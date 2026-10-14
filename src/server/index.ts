@@ -1,0 +1,279 @@
+#!/usr/bin/env node
+import { existsSync } from 'node:fs';
+import { createServer } from 'node:http';
+import { dirname, join, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { WebSocketServer, type WebSocket } from 'ws';
+import QRCode from 'qrcode';
+import type { ClientMessage, GameConfig, ServerMessage } from '../../shared/protocol.js';
+import { handleAuthorRoute } from './author-routes.js';
+import { loadBank } from './content.js';
+import { DraftStore } from './drafts.js';
+import { Engine, type NightState } from './engine.js';
+import { ControlAuth, createRequestHandler } from './http.js';
+import { primaryLanAddress, lanAddresses } from './lan.js';
+import { Store } from './store.js';
+import { controlState, hostState, playerState } from './views.js';
+
+const here = dirname(fileURLToPath(import.meta.url));
+
+/**
+ * Find the project root by walking up to the nearest package.json.
+ *
+ * The compiled layout (dist/src/server) and the tsx layout (src/server) sit at
+ * different depths, and hard-coding either one breaks the other. Walking up is
+ * dull and correct.
+ */
+function findRoot(from: string): string {
+  let dir = from;
+  for (let i = 0; i < 6; i++) {
+    if (existsSync(join(dir, 'package.json'))) return dir;
+    const parent = dirname(dir);
+    if (parent === dir) break;
+    dir = parent;
+  }
+  return resolve(from, '../..');
+}
+const root = findRoot(here);
+
+const PORT = Number(process.env.PORT ?? 8080);
+const CONTENT_DIR = process.env.PRIMETIME_CONTENT ?? join(root, 'content');
+const DATA_DIR = process.env.PRIMETIME_DATA ?? join(root, 'data');
+const CLIENT_DIR = join(root, 'dist', 'client');
+
+let bank = loadBank(CONTENT_DIR);
+const store = new Store(DATA_DIR);
+const drafts = new DraftStore(DATA_DIR);
+const auth = new ControlAuth(process.env.PRIMETIME_PIN);
+
+const errors = bank.issues.filter((i) => i.severity === 'error');
+const warnings = bank.issues.filter((i) => i.severity === 'warning');
+if (errors.length) {
+  console.error(`\n  ${errors.length} content error(s):`);
+  for (const issue of errors.slice(0, 20)) {
+    console.error(`    ${issue.file}${issue.id ? ` [${issue.id}]` : ''}: ${issue.message}`);
+  }
+  if (!bank.questions.length) {
+    console.error('\n  No questions loaded. Fix the errors above, then start again.\n');
+    process.exit(1);
+  }
+}
+
+const config: Partial<GameConfig> = {};
+if (process.env.PRIMETIME_VENUE) config.venueName = process.env.PRIMETIME_VENUE;
+
+const resumed = store.loadNight<NightState>();
+const engine = new Engine(bank, store, config, resumed);
+if (resumed) console.log(`  Resumed the night already in progress (room ${engine.snapshot().roomCode}).`);
+
+// ------------------------------------------------------------------ sockets
+
+type Role = 'player' | 'host' | 'control';
+
+interface Client {
+  socket: WebSocket;
+  role: Role;
+  playerId?: string;
+}
+
+const clients = new Set<Client>();
+
+function joinInfo() {
+  const ip = primaryLanAddress();
+  const urls = lanAddresses().map((addr) => `http://${addr}:${PORT}`);
+  return {
+    url: ip ? `http://${ip}:${PORT}` : `http://localhost:${PORT}`,
+    urls,
+    ssid: process.env.PRIMETIME_SSID,
+    roomCode: engine.snapshot().roomCode,
+    venueName: engine.snapshot().config.venueName,
+  };
+}
+
+let cachedQr = { url: '', svg: '' };
+async function qrForJoinUrl(url: string): Promise<string> {
+  if (cachedQr.url === url) return cachedQr.svg;
+  const svg = await QRCode.toString(url, { type: 'svg', margin: 1, errorCorrectionLevel: 'M' });
+  cachedQr = { url, svg };
+  return svg;
+}
+
+function send(socket: WebSocket, message: ServerMessage) {
+  if (socket.readyState === socket.OPEN) socket.send(JSON.stringify(message));
+}
+
+async function stateFor(client: Client) {
+  if (client.role === 'host') {
+    const info = joinInfo();
+    return hostState(engine, { url: info.url, ssid: info.ssid, qrSvg: await qrForJoinUrl(info.url) });
+  }
+  if (client.role === 'control') return controlState(engine);
+  return playerState(engine, client.playerId!);
+}
+
+let broadcasting = false;
+async function broadcast() {
+  // Transitions can cascade (an answer auto-locks, which scores and advances).
+  // Coalesce into one push per tick so twenty tablets get one snapshot, not four.
+  if (broadcasting) return;
+  broadcasting = true;
+  await Promise.resolve();
+  broadcasting = false;
+  for (const client of clients) {
+    if (client.role === 'player' && !client.playerId) continue;
+    send(client.socket, { t: 'state', state: await stateFor(client) });
+  }
+}
+
+engine.onChange(() => void broadcast());
+
+/** Re-read content from disk, e.g. after a pack is published from /author. */
+function reloadBank() {
+  const fresh = loadBank(CONTENT_DIR);
+  const errors = fresh.issues.filter((i) => i.severity === 'error');
+  if (errors.length) {
+    return { ok: false, message: `Not reloaded — ${errors.length} content error(s). Run \`npm run validate\`.` };
+  }
+  const result = engine.replaceBank(fresh);
+  if (result.ok) bank = fresh;
+  return result;
+}
+
+const server = createServer(createRequestHandler({
+  clientDir: CLIENT_DIR,
+  imagesDir: join(CONTENT_DIR, 'images'),
+  auth,
+  joinInfo,
+  handleAuthor: (req, res, path) =>
+    handleAuthorRoute(req, res, path, {
+      contentDir: CONTENT_DIR,
+      drafts,
+      bank: () => bank,
+      reloadBank,
+      authorised: (request) => auth.validRequest(request as unknown as { headers: Record<string, unknown> }),
+    }),
+}));
+
+const wss = new WebSocketServer({ server, path: '/ws' });
+
+wss.on('connection', (socket) => {
+  const client: Client = { socket, role: 'player' };
+  clients.add(client);
+  let ready = false;
+
+  socket.on('message', (raw) => {
+    let msg: ClientMessage;
+    try {
+      msg = JSON.parse(String(raw)) as ClientMessage;
+    } catch {
+      return;
+    }
+
+    try {
+      if (msg.t === 'hello') {
+        client.role = msg.role;
+        if (msg.role === 'control' && !auth.valid(msg.token)) {
+          send(socket, { t: 'error', message: 'Control view needs the host PIN.' });
+          socket.close(4001, 'unauthorized');
+          return;
+        }
+        if (msg.role === 'player') {
+          const player = engine.identify(msg.playerId, msg.token);
+          client.playerId = player.id;
+          send(socket, { t: 'identity', playerId: player.id, token: player.token });
+        }
+        ready = true;
+        void stateFor(client).then((state) => send(socket, { t: 'state', state }));
+        return;
+      }
+
+      if (!ready) return;
+
+      // Everything below mutates the game; control messages need the gate.
+      const controlOnly = new Set<ClientMessage['t']>([
+        'set_config', 'start_block', 'advance', 'reveal', 'lock_now', 'extend_timer',
+        'skip_question', 'replace_question', 'adjust_score', 'rename_team', 'remove_team',
+        'set_round_category', 'start_tiebreak', 'end_night', 'reset_night', 'say',
+      ]);
+      if (controlOnly.has(msg.t) && client.role !== 'control') return;
+
+      switch (msg.t) {
+        case 'create_team': engine.createTeam(client.playerId!, msg.name, msg.playerName, msg.tableNo); break;
+        case 'join_team': engine.joinTeam(client.playerId!, msg.teamId, msg.name); break;
+        case 'leave_team': engine.leaveTeam(client.playerId!); break;
+        case 'answer': engine.answer(client.playerId!, msg.choiceIndex); break;
+        case 'answer_number': engine.answerNumber(client.playerId!, msg.value); break;
+        case 'set_wager': engine.setWager(client.playerId!, msg.amount); break;
+
+        case 'set_config': engine.setConfig(msg.patch); break;
+        case 'start_block': engine.startBlock(); break;
+        case 'advance': engine.advance(); break;
+        case 'reveal': engine.reveal(); break;
+        case 'lock_now': engine.lockNow('host'); break;
+        case 'extend_timer': engine.extendTimer(msg.seconds); break;
+        case 'skip_question': engine.skipQuestion(); break;
+        case 'replace_question': engine.replaceQuestion(); break;
+        case 'adjust_score': engine.adjustScore(msg.teamId, msg.delta, msg.note); break;
+        case 'rename_team': engine.renameTeam(msg.teamId, msg.name); break;
+        case 'remove_team': engine.removeTeam(msg.teamId); break;
+        case 'set_round_category': engine.setRoundCategory(msg.roundIndex, msg.categoryId); break;
+        case 'start_tiebreak': engine.startTiebreak(); break;
+        case 'end_night': engine.endNight(); break;
+        case 'reset_night': engine.resetNight(); break;
+        case 'say': engine.say(msg.message); break;
+      }
+    } catch (err) {
+      send(socket, { t: 'error', message: (err as Error).message });
+    }
+  });
+
+  socket.on('close', () => {
+    clients.delete(client);
+    if (client.playerId) engine.setConnected(client.playerId, false);
+  });
+
+  socket.on('error', () => clients.delete(client));
+});
+
+// Drop sockets that stopped responding, so the roster reflects the room.
+const heartbeat = setInterval(() => {
+  for (const client of clients) {
+    if (client.socket.readyState === client.socket.OPEN) client.socket.ping();
+  }
+}, 20_000);
+
+server.listen(PORT, () => {
+  const info = joinInfo();
+  const line = '─'.repeat(52);
+  console.log(`\n  ${engine.snapshot().config.venueName}`);
+  console.log(`  ${line}`);
+  console.log(`  Players join at   ${info.url}`);
+  for (const alt of info.urls.filter((u) => u !== info.url)) console.log(`                    ${alt}`);
+  console.log(`  Big screen        ${info.url}/host`);
+  console.log(`  MC controls       ${info.url}/control`);
+  console.log(`  Question editor   ${info.url}/author`);
+  console.log(`  Host PIN          ${auth.pin}`);
+  console.log(`  Room code         ${engine.snapshot().roomCode}`);
+  console.log(`  ${line}`);
+  console.log(`  ${bank.questions.length} questions in ${bank.categories.length} categories` +
+    (warnings.length ? `, ${warnings.length} content warning(s)` : ''));
+  if (!process.env.ANTHROPIC_API_KEY && !process.env.ANTHROPIC_AUTH_TOKEN) {
+    console.log('  (set ANTHROPIC_API_KEY to generate new questions from /author)');
+  }
+  if (!info.urls.length) {
+    console.log('\n  No local network address found. Connect the laptop to the venue wifi');
+    console.log('  (or your own travel router) before players try to join.');
+  }
+  console.log('');
+});
+
+function shutdown() {
+  clearInterval(heartbeat);
+  engine.dispose();
+  for (const client of clients) client.socket.close(1001, 'server stopping');
+  wss.close();
+  server.close(() => process.exit(0));
+  setTimeout(() => process.exit(0), 1500);
+}
+process.on('SIGINT', shutdown);
+process.on('SIGTERM', shutdown);

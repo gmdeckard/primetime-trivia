@@ -1,0 +1,153 @@
+# Running a trivia night
+
+Written for whoever actually runs the evening. No technical knowledge assumed
+past opening a terminal once.
+
+## What you need
+
+- A laptop, connected to the TV or projector by HDMI
+- Wifi that the laptop and everyone's tablets are all on. **Internet is not
+  required.**
+- Your own phone, for the controls
+- Players' own phones or tablets, or a stack of venue tablets
+
+### Strongly recommended: your own travel router
+
+A $30 travel router (GL.iNet and similar) solves three problems at once:
+
+1. The wifi name and password are the same every week, so you can print them
+   on the table cards.
+2. You can reserve a fixed address for the laptop, so the join address never
+   changes and the printed QR code keeps working forever.
+3. **It avoids client isolation.** Many guest networks block devices from
+   talking to each other. When that is on, players can join the wifi, the
+   laptop is running fine, and nothing works — with no error message that
+   explains why. This is the single most likely thing to ruin a first attempt.
+
+Plug it into the clubhouse ethernet, or run it with no internet at all. The
+game does not care.
+
+## First time setup
+
+Once, on the laptop:
+
+```bash
+npm install
+npm run build
+```
+
+## Every night
+
+```bash
+npm start
+```
+
+The terminal prints a block of addresses. Leave this window open — it is the
+game. Closing it ends the night.
+
+```
+  Thursday Trivia
+  ────────────────────────────────────────────────────
+  Players join at   http://192.168.1.42:8080
+  Big screen        http://192.168.1.42:8080/host
+  MC controls       http://192.168.1.42:8080/control
+  Host PIN          297392
+  Room code         CORAL-9
+  ────────────────────────────────────────────────────
+```
+
+Then:
+
+1. Open the **Big screen** address in a browser on the laptop, and press F11
+   for full screen. Drag it to the TV.
+2. Open the **MC controls** address on your phone and type the **Host PIN**.
+   Your phone remembers it after that.
+3. Tell the room the join address. The big screen is showing it in large type
+   with a QR code — point at it rather than reading the numbers out.
+
+To put the event name on the screen:
+
+```bash
+PRIMETIME_VENUE="Thursday Trivia" PRIMETIME_SSID="Clubhouse-Guest" npm start
+```
+
+## Setting up the game
+
+On your phone, before you start:
+
+- **Team size** — 2 for couples, 4 for tables
+- **Block shape** — 3 × 8 is about thirty minutes; 4 × 6 and 2 × 10 are also
+  offered, and the screen tells you the estimated running time
+- **Seconds per question** — 35 is the default; 25 for a sharp crowd, 50 if
+  there is a lot of discussion at the tables
+- **Speed bonus** — 5 points for the fastest correct team. Turn it off if the
+  room is mixed and you want knowledge alone to decide.
+- **Final wager** — a Jeopardy-style bet to close the block. Leave it on; it
+  keeps the last-place table interested right to the end.
+- **Read questions aloud** — the big screen speaks each question using the
+  laptop's own voice. Useful for low-vision players and needs no internet.
+
+## During the night
+
+There is one large button at the bottom of your phone, and it always does the
+right next thing — start, show the question, lock the answers, reveal, next.
+The label tells you what it will do and the line underneath gives you something
+to say. Space bar does the same thing, so a presentation clicker works.
+
+While a question is live you also get:
+
+- **+15s** — more time, as often as you like
+- **Lock now** — everyone has clearly finished
+- **Skip** — this question is a dud, bin it with no score
+- **Swap this question** — they have seen it before; replaces it with another
+  from the same category
+
+Tap any team to adjust their score, rename them, or remove them.
+
+### Things that will happen
+
+**Somebody joins late.** They pick any team with a free seat and come in with
+that team's score. No restart needed.
+
+**A tablet goes to sleep.** They tap to wake and the page reconnects on its
+own, landing on whatever is happening now. Nobody needs to reload anything.
+
+**The laptop sleeps, or you close the lid.** Start it again with `npm start`.
+The night comes back — teams, scores, which questions have been used. The
+question that was live gets parked rather than scored, and the screen tells you
+so. Reveal it and carry on.
+
+**Two teams tie at the top.** The controls offer a tiebreaker: a numeric
+question where the closest guess wins. It is sudden death and only the tied
+teams play.
+
+**The thirty minutes are up and nobody wants to stop.** Press the button again
+and it starts another block with the same teams and carried-over scores. No
+question repeats, so you can run three blocks back to back.
+
+## Afterwards
+
+Nothing to do. The final standings stay on the screen until you stop the
+server.
+
+If you want a completely fresh night — new teams, zero scores — use **Reset
+everything** in the controls, or just restart with an empty `data/` folder.
+
+By default the game avoids any question used in the previous eight nights, so
+a weekly game will not recycle material for about two months.
+
+## If something goes wrong
+
+**Players get "can't reach this page".** They are on a different wifi network,
+or the network has client isolation on. Check the first; if the laptop is fine
+and several devices all fail, assume the second and use your own router.
+
+**The address in the terminal looks wrong** (starts with `172.` or `169.`).
+The laptop picked a virtual adapter. The terminal lists every address it found
+— try the one starting `192.168.`.
+
+**The big screen is tiny or cut off.** F11 for full screen. The layout scales
+to whatever it is given.
+
+**A question is wrong.** Press **Skip**, say so out loud, and move on — then
+open an issue on GitHub so it gets fixed for everyone.

@@ -1,0 +1,212 @@
+category: geography
+
+questions:
+  - id: geo-001
+    difficulty: 2
+    prompt: Which is the only sea with no coastline?
+    answer: The Sargasso Sea
+    distractors: [The Coral Sea, The Bering Sea, The Andaman Sea]
+    fact: It is bounded by ocean currents rather than land, and takes its name from the sargassum seaweed that collects there.
+
+  - id: geo-002
+    difficulty: 3
+    prompt: Which two countries are separated by the Khyber Pass?
+    answer: Afghanistan and Pakistan
+    distractors: [India and Nepal, Iran and Turkmenistan, Tajikistan and China]
+    fact: It cuts through the Spin Ghar range and has carried invading armies for at least two and a half thousand years.
+
+  - id: geo-003
+    difficulty: 2
+    prompt: What is the capital of Australia?
+    answer: Canberra
+    distractors: [Sydney, Melbourne, Brisbane]
+    fact: It was purpose-built as a compromise after Sydney and Melbourne each refused to concede to the other.
+
+  - id: geo-004
+    difficulty: 3
+    prompt: The Atacama Desert lies mainly in which country?
+    answer: Chile
+    distractors: [Peru, Bolivia, Argentina]
+    fact: Some weather stations there have never recorded rain, making it the driest non-polar desert on earth.
+
+  - id: geo-005
+    difficulty: 1
+    prompt: Which river flows through the Grand Canyon?
+    answer: The Colorado
+    distractors: [The Rio Grande, The Snake, The Gila]
+    fact: It has been cutting the canyon for roughly six million years, and now rarely reaches the sea.
+
+  - id: geo-006
+    difficulty: 4
+    prompt: Which African country is entirely surrounded by South Africa?
+    answer: Lesotho
+    distractors: [Eswatini, Botswana, Malawi]
+    fact: It is one of only three fully enclaved countries in the world, with San Marino and Vatican City.
+
+  - id: geo-007
+    difficulty: 2
+    prompt: Which US state has the longest coastline?
+    answer: Alaska
+    distractors: [Florida, California, Maine]
+    fact: Alaska's coast is longer than that of all the other states put together.
+
+  - id: geo-008
+    difficulty: 3
+    prompt: The Bosphorus strait separates which two continents?
+    answer: Europe and Asia
+    distractors: [Europe and Africa, Asia and Africa, Europe and the Middle East]
+    fact: It runs through Istanbul, making it the only major city on two continents.
+
+  - id: geo-009
+    difficulty: 2
+    prompt: Which is the deepest lake in the world?
+    answer: Lake Baikal
+    distractors: [The Caspian Sea, Lake Tanganyika, Lake Superior]
+    fact: It is over a mile deep and holds roughly a fifth of the world's unfrozen fresh water.
+
+  - id: geo-010
+    difficulty: 3
+    prompt: Which country has the most time zones?
+    answer: France
+    distractors: [Russia, The United States, Australia]
+    fact: Counting its overseas territories, France spans twelve. Russia has eleven, all contiguous.
+
+  - id: geo-011
+    difficulty: 2
+    prompt: Mount Kilimanjaro is in which country?
+    answer: Tanzania
+    distractors: [Kenya, Uganda, Ethiopia]
+    fact: It sits just inside the Tanzanian border, though the classic view of it is from Kenya's Amboseli park.
+
+  - id: geo-012
+    difficulty: 4
+    prompt: Which strait separates Spain from Morocco?
+    answer: The Strait of Gibraltar
+    distractors: [The Strait of Messina, The Strait of Hormuz, The Dardanelles]
+    fact: At its narrowest it is about nine miles across.
+
+  - id: geo-013
+    difficulty: 1
+    prompt: Which is the largest of the Great Lakes by surface area?
+    answer: Lake Superior
+    distractors: [Lake Michigan, Lake Huron, Lake Erie]
+    fact: It is the largest freshwater lake in the world by surface area, holding about 10 per cent of the world's fresh surface water.
+
+  - id: geo-014
+    difficulty: 3
+    prompt: The Danube flows into which sea?
+    answer: The Black Sea
+    distractors: [The Baltic Sea, The Adriatic Sea, The Caspian Sea]
+    fact: It passes through or borders ten countries — more than any other river in the world.
+
+  - id: geo-015
+    difficulty: 2
+    prompt: Which country is home to Angel Falls, the world's highest uninterrupted waterfall?
+    answer: Venezuela
+    distractors: [Brazil, Colombia, Guyana]
+    fact: It drops 979 metres from the Auyán-Tepui plateau — so far that much of the water becomes mist before reaching the bottom.
+
+  - id: geo-016
+    difficulty: 4
+    prompt: Which Canadian province is the only officially bilingual one?
+    answer: New Brunswick
+    distractors: [Quebec, Ontario, Manitoba]
+    fact: Quebec is officially French-only; New Brunswick recognises both English and French.
+
+  - id: geo-017
+    difficulty: 2
+    prompt: The Ural Mountains are traditionally taken as the boundary between what?
+    answer: Europe and Asia
+    distractors: [Russia and Kazakhstan, Siberia and Mongolia, The Arctic and temperate zones]
+    fact: The range runs roughly north to south for about 1,600 miles.
+
+  - id: geo-018
+    difficulty: 3
+    prompt: Which is the southernmost capital city in the world?
+    answer: Wellington
+    distractors: [Canberra, Santiago, Buenos Aires]
+    fact: Wellington, New Zealand sits at about 41 degrees south.
+
+  - id: geo-019
+    difficulty: 1
+    prompt: Which desert covers much of northern Africa?
+    answer: The Sahara
+    distractors: [The Kalahari, The Namib, The Gobi]
+    fact: It is roughly the size of the United States, and has been expanding southward for decades.
+
+  - id: geo-020
+    difficulty: 4
+    prompt: Which sea is shrinking dramatically because its feeder rivers were diverted for cotton irrigation?
+    answer: The Aral Sea
+    distractors: [The Dead Sea, The Caspian Sea, Lake Chad]
+    fact: Soviet irrigation projects from the 1960s reduced it to a fraction of its former area, leaving fishing boats stranded in desert.
+
+  - id: geo-021
+    difficulty: 2
+    prompt: Which country has the longest land border with the United States?
+    answer: Canada
+    distractors: [Mexico, Russia, Neither — the US borders only two countries equally]
+    fact: The Canadian border runs about 5,500 miles including Alaska; the Mexican border is roughly 1,950.
+
+  - id: geo-022
+    difficulty: 3
+    prompt: Which European capital sits on the Tagus river?
+    answer: Lisbon
+    distractors: [Madrid, Seville, Porto]
+    fact: Madrid sits on the much smaller Manzanares; the Tagus rises in Spain and reaches the Atlantic at Lisbon.
+
+  - id: geo-023
+    difficulty: 2
+    prompt: The Panama Canal connects the Atlantic to which ocean?
+    answer: The Pacific
+    distractors: [The Indian, The Southern, The Arctic]
+    fact: Because of the isthmus's shape, a ship transiting from the Atlantic to the Pacific actually travels south-east.
+
+  - id: geo-024
+    difficulty: 4
+    prompt: Which is the largest island in the Mediterranean?
+    answer: Sicily
+    distractors: [Sardinia, Cyprus, Crete]
+    fact: Sicily edges out Sardinia; Cyprus is third.
+
+  - id: geo-025
+    difficulty: 3
+    prompt: Which US state borders only one other state?
+    answer: Maine
+    distractors: [Florida, Alaska, Washington]
+    fact: Maine touches only New Hampshire. Alaska borders no state at all.
+
+  - id: geo-026
+    difficulty: 2
+    prompt: Which mountain range separates France from Spain?
+    answer: The Pyrenees
+    distractors: [The Alps, The Apennines, The Carpathians]
+    fact: Andorra sits in them, between the two countries.
+
+  - id: geo-027
+    difficulty: 3
+    prompt: Lake Titicaca lies on the border between which two countries?
+    answer: Peru and Bolivia
+    distractors: [Chile and Argentina, Ecuador and Colombia, Brazil and Paraguay]
+    fact: At about 12,500 feet it is the highest large navigable lake in the world.
+
+  - id: geo-028
+    difficulty: 4
+    prompt: What is the capital of Myanmar?
+    answer: Naypyidaw
+    distractors: [Yangon, Mandalay, Bago]
+    fact: The government moved the capital from Yangon, formerly Rangoon, to a purpose-built city in 2005.
+
+  - id: geo-029
+    difficulty: 2
+    prompt: Which Scandinavian capital is built across a group of islands?
+    answer: Stockholm
+    distractors: [Oslo, Copenhagen, Helsinki]
+    fact: It spreads over fourteen islands where Lake Mälaren meets the Baltic.
+
+  - id: geo-030
+    difficulty: 3
+    prompt: Which American state is the only one to grow coffee commercially?
+    answer: Hawaii
+    distractors: [Florida, California, Louisiana]
+    fact: The Kona district of the Big Island is the best known growing area. California now has small plantings, but Hawaii remains the only long-standing commercial producer.

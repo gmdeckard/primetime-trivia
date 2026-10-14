@@ -1,0 +1,37 @@
+#!/usr/bin/env tsx
+/**
+ * Content check, for CI and for contributors before they open a pull request.
+ *
+ * Exits non-zero on any error so a bad question can't land on a branch that
+ * someone then runs in front of a room of a hundred people.
+ */
+import { join } from 'node:path';
+import { loadBank } from '../src/server/content.js';
+
+const contentDir = process.argv[2] ?? join(process.cwd(), 'content');
+const bank = loadBank(contentDir);
+
+const errors = bank.issues.filter((i) => i.severity === 'error');
+const warnings = bank.issues.filter((i) => i.severity === 'warning');
+
+for (const issue of [...errors, ...warnings]) {
+  const tag = issue.severity === 'error' ? 'ERROR' : 'warn ';
+  console.log(`${tag}  ${issue.file}${issue.id ? ` [${issue.id}]` : ''}  ${issue.message}`);
+}
+
+console.log('');
+console.log(`  ${bank.questions.length} questions across ${bank.categories.length} categories`);
+
+const counts = bank.categories
+  .map((c) => ({ name: c.name, n: (bank.byCategory.get(c.id) ?? []).length }))
+  .sort((a, b) => b.n - a.n);
+for (const row of counts) {
+  console.log(`    ${String(row.n).padStart(4)}  ${row.name}`);
+}
+
+const byDifficulty = [1, 2, 3, 4].map((d) => bank.questions.filter((q) => q.difficulty === d).length);
+console.log(`  difficulty spread  1:${byDifficulty[0]}  2:${byDifficulty[1]}  3:${byDifficulty[2]}  4:${byDifficulty[3]}`);
+console.log(`  ${errors.length} error(s), ${warnings.length} warning(s)`);
+console.log('');
+
+process.exit(errors.length ? 1 : 0);

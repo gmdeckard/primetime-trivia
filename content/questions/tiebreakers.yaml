@@ -1,0 +1,114 @@
+category: tiebreakers
+
+# Numeric sudden death. These are never drawn into a normal round — the engine
+# only offers them when two or more teams are tied at the top.
+#
+# A good tiebreaker is one nobody knows exactly but an educated guess can get
+# close to. If a team could know the number outright it is a trivia question,
+# not a tiebreaker.
+
+questions:
+  - id: tie-001
+    kind: number
+    difficulty: 3
+    prompt: In what year was the Brooklyn Bridge opened to traffic?
+    answerNumber: 1883
+    fact: It took fourteen years to build and was the longest suspension bridge in the world when it opened.
+
+  - id: tie-002
+    kind: number
+    difficulty: 3
+    prompt: How many miles long is the Grand Canyon, to the nearest mile?
+    answerNumber: 277
+    fact: About 277 river miles, up to eighteen miles wide and over a mile deep.
+
+  - id: tie-003
+    kind: number
+    difficulty: 3
+    prompt: How many keys does a standard modern piano have?
+    answerNumber: 88
+    fact: Fifty-two white and thirty-six black, spanning seven octaves and a minor third.
+
+  - id: tie-004
+    kind: number
+    difficulty: 3
+    prompt: In what year did the Hoover Dam begin generating power?
+    answerNumber: 1936
+    fact: Construction began in 1931 and finished ahead of schedule.
+
+  - id: tie-005
+    kind: number
+    difficulty: 3
+    prompt: How many feet tall is the Statue of Liberty from the ground to the tip of the torch?
+    answerNumber: 305
+    fact: About 305 feet including the pedestal; the statue alone is roughly 151 feet.
+
+  - id: tie-006
+    kind: number
+    difficulty: 3
+    prompt: How many counties are there in the state of Texas?
+    answerNumber: 254
+    fact: More than any other state. Delaware has three.
+
+  - id: tie-007
+    kind: number
+    difficulty: 3
+    prompt: How many miles is it from New York to Los Angeles by air, to the nearest ten miles?
+    answerNumber: 2450
+    fact: About 2,450 miles direct. By road it is nearer 2,800.
+
+  - id: tie-008
+    kind: number
+    difficulty: 3
+    prompt: In what year was the first Model T produced?
+    answerNumber: 1908
+    fact: Production ran until 1927, by which time over fifteen million had been built.
+
+  - id: tie-009
+    kind: number
+    difficulty: 3
+    prompt: How many bones are there in the adult human body?
+    answerNumber: 206
+    fact: Babies are born with around 270; many fuse during growth.
+
+  - id: tie-010
+    kind: number
+    difficulty: 3
+    prompt: How many feet high is Niagara Falls on the Canadian side, to the nearest ten feet?
+    answerNumber: 170
+    fact: The Horseshoe Falls drop about 170 feet, carrying the great majority of the river's flow.
+
+  - id: tie-011
+    kind: number
+    difficulty: 3
+    prompt: In what year was the Panama Canal first opened to traffic?
+    answerNumber: 1914
+    fact: It opened in August 1914, just as the First World War began, which muted the celebrations considerably.
+
+  - id: tie-012
+    kind: number
+    difficulty: 3
+    prompt: How many square miles is the state of Arizona, to the nearest thousand?
+    answerNumber: 114000
+    fact: About 113,990 square miles, making it the sixth largest state.
+
+  - id: tie-013
+    kind: number
+    difficulty: 3
+    prompt: How many elements appear on the modern periodic table?
+    answerNumber: 118
+    fact: The heaviest, oganesson, was confirmed in 2016 and exists only as a handful of atoms at a time.
+
+  - id: tie-014
+    kind: number
+    difficulty: 3
+    prompt: How many days did the Apollo 11 mission last, from launch to splashdown?
+    answerNumber: 8
+    fact: Eight days, three hours and change — launched 16 July 1969 and recovered on 24 July.
+
+  - id: tie-015
+    kind: number
+    difficulty: 3
+    prompt: How many strings does a standard concert harp have?
+    answerNumber: 47
+    fact: Forty-seven strings and seven pedals, covering six and a half octaves.

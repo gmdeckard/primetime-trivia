@@ -1,0 +1,212 @@
+category: music-popular
+
+questions:
+  - id: mus-001
+    difficulty: 2
+    prompt: Which record label was founded in Detroit by Berry Gordy in 1959?
+    answer: Motown
+    distractors: [Stax, Atlantic, Chess]
+    fact: Stax was the Memphis equivalent and Chess the Chicago blues label.
+
+  - id: mus-002
+    difficulty: 3
+    prompt: Which Beatles album was the first to be released with the band not pictured on the front in a conventional group portrait, instead using a crowd of cut-outs?
+    answer: Sgt. Pepper's Lonely Hearts Club Band
+    distractors: [Revolver, Rubber Soul, The White Album]
+    fact: Peter Blake and Jann Haworth designed the collage and won a Grammy for it.
+
+  - id: mus-003
+    difficulty: 2
+    prompt: Who was known as the Queen of Soul?
+    answer: Aretha Franklin
+    distractors: [Diana Ross, Gladys Knight, Tina Turner]
+    fact: Her version of Otis Redding's "Respect" rewrote the song so thoroughly that Redding conceded she had taken it from him.
+
+  - id: mus-004
+    difficulty: 3
+    prompt: Which 1969 festival was held on a dairy farm in Bethel, New York?
+    answer: Woodstock
+    distractors: [Altamont, Monterey Pop, The Isle of Wight Festival]
+    fact: It was named for a town about 40 miles away, where the organisers had originally hoped to hold it.
+
+  - id: mus-005
+    difficulty: 2
+    prompt: Which group recorded "Good Vibrations"?
+    answer: The Beach Boys
+    distractors: [The Four Seasons, The Mamas and the Papas, Jan and Dean]
+    fact: Brian Wilson assembled it from fragments recorded at four studios over about six months.
+
+  - id: mus-006
+    difficulty: 4
+    prompt: Which session musicians, uncredited for years, played on a vast number of 1960s Los Angeles hit records?
+    answer: The Wrecking Crew
+    distractors: [The Funk Brothers, The Swampers, Booker T. and the M.G.s]
+    fact: The Funk Brothers were Motown's equivalent in Detroit, and the Swampers worked at Muscle Shoals.
+
+  - id: mus-007
+    difficulty: 2
+    prompt: Which Elvis Presley song was his first number one on the Billboard pop chart?
+    answer: Heartbreak Hotel
+    distractors: [Hound Dog, Love Me Tender, Jailhouse Rock]
+    fact: Released in January 1956, it was also his first million-seller for RCA.
+
+  - id: mus-008
+    difficulty: 3
+    prompt: Who wrote "Blowin' in the Wind"?
+    answer: Bob Dylan
+    distractors: [Pete Seeger, Woody Guthrie, Phil Ochs]
+    fact: Peter, Paul and Mary had the hit with it in 1963, which is how most Americans first heard the song.
+
+  - id: mus-009
+    difficulty: 2
+    prompt: Which band released the album "Dark Side of the Moon"?
+    answer: Pink Floyd
+    distractors: [Led Zeppelin, The Who, Yes]
+    fact: It spent over 900 weeks on the Billboard 200, a record that stood for decades.
+
+  - id: mus-010
+    difficulty: 3
+    prompt: Which Motown group had hits with "Stop! In the Name of Love" and "Baby Love"?
+    answer: The Supremes
+    distractors: [The Marvelettes, Martha and the Vandellas, The Ronettes]
+    fact: The Ronettes were on Philles, Phil Spector's label, not Motown.
+
+  - id: mus-011
+    difficulty: 2
+    prompt: Which guitarist played the national anthem at Woodstock?
+    answer: Jimi Hendrix
+    distractors: [Carlos Santana, Pete Townshend, Eric Clapton]
+    fact: He closed the festival on Monday morning, by which time most of the crowd had left.
+
+  - id: mus-012
+    difficulty: 4
+    prompt: Which 1950s DJ is credited with popularising the term "rock and roll"?
+    answer: Alan Freed
+    distractors: [Dick Clark, Wolfman Jack, Murray the K]
+    fact: His career ended in the payola scandals of 1959-62.
+
+  - id: mus-013
+    difficulty: 2
+    prompt: Which singer recorded "What's Going On" in 1971?
+    answer: Marvin Gaye
+    distractors: [Stevie Wonder, Curtis Mayfield, Al Green]
+    fact: Berry Gordy initially refused to release it, calling it the worst record he had ever heard.
+
+  - id: mus-014
+    difficulty: 3
+    prompt: Which band's members were John, Paul, George and Ringo?
+    answer: The Beatles
+    distractors: [The Hollies, The Kinks, The Searchers]
+    fact: Ringo replaced Pete Best in August 1962, weeks before their first single.
+
+  - id: mus-015
+    difficulty: 2
+    prompt: Which American singer was known as "Ol' Blue Eyes"?
+    answer: Frank Sinatra
+    distractors: [Bing Crosby, Dean Martin, Tony Bennett]
+    fact: He announced his retirement in 1971 and was back on stage within two years.
+
+  - id: mus-016
+    difficulty: 3
+    prompt: Which 1977 album by Fleetwood Mac was recorded as the band members' relationships collapsed?
+    answer: Rumours
+    distractors: [Tusk, Mirage, Fleetwood Mac]
+    fact: It has sold over forty million copies, and nearly every song is about somebody else in the room.
+
+  - id: mus-017
+    difficulty: 4
+    prompt: Which producer developed the "Wall of Sound" technique?
+    answer: Phil Spector
+    distractors: [George Martin, Quincy Jones, Brian Eno]
+    fact: He layered multiple musicians playing the same parts in an echo chamber, aiming for what he called "little symphonies for the kids".
+
+  - id: mus-018
+    difficulty: 2
+    prompt: Which Johnny Cash album was recorded live at a California prison in 1968?
+    answer: At Folsom Prison
+    distractors: [At San Quentin, Ride This Train, Bitter Tears]
+    fact: At San Quentin followed in 1969, and produced his only number one pop hit, "A Boy Named Sue".
+
+  - id: mus-019
+    difficulty: 3
+    prompt: Which group recorded "Bridge Over Troubled Water"?
+    answer: Simon and Garfunkel
+    distractors: [The Everly Brothers, Peter and Gordon, Seals and Crofts]
+    fact: It was their last studio album; the duo split the following year.
+
+  - id: mus-020
+    difficulty: 2
+    prompt: Which British band recorded "My Generation" in 1965?
+    answer: The Who
+    distractors: [The Rolling Stones, The Animals, The Yardbirds]
+    fact: Pete Townshend wrote it at twenty, including the line about hoping to die before getting old.
+
+  - id: mus-021
+    difficulty: 4
+    prompt: Which jazz trumpeter recorded "Kind of Blue" in 1959?
+    answer: Miles Davis
+    distractors: [Dizzy Gillespie, Chet Baker, Clifford Brown]
+    fact: It is the best-selling jazz album ever made, and most of it was recorded in two sessions with minimal rehearsal.
+
+  - id: mus-022
+    difficulty: 2
+    prompt: Which song opens Michael Jackson's album "Thriller"?
+    answer: Wanna Be Startin' Somethin'
+    distractors: [Billie Jean, Beat It, Thriller]
+    fact: Seven of the album's nine tracks were released as singles, all reaching the top ten.
+
+  - id: mus-023
+    difficulty: 3
+    prompt: Which country singer recorded "Coal Miner's Daughter"?
+    answer: Loretta Lynn
+    distractors: [Patsy Cline, Tammy Wynette, Dolly Parton]
+    fact: Sissy Spacek won an Academy Award for playing her in the 1980 film, doing her own singing.
+
+  - id: mus-024
+    difficulty: 2
+    prompt: Which band released "Hotel California" in 1976?
+    answer: The Eagles
+    distractors: [Fleetwood Mac, Jackson Browne's band, America]
+    fact: Don Felder wrote the music on a demo; Don Henley and Glenn Frey wrote the words.
+
+  - id: mus-025
+    difficulty: 4
+    prompt: Which bluesman's recordings at a 1936 Texas session became foundational for later rock guitarists?
+    answer: Robert Johnson
+    distractors: [Muddy Waters, Son House, Blind Lemon Jefferson]
+    fact: Only twenty-nine of his songs survive, recorded across two sessions, and only two photographs of him are known.
+
+  - id: mus-026
+    difficulty: 2
+    prompt: Which song was the first music video played on MTV in August 1981?
+    answer: Video Killed the Radio Star
+    distractors: [Thriller, Money for Nothing, Bette Davis Eyes]
+    fact: Performed by the Buggles. "Money for Nothing", with its "I want my MTV" line, came four years later.
+
+  - id: mus-027
+    difficulty: 3
+    prompt: Which Rolling Stones guitarist died in 1969, shortly after leaving the band?
+    answer: Brian Jones
+    distractors: [Mick Taylor, Ronnie Wood, Ian Stewart]
+    fact: Mick Taylor replaced him, and the band played a free Hyde Park concert as a memorial two days after his death.
+
+  - id: mus-028
+    difficulty: 2
+    prompt: Which singer's 1984 album "Born in the U.S.A." produced seven top-ten singles?
+    answer: Bruce Springsteen
+    distractors: [Bob Seger, John Mellencamp, Tom Petty]
+    fact: The title track is routinely mistaken for a patriotic anthem; it is about a returning Vietnam veteran who cannot find work.
+
+  - id: mus-029
+    difficulty: 4
+    prompt: Which songwriting duo wrote "Hound Dog", "Jailhouse Rock" and "Stand By Me"?
+    answer: Leiber and Stoller
+    distractors: [Bacharach and David, Goffin and King, Holland-Dozier-Holland]
+    fact: Holland-Dozier-Holland were Motown's house writers; Goffin and King worked out of the Brill Building.
+
+  - id: mus-030
+    difficulty: 3
+    prompt: Which 1985 transatlantic concert raised money for Ethiopian famine relief?
+    answer: Live Aid
+    distractors: [Farm Aid, The Concert for Bangladesh, Band Aid]
+    fact: Band Aid was the 1984 charity single that preceded it; Farm Aid began later the same year as Live Aid.

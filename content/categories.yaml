@@ -1,0 +1,81 @@
+# The category registry. Every question file names one of these ids.
+#
+# The set is deliberately weighted for an audience that is college-educated,
+# widely travelled and often military — categories that reward a life of
+# reading rather than recent pop culture. Nothing here requires knowledge of
+# anything after about 1995.
+
+- id: history-20c
+  name: The Twentieth Century
+  blurb: The events your parents lived through and you watched unfold.
+  sample: Treaties, elections, turning points
+
+- id: military-history
+  name: Military History
+  blurb: Campaigns, commanders and the hardware.
+  sample: From Verdun to Desert Storm
+
+- id: geography
+  name: World Geography
+  blurb: Capitals, rivers, borders and the places in between.
+  sample: Rivers, ranges and remote capitals
+
+- id: literature
+  name: Literature
+  blurb: Novels, poets and first lines.
+  sample: Authors, openings, prizes
+
+- id: arts-classical
+  name: Arts & Classical Music
+  blurb: Painters, composers, architects and what they left behind.
+  sample: Symphonies, canvases, cathedrals
+
+- id: science-nature
+  name: Science & Nature
+  blurb: The physical world, and the creatures in it.
+  sample: Elements, anatomy, animals
+
+- id: space-aviation
+  name: Space & Aviation
+  blurb: Apollo, aircraft and everything that leaves the ground.
+  sample: Missions, machines, milestones
+
+- id: business-economics
+  name: Business & Economics
+  blurb: Companies, brands, money and the people who moved it.
+  sample: Founders, markets, logos
+
+- id: world-affairs
+  name: World Affairs
+  blurb: Leaders, institutions and the Cold War's long shadow.
+  sample: Summits, treaties, prime ministers
+
+- id: film-tv
+  name: Classic Film & Television
+  blurb: The pictures and programmes that defined four decades.
+  sample: Oscars, casts, catchphrases
+
+- id: music-popular
+  name: Popular Music 1955-1995
+  blurb: Motown through MTV.
+  sample: Hits, bands, album covers
+
+- id: sports
+  name: Sports
+  blurb: Records, dynasties and the moments everyone remembers.
+  sample: Champions, streaks, upsets
+
+- id: words-language
+  name: Words & Language
+  blurb: Etymology, usage and the odd corners of English.
+  sample: Origins, meanings, phrases
+
+- id: food-drink
+  name: Food & Drink
+  blurb: Regional cooking, wine and where it all comes from.
+  sample: Grapes, cuts, provenance
+
+- id: tiebreakers
+  name: Tiebreakers
+  blurb: Numeric sudden death. Closest answer wins.
+  sample: Never used in a normal round

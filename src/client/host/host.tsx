@@ -1,0 +1,293 @@
+import { render } from 'preact';
+import { useEffect } from 'preact/hooks';
+import type { HostState } from '../../../shared/protocol';
+import '../shared/styles.css';
+import { useCountdown, useGame, useSpeech } from '../shared/useGame';
+import { Badge, Board, Timer, Toast } from '../shared/ui';
+
+/**
+ * The big screen. Read-only, and sized for a projector at the far end of a
+ * clubhouse room.
+ *
+ * It deliberately never shows the answer key before the reveal — not because
+ * players would read it off the screen, but because the MC's own laptop is
+ * usually mirroring this, and a reflection in a window has ruined more than
+ * one quiz night.
+ */
+
+function JoinPanel({ state }: { state: HostState }) {
+  return (
+    <div class="join">
+      <div class="join-qr" dangerouslySetInnerHTML={{ __html: state.join.qrSvg }} />
+      <div class="stack">
+        <div class="eyebrow">Scan, or type this in any browser</div>
+        <div class="join-url">{state.join.url.replace('http://', '')}</div>
+        {state.join.ssid && (
+          <p class="muted" style={{ fontSize: '1.3rem' }}>
+            First join the wifi network <strong>{state.join.ssid}</strong>
+          </p>
+        )}
+        <p class="muted" style={{ fontSize: '1.2rem' }}>
+          Room <strong>{state.roomCode}</strong> · teams of {state.config.teamSize}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function AnswerGrid({ state }: { state: HostState }) {
+  const q = state.question;
+  const reveal = state.reveal;
+  if (!q?.choices) return null;
+  return (
+    <div class="answers">
+      {q.choices.map((choice, i) => {
+        const correct = reveal?.answerIndex === i;
+        return (
+          <div
+            key={i}
+            class={`answer${correct ? ' is-correct' : ''}${reveal && !correct ? ' is-muted' : ''}`}
+            data-slot={i}
+          >
+            <Badge slot={i} />
+            <span class="label">{choice}</span>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+function AnsweredStrip({ state }: { state: HostState }) {
+  const total = state.teams.length;
+  const answered = state.answeredTeamIds.length;
+  return (
+    <div class="row" style={{ justifyContent: 'center', gap: '18px' }}>
+      <span class="pill pill-brass" style={{ fontSize: '1.1rem' }}>
+        {answered} of {total} teams in
+      </span>
+      <div class="dots">
+        {state.teams.map((t) => (
+          <span key={t.id} class={`dot${state.answeredTeamIds.includes(t.id) ? ' is-on' : ''}`} title={t.name} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function Podium({ state, title }: { state: HostState; title: string }) {
+  const rows = state.scoreboard;
+  const winner = rows[0];
+  return (
+    <div class="host-body">
+      <div class="center stack">
+        <div class="eyebrow">{title}</div>
+        {winner && (
+          <>
+            <div class="host-display" style={{ color: 'var(--brass)' }}>{winner.name}</div>
+            <p class="muted" style={{ fontSize: '1.6rem' }}>
+              {winner.score} points
+              {rows[1] ? ` · ${winner.score - rows[1].score} clear of ${rows[1].name}` : ''}
+            </p>
+          </>
+        )}
+      </div>
+      <div style={{ maxWidth: '900px', margin: '0 auto', width: '100%' }}>
+        <Board rows={rows} limit={10} />
+      </div>
+    </div>
+  );
+}
+
+function App() {
+  const { state, send: _send, toast, dismissToast } = useGame<HostState>('host');
+  const speak = useSpeech(!!state?.config.readAloud);
+
+  useEffect(() => {
+    if (!state) return;
+    if (state.phase !== 'question' && state.phase !== 'wager_question') return;
+    const q = state.question;
+    if (!q) return;
+    const letters = ['A', 'B', 'C', 'D'];
+    const spoken = [q.prompt, ...(q.choices ?? []).map((c, i) => `${letters[i]}. ${c}`)].join('. ');
+    speak(spoken);
+  }, [state?.phase, state?.question?.prompt, speak]);
+
+  // Hooks run before any early return, so the countdown can't be conditional.
+  const { secondsLeft, fraction } = useCountdown(state?.deadline, state?.config.secondsPerQuestion ?? 1);
+
+  if (!state) {
+    return <div class="host center"><p class="muted">Starting up…</p></div>;
+  }
+
+  const q = state.question;
+
+  return (
+    <div class="host">
+      <div class="host-bar">
+        <div>
+          <div class="eyebrow">{state.venueName}</div>
+          {state.round && (
+            <div class="serif" style={{ fontSize: '1.5rem' }}>
+              {state.round.categoryName}
+              <span class="muted" style={{ fontSize: '1rem' }}>
+                {' '}· round {state.round.index} of {state.round.ofTotal}
+                {q ? ` · question ${q.position} of ${q.ofTotal}` : ''}
+              </span>
+            </div>
+          )}
+        </div>
+        <div class="row" style={{ gap: '14px' }}>
+          {state.block.index > 0 && <span class="pill">Block {state.block.index}</span>}
+          <span class="pill">{state.teams.length} teams</span>
+          <span class="pill pill-brass">{state.roomCode}</span>
+        </div>
+      </div>
+
+      {state.message && <div class="warn center" style={{ fontSize: '1.2rem' }}>{state.message}</div>}
+
+      {state.phase === 'lobby' && (
+        <div class="host-body">
+          <div class="center stack">
+            <h1 class="host-display">{state.venueName}</h1>
+            <p class="muted" style={{ fontSize: '1.5rem' }}>Grab a partner and join in.</p>
+          </div>
+          <JoinPanel state={state} />
+          {state.teams.length > 0 && (
+            <div class="teamgrid">
+              {state.teams.map((t) => (
+                <div key={t.id} class="teamchip">
+                  <strong>{t.name}</strong>
+                  <span class="faint">{t.members.join(' & ')}</span>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+
+      {state.phase === 'block_intro' && (
+        <div class="host-body center stack">
+          <div class="eyebrow">Here we go</div>
+          <h1 class="host-display">Block {state.block.index}</h1>
+          <p class="muted" style={{ fontSize: '1.5rem' }}>
+            {state.config.roundsPerBlock} rounds · {state.config.questionsPerRound} questions each
+            {state.config.finalWager ? ' · final wager to close' : ''}
+          </p>
+        </div>
+      )}
+
+      {state.phase === 'round_intro' && state.round && (
+        <div class="host-body center stack">
+          <div class="eyebrow">Round {state.round.index} of {state.round.ofTotal}</div>
+          <h1 class="host-display">{state.round.categoryName}</h1>
+          <p class="muted" style={{ fontSize: '1.6rem', maxWidth: '26ch', margin: '0 auto' }}>{state.round.blurb}</p>
+        </div>
+      )}
+
+      {(state.phase === 'question' || state.phase === 'locked' || state.phase === 'reveal' ||
+        state.phase === 'wager_question' || state.phase === 'wager_reveal') && q && (
+        <div class="host-body">
+          {state.deadline && (
+            <div style={{ maxWidth: '1100px', margin: '0 auto', width: '100%' }}>
+              <Timer fraction={fraction} seconds={secondsLeft} />
+            </div>
+          )}
+          <h1 class="prompt center">{q.prompt}</h1>
+          {q.image && (
+            <img
+              src={`/media/${q.image}`}
+              alt=""
+              style={{ maxHeight: '38vh', maxWidth: '90%', margin: '0 auto', borderRadius: '16px', display: 'block' }}
+            />
+          )}
+          <AnswerGrid state={state} />
+          {state.phase === 'question' && <AnsweredStrip state={state} />}
+          {state.phase === 'locked' && (
+            <div class="center"><span class="pill pill-brass" style={{ fontSize: '1.3rem' }}>Answers in</span></div>
+          )}
+          {state.reveal && (
+            <>
+              <p class="fact">{state.reveal.funFact}</p>
+              <div class="center">
+                <span class="pill" style={{ fontSize: '1.1rem' }}>
+                  {state.reveal.correctPct}% of teams got it
+                </span>
+              </div>
+            </>
+          )}
+        </div>
+      )}
+
+      {state.phase === 'round_scores' && (
+        <div class="host-body">
+          <div class="center">
+            <div class="eyebrow">After {state.round?.categoryName}</div>
+          </div>
+          <div style={{ maxWidth: '900px', margin: '0 auto', width: '100%' }}>
+            <Board rows={state.scoreboard} limit={12} />
+          </div>
+        </div>
+      )}
+
+      {state.phase === 'wager_bet' && (
+        <div class="host-body center stack">
+          <div class="eyebrow">Final question of the block</div>
+          <h1 class="host-display">Place your wagers</h1>
+          <p class="muted" style={{ fontSize: '1.5rem' }}>
+            Bet any part of your score. Right answer wins it, wrong answer loses it.
+          </p>
+          <div class="teamgrid" style={{ maxWidth: '1000px', margin: '0 auto' }}>
+            {state.scoreboard.map((row) => (
+              <div key={row.teamId} class="teamchip">
+                <strong>{row.name}</strong>
+                <span class="faint">{row.score} on the board</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {state.phase === 'tiebreak' && q && (
+        <div class="host-body center stack">
+          <div class="eyebrow">Tiebreaker — closest answer wins</div>
+          <h1 class="prompt">{q.prompt}</h1>
+          {state.deadline && (
+            <div style={{ maxWidth: '900px', margin: '0 auto', width: '100%' }}>
+              <Timer fraction={fraction} seconds={secondsLeft} />
+            </div>
+          )}
+        </div>
+      )}
+
+      {state.phase === 'tiebreak_reveal' && state.reveal && (
+        <div class="host-body center stack">
+          <div class="eyebrow">The answer was</div>
+          <h1 class="host-display">{state.reveal.answerText}</h1>
+          <div class="teamgrid" style={{ maxWidth: '1000px', margin: '0 auto' }}>
+            {state.reveal.outcomes.map((o) => (
+              <div key={o.teamId} class="teamchip">
+                <strong>{o.name}</strong>
+                <span class="faint">guessed {o.numberAnswer ?? '—'}{o.correct ? ' · wins it' : ''}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {state.phase === 'block_results' && <Podium state={state} title={`Block ${state.block.index} — final standings`} />}
+      {state.phase === 'night_over' && <Podium state={state} title="Tonight's champions" />}
+
+      {state.phase !== 'lobby' && (
+        <div class="host-bar">
+          <p class="faint">Join at {state.join.url.replace('http://', '')} · room {state.roomCode}</p>
+          <p class="faint">{state.teams.length} teams</p>
+        </div>
+      )}
+
+      <Toast message={toast} onDismiss={dismissToast} />
+    </div>
+  );
+}
+
+render(<App />, document.getElementById('app')!);

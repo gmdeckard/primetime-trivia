@@ -1,0 +1,272 @@
+category: military-history
+
+questions:
+  - id: mil-001
+    difficulty: 2
+    prompt: Operation Husky was the Allied invasion of which island in July 1943?
+    answer: Sicily
+    distractors: [Sardinia, Crete, Corsica]
+    fact: Mussolini was deposed within two weeks of the landings, on 25 July 1943.
+    era: 1940s
+    tags: [wwii, mediterranean]
+
+  - id: mil-002
+    difficulty: 2
+    prompt: How many Japanese fleet carriers were sunk at the Battle of Midway?
+    answer: Four
+    distractors: [Two, Three, Six]
+    fact: Akagi, Kaga, Soryu and Hiryu were all lost in a single day, along with most of their experienced aircrew.
+    era: 1940s
+    tags: [wwii, pacific]
+
+  - id: mil-003
+    difficulty: 3
+    prompt: Which general took command of the Eighth Army in Korea and later replaced MacArthur as UN commander?
+    answer: Matthew Ridgway
+    distractors: [Mark Clark, Walton Walker, James Van Fleet]
+    fact: Ridgway took over after Walker was killed in a jeep accident, and is widely credited with restoring the Eighth Army's morale.
+    era: 1950s
+    tags: [korea]
+
+  - id: mil-004
+    difficulty: 1
+    prompt: The Battle of the Bulge was fought in which forested region?
+    answer: The Ardennes
+    distractors: [The Hürtgen Forest, The Black Forest, The Teutoburg Forest]
+    fact: The German attack of December 1944 achieved complete surprise partly because the Ardennes was considered unsuitable for armour.
+    era: 1940s
+    tags: [wwii, europe]
+
+  - id: mil-005
+    difficulty: 1
+    prompt: Aboard which battleship did Japan formally surrender in September 1945?
+    answer: USS Missouri
+    distractors: [USS Arizona, USS Iowa, USS Enterprise]
+    fact: The ceremony took place in Tokyo Bay. The Missouri is now moored at Pearl Harbor, within sight of the Arizona memorial.
+    era: 1940s
+    tags: [wwii, pacific]
+
+  - id: mil-006
+    difficulty: 4
+    prompt: Operation Overlord was the Normandy invasion. What was the codename for its naval component?
+    answer: Neptune
+    distractors: [Mulberry, Bodyguard, Fortitude]
+    fact: Mulberry was the artificial harbour project and Bodyguard the overall deception plan, of which Fortitude was a part.
+    era: 1940s
+    tags: [wwii, dday]
+
+  - id: mil-007
+    difficulty: 2
+    prompt: At which 1954 battle did Viet Minh forces decisively defeat the French?
+    answer: Dien Bien Phu
+    distractors: [Khe Sanh, Ia Drang, Hue]
+    fact: The French garrison surrendered after a 56-day siege, and France withdrew from Indochina within months.
+    era: 1950s
+    tags: [indochina]
+
+  - id: mil-008
+    difficulty: 2
+    prompt: Which US Army division carries the nickname "Screaming Eagles"?
+    answer: 101st Airborne
+    distractors: [82nd Airborne, 1st Cavalry, 3rd Infantry]
+    fact: The 82nd is the "All American" division — the source of its double-A shoulder patch.
+    era: 1940s
+    tags: [us-army]
+
+  - id: mil-009
+    difficulty: 1
+    prompt: In which year did the Tet Offensive take place?
+    answer: 1968
+    distractors: ['1965', '1970', '1972']
+    fact: Militarily the offensive was costly for the North, but its effect on American public opinion was decisive.
+    era: 1960s
+    tags: [vietnam]
+
+  - id: mil-010
+    difficulty: 1
+    prompt: Who commanded the German Afrika Korps?
+    answer: Erwin Rommel
+    distractors: [Heinz Guderian, Gerd von Rundstedt, Albert Kesselring]
+    fact: His British opponents nicknamed him the Desert Fox, a rare compliment paid to an enemy commander.
+    era: 1940s
+    tags: [wwii, africa]
+
+  - id: mil-011
+    difficulty: 1
+    prompt: Which battle, ending in February 1943, is generally seen as the turning point of the Eastern Front?
+    answer: Stalingrad
+    distractors: [Kursk, Moscow, Leningrad]
+    fact: The German Sixth Army surrendered with some 91,000 survivors; fewer than 6,000 ever returned home.
+    era: 1940s
+    tags: [wwii, eastern-front]
+
+  - id: mil-012
+    difficulty: 3
+    prompt: The intelligence ship USS Pueblo was seized in 1968 by which country?
+    answer: North Korea
+    distractors: [The Soviet Union, China, Cuba]
+    fact: The crew was held for eleven months. The Pueblo is still held in Pyongyang and remains a commissioned US Navy vessel.
+    era: 1960s
+    tags: [cold-war]
+
+  - id: mil-013
+    difficulty: 1
+    prompt: Which treaty formally ended the state of war between Germany and the Allied powers in 1919?
+    answer: The Treaty of Versailles
+    distractors: [The Treaty of Trianon, The Treaty of Brest-Litovsk, The Treaty of Sèvres]
+    fact: Trianon dealt with Hungary and Sèvres with the Ottoman Empire. Brest-Litovsk was Russia's separate peace with Germany in 1918.
+    era: 1910s
+    tags: [wwi, treaties]
+
+  - id: mil-014
+    difficulty: 3
+    prompt: Which 1944 engagement was the largest naval battle of the Second World War?
+    answer: Leyte Gulf
+    distractors: [The Philippine Sea, Coral Sea, Midway]
+    fact: It was also the last battle in which battleships engaged each other, and saw the first organised kamikaze attacks.
+    era: 1940s
+    tags: [wwii, pacific]
+
+  - id: mil-015
+    difficulty: 3
+    prompt: The M1 Garand replaced which rifle as the standard US service rifle?
+    answer: The Springfield M1903
+    distractors: [The Krag-Jørgensen, The M1 Carbine, The Lee-Enfield]
+    fact: Patton called the Garand "the greatest battle implement ever devised" — it gave American infantry semi-automatic fire while most armies still used bolt actions.
+    era: 1930s
+    tags: [wwii, weapons]
+
+  - id: mil-016
+    difficulty: 1
+    prompt: On which island did Marines raise the flag over Mount Suribachi in 1945?
+    answer: Iwo Jima
+    distractors: [Okinawa, Guadalcanal, Tarawa]
+    fact: Joe Rosenthal's photograph was of the second, larger flag raised that day; the first had been judged too small to be seen across the island.
+    era: 1940s
+    tags: [wwii, pacific, usmc]
+
+  - id: mil-017
+    difficulty: 3
+    prompt: Which Dutch city's bridge was the furthest objective of Operation Market Garden?
+    answer: Arnhem
+    distractors: [Nijmegen, Eindhoven, Maastricht]
+    fact: The operation's failure at Arnhem gave Cornelius Ryan the title of his account, "A Bridge Too Far".
+    era: 1940s
+    tags: [wwii, europe]
+
+  - id: mil-018
+    difficulty: 2
+    prompt: Which 1941 act allowed the United States to supply war materiel to the Allies before it entered the war?
+    answer: Lend-Lease
+    distractors: [The Neutrality Act, The Atlantic Charter, The Selective Service Act]
+    fact: Roosevelt compared it to lending a garden hose to a neighbour whose house was on fire.
+    era: 1940s
+    tags: [wwii, politics]
+
+  - id: mil-019
+    difficulty: 2
+    prompt: Which Soviet marshal commanded the forces that took Berlin in 1945?
+    answer: Georgy Zhukov
+    distractors: [Ivan Konev, Konstantin Rokossovsky, Semyon Timoshenko]
+    fact: Stalin deliberately set Zhukov and Konev in competition for the city, at considerable cost in Soviet lives.
+    era: 1940s
+    tags: [wwii, eastern-front]
+
+  - id: mil-020
+    difficulty: 2
+    prompt: In which year did the Berlin Airlift begin?
+    answer: 1948
+    distractors: ['1945', '1950', '1953']
+    fact: At its peak, aircraft were landing at Tempelhof roughly every ninety seconds.
+    era: 1940s
+    tags: [cold-war]
+
+  - id: mil-021
+    difficulty: 2
+    prompt: Which president ordered the desegregation of the US armed forces in 1948?
+    answer: Harry Truman
+    distractors: [Franklin Roosevelt, Dwight Eisenhower, Lyndon Johnson]
+    fact: Executive Order 9981 required equality of treatment regardless of race, colour, religion or national origin.
+    era: 1940s
+    tags: [us-politics]
+
+  - id: mil-022
+    difficulty: 3
+    prompt: The Tuskegee Airmen earned the name "Red Tails" flying which fighter in 1944-45?
+    answer: The P-51 Mustang
+    distractors: [The P-47 Thunderbolt, The P-38 Lightning, The P-40 Warhawk]
+    fact: The 332nd Fighter Group had flown P-40s, P-39s and P-47s before converting to Mustangs, on which the distinctive red tails were painted.
+    era: 1940s
+    tags: [wwii, aviation]
+
+  - id: mil-023
+    difficulty: 3
+    prompt: Which conflict saw the first sustained air combat between jet fighters?
+    answer: The Korean War
+    distractors: [The Second World War, The Suez Crisis, The Vietnam War]
+    fact: F-86 Sabres and MiG-15s fought over an area of north-western Korea that pilots called MiG Alley.
+    era: 1950s
+    tags: [korea, aviation]
+
+  - id: mil-024
+    difficulty: 2
+    prompt: In which year was NATO founded?
+    answer: 1949
+    distractors: ['1945', '1947', '1955']
+    fact: The Warsaw Pact followed in 1955, after West Germany was admitted to NATO.
+    era: 1940s
+    tags: [cold-war]
+
+  - id: mil-025
+    difficulty: 2
+    prompt: The Doolittle Raid of April 1942 struck which city?
+    answer: Tokyo
+    distractors: [Osaka, Yokohama, Nagoya]
+    fact: Sixteen B-25s launched from the carrier Hornet. The material damage was slight; the effect on American morale was enormous.
+    era: 1940s
+    tags: [wwii, pacific]
+
+  - id: mil-026
+    difficulty: 2
+    prompt: Which 1916 battle lasted nearly ten months and became the symbol of French endurance?
+    answer: Verdun
+    distractors: [The Somme, Passchendaele, The Marne]
+    fact: The phrase ils ne passeront pas — they shall not pass — came out of Verdun, where French and German casualties together approached 700,000.
+    era: 1910s
+    tags: [wwi]
+
+  - id: mil-027
+    difficulty: 1
+    prompt: Which general commanded coalition forces during Operation Desert Storm?
+    answer: Norman Schwarzkopf
+    distractors: [Colin Powell, Tommy Franks, Wesley Clark]
+    fact: Powell was Chairman of the Joint Chiefs at the time; Schwarzkopf held the theatre command.
+    era: 1990s
+    tags: [gulf-war]
+
+  - id: mil-028
+    difficulty: 3
+    prompt: What was the codename of the US nuclear weapons programme during the Second World War?
+    answer: The Manhattan Project
+    distractors: [Project Trinity, The Tube Alloys Project, Operation Crossroads]
+    fact: Tube Alloys was the parallel British programme; Trinity was the first test and Crossroads the 1946 Bikini tests.
+    era: 1940s
+    tags: [wwii, science]
+
+  - id: mil-029
+    difficulty: 4
+    prompt: Which Marine unit held the perimeter at the Chosin Reservoir in the winter of 1950?
+    answer: The 1st Marine Division
+    distractors: [The 2nd Marine Division, The 3rd Marine Division, The 5th Marine Division]
+    fact: Surrounded and outnumbered, General O. P. Smith remarked that they were not retreating but "attacking in a different direction".
+    era: 1950s
+    tags: [korea, usmc]
+
+  - id: mil-030
+    difficulty: 4
+    prompt: The Enigma decryption effort was based at which English country house?
+    answer: Bletchley Park
+    distractors: [Chequers, Hatfield House, Chartwell]
+    fact: Chartwell was Churchill's home and Chequers the prime minister's official country residence.
+    era: 1940s
+    tags: [wwii, intelligence]
