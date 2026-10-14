@@ -120,7 +120,7 @@ export function loadBank(contentDir: string): Bank {
 
   const questions: Question[] = [];
   const seenIds = new Set<string>();
-  const seenPrompts = new Map<string, string>();
+  const fileById = new Map<string, string>();
 
   for (const file of walkYaml(contentDir)) {
     const rel = relative(contentDir, file).split(sep).join('/');
@@ -188,14 +188,6 @@ export function loadBank(contentDir: string): Bank {
         issues.push({ file: rel, id, message: `prompt is ${prompt.length} chars; keep under ${MAX_PROMPT} so it fits the host screen at readable size`, severity: 'warning' });
       }
 
-      const normalisedPrompt = prompt.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
-      const clash = seenPrompts.get(normalisedPrompt);
-      if (clash) {
-        issues.push({ file: rel, id, message: `prompt duplicates ${clash}`, severity: 'warning' });
-      } else {
-        seenPrompts.set(normalisedPrompt, id);
-      }
-
       const q: Question = {
         id,
         category: categoryId,
@@ -242,9 +234,12 @@ export function loadBank(contentDir: string): Bank {
       }
 
       seenIds.add(id);
+      fileById.set(q.id, rel);
       questions.push(q);
     }
   }
+
+  findDuplicates(questions, fileById, issues);
 
   const byCategory = new Map<string, Question[]>();
   for (const cat of categories) byCategory.set(cat.id, []);
@@ -258,4 +253,100 @@ export function loadBank(contentDir: string): Bank {
   }
 
   return { categories, categoryById, questions, byCategory, issues };
+}
+
+/**
+ * Function words carry no signal about what a question is asking, so they are
+ * dropped before two prompts are compared. Deliberately short: words like
+ * "first", "last" and "only" are exactly what distinguishes one question about
+ * a subject from another, and must survive.
+ */
+const STOPWORDS = new Set(
+  ('a an the of in on at to for from by with as is are was were be been did does do ' +
+   'which what who whom whose where when how and or but if then than that this these those ' +
+   'it its his her their there here you your we our they them he she').split(' '),
+);
+
+function significantWords(text: string): Set<string> {
+  return new Set(
+    text
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, ' ')
+      .trim()
+      .split(' ')
+      .filter((w) => w.length > 2 && !STOPWORDS.has(w)),
+  );
+}
+
+function overlap(a: Set<string>, b: Set<string>): number {
+  if (!a.size || !b.size) return 0;
+  let shared = 0;
+  for (const w of a) if (b.has(w)) shared += 1;
+  return shared / (a.size + b.size - shared);
+}
+
+/**
+ * Three ways a question repeats itself, and they are not the same mistake.
+ *
+ * An identical prompt is a slip. An identical fact is the same question in a
+ * different hat — the reveal is the thing the room actually hears, so two
+ * questions that end in the same sentence are one question. Both are errors:
+ * the bank is written in long sessions and a warning scrolls past.
+ *
+ * The third is the one that reaches a live night. Nobody writes the same
+ * sentence twice, but "which organ produces insulin" and "insulin is produced
+ * by which organ" are the same question, and only show up as a shared answer
+ * plus heavy word overlap. That stays a warning, because the test is a
+ * heuristic and a false positive should not block a night's content.
+ */
+function findDuplicates(
+  questions: Question[],
+  fileById: Map<string, string>,
+  issues: ContentIssue[],
+): void {
+  const norm = (t: string) => t.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+  const at = (id: string) => fileById.get(id) ?? 'unknown';
+
+  const seenPrompt = new Map<string, string>();
+  const seenFact = new Map<string, string>();
+  const byAnswer = new Map<string, Array<{ id: string; words: Set<string> }>>();
+
+  for (const q of questions) {
+    const p = norm(q.prompt);
+    const clash = seenPrompt.get(p);
+    if (clash) {
+      issues.push({ file: at(q.id), id: q.id, message: `prompt duplicates ${clash}`, severity: 'error' });
+    } else {
+      seenPrompt.set(p, q.id);
+    }
+
+    const f = norm(q.funFact);
+    const factClash = seenFact.get(f);
+    if (factClash) {
+      issues.push({ file: at(q.id), id: q.id, message: `fact duplicates ${factClash}`, severity: 'error' });
+    } else {
+      seenFact.set(f, q.id);
+    }
+
+    // Grouped by answer so the near-duplicate scan stays linear in practice:
+    // two questions with different answers are different questions.
+    const answer = q.choices?.[q.answerIndex ?? 0] ?? (q.answerNumber !== undefined ? String(q.answerNumber) : '');
+    if (!answer) continue;
+    const key = norm(answer);
+    const group = byAnswer.get(key) ?? [];
+    const words = significantWords(q.prompt);
+    for (const other of group) {
+      const score = overlap(words, other.words);
+      if (score >= 0.6) {
+        issues.push({
+          file: at(q.id),
+          id: q.id,
+          message: `looks like ${other.id}: same answer and ${Math.round(score * 100)}% of the prompt`,
+          severity: 'warning',
+        });
+      }
+    }
+    group.push({ id: q.id, words });
+    byAnswer.set(key, group);
+  }
 }

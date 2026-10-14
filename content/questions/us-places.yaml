@@ -41,17 +41,17 @@ questions:
 
   - id: usp-006
     difficulty: 3
-    prompt: Which is the only state that borders exactly one other state?
-    answer: Maine
-    distractors: [Florida, Washington, New Hampshire]
-    fact: Maine touches only New Hampshire. Alaska and Hawaii border none at all, which is why the answer is not simply the most isolated one.
+    prompt: Which state is divided into the most counties?
+    answer: Texas
+    distractors: [Georgia, Kentucky, Missouri]
+    fact: Georgia is second with 159, and Delaware manages the whole state with three.
 
   - id: usp-007
     difficulty: 3
-    prompt: Which state has the longest coastline?
-    answer: Alaska
-    distractors: [Florida, California, Texas]
-    fact: Alaska's coast is longer than that of all the other states put together.
+    prompt: Which state was created by breaking away from another state during the Civil War?
+    answer: West Virginia
+    distractors: [Kentucky, Maryland, Tennessee]
+    fact: It split from Virginia and was admitted in 1863. The other three were slave states that stayed in the Union or were divided by it.
 
   - id: usp-008
     difficulty: 3
