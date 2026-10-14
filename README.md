@@ -42,6 +42,22 @@ Regenerate these any time with `npm run screenshots` — the script plays a real
 game against a throwaway server, so it also catches UI regressions that unit
 tests cannot see.
 
+## Requirements
+
+**Node.js 20 or newer.** That is the only prerequisite — there are no native
+dependencies, no database, and no build toolchain needed.
+
+Ubuntu and Debian ship a version of Node too old to run this, so install a
+current one first:
+
+```bash
+curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
+sudo apt-get install -y nodejs
+node -v          # expect v22.x
+```
+
+On macOS: `brew install node`. On Windows, use the installer from nodejs.org.
+
 ## Quick start
 
 ```bash
@@ -55,11 +71,12 @@ npm start
 The terminal prints everything you need:
 
 ```
-  Trivia Night
+  PrimeTime Trivia
   ────────────────────────────────────────────────────
   Players join at   http://192.168.1.42:8080
   Big screen        http://192.168.1.42:8080/host
   MC controls       http://192.168.1.42:8080/control
+  Question editor   http://192.168.1.42:8080/author
   Host PIN          297392
   Room code         CORAL-9
   ────────────────────────────────────────────────────
@@ -104,6 +121,10 @@ other and breaks everything with no useful error.
 **Using the clubhouse wifi** works too. The server detects its address at boot
 and the host screen displays it. If players can reach the page but nothing
 loads, client isolation is the first thing to suspect.
+
+To leave it running permanently on a Raspberry Pi, Jetson or mini PC — starting
+on boot, restarting if it crashes, serving on port 80 so the join address has no
+`:8080` on the end — see [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md).
 
 Set `PRIMETIME_SSID` and the host screen will tell people which network to join
 before giving them the address:
