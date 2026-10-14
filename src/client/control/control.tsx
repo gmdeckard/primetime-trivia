@@ -389,7 +389,7 @@ function App() {
           <div class="eyebrow">MC controls</div>
           <strong>{state.venueName}</strong>
         </div>
-        <button class="btn btn-sm" onClick={() => setShowSetup(!showSetup)}>
+        <button class={`btn btn-sm${showSetup ? ' btn-primary' : ''}`} onClick={() => setShowSetup(!showSetup)}>
           {showSetup ? 'Hide setup' : 'Setup'}
         </button>
       </div>
@@ -398,7 +398,28 @@ function App() {
         <div key={w} class="warn">{w}</div>
       ))}
 
-      {(showSetup || state.phase === 'lobby') && <Setup state={state} send={send} />}
+      {state.phase === 'lobby' && (
+        <div class="card stack">
+          <div class="row-between">
+            <div class="eyebrow">Joining</div>
+            <span class="pill pill-brass">{state.entryCount} in</span>
+          </div>
+          {state.entryCount === 0 ? (
+            <p class="muted">
+              Nobody yet. Players join at <strong>{state.venueName}</strong>'s address on the big screen.
+            </p>
+          ) : (
+            <div class="chips">
+              {state.teams.slice(-18).map((t) => (
+                <span key={t.id} class="chip">{t.name}</span>
+              ))}
+              {state.teams.length > 18 && <span class="chip">+{state.teams.length - 18} more</span>}
+            </div>
+          )}
+        </div>
+      )}
+
+      {(showSetup || (state.phase === 'lobby' && showSetup)) && <Setup state={state} send={send} />}
 
       {/* Phase, answer key and lookahead: everything the MC speaks from. */}
       <div class="card stack">
@@ -466,7 +487,8 @@ function App() {
         </>
       )}
 
-      <Teams state={state} send={send} />
+      {state.phase !== 'lobby' && <Teams state={state} send={send} />}
+      {state.phase === 'lobby' && state.entryCount > 0 && <Teams state={state} send={send} />}
 
       <div class="card stack">
         <div class="eyebrow">Announce on the big screen</div>

@@ -86,12 +86,29 @@ function safeJoin(root: string, urlPath: string): string | undefined {
   return candidate;
 }
 
-function serveFile(res: ServerResponse, path: string, immutable = false) {
+function serveFile(req: IncomingMessage, res: ServerResponse, path: string, immutable = false) {
   const stat = statSync(path);
+  // Weak validator built from the file itself, so a repeat request for an
+  // unchanged asset costs a 304 rather than the whole file.
+  const etag = `W/"${stat.size.toString(16)}-${stat.mtimeMs.toString(16)}"`;
+
+  if (immutable && req.headers['if-none-match'] === etag) {
+    res.writeHead(304, { etag, 'cache-control': 'public, max-age=31536000, immutable' });
+    res.end();
+    return;
+  }
+
   res.writeHead(200, {
     'content-type': TYPES[extname(path).toLowerCase()] ?? 'application/octet-stream',
     'content-length': stat.size,
-    'cache-control': immutable ? 'public, max-age=31536000, immutable' : 'no-cache',
+    etag,
+    'last-modified': stat.mtime.toUTCString(),
+    // Asset filenames carry a content hash, so they can be cached forever. The
+    // HTML that points at them must never be: a phone holding yesterday's page
+    // would keep loading yesterday's bundle, and the symptom of that is a
+    // screen that mysteriously stops updating. `no-cache` only asks the browser
+    // to revalidate; `no-store` removes the question.
+    'cache-control': immutable ? 'public, max-age=31536000, immutable' : 'no-store, must-revalidate',
   });
   createReadStream(path).pipe(res);
 }
@@ -134,7 +151,7 @@ export function createRequestHandler(deps: HttpDeps) {
     if (path.startsWith('/media/')) {
       const file = safeJoin(deps.imagesDir, path.slice('/media/'.length));
       if (file && existsSync(file) && statSync(file).isFile()) {
-        serveFile(res, file, true);
+        serveFile(req, res, file, true);
         return;
       }
       res.writeHead(404).end('not found');
@@ -152,7 +169,7 @@ export function createRequestHandler(deps: HttpDeps) {
     if (page) {
       const file = join(deps.clientDir, page);
       if (existsSync(file)) {
-        serveFile(res, file);
+        serveFile(req, res, file);
         return;
       }
       res.writeHead(503, { 'content-type': 'text/plain; charset=utf-8' });
@@ -162,7 +179,7 @@ export function createRequestHandler(deps: HttpDeps) {
 
     const asset = safeJoin(deps.clientDir, path);
     if (asset && existsSync(asset) && statSync(asset).isFile()) {
-      serveFile(res, asset, path.startsWith('/assets/'));
+      serveFile(req, res, asset, path.startsWith('/assets/'));
       return;
     }
 
