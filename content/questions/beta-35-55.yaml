@@ -1,17 +1,16 @@
-# Beta test set, pitched at 35 to 55 (formative years roughly 1981-2016).
+# Written for a 35-to-55 beta night, and most of it turned out to be general
+# knowledge rather than anything age-locked.
 #
-# This exists so people can test-drive a real night without burning questions
-# from the core bank, and without being asked about Sirimavo Bandaranaike. It
-# is tagged for its own age group, and because every core file is tagged
-# 55-75, picking one group in the MC controls swaps the material wholesale.
+# So the file is untagged by default, which means every question here serves
+# any age group and counts toward the core bank. Only the twelve that genuinely
+# need knowledge of something after about 1995 carry audience: 35-55 of their
+# own, because the core bank is written to stop at roughly that line.
 #
 # Eight categories, ten questions each, shaped 2/5/3 across difficulties 2, 3
-# and 4 so any one of them can fill a ten-question round on its own. A night
-# is six rounds, which leaves two categories spare for the block wagers.
+# and 4 so any one of them can fill a ten-question round on its own. Picking
+# 35 to 55 in the MC controls still yields all eighty.
 #
-# The numeric tiebreakers are untagged on purpose and serve every group.
-
-audience: 35-55
+# The numeric tiebreakers are untagged on purpose too and serve every group.
 
 questions:
   - id: b35-001
@@ -85,6 +84,7 @@ questions:
     answer: Brad Pitt
     distractors: [Edward Norton, Bruce Willis, Matt Damon]
     fact: Norton and Willis each starred alongside him in one of the two, which is why the question needs both titles.
+    audience: 35-55   # Fight Club, 1999
 
   - id: b35-010
     category: film-tv
@@ -93,6 +93,7 @@ questions:
     answer: Breaking Bad
     distractors: [The Shield, Weeds, Justified]
     fact: The network nearly passed on it. Weeds had aired a suburban-drug-dealer premise two years earlier.
+    audience: 35-55   # Breaking Bad, 2008
 
   - id: b35-011
     category: geography
@@ -209,10 +210,10 @@ questions:
   - id: b35-025
     category: sports
     difficulty: 3
-    prompt: In which event would you perform a Fosbury Flop?
-    answer: The high jump
-    distractors: [The pole vault, The long jump, The triple jump]
-    fact: Dick Fosbury won the 1968 Olympics going over backwards. Within a decade essentially everyone jumped that way.
+    prompt: Which trophy goes to the winner of the NHL playoffs?
+    answer: The Stanley Cup
+    distractors: [The Vezina Trophy, The Art Ross Trophy, The Hart Trophy]
+    fact: The oldest trophy competed for by professional athletes in North America, and every winning player's name is engraved on it.
 
   - id: b35-026
     category: sports
@@ -229,6 +230,7 @@ questions:
     answer: Lance Armstrong
     distractors: [Miguel Indurain, Greg LeMond, Jan Ullrich]
     fact: Indurain won five in a row legitimately, and the stripped years were simply left with no winner at all.
+    audience: 35-55   # Armstrong won from 1999
 
   - id: b35-028
     category: sports
@@ -269,6 +271,7 @@ questions:
     answer: Apple
     distractors: [Sony, Creative, Microsoft]
     fact: Creative had shipped a hard-drive music player two years earlier and later won a patent settlement over the interface.
+    audience: 35-55   # iPod, 2001
 
   - id: b35-033
     category: invention-tech
@@ -309,6 +312,7 @@ questions:
     answer: Google
     distractors: [Yahoo, AltaVista, Lycos]
     fact: The ranking idea came from counting citations between academic papers.
+    audience: 35-55   # Google, 1998
 
   - id: b35-038
     category: invention-tech
@@ -325,6 +329,7 @@ questions:
     answer: The PalmPilot
     distractors: [The Apple Newton, The Psion Organiser, The Nokia Communicator]
     fact: The Newton came first and its handwriting recognition was mocked so widely it turned up as a joke in Doonesbury.
+    audience: 35-55   # PalmPilot, 1996
 
   - id: b35-040
     category: invention-tech
@@ -425,18 +430,18 @@ questions:
   - id: b35-052
     category: words-language
     difficulty: 2
-    prompt: What is a word that reads the same backwards called?
-    answer: A palindrome
-    distractors: [An anagram, A homonym, An acronym]
-    fact: From the Greek for running back again.
+    prompt: What does the abbreviation etc. stand for?
+    answer: Et cetera
+    distractors: [Et alia, Exempli gratia, Et alii]
+    fact: Latin for and the rest. The common misspelling ect. comes from people hearing it as ex-cetera.
 
   - id: b35-053
     category: words-language
     difficulty: 3
-    prompt: What is a word formed from the initials of a phrase, pronounced as a word?
-    answer: An acronym
-    distractors: [An initialism, An abbreviation, A contraction]
-    fact: NASA is an acronym; FBI is an initialism, because nobody tries to say it as a word.
+    prompt: What is a word meaning the opposite of another called?
+    answer: An antonym
+    distractors: [A synonym, A homonym, A homophone]
+    fact: Homophones sound alike and homonyms are spelled alike, which is why all three get muddled together.
 
   - id: b35-054
     category: words-language
@@ -473,10 +478,10 @@ questions:
   - id: b35-058
     category: words-language
     difficulty: 4
-    prompt: What is a word that sounds like what it describes called?
-    answer: Onomatopoeia
-    distractors: [Assonance, Alliteration, Synecdoche]
-    fact: Languages disagree about the sounds. A dog says woof in English and ouaf in French.
+    prompt: Which term covers substituting an associated word for the thing meant, as in the crown for the monarchy?
+    answer: Metonymy
+    distractors: [Synecdoche, Metaphor, Allegory]
+    fact: Synecdoche is its close neighbour and uses a part for the whole instead, as in all hands on deck.
 
   - id: b35-059
     category: words-language
@@ -565,6 +570,7 @@ questions:
     answer: Atlanta
     distractors: [Los Angeles, Seoul, Barcelona]
     fact: It beat Athens, which had expected the centenary games and did not take the loss well.
+    audience: 35-55   # Atlanta, 1996
 
   - id: b35-070
     category: us-places
@@ -597,6 +603,7 @@ questions:
     answer: Amazon
     distractors: [eBay, Barnes and Noble, Borders]
     fact: Books were chosen because there were more titles than any shop could stock, so a catalogue was the whole advantage.
+    audience: 35-55   # Amazon, 1995 and after
 
   - id: b35-074
     category: business-economics
@@ -613,6 +620,7 @@ questions:
     answer: Enron
     distractors: [WorldCom, Tyco, Global Crossing]
     fact: It took its auditor, Arthur Andersen, down with it, ending one of the five largest accounting firms in the world.
+    audience: 35-55   # Enron, 2001
 
   - id: b35-076
     category: business-economics
@@ -621,6 +629,7 @@ questions:
     answer: Blockbuster
     distractors: [Hollywood Video, Movie Gallery, Family Video]
     fact: Netflix is said to have offered itself for 50 million dollars in 2000 and been laughed out of the room.
+    audience: 35-55   # Netflix by mail, 2000
 
   - id: b35-077
     category: business-economics
@@ -637,6 +646,7 @@ questions:
     answer: The global financial crisis
     distractors: [The dot-com crash, The savings and loan crisis, The Asian financial crisis]
     fact: It was the largest bankruptcy filing in US history, and the firm had survived the Civil War and the Depression.
+    audience: 35-55   # Lehman, 2008
 
   - id: b35-079
     category: business-economics
@@ -653,3 +663,4 @@ questions:
     answer: The euro
     distractors: [The Swiss franc, The pound sterling, The Norwegian krone]
     fact: It had existed since 1999 for accounting and electronic transfers. The notes and coins came three years later.
+    audience: 35-55   # euro notes, 2002

@@ -137,10 +137,10 @@ questions:
 
   - id: art-020
     difficulty: 4
-    prompt: Which conductor led the New York Philharmonic and wrote the music for "West Side Story"?
-    answer: Leonard Bernstein
-    distractors: [Arturo Toscanini, Georg Solti, Eugene Ormandy]
-    fact: His televised Young People's Concerts ran for fourteen years and taught a generation how to listen.
+    prompt: Which conductor led the Chicago Symphony Orchestra from 1969 for twenty-two years?
+    answer: Georg Solti
+    distractors: [Arturo Toscanini, Eugene Ormandy, Fritz Reiner]
+    fact: He holds the record for the most Grammy awards won by any individual, and Reiner had the same orchestra before him.
 
   - id: art-021
     difficulty: 2

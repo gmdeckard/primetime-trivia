@@ -336,8 +336,15 @@ function findDuplicates(
     const group = byAnswer.get(key) ?? [];
     const words = significantWords(q.prompt);
     for (const other of group) {
+      // 0.4, not 0.6. At 0.6 three genuine repeats slipped through, all of
+      // them the same question asked in different words. The cost of being
+      // wrong is asymmetric: a false positive is one glance by a human, a
+      // miss is the same question twice in front of a room. One known false
+      // positive at this setting is "eleven players" in soccer and American
+      // football, which share an answer and a shape but are different
+      // questions. That is the trade, taken deliberately.
       const score = overlap(words, other.words);
-      if (score >= 0.6) {
+      if (score >= 0.4) {
         issues.push({
           file: at(q.id),
           id: q.id,
