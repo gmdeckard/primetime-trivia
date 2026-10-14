@@ -3,7 +3,9 @@ import { mkdtempSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { after, test } from 'node:test';
+import { DEFAULT_CONFIG } from '../../shared/protocol.js';
 import { loadBank } from './content.js';
+import { rankLanAddresses } from './lan.js';
 import { Engine } from './engine.js';
 import { Store } from './store.js';
 import { controlState, playerState } from './views.js';
@@ -18,10 +20,13 @@ const bank = loadBank(join(process.cwd(), 'content'));
 const dirs: string[] = [];
 const engines: Engine[] = [];
 
-function freshEngine(config?: ConstructorParameters<typeof Engine>[2]) {
+function freshEngine(
+  config?: ConstructorParameters<typeof Engine>[2],
+  resume?: ConstructorParameters<typeof Engine>[3],
+) {
   const dir = mkdtempSync(join(tmpdir(), 'primetime-test-'));
   dirs.push(dir);
-  const engine = new Engine(bank, new Store(dir), config);
+  const engine = new Engine(bank, new Store(dir), config, resume);
   engines.push(engine);
   return engine;
 }
@@ -454,12 +459,75 @@ test('a resumed night does not fire a countdown that expired while it slept', ()
   engines.push(first);
   const teams = toFirstQuestion(first);
   for (const team of teams) first.answer(team.players[0]!, 0);
-  assert.ok(first.snapshot().autoAdvanceAt, 'a step was queued before the restart');
+  const before = first.snapshot().autoAdvanceAt;
+  assert.ok(before, 'a step was queued before the restart');
   first.dispose();
 
   const resumed = new Engine(bank, store, undefined, store.loadNight());
   engines.push(resumed);
-  assert.equal(resumed.snapshot().autoAdvanceAt, undefined, 'the stale countdown must be dropped');
+  const after = resumed.snapshot().autoAdvanceAt;
+  // The stale deadline must not survive, or the night jumps a step the instant
+  // it comes back. But it must not simply be dropped either: that left the
+  // game parked on a locked question waiting for a thumb after every restart,
+  // which is what the clubhouse box actually did all day. Drop the old one,
+  // queue a fresh one.
+  assert.ok(after, 'a resumed night must queue its next step');
+  assert.notEqual(after, before, 'the expired countdown must not be carried over');
+  assert.ok(after! > Date.now() + 1000, 'the new countdown must be measured from now');
   assert.equal(resumed.snapshot().held, false);
   resumed.dispose();
+});
+
+/**
+ * Three bugs found on real hardware after a day of deploys, all of them
+ * invisible to every test above because the tests build a night and play it
+ * inside one process. The box in the clubhouse does not work like that: it
+ * gets restarted, and it keeps the night it was in the middle of.
+ */
+
+test('a night resumed after a restart keeps running itself', () => {
+  const first = freshEngine({ secondsPerQuestion: 1, revealDelaySeconds: 1, nextQuestionDelaySeconds: 1 });
+  seatTeams(first, 2);
+  while (first.snapshot().phase !== 'question') first.advance();
+  const onDisk = JSON.parse(JSON.stringify(first.snapshot()));
+
+  const resumed = freshEngine(undefined, onDisk);
+  // The question is parked locked, which is correct: its deadline expired
+  // while the machine was off. What was missing is anything to carry on from
+  // there, so the night sat waiting for the MC on every single restart.
+  assert.equal(resumed.snapshot().phase, 'locked');
+  assert.ok(resumed.snapshot().autoAdvanceAt, 'resumed night should have the next step queued');
+});
+
+test('a night resumed from an older build gains settings added since', () => {
+  const engine = freshEngine();
+  const onDisk = JSON.parse(JSON.stringify(engine.snapshot()));
+  delete (onDisk.config as Record<string, unknown>).speedBonusPoints;
+  const resumed = freshEngine(undefined, onDisk);
+  assert.equal(resumed.snapshot().config.speedBonusPoints, DEFAULT_CONFIG.speedBonusPoints);
+});
+
+test('resetting the night restores current defaults and keeps the venue name', () => {
+  const engine = freshEngine({ venueName: 'Del Pueblo', secondsPerQuestion: 35, questionsPerRound: 8 });
+  seatTeams(engine, 2);
+  engine.resetNight();
+  const config = engine.snapshot().config;
+  // This is the one that stranded a real box: a reset used to carry the stale
+  // config forward, so a machine running since before an update could never
+  // pick up a new clock or round length by any route available to the MC.
+  assert.equal(config.secondsPerQuestion, DEFAULT_CONFIG.secondsPerQuestion);
+  assert.equal(config.questionsPerRound, DEFAULT_CONFIG.questionsPerRound);
+  assert.equal(config.venueName, 'Del Pueblo');
+  assert.equal(Object.keys(engine.snapshot().teams).length, 0);
+});
+
+test('the USB rescue address never becomes the advertised join address', () => {
+  // 192.168.55.1 is the Jetson's USB gadget bridge. It sorts into the same
+  // band as the wifi address, so a stable sort was deciding which one went on
+  // the big screen, and half the time the room would scan an address only a
+  // cable can reach.
+  const ranked = rankLanAddresses(['192.168.55.1', '192.168.12.12']);
+  assert.equal(ranked[0], '192.168.12.12');
+  assert.equal(ranked[1], '192.168.55.1', 'it stays available as the rescue path');
+  assert.equal(rankLanAddresses(['169.254.9.9', '10.0.0.4'])[0], '10.0.0.4');
 });

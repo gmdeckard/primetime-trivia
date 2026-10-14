@@ -547,7 +547,7 @@ function App() {
         </button>
         <button
           class="btn btn-sm btn-danger btn-block"
-          onClick={() => { if (confirm('Clear all teams and scores and start fresh? This cannot be undone.')) send({ t: 'reset_night' }); }}
+          onClick={() => { if (confirm('Clear all teams and scores, and restore the current default settings? This cannot be undone.')) send({ t: 'reset_night' }); }}
         >
           Reset everything
         </button>

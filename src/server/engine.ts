@@ -134,6 +134,15 @@ export class Engine {
       this.state.autoAdvanceAt = undefined;
       this.state.held = false;
       for (const p of Object.values(this.state.players)) p.connected = false;
+      // Settings added since this night started would otherwise be missing
+      // outright. Existing values are left alone: changing the shape of a
+      // block underneath a live round is the one thing worse than stale
+      // pacing, which is why only absent keys are filled in here.
+      this.state.config = { ...DEFAULT_CONFIG, ...this.state.config };
+      // Parking the question above is right, but nothing was left to restart
+      // the clock, so the night stopped dead and waited for a thumb. Pick the
+      // countdown back up exactly as releasing a hold does.
+      this.resumeAutoAdvance();
     } else {
       this.state = this.freshNight(config);
     }
@@ -438,6 +447,20 @@ export class Engine {
     return !!round && !!round.questionIds[round.cursor + 1];
   }
 
+  /**
+   * Pick the countdown back up from whatever beat we are sitting on.
+   *
+   * Used when releasing a hold and when resuming a night after a restart.
+   * Both land mid-round with a phase that has a next step and no timer behind
+   * it, and without this the game simply stops until someone presses a button.
+   */
+  private resumeAutoAdvance() {
+    if (this.state.phase === 'locked') this.scheduleAuto(this.state.config.revealDelaySeconds);
+    else if (this.state.phase === 'reveal' && this.moreQuestionsInRound()) {
+      this.scheduleAuto(this.state.config.nextQuestionDelaySeconds);
+    }
+  }
+
   /** Pause or resume auto-advance so the MC can tell a story. */
   setHeld(held: boolean) {
     this.state.held = held;
@@ -446,11 +469,7 @@ export class Engine {
       this.commit({ kind: 'held' });
       return;
     }
-    // Releasing picks the countdown back up from wherever we are.
-    if (this.state.phase === 'locked') this.scheduleAuto(this.state.config.revealDelaySeconds);
-    else if (this.state.phase === 'reveal' && this.moreQuestionsInRound()) {
-      this.scheduleAuto(this.state.config.nextQuestionDelaySeconds);
-    }
+    this.resumeAutoAdvance();
     this.commit({ kind: 'released' });
   }
 
@@ -805,11 +824,20 @@ export class Engine {
     this.commit({ kind: 'night_over' });
   }
 
-  /** Fresh night, same server. Teams and scores are cleared. */
+  /**
+   * Fresh night, same server. Teams and scores are cleared.
+   *
+   * The config is rebuilt from the current defaults rather than carried over.
+   * It used to be carried, which meant a box that had been running since
+   * before an update could never pick up a new question length, clock or
+   * scoring rule — not even through Reset everything. Only the venue name
+   * survives, because that is the one setting belonging to the room rather
+   * than to the build.
+   */
   resetNight() {
     this.clearTimer();
-    const config = this.state.config;
-    this.state = this.freshNight(config);
+    this.clearAutoTimer();
+    this.state = this.freshNight({ venueName: this.state.config.venueName });
     this.store.clearNight();
     this.commit({ kind: 'night_reset' });
   }

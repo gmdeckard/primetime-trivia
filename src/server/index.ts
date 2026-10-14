@@ -95,7 +95,7 @@ function joinInfo() {
 let cachedQr = { url: '', svg: '' };
 async function qrForJoinUrl(url: string): Promise<string> {
   if (cachedQr.url === url) return cachedQr.svg;
-  const svg = await QRCode.toString(url, { type: 'svg', margin: 1, errorCorrectionLevel: 'M' });
+  const svg = await QRCode.toString(url, { type: 'svg', margin: 4, errorCorrectionLevel: 'Q' });
   cachedQr = { url, svg };
   return svg;
 }

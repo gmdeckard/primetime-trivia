@@ -124,7 +124,7 @@ export function createRequestHandler(deps: HttpDeps) {
 
     if (path === '/api/info') {
       const info = deps.joinInfo();
-      const qrSvg = await QRCode.toString(info.url, { type: 'svg', margin: 1, errorCorrectionLevel: 'M' });
+      const qrSvg = await QRCode.toString(info.url, { type: 'svg', margin: 4, errorCorrectionLevel: 'Q' });
       sendJson(res, 200, { ...info, qrSvg });
       return;
     }
