@@ -30,10 +30,20 @@
   blurb: Painters, composers, architects and what they left behind.
   sample: Symphonies, canvases, cathedrals
 
-- id: science-nature
-  name: Science & Nature
-  blurb: The physical world, and the creatures in it.
-  sample: Elements, anatomy, animals
+- id: natural-world
+  name: The Natural World
+  blurb: Animals, plants, the earth itself and the weather over it.
+  sample: Creatures, continents, climate
+
+- id: physics-chemistry
+  name: Physics & Chemistry
+  blurb: Matter, energy, the elements and the laws they obey.
+  sample: Elements, forces, constants
+
+- id: medicine
+  name: Medicine & The Body
+  blurb: The body, and the people who worked out how it goes wrong.
+  sample: Anatomy, discoveries, vaccines
 
 - id: space-aviation
   name: Space & Aviation
@@ -79,3 +89,24 @@
   name: Tiebreakers
   blurb: Numeric sudden death. Closest answer wins.
   sample: Never used in a normal round
+
+- id: us-places
+  name: US States & Places
+  blurb: States, capitals, borders and the landmarks between them.
+  sample: Capitals, rivers, national parks
+
+- id: stage-musicals
+  name: Stage & Musicals
+  blurb: Broadway, the West End and the straight play.
+  sample: Scores, lyricists, first nights
+
+- id: radio-comedy
+  name: Radio & Comedy
+  blurb: The golden age of radio, and the joke in every form it took after.
+  sample: Serials, catchphrases, stand-up
+
+- id: explorers
+  name: Explorers & Voyages
+  blurb: Expeditions, voyages and the people who did not come back.
+  sample: Poles, passages, shipwrecks
+

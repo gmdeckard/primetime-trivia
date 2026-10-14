@@ -1,0 +1,47 @@
+category: physics-chemistry
+
+# Matter, energy, the elements and the laws they obey.
+
+questions:
+  - id: phy-001
+    difficulty: 2
+    prompt: Which element has the atomic number 1?
+    answer: Hydrogen
+    distractors: [Helium, Lithium, Carbon]
+    fact: It makes up roughly three-quarters of the ordinary matter in the universe by mass.
+  - id: phy-002
+    difficulty: 4
+    prompt: Which physicist formulated the uncertainty principle?
+    answer: Werner Heisenberg
+    distractors: [Niels Bohr, Erwin Schrödinger, Max Planck]
+    fact: Published in 1927, it holds that position and momentum cannot both be known precisely — a limit of nature, not of instruments.
+  - id: phy-003
+    difficulty: 3
+    prompt: What is the hardest naturally occurring substance?
+    answer: Diamond
+    distractors: [Quartz, Corundum, Topaz]
+    fact: It sits at 10 on the Mohs scale; corundum, which includes rubies and sapphires, is 9.
+  - id: phy-004
+    difficulty: 2
+    prompt: What is the speed of light in a vacuum, to the nearest thousand kilometres per second?
+    answer: 300,000 km per second
+    distractors: ['150,000 km per second', '500,000 km per second', '1,000,000 km per second']
+    fact: More precisely 299,792 kilometres per second, a value now used to define the metre.
+  - id: phy-005
+    difficulty: 3
+    prompt: What is the chemical symbol for gold?
+    answer: Au
+    distractors: [Ag, Go, Gd]
+    fact: From the Latin aurum. Ag is silver, from argentum.
+  - id: phy-006
+    difficulty: 4
+    prompt: Which law of thermodynamics states that entropy in a closed system tends to increase?
+    answer: The second
+    distractors: [The first, The third, The zeroth]
+    fact: The first is conservation of energy; the third concerns absolute zero.
+  - id: phy-007
+    difficulty: 2
+    prompt: Which scale measures the acidity or alkalinity of a solution?
+    answer: The pH scale
+    distractors: [The Richter scale, The Mohs scale, The Kelvin scale]
+    fact: It runs from 0 to 14, with 7 neutral, and is logarithmic — so pH 4 is ten times as acidic as pH 5.

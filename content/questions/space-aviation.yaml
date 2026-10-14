@@ -210,3 +210,15 @@ questions:
     answer: Concorde
     distractors: [The Boeing 2707, The Tu-144, The Lockheed L-2000]
     fact: British Airways and Air France began Concorde service on the same day in January 1976. The Boeing and Lockheed designs were cancelled before flying.
+  - id: spa-031
+    difficulty: 2
+    prompt: Which planet has the Great Red Spot?
+    answer: Jupiter
+    distractors: [Mars, Saturn, Neptune]
+    fact: It is a storm wider than the earth, observed for at least 190 years and apparently shrinking.
+  - id: spa-032
+    difficulty: 2
+    prompt: Which is the smallest planet in the solar system?
+    answer: Mercury
+    distractors: [Mars, Venus, Pluto]
+    fact: Since Pluto's reclassification in 2006, Mercury holds the title.

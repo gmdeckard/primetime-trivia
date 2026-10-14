@@ -1,0 +1,78 @@
+category: natural-world
+
+# Animals, plants, the earth itself and the weather over it, plus how life
+# turned out the way it did.
+
+questions:
+  - id: nat-001
+    difficulty: 3
+    prompt: Which scientist proposed the theory of continental drift in 1912?
+    answer: Alfred Wegener
+    distractors: [Charles Lyell, James Hutton, Harry Hess]
+    fact: He was largely dismissed for decades because he could not explain a mechanism. Plate tectonics supplied one in the 1960s.
+  - id: nat-002
+    difficulty: 3
+    prompt: What is the most abundant gas in the earth's atmosphere?
+    answer: Nitrogen
+    distractors: [Oxygen, Carbon dioxide, Argon]
+    fact: About 78 per cent nitrogen to 21 per cent oxygen. Argon is third, at just under 1 per cent.
+  - id: nat-003
+    difficulty: 1
+    prompt: What is the largest animal that has ever lived?
+    answer: The blue whale
+    distractors: [The African elephant, Argentinosaurus, The sperm whale]
+    fact: Adults reach about 100 feet and 150 tons, heavier than any known dinosaur.
+  - id: nat-004
+    difficulty: 4
+    prompt: What does DNA stand for?
+    answer: Deoxyribonucleic acid
+    distractors: [Diribonucleic acid, Deoxyribose nucleic amine, Dinucleic acid]
+    fact: Watson and Crick published the double helix structure in 1953, drawing on Rosalind Franklin's X-ray diffraction work.
+  - id: nat-005
+    difficulty: 2
+    prompt: Which gas do plants absorb from the air for photosynthesis?
+    answer: Carbon dioxide
+    distractors: [Oxygen, Nitrogen, Methane]
+    fact: They release oxygen as a by-product, which is the reason the atmosphere has any to speak of.
+  - id: nat-006
+    difficulty: 3
+    prompt: Which naturalist published "On the Origin of Species" in 1859?
+    answer: Charles Darwin
+    distractors: [Alfred Russel Wallace, Gregor Mendel, Jean-Baptiste Lamarck]
+    fact: Wallace reached similar conclusions independently, which is what finally pushed Darwin to publish.
+  - id: nat-007
+    difficulty: 4
+    prompt: What is the study of fungi called?
+    answer: Mycology
+    distractors: [Phycology, Bryology, Entomology]
+    fact: Phycology is algae, bryology is mosses, entomology is insects.
+  - id: nat-008
+    difficulty: 2
+    prompt: Which animal group do dolphins belong to?
+    answer: Mammals
+    distractors: [Fish, Reptiles, Amphibians]
+    fact: They are warm-blooded, breathe air and nurse their young.
+  - id: nat-009
+    difficulty: 3
+    prompt: Which tree is the tallest species on earth?
+    answer: The coast redwood
+    distractors: [The giant sequoia, The Douglas fir, The mountain ash]
+    fact: Sequoia sempervirens exceeds 370 feet. The giant sequoia is more massive but not as tall.
+  - id: nat-010
+    difficulty: 2
+    prompt: What causes the tides?
+    answer: The gravitational pull of the moon and sun
+    distractors: [The rotation of the earth alone, Prevailing winds, Variations in water temperature]
+    fact: The moon dominates, but the sun's contribution produces the stronger spring tides when the two align.
+  - id: nat-011
+    difficulty: 4
+    prompt: Which Austrian monk established the basic laws of heredity using pea plants?
+    answer: Gregor Mendel
+    distractors: [Charles Darwin, Thomas Hunt Morgan, Hugo de Vries]
+    fact: His 1866 paper was almost entirely ignored until it was rediscovered around 1900.
+  - id: nat-012
+    difficulty: 3
+    prompt: Which bird can fly backwards?
+    answer: The hummingbird
+    distractors: [The kingfisher, The swift, The kestrel]
+    fact: Its wings trace a figure of eight, letting it hover and reverse — unique among birds.

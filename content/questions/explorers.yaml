@@ -1,0 +1,180 @@
+category: explorers
+
+# Voyages, expeditions and the people who did not come back. World Geography
+# has the places; this is the getting there.
+
+questions:
+  - id: exp-001
+    difficulty: 2
+    prompt: Which navigator led the first expedition to sail around the world, without living to finish it?
+    answer: Ferdinand Magellan
+    distractors: [Francis Drake, Vasco da Gama, Juan Sebastian Elcano]
+    fact: Magellan was killed in the Philippines. Elcano brought the one surviving ship home, so the first man to sail the whole way round was not the man it is named for.
+
+  - id: exp-002
+    difficulty: 2
+    prompt: Which ship carried the Pilgrims to Plymouth in 1620?
+    answer: The Mayflower
+    distractors: [The Speedwell, The Arbella, The Susan Constant]
+    fact: The Speedwell set out alongside her and turned back leaking. The Susan Constant had carried settlers to Jamestown in 1607.
+
+  - id: exp-003
+    difficulty: 2
+    prompt: Who reached the South Pole first, in December 1911?
+    answer: Roald Amundsen
+    distractors: [Robert Falcon Scott, Ernest Shackleton, Richard Byrd]
+    fact: Scott arrived 34 days later to find the Norwegian tent already there, and died with his party on the march back.
+
+  - id: exp-004
+    difficulty: 2
+    prompt: Which sea route north of Canada did European explorers search for over four centuries?
+    answer: The Northwest Passage
+    distractors: [The Northeast Passage, The Strait of Magellan, The Bering Route]
+    fact: Amundsen was the first to sail it, between 1903 and 1906, in a converted herring boat with a crew of six.
+
+  - id: exp-005
+    difficulty: 2
+    prompt: Which Italian navigator gave his name to two continents?
+    answer: Amerigo Vespucci
+    distractors: [Christopher Columbus, Giovanni Caboto, Marco Polo]
+    fact: A German mapmaker put the name America on a 1507 chart, apparently on his own initiative, and it stuck.
+
+  - id: exp-006
+    difficulty: 3
+    prompt: Which Portuguese navigator first reached India by sea, in 1498?
+    answer: Vasco da Gama
+    distractors: [Bartolomeu Dias, Ferdinand Magellan, Pedro Cabral]
+    fact: Dias had rounded the Cape of Good Hope ten years earlier and then turned for home, which is why he is the plausible wrong answer.
+
+  - id: exp-007
+    difficulty: 3
+    prompt: On which ship did Charles Darwin make his voyage of 1831 to 1836?
+    answer: HMS Beagle
+    distractors: [HMS Challenger, HMS Endeavour, HMS Erebus]
+    fact: He was taken on partly as a dinner companion for the captain, Robert FitzRoy, who dreaded the isolation of command.
+
+  - id: exp-008
+    difficulty: 3
+    prompt: Which expedition ship was crushed by pack ice in 1915, after which every man aboard survived?
+    answer: The Endurance
+    distractors: [The Terra Nova, The Fram, The Discovery]
+    fact: Shackleton got all 28 home, partly by sailing an open boat 800 miles to South Georgia. The wreck was not located until 2022.
+
+  - id: exp-009
+    difficulty: 3
+    prompt: Which pair led the expedition Jefferson sent to cross the continent in 1804?
+    answer: Lewis and Clark
+    distractors: [Pike and Long, Fremont and Carson, Powell and Dellenbaugh]
+    fact: Sacagawea joined them in what is now North Dakota, the only woman on the journey, and she was about sixteen.
+
+  - id: exp-010
+    difficulty: 3
+    prompt: Which explorer vanished in 1845 seeking the Northwest Passage with the ships Erebus and Terror?
+    answer: John Franklin
+    distractors: [John Ross, William Parry, George Back]
+    fact: All 129 men died. The wrecks were finally found in 2014 and 2016, close to where Inuit testimony had placed them all along.
+
+  - id: exp-011
+    difficulty: 3
+    prompt: Who was the first European to see the Pacific from the American side, in 1513?
+    answer: Vasco Nunez de Balboa
+    distractors: [Hernan Cortes, Francisco Pizarro, Juan Ponce de Leon]
+    fact: He crossed the Isthmus of Panama on foot and claimed the entire ocean, and everything touching it, for Spain.
+
+  - id: exp-012
+    difficulty: 3
+    prompt: Which British captain charted New Zealand and the eastern coast of Australia in 1769 and 1770?
+    answer: James Cook
+    distractors: [William Bligh, Matthew Flinders, George Vancouver]
+    fact: Bligh and Vancouver both sailed under Cook before they got ships of their own, so the wrong answers are his own officers.
+
+  - id: exp-013
+    difficulty: 3
+    prompt: Which Norwegian crossed the Pacific on a balsa raft in 1947?
+    answer: Thor Heyerdahl
+    distractors: [Fridtjof Nansen, Otto Sverdrup, Carl Lumholtz]
+    fact: The raft was the Kon-Tiki. He wanted to show that South Americans could have reached Polynesia, and most scholars still think they did not.
+
+  - id: exp-014
+    difficulty: 3
+    prompt: Which Venetian merchant dictated his account of travels to China while in a Genoese prison?
+    answer: Marco Polo
+    distractors: [Niccolo Polo, Giovanni Carpini, Ibn Battuta]
+    fact: Niccolo was his father and went with him. Doubts about how much of the book he actually saw have never gone away.
+
+  - id: exp-015
+    difficulty: 3
+    prompt: Who found David Livingstone in 1871 and reported greeting him with a famously stiff line?
+    answer: Henry Morton Stanley
+    distractors: [Richard Burton, John Hanning Speke, Samuel Baker]
+    fact: Stanley was a newspaperman sent by the New York Herald. He may well have composed the line afterwards for the readers.
+
+  - id: exp-016
+    difficulty: 3
+    prompt: Which strait separates mainland South America from Tierra del Fuego?
+    answer: The Strait of Magellan
+    distractors: [The Drake Passage, The Beagle Channel, Cape Horn]
+    fact: The Drake Passage is the open water further south, and the Beagle Channel runs south of the strait again. Sailors feared all three.
+
+  - id: exp-017
+    difficulty: 3
+    prompt: Which conquistador overthrew the Inca empire?
+    answer: Francisco Pizarro
+    distractors: [Hernan Cortes, Diego de Almagro, Pedro de Valdivia]
+    fact: Cortes did the same to the Aztecs. Almagro was Pizarro's partner until the two fought a private war over Cuzco.
+
+  - id: exp-018
+    difficulty: 4
+    prompt: Who led the 1953 British expedition on which Hillary and Tenzing reached the summit of Everest?
+    answer: John Hunt
+    distractors: [George Mallory, Eric Shipton, Charles Bruce]
+    fact: Shipton had been given the job first and was replaced months before departure, which caused bad feeling that lasted for years.
+
+  - id: exp-019
+    difficulty: 4
+    prompt: Which Chinese admiral commanded treasure fleets across the Indian Ocean in the early 1400s?
+    answer: Zheng He
+    distractors: [Kublai Khan, Yongle, Xu Fu]
+    fact: His fleets reached East Africa decades before the Portuguese. The voyages were then halted by imperial decree and the records burned.
+
+  - id: exp-020
+    difficulty: 4
+    prompt: Which British traveller helped draw the borders of modern Iraq?
+    answer: Gertrude Bell
+    distractors: [Freya Stark, Isabella Bird, Mary Kingsley]
+    fact: All four were real travellers and writers. Bell was at the 1921 Cairo Conference alongside Churchill and T. E. Lawrence.
+
+  - id: exp-021
+    difficulty: 4
+    prompt: Which boat was the first to be sailed single-handed around the world?
+    answer: The Spray
+    distractors: [The Gipsy Moth IV, The Suhaili, The Islander]
+    fact: Joshua Slocum sailed her round between 1895 and 1898, and could not swim. Gipsy Moth IV was Francis Chichester's, seventy years later.
+
+  - id: exp-022
+    difficulty: 4
+    prompt: Whose 1909 claim to have reached the North Pole is still disputed?
+    answer: Robert Peary
+    distractors: [Frederick Cook, Matthew Henson, Umberto Nobile]
+    fact: Cook claimed it a year earlier and is generally disbelieved. Henson was Peary's companion and almost certainly went the whole way.
+
+  - id: exp-023
+    difficulty: 4
+    prompt: Which Portuguese commander was the first European to sight Brazil, in 1500?
+    answer: Pedro Alvares Cabral
+    distractors: [Vasco da Gama, Bartolomeu Dias, Gaspar Corte-Real]
+    fact: He was bound for India and either drifted a very long way west or went deliberately. Historians have never settled it.
+
+  - id: exp-024
+    difficulty: 4
+    prompt: Which one-armed Civil War veteran ran the Grand Canyon by boat in 1869?
+    answer: John Wesley Powell
+    distractors: [Clarence King, Ferdinand Hayden, George Wheeler]
+    fact: He set out with nine men and four boats and came out with six men and two. All three wrong answers led rival government surveys of the West.
+
+  - id: exp-025
+    difficulty: 4
+    prompt: Which Scottish explorer traced the course of the Niger and drowned in its rapids?
+    answer: Mungo Park
+    distractors: [James Bruce, Hugh Clapperton, Alexander Gordon Laing]
+    fact: All four died on African expeditions. Park's first journey made him famous in Britain, and the second one killed him in 1806.

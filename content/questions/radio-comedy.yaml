@@ -1,0 +1,180 @@
+category: radio-comedy
+
+# The golden age of radio, and comedy in every form it took afterwards.
+# Classic Film & Television has the pictures; this is the voice and the joke.
+
+questions:
+  - id: rad-001
+    difficulty: 2
+    prompt: Which 1938 radio drama convinced some listeners that Martians had landed in New Jersey?
+    answer: The War of the Worlds
+    distractors: [The Shadow, Lights Out, Suspense]
+    fact: Orson Welles and the Mercury Theatre staged it as a news bulletin. The scale of the panic has been heavily exaggerated ever since.
+
+  - id: rad-002
+    difficulty: 2
+    prompt: Which comedy duo performed the routine Who's on First?
+    answer: Abbott and Costello
+    distractors: [Laurel and Hardy, Burns and Allen, The Marx Brothers]
+    fact: A recording of it plays on a loop at the Baseball Hall of Fame in Cooperstown.
+
+  - id: rad-003
+    difficulty: 2
+    prompt: Which comedian built an act around the line I don't get no respect?
+    answer: Rodney Dangerfield
+    distractors: [Don Rickles, Henny Youngman, Jackie Mason]
+    fact: He opened his own club in Manhattan in 1969 and gave early spots to Jim Carrey, Jerry Seinfeld and Sam Kinison.
+
+  - id: rad-004
+    difficulty: 2
+    prompt: Which comedian hosted the quiz show You Bet Your Life?
+    answer: Groucho Marx
+    distractors: [Harpo Marx, Jack Benny, Art Linkletter]
+    fact: A contestant who said the secret word won extra money. Groucho ad-libbed most of it and the scripted questions were largely a pretext.
+
+  - id: rad-005
+    difficulty: 2
+    prompt: Which comedian claimed to be 39 years old for four decades?
+    answer: Jack Benny
+    distractors: [George Burns, Bob Hope, Milton Berle]
+    fact: His terrible violin playing was deliberate, and his real skill was the pause. He could hold a silence longer than anyone in radio.
+
+  - id: rad-006
+    difficulty: 3
+    prompt: Which ventriloquist performed with the dummy Charlie McCarthy?
+    answer: Edgar Bergen
+    distractors: [Paul Winchell, Shari Lewis, Jimmy Nelson]
+    fact: A ventriloquist act was a enormous hit on radio, where nobody could see the dummy. He was Candice Bergen's father.
+
+  - id: rad-007
+    difficulty: 3
+    prompt: Which radio drama opened by asking who knows what evil lurks in the hearts of men?
+    answer: The Shadow
+    distractors: [The Green Hornet, The Whistler, Inner Sanctum]
+    fact: Orson Welles voiced the Shadow in the late 1930s, before War of the Worlds made his name.
+
+  - id: rad-008
+    difficulty: 3
+    prompt: Which radio comedian carried on a long public feud with Jack Benny?
+    answer: Fred Allen
+    distractors: [Bob Hope, Eddie Cantor, Rudy Vallee]
+    fact: The feud was entirely staged, ran for years, and both men did very well out of it.
+
+  - id: rad-009
+    difficulty: 3
+    prompt: Which of the Marx Brothers never spoke on screen?
+    answer: Harpo
+    distractors: [Chico, Zeppo, Gummo]
+    fact: He spoke perfectly normally off screen. Gummo and Zeppo both left the act, which is why five brothers produced a trio.
+
+  - id: rad-010
+    difficulty: 3
+    prompt: Which long-running radio serial followed the Barbour family of San Francisco?
+    answer: One Man's Family
+    distractors: [The Guiding Light, Ma Perkins, Vic and Sade]
+    fact: It ran from 1932 to 1959, and Carlton E. Morse wrote almost all of it himself.
+
+  - id: rad-011
+    difficulty: 3
+    prompt: Which comedian closed his show with the line Say goodnight, Gracie?
+    answer: George Burns
+    distractors: [Jack Benny, Fred Allen, Danny Thomas]
+    fact: Gracie Allen was his wife and the engine of the act. Burns said his own job was to hold the cigar and wait.
+
+  - id: rad-012
+    difficulty: 3
+    prompt: Which 1975 sketch show introduced a cast billed as the Not Ready for Prime Time Players?
+    answer: Saturday Night Live
+    distractors: [The Carol Burnett Show, Laugh-In, SCTV]
+    fact: The original cast included John Belushi, Dan Aykroyd, Chevy Chase and Gilda Radner.
+
+  - id: rad-013
+    difficulty: 3
+    prompt: Which comedian was known as Mr Television and hosted Texaco Star Theater?
+    answer: Milton Berle
+    distractors: [Ed Sullivan, Sid Caesar, Jackie Gleason]
+    fact: Also called Uncle Miltie. His Tuesday night show is widely credited with selling a great many of the first television sets.
+
+  - id: rad-014
+    difficulty: 3
+    prompt: Which BBC radio comedy launched Peter Sellers, Spike Milligan and Harry Secombe?
+    answer: The Goon Show
+    distractors: [Round the Horne, Hancock's Half Hour, Beyond Our Ken]
+    fact: It ran from 1951 and Milligan wrote most of it, at considerable cost to his own health.
+
+  - id: rad-015
+    difficulty: 3
+    prompt: Whose monologue about words you cannot say on television led to a Supreme Court case?
+    answer: George Carlin
+    distractors: [Lenny Bruce, Richard Pryor, Mort Sahl]
+    fact: The case was FCC versus Pacifica Foundation in 1978. Lenny Bruce had been prosecuted for obscenity a decade before, which is why he is the tempting answer.
+
+  - id: rad-016
+    difficulty: 3
+    prompt: Who hosted the Academy Awards ceremony more times than anyone else?
+    answer: Bob Hope
+    distractors: [Johnny Carson, Billy Crystal, Jack Benny]
+    fact: Nineteen times between 1939 and 1977. He never won an acting Oscar, and made a running joke of it.
+
+  - id: rad-017
+    difficulty: 3
+    prompt: Which American humorist and rope-twirling vaudevillian said he never met a man he didn't like?
+    answer: Will Rogers
+    distractors: [Mark Twain, W. C. Fields, Fred Allen]
+    fact: He died in a plane crash in Alaska in 1935 alongside the aviator Wiley Post.
+
+  - id: rad-018
+    difficulty: 4
+    prompt: Which comedian recorded the 2000 Year Old Man albums with Carl Reiner?
+    answer: Mel Brooks
+    distractors: [Sid Caesar, Buck Henry, Larry Gelbart]
+    fact: It started as an improvisation in the writers' room of Your Show of Shows, where all four of these men worked together.
+
+  - id: rad-019
+    difficulty: 4
+    prompt: Which comedian was billed as the King of the One-Liners?
+    answer: Henny Youngman
+    distractors: [Rodney Dangerfield, Shecky Greene, Jackie Mason]
+    fact: His signature was Take my wife, please. He claimed to deliver more jokes per minute than any comic alive and was probably right.
+
+  - id: rad-020
+    difficulty: 4
+    prompt: Which radio comedy was set in the fictional town of Wistful Vista?
+    answer: Fibber McGee and Molly
+    distractors: [The Great Gildersleeve, Lum and Abner, Vic and Sade]
+    fact: The running gag was the hall closet, which emptied itself onto McGee in an avalanche of junk. The Great Gildersleeve was a spin-off from it.
+
+  - id: rad-021
+    difficulty: 4
+    prompt: Whose debut record was the first comedy album to win the Grammy for Album of the Year?
+    answer: Bob Newhart
+    distractors: [Vaughn Meader, Shelley Berman, Mort Sahl]
+    fact: The Button-Down Mind of Bob Newhart took the 1961 award. He was working as an accountant in Chicago until it sold.
+
+  - id: rad-022
+    difficulty: 4
+    prompt: Which comedian was booked into the Chicago Playboy Club in 1961 and later became a civil-rights activist?
+    answer: Dick Gregory
+    distractors: [Nipsey Russell, Godfrey Cambridge, Redd Foxx]
+    fact: Hugh Hefner hired him as a one-night fill-in and then extended the run for weeks. Gregory later ran for president.
+
+  - id: rad-023
+    difficulty: 4
+    prompt: Which radio serial invented the characters Jimmy Olsen and Perry White?
+    answer: The Adventures of Superman
+    distractors: [The Green Hornet, Buck Rogers, Captain Midnight]
+    fact: Both were created for radio in the 1940s and then written back into the comics, along with kryptonite.
+
+  - id: rad-024
+    difficulty: 4
+    prompt: Which Canadian sketch series produced Rick Moranis, John Candy and Martin Short?
+    answer: SCTV
+    distractors: [The Kids in the Hall, Second City, Codco]
+    fact: Second City is the theatre company the cast came out of, which is why the two names are so easily confused.
+
+  - id: rad-025
+    difficulty: 4
+    prompt: Which radio variety programme has broadcast from Nashville since 1925?
+    answer: The Grand Ole Opry
+    distractors: [The National Barn Dance, Louisiana Hayride, The Midwestern Hayride]
+    fact: All four were real country radio shows with national audiences. The Opry simply outlasted every one of them.
