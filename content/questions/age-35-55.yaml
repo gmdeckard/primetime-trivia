@@ -1,0 +1,656 @@
+category: film-tv
+audience: 35-55
+
+# Written for 35 to 55: formative years roughly 1981 to 2016.
+#
+# Deliberately era-locked rather than general knowledge. The first version of
+# this set turned out to be mostly timeless questions, so those were moved into
+# the core bank where they earn their keep every night, and this replaces them
+# with material the main 55-75 bank will not touch. That keeps a beta night
+# genuinely separate from the questions a resident will be asked in January.
+#
+# Eight categories, ten each, shaped 2/5/3 across difficulties 2, 3 and 4, so
+# any one of them fills a ten-question round alone. A night is six rounds.
+
+questions:
+  - id: a35-001
+    difficulty: 2
+    prompt: Which 1999 film has a character explain the difference between a red pill and a blue pill?
+    answer: The Matrix
+    distractors: [Fight Club, Dark City, eXistenZ]
+    fact: The bullet-dodging effect used 120 still cameras fired in sequence, and the technique was promptly copied into adverts for years.
+
+  - id: a35-002
+    difficulty: 2
+    prompt: Which animated studio made Toy Story in 1995?
+    answer: Pixar
+    distractors: [DreamWorks, Blue Sky, Illumination]
+    fact: It was the first feature film animated entirely by computer, and the studio had been making adverts and short films until then.
+
+  - id: a35-003
+    difficulty: 3
+    prompt: Which sitcom ended in 2004 with the main characters leaving a New York apartment and its purple door?
+    answer: Friends
+    distractors: [Seinfeld, Will and Grace, Mad About You]
+    fact: Seinfeld had finished six years earlier, which is why it is the obvious wrong answer.
+
+  - id: a35-004
+    difficulty: 3
+    prompt: Which film opens with a briefcase being recovered for a crime boss named Marsellus Wallace?
+    answer: Pulp Fiction
+    distractors: [Reservoir Dogs, Jackie Brown, True Romance]
+    fact: What is in the briefcase is never shown or stated, and the director has said flatly that there is no answer.
+
+  - id: a35-005
+    difficulty: 3
+    prompt: Which 2001 film was the first of three adapted from a single Tolkien novel?
+    answer: The Fellowship of the Ring
+    distractors: [The Two Towers, The Hobbit, The Return of the King]
+    fact: All three were shot at once over roughly fifteen months, which is why the cast visibly does not age across them.
+
+  - id: a35-006
+    difficulty: 3
+    prompt: Which HBO drama followed a New Jersey crime family and a mob boss in therapy?
+    answer: The Sopranos
+    distractors: [The Wire, Oz, Boardwalk Empire]
+    fact: It is usually named as the show that began prestige television, and the network nearly passed on the therapy premise.
+
+  - id: a35-007
+    difficulty: 3
+    prompt: Which 1997 film became the first to gross a billion dollars worldwide?
+    answer: Titanic
+    distractors: [Jurassic Park, Independence Day, The Phantom Menace]
+    fact: It was widely expected to fail. The production had run badly over budget and the release was pushed back by months.
+
+  - id: a35-008
+    difficulty: 4
+    prompt: Which 1999 film was marketed as recovered footage and shot largely by its own cast?
+    answer: The Blair Witch Project
+    distractors: [Cannibal Holocaust, Paranormal Activity, Cloverfield]
+    fact: The actors were given directions left in milk crates in the woods and improvised the rest, which is why they look genuinely irritated.
+
+  - id: a35-009
+    difficulty: 4
+    prompt: Which actor starred in both Twelve Monkeys and Fight Club?
+    answer: Brad Pitt
+    distractors: [Edward Norton, Bruce Willis, Matt Damon]
+    audience: 35-55   # Fight Club, 1999
+    fact: Norton and Willis each appeared in one of the two, which is exactly why the question has to name both films.
+
+  - id: a35-010
+    difficulty: 4
+    prompt: Which television drama opened with a chemistry teacher receiving a cancer diagnosis?
+    answer: Breaking Bad
+    distractors: [The Shield, Weeds, Justified]
+    audience: 35-55   # Breaking Bad, 2008
+    fact: The network nearly passed. Weeds had aired a suburban-drug-dealer premise two years earlier and looked too close for comfort.
+
+  - id: a35-011
+    category: sports
+    difficulty: 2
+    prompt: Which sport does the Super Bowl decide the champion of?
+    answer: American football
+    distractors: [Baseball, Basketball, Ice hockey]
+    fact: The name came from a bouncy toy called a Super Ball that an owner's daughter was playing with.
+
+  - id: a35-012
+    category: sports
+    difficulty: 2
+    prompt: Which tennis player won Wimbledon eight times between 2003 and 2017?
+    answer: Roger Federer
+    distractors: [Rafael Nadal, Novak Djokovic, Pete Sampras]
+    fact: Sampras won seven in the 1990s, and Federer beat his record in 2017 at nearly thirty-six.
+
+  - id: a35-013
+    category: sports
+    difficulty: 3
+    prompt: Which country hosted the 2008 Summer Olympics?
+    answer: China
+    distractors: [Greece, Britain, Brazil]
+    fact: Athens had 2004, London 2012 and Rio 2016, so all three wrong answers held the games within eight years either side.
+
+  - id: a35-014
+    category: sports
+    difficulty: 3
+    prompt: Which footballer scored the Hand of God goal in 1986?
+    answer: Diego Maradona
+    distractors: [Pele, Zico, Michel Platini]
+    fact: He scored a second goal four minutes later, running past half the England team, that is often called the best in World Cup history.
+
+  - id: a35-015
+    category: sports
+    difficulty: 3
+    prompt: Which team broke an eighty-six-year championship drought in baseball in 2004?
+    answer: The Boston Red Sox
+    distractors: [The Chicago Cubs, The Chicago White Sox, The Cleveland Indians]
+    fact: The Cubs waited even longer and finally won in 2016, which is why they are the tempting answer.
+
+  - id: a35-016
+    category: sports
+    difficulty: 3
+    prompt: Which cyclist was stripped of seven Tour de France titles?
+    answer: Lance Armstrong
+    distractors: [Miguel Indurain, Greg LeMond, Jan Ullrich]
+    audience: 35-55   # the titles ran 1999 to 2005
+    fact: Indurain won five in a row in the 1990s and kept them. The stripped years were simply left with no winner at all.
+
+  - id: a35-017
+    category: sports
+    difficulty: 3
+    prompt: In which sport did Tony Hawk land the first documented 900?
+    answer: Skateboarding
+    distractors: [Snowboarding, BMX, Freestyle motocross]
+    fact: A 900 is two and a half full rotations. He landed it at the 1999 X Games after eleven failed attempts in a row.
+
+  - id: a35-018
+    category: sports
+    difficulty: 4
+    prompt: Which country won the first Rugby World Cup, in 1987?
+    answer: New Zealand
+    distractors: [Australia, South Africa, England]
+    fact: South Africa were not invited, being under sporting boycott, and won the tournament the first time they entered in 1995.
+
+  - id: a35-019
+    category: sports
+    difficulty: 4
+    prompt: Which driver won seven Formula One world championships between 1994 and 2004?
+    answer: Michael Schumacher
+    distractors: [Ayrton Senna, Alain Prost, Mika Hakkinen]
+    fact: Five of them came consecutively with Ferrari, who had not won a drivers' title for twenty-one years before he arrived.
+
+  - id: a35-020
+    category: sports
+    difficulty: 4
+    prompt: Which swimmer won eight gold medals at a single Olympic Games?
+    answer: Michael Phelps
+    distractors: [Mark Spitz, Ian Thorpe, Matt Biondi]
+    fact: Beijing 2008. Spitz had held the record with seven since 1972, and was there to watch it broken.
+
+  - id: a35-021
+    category: invention-tech
+    difficulty: 2
+    prompt: Which company released the first iPod, in 2001?
+    answer: Apple
+    distractors: [Sony, Creative, Microsoft]
+    audience: 35-55   # 2001
+    fact: Creative had shipped a hard-drive music player two years earlier and later won a patent settlement over the interface.
+
+  - id: a35-022
+    category: invention-tech
+    difficulty: 2
+    prompt: What does the SMS in a text message stand for?
+    answer: Short Message Service
+    distractors: [Simple Message System, Standard Mobile Signal, Short Mobile Send]
+    fact: The 160-character limit was picked because a researcher reckoned most postcards and telex messages fitted inside it.
+
+  - id: a35-023
+    category: invention-tech
+    difficulty: 3
+    prompt: Which search engine was founded in 1998 by two Stanford graduate students?
+    answer: Google
+    distractors: [Yahoo, AltaVista, Lycos]
+    audience: 35-55   # 1998
+    fact: The ranking idea came from counting citations between academic papers, which is how libraries had judged importance for decades.
+
+  - id: a35-024
+    category: invention-tech
+    difficulty: 3
+    prompt: Which file format compressed music enough to make it practical to share in the late 1990s?
+    answer: MP3
+    distractors: [WAV, AIFF, FLAC]
+    fact: It throws away sound the ear is unlikely to notice. The others keep everything, which is why they were far too large to send.
+
+  - id: a35-025
+    category: invention-tech
+    difficulty: 3
+    prompt: Which console did Sony launch in 1994 to compete with Nintendo and Sega?
+    answer: The PlayStation
+    distractors: [The Dreamcast, The Saturn, The Jaguar]
+    fact: It began as a CD add-on for the Super Nintendo. The deal collapsed publicly and Sony built the whole machine itself.
+
+  - id: a35-026
+    category: invention-tech
+    difficulty: 3
+    prompt: What does USB stand for?
+    answer: Universal Serial Bus
+    distractors: [United Service Bus, Universal System Buffer, Unified Signal Bridge]
+    fact: Introduced in 1996 to replace a back panel that had a different shaped socket for every single device.
+
+  - id: a35-027
+    category: invention-tech
+    difficulty: 3
+    prompt: Which encyclopedia launched in 2001 and was written by its readers?
+    answer: Wikipedia
+    distractors: [Encarta, Britannica Online, Everything2]
+    fact: It began as a side project to feed a conventional expert-written encyclopedia that never got finished.
+
+  - id: a35-028
+    category: invention-tech
+    difficulty: 4
+    prompt: Which handheld popularised the stylus and handwriting recognition in the 1990s?
+    answer: The PalmPilot
+    distractors: [The Apple Newton, The Psion Organiser, The Nokia Communicator]
+    audience: 35-55   # 1996
+    fact: The Newton came first and its handwriting recognition was mocked so widely it became a running joke in Doonesbury.
+
+  - id: a35-029
+    category: invention-tech
+    difficulty: 4
+    prompt: Which company made the first camera phone widely sold, in 2000?
+    answer: Sharp
+    distractors: [Nokia, Motorola, Samsung]
+    fact: The J-SH04 sold only in Japan and took pictures at 0.1 megapixels, which is smaller than a modern thumbnail.
+
+  - id: a35-030
+    category: invention-tech
+    difficulty: 4
+    prompt: Which standard did Bluetooth take its name from?
+    answer: A tenth-century Danish king
+    distractors: [A radio frequency band, A Swedish engineering firm, An early naval signalling code]
+    fact: Harald Bluetooth united Denmark and Norway, and the logo is his initials in runes.
+
+  - id: a35-031
+    category: business-economics
+    difficulty: 2
+    prompt: Which coffee chain grew from a single Seattle shop to tens of thousands worldwide?
+    answer: Starbucks
+    distractors: [Peet's, Caribou Coffee, Costa]
+    fact: The original shop sold beans and equipment, not drinks. The cafe idea was borrowed from Milan after a buying trip.
+
+  - id: a35-032
+    category: business-economics
+    difficulty: 2
+    prompt: Which Swedish retailer sells flat-pack furniture with Scandinavian names?
+    answer: IKEA
+    distractors: [Habitat, MFI, Jysk]
+    fact: Flat packing began when an employee took the legs off a table to fit it in a car, and the firm realised shipping air was the cost.
+
+  - id: a35-033
+    category: business-economics
+    difficulty: 3
+    prompt: Which retailer began selling books online in 1995?
+    answer: Amazon
+    distractors: [eBay, Barnes and Noble, Borders]
+    audience: 35-55   # 1995 and mostly after
+    fact: Books were chosen because there were more titles than any shop could stock, so a catalogue was the entire advantage.
+
+  - id: a35-034
+    category: business-economics
+    difficulty: 3
+    prompt: Which energy company collapsed in 2001 in an accounting scandal?
+    answer: Enron
+    distractors: [WorldCom, Tyco, Global Crossing]
+    audience: 35-55   # 2001
+    fact: It took its auditor, Arthur Andersen, down with it, ending one of the five largest accounting firms in the world.
+
+  - id: a35-035
+    category: business-economics
+    difficulty: 3
+    prompt: Which video rental chain declined to buy a mail-order DVD service in 2000?
+    answer: Blockbuster
+    distractors: [Hollywood Video, Movie Gallery, Family Video]
+    audience: 35-55   # 2000
+    fact: Netflix is said to have offered itself for fifty million dollars and been laughed out of the meeting.
+
+  - id: a35-036
+    category: business-economics
+    difficulty: 3
+    prompt: What burst in 2000, wiping out a generation of internet companies?
+    answer: The dot-com bubble
+    distractors: [The housing bubble, The junk bond market, The Asian currency peg]
+    fact: Pets.com ran a Super Bowl advert and liquidated nine months after going public.
+
+  - id: a35-037
+    category: business-economics
+    difficulty: 3
+    prompt: Which Finnish company dominated mobile phones through the late 1990s?
+    answer: Nokia
+    distractors: [Ericsson, Siemens, Alcatel]
+    fact: It had previously made rubber boots, cables and paper. The name comes from a river in the town where the paper mill stood.
+
+  - id: a35-038
+    category: business-economics
+    difficulty: 4
+    prompt: Which bank's collapse in 2008 was the largest bankruptcy in US history?
+    answer: Lehman Brothers
+    distractors: [Bear Stearns, Merrill Lynch, Washington Mutual]
+    audience: 35-55   # 2008
+    fact: The firm had survived the Civil War, the Depression and two world wars. Bear Stearns had been rescued six months earlier.
+
+  - id: a35-039
+    category: business-economics
+    difficulty: 4
+    prompt: Which currency entered circulation as notes and coins in 2002?
+    answer: The euro
+    distractors: [The Swiss franc, The pound sterling, The Norwegian krone]
+    audience: 35-55   # 2002
+    fact: It had existed since 1999 for accounting and transfers. The physical changeover across twelve countries took about two months.
+
+  - id: a35-040
+    category: business-economics
+    difficulty: 4
+    prompt: Which company's 1997 near-bankruptcy ended with a 150 million dollar investment from Microsoft?
+    answer: Apple
+    distractors: [Silicon Graphics, Compaq, Gateway]
+    fact: The announcement was booed by the audience at Macworld. Microsoft also agreed to keep making Office for the Mac for five years.
+
+  - id: a35-041
+    category: us-places
+    difficulty: 2
+    prompt: Which city is home to the Gateway Arch?
+    answer: St Louis
+    distractors: [Kansas City, Memphis, Louisville]
+    fact: 630 feet tall and exactly as wide at the base as it is high. Trams inside carry visitors up through the curve in little pods.
+
+  - id: a35-042
+    category: us-places
+    difficulty: 2
+    prompt: Which US city is known as Music City?
+    answer: Nashville
+    distractors: [Memphis, Austin, New Orleans]
+    fact: The nickname predates country radio and is usually traced to a touring choir praised by Queen Victoria in the 1870s.
+
+  - id: a35-043
+    category: us-places
+    difficulty: 3
+    prompt: Which city hosted the 1996 Summer Olympics?
+    answer: Atlanta
+    distractors: [Los Angeles, Seoul, Barcelona]
+    audience: 35-55   # 1996
+    fact: It beat Athens, which had expected the centenary games and did not take the loss gracefully.
+
+  - id: a35-044
+    category: us-places
+    difficulty: 3
+    prompt: Which desert city hosts an annual festival that builds and burns a temporary town?
+    answer: Reno
+    distractors: [Tucson, Santa Fe, Boise]
+    fact: Burning Man moved to the Black Rock Desert north of Reno in 1990 after outgrowing a San Francisco beach.
+
+  - id: a35-045
+    category: us-places
+    difficulty: 3
+    prompt: Which American city rebuilt its downtown around a convention centre after the 1984 World's Fair bankrupted it?
+    answer: New Orleans
+    distractors: [Knoxville, Spokane, San Antonio]
+    fact: It is the only World's Fair in history to declare bankruptcy while still open to visitors.
+
+  - id: a35-046
+    category: us-places
+    difficulty: 3
+    prompt: Which state legalised recreational cannabis first, alongside Washington, in 2012?
+    answer: Colorado
+    distractors: [Oregon, California, Alaska]
+    fact: California had been first for medical use, sixteen years earlier, which is why it is the obvious wrong answer.
+
+  - id: a35-047
+    category: us-places
+    difficulty: 3
+    prompt: Which city's Pike Place Market is known for fishmongers throwing fish?
+    answer: Seattle
+    distractors: [Portland, San Francisco, Baltimore]
+    fact: It opened in 1907 so farmers could sell directly, after a public outcry about the price of onions.
+
+  - id: a35-048
+    category: us-places
+    difficulty: 4
+    prompt: Which US city has the largest population of any state capital?
+    answer: Phoenix
+    distractors: [Austin, Denver, Columbus]
+    fact: The only state capital with more than a million people, and it has grown by roughly that much again since 1980.
+
+  - id: a35-049
+    category: us-places
+    difficulty: 4
+    prompt: Which city was devastated by Hurricane Katrina's levee failures in 2005?
+    answer: New Orleans
+    distractors: [Mobile, Biloxi, Galveston]
+    fact: The storm itself largely missed the city. What flooded it was the collapse of the federal levee system over the following day.
+
+  - id: a35-050
+    category: us-places
+    difficulty: 4
+    prompt: Which American city built a park on a disused elevated railway line?
+    answer: New York
+    distractors: [Chicago, Philadelphia, Atlanta]
+    fact: The High Line was due for demolition. Chicago and Atlanta both built their own versions after it worked.
+
+  - id: a35-051
+    category: world-affairs
+    difficulty: 2
+    prompt: Which wall came down in 1989?
+    answer: The Berlin Wall
+    distractors: [Hadrian's Wall, The Great Wall, The Western Wall]
+    fact: The opening was announced by an official reading a note he had not been briefed on, and the crowds simply arrived.
+
+  - id: a35-052
+    category: world-affairs
+    difficulty: 2
+    prompt: Which country did Hong Kong return to in 1997?
+    answer: China
+    distractors: [Taiwan, Japan, Singapore]
+    fact: The handover ended 156 years of British rule, and the lease that triggered it had been for ninety-nine years.
+
+  - id: a35-053
+    category: world-affairs
+    difficulty: 3
+    prompt: Which country did the Soviet Union dissolve into fifteen of in 1991?
+    answer: Independent republics
+    distractors: [A single Russian federation, A confederation under Moscow, Two successor states]
+    fact: The flag came down over the Kremlin on Christmas Day 1991, and the largest successor state kept the UN Security Council seat.
+
+  - id: a35-054
+    category: world-affairs
+    difficulty: 3
+    prompt: Who was released from a South African prison in 1990 after twenty-seven years?
+    answer: Nelson Mandela
+    distractors: [Steve Biko, Desmond Tutu, Walter Sisulu]
+    fact: Biko had died in custody thirteen years earlier. Sisulu was imprisoned alongside Mandela and released a few months before him.
+
+  - id: a35-055
+    category: world-affairs
+    difficulty: 3
+    prompt: Which 1986 nuclear accident happened in what is now Ukraine?
+    answer: Chernobyl
+    distractors: [Three Mile Island, Fukushima, Windscale]
+    fact: Swedish monitoring stations detected the fallout and raised the alarm before the Soviet government acknowledged anything.
+
+  - id: a35-056
+    category: world-affairs
+    difficulty: 3
+    prompt: Which treaty created the European Union in 1993?
+    answer: Maastricht
+    distractors: [Rome, Lisbon, Nice]
+    fact: Rome founded the earlier common market in 1957, and Lisbon reorganised the union in 2009, so all three are real and in order.
+
+  - id: a35-057
+    category: world-affairs
+    difficulty: 3
+    prompt: Which country's apartheid system formally ended with elections in 1994?
+    answer: South Africa
+    distractors: [Zimbabwe, Namibia, Mozambique]
+    fact: Queues at some polling stations ran for more than a mile, and voting had to be extended by an extra day.
+
+  - id: a35-058
+    category: world-affairs
+    difficulty: 4
+    prompt: Which international agreement on reducing greenhouse gases was signed in 1997?
+    answer: The Kyoto Protocol
+    distractors: [The Montreal Protocol, The Rio Declaration, The Paris Agreement]
+    fact: Montreal came first, in 1987, and dealt with the ozone layer. It is generally judged the more successful of the two.
+
+  - id: a35-059
+    category: world-affairs
+    difficulty: 4
+    prompt: Which European currency union did Britain leave in 1992 on a day known as Black Wednesday?
+    answer: The Exchange Rate Mechanism
+    distractors: [The eurozone, The gold standard, The sterling area]
+    fact: The Treasury spent billions in a single day defending the pound and then gave up by evening.
+
+  - id: a35-060
+    category: world-affairs
+    difficulty: 4
+    prompt: Which country was divided by a 1995 agreement signed in Dayton, Ohio?
+    answer: Bosnia and Herzegovina
+    distractors: [Serbia, Croatia, Kosovo]
+    fact: The talks were held on a US air force base specifically so the delegations could not leave or talk to the press.
+
+  - id: a35-061
+    category: history-20c
+    difficulty: 2
+    prompt: Which spacecraft programme ended with its final flight in 2011?
+    answer: The Space Shuttle
+    distractors: [Apollo, Soyuz, Skylab]
+    fact: Five orbiters flew 135 missions over thirty years. Soyuz is still flying and is now far older than the shuttle ever got.
+
+  - id: a35-062
+    category: history-20c
+    difficulty: 2
+    prompt: In which decade did the first Gulf War take place?
+    answer: The 1990s
+    distractors: [The 1970s, The 1980s, The 2000s]
+    fact: It began in January 1991 and the ground campaign lasted about a hundred hours.
+
+  - id: a35-063
+    category: history-20c
+    difficulty: 3
+    prompt: Which Soviet leader introduced glasnost and perestroika?
+    answer: Mikhail Gorbachev
+    distractors: [Leonid Brezhnev, Yuri Andropov, Boris Yeltsin]
+    fact: Openness and restructuring. Yeltsin followed him and presided over Russia rather than the Soviet Union.
+
+  - id: a35-064
+    category: history-20c
+    difficulty: 3
+    prompt: Which sheep, born in 1996, was the first mammal cloned from an adult cell?
+    answer: Dolly
+    distractors: [Polly, Molly, Megan]
+    fact: Named after Dolly Parton, because the cell came from a mammary gland. Polly and Megan were real cloned sheep from the same institute.
+
+  - id: a35-065
+    category: history-20c
+    difficulty: 3
+    prompt: Which space telescope launched in 1990 with a flawed mirror?
+    answer: Hubble
+    distractors: [Chandra, Spitzer, Kepler]
+    fact: The mirror was ground to the wrong shape by a fraction of a hair's width. A 1993 servicing mission fitted it with corrective optics.
+
+  - id: a35-066
+    category: history-20c
+    difficulty: 3
+    prompt: Which genome project was declared essentially complete in 2003?
+    answer: The human genome
+    distractors: [The mouse genome, The wheat genome, The fruit fly genome]
+    fact: It ran thirteen years and finished ahead of schedule because a private competitor forced the pace.
+
+  - id: a35-067
+    category: history-20c
+    difficulty: 3
+    prompt: Which tunnel opened in 1994 linking Britain and France?
+    answer: The Channel Tunnel
+    distractors: [The Gotthard Tunnel, The Seikan Tunnel, The Mont Blanc Tunnel]
+    fact: Digging started from both ends and the two bores met with an error of about four inches.
+
+  - id: a35-068
+    category: history-20c
+    difficulty: 4
+    prompt: Which computer beat the world chess champion in a match in 1997?
+    answer: Deep Blue
+    distractors: [Deep Thought, Watson, AlphaGo]
+    fact: Deep Thought was its own predecessor and lost badly in 1989, which is what makes it the plausible wrong answer.
+
+  - id: a35-069
+    category: history-20c
+    difficulty: 4
+    prompt: Which probe landed on Mars in 1997 carrying a small rover called Sojourner?
+    answer: Mars Pathfinder
+    distractors: [Viking 1, Mars Observer, Phoenix]
+    fact: It bounced to a stop inside airbags. The rover was about the size of a microwave oven and ran for three months.
+
+  - id: a35-070
+    category: history-20c
+    difficulty: 4
+    prompt: Which 1992 UN conference is usually called the Earth Summit?
+    answer: Rio de Janeiro
+    distractors: [Stockholm, Johannesburg, Kyoto]
+    fact: Stockholm hosted the first such conference in 1972 and Johannesburg the follow-up in 2002, so the sequence is real.
+
+  - id: a35-071
+    category: music-popular
+    difficulty: 2
+    prompt: Which band released Nevermind in 1991?
+    answer: Nirvana
+    distractors: [Pearl Jam, Soundgarden, Alice in Chains]
+    fact: It knocked Michael Jackson off the top of the US album chart, which is usually taken as the moment the 1980s ended.
+
+  - id: a35-072
+    category: music-popular
+    difficulty: 2
+    prompt: Which channel launched in 1981 with a video titled Video Killed the Radio Star?
+    answer: MTV
+    distractors: [VH1, BET, The Box]
+    fact: It reached very few homes at first, and the campaign that fixed that asked viewers to ring their cable company and demand it.
+
+  - id: a35-073
+    category: music-popular
+    difficulty: 3
+    prompt: Which 1985 concert was staged simultaneously in London and Philadelphia?
+    answer: Live Aid
+    distractors: [Farm Aid, The Secret Policeman's Ball, Band Aid]
+    fact: Band Aid was the record that came first. Farm Aid started later the same year and is still running annually.
+
+  - id: a35-074
+    category: music-popular
+    difficulty: 3
+    prompt: Which group's members were nicknamed Scary, Sporty, Baby, Ginger and Posh?
+    answer: The Spice Girls
+    distractors: [All Saints, TLC, Bananarama]
+    fact: A magazine made the nicknames up, and the group adopted them because they were easier to remember than the real names.
+
+  - id: a35-075
+    category: music-popular
+    difficulty: 3
+    prompt: Which album spent most of the 1980s as the best-selling of all time?
+    answer: Thriller
+    distractors: [Back in Black, Rumours, The Wall]
+    fact: Seven of its nine tracks were released as singles, which was unheard of and is roughly why it sold as it did.
+
+  - id: a35-076
+    category: music-popular
+    difficulty: 3
+    prompt: Which file-sharing service was shut down by lawsuits in 2001?
+    answer: Napster
+    distractors: [Kazaa, LimeWire, Morpheus]
+    fact: The others carried on for years afterwards, which is why Napster being the answer depends on the date rather than the name.
+
+  - id: a35-077
+    category: music-popular
+    difficulty: 3
+    prompt: Which Seattle genre took over rock radio in the early 1990s?
+    answer: Grunge
+    distractors: [Britpop, New wave, Shoegaze]
+    fact: Britpop was the British answer to it a few years later, and the two were set against each other by the music press.
+
+  - id: a35-078
+    category: music-popular
+    difficulty: 4
+    prompt: Which rapper's 1988 album was titled Straight Outta Compton?
+    answer: N.W.A
+    distractors: [Public Enemy, Ice-T, Run-DMC]
+    fact: The FBI wrote to the record label about one of its tracks, which did the sales no harm whatsoever.
+
+  - id: a35-079
+    category: music-popular
+    difficulty: 4
+    prompt: Which instrument defined the sound of 1980s synth-pop and was made by Yamaha?
+    answer: The DX7
+    distractors: [The Moog Minimoog, The Mellotron, The Hammond organ]
+    fact: Its factory electric-piano preset turns up on an enormous share of records from 1984 onward, usually untouched.
+
+  - id: a35-080
+    category: music-popular
+    difficulty: 4
+    prompt: Which 1995 chart battle was framed as Blur against Oasis?
+    answer: The Battle of Britpop
+    distractors: [The Second British Invasion, The Madchester split, The NME wars]
+    fact: Blur won the week and Oasis sold several times more records over the following year.

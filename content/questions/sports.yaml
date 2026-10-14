@@ -211,3 +211,66 @@ questions:
     answer: Roger Bannister
     distractors: [John Landy, Herb Elliott, Jim Ryun]
     fact: He ran 3:59.4 at Oxford in May 1954. Landy broke the record again six weeks later.
+
+  - id: spo-031
+    difficulty: 2
+    prompt: How many players are on the field per team in a soccer match?
+    answer: Eleven
+    distractors: [Nine, Ten, Twelve]
+    fact: The goalkeeper is the only one permitted to handle the ball, and only inside the penalty area.
+
+  - id: spo-032
+    difficulty: 2
+    prompt: Which basketball player wore number 23 for the Chicago Bulls?
+    answer: Michael Jordan
+    distractors: [Scottie Pippen, Dennis Rodman, Charles Barkley]
+    fact: He briefly wore 45 after returning from baseball, then switched back.
+
+  - id: spo-033
+    difficulty: 3
+    prompt: Which country has won the most FIFA World Cups?
+    answer: Brazil
+    distractors: [Germany, Italy, Argentina]
+    fact: Five. Brazil is also the only country to have played in every tournament.
+
+  - id: spo-034
+    difficulty: 3
+    prompt: In tennis, what is a score of zero called?
+    answer: Love
+    distractors: [Nil, Duck, Blank]
+    fact: The usual explanation is the French l'oeuf, the egg, for the shape of a nought. Nobody has proved it.
+
+  - id: spo-035
+    difficulty: 3
+    prompt: Which trophy goes to the winner of the NHL playoffs?
+    answer: The Stanley Cup
+    distractors: [The Vezina Trophy, The Art Ross Trophy, The Hart Trophy]
+    fact: The oldest trophy competed for by professional athletes in North America, and every winning player's name is engraved on it.
+
+  - id: spo-036
+    difficulty: 3
+    prompt: How many holes are played in a standard round of golf?
+    answer: Eighteen
+    distractors: [Twelve, Fifteen, Twenty-one]
+    fact: St Andrews settled on eighteen in 1764 and the rest of the sport copied it.
+
+  - id: spo-037
+    difficulty: 4
+    prompt: Which country hosted the first modern Olympic Games, in 1896?
+    answer: Greece
+    distractors: [France, Britain, The United States]
+    fact: A Frenchman, Pierre de Coubertin, organised the revival, which is why France is the tempting answer.
+
+  - id: spo-038
+    difficulty: 4
+    prompt: In cricket, what is a score of zero by a batsman called?
+    answer: A duck
+    distractors: [A love, A blank, A nought]
+    fact: From duck's egg, the same joke as tennis making an egg out of a nought, arrived at separately.
+
+  - id: spo-039
+    difficulty: 4
+    prompt: Which NFL team completed a perfect season including the Super Bowl?
+    answer: The 1972 Miami Dolphins
+    distractors: [The 1985 Chicago Bears, The 2007 New England Patriots, The 1976 Oakland Raiders]
+    fact: New England went 16-0 in the regular season in 2007 and then lost the Super Bowl, which is what keeps the record alone.

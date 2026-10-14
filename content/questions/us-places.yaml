@@ -179,3 +179,66 @@ questions:
     answer: Colorado
     distractors: [Wyoming, Utah, Alaska]
     fact: Colorado averages about 6,800 feet and has more than fifty peaks above 14,000, more than any other state.
+
+  - id: usp-026
+    difficulty: 2
+    prompt: Which city is home to the Space Needle?
+    answer: Seattle
+    distractors: [Portland, Vancouver, San Francisco]
+    fact: Built for the 1962 World's Fair and designed to survive winds far stronger than the city has ever recorded.
+
+  - id: usp-027
+    difficulty: 2
+    prompt: Which state is Silicon Valley in?
+    answer: California
+    distractors: [Washington, Oregon, Texas]
+    fact: The name comes from the silicon in semiconductors, coined by a trade journalist in 1971.
+
+  - id: usp-028
+    difficulty: 3
+    prompt: Which city is known as the Mile High City?
+    answer: Denver
+    distractors: [Salt Lake City, Albuquerque, Boise]
+    fact: One step on the Colorado capitol building is exactly a mile above sea level, and it has been re-measured and moved twice.
+
+  - id: usp-029
+    difficulty: 3
+    prompt: Which US city has the largest population?
+    answer: New York
+    distractors: [Los Angeles, Chicago, Houston]
+    fact: More than twice Los Angeles within the city limits, though the gap narrows sharply on a metro-area basis.
+
+  - id: usp-030
+    difficulty: 3
+    prompt: Which national park sits mostly in Wyoming and has a geyser called Old Faithful?
+    answer: Yellowstone
+    distractors: [Grand Teton, Glacier, Yosemite]
+    fact: Old Faithful is not the largest geyser there, only the most predictable, which is how it got the name.
+
+  - id: usp-031
+    difficulty: 3
+    prompt: Which US city opened the country's first subway?
+    answer: Boston
+    distractors: [New York, Philadelphia, Chicago]
+    fact: 1897, seven years ahead of New York. The first line was built largely to get streetcars off a congested Tremont Street.
+
+  - id: usp-032
+    difficulty: 3
+    prompt: Which state is the Mall of America in?
+    answer: Minnesota
+    distractors: [Illinois, Ohio, Michigan]
+    fact: Built on the site of the old Metropolitan Stadium. A seat inside marks where a Harmon Killebrew home run landed.
+
+  - id: usp-033
+    difficulty: 4
+    prompt: Which US state has the fewest people?
+    answer: Wyoming
+    distractors: [Vermont, Alaska, North Dakota]
+    fact: Fewer residents than several individual American cities, in the ninth largest state by area.
+
+  - id: usp-034
+    difficulty: 4
+    prompt: Which American city is built on a series of islands and bayous below sea level?
+    answer: New Orleans
+    distractors: [Charleston, Mobile, Galveston]
+    fact: Much of it sits below the Mississippi, which is held off by levees and runs past the city higher than the streets.

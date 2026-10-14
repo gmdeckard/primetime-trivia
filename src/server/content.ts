@@ -307,6 +307,24 @@ function findDuplicates(
   const norm = (t: string) => t.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
   const at = (id: string) => fileById.get(id) ?? 'unknown';
 
+  const audienceOf = new Map(questions.map((q) => [q.id, q.audience ?? '']));
+
+  /**
+   * Whether two questions can turn up in the same night.
+   *
+   * An untagged question serves every age group, so it meets everything. Two
+   * questions tagged for different groups never meet, which is the point of
+   * the tags: a kids set and the main bank are allowed to ask the same thing.
+   * The exception is the MC picking No filter, which puts the whole bank in
+   * play at once. That is real, but it is a deliberate choice for a mixed
+   * night, so a collision there is worth a warning and not a blocked build.
+   */
+  const canMeet = (a: string, b: string): boolean => {
+    const x = audienceOf.get(a) ?? '';
+    const y = audienceOf.get(b) ?? '';
+    return !x || !y || x === y;
+  };
+
   const seenPrompt = new Map<string, string>();
   const seenFact = new Map<string, string>();
   const byAnswer = new Map<string, Array<{ id: string; words: Set<string> }>>();
@@ -315,7 +333,15 @@ function findDuplicates(
     const p = norm(q.prompt);
     const clash = seenPrompt.get(p);
     if (clash) {
-      issues.push({ file: at(q.id), id: q.id, message: `prompt duplicates ${clash}`, severity: 'error' });
+      const meets = canMeet(q.id, clash);
+      issues.push({
+        file: at(q.id),
+        id: q.id,
+        message: meets
+          ? `prompt duplicates ${clash}`
+          : `prompt duplicates ${clash}, written for another age group (collides only under No filter)`,
+        severity: meets ? 'error' : 'warning',
+      });
     } else {
       seenPrompt.set(p, q.id);
     }
@@ -323,7 +349,15 @@ function findDuplicates(
     const f = norm(q.funFact);
     const factClash = seenFact.get(f);
     if (factClash) {
-      issues.push({ file: at(q.id), id: q.id, message: `fact duplicates ${factClash}`, severity: 'error' });
+      const meets = canMeet(q.id, factClash);
+      issues.push({
+        file: at(q.id),
+        id: q.id,
+        message: meets
+          ? `fact duplicates ${factClash}`
+          : `fact duplicates ${factClash}, written for another age group`,
+        severity: meets ? 'error' : 'warning',
+      });
     } else {
       seenFact.set(f, q.id);
     }
@@ -336,6 +370,8 @@ function findDuplicates(
     const group = byAnswer.get(key) ?? [];
     const words = significantWords(q.prompt);
     for (const other of group) {
+      // Different age groups never share a night, so they cannot repeat.
+      if (!canMeet(q.id, other.id)) continue;
       // 0.4, not 0.6. At 0.6 three genuine repeats slipped through, all of
       // them the same question asked in different words. The cost of being
       // wrong is asymmetric: a false positive is one glance by a human, a

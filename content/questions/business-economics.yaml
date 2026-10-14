@@ -211,3 +211,38 @@ questions:
     answer: The Nixon shock
     distractors: [The Plaza Accord, The Louvre Accord, The Volcker shock]
     fact: The Plaza Accord of 1985 coordinated a dollar devaluation; the Volcker shock was the interest-rate squeeze of 1979-81.
+
+  - id: biz-031
+    difficulty: 2
+    prompt: Which company uses a swoosh as its logo?
+    answer: Nike
+    distractors: [Adidas, Puma, Reebok]
+    fact: A design student was paid 35 dollars for it in 1971. She was given company stock years later.
+
+  - id: biz-032
+    difficulty: 2
+    prompt: Which company is identified by golden arches?
+    answer: McDonald's
+    distractors: [Burger King, Wendy's, Hardee's]
+    fact: The arches were part of the actual architecture of the early restaurants before anyone thought to use them as a logo.
+
+  - id: biz-033
+    difficulty: 3
+    prompt: What does IPO stand for?
+    answer: Initial public offering
+    distractors: [International purchase order, Investor profit option, Interim private offering]
+    fact: It is the point at which a private company's shares can be bought by anyone, and its accounts become public reading.
+
+  - id: biz-034
+    difficulty: 3
+    prompt: What is inflation?
+    answer: A general rise in prices over time
+    distractors: [A rise in unemployment, A fall in the money supply, A rise in interest rates]
+    fact: Central banks generally aim for a low positive rate, on the view that prices falling is harder to escape than prices rising.
+
+  - id: biz-035
+    difficulty: 4
+    prompt: Which Japanese manufacturing approach aims to eliminate waste and hold minimal inventory?
+    answer: Just-in-time
+    distractors: [Six Sigma, Total quality management, Kaizen costing]
+    fact: Developed at Toyota. It works beautifully until a supply chain breaks, which the 2020s demonstrated at length.

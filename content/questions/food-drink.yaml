@@ -211,3 +211,73 @@ questions:
     answer: Louisiana
     distractors: [The Carolinas, Texas, Tennessee]
     fact: Both dishes reflect French, Spanish, West African and Native American influence in Creole and Cajun cooking.
+
+  - id: fnd-031
+    difficulty: 2
+    prompt: Which country did sushi originate in?
+    answer: Japan
+    distractors: [China, Korea, Thailand]
+    fact: It began as a way of preserving fish in fermented rice, and the rice was thrown away.
+
+  - id: fnd-032
+    difficulty: 2
+    prompt: Which bean is coffee made from?
+    answer: The coffee cherry's seed
+    distractors: [The cocoa bean, The vanilla pod, The soy bean]
+    fact: It is not botanically a bean at all, but the stone of a fruit.
+
+  - id: fnd-033
+    difficulty: 3
+    prompt: Which spirit is the base of a mojito?
+    answer: Rum
+    distractors: [Vodka, Gin, Tequila]
+    fact: The mint is meant to be pressed, not crushed. Shredding it releases bitterness from the stems.
+
+  - id: fnd-034
+    difficulty: 3
+    prompt: Which country produces the most coffee?
+    answer: Brazil
+    distractors: [Colombia, Vietnam, Ethiopia]
+    fact: Brazil has led for over 150 years. Vietnam is second and grows mostly robusta for instant coffee.
+
+  - id: fnd-035
+    difficulty: 3
+    prompt: What makes bread rise?
+    answer: Carbon dioxide from yeast
+    distractors: [Steam alone, Oxygen from kneading, Gluten expanding]
+    fact: The gluten is what traps the gas. Without it the bubbles escape and the loaf stays flat.
+
+  - id: fnd-036
+    difficulty: 3
+    prompt: Which fish is in a traditional Caesar salad dressing?
+    answer: Anchovy
+    distractors: [Sardine, Mackerel, Tuna]
+    fact: The salad was invented in Tijuana and the original had no anchovies at all. The savoury note came from Worcestershire sauce.
+
+  - id: fnd-037
+    difficulty: 3
+    prompt: Which part of the plant is cinnamon?
+    answer: The bark
+    distractors: [The root, The seed, The flower]
+    fact: It is stripped from young shoots and curls into quills as it dries.
+
+  - id: fnd-038
+    difficulty: 4
+    prompt: Which wine grape is the most planted in the world?
+    answer: Cabernet Sauvignon
+    distractors: [Merlot, Chardonnay, Airen]
+    fact: It is a natural cross of Cabernet Franc and Sauvignon Blanc, discovered by DNA testing only in 1996.
+
+  - id: fnd-039
+    difficulty: 4
+    prompt: What distinguishes bourbon from other whiskeys?
+    answer: A mash of at least 51 percent corn
+    distractors: [Ageing for at least twelve years, Distillation in Kentucky only, A mash of at least 51 percent rye]
+    fact: It must also go into new charred oak barrels, which is why so many used ones end up in Scotland.
+
+  - id: fnd-040
+    difficulty: 4
+    prompt: Which acid gives sourdough bread its tang?
+    answer: Lactic acid
+    distractors: [Citric acid, Acetic acid, Malic acid]
+    fact: Bacteria in the starter make both lactic and acetic acid. The ratio is what separates a mild loaf from a sharp one.

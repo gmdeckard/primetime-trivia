@@ -211,3 +211,59 @@ questions:
     answer: The Ed Sullivan Show
     distractors: [American Bandstand, The Tonight Show, Hullabaloo]
     fact: An estimated 73 million people watched — then roughly 40 per cent of the American population.
+
+  - id: ftv-031
+    difficulty: 2
+    prompt: In Back to the Future, what speed must the DeLorean reach to time travel?
+    answer: 88 miles per hour
+    distractors: [77 miles per hour, 99 miles per hour, 100 miles per hour]
+    fact: The car was picked because the designers wanted something a 1955 farmer could plausibly mistake for a spacecraft.
+
+  - id: ftv-032
+    difficulty: 2
+    prompt: Which film features a computer asking whether the user wants to play a game of thermonuclear war?
+    answer: WarGames
+    distractors: [Tron, Sneakers, The Net]
+    fact: It prompted a congressional hearing and is usually credited with shaping the first US computer crime law.
+
+  - id: ftv-033
+    difficulty: 3
+    prompt: Which 1993 film opens with a man being dragged into a crate by an unseen animal?
+    answer: Jurassic Park
+    distractors: [Congo, Anaconda, The Lost World]
+    fact: The raptors in that scene are a puppet. Only about fifteen minutes of the film uses computer animation at all.
+
+  - id: ftv-034
+    difficulty: 3
+    prompt: In The Shawshank Redemption, what does Andy use to hide his tunnel?
+    answer: A poster
+    distractors: [A bookshelf, A loose stone, A wardrobe]
+    fact: The film lost money on release and found its audience on cable and video rental.
+
+  - id: ftv-035
+    difficulty: 3
+    prompt: Which sitcom was set in a Boston bar where everybody knows your name?
+    answer: Cheers
+    distractors: [Taxi, Night Court, Barney Miller]
+    fact: It finished last in the ratings in its first season and was nearly cancelled.
+
+  - id: ftv-036
+    difficulty: 3
+    prompt: Which director made Reservoir Dogs and Pulp Fiction?
+    answer: Quentin Tarantino
+    distractors: [Robert Rodriguez, Guy Ritchie, Paul Thomas Anderson]
+    fact: He wrote much of Reservoir Dogs while working in a video rental shop in Manhattan Beach.
+
+  - id: ftv-037
+    difficulty: 3
+    prompt: In The Princess Bride, what is Inigo Montoya's stated purpose?
+    answer: To avenge his father
+    distractors: [To rescue Buttercup, To claim a title, To find a lost sword]
+    fact: The novel presents itself as an abridgement of an older book by a writer who never existed.
+
+  - id: ftv-038
+    difficulty: 4
+    prompt: Which 1982 film was a commercial disappointment before becoming a touchstone of science fiction?
+    answer: Blade Runner
+    distractors: [The Thing, Tron, Dune]
+    fact: It opened against E.T. and lost badly. There are at least seven distinct released cuts of it.

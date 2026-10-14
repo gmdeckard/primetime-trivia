@@ -12,12 +12,13 @@
  */
 
 /** Who the questions are pitched at. Drives era weighting during generation. */
-export type Audience = '55-75' | '35-55' | '18-35' | 'family' | 'any';
+export type Audience = '55-75' | '35-55' | '18-35' | '8-12' | 'family' | 'any';
 
 export const AUDIENCES: Array<{ id: Audience; name: string; blurb: string }> = [
   { id: '55-75', name: '55 to 75', blurb: 'Formative years roughly 1961-1996. The core audience.' },
   { id: '35-55', name: '35 to 55', blurb: 'Formative years roughly 1981-2016.' },
   { id: '18-35', name: '18 to 35', blurb: 'Formative years roughly 2000 onward.' },
+  { id: '8-12', name: 'Kids 8 to 12', blurb: 'Primary and middle school. Nothing that needs adult life experience.' },
   { id: 'family', name: 'All ages', blurb: 'Mixed groups with children present. Nothing era-dependent.' },
   { id: 'any', name: 'No preference', blurb: 'General knowledge with no era weighting.' },
 ];

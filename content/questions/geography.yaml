@@ -211,3 +211,73 @@ questions:
     answer: Hawaii
     distractors: [Florida, California, Louisiana]
     fact: The Kona district of the Big Island is the best known growing area. California now has small plantings, but Hawaii remains the only long-standing commercial producer.
+
+  - id: geo-031
+    difficulty: 2
+    prompt: Which country has the most natural lakes?
+    answer: Canada
+    distractors: [Russia, Finland, Sweden]
+    fact: More than half the lakes on earth are in Canada, which is one reason nobody has finished counting them.
+
+  - id: geo-032
+    difficulty: 2
+    prompt: Which sea separates Europe from Africa at its narrowest point?
+    answer: The Mediterranean
+    distractors: [The Red Sea, The Adriatic, The Black Sea]
+    fact: At the Strait of Gibraltar the gap is about nine miles.
+
+  - id: geo-033
+    difficulty: 3
+    prompt: Which country has the longest coastline in the world?
+    answer: Canada
+    distractors: [Russia, Indonesia, Norway]
+    fact: Its coast runs to roughly 125,000 miles once the Arctic islands are counted, several times that of any other country.
+
+  - id: geo-034
+    difficulty: 3
+    prompt: Which African country was never colonised by a European power?
+    answer: Ethiopia
+    distractors: [Liberia, Morocco, Egypt]
+    fact: Italy occupied it from 1936 to 1941 but never established colonial rule. Liberia was founded by freed American slaves.
+
+  - id: geo-035
+    difficulty: 3
+    prompt: Which two countries share the longest international land border?
+    answer: Canada and the United States
+    distractors: [Russia and Kazakhstan, Chile and Argentina, China and Mongolia]
+    fact: Around 5,500 miles. Russia and Kazakhstan are second at roughly 4,750.
+
+  - id: geo-036
+    difficulty: 3
+    prompt: Which city is split between two continents?
+    answer: Istanbul
+    distractors: [Cairo, Suez, Vladivostok]
+    fact: The Bosphorus runs through it, so a commuter can cross from Europe to Asia on the way to work.
+
+  - id: geo-037
+    difficulty: 3
+    prompt: Which desert is the largest hot desert in the world?
+    answer: The Sahara
+    distractors: [The Arabian, The Kalahari, The Gobi]
+    fact: Antarctica is the largest desert of any kind, which is why the question has to say hot.
+
+  - id: geo-038
+    difficulty: 4
+    prompt: Which is the largest country lying entirely within Europe?
+    answer: Ukraine
+    distractors: [France, Spain, Poland]
+    fact: Russia is far larger but most of it is in Asia, which is exactly why the question has to say entirely.
+
+  - id: geo-039
+    difficulty: 4
+    prompt: Which country has the most islands?
+    answer: Sweden
+    distractors: [Indonesia, The Philippines, Norway]
+    fact: Around 270,000, the overwhelming majority of them uninhabited rock. Indonesia has far more that people actually live on.
+
+  - id: geo-040
+    difficulty: 4
+    prompt: Which is the only country to border both the Atlantic and the Indian Ocean on the African mainland?
+    answer: South Africa
+    distractors: [Egypt, Morocco, Mozambique]
+    fact: The two oceans are conventionally divided at Cape Agulhas, not the better-known Cape of Good Hope.

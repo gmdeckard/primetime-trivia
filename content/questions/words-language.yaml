@@ -211,3 +211,73 @@ questions:
     answer: Synecdoche
     distractors: [Metonymy, Simile, Hyperbole]
     fact: Metonymy is the closely related device of substituting an associated thing, as in "the crown" for the monarchy.
+
+  - id: wrd-031
+    difficulty: 2
+    prompt: Which language has the most native speakers?
+    answer: Mandarin Chinese
+    distractors: [English, Spanish, Hindi]
+    fact: English leads once second-language speakers are counted, which is why the question says native.
+
+  - id: wrd-032
+    difficulty: 2
+    prompt: What does the abbreviation etc. stand for?
+    answer: Et cetera
+    distractors: [Et alia, Exempli gratia, Et alii]
+    fact: Latin for and the rest. The common misspelling ect. comes from people hearing it as ex-cetera.
+
+  - id: wrd-033
+    difficulty: 3
+    prompt: What is a word meaning the opposite of another called?
+    answer: An antonym
+    distractors: [A synonym, A homonym, A homophone]
+    fact: Homophones sound alike and homonyms are spelled alike, which is why all three get muddled together.
+
+  - id: wrd-034
+    difficulty: 3
+    prompt: Which language contributed the words algebra, alcohol and admiral to English?
+    answer: Arabic
+    distractors: [Latin, Greek, Persian]
+    fact: The al in each is the Arabic definite article, carried into English attached to the noun.
+
+  - id: wrd-035
+    difficulty: 3
+    prompt: What does the prefix pseudo mean?
+    answer: 'False'
+    distractors: [Before, Beyond, Together]
+    fact: From the Greek. It is the same root behind pseudonym, a false name.
+
+  - id: wrd-036
+    difficulty: 3
+    prompt: What is it called when a phrase means something different from its literal words?
+    answer: An idiom
+    distractors: [A metaphor, A simile, An allegory]
+    fact: Kicking the bucket is the stock example, and nobody agrees where it came from.
+
+  - id: wrd-037
+    difficulty: 3
+    prompt: Which punctuation mark joins two independent clauses without a conjunction?
+    answer: The semicolon
+    distractors: [The colon, The comma, The dash]
+    fact: Doing the same job with a comma alone is the comma splice, the most-corrected error in English.
+
+  - id: wrd-038
+    difficulty: 4
+    prompt: Which term covers substituting an associated word for the thing meant, as in the crown for the monarchy?
+    answer: Metonymy
+    distractors: [Synecdoche, Metaphor, Allegory]
+    fact: Synecdoche is its close neighbour and uses a part for the whole instead, as in all hands on deck.
+
+  - id: wrd-039
+    difficulty: 4
+    prompt: Which writing system did ancient Mesopotamia use?
+    answer: Cuneiform
+    distractors: [Hieroglyphics, Linear B, Demotic]
+    fact: Pressed into wet clay with a reed, which is why the strokes are wedges. Hieroglyphics were Egyptian.
+
+  - id: wrd-040
+    difficulty: 4
+    prompt: What is the study of word origins called?
+    answer: Etymology
+    distractors: [Entomology, Philology, Lexicography]
+    fact: Entomology is insects, and the two get mixed up often enough that dictionaries list the confusion.

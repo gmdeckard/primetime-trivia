@@ -1,0 +1,644 @@
+category: natural-world
+audience: 8-12
+
+# Written for children of 8 to 12.
+#
+# The difficulty numbers are relative to that age, not to the adult bank: a 4
+# here is a hard question for a ten-year-old, not a hard question full stop.
+#
+# Ground rules kept throughout: nothing that needs adult life experience,
+# nothing frightening, and no alcohol, politics or war casualties. Every fact
+# is written to be read aloud and to be the bit a child repeats afterwards.
+#
+# Eight categories, ten each, shaped 2/5/3 so any one fills a round alone.
+
+questions:
+  - id: kid-001
+    difficulty: 2
+    prompt: How many legs does a spider have?
+    answer: Eight
+    distractors: [Six, Ten, Twelve]
+    fact: Insects have six. That is the difference that makes a spider not an insect at all.
+
+  - id: kid-002
+    difficulty: 2
+    prompt: Which is the largest animal on earth?
+    answer: The blue whale
+    distractors: [The African elephant, The giraffe, The great white shark]
+    fact: Its tongue alone can weigh as much as an elephant, and a baby drinks enough milk a day to fill a bath.
+
+  - id: kid-003
+    difficulty: 3
+    prompt: What do you call an animal that eats only plants?
+    answer: A herbivore
+    distractors: [A carnivore, An omnivore, An insectivore]
+    fact: A carnivore eats meat and an omnivore eats both. People are omnivores, which is why we argue about dinner.
+
+  - id: kid-004
+    difficulty: 3
+    prompt: Which bird cannot fly but can run faster than a person?
+    answer: The ostrich
+    distractors: [The penguin, The chicken, The turkey]
+    fact: It can reach about 40 miles an hour and kick hard enough to bend a fence.
+
+  - id: kid-005
+    difficulty: 3
+    prompt: What do caterpillars turn into?
+    answer: Butterflies or moths
+    distractors: [Beetles, Dragonflies, Grasshoppers]
+    fact: Inside the chrysalis the caterpillar turns almost entirely to liquid before rebuilding itself.
+
+  - id: kid-006
+    difficulty: 3
+    prompt: Which part of a plant takes in water from the soil?
+    answer: The roots
+    distractors: [The leaves, The flower, The stem]
+    fact: The leaves do the opposite, letting water out as vapour, and that is partly what pulls more up the stem.
+
+  - id: kid-007
+    difficulty: 3
+    prompt: What is a young frog called before it grows legs?
+    answer: A tadpole
+    distractors: [A fry, A nymph, A cub]
+    fact: It breathes through gills like a fish at first and grows lungs later, which is why it has to come up for air.
+
+  - id: kid-008
+    difficulty: 4
+    prompt: Which animal has the longest neck relative to its body?
+    answer: The giraffe
+    distractors: [The ostrich, The swan, The camel]
+    fact: It has exactly seven neck bones, the same number as a person. Each one is just enormous.
+
+  - id: kid-009
+    difficulty: 4
+    prompt: Which animal can change colour to match its mood?
+    answer: The chameleon
+    distractors: [The gecko, The iguana, The salamander]
+    fact: Everyone thinks it is for hiding. Mostly it is about temperature and mood, and an angry chameleon goes bright on purpose.
+
+  - id: kid-010
+    difficulty: 4
+    prompt: Which sea creature has three hearts?
+    answer: The octopus
+    distractors: [The jellyfish, The starfish, The crab]
+    fact: Two pump blood to the gills and one to the rest of the body. Its blood is blue rather than red.
+
+  - id: kid-011
+    category: geography
+    difficulty: 2
+    prompt: How many continents are there?
+    answer: Seven
+    distractors: [Five, Six, Eight]
+    fact: Some countries teach six, counting Europe and Asia as one. Both answers are defensible, which is why the count is argued about.
+
+  - id: kid-012
+    category: geography
+    difficulty: 2
+    prompt: Which is the largest ocean?
+    answer: The Pacific
+    distractors: [The Atlantic, The Indian, The Arctic]
+    fact: It is bigger than all the land on earth put together.
+
+  - id: kid-013
+    category: geography
+    difficulty: 3
+    prompt: Which continent is the coldest?
+    answer: Antarctica
+    distractors: [Europe, Asia, South America]
+    fact: It is also the driest. Parts of it have had no rain or snow for around two million years.
+
+  - id: kid-014
+    category: geography
+    difficulty: 3
+    prompt: Which is the longest river in the world?
+    answer: The Nile
+    distractors: [The Amazon, The Mississippi, The Yangtze]
+    fact: The Amazon carries far more water, so which river is biggest depends on whether you measure length or volume.
+
+  - id: kid-015
+    category: geography
+    difficulty: 3
+    prompt: Which country is shaped like a boot?
+    answer: Italy
+    distractors: [Spain, Greece, Portugal]
+    fact: The island of Sicily sits right where the toe would be kicking it.
+
+  - id: kid-016
+    category: geography
+    difficulty: 3
+    prompt: What is the tallest mountain on earth above sea level?
+    answer: Mount Everest
+    distractors: [Mount Kilimanjaro, Mount Fuji, Denali]
+    fact: It grows by a few millimetres every year, because the plates underneath are still pushing together.
+
+  - id: kid-017
+    category: geography
+    difficulty: 3
+    prompt: Which country has the most people?
+    answer: India
+    distractors: [China, The United States, Indonesia]
+    fact: India passed China in 2023 after China had held the top spot for as long as anyone had been counting.
+
+  - id: kid-018
+    category: geography
+    difficulty: 4
+    prompt: Which is the smallest country in the world?
+    answer: Vatican City
+    distractors: [Monaco, San Marino, Liechtenstein]
+    fact: You can walk all the way around it in under an hour, and fewer people live there than in most primary schools' catchments.
+
+  - id: kid-019
+    category: geography
+    difficulty: 4
+    prompt: Which imaginary line runs around the middle of the earth?
+    answer: The equator
+    distractors: [The prime meridian, The tropic of Cancer, The international date line]
+    fact: Stand on it and you are spinning at about a thousand miles an hour without noticing a thing.
+
+  - id: kid-020
+    category: geography
+    difficulty: 4
+    prompt: Which country is home to the kangaroo?
+    answer: Australia
+    distractors: [New Zealand, South Africa, Argentina]
+    fact: A baby kangaroo is about the size of a jellybean when it is born and climbs into the pouch by itself.
+
+  - id: kid-021
+    category: space-aviation
+    difficulty: 2
+    prompt: Which planet do we live on?
+    answer: Earth
+    distractors: [Mars, Venus, Jupiter]
+    fact: It is the only planet not named after a Greek or Roman god, and the only one we know of with liquid water on the surface.
+
+  - id: kid-022
+    category: space-aviation
+    difficulty: 2
+    prompt: What is the closest star to earth?
+    answer: The sun
+    distractors: [The North Star, Sirius, Alpha Centauri]
+    fact: Its light takes about eight minutes to reach us, so you always see it as it was eight minutes ago.
+
+  - id: kid-023
+    category: space-aviation
+    difficulty: 3
+    prompt: Which planet is known as the red planet?
+    answer: Mars
+    distractors: [Venus, Mercury, Saturn]
+    fact: The red is rust. The soil is full of iron that has been slowly rusting for billions of years.
+
+  - id: kid-024
+    category: space-aviation
+    difficulty: 3
+    prompt: Which planet has rings that are easy to see through a telescope?
+    answer: Saturn
+    distractors: [Jupiter, Uranus, Neptune]
+    fact: All four of these have rings. Saturn's are simply far brighter, and they are made mostly of ice.
+
+  - id: kid-025
+    category: space-aviation
+    difficulty: 3
+    prompt: What did Neil Armstrong become the first person to do in 1969?
+    answer: Walk on the moon
+    distractors: [Orbit the earth, Fly faster than sound, Reach the South Pole]
+    fact: The footprints he left have no wind or rain to wash them away, so they are still there.
+
+  - id: kid-026
+    category: space-aviation
+    difficulty: 3
+    prompt: How long does the earth take to travel once around the sun?
+    answer: A year
+    distractors: [A day, A month, A week]
+    fact: It takes about a quarter of a day longer than 365, which is what leap years are for.
+
+  - id: kid-027
+    category: space-aviation
+    difficulty: 3
+    prompt: Which is the largest planet in our solar system?
+    answer: Jupiter
+    distractors: [Saturn, Neptune, Earth]
+    fact: You could fit every other planet inside it and still have room left over.
+
+  - id: kid-028
+    category: space-aviation
+    difficulty: 4
+    prompt: What do you call a rock from space that lands on earth?
+    answer: A meteorite
+    distractors: [A meteor, A meteoroid, A comet]
+    fact: All three are the same rock at different stages. It is a meteoroid in space, a meteor while it burns, a meteorite once it lands.
+
+  - id: kid-029
+    category: space-aviation
+    difficulty: 4
+    prompt: Why does the moon seem to change shape through the month?
+    answer: We see different amounts of its sunlit side
+    distractors: [The earth's shadow covers it, It really does change shape, Clouds hide part of it]
+    fact: The same side always faces us, so the shape of the moon never changes at all. Only the lighting does.
+
+  - id: kid-030
+    category: space-aviation
+    difficulty: 4
+    prompt: Which force keeps the planets going round the sun?
+    answer: Gravity
+    distractors: [Magnetism, Wind, Electricity]
+    fact: The same force that makes a dropped apple fall is the one holding the whole solar system together.
+
+  - id: kid-031
+    category: medicine
+    difficulty: 2
+    prompt: Which organ pumps blood around your body?
+    answer: The heart
+    distractors: [The lungs, The liver, The stomach]
+    fact: It beats about a hundred thousand times a day without you ever asking it to.
+
+  - id: kid-032
+    category: medicine
+    difficulty: 2
+    prompt: How many teeth does a typical adult have?
+    answer: Thirty-two
+    distractors: [Twenty, Twenty-four, Forty]
+    fact: Children have twenty baby teeth, which is why the number changes so much between you and a grown-up.
+
+  - id: kid-033
+    category: medicine
+    difficulty: 3
+    prompt: Which organs let you breathe?
+    answer: The lungs
+    distractors: [The kidneys, The heart, The liver]
+    fact: Spread flat, the inside surface of your lungs would cover roughly half a tennis court.
+
+  - id: kid-034
+    category: medicine
+    difficulty: 3
+    prompt: What is the hardest substance in the human body?
+    answer: Tooth enamel
+    distractors: [Bone, Fingernail, Cartilage]
+    fact: It is harder than bone, and unlike bone it cannot grow back once it is gone.
+
+  - id: kid-035
+    category: medicine
+    difficulty: 3
+    prompt: Which part of the body controls everything else?
+    answer: The brain
+    distractors: [The heart, The spine, The stomach]
+    fact: It uses about a fifth of all the energy you eat, which is a lot for something the size of two fists.
+
+  - id: kid-036
+    category: medicine
+    difficulty: 3
+    prompt: What are your bones joined together by?
+    answer: Joints
+    distractors: [Muscles, Nerves, Veins]
+    fact: Your knee and elbow work like hinges, while your shoulder is a ball in a socket and can go all the way round.
+
+  - id: kid-037
+    category: medicine
+    difficulty: 3
+    prompt: Which sense do your taste buds give you?
+    answer: Taste
+    distractors: [Smell, Touch, Hearing]
+    fact: Most of what you think is taste is actually smell. Hold your nose and an apple and an onion are hard to tell apart.
+
+  - id: kid-038
+    category: medicine
+    difficulty: 4
+    prompt: How many bones is a baby born with, roughly?
+    answer: About 270
+    distractors: [About 100, About 206, About 400]
+    fact: Adults have about 206. Many of a baby's bones fuse together as it grows, so you end up with fewer than you started.
+
+  - id: kid-039
+    category: medicine
+    difficulty: 4
+    prompt: What is the largest organ of the human body?
+    answer: The skin
+    distractors: [The liver, The lungs, The brain]
+    fact: You shed it constantly. A good share of household dust is skin that used to be somebody in the house.
+
+  - id: kid-040
+    category: medicine
+    difficulty: 4
+    prompt: Which liquid carries oxygen around your body?
+    answer: Blood
+    distractors: [Water, Saliva, Sweat]
+    fact: It is red because of iron. Octopus blood uses copper instead, which is why theirs is blue.
+
+  - id: kid-041
+    category: food-drink
+    difficulty: 2
+    prompt: Which food do bees make?
+    answer: Honey
+    distractors: [Butter, Jam, Syrup]
+    fact: One bee makes about a twelfth of a teaspoon in its whole life, so a jar is the work of a great many bees.
+
+  - id: kid-042
+    category: food-drink
+    difficulty: 2
+    prompt: Which drink comes from a cow?
+    answer: Milk
+    distractors: [Orange juice, Lemonade, Tea]
+    fact: Cheese, butter and yoghurt all start as milk too. One animal is doing a lot of the work in your fridge.
+
+  - id: kid-043
+    category: food-drink
+    difficulty: 3
+    prompt: Which vegetable grows underground and can be mashed or roasted?
+    answer: The potato
+    distractors: [The cabbage, The pea, The tomato]
+    fact: The part you eat is a swollen stem, not a root, which is why it can sprout if you leave it in the cupboard.
+
+  - id: kid-044
+    category: food-drink
+    difficulty: 3
+    prompt: Which fruit is dried to make a raisin?
+    answer: The grape
+    distractors: [The plum, The apricot, The fig]
+    fact: A dried plum is a prune and a dried apricot stays an apricot, so each dried fruit has its own rule.
+
+  - id: kid-045
+    category: food-drink
+    difficulty: 3
+    prompt: Which food is made by baking flour, water and yeast?
+    answer: Bread
+    distractors: [Cheese, Pasta, Rice]
+    fact: The yeast is alive. It eats sugar in the dough and burps out the gas that makes all the holes.
+
+  - id: kid-046
+    category: food-drink
+    difficulty: 3
+    prompt: Which plant are cornflakes made from?
+    answer: Maize
+    distractors: [Wheat, Rice, Oats]
+    fact: Maize is the proper name for sweetcorn. Different cereals give you different flakes in the same shape of box.
+
+  - id: kid-047
+    category: food-drink
+    difficulty: 3
+    prompt: Which country is spaghetti most associated with?
+    answer: Italy
+    distractors: [Greece, France, Mexico]
+    fact: There are hundreds of pasta shapes and most have names that describe them, like little ears or little worms.
+
+  - id: kid-048
+    category: food-drink
+    difficulty: 4
+    prompt: Which part of the cocoa plant is chocolate made from?
+    answer: The beans
+    distractors: [The leaves, The flowers, The roots]
+    fact: The beans grow in pods straight out of the trunk, and raw they taste nothing like chocolate at all.
+
+  - id: kid-049
+    category: food-drink
+    difficulty: 4
+    prompt: What makes a chilli pepper taste hot?
+    answer: A chemical called capsaicin
+    distractors: [Tiny sharp hairs, Natural acid, Trapped heat]
+    fact: It does not burn anything. It switches on the same nerves that report heat, so your mouth reports a fire that is not there.
+
+  - id: kid-050
+    category: food-drink
+    difficulty: 4
+    prompt: Which nut is used to make marzipan?
+    answer: The almond
+    distractors: [The hazelnut, The walnut, The peanut]
+    fact: A peanut is not really a nut at all. It grows underground and belongs with peas and beans.
+
+  - id: kid-051
+    category: words-language
+    difficulty: 2
+    prompt: How many letters are in the English alphabet?
+    answer: Twenty-six
+    distractors: [Twenty-four, Twenty-eight, Thirty]
+    fact: Five of them are vowels, and almost every word needs at least one.
+
+  - id: kid-052
+    category: words-language
+    difficulty: 2
+    prompt: What do you call a word that means the same as another?
+    answer: A synonym
+    distractors: [An antonym, A homonym, An acronym]
+    fact: Big and large are synonyms. Big and small are antonyms, which is the opposite idea.
+
+  - id: kid-053
+    category: words-language
+    difficulty: 3
+    prompt: What is a naming word for a person, place or thing called?
+    answer: A noun
+    distractors: [A verb, An adjective, An adverb]
+    fact: A verb is a doing word and an adjective describes. Between them they build almost every sentence you say.
+
+  - id: kid-054
+    category: words-language
+    difficulty: 3
+    prompt: Which punctuation mark ends a question?
+    answer: A question mark
+    distractors: [A full stop, An exclamation mark, A comma]
+    fact: It may have started as the Latin word for question written above the line and squashed down over the centuries.
+
+  - id: kid-055
+    category: words-language
+    difficulty: 3
+    prompt: What do you call words that sound the same but are spelled differently?
+    answer: Homophones
+    distractors: [Synonyms, Antonyms, Adjectives]
+    fact: There, their and they're are the three that cause the most trouble in the whole language.
+
+  - id: kid-056
+    category: words-language
+    difficulty: 3
+    prompt: What is a group of words that tells a complete idea called?
+    answer: A sentence
+    distractors: [A syllable, A paragraph, A chapter]
+    fact: A paragraph is a group of sentences, so they stack up like boxes inside bigger boxes.
+
+  - id: kid-057
+    category: words-language
+    difficulty: 3
+    prompt: Which word describes something, like the word shiny?
+    answer: An adjective
+    distractors: [A noun, A verb, A pronoun]
+    fact: Pile up too many and a sentence slows right down, which is why good writers use fewer than you would expect.
+
+  - id: kid-058
+    category: words-language
+    difficulty: 4
+    prompt: What do you call a phrase where every word starts with the same sound?
+    answer: Alliteration
+    distractors: [Rhyme, Onomatopoeia, Simile]
+    fact: Tongue twisters run on it. Peter Piper picked a peck of pickled peppers is the most famous one in English.
+
+  - id: kid-059
+    category: words-language
+    difficulty: 4
+    prompt: What is a comparison using the word like or as called?
+    answer: A simile
+    distractors: [A metaphor, A rhyme, A proverb]
+    fact: As quiet as a mouse is a simile. Calling someone a mouse outright is a metaphor, which skips the comparison.
+
+  - id: kid-060
+    category: words-language
+    difficulty: 4
+    prompt: How many syllables are in the word butterfly?
+    answer: Three
+    distractors: [Two, Four, Five]
+    fact: Clap as you say it and the claps are the syllables. But-ter-fly.
+
+  - id: kid-061
+    category: sports
+    difficulty: 2
+    prompt: How many players are on a basketball team on the court at once?
+    answer: Five
+    distractors: [Four, Six, Seven]
+    fact: The hoop is ten feet off the ground, and it has been at that exact height since the game was invented in 1891.
+
+  - id: kid-062
+    category: sports
+    difficulty: 2
+    prompt: In which sport do you score a try?
+    answer: Rugby
+    distractors: [Football, Cricket, Hockey]
+    fact: It is called a try because originally it scored nothing. It only gave you a try at a kick at goal.
+
+  - id: kid-063
+    category: sports
+    difficulty: 3
+    prompt: How often are the Summer Olympic Games held?
+    answer: Every four years
+    distractors: [Every two years, Every year, Every five years]
+    fact: The Winter Games are also every four years, offset by two, so there is an Olympics of some kind every other year.
+
+  - id: kid-064
+    category: sports
+    difficulty: 3
+    prompt: In which sport would you use a racket and a shuttlecock?
+    answer: Badminton
+    distractors: [Tennis, Squash, Table tennis]
+    fact: A shuttlecock leaves the racket faster than a ball in any other racket sport, then slows down almost at once.
+
+  - id: kid-065
+    category: sports
+    difficulty: 3
+    prompt: How many rings are on the Olympic flag?
+    answer: Five
+    distractors: [Four, Six, Seven]
+    fact: One for each inhabited continent, and between them the six colours include at least one from every national flag in the world.
+
+  - id: kid-066
+    category: sports
+    difficulty: 3
+    prompt: In swimming, which stroke is swum on your back?
+    answer: Backstroke
+    distractors: [Butterfly, Breaststroke, Freestyle]
+    fact: It is the only race that starts in the water rather than from the blocks, because you cannot dive in facing backwards.
+
+  - id: kid-067
+    category: sports
+    difficulty: 3
+    prompt: What shape is a football pitch?
+    answer: A rectangle
+    distractors: [A square, An oval, A diamond]
+    fact: A baseball field is a diamond and a cricket ground is usually an oval, so each sport really does have its own shape.
+
+  - id: kid-068
+    category: sports
+    difficulty: 4
+    prompt: How many points is a touchdown worth in American football?
+    answer: Six
+    distractors: [Three, Five, Seven]
+    fact: The extra kick afterwards makes seven, which is why seven feels like the right answer and is not.
+
+  - id: kid-069
+    category: sports
+    difficulty: 4
+    prompt: In gymnastics, what is the highest score a routine was given under the old system?
+    answer: Ten
+    distractors: [Six, Twenty, One hundred]
+    fact: Nadia Comaneci got the first perfect ten in 1976 and the scoreboard could not show it, so it displayed 1.00 instead.
+
+  - id: kid-070
+    category: sports
+    difficulty: 4
+    prompt: Which sport is played at Wimbledon?
+    answer: Tennis
+    distractors: [Golf, Cricket, Rowing]
+    fact: It is the only one of the four big tennis tournaments still played on grass, and the grass is cut to exactly eight millimetres.
+
+  - id: kid-071
+    category: us-places
+    difficulty: 2
+    prompt: What is the capital of the United States?
+    answer: Washington DC
+    distractors: [New York, Los Angeles, Boston]
+    fact: It is not in any state at all. That is what the DC stands for, the District of Columbia.
+
+  - id: kid-072
+    category: us-places
+    difficulty: 2
+    prompt: How many stars are on the United States flag?
+    answer: Fifty
+    distractors: [Thirteen, Forty-eight, Fifty-two]
+    fact: One per state, and thirteen stripes for the thirteen colonies that started it. A schoolboy designed the fifty-star version for a class project.
+
+  - id: kid-073
+    category: us-places
+    difficulty: 3
+    prompt: Which statue stands on an island in New York harbour?
+    answer: The Statue of Liberty
+    distractors: [Christ the Redeemer, The Colossus of Rhodes, The Little Mermaid]
+    fact: It was a gift from France and arrived in 214 crates, in pieces, to be put together on site.
+
+  - id: kid-074
+    category: us-places
+    difficulty: 3
+    prompt: Which US state is made up only of islands?
+    answer: Hawaii
+    distractors: [Alaska, Florida, Rhode Island]
+    fact: It is also the only state that grows coffee, and the newest, having joined in 1959.
+
+  - id: kid-075
+    category: us-places
+    difficulty: 3
+    prompt: Which monument has four presidents' faces carved into a mountain?
+    answer: Mount Rushmore
+    distractors: [The Lincoln Memorial, Stone Mountain, The Washington Monument]
+    fact: Each face is about sixty feet from chin to forehead, which is taller than a five-storey house.
+
+  - id: kid-076
+    category: us-places
+    difficulty: 3
+    prompt: In which state would you find Hollywood?
+    answer: California
+    distractors: [New York, Florida, Texas]
+    fact: The famous sign originally said Hollywoodland and advertised houses for sale.
+
+  - id: kid-077
+    category: us-places
+    difficulty: 3
+    prompt: Which US state is the largest by area?
+    answer: Alaska
+    distractors: [Texas, California, Montana]
+    fact: It is more than twice the size of Texas, which Texans are reminded of more often than they would like.
+
+  - id: kid-078
+    category: us-places
+    difficulty: 4
+    prompt: Which American landmark is a canyon carved by a river in Arizona?
+    answer: The Grand Canyon
+    distractors: [Yosemite Valley, Bryce Canyon, Zion Canyon]
+    fact: It is about a mile deep. The rock at the bottom is around two billion years old, roughly half the age of the earth.
+
+  - id: kid-079
+    category: us-places
+    difficulty: 4
+    prompt: Which city is famous for its cable cars and a bridge painted orange?
+    answer: San Francisco
+    distractors: [Seattle, Portland, San Diego]
+    fact: The colour is officially called international orange, chosen so ships could see the bridge through the fog.
+
+  - id: kid-080
+    category: us-places
+    difficulty: 4
+    prompt: Which desert cactus with arms grows wild only in the American southwest?
+    answer: The saguaro
+    distractors: [The prickly pear, The barrel cactus, The cholla]
+    fact: It can take fifty years to grow its first arm and live for two hundred years, so most of the ones you see are older than you.

@@ -15,6 +15,7 @@ const AGE_GROUPS: Array<{ id: string; name: string }> = [
   { id: '55-75', name: '55 to 75' },
   { id: '35-55', name: '35 to 55' },
   { id: '18-35', name: '18 to 35' },
+  { id: '8-12', name: 'Kids 8 to 12' },
   { id: 'family', name: 'All ages' },
   { id: '', name: 'No filter' },
 ];
