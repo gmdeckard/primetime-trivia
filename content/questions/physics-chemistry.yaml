@@ -72,7 +72,7 @@ questions:
     prompt: What is absolute zero on the Celsius scale?
     answer: About minus 273 degrees
     distractors: [About minus 100 degrees, About minus 196 degrees, About minus 460 degrees]
-    fact: Minus 196 is where nitrogen turns liquid, and minus 460 is absolute zero expressed in Fahrenheit.
+    fact: Minus 196 Celsius is where nitrogen turns liquid. Absolute zero on the Fahrenheit scale is minus 460, which is why that number also looks right.
 
   - id: phy-012
     difficulty: 3
