@@ -140,6 +140,13 @@ other and breaks everything with no useful error.
 and the host screen displays it. If players can reach the page but nothing
 loads, client isolation is the first thing to suspect.
 
+The box can also **be** the wifi rather than join it, which is the answer when
+the venue has nothing usable:
+
+```bash
+sudo ./scripts/network-mode.sh ap
+```
+
 To leave it running permanently on a Raspberry Pi, Jetson or mini PC — starting
 on boot, restarting if it crashes, serving on port 80 so the join address has no
 `:8080` on the end — see [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md).

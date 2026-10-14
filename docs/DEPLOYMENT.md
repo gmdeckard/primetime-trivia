@@ -120,3 +120,57 @@ Some boards can be the access point themselves, which removes one device from
 the bag. Test that thoroughly with a roomful of real devices before relying on
 it; wifi chipset AP support varies, and discovering a limit at 6:45pm with
 ninety people waiting is not the moment.
+
+## Being the wifi instead of joining it
+
+If the venue has no usable wifi — or its guest network has client isolation
+turned on, which silently blocks devices from reaching each other — the box can
+be the access point itself.
+
+```bash
+sudo ./scripts/network-mode.sh ap        # become an access point
+sudo ./scripts/network-mode.sh client    # rejoin your normal wifi
+sudo ./scripts/network-mode.sh status
+```
+
+Set the network name and password when you first switch:
+
+```bash
+sudo AP_SSID="Thursday Trivia" AP_PASS="snowbird2026" ./scripts/network-mode.sh ap
+```
+
+The access point always uses **192.168.50.1**, so the join address never
+changes. Print the QR code once and it works every week.
+
+### Know these three things first
+
+**You lose internet in AP mode.** Most wifi chipsets cannot be an access point
+and a client at the same time, and the Realtek part in the Jetson Orin Nano is
+one of them. While the box is the AP there is no `git pull`, no `apt`, and the
+`/author` screen cannot reach the Claude API. Switch to client mode to update,
+then switch back.
+
+**You can always get back in over USB-C.** The box runs a USB network gadget at
+`192.168.55.1` that is completely independent of wifi. If an AP config leaves
+you locked out, plug a USB-C cable into your laptop and `ssh g@192.168.55.1`.
+No monitor, no keyboard. Know this before you experiment.
+
+**Test it with real devices before you rely on it.** Vendor wifi drivers vary
+enormously in how well they hold up as access points under load. Advertising AP
+mode is not the same as serving forty tablets for an hour. Get twenty real
+devices on it and run a full block before trusting it on a night, and keep a
+travel router in the bag as the fallback. The software does not care which
+network it is on.
+
+### 2.4 or 5 GHz
+
+The switcher defaults to **2.4 GHz** (`AP_BAND=bg`). It is slower and more
+congested, but it carries further through clubhouse walls and works with older
+tablets. Throughput is not the constraint here — the game sends a few kilobytes
+per device per question — so range and compatibility win.
+
+If your room is small and every device is modern, 5 GHz is cleaner:
+
+```bash
+sudo AP_BAND=a ./scripts/network-mode.sh ap
+```
