@@ -13,23 +13,45 @@
  */
 
 :root {
-  --ink: #11161d;
-  --ink-2: #171f28;
-  --surface: #1c2530;
-  --surface-2: #243040;
-  --line: #334354;
-  --line-soft: #2a3542;
-  --text: #f3f6f9;
-  --text-dim: #a7b8c8;
-  --text-faint: #74879a;
+  /*
+   * Del Pueblo Phoenix, livecobblestone.com/del-pueblo. Taken from the site's
+   * own CSS custom properties rather than eyedropped from a screenshot:
+   *   --primary   rgb(244 125 57)  #f47d39   the orange on everything
+   *   --secondary rgb(22 43 83)    #162b53   the navy in the logo and pills
+   *   --accent    rgb(248 153 75)  #f8994b
+   * plus its theme set, of which --lt-blue #5ec4d4 and --br-green #8ec73d
+   * earn a place here.
+   *
+   * The site is white-on-light. This stays dark on purpose: the host screen is
+   * a projector in a clubhouse with the lights down, and a white field at that
+   * size is glare rather than brand. So the brand hues sit on a navy-black
+   * drawn from the same --secondary rather than on the old neutral slate.
+   */
+  --ink: #0a1322;
+  --ink-2: #0e1a2d;
+  --surface: #152440;
+  --surface-2: #1d3053;
+  --line: #2f4a73;
+  --line-soft: #223b5e;
+  --text: #f4f7fb;
+  --text-dim: #a8bdd8;
+  --text-faint: #7590b2;
 
-  --brass: #d9a84e;
-  --brass-deep: #a87d2c;
-  --correct: #52b06a;
-  --wrong: #d6584f;
+  /* Kept the --brass name: it is the accent slot, and renaming it would touch
+     every file for no behaviour change. It is the resort's orange now. */
+  --brass: #f47d39;
+  --brass-deep: #c05c22;
+  --navy: #162b53;
+  --correct: #7ab83f;
+  --wrong: #dc5a4d;
 
-  --a: #e0ad50;
-  --b: #46a6ae;
+  /* Answer slots keep four clearly separate hues, because colour is only one
+     of the three channels here and collapsing them into brand oranges would
+     break the other two. A and B move to the resort's orange and light blue;
+     C and D stay as they were, since the brand has no violet and no second
+     warm that is far enough from the orange. */
+  --a: #f9a04d;
+  --b: #5ec4d4;
   --c: #a98ccd;
   --d: #dc8370;
 
@@ -61,8 +83,8 @@ html, body {
 
 body {
   background-image:
-    radial-gradient(1200px 600px at 50% -10%, rgba(217,168,78,.09), transparent 70%),
-    radial-gradient(900px 500px at 10% 110%, rgba(70,166,174,.06), transparent 70%);
+    radial-gradient(1200px 600px at 50% -10%, rgba(244,125,57,.10), transparent 70%),
+    radial-gradient(900px 500px at 10% 110%, rgba(94,196,212,.07), transparent 70%);
   background-attachment: fixed;
 }
 
@@ -161,9 +183,9 @@ input:focus { border-color: var(--brass); outline: none; }
 .btn-primary {
   background: linear-gradient(180deg, var(--brass) 0%, var(--brass-deep) 100%);
   border-color: var(--brass-deep);
-  color: #1a1206;
+  color: #10203c;
 }
-.btn-danger { border-color: #6e2f2b; color: #f0a9a4; }
+.btn-danger { border-color: #76312c; color: #f3aca6; }
 .btn-ghost { background: transparent; }
 .btn-lg { min-height: 72px; font-size: 1.15rem; }
 .btn-sm { min-height: 44px; padding: 8px 14px; font-size: .9rem; }
@@ -225,7 +247,7 @@ input:focus { border-color: var(--brass); outline: none; }
   font-family: var(--serif);
   font-size: 1.4rem;
   font-weight: 700;
-  color: #14191f;
+  color: #0f1b30;
   background: var(--slot, var(--brass));
 }
 .badge[data-shape="circle"] { border-radius: 50%; }
@@ -254,7 +276,7 @@ input:focus { border-color: var(--brass); outline: none; }
   /* Width is set inline from the deadline; no transition so a host extending
      the clock doesn't animate backwards through a stale value. */
 }
-.timer.is-low > i { background: linear-gradient(90deg, var(--wrong), #a63a33); }
+.timer.is-low > i { background: linear-gradient(90deg, var(--wrong), #a8392f); }
 
 .timer-row { display: flex; align-items: center; gap: 14px; }
 .timer-count {
@@ -310,13 +332,13 @@ input:focus { border-color: var(--brass); outline: none; }
   font-size: .85rem;
   font-weight: 600;
 }
-.pill-brass { background: color-mix(in srgb, var(--brass) 18%, var(--surface)); border-color: var(--brass-deep); color: var(--brass); }
-/* While a bonus band is still live the value is worth looking at, so it reads
-   a shade hotter than the resting brass. No animation: this screen is held at
+.pill-brass { background: color-mix(in srgb, var(--brass) 10%, var(--ink-2)); border-color: var(--brass-deep); color: #f9a04d; }
+/* While a bonus band is still live the pill goes solid, which is how the
+   resort builds its own call-to-action pills. No animation: this is held at
    arm's length for twenty seconds and a pulsing number is a distraction. */
-.pill-live { background: color-mix(in srgb, var(--brass) 34%, var(--surface)); color: #ffe6ad; }
-.pill-ok { background: color-mix(in srgb, var(--correct) 18%, var(--surface)); border-color: #2f6b3d; color: #8fd79f; }
-.pill-bad { background: color-mix(in srgb, var(--wrong) 18%, var(--surface)); border-color: #6e2f2b; color: #f0a9a4; }
+.pill-live { background: var(--brass); border-color: var(--brass); color: var(--navy); font-weight: 700; }
+.pill-ok { background: color-mix(in srgb, var(--correct) 18%, var(--surface)); border-color: #4c7d26; color: #bfe08a; }
+.pill-bad { background: color-mix(in srgb, var(--wrong) 18%, var(--surface)); border-color: #76312c; color: #f3aca6; }
 
 .dots { display: flex; gap: 6px; flex-wrap: wrap; }
 .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--line); }
@@ -335,12 +357,12 @@ input:focus { border-color: var(--brass); outline: none; }
   background: var(--surface);
   border: 1px solid var(--line-soft);
 }
-.board-row.is-lead { border-color: var(--brass-deep); background: color-mix(in srgb, var(--brass) 10%, var(--surface)); }
+.board-row.is-lead { border-color: var(--brass); background: color-mix(in srgb, var(--brass) 7%, var(--surface-2)); }
 .board-rank { font-family: var(--serif); font-size: 1.3rem; color: var(--text-dim); text-align: center; }
 .board-name { font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .board-score { font-family: var(--mono); font-size: 1.3rem; font-variant-numeric: tabular-nums; }
 .board-delta { font-family: var(--mono); font-size: .95rem; min-width: 4ch; text-align: right; }
-.board-delta.up { color: #8fd79f; }
+.board-delta.up { color: #bfe08a; }
 .board-delta.flat { color: var(--text-faint); }
 
 /* ---------------------------------------------------------------- host */
@@ -382,7 +404,7 @@ input:focus { border-color: var(--brass); outline: none; }
   background: var(--surface);
   border: 1px solid var(--line-soft);
 }
-.rail-row.is-lead { border-color: var(--brass-deep); background: color-mix(in srgb, var(--brass) 12%, var(--surface)); }
+.rail-row.is-lead { border-color: var(--brass); background: color-mix(in srgb, var(--brass) 7%, var(--surface-2)); }
 .rail-rank { font-family: var(--serif); color: var(--text-dim); font-size: clamp(.95rem, 1.1vw, 1.3rem); }
 .rail-name {
   font-weight: 600;
@@ -508,7 +530,7 @@ input:focus { border-color: var(--brass); outline: none; }
   font-size: clamp(1.1rem, 1.9vw, 1.65rem);
   line-height: 1.45;
   color: var(--text);
-  background: color-mix(in srgb, var(--brass) 9%, var(--surface));
+  background: var(--surface-2);
   border-left: 5px solid var(--brass);
   border-radius: 0 var(--radius) var(--radius) 0;
   padding: clamp(16px, 2vw, 26px) clamp(18px, 2.4vw, 32px);
@@ -532,12 +554,12 @@ input:focus { border-color: var(--brass); outline: none; }
   padding: 14px 18px;
   border-radius: var(--radius);
   background: color-mix(in srgb, var(--correct) 16%, var(--surface));
-  border: 1px solid #2f6b3d;
+  border: 1px solid #4c7d26;
 }
 .warn {
   padding: 12px 16px;
   border-radius: var(--radius);
-  background: color-mix(in srgb, var(--brass) 14%, var(--surface));
+  background: color-mix(in srgb, var(--brass) 7%, var(--surface-2));
   border: 1px solid var(--brass-deep);
   font-size: .92rem;
 }
@@ -610,7 +632,7 @@ input:focus { border-color: var(--brass); outline: none; }
   font-weight: 600;
 }
 .chip[aria-pressed="true"] {
-  background: color-mix(in srgb, var(--brass) 20%, var(--surface));
+  background: color-mix(in srgb, var(--brass) 10%, var(--surface-2));
   border-color: var(--brass-deep);
   color: var(--brass);
 }
@@ -644,7 +666,7 @@ input:focus { border-color: var(--brass); outline: none; }
 }
 .draft-option.is-answer {
   background: color-mix(in srgb, var(--correct) 18%, var(--ink));
-  border-color: #2f6b3d;
+  border-color: #4c7d26;
   font-weight: 600;
 }
 
@@ -652,7 +674,7 @@ input:focus { border-color: var(--brass); outline: none; }
   font-size: .9rem;
   padding: 10px 14px;
   border-radius: 8px;
-  background: color-mix(in srgb, var(--brass) 12%, var(--surface));
+  background: color-mix(in srgb, var(--brass) 7%, var(--surface-2));
   border: 1px solid var(--brass-deep);
 }
 
