@@ -100,6 +100,45 @@ export function useGame<S extends GameState>(role: S['role'], options: { enabled
 }
 
 /**
+ * Hold the screen awake for as long as this component is mounted.
+ *
+ * Every screen in this game is a screen somebody is looking at and nobody is
+ * touching. The big screen sits untouched through a ten-minute break and then
+ * through a twenty-second question; the MC's phone sits in a hand that is
+ * holding a microphone. A device that sleeps there looks exactly like the app
+ * crashing, and the room blames the app.
+ *
+ * The lock is dropped by the browser whenever the page is hidden, so it has to
+ * be taken again on every return to visibility rather than only once on mount.
+ *
+ * Measured caveat: the API is secure-context only. Served from a LAN IP over
+ * plain http, which is how every device in the room connects,
+ * navigator.wakeLock is undefined and this is a no-op. It works when the page
+ * is opened on the machine serving it, via localhost, which is the practical
+ * way to keep the big screen awake. Everything else is a device setting.
+ */
+export function useWakeLock() {
+  useEffect(() => {
+    let lock: { release: () => Promise<void> } | undefined;
+    const request = async () => {
+      try {
+        const wakeLock = (navigator as Navigator & { wakeLock?: { request: (t: string) => Promise<typeof lock> } }).wakeLock;
+        if (wakeLock) lock = await wakeLock.request('screen');
+      } catch {
+        /* Denied or unsupported. Nothing to do but let the device sleep. */
+      }
+    };
+    void request();
+    const onVisible = () => { if (document.visibilityState === 'visible') void request(); };
+    document.addEventListener('visibilitychange', onVisible);
+    return () => {
+      document.removeEventListener('visibilitychange', onVisible);
+      void lock?.release();
+    };
+  }, []);
+}
+
+/**
  * Seconds remaining against an absolute server deadline.
  *
  * Counting locally rather than streaming ticks keeps the bar smooth on a

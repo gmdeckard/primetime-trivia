@@ -2,7 +2,7 @@ import { render } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
 import type { EntryKind, PlayerState } from '../../shared/protocol';
 import './shared/styles.css';
-import { useCountdown, useGame } from './shared/useGame';
+import { useCountdown, useGame, useWakeLock } from './shared/useGame';
 import { pointsAvailable } from '../../shared/protocol';
 import { AutoAdvance, Badge, Board, ConnBanner, Keypad, Timer, Toast } from './shared/ui';
 
@@ -301,24 +301,7 @@ function App() {
   const { state, status, send, toast, dismissToast } = useGame<PlayerState>('player');
 
   // The screen must not sleep mid-round on a shared tablet.
-  useEffect(() => {
-    let lock: { release: () => Promise<void> } | undefined;
-    const request = async () => {
-      try {
-        const wakeLock = (navigator as Navigator & { wakeLock?: { request: (t: string) => Promise<typeof lock> } }).wakeLock;
-        if (wakeLock) lock = await wakeLock.request('screen');
-      } catch {
-        /* Unsupported on older iPads; the host reminds people to tap to wake. */
-      }
-    };
-    void request();
-    const onVisible = () => { if (document.visibilityState === 'visible') void request(); };
-    document.addEventListener('visibilitychange', onVisible);
-    return () => {
-      document.removeEventListener('visibilitychange', onVisible);
-      void lock?.release();
-    };
-  }, []);
+  useWakeLock();
 
   if (!state) {
     return (

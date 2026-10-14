@@ -262,7 +262,11 @@ wss.on('connection', (socket) => {
   socket.on('error', () => clients.delete(client));
 });
 
-// Drop sockets that stopped responding, so the roster reflects the room.
+// Keep the connection warm through a long gap. This pings; it deliberately
+// does NOT reap. A ten-minute break is an idle big screen and an idle MC
+// phone, and a screen that gets closed for being quiet looks to the room like
+// the app crashed. The cost is that a tablet carried out of the building
+// stays on the roster until its socket actually drops.
 const heartbeat = setInterval(() => {
   for (const client of clients) {
     if (client.socket.readyState === client.socket.OPEN) client.socket.ping();

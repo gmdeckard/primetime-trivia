@@ -2,7 +2,7 @@ import { render } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
 import type { HostState } from '../../../shared/protocol';
 import '../shared/styles.css';
-import { useCountdown, useGame, useSpeech } from '../shared/useGame';
+import { useCountdown, useGame, useSpeech, useWakeLock } from '../shared/useGame';
 import { pointsAvailable } from '../../../shared/protocol';
 import { AutoAdvance, Badge, Board, Timer, Toast } from '../shared/ui';
 
@@ -144,6 +144,8 @@ function Podium({ state, title }: { state: HostState; title: string }) {
 }
 
 function App() {
+  // The big screen sits untouched through a ten-minute break.
+  useWakeLock();
   const { state, send: _send, toast, dismissToast } = useGame<HostState>('host');
   const speak = useSpeech(!!state?.config.readAloud);
 

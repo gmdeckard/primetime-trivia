@@ -2,7 +2,7 @@ import { render } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
 import type { ControlState, GameConfig } from '../../../shared/protocol';
 import '../shared/styles.css';
-import { useCountdown, useGame } from '../shared/useGame';
+import { useCountdown, useGame, useWakeLock } from '../shared/useGame';
 import { AutoAdvance, Board, ConnBanner, Toast } from '../shared/ui';
 
 /**
@@ -379,6 +379,8 @@ function Teams({ state, send }: { state: ControlState; send: ReturnType<typeof u
 }
 
 function App() {
+  // The MC is holding a microphone, not tapping this.
+  useWakeLock();
   const [token, setToken] = useState(() => localStorage.getItem('primetime.controlToken'));
   // No token means no socket. Connecting anyway gets us closed with 4001 on
   // every attempt, which is a reconnect loop with nothing to show for it.
