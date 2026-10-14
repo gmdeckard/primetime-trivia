@@ -81,6 +81,14 @@ npm run build
 npm start
 ```
 
+Or use the wrappers, which work the same whether or not the boot service is
+installed:
+
+```bash
+./start-server.sh
+./stop-server.sh
+```
+
 The terminal prints everything you need:
 
 ```

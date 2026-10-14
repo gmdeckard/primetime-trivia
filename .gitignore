@@ -7,3 +7,7 @@ data/
 
 # gstack browse artifacts
 .gstack/
+
+# local run artifacts
+server.log
+.server.pid
