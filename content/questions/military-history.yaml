@@ -270,3 +270,66 @@ questions:
     fact: Chartwell was Churchill's home and Chequers the prime minister's official country residence.
     era: 1940s
     tags: [wwii, intelligence]
+
+  - id: mil-031
+    difficulty: 3
+    prompt: Which Civil War battle was the bloodiest single day in American history?
+    answer: Antietam
+    distractors: [Gettysburg, Shiloh, Chancellorsville]
+    fact: About 23,000 casualties in one September day in 1862. Gettysburg cost more in total but took three days to do it.
+
+  - id: mil-032
+    difficulty: 3
+    prompt: At which 1415 battle did English longbowmen rout a far larger French army?
+    answer: Agincourt
+    distractors: [Crecy, Poitiers, Bosworth]
+    fact: Crecy and Poitiers were earlier English victories in the same long war, which is exactly why they sound right.
+
+  - id: mil-033
+    difficulty: 3
+    prompt: Which tank was built in the greatest numbers during the Second World War?
+    answer: The T-34
+    distractors: [The Sherman, The Panzer IV, The Churchill]
+    fact: The Sherman came second. German designers who saw a T-34 in 1941 went back and redrew their own tanks around its sloped armour.
+
+  - id: mil-034
+    difficulty: 3
+    prompt: Which strait did the Gallipoli campaign set out to force open?
+    answer: The Dardanelles
+    distractors: [The Bosphorus, The Strait of Otranto, The Kerch Strait]
+    fact: The aim was Constantinople and a supply route to Russia. Churchill took the blame and resigned from the Admiralty over it.
+
+  - id: mil-035
+    difficulty: 4
+    prompt: Which Japanese admiral planned the attack on Pearl Harbor?
+    answer: Isoroku Yamamoto
+    distractors: [Chuichi Nagumo, Tamon Yamaguchi, Mineichi Koga]
+    fact: He had studied at Harvard and argued against war with America, then planned its opening blow. Codebreakers arranged his death in 1943.
+
+  - id: mil-036
+    difficulty: 4
+    prompt: Which 1805 battle secured British naval supremacy for a century?
+    answer: Trafalgar
+    distractors: [The Nile, Copenhagen, Camperdown]
+    fact: All four were real Royal Navy victories of the period, and Nelson had a hand in three of them.
+
+  - id: mil-037
+    difficulty: 4
+    prompt: What kind of weapon was the German V-2?
+    answer: A ballistic missile
+    distractors: [A jet fighter, A cruise missile, A long-range gun]
+    fact: The V-1 was the cruise missile, the buzz bomb you could hear coming. The V-2 arrived faster than sound, so the blast came first.
+
+  - id: mil-038
+    difficulty: 4
+    prompt: What did the Schlieffen Plan propose?
+    answer: A fast sweep through Belgium to knock out France
+    distractors: [A naval blockade of Britain, A defensive line along the Rhine, A joint offensive with Austria against Russia]
+    fact: It assumed Russia would take six weeks to mobilise. Russia moved faster than that and the plan came apart at the Marne.
+
+  - id: mil-039
+    difficulty: 4
+    prompt: At which battle did a small Greek force hold a mountain pass against the Persians?
+    answer: Thermopylae
+    distractors: [Marathon, Salamis, Plataea]
+    fact: All four belong to the same Persian wars. Salamis was the naval victory and Plataea is what actually ended the invasion.
