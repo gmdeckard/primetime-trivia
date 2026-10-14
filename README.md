@@ -26,10 +26,19 @@ and a distinct shape:
 
 ![The host screen during a question](docs/screenshots/07-host-question.png)
 
+Live standings sit beside the question all round, with a filled dot for each
+team that has locked an answer — so the room can see the race without waiting
+for the end of the round.
+
 The reveal, where the evening actually happens — the answer, and something
 worth saying about it:
 
 ![The host screen revealing an answer](docs/screenshots/13-host-reveal.png)
+
+Then the last few seconds of the gap belong to the scoreboard, so every
+question ends on where everyone stands:
+
+![The host screen showing standings between questions](docs/screenshots/15-host-standings-gap.png)
 
 A team's tablet and the MC's phone. The MC always has the answer and one
 obvious next button:

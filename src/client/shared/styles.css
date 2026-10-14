@@ -341,6 +341,63 @@ input:focus { border-color: var(--brass); outline: none; }
 
 /* ---------------------------------------------------------------- host */
 
+/* Question on the left, standings down the right. The rail lives in space the
+   question screen was wasting anyway, and it answers the one thing the room
+   wants to know all round: are we winning? */
+.host-stage {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(20px, 2.5vw, 48px);
+  min-height: 0;
+}
+.host-stage.has-rail { grid-template-columns: minmax(0, 1fr) clamp(240px, 19vw, 360px); }
+
+.rail {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(6px, 0.9vh, 12px);
+  justify-content: center;
+  min-width: 0;
+}
+.rail-head {
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--brass);
+  margin-bottom: 4px;
+}
+.rail-row {
+  display: grid;
+  grid-template-columns: 1.6rem minmax(0, 1fr) auto 0.9rem;
+  align-items: center;
+  gap: 10px;
+  padding: clamp(8px, 1.1vh, 14px) clamp(10px, 0.9vw, 16px);
+  border-radius: 12px;
+  background: var(--surface);
+  border: 1px solid var(--line-soft);
+}
+.rail-row.is-lead { border-color: var(--brass-deep); background: color-mix(in srgb, var(--brass) 12%, var(--surface)); }
+.rail-rank { font-family: var(--serif); color: var(--text-dim); font-size: clamp(.95rem, 1.1vw, 1.3rem); }
+.rail-name {
+  font-weight: 600;
+  font-size: clamp(.95rem, 1.1vw, 1.35rem);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.rail-score { font-family: var(--mono); font-size: clamp(1rem, 1.2vw, 1.5rem); font-variant-numeric: tabular-nums; }
+.rail-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--line); justify-self: end; }
+.rail-dot.is-in { background: var(--brass); }
+.rail-foot { font-size: .8rem; color: var(--text-faint); margin-top: 6px; }
+
+/* Narrow or portrait screens drop the rail rather than squeeze the question. */
+@media (max-aspect-ratio: 1/1), (max-width: 1100px) {
+  .host-stage.has-rail { grid-template-columns: 1fr; }
+  .rail { display: none; }
+}
+
 .host {
   min-height: 100dvh;
   display: flex;

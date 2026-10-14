@@ -1,5 +1,5 @@
 import { render } from 'preact';
-import { useEffect } from 'preact/hooks';
+import { useEffect, useState } from 'preact/hooks';
 import type { HostState } from '../../../shared/protocol';
 import '../shared/styles.css';
 import { useCountdown, useGame, useSpeech } from '../shared/useGame';
@@ -75,6 +75,40 @@ function AnsweredStrip({ state }: { state: HostState }) {
   );
 }
 
+/**
+ * Live standings beside the question.
+ *
+ * Shows a filled dot for a team that has locked an answer, so the MC can see
+ * who is still thinking without looking at their phone, and the room can see
+ * the race without waiting for the end of the round.
+ */
+function StandingsRail({ state }: { state: HostState }) {
+  const rows = state.scoreboard;
+  if (rows.length < 2) return null;
+  // Past about ten the rows get too small to read across a room; the full
+  // scoreboard between questions covers everyone.
+  const shown = rows.slice(0, 10);
+  const live = state.phase === 'question';
+
+  return (
+    <div class="rail">
+      <div class="rail-head">Standings</div>
+      {shown.map((row) => (
+        <div key={row.teamId} class={`rail-row${row.rank === 1 && row.score > 0 ? ' is-lead' : ''}`}>
+          <span class="rail-rank">{row.rank}</span>
+          <span class="rail-name">{row.name}</span>
+          <span class="rail-score">{row.score}</span>
+          <span class={`rail-dot${state.answeredTeamIds.includes(row.teamId) ? ' is-in' : ''}`} />
+        </div>
+      ))}
+      {rows.length > shown.length && (
+        <div class="rail-foot">+{rows.length - shown.length} more</div>
+      )}
+      {live && <div class="rail-foot">● answered</div>}
+    </div>
+  );
+}
+
 function Podium({ state, title }: { state: HostState; title: string }) {
   const rows = state.scoreboard;
   const winner = rows[0];
@@ -116,11 +150,39 @@ function App() {
   // Hooks run before any early return, so the countdown can't be conditional.
   const { secondsLeft, fraction } = useCountdown(state?.deadline, state?.config.secondsPerQuestion ?? 1);
 
+  // Drives the switch from the answer to the scoreboard during the gap between
+  // questions. Purely a presentation decision — the engine still owns when the
+  // game actually moves, and both are derived from the same deadline, so they
+  // never disagree.
+  const [tick, setTick] = useState(() => Date.now());
+  useEffect(() => {
+    if (!state?.autoAdvanceAt || state.held) return;
+    const id = setInterval(() => setTick(Date.now()), 200);
+    return () => clearInterval(id);
+  }, [state?.autoAdvanceAt, state?.held]);
+
   if (!state) {
     return <div class="host center"><p class="muted">Starting up…</p></div>;
   }
 
   const q = state.question;
+
+  // The answer and its fact get the first part of the gap; the scoreboard takes
+  // the last few seconds, so each question ends on where everyone now stands.
+  const gapMs = state.config.nextQuestionDelaySeconds * 1000;
+  const standingsWindowMs = Math.min(5000, gapMs * 0.45);
+  const showStandings =
+    state.phase === 'reveal' &&
+    !!state.autoAdvanceAt &&
+    !state.held &&
+    state.scoreboard.length > 1 &&
+    state.autoAdvanceAt - tick <= standingsWindowMs;
+
+  // No point showing the rail next to a full scoreboard.
+  const showRail =
+    !showStandings &&
+    state.scoreboard.length > 1 &&
+    (state.phase === 'question' || state.phase === 'locked' || state.phase === 'reveal');
 
   return (
     <div class="host">
@@ -187,6 +249,23 @@ function App() {
 
       {(state.phase === 'question' || state.phase === 'locked' || state.phase === 'reveal' ||
         state.phase === 'wager_question' || state.phase === 'wager_reveal') && q && (
+        <div class={`host-stage${showRail ? ' has-rail' : ''}`}>
+        {showStandings ? (
+          <div class="host-body">
+            <div class="center">
+              <div class="eyebrow">Standings</div>
+            </div>
+            <div style={{ maxWidth: '1000px', margin: '0 auto', width: '100%' }}>
+              <Board rows={state.scoreboard} limit={10} />
+            </div>
+            <AutoAdvance
+              at={state.autoAdvanceAt}
+              total={state.config.nextQuestionDelaySeconds}
+              label="Next question in"
+              held={state.held}
+            />
+          </div>
+        ) : (
         <div class="host-body">
           {state.deadline && (
             <div style={{ maxWidth: '1100px', margin: '0 auto', width: '100%' }}>
@@ -230,6 +309,9 @@ function App() {
               />
             </>
           )}
+        </div>
+        )}
+        {showRail && <StandingsRail state={state} />}
         </div>
       )}
 

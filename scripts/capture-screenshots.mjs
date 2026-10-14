@@ -162,6 +162,10 @@ try {
   await shoot(host, '13-host-reveal');
   await shoot(ann, '14-player-reveal');
 
+  // The big screen hands the last seconds of the gap over to the scoreboard.
+  await pause(host, 6500);
+  await shoot(host, '15-host-standings-gap');
+
   // --- run the round out to a scoreboard
   for (let i = 0; i < 40; i++) {
     const phase = await mc.evaluate(() => document.querySelector('.pill-brass')?.textContent ?? '');
@@ -176,8 +180,8 @@ try {
     await pause(mc, 420);
   }
   await pause(host, 900);
-  await shoot(host, '15-host-scoreboard');
-  await shoot(ann, '16-player-standings');
+  await shoot(host, '16-host-scoreboard');
+  await shoot(ann, '17-player-standings');
 
   console.log('CONSOLE_ERRORS=' + JSON.stringify(errors, null, 1));
 

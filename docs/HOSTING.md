@@ -101,6 +101,12 @@ not need to touch anything for a whole round.
 Every screen shows the same countdown — "Next question in 7" — so the room
 knows it is still moving and you know exactly how long you have to talk.
 
+The big screen keeps **live standings** beside the question, with a dot that
+fills in as each team locks an answer. You can see who is still thinking
+without looking at your phone. Then for the last few seconds before the next
+question, the screen gives the whole wall to the scoreboard, so every question
+ends on where everyone stands.
+
 **Hold** pauses it whenever you want to tell a story, settle an argument, or
 wait for someone to come back from the bar. Press it again to carry on from
 where you were. The big button also still works: tapping it skips the rest of

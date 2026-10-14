@@ -91,7 +91,7 @@ export function Board({
   return (
     <div class="board">
       {shown.map((row) => (
-        <div key={row.teamId} class={`board-row${row.rank === 1 ? ' is-lead' : ''}`}>
+        <div key={row.teamId} class={`board-row${row.rank === 1 && row.score > 0 ? ' is-lead' : ''}`}>
           <div class="board-rank">{row.rank}</div>
           <div class="board-name">{row.name}</div>
           <div class="board-score tabular">{row.score}</div>
