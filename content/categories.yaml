@@ -110,3 +110,23 @@
   blurb: Expeditions, voyages and the people who did not come back.
   sample: Poles, passages, shipwrecks
 
+- id: american-history
+  name: American History
+  blurb: The founding through to about 1900.
+  sample: Colonies, the Constitution, the Civil War
+
+- id: world-history
+  name: World History
+  blurb: Everything outside America, up to about 1900.
+  sample: Empires, treaties, turning points
+
+- id: invention-tech
+  name: Invention & Technology
+  blurb: What got built, and who got the credit instead.
+  sample: Patents, firsts, happy accidents
+
+- id: transportation
+  name: Transportation
+  blurb: Road, rail and sea, and the people who laid them out.
+  sample: Cars, locomotives, liners
+

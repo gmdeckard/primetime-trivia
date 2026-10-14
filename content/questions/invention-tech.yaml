@@ -1,0 +1,180 @@
+category: invention-tech
+
+# What got built, who built it, and who got the credit instead. Nothing here
+# needs knowledge of anything after about 1995.
+
+questions:
+  - id: inv-001
+    difficulty: 2
+    prompt: Who was granted the US patent for the telephone in 1876?
+    answer: Alexander Graham Bell
+    distractors: [Thomas Edison, Elisha Gray, Guglielmo Marconi]
+    fact: Elisha Gray filed a caveat on the very same day, and who arrived first has been argued about ever since.
+
+  - id: inv-002
+    difficulty: 2
+    prompt: What did Johannes Gutenberg bring to Europe around 1440?
+    answer: Printing with movable type
+    distractors: [Paper making, The windmill, The mechanical clock]
+    fact: Movable type already existed in Korea and China. His real contribution was the press itself and an alloy that cast clean letters.
+
+  - id: inv-003
+    difficulty: 2
+    prompt: What did Edison's Menlo Park laboratory perfect in 1879?
+    answer: The incandescent light bulb
+    distractors: [The telephone, The phonograph, The electric motor]
+    fact: He did not invent the bulb. He found a filament that lasted long enough to sell. The phonograph was genuinely his, two years earlier.
+
+  - id: inv-004
+    difficulty: 2
+    prompt: Which material did Charles Goodyear learn to vulcanise in 1839?
+    answer: Rubber
+    distractors: [Celluloid, Bakelite, Nylon]
+    fact: He got there by dropping a mixture on a hot stove. He died in debt, and the tyre company simply borrowed his name forty years later.
+
+  - id: inv-005
+    difficulty: 2
+    prompt: Who patented the cotton gin in 1794?
+    answer: Eli Whitney
+    distractors: [Cyrus McCormick, John Deere, Samuel Slater]
+    fact: By making short-staple cotton profitable it entrenched slavery rather than easing it, which was the opposite of what he expected.
+
+  - id: inv-006
+    difficulty: 3
+    prompt: At which laboratory was the transistor invented in 1947?
+    answer: Bell Labs
+    distractors: [RCA Laboratories, General Electric Research, MIT Radiation Laboratory]
+    fact: Bardeen, Brattain and Shockley shared the 1956 Nobel. Every one of the wrong answers was a serious rival lab at the time.
+
+  - id: inv-007
+    difficulty: 3
+    prompt: Who transmitted the first transatlantic radio signal in 1901?
+    answer: Guglielmo Marconi
+    distractors: [Nikola Tesla, Heinrich Hertz, Lee de Forest]
+    fact: The signal was the letter S in Morse. A US court upheld Tesla's radio patents decades afterwards, long after both men were past caring.
+
+  - id: inv-008
+    difficulty: 3
+    prompt: Whose improvements turned the steam engine into a practical machine?
+    answer: James Watt
+    distractors: [Thomas Newcomen, Richard Trevithick, George Stephenson]
+    fact: Newcomen's engine came first and worked, badly. Watt added a separate condenser and cut the fuel bill by three quarters.
+
+  - id: inv-009
+    difficulty: 3
+    prompt: Which process did Chester Carlson invent, leading to the office photocopier?
+    answer: Xerography
+    distractors: [The mimeograph, The fax machine, Offset lithography]
+    fact: He was turned down by more than twenty companies, IBM and General Electric among them, before a small outfit in Rochester took it on.
+
+  - id: inv-010
+    difficulty: 3
+    prompt: Who demonstrated the first fully electronic television system, in 1927?
+    answer: Philo Farnsworth
+    distractors: [Vladimir Zworykin, John Logie Baird, Lee de Forest]
+    fact: Baird's system was mechanical and Zworykin worked for RCA, which fought Farnsworth through the patent courts for the better part of a decade.
+
+  - id: inv-011
+    difficulty: 3
+    prompt: Which wartime British machine was built to break the Lorenz cipher?
+    answer: Colossus
+    distractors: [The Bombe, Enigma, Ultra]
+    fact: Enigma was the German machine and the Bombe attacked it. Colossus has a good claim to being the first programmable electronic computer, and was broken up in secret.
+
+  - id: inv-012
+    difficulty: 3
+    prompt: Who built the first commercially successful mechanical reaper?
+    answer: Cyrus McCormick
+    distractors: [John Deere, Eli Whitney, Jethro Tull]
+    fact: Deere's contribution was the steel plough, which shed the sticky prairie soil that clogged iron ones.
+
+  - id: inv-013
+    difficulty: 3
+    prompt: Which synthetic fibre did DuPont introduce in 1938?
+    answer: Nylon
+    distractors: [Rayon, Polyester, Acrylic]
+    fact: It went into stockings first and into parachutes a few years later, when the stockings abruptly became unpatriotic.
+
+  - id: inv-014
+    difficulty: 3
+    prompt: What did Willis Carrier invent in 1902?
+    answer: Air conditioning
+    distractors: [The electric fan, Mechanical refrigeration, The heat pump]
+    fact: He built it to control humidity in a printing plant. Cooling people was a side effect, and the population of the Sun Belt is downstream of it.
+
+  - id: inv-015
+    difficulty: 3
+    prompt: What did Percy Spencer discover by accident while working on radar in 1945?
+    answer: The microwave oven
+    distractors: [The transistor, Radar ranging, The induction hob]
+    fact: A chocolate bar melted in his pocket while he stood near a magnetron. He tried popcorn next, and then an egg, which exploded.
+
+  - id: inv-016
+    difficulty: 3
+    prompt: Which network was the direct ancestor of the internet?
+    answer: ARPANET
+    distractors: [Usenet, Ethernet, Telenet]
+    fact: The first message was meant to be the word LOGIN. The system crashed after two letters, so the first word ever sent was LO.
+
+  - id: inv-017
+    difficulty: 3
+    prompt: Who built the water-powered spinning frame that moved cloth-making into factories?
+    answer: Richard Arkwright
+    distractors: [James Hargreaves, Samuel Crompton, Edmund Cartwright]
+    fact: Hargreaves built the spinning jenny and Crompton the mule, which combined the two. Arkwright's contribution was really the factory itself.
+
+  - id: inv-018
+    difficulty: 4
+    prompt: Who held the American patent for the first practical sewing machine?
+    answer: Elias Howe
+    distractors: [Isaac Singer, Walter Hunt, Allen Wilson]
+    fact: Singer built the better machine and the far bigger company, and still lost the patent suit to Howe and had to pay him royalties.
+
+  - id: inv-019
+    difficulty: 4
+    prompt: Which company produced the first commercial microprocessor, in 1971?
+    answer: Intel
+    distractors: [Texas Instruments, Fairchild Semiconductor, Motorola]
+    fact: The 4004 was designed to order for a Japanese calculator firm. Intel's founders had come from Fairchild a few years before.
+
+  - id: inv-020
+    difficulty: 4
+    prompt: What did the Hungarian journalist Laszlo Biro patent in 1938?
+    answer: The ballpoint pen
+    distractors: [The fountain pen, The felt-tip pen, Correction fluid]
+    fact: The RAF bought them in quantity because they kept working at altitude, where a fountain pen leaks all over the navigator.
+
+  - id: inv-021
+    difficulty: 4
+    prompt: Which 1839 process produced the first widely used photographs?
+    answer: The daguerreotype
+    distractors: [The calotype, The ambrotype, The tintype]
+    fact: Talbot's calotype arrived the same year and made a negative, which is what photography actually descends from. The daguerreotype was a one-off on silvered metal.
+
+  - id: inv-022
+    difficulty: 4
+    prompt: Who built a punched-card machine to count the 1890 US census?
+    answer: Herman Hollerith
+    distractors: [Charles Babbage, Vannevar Bush, Howard Aiken]
+    fact: The 1880 census had taken most of a decade to tabulate. His company was one of those later merged into IBM.
+
+  - id: inv-023
+    difficulty: 4
+    prompt: What did Leo Baekeland synthesise in 1907?
+    answer: Bakelite
+    distractors: [Celluloid, Vulcanite, Polystyrene]
+    fact: Celluloid came earlier but was made from plant cellulose. Bakelite was the first plastic built from nothing that had ever been alive.
+
+  - id: inv-024
+    difficulty: 4
+    prompt: Which instrument did John Harrison perfect to solve the longitude problem?
+    answer: The marine chronometer
+    distractors: [The sextant, The astrolabe, The chip log]
+    fact: A clock that kept time at sea gives longitude directly. The Board of Longitude spent decades finding reasons not to pay him.
+
+  - id: inv-025
+    difficulty: 4
+    prompt: Which 1856 process first made steel cheap enough to build with?
+    answer: The Bessemer process
+    distractors: [The open hearth process, The crucible process, The puddling process]
+    fact: Blowing cold air through molten iron burns the carbon out and heats it further, which nobody believed until they saw it.

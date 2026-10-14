@@ -1,0 +1,180 @@
+category: world-history
+
+# Everything outside the United States, up to about 1900. The Twentieth
+# Century takes it from there and American History has the colonies on.
+
+questions:
+  - id: wld-001
+    difficulty: 2
+    prompt: Which empire was ruled from Constantinople after Rome fell?
+    answer: The Byzantine Empire
+    distractors: [The Ottoman Empire, The Holy Roman Empire, The Persian Empire]
+    fact: They called themselves Romans the whole time. Byzantine is a label historians applied centuries later.
+
+  - id: wld-002
+    difficulty: 2
+    prompt: Which wall did the Romans build across northern Britain?
+    answer: Hadrian's Wall
+    distractors: [The Antonine Wall, Offa's Dyke, The Great Wall]
+    fact: The Antonine Wall is also real and lies further north. The Romans held it for about twenty years and then fell back.
+
+  - id: wld-003
+    difficulty: 2
+    prompt: Which document did King John seal at Runnymede in 1215?
+    answer: Magna Carta
+    distractors: [The Bill of Rights, The Petition of Right, The Act of Union]
+    fact: The Pope annulled it within months at John's request. It only mattered because later kings kept being made to reissue it.
+
+  - id: wld-004
+    difficulty: 2
+    prompt: Which French emperor was defeated at Waterloo?
+    answer: Napoleon Bonaparte
+    distractors: [Louis Napoleon, Charles X, Louis Philippe]
+    fact: Louis Napoleon was his nephew and made himself emperor 37 years later, which is why the name alone is not enough.
+
+  - id: wld-005
+    difficulty: 2
+    prompt: Which epidemic killed perhaps a third of Europe in the 1340s?
+    answer: The Black Death
+    distractors: [Smallpox, Cholera, Typhus]
+    fact: It came ashore at Mediterranean ports and crossed the whole continent in about four years.
+
+  - id: wld-006
+    difficulty: 3
+    prompt: Which city did the Mongols sack in 1258, ending the Abbasid Caliphate?
+    answer: Baghdad
+    distractors: [Damascus, Cairo, Samarkand]
+    fact: The libraries went into the Tigris. The river is said to have run black with ink and then red, though that may be a later flourish.
+
+  - id: wld-007
+    difficulty: 3
+    prompt: Which settlement ended the Thirty Years War?
+    answer: The Peace of Westphalia
+    distractors: [The Treaty of Utrecht, The Peace of Augsburg, The Treaty of Vienna]
+    fact: Signed in 1648, and usually treated as the beginning of the modern system of sovereign states minding their own business.
+
+  - id: wld-008
+    difficulty: 3
+    prompt: Which Chinese dynasty built most of the Great Wall as it stands today?
+    answer: The Ming
+    distractors: [The Qin, The Han, The Qing]
+    fact: Qin built the first version centuries earlier out of rammed earth. The stone wall in the photographs is Ming work.
+
+  - id: wld-009
+    difficulty: 3
+    prompt: Which battle in 1066 ended Anglo-Saxon rule in England?
+    answer: Hastings
+    distractors: [Stamford Bridge, Agincourt, Bosworth Field]
+    fact: Harold had beaten a Norwegian invasion at Stamford Bridge, 250 miles north, three weeks earlier, and marched his army back down.
+
+  - id: wld-010
+    difficulty: 3
+    prompt: Which Mughal emperor built the Taj Mahal?
+    answer: Shah Jahan
+    distractors: [Akbar, Aurangzeb, Babur]
+    fact: It is a tomb for his wife Mumtaz Mahal. His son Aurangzeb deposed him, and he spent his last years under guard within sight of it.
+
+  - id: wld-011
+    difficulty: 3
+    prompt: Who swore the Tennis Court Oath in 1789?
+    answer: The Third Estate
+    distractors: [The Estates-General, The National Convention, The Directory]
+    fact: They swore not to disperse until France had a constitution. They had been locked out of their usual hall, possibly only for redecoration.
+
+  - id: wld-012
+    difficulty: 3
+    prompt: Which European power colonised Brazil?
+    answer: Portugal
+    distractors: [Spain, France, The Netherlands]
+    fact: A papal-brokered line drawn down the Atlantic in 1494 put that corner of South America on the Portuguese side, before anyone knew it was there.
+
+  - id: wld-013
+    difficulty: 3
+    prompt: Which war between Britain and China ended with Hong Kong ceded to Britain?
+    answer: The First Opium War
+    distractors: [The Boxer Rebellion, The Taiping Rebellion, The Second Sino-Japanese War]
+    fact: Britain went to war to keep selling a drug that China had banned, which was controversial in Parliament at the time too.
+
+  - id: wld-014
+    difficulty: 3
+    prompt: Which tsar founded St Petersburg and forced Russia to modernise?
+    answer: Peter the Great
+    distractors: [Ivan the Terrible, Catherine the Great, Alexander I]
+    fact: He worked in Dutch and English shipyards under an assumed name to learn the trade, at six foot seven and not remotely in disguise.
+
+  - id: wld-015
+    difficulty: 3
+    prompt: Which empire did Suleiman the Magnificent rule?
+    answer: The Ottoman Empire
+    distractors: [The Safavid Empire, The Mughal Empire, The Byzantine Empire]
+    fact: His contemporaries were Charles V and Henry VIII. He reached the walls of Vienna in 1529 and was stopped partly by the weather.
+
+  - id: wld-016
+    difficulty: 3
+    prompt: Which 1884 conference carved up Africa between the European powers?
+    answer: The Berlin Conference
+    distractors: [The Congress of Vienna, The Congress of Berlin, The Hague Convention]
+    fact: Not one African was present. The Congress of Berlin six years earlier was a different meeting about the Balkans.
+
+  - id: wld-017
+    difficulty: 3
+    prompt: Which civilisation built Machu Picchu?
+    answer: The Inca
+    distractors: [The Maya, The Aztec, The Nazca]
+    fact: The Spanish never found it, which is the only reason it is still standing.
+
+  - id: wld-018
+    difficulty: 4
+    prompt: Which Byzantine emperor had Roman law codified?
+    answer: Justinian
+    distractors: [Constantine, Theodosius, Basil II]
+    fact: The resulting code is the root of most European legal systems, and of a fair amount of American law through Louisiana.
+
+  - id: wld-019
+    difficulty: 4
+    prompt: Which Frankish leader commanded at the Battle of Tours in 732?
+    answer: Charles Martel
+    distractors: [Charlemagne, Pepin the Short, Clovis]
+    fact: Pepin was his son and Charlemagne his grandson, so the whole family is on the board.
+
+  - id: wld-020
+    difficulty: 4
+    prompt: Which emperor waited barefoot in the snow at Canossa in 1077?
+    answer: Henry IV
+    distractors: [Frederick Barbarossa, Otto I, Charles V]
+    fact: Three days outside the castle where Pope Gregory VII was staying, to have his excommunication lifted. He took his revenge later.
+
+  - id: wld-021
+    difficulty: 4
+    prompt: Which royal house ruled France from 1328 to 1589?
+    answer: The Valois
+    distractors: [The Bourbons, The Carolingians, The Plantagenets]
+    fact: The Bourbons followed, starting with Henry IV, who converted to Catholicism on the grounds that Paris was worth a mass.
+
+  - id: wld-022
+    difficulty: 4
+    prompt: Which policy kept Japan closed to foreigners from the 1630s until 1853?
+    answer: Sakoku
+    distractors: [The Meiji Restoration, The Sengoku period, The Heian period]
+    fact: Dutch traders were allowed a single artificial island in Nagasaki harbour throughout. Commodore Perry's warships ended it.
+
+  - id: wld-023
+    difficulty: 4
+    prompt: Which West African empire did Mansa Musa rule?
+    answer: Mali
+    distractors: [Ghana, Songhai, Kanem-Bornu]
+    fact: He handed out so much gold crossing Egypt on pilgrimage in 1324 that he is said to have depressed its value there for years.
+
+  - id: wld-024
+    difficulty: 4
+    prompt: Which council began the Catholic response to the Reformation, in 1545?
+    answer: The Council of Trent
+    distractors: [The Council of Constance, The Council of Nicaea, The Diet of Worms]
+    fact: It sat on and off for eighteen years. The Diet of Worms, where Luther refused to recant, was 24 years earlier.
+
+  - id: wld-025
+    difficulty: 4
+    prompt: Which 1757 battle effectively handed Bengal to the East India Company?
+    answer: Plassey
+    distractors: [Buxar, Panipat, Assaye]
+    fact: Clive won against a far larger army mainly by arranging in advance that a large part of it would not fight.
