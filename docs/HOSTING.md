@@ -71,11 +71,25 @@ To put the event name on the screen:
 PRIMETIME_VENUE="Thursday Trivia" PRIMETIME_SSID="Clubhouse-Guest" npm start
 ```
 
+## How people join
+
+**One device, one entry.** When someone opens the join address they pick
+whether they're playing on their own or as a table sharing that device, then
+type a handle. It does not have to be their real name — people who would rather
+stay anonymous can.
+
+There's no joining someone else's team and no list of teams to scroll. At a
+hundred people, finding your partner in a list is slower and goes wrong more
+often than just typing a name.
+
+A table of four who want to play together simply share one tablet. A couple who
+want to compete against each other use two.
+
 ## Setting up the game
 
 On your phone, before you start:
 
-- **Team size** — 2 for couples, 4 for tables
+
 - **Block shape** — 3 × 8 is about thirty minutes; 4 × 6 and 2 × 10 are also
   offered, and the screen tells you the estimated running time
 - **Seconds per question** — 35 is the default; 25 for a sharp crowd, 50 if
@@ -135,8 +149,8 @@ Tap any team to adjust their score, rename them, or remove them.
 
 ### Things that will happen
 
-**Somebody joins late.** They pick any team with a free seat and come in with
-that team's score. No restart needed.
+**Somebody joins late.** They join like anyone else and start from zero. No
+restart needed.
 
 **A tablet goes to sleep.** They tap to wake and the page reconnects on its
 own, landing on whatever is happening now. Nobody needs to reload anything.

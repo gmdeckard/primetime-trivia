@@ -74,6 +74,8 @@ interface Client {
   socket: WebSocket;
   role: Role;
   playerId?: string;
+  /** Last payload this client received, so we can skip sending it again. */
+  lastSent?: string;
 }
 
 const clients = new Set<Client>();
@@ -111,21 +113,42 @@ async function stateFor(client: Client) {
   return playerState(engine, client.playerId!);
 }
 
-let broadcasting = false;
-async function broadcast() {
-  // Transitions can cascade (an answer auto-locks, which scores and advances).
-  // Coalesce into one push per tick so twenty tablets get one snapshot, not four.
-  if (broadcasting) return;
-  broadcasting = true;
-  await Promise.resolve();
-  broadcasting = false;
+/**
+ * Push state to everyone who needs it.
+ *
+ * Two things keep this affordable at a hundred devices.
+ *
+ * Coalescing: a burst of answers arrives as a burst of separate socket
+ * messages, each of which would otherwise trigger its own full push to every
+ * device. A short window collapses them into one.
+ *
+ * Deduplication: a player's own screen does not change when somebody else
+ * answers, so there is nothing to send them. Comparing against what they last
+ * received turns the answer flood from "every device hears about every answer"
+ * into "every device hears about its own". Measured on 100 entries answering
+ * one question, that is the difference between 26 MB and a few hundred KB.
+ */
+const COALESCE_MS = 60;
+let pending: NodeJS.Timeout | undefined;
+
+async function flush() {
+  pending = undefined;
   for (const client of clients) {
     if (client.role === 'player' && !client.playerId) continue;
-    send(client.socket, { t: 'state', state: await stateFor(client) });
+    if (client.socket.readyState !== client.socket.OPEN) continue;
+    const payload = JSON.stringify({ t: 'state', state: await stateFor(client) });
+    if (payload === client.lastSent) continue;
+    client.lastSent = payload;
+    client.socket.send(payload);
   }
 }
 
-engine.onChange(() => void broadcast());
+function broadcast() {
+  if (pending) return;
+  pending = setTimeout(() => void flush(), COALESCE_MS);
+}
+
+engine.onChange(broadcast);
 
 /** Re-read content from disk, e.g. after a pack is published from /author. */
 function reloadBank() {
@@ -183,7 +206,11 @@ wss.on('connection', (socket) => {
           send(socket, { t: 'identity', playerId: player.id, token: player.token });
         }
         ready = true;
-        void stateFor(client).then((state) => send(socket, { t: 'state', state }));
+        void stateFor(client).then((state) => {
+          const payload = JSON.stringify({ t: 'state', state });
+          client.lastSent = payload;
+          if (socket.readyState === socket.OPEN) socket.send(payload);
+        });
         return;
       }
 
@@ -198,9 +225,8 @@ wss.on('connection', (socket) => {
       if (controlOnly.has(msg.t) && client.role !== 'control') return;
 
       switch (msg.t) {
-        case 'create_team': engine.createTeam(client.playerId!, msg.name, msg.playerName, msg.tableNo); break;
-        case 'join_team': engine.joinTeam(client.playerId!, msg.teamId, msg.name); break;
-        case 'leave_team': engine.leaveTeam(client.playerId!); break;
+        case 'join': engine.join(client.playerId!, msg.name, msg.kind, msg.tableNo); break;
+        case 'leave': engine.leave(client.playerId!); break;
         case 'answer': engine.answer(client.playerId!, msg.choiceIndex); break;
         case 'answer_number': engine.answerNumber(client.playerId!, msg.value); break;
         case 'set_wager': engine.setWager(client.playerId!, msg.amount); break;
@@ -270,6 +296,7 @@ server.listen(PORT, () => {
 
 function shutdown() {
   clearInterval(heartbeat);
+  if (pending) clearTimeout(pending);
   engine.dispose();
   for (const client of clients) client.socket.close(1001, 'server stopping');
   wss.close();

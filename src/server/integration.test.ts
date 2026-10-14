@@ -159,10 +159,11 @@ test('players join, answer, and the MC drives the night', async () => {
   await bob.next<PlayerState>((s) => !!s.me?.playerId, 'bob identity');
   assert.ok(ann.identity?.token, 'a player should be handed a reconnect token');
 
-  ann.send({ t: 'create_team', name: 'The Snowbirds', playerName: 'Ann' });
+  ann.send({ t: 'join', name: 'The Snowbirds', kind: 'team' });
   const seated = await ann.next<PlayerState>((s) => !!s.me.teamId, 'ann seated');
-  bob.send({ t: 'join_team', teamId: seated.me.teamId!, name: 'Bob' });
-  await bob.next<PlayerState>((s) => s.me.teamId === seated.me.teamId, 'bob seated');
+  bob.send({ t: 'join', name: 'Bob', kind: 'solo' });
+  const bobSeated = await bob.next<PlayerState>((s) => !!s.me.teamId, 'bob seated');
+  assert.notEqual(bobSeated.me.teamId, seated.me.teamId, 'each device is its own entry');
 
   // A player must not be able to drive the game, however they ask.
   bob.send({ t: 'advance' });
@@ -179,14 +180,14 @@ test('players join, answer, and the MC drives the night', async () => {
   assert.ok(question.question?.prompt, 'the player should receive the prompt');
   assert.equal(question.question?.choices?.length, 4);
   assert.equal(question.reveal, undefined, 'and must not receive the answer yet');
+  assert.equal(question.teams.length, 0, 'players must not be sent the whole entry list');
 
   ann.send({ t: 'answer', choiceIndex: 1 });
-  const answered = await ann.next<PlayerState>((s) => s.me.choiceIndex === 1, 'answer registered');
-  assert.equal(answered.me.chosenBy, 'Ann', 'the team should see who answered');
+  await ann.next<PlayerState>((s) => s.me.choiceIndex === 1, 'answer registered');
 
-  // Bob sees his partner's choice on his own device.
-  const partnerView = await bob.next<PlayerState>((s) => s.me.choiceIndex === 1, 'partner sees the answer');
-  assert.equal(partnerView.me.chosenBy, 'Ann');
+  // One device answering must not answer for anybody else.
+  const bobView = await bob.next<PlayerState>((s) => s.phase === 'question', 'bob still on the question');
+  assert.equal(bobView.me.choiceIndex, undefined, "another entry's answer leaked across devices");
 
   mc.send({ t: 'lock_now' });
   mc.send({ t: 'advance' }); // -> reveal

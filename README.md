@@ -26,6 +26,10 @@ and a distinct shape:
 
 ![The host screen during a question](docs/screenshots/07-host-question.png)
 
+One device is one entry — solo or a table sharing a tablet:
+
+![Choosing solo or team](docs/screenshots/02-player-solo-or-team.png)
+
 Live standings sit beside the question all round, with a filled dot for each
 team that has locked an answer — so the room can see the race without waiting
 for the end of the round.
@@ -111,11 +115,14 @@ button for when they want to talk. It stops by itself at every round boundary. T
 the MC can run the room while facing it, instead of hunched over the laptop.
 Space bar also advances, so a bluetooth clicker works.
 
-**The team tablets** (`/`) show one decision at a time. Four big buttons,
-each with a letter, a colour and a distinct shape. Either partner can change
-the team's answer until the lock, and the screen names whoever last tapped it —
-which settles the "did you lock it in?" conversation that otherwise happens at
-every table.
+**The players' devices** (`/`) show one decision at a time. Four big buttons,
+each with a letter, a colour and a distinct shape.
+
+**One device is one entry.** On joining, you say whether you're playing on your
+own or as a table sharing the device, then pick a handle — it doesn't have to
+be your real name. There's no joining someone else's team and no list to find
+your partner in, which is the only model that survives a hundred people
+arriving at once.
 
 ## Network setup
 
@@ -201,9 +208,9 @@ Environment variables:
 Everything else — team size, block shape, timing, categories, speed bonus,
 final wager, read-aloud — is set from the control view before you start.
 
-Team size is selectable between **2** (couples, the common case) and **4**
-(tables). It caps how many people can sit on one team; a team can always share
-a single tablet regardless.
+Players choose for themselves whether they're solo or a table sharing one
+device. Nothing caps the room — it's been load-tested at 100 simultaneous
+entries.
 
 ## The question bank
 

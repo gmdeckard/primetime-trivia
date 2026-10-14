@@ -467,6 +467,38 @@ input:focus { border-color: var(--brass); outline: none; }
 .host .board-score { font-size: clamp(1.4rem, 2.3vw, 2.6rem); }
 .host .board-delta { font-size: clamp(1rem, 1.4vw, 1.5rem); }
 
+/* A hundred names has to read as a crowd, not a list. */
+.namewall {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  max-width: 1500px;
+  margin-inline: auto;
+  max-height: 34vh;
+  overflow: hidden;
+}
+.namechip {
+  padding: 8px 16px;
+  border-radius: 99px;
+  background: var(--surface);
+  border: 1px solid var(--line-soft);
+  font-size: clamp(.95rem, 1.3vw, 1.4rem);
+  font-weight: 600;
+  animation: pop .28s ease;
+}
+.namewall.is-dense .namechip { padding: 5px 11px; font-size: clamp(.8rem, .95vw, 1rem); }
+
+.answerbar {
+  display: block;
+  width: min(420px, 34vw);
+  height: 14px;
+  border-radius: 99px;
+  background: var(--line-soft);
+  overflow: hidden;
+}
+.answerbar > i { display: block; height: 100%; background: var(--brass); }
+
 .fact {
   font-family: var(--serif);
   font-size: clamp(1.1rem, 1.9vw, 1.65rem);

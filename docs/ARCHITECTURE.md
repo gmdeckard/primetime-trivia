@@ -153,3 +153,43 @@ bugs it has caught so far were invisible to the test suite:
 
 Neither is expressible as an assertion about engine state, which is exactly
 why driving the real thing matters.
+
+## Scaling to a full room
+
+One device is one entry. There is no joining an existing team, no member list,
+and no team-size cap — a table that wants to play together shares a tablet.
+Besides being simpler for a hundred people arriving at once, it removes a
+lobby-wide list that every device would otherwise have to receive and render.
+
+`npm run loadtest` opens N real websocket clients against a throwaway server,
+has them all join and all answer one question, and reports the bytes. The first
+run at 100 devices reported **26.5 MB to players for a single question**, which
+is what prompted three changes:
+
+**Coalescing.** A hundred answers arrive as a hundred separate socket messages,
+each previously triggering its own full push to every device. Broadcasts are
+now batched over a 60 ms window.
+
+**Deduplication.** A player's screen does not change when somebody else
+answers. Each client's serialised projection is compared against what it last
+received, and identical payloads are skipped. This turns the answer flood from
+"every device hears about every answer" into "every device hears about its own".
+
+**Per-role payloads.** The host and MC render every entry, so they get the full
+table. A player renders the top of the board plus their own row, so that is all
+they are sent — and `reveal.outcomes`, which carries a row per entry, is cut to
+the player's own. That last one was the largest single payload in the game and
+it grew with the square of the room.
+
+Measured on 100 entries answering one question:
+
+| | before | after |
+|---|---|---|
+| to all players | 26,520 KB | 1,394 KB |
+| messages | 10,500 | 600 |
+| per device | 265 KB | 13.9 KB |
+| to host | 2,540 KB | 153 KB |
+
+The MC's roster also switches to a search box past ten entries, and the host
+screen swaps its per-entry answered dots for a progress bar past twenty-four —
+a dot per team is a nice touch at eight and unreadable confetti at a hundred.

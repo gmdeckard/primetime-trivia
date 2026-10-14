@@ -70,10 +70,10 @@ function Login({ onToken }: { onToken: (token: string) => void }) {
 /** What the big button does, in words the MC can glance at. */
 function primaryAction(state: ControlState): { label: string; hint: string } {
   switch (state.phase) {
-    case 'lobby': return { label: 'Start the block', hint: `${state.teams.length} teams ready` };
+    case 'lobby': return { label: 'Start the block', hint: `${state.entryCount} ready` };
     case 'block_intro': return { label: 'First round', hint: 'Introduce the category' };
     case 'round_intro': return { label: 'First question', hint: state.round?.categoryName ?? '' };
-    case 'question': return { label: 'Answers in', hint: `${state.answeredTeamIds.length} of ${state.teams.length} answered` };
+    case 'question': return { label: 'Answers in', hint: `${state.answeredCount} of ${state.entryCount} answered` };
     case 'locked':
       return state.autoAdvanceAt
         ? { label: 'Reveal now', hint: 'Revealing by itself shortly' }
@@ -110,21 +110,6 @@ function Setup({ state, send }: { state: ControlState; send: ReturnType<typeof u
           maxLength={40}
         />
       </label>
-
-      <div class="stack" style={{ gap: '6px' }}>
-        <span class="faint">Team size</span>
-        <div class="grid2">
-          {([2, 4] as const).map((n) => (
-            <button
-              key={n}
-              class={`btn${state.config.teamSize === n ? ' btn-primary' : ''}`}
-              onClick={() => set({ teamSize: n })}
-            >
-              {n === 2 ? 'Couples (2)' : 'Tables (4)'}
-            </button>
-          ))}
-        </div>
-      </div>
 
       <div class="stack" style={{ gap: '6px' }}>
         <span class="faint">
@@ -266,35 +251,56 @@ function Setup({ state, send }: { state: ControlState; send: ReturnType<typeof u
 
 function Teams({ state, send }: { state: ControlState; send: ReturnType<typeof useGame>['send'] }) {
   const [open, setOpen] = useState<string | null>(null);
+  const [filter, setFilter] = useState('');
+
+  // At a hundred entries, scrolling to find one is hopeless. Filter by name,
+  // and otherwise show the table in score order so the ones the MC is most
+  // likely to be asked about are at the top.
+  const needle = filter.trim().toLowerCase();
+  const rows = state.scoreboard.filter((r) => !needle || r.name.toLowerCase().includes(needle));
+  const shown = needle ? rows : rows.slice(0, 25);
+
   return (
     <div class="card stack">
       <div class="row-between">
-        <div class="eyebrow">Teams ({state.teams.length})</div>
+        <div class="eyebrow">Players ({state.entryCount})</div>
         <span class="faint">tap to adjust</span>
       </div>
-      {state.teams.map((t) => {
-        const answered = state.answeredTeamIds.includes(t.id);
+
+      {state.entryCount > 10 && (
+        <input
+          value={filter}
+          onInput={(e) => setFilter((e.target as HTMLInputElement).value)}
+          placeholder="Find a player or team"
+          maxLength={28}
+        />
+      )}
+
+      {shown.map((row) => {
+        const entry = state.teams.find((t) => t.id === row.teamId);
+        const answered = state.answeredTeamIds.includes(row.teamId);
         return (
-          <div key={t.id} class="stack" style={{ gap: '8px' }}>
-            <button class="row-between" style={{ width: '100%', textAlign: 'left' }} onClick={() => setOpen(open === t.id ? null : t.id)}>
+          <div key={row.teamId} class="stack" style={{ gap: '8px' }}>
+            <button class="row-between" style={{ width: '100%', textAlign: 'left' }} onClick={() => setOpen(open === row.teamId ? null : row.teamId)}>
               <span class="grow">
-                <strong>{t.name}</strong>
+                <strong>{row.name}</strong>
                 <br />
                 <span class="faint">
-                  {t.members.join(' & ') || 'nobody yet'}
-                  {t.connected < t.members.length ? ` · ${t.members.length - t.connected} offline` : ''}
+                  {row.rank === 1 && row.score > 0 ? 'leading' : `${row.rank} of ${state.entryCount}`}
+                  {entry?.kind === 'team' ? ' · team' : ''}
+                  {entry && !entry.connected ? ' · offline' : ''}
                 </span>
               </span>
               <span class="row" style={{ gap: '8px' }}>
                 {answered && <span class="pill pill-ok">in</span>}
-                <span class="board-score tabular">{t.score}</span>
+                <span class="board-score tabular">{row.score}</span>
               </span>
             </button>
-            {open === t.id && (
+            {open === row.teamId && (
               <div class="stack" style={{ gap: '8px', paddingLeft: '8px' }}>
                 <div class="grid3">
                   {[-10, 5, 10].map((delta) => (
-                    <button key={delta} class="btn btn-sm" onClick={() => send({ t: 'adjust_score', teamId: t.id, delta })}>
+                    <button key={delta} class="btn btn-sm" onClick={() => send({ t: 'adjust_score', teamId: row.teamId, delta })}>
                       {delta > 0 ? `+${delta}` : delta}
                     </button>
                   ))}
@@ -303,8 +309,8 @@ function Teams({ state, send }: { state: ControlState; send: ReturnType<typeof u
                   <button
                     class="btn btn-sm"
                     onClick={() => {
-                      const name = prompt('New team name', t.name);
-                      if (name) send({ t: 'rename_team', teamId: t.id, name });
+                      const name = prompt('New name', row.name);
+                      if (name) send({ t: 'rename_team', teamId: row.teamId, name });
                     }}
                   >
                     Rename
@@ -312,7 +318,7 @@ function Teams({ state, send }: { state: ControlState; send: ReturnType<typeof u
                   <button
                     class="btn btn-sm btn-danger"
                     onClick={() => {
-                      if (confirm(`Remove ${t.name}? Their score goes with them.`)) send({ t: 'remove_team', teamId: t.id });
+                      if (confirm(`Remove ${row.name}? Their score goes with them.`)) send({ t: 'remove_team', teamId: row.teamId });
                     }}
                   >
                     Remove
@@ -323,7 +329,11 @@ function Teams({ state, send }: { state: ControlState; send: ReturnType<typeof u
           </div>
         );
       })}
-      {!state.teams.length && <p class="muted">Nobody has joined yet.</p>}
+
+      {!needle && rows.length > shown.length && (
+        <p class="faint">Showing the top {shown.length}. Use the search to reach the rest.</p>
+      )}
+      {!state.entryCount && <p class="muted">Nobody has joined yet.</p>}
     </div>
   );
 }
@@ -394,7 +404,7 @@ function App() {
       <div class="card stack">
         <div class="row-between">
           <span class="pill pill-brass">{state.phase.replace(/_/g, ' ')}</span>
-          {live && <span class="pill">{secondsLeft}s · {state.answeredTeamIds.length}/{state.teams.length} in</span>}
+          {live && <span class="pill">{secondsLeft}s · {state.answeredCount}/{state.entryCount} in</span>}
           {state.round && <span class="faint">R{state.round.index}/{state.round.ofTotal}</span>}
         </div>
 

@@ -1,6 +1,6 @@
 import { render } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
-import type { PlayerState } from '../../shared/protocol';
+import type { EntryKind, PlayerState } from '../../shared/protocol';
 import './shared/styles.css';
 import { useCountdown, useGame } from './shared/useGame';
 import { AutoAdvance, Badge, Board, ConnBanner, Keypad, Timer, Toast } from './shared/ui';
@@ -14,145 +14,75 @@ import { AutoAdvance, Badge, Board, ConnBanner, Keypad, Timer, Toast } from './s
  */
 
 function Lobby({ state, send }: { state: PlayerState; send: ReturnType<typeof useGame>['send'] }) {
-  const [name, setName] = useState(() => localStorage.getItem('primetime.name') ?? '');
-  // Whether the name has been committed, tracked separately from whether it is
-  // non-empty. Branching on the text itself made the name screen disappear on
-  // the first keystroke and dump the player into team selection mid-word.
-  const [named, setNamed] = useState(() => !!localStorage.getItem('primetime.name'));
-  const [teamName, setTeamName] = useState('');
-  const [mode, setMode] = useState<'pick' | 'create'>('pick');
+  const [kind, setKind] = useState<EntryKind | null>(null);
+  const [handle, setHandle] = useState(() => localStorage.getItem('primetime.handle') ?? '');
 
-  const confirmName = () => {
-    const clean = name.trim();
-    if (!clean) return;
-    localStorage.setItem('primetime.name', clean);
-    setName(clean);
-    setNamed(true);
-  };
-
+  // Already in — show who they are and let them wait.
   if (state.me.teamId) {
-    const mine = state.teams.find((t) => t.id === state.me.teamId);
     return (
       <>
         <div class="card stack center">
           <div class="eyebrow">You're in</div>
-          <h1 style={{ fontSize: '2rem' }}>{mine?.name}</h1>
+          <h1 style={{ fontSize: '2rem' }}>{state.me.teamName}</h1>
           <p class="muted">
-            {mine?.members.length === 1
-              ? 'Waiting for your teammate, and for the host to start.'
-              : `With ${mine?.members.filter((m) => m !== state.me.name).join(', ')}`}
+            {state.me.kind === 'team' ? 'Playing as a team' : 'Playing solo'} · waiting for the host to start
           </p>
-          <div class="dots center" style={{ justifyContent: 'center' }}>
-            {Array.from({ length: state.config.teamSize }).map((_, i) => (
-              <span key={i} class={`dot${i < (mine?.members.length ?? 0) ? ' is-on' : ''}`} />
-            ))}
-          </div>
+          <span class="pill">{state.entryCount} {state.entryCount === 1 ? 'player' : 'players'} so far</span>
         </div>
-        <div class="card stack">
-          <div class="eyebrow">{state.teams.length} teams so far</div>
-          <div class="stack" style={{ gap: '8px' }}>
-            {state.teams.map((t) => (
-              <div key={t.id} class="row-between">
-                <strong>{t.name}</strong>
-                <span class="faint">{t.members.join(', ')}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-        <button class="btn btn-ghost btn-block" onClick={() => send({ t: 'leave_team' })}>
-          Leave this team
+        <button class="btn btn-ghost btn-block" onClick={() => { setKind(null); send({ t: 'leave' }); }}>
+          Change my name
         </button>
       </>
     );
   }
 
-  if (!named) {
+  // Step 1 — solo or team. Asked first because it changes what the handle means.
+  if (!kind) {
     return (
       <div class="card stack">
         <div class="eyebrow">{state.venueName}</div>
         <h1>Welcome</h1>
-        <p class="muted">What should we call you?</p>
-        <input
-          value={name}
-          onInput={(e) => setName((e.target as HTMLInputElement).value)}
-          onKeyDown={(e) => { if (e.key === 'Enter') confirmName(); }}
-          placeholder="Your first name"
-          autocomplete="given-name"
-          enterkeyhint="done"
-          maxLength={24}
-        />
-        <button class="btn btn-primary btn-lg btn-block" disabled={!name.trim()} onClick={confirmName}>
-          Continue
-        </button>
-      </div>
-    );
-  }
-
-  if (mode === 'create') {
-    return (
-      <div class="card stack">
-        <div class="eyebrow">New team</div>
-        <h1>Name your team</h1>
-        <input
-          value={teamName}
-          onInput={(e) => setTeamName((e.target as HTMLInputElement).value)}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' && teamName.trim()) {
-              send({ t: 'create_team', name: teamName.trim(), playerName: name.trim() });
-            }
-          }}
-          placeholder="The Snowbirds"
-          enterkeyhint="done"
-          maxLength={28}
-        />
-        <button
-          class="btn btn-primary btn-lg btn-block"
-          disabled={!teamName.trim()}
-          onClick={() => send({ t: 'create_team', name: teamName.trim(), playerName: name.trim() })}
-        >
-          Create team
-        </button>
-        <button class="btn btn-ghost btn-block" onClick={() => setMode('pick')}>Back</button>
-      </div>
-    );
-  }
-
-  const open = state.openTeams.filter((t) => !t.full);
-  return (
-    <>
-      <div class="card stack">
-        <div class="eyebrow">
-          Hello {name} · <button class="btn-ghost" style={{ textDecoration: 'underline' }} onClick={() => setNamed(false)}>not you?</button>
-        </div>
-        <h1>Join a team</h1>
         <p class="muted">
-          Teams of {state.config.teamSize}. Sit with your partner and share one device, or use your own — either works.
+          One device per entry. Play on your own, or share this device with the people at your table.
         </p>
+        <button class="btn btn-primary btn-lg btn-block" onClick={() => setKind('solo')}>
+          Just me
+        </button>
+        <button class="btn btn-lg btn-block" onClick={() => setKind('team')}>
+          A team on this device
+        </button>
       </div>
+    );
+  }
 
-      {open.length > 0 && (
-        <div class="stack">
-          {open.map((t) => (
-            <button
-              key={t.id}
-              class="btn btn-lg btn-block"
-              style={{ justifyContent: 'space-between' }}
-              onClick={() => send({ t: 'join_team', teamId: t.id, name: name.trim() })}
-            >
-              <span>{t.name}</span>
-              <span class="faint">{t.members.length ? t.members.join(', ') : 'empty'}</span>
-            </button>
-          ))}
-        </div>
-      )}
+  // Step 2 — the handle. No real names required; anonymity is the default.
+  const submit = () => {
+    const clean = handle.trim();
+    if (!clean) return;
+    localStorage.setItem('primetime.handle', clean);
+    send({ t: 'join', name: clean, kind });
+  };
 
-      <button class="btn btn-primary btn-lg btn-block" onClick={() => setMode('create')}>
-        Start a new team
+  return (
+    <div class="card stack">
+      <div class="eyebrow">{kind === 'team' ? 'Team' : 'Playing solo'}</div>
+      <h1>{kind === 'team' ? 'Name your team' : 'Pick a name'}</h1>
+      <p class="muted">
+        This is what shows on the big screen. Use whatever you like — it does not have to be your real name.
+      </p>
+      <input
+        value={handle}
+        onInput={(e) => setHandle((e.target as HTMLInputElement).value)}
+        onKeyDown={(e) => { if (e.key === 'Enter') submit(); }}
+        placeholder={kind === 'team' ? 'The Snowbirds' : 'Ace'}
+        enterkeyhint="go"
+        maxLength={28}
+      />
+      <button class="btn btn-primary btn-lg btn-block" disabled={!handle.trim()} onClick={submit}>
+        Join
       </button>
-      {state.openTeams.some((t) => t.full) && (
-        <p class="faint center">Full: {state.openTeams.filter((t) => t.full).map((t) => t.name).join(', ')}</p>
-      )}
-    </>
+      <button class="btn btn-ghost btn-block" onClick={() => setKind(null)}>Back</button>
+    </div>
   );
 }
 
@@ -204,9 +134,7 @@ function Question({ state, send }: { state: PlayerState; send: ReturnType<typeof
       {/* Naming who tapped it stops the "did you lock it in?" confusion at a shared tablet. */}
       {chosen !== undefined && !reveal && (
         <p class="center muted">
-          {state.me.chosenBy && state.me.chosenBy !== state.me.name
-            ? `${state.me.chosenBy} locked in ${['A', 'B', 'C', 'D'][chosen]}. Tap another to change it.`
-            : `Locked in ${['A', 'B', 'C', 'D'][chosen]}. Tap another to change your mind.`}
+          Locked in {['A', 'B', 'C', 'D'][chosen]}. Tap another to change your mind.
         </p>
       )}
       {chosen === undefined && !locked && <p class="center muted">Tap your answer.</p>}
@@ -323,6 +251,7 @@ function Tiebreak({ state, send }: { state: PlayerState; send: ReturnType<typeof
 
 function Standings({ state, title }: { state: PlayerState; title: string }) {
   const mine = state.scoreboard.find((r) => r.teamId === state.me.teamId);
+  const top = state.scoreboard.filter((r) => r.teamId !== state.me.teamId).slice(0, 8);
   return (
     <>
       <div class="card center stack">
@@ -331,13 +260,16 @@ function Standings({ state, title }: { state: PlayerState; title: string }) {
           <>
             <div style={{ fontFamily: 'var(--serif)', fontSize: '3rem', lineHeight: 1 }}>{mine.score}</div>
             <p class="muted">
-              {mine.rank === 1 ? 'Leading the room' : `${ordinal(mine.rank)} place`}
+              {mine.rank === 1 ? 'Leading the room' : `${ordinal(mine.rank)} of ${state.entryCount}`}
               {mine.delta > 0 ? ` · +${mine.delta} that round` : ''}
             </p>
           </>
         )}
       </div>
-      <Board rows={state.scoreboard} limit={8} />
+      <div class="stack">
+        <div class="eyebrow">Top of the table</div>
+        <Board rows={[...(mine ? [mine] : []), ...top].sort((a, b) => a.rank - b.rank)} limit={9} />
+      </div>
     </>
   );
 }
@@ -400,20 +332,10 @@ function App() {
       {state.phase === 'lobby' && <Lobby state={state} send={send} />}
 
       {noTeam && (
-        <div class="card stack center">
-          <div class="eyebrow">Already underway</div>
-          <h1>Join a team</h1>
-          <p class="muted">Pick a team with a free seat — you'll come in with their score.</p>
-          {state.openTeams.filter((t) => !t.full).map((t) => (
-            <button
-              key={t.id}
-              class="btn btn-lg btn-block"
-              onClick={() => send({ t: 'join_team', teamId: t.id, name: localStorage.getItem('primetime.name') || 'Guest' })}
-            >
-              {t.name}
-            </button>
-          ))}
-        </div>
+        <>
+          <div class="warn center">The night is already underway — you'll start from zero.</div>
+          <Lobby state={state} send={send} />
+        </>
       )}
 
       {!noTeam && (

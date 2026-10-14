@@ -3,6 +3,7 @@ import {
   DEFAULT_CONFIG,
   POINTS_BY_DIFFICULTY,
   type Difficulty,
+  type EntryKind,
   type GameConfig,
   type Phase,
   type Question,
@@ -40,9 +41,12 @@ export interface PlayerRec {
 export interface TeamRec {
   id: string;
   name: string;
+  kind: EntryKind;
   tableNo?: number;
   score: number;
   createdAt: number;
+  /** The one device that owns this entry. */
+  ownerId: string;
 }
 
 export interface AnswerRec extends AnswerRecord {}
@@ -227,52 +231,64 @@ export class Engine {
     this.commit();
   }
 
-  private teamMembers(teamId: string): PlayerRec[] {
-    return Object.values(this.state.players).filter((p) => p.teamId === teamId);
-  }
-
-  createTeam(playerId: string, name: string, playerName: string, tableNo?: number): void {
+  /**
+   * Take a seat. One device, one entry — no joining someone else's.
+   *
+   * At a hundred people, picking your partner out of a list is slower and more
+   * error-prone than just typing a handle, and a full lobby list is a payload
+   * every device has to receive and render for no reason.
+   */
+  join(playerId: string, name: string, kind: EntryKind, tableNo?: number): void {
     const player = this.state.players[playerId];
     if (!player) throw new Error('unknown player');
     const clean = name.trim().slice(0, 28);
-    if (!clean) throw new Error('Your team needs a name.');
-    if (this.state.teamOrder.length >= 40) throw new Error('This night is full at 40 teams.');
-    const taken = Object.values(this.state.teams).some((t) => t.name.toLowerCase() === clean.toLowerCase());
-    if (taken) throw new Error('That team name is taken — try another.');
+    if (!clean) throw new Error('Pick a name to play under.');
+    if (this.state.teamOrder.length >= 200) throw new Error('This night is full.');
 
-    const team: TeamRec = { id: randomUUID(), name: clean, tableNo, score: 0, createdAt: Date.now() };
+    const taken = Object.values(this.state.teams).some(
+      (t) => t.id !== player.teamId && t.name.toLowerCase() === clean.toLowerCase(),
+    );
+    if (taken) throw new Error('Someone is already using that name — pick another.');
+
+    // Rejoining after a reload keeps the same entry and its score.
+    const existing = player.teamId ? this.state.teams[player.teamId] : undefined;
+    if (existing) {
+      existing.name = clean;
+      existing.kind = kind;
+      if (tableNo !== undefined) existing.tableNo = tableNo;
+      player.name = clean;
+      this.commit({ kind: 'entry_renamed', teamId: existing.id });
+      return;
+    }
+
+    const team: TeamRec = {
+      id: randomUUID(),
+      name: clean,
+      kind,
+      tableNo,
+      score: 0,
+      createdAt: Date.now(),
+      ownerId: playerId,
+    };
     this.state.teams[team.id] = team;
     this.state.teamOrder.push(team.id);
-    player.name = playerName.trim().slice(0, 24);
+    player.name = clean;
     player.teamId = team.id;
-    this.commit({ kind: 'team_created', teamId: team.id, name: clean });
+    this.commit({ kind: 'joined', teamId: team.id, entryKind: kind });
   }
 
-  joinTeam(playerId: string, teamId: string, name: string): void {
-    const player = this.state.players[playerId];
-    const team = this.state.teams[teamId];
-    if (!player) throw new Error('unknown player');
-    if (!team) throw new Error('That team is no longer there.');
-    if (this.teamMembers(teamId).length >= this.state.config.teamSize) {
-      throw new Error(`${team.name} is full.`);
-    }
-    player.name = name.trim().slice(0, 24);
-    player.teamId = teamId;
-    this.commit({ kind: 'team_joined', teamId, playerId });
-  }
-
-  leaveTeam(playerId: string): void {
+  leave(playerId: string): void {
     const player = this.state.players[playerId];
     if (!player?.teamId) return;
     const teamId = player.teamId;
     player.teamId = undefined;
-    // Drop an empty team only in the lobby; mid-game it keeps its score so a
-    // player whose tablet died can rejoin and find the team still standing.
-    if (this.state.phase === 'lobby' && this.teamMembers(teamId).length === 0) {
+    // In the lobby a withdrawal is clean. Once play has started the entry keeps
+    // its score, so a reconnecting device lands back on its own row.
+    if (this.state.phase === 'lobby') {
       delete this.state.teams[teamId];
       this.state.teamOrder = this.state.teamOrder.filter((id) => id !== teamId);
     }
-    this.commit({ kind: 'team_left', teamId, playerId });
+    this.commit({ kind: 'left', teamId });
   }
 
   renameTeam(teamId: string, name: string) {
@@ -303,7 +319,7 @@ export class Engine {
     // Changing the shape of a block mid-block would leave rounds half-built,
     // so structural keys are lobby-only. Pacing keys stay live because an MC
     // reads the room and speeds up or slows down as they go.
-    const structural: Array<keyof GameConfig> = ['roundsPerBlock', 'questionsPerRound', 'teamSize', 'difficultyMix', 'categories'];
+    const structural: Array<keyof GameConfig> = ['roundsPerBlock', 'questionsPerRound', 'difficultyMix', 'categories'];
     const next = { ...this.state.config };
     for (const [key, value] of Object.entries(patch) as Array<[keyof GameConfig, never]>) {
       if (this.state.phase !== 'lobby' && structural.includes(key)) continue;
@@ -822,10 +838,11 @@ export class Engine {
     return rows;
   }
 
-  membersOf(teamId: string): string[] {
-    return this.teamMembers(teamId)
-      .map((p) => p.name || 'Guest')
-      .sort();
+  /** Whether the device behind an entry is currently connected. */
+  isConnected(teamId: string): boolean {
+    const team = this.state.teams[teamId];
+    if (!team) return false;
+    return !!this.state.players[team.ownerId]?.connected;
   }
 
   difficultyOf(questionId: string): Difficulty {

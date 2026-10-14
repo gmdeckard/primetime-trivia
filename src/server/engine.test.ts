@@ -33,16 +33,13 @@ after(() => {
   for (const dir of dirs) rmSync(dir, { recursive: true, force: true });
 });
 
-/** Seat `count` teams of two and return their ids. */
+/** Seat `count` entries — one device each — and return their ids. */
 function seatTeams(engine: Engine, count: number) {
   const teams: Array<{ teamId: string; players: string[] }> = [];
   for (let i = 0; i < count; i++) {
-    const a = engine.identify();
-    const b = engine.identify();
-    engine.createTeam(a.id, `Team ${i + 1}`, `Player ${i + 1}A`);
-    const teamId = engine.snapshot().players[a.id]!.teamId!;
-    engine.joinTeam(b.id, teamId, `Player ${i + 1}B`);
-    teams.push({ teamId, players: [a.id, b.id] });
+    const device = engine.identify();
+    engine.join(device.id, `Entry ${i + 1}`, i % 2 === 0 ? 'team' : 'solo');
+    teams.push({ teamId: engine.snapshot().players[device.id]!.teamId!, players: [device.id] });
   }
   return teams;
 }
@@ -52,19 +49,38 @@ test('content bank loads with no errors', () => {
   assert.ok(bank.questions.length > 300, `expected a usable bank, got ${bank.questions.length}`);
 });
 
-test('a team is capped at the configured size', () => {
-  const engine = freshEngine({ teamSize: 2 });
-  const [team] = seatTeams(engine, 1);
-  const third = engine.identify();
-  assert.throws(() => engine.joinTeam(third.id, team!.teamId, 'Gatecrasher'), /full/i);
-});
-
-test('duplicate team names are refused', () => {
+test('one device is one entry — a second device is its own entry', () => {
   const engine = freshEngine();
   const a = engine.identify();
   const b = engine.identify();
-  engine.createTeam(a.id, 'The Snowbirds', 'Ann');
-  assert.throws(() => engine.createTeam(b.id, 'the snowbirds', 'Bob'), /taken/i);
+  engine.join(a.id, 'Ace', 'solo');
+  engine.join(b.id, 'Deuce', 'solo');
+  const s = engine.snapshot();
+  assert.equal(s.teamOrder.length, 2, 'each device gets its own row');
+  assert.notEqual(s.players[a.id]!.teamId, s.players[b.id]!.teamId);
+});
+
+test('rejoining from the same device keeps the entry and its score', () => {
+  const engine = freshEngine();
+  const device = engine.identify();
+  engine.join(device.id, 'Ace', 'solo');
+  const teamId = engine.snapshot().players[device.id]!.teamId!;
+  engine.adjustScore(teamId, 40);
+
+  engine.join(device.id, 'Ace of Spades', 'team');
+  const s = engine.snapshot();
+  assert.equal(s.teamOrder.length, 1, 'renaming must not create a second entry');
+  assert.equal(s.teams[teamId]!.score, 40, 'the score must survive');
+  assert.equal(s.teams[teamId]!.name, 'Ace of Spades');
+  assert.equal(s.teams[teamId]!.kind, 'team');
+});
+
+test('duplicate names are refused', () => {
+  const engine = freshEngine();
+  const a = engine.identify();
+  const b = engine.identify();
+  engine.join(a.id, 'The Snowbirds', 'team');
+  assert.throws(() => engine.join(b.id, 'the snowbirds', 'solo'), /already using/i);
 });
 
 test('the correct answer is not always in the same slot', () => {
@@ -126,19 +142,34 @@ test('answering locks automatically once every team is in', () => {
   assert.equal(engine.snapshot().phase, 'locked', 'should lock once everyone has answered');
 });
 
-test('either partner can change the team answer until the lock', () => {
+test('an answer can be changed until the lock', () => {
   const engine = freshEngine();
   const teams = seatTeams(engine, 2);
   engine.startBlock();
   engine.advance();
   engine.advance();
 
-  const [first, second] = teams[0]!.players as [string, string];
-  engine.answer(first, 0);
-  engine.answer(second, 2);
-  const view = playerState(engine, first);
-  assert.equal(view.me.choiceIndex, 2, 'the later tap should win');
-  assert.equal(view.me.chosenBy, 'Player 1B', 'and the team should see who changed it');
+  const device = teams[0]!.players[0]!;
+  engine.answer(device, 0);
+  engine.answer(device, 2);
+  assert.equal(playerState(engine, device).me.choiceIndex, 2, 'the later tap should win');
+});
+
+test('a player is sent the top of the table plus their own row, not all hundred', () => {
+  const engine = freshEngine();
+  const teams = seatTeams(engine, 40);
+  // Push one entry to the bottom so it falls outside the top slice.
+  teams.forEach((t, i) => engine.adjustScore(t.teamId, (teams.length - i) * 10));
+  const last = teams[teams.length - 1]!;
+
+  const view = playerState(engine, last.players[0]!);
+  assert.ok(view.scoreboard.length < teams.length, 'the full table must not be sent to a player');
+  assert.ok(
+    view.scoreboard.some((r) => r.teamId === last.teamId),
+    "a player's own row must always be included, however far down they are",
+  );
+  assert.equal(view.entryCount, 40, 'but they should still see how many are playing');
+  assert.equal(view.teams.length, 0, 'the entry list is for the host and MC only');
 });
 
 test('a wrong final wager subtracts the bet', () => {

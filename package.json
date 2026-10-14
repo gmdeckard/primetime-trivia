@@ -17,6 +17,7 @@
     "build:server": "tsc -p tsconfig.server.json",
     "dev": "concurrently -n server,client -c cyan,magenta \"tsx watch src/server/index.ts\" \"vite\"",
     "fix:content": "tsx scripts/normalize-content.ts",
+    "loadtest": "node scripts/loadtest.mjs",
     "screenshots": "node scripts/capture-screenshots.mjs",
     "start": "node dist/src/server/index.js",
     "stats": "tsx scripts/content-stats.ts",

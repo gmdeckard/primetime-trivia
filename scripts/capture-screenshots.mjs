@@ -87,43 +87,33 @@ try {
     console.log(`  ${name}`);
   }
 
-  async function seat(label, person, teamName) {
+  /** One device, one entry: pick solo or team, then type a handle. */
+  async function seat(label, handle, kind = 'solo') {
     const page = await open(label, '/', 420, 900);
-    await press(page, person);
-    await tap(page, 'Continue');
-    await pause(page);
-    if (teamName) {
-      await tap(page, 'Start a new team');
-      await pause(page, 400);
-      await press(page, teamName);
-      await tap(page, 'Create team');
-    } else {
-      await tap(page, /Snowbirds/);
-    }
+    await tap(page, kind === 'team' ? 'A team on this device' : 'Just me');
+    await pause(page, 400);
+    await press(page, handle);
+    await tap(page, 'Join');
     await pause(page, 700);
     return page;
   }
 
-  // --- the big screen stays open all night
   const host = await open('host', '/host', 1920, 1080, 1);
   await shoot(host, '01-host-lobby');
 
   // --- players arrive
   const ann = await open('ann', '/', 420, 900);
-  await press(ann, 'Ann');
-  await tap(ann, 'Continue');
-  await pause(ann);
-  await shoot(ann, '02-player-pick-team');
-  await tap(ann, 'Start a new team');
+  await shoot(ann, '02-player-solo-or-team');
+  await tap(ann, 'A team on this device');
   await pause(ann, 400);
   await press(ann, 'The Snowbirds');
-  await tap(ann, 'Create team');
+  await tap(ann, 'Join');
   await pause(ann, 700);
   await shoot(ann, '03-player-seated');
 
-  const bob = await seat('bob', 'Bob', null);
-  const carol = await seat('carol', 'Carol', 'Desert Rats');
-  const dave = await seat('dave', 'Dave', 'The Gearheads');
+  const bob = await seat('bob', 'Ace', 'solo');
+  const carol = await seat('carol', 'Desert Rats', 'team');
+  const dave = await seat('dave', 'Roadrunner', 'solo');
   await pause(host, 900);
   await shoot(host, '04-host-lobby-filling');
 

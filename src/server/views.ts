@@ -28,19 +28,26 @@ function teamViews(engine: Engine): TeamView[] {
   return s.teamOrder
     .map((id) => s.teams[id])
     .filter((t): t is NonNullable<typeof t> => !!t)
-    .map((t) => {
-      const members = Object.values(s.players).filter((p) => p.teamId === t.id);
-      return {
-        id: t.id,
-        name: t.name,
-        tableNo: t.tableNo,
-        score: t.score,
-        members: members.map((p) => p.name || 'Guest').sort(),
-        full: members.length >= s.config.teamSize,
-        connected: members.filter((p) => p.connected).length,
-      };
-    });
+    .map((t) => ({
+      id: t.id,
+      name: t.name,
+      kind: t.kind,
+      tableNo: t.tableNo,
+      score: t.score,
+      connected: engine.isConnected(t.id),
+    }));
 }
+
+/**
+ * How much of the table a player's device receives.
+ *
+ * The host and the MC render every entry, so they get the lot. A player
+ * renders the top of the table and their own position, so that is all they are
+ * sent. At a hundred devices the difference is the whole bandwidth story: the
+ * full state would be ~25 KB to every device on every transition, several
+ * hundred times a night, over a clubhouse access point.
+ */
+const PLAYER_BOARD_ROWS = 12;
 
 function roundView(engine: Engine): RoundView | undefined {
   const s = engine.snapshot();
@@ -74,7 +81,14 @@ function questionView(engine: Engine): QuestionView | undefined {
   };
 }
 
-function revealView(engine: Engine): RevealView | undefined {
+/**
+ * The reveal, scoped to who is asking.
+ *
+ * `outcomes` has a row per entry, and a player's screen renders exactly one of
+ * them: their own. Sending all hundred to all hundred devices was the single
+ * largest payload in the game, and it grew quadratically with the room.
+ */
+function revealView(engine: Engine, onlyTeamId?: string): RevealView | undefined {
   const s = engine.snapshot();
   if (!REVEAL_PHASES.has(s.phase)) return undefined;
   const current = s.current;
@@ -103,35 +117,60 @@ function revealView(engine: Engine): RevealView | undefined {
   });
 
   const answered = outcomes.length;
+  const correctPct = answered
+    ? Math.round((outcomes.filter((o) => o.correct).length / answered) * 100)
+    : 0;
+
   return {
     answerIndex: q.kind === 'choice' ? correctIndex : undefined,
     answerNumber: q.answerNumber,
     answerText,
     funFact: q.funFact,
-    outcomes,
-    correctPct: answered ? Math.round((outcomes.filter((o) => o.correct).length / answered) * 100) : 0,
+    // The percentage is computed from everyone first, then the list is cut.
+    outcomes: onlyTeamId ? outcomes.filter((o) => o.teamId === onlyTeamId) : outcomes,
+    correctPct,
   };
 }
 
-function baseState(engine: Engine): BaseState {
+function baseState(engine: Engine, role: 'host' | 'control' | 'player', teamId?: string): BaseState {
   const s = engine.snapshot();
   const current = s.current;
+  const everyone = engine.scoreRows();
+  const answered = current ? Object.keys(current.answers) : [];
+
+  let board = everyone;
+  if (role === 'player') {
+    board = everyone.slice(0, PLAYER_BOARD_ROWS);
+    // Always include their own row, even when they are ninety-third.
+    if (teamId && !board.some((r) => r.teamId === teamId)) {
+      const mine = everyone.find((r) => r.teamId === teamId);
+      if (mine) board = [...board, mine];
+    }
+  }
+
   return {
     protocol: PROTOCOL_VERSION,
     phase: s.phase,
     roomCode: s.roomCode,
     venueName: s.config.venueName,
     config: s.config,
-    teams: teamViews(engine),
-    scoreboard: engine.scoreRows(),
+    teams: role === 'player' ? [] : teamViews(engine),
+    entryCount: s.teamOrder.length,
+    scoreboard: board,
     block: { index: s.blockIndex, ofTotal: null },
     round: roundView(engine),
     question: questionView(engine),
     deadline: current && !current.locked ? current.deadline : undefined,
     autoAdvanceAt: s.autoAdvanceAt,
     held: !!s.held,
-    answeredTeamIds: current ? Object.keys(current.answers) : [],
-    reveal: revealView(engine),
+    answeredTeamIds: role === 'player' ? [] : answered,
+    // Withheld from players on purpose. "80 of 100 have answered" is pressure
+    // on whoever is still thinking, and this audience does not need a clock on
+    // top of a clock. It also keeps a player's state unchanged while everyone
+    // else answers, so their device receives nothing until something that
+    // actually concerns them happens.
+    answeredCount: role === 'player' ? 0 : answered.length,
+    reveal: revealView(engine, role === 'player' ? (teamId ?? 'none') : undefined),
     message: s.message,
   };
 }
@@ -143,12 +182,12 @@ export interface JoinInfo {
 }
 
 export function hostState(engine: Engine, join: JoinInfo): HostState {
-  return { ...baseState(engine), role: 'host', join };
+  return { ...baseState(engine, 'host'), role: 'host', join };
 }
 
 export function controlState(engine: Engine): ControlState {
   const s = engine.snapshot();
-  const base = baseState(engine);
+  const base = baseState(engine, 'control');
   const q = engine.currentQuestion();
   const choices = engine.displayChoices();
   const correctIndex = engine.correctDisplayIndex();
@@ -217,9 +256,11 @@ export function controlState(engine: Engine): ControlState {
     upNext,
     roster: s.teamOrder.map((teamId) => ({
       teamId,
-      players: Object.values(s.players)
-        .filter((p) => p.teamId === teamId)
-        .map((p) => ({ id: p.id, name: p.name || 'Guest', connected: p.connected })),
+      players: [{
+        id: s.teams[teamId]?.ownerId ?? teamId,
+        name: s.teams[teamId]?.name ?? 'Entry',
+        connected: engine.isConnected(teamId),
+      }],
     })),
     bank: {
       total: bank.questions.length,
@@ -232,12 +273,12 @@ export function controlState(engine: Engine): ControlState {
 
 export function playerState(engine: Engine, playerId: string): PlayerState {
   const s = engine.snapshot();
-  const base = baseState(engine);
   const player = s.players[playerId];
   const teamId = player?.teamId;
+  const base = baseState(engine, 'player', teamId);
   const team = teamId ? s.teams[teamId] : undefined;
   const answer = teamId && s.current ? s.current.answers[teamId] : undefined;
-  const chosenBy = answer ? s.players[answer.byPlayerId]?.name || undefined : undefined;
+  const mine = teamId ? engine.scoreRows().find((r) => r.teamId === teamId) : undefined;
 
   return {
     ...base,
@@ -245,19 +286,15 @@ export function playerState(engine: Engine, playerId: string): PlayerState {
     me: {
       playerId,
       name: player?.name ?? '',
+      kind: team?.kind,
       teamId,
       teamName: team?.name,
+      rank: mine?.rank,
+      score: mine?.score,
       choiceIndex: answer?.choiceIndex,
       numberAnswer: answer?.numberAnswer,
-      chosenBy,
       wager: teamId ? s.wagerBets?.[teamId] : undefined,
       maxWager: team ? Math.max(team.score, POINTS_BY_DIFFICULTY[4]) : 0,
     },
-    openTeams: teamViews(engine).map((t) => ({
-      id: t.id,
-      name: t.name,
-      members: t.members,
-      full: t.full,
-    })),
   };
 }

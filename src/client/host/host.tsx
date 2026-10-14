@@ -28,7 +28,7 @@ function JoinPanel({ state }: { state: HostState }) {
           </p>
         )}
         <p class="muted" style={{ fontSize: '1.2rem' }}>
-          Room <strong>{state.roomCode}</strong> · teams of {state.config.teamSize}
+          Room <strong>{state.roomCode}</strong> · play solo or share a device
         </p>
       </div>
     </div>
@@ -59,18 +59,27 @@ function AnswerGrid({ state }: { state: HostState }) {
 }
 
 function AnsweredStrip({ state }: { state: HostState }) {
-  const total = state.teams.length;
-  const answered = state.answeredTeamIds.length;
+  const total = state.entryCount;
+  const answered = state.answeredCount;
+  // A dot per entry is a nice touch at eight and unreadable confetti at a
+  // hundred, so past a couple of dozen it becomes a bar.
+  const asBar = total > 24;
   return (
     <div class="row" style={{ justifyContent: 'center', gap: '18px' }}>
       <span class="pill pill-brass" style={{ fontSize: '1.1rem' }}>
-        {answered} of {total} teams in
+        {answered} of {total} in
       </span>
-      <div class="dots">
-        {state.teams.map((t) => (
-          <span key={t.id} class={`dot${state.answeredTeamIds.includes(t.id) ? ' is-on' : ''}`} title={t.name} />
-        ))}
-      </div>
+      {asBar ? (
+        <span class="answerbar">
+          <i style={{ width: `${total ? (answered / total) * 100 : 0}%` }} />
+        </span>
+      ) : (
+        <div class="dots">
+          {state.teams.map((t) => (
+            <span key={t.id} class={`dot${state.answeredTeamIds.includes(t.id) ? ' is-on' : ''}`} title={t.name} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
@@ -201,7 +210,7 @@ function App() {
         </div>
         <div class="row" style={{ gap: '14px' }}>
           {state.block.index > 0 && <span class="pill">Block {state.block.index}</span>}
-          <span class="pill">{state.teams.length} teams</span>
+          <span class="pill">{state.entryCount} playing</span>
           <span class="pill pill-brass">{state.roomCode}</span>
         </div>
       </div>
@@ -212,18 +221,22 @@ function App() {
         <div class="host-body">
           <div class="center stack">
             <h1 class="host-display">{state.venueName}</h1>
-            <p class="muted" style={{ fontSize: '1.5rem' }}>Grab a partner and join in.</p>
+            <p class="muted" style={{ fontSize: '1.5rem' }}>Play on your own or share a device.</p>
           </div>
           <JoinPanel state={state} />
           {state.teams.length > 0 && (
-            <div class="teamgrid">
-              {state.teams.map((t) => (
-                <div key={t.id} class="teamchip">
-                  <strong>{t.name}</strong>
-                  <span class="faint">{t.members.join(' & ')}</span>
-                </div>
-              ))}
-            </div>
+            <>
+              <div class="center">
+                <span class="pill pill-brass" style={{ fontSize: '1.2rem' }}>
+                  {state.entryCount} in
+                </span>
+              </div>
+              <div class={`namewall${state.teams.length > 24 ? ' is-dense' : ''}`}>
+                {state.teams.map((t) => (
+                  <span key={t.id} class="namechip">{t.name}</span>
+                ))}
+              </div>
+            </>
           )}
         </div>
       )}
@@ -377,7 +390,7 @@ function App() {
       {state.phase !== 'lobby' && (
         <div class="host-bar">
           <p class="faint">Join at {state.join.url.replace('http://', '')} · room {state.roomCode}</p>
-          <p class="faint">{state.teams.length} teams</p>
+          <p class="faint">{state.entryCount} playing</p>
         </div>
       )}
 

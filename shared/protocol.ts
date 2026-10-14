@@ -80,8 +80,6 @@ export interface Question {
 
 export interface GameConfig {
   venueName: string;
-  /** Couples play as 2; tables play as 4. Caps members per team. */
-  teamSize: 2 | 4;
   roundsPerBlock: number;
   questionsPerRound: number;
   secondsPerQuestion: number;
@@ -123,7 +121,6 @@ export const POINTS_BY_DIFFICULTY: Record<Difficulty, number> = {
 
 export const DEFAULT_CONFIG: GameConfig = {
   venueName: 'PrimeTime Trivia',
-  teamSize: 2,
   roundsPerBlock: 3,
   questionsPerRound: 8,
   secondsPerQuestion: 35,
@@ -146,15 +143,24 @@ export const DEFAULT_CONFIG: GameConfig = {
 
 // ---------------------------------------------------------------- views
 
+/**
+ * One entry in the game: a single player or a team sharing one device.
+ *
+ * There is no joining an existing entry. One device is one entry, which is the
+ * only model that survives a hundred people arriving at once — nobody has to
+ * find their partner in a list, and a dead tablet takes out one entry rather
+ * than stranding a teammate.
+ */
+export type EntryKind = 'solo' | 'team';
+
 export interface TeamView {
   id: string;
+  /** The handle they chose. Players are free to stay anonymous. */
   name: string;
+  kind: EntryKind;
   tableNo?: number;
   score: number;
-  members: string[];
-  /** Full for this night's team size. */
-  full: boolean;
-  connected: number;
+  connected: boolean;
 }
 
 export interface ScoreRow {
@@ -215,7 +221,14 @@ export interface BaseState {
   roomCode: string;
   venueName: string;
   config: GameConfig;
+  /**
+   * Every entry. Sent to the host and MC, who display them; omitted for
+   * players, who would otherwise each receive ninety-nine rows they never
+   * render. `entryCount` is what the player screens actually use.
+   */
   teams: TeamView[];
+  entryCount: number;
+  /** Top of the table, plus the player's own row on the player projection. */
   scoreboard: ScoreRow[];
   block: { index: number; ofTotal: number | null };
   round?: RoundView;
@@ -226,8 +239,10 @@ export interface BaseState {
   autoAdvanceAt?: number;
   /** True when the MC has paused auto-advance to talk. */
   held: boolean;
-  /** Team ids that have locked something in, for the "6 of 8 answered" strip. */
+  /** Entry ids that have locked an answer. Host and MC only — see `teams`. */
   answeredTeamIds: string[];
+  /** How many have answered, which is all a player screen needs. */
+  answeredCount: number;
   reveal?: RevealView;
   message?: string;
 }
@@ -255,8 +270,12 @@ export interface PlayerState extends BaseState {
   me: {
     playerId: string;
     name: string;
+    kind?: EntryKind;
     teamId?: string;
     teamName?: string;
+    /** Where this entry currently sits, so a player sees it without the full table. */
+    rank?: number;
+    score?: number;
     /** This team's locked answer for the current question. */
     choiceIndex?: number;
     numberAnswer?: number;
@@ -265,8 +284,6 @@ export interface PlayerState extends BaseState {
     wager?: number;
     maxWager: number;
   };
-  /** Teams available to join in the lobby. */
-  openTeams: Array<{ id: string; name: string; members: string[]; full: boolean }>;
 }
 
 export type GameState = HostState | ControlState | PlayerState;
@@ -276,9 +293,8 @@ export type GameState = HostState | ControlState | PlayerState;
 export type ClientMessage =
   // player
   | { t: 'hello'; role: 'player' | 'host' | 'control'; playerId?: string; token?: string }
-  | { t: 'create_team'; name: string; playerName: string; tableNo?: number }
-  | { t: 'join_team'; teamId: string; name: string }
-  | { t: 'leave_team' }
+  | { t: 'join'; name: string; kind: EntryKind; tableNo?: number }
+  | { t: 'leave' }
   | { t: 'answer'; choiceIndex: number }
   | { t: 'answer_number'; value: number }
   | { t: 'set_wager'; amount: number }
