@@ -112,6 +112,7 @@ function revealView(engine: Engine, onlyTeamId?: string): RevealView | undefined
       numberAnswer: answer?.numberAnswer,
       correct: a.correct,
       awarded: a.total,
+      bonus: a.bonus,
       speedBonus: a.speedBonus,
     };
   });

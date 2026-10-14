@@ -3,6 +3,7 @@ import { useEffect, useState } from 'preact/hooks';
 import type { EntryKind, PlayerState } from '../../shared/protocol';
 import './shared/styles.css';
 import { useCountdown, useGame } from './shared/useGame';
+import { pointsAvailable } from '../../shared/protocol';
 import { AutoAdvance, Badge, Board, ConnBanner, Keypad, Timer, Toast } from './shared/ui';
 
 /**
@@ -95,11 +96,17 @@ function Question({ state, send }: { state: PlayerState; send: ReturnType<typeof
   const reveal = state.reveal;
   const chosen = state.me.choiceIndex;
 
+  // What the question is worth right now. The countdown bar only says how long
+  // is left; this says what hesitating costs, which is the part that makes a
+  // room answer. Once the question locks the bonus window is gone, so it falls
+  // back to the base value and the reveal card reports what was actually won.
+  const onOffer = locked ? q.points : pointsAvailable(q.points, state.config, 1 - fraction);
+
   return (
     <>
       <div class="row-between">
         <span class="pill">{state.round?.categoryName}</span>
-        <span class="pill pill-brass">{q.points} pts</span>
+        <span class={`pill pill-brass${!locked && onOffer > q.points ? ' pill-live' : ''}`}>{onOffer} pts</span>
       </div>
 
       {state.deadline && <Timer fraction={fraction} seconds={secondsLeft} />}
@@ -156,7 +163,7 @@ function Reveal({ state }: { state: PlayerState }) {
           <div style={{ fontFamily: 'var(--serif)', fontSize: '3rem', lineHeight: 1 }}>
             {mine.awarded > 0 ? `+${mine.awarded}` : mine.awarded}
           </div>
-          {mine.speedBonus && <span class="pill pill-brass">First in — speed bonus</span>}
+          {mine.speedBonus && <span class="pill pill-brass">+{mine.bonus} for a fast answer</span>}
         </div>
       ) : (
         <div class="card center">

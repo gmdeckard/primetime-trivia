@@ -3,6 +3,7 @@ import { useEffect, useState } from 'preact/hooks';
 import type { HostState } from '../../../shared/protocol';
 import '../shared/styles.css';
 import { useCountdown, useGame, useSpeech } from '../shared/useGame';
+import { pointsAvailable } from '../../../shared/protocol';
 import { AutoAdvance, Badge, Board, Timer, Toast } from '../shared/ui';
 
 /**
@@ -158,6 +159,12 @@ function App() {
 
   // Hooks run before any early return, so the countdown can't be conditional.
   const { secondsLeft, fraction } = useCountdown(state?.deadline, state?.config.secondsPerQuestion ?? 1);
+  // Matches the player's handset exactly: both derive from the same deadline
+  // and the same shared bands, so the two screens cannot disagree.
+  const onOffer =
+    state?.question && state.deadline && state.phase === 'question'
+      ? pointsAvailable(state.question.points, state.config, 1 - fraction)
+      : state?.question?.points ?? 0;
 
   // Drives the switch from the answer to the scoreboard during the gap between
   // questions. Purely a presentation decision — the engine still owns when the
@@ -283,6 +290,16 @@ function App() {
           {state.deadline && (
             <div style={{ maxWidth: '1100px', margin: '0 auto', width: '100%' }}>
               <Timer fraction={fraction} seconds={secondsLeft} />
+              {/* The room is watching this screen, not their phones, so the
+                  falling value belongs here as much as on the handset. */}
+              <div class="center" style={{ marginTop: '8px' }}>
+                <span
+                  class={`pill pill-brass${onOffer > q.points ? ' pill-live' : ''}`}
+                  style={{ fontSize: '1.3rem' }}
+                >
+                  {onOffer} pts
+                </span>
+              </div>
             </div>
           )}
           <h1 class="prompt center">{q.prompt}</h1>

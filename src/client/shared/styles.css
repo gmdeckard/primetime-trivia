@@ -311,6 +311,10 @@ input:focus { border-color: var(--brass); outline: none; }
   font-weight: 600;
 }
 .pill-brass { background: color-mix(in srgb, var(--brass) 18%, var(--surface)); border-color: var(--brass-deep); color: var(--brass); }
+/* While a bonus band is still live the value is worth looking at, so it reads
+   a shade hotter than the resting brass. No animation: this screen is held at
+   arm's length for twenty seconds and a pulsing number is a distraction. */
+.pill-live { background: color-mix(in srgb, var(--brass) 34%, var(--surface)); color: #ffe6ad; }
 .pill-ok { background: color-mix(in srgb, var(--correct) 18%, var(--surface)); border-color: #2f6b3d; color: #8fd79f; }
 .pill-bad { background: color-mix(in srgb, var(--wrong) 18%, var(--surface)); border-color: #6e2f2b; color: #f0a9a4; }
 

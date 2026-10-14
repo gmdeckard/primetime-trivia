@@ -568,7 +568,15 @@ export class Engine {
     const answers = Object.values(current.answers);
 
     if (this.state.phase === 'question' && q) {
-      current.awards = scoreQuestion(answers, this.correctDisplayIndex(), q.difficulty, this.state.config);
+      // The real window, not the configured one, so host-granted time widens
+      // the speed bands instead of penalising whoever answered before it.
+      current.awards = scoreQuestion(
+        answers,
+        this.correctDisplayIndex(),
+        q.difficulty,
+        this.state.config,
+        current.deadline - current.startedAt,
+      );
       for (const award of current.awards) {
         const team = this.state.teams[award.teamId];
         if (team) team.score += award.total;

@@ -112,6 +112,34 @@ export interface GameConfig {
   audience: string;
 }
 
+/**
+ * Stepped speed bands, as a share of the configured bonus.
+ *
+ * Shared rather than server-only because a band nobody can see is not a game
+ * mechanic. The player's screen shows what a correct answer is worth right
+ * now, and it has to step at exactly the same places the scoring does.
+ */
+export const SPEED_BANDS: ReadonlyArray<{ under: number; share: number }> = [
+  { under: 0.4, share: 1 },
+  { under: 0.7, share: 0.5 },
+];
+
+/** Share of the speed bonus earned, from elapsed as a fraction of the window. */
+export function speedShareAt(elapsed: number): number {
+  if (!Number.isFinite(elapsed)) return 0;
+  const f = Math.max(0, elapsed);
+  for (const band of SPEED_BANDS) {
+    if (f < band.under) return band.share;
+  }
+  return 0;
+}
+
+/** What a correct answer is worth at this moment, speed bonus included. */
+export function pointsAvailable(base: number, config: GameConfig, elapsed: number): number {
+  if (!config.speedBonus) return base;
+  return base + Math.round(config.speedBonusPoints * speedShareAt(elapsed));
+}
+
 export const POINTS_BY_DIFFICULTY: Record<Difficulty, number> = {
   1: 10,
   2: 15,
@@ -121,16 +149,30 @@ export const POINTS_BY_DIFFICULTY: Record<Difficulty, number> = {
 
 export const DEFAULT_CONFIG: GameConfig = {
   venueName: 'PrimeTime Trivia',
-  roundsPerBlock: 3,
-  questionsPerRound: 8,
-  secondsPerQuestion: 35,
+  // Two rounds of ten, which is the shape of the evening: ten questions, a
+  // short break, ten more, then the wager closes the block and the room gets
+  // a long break. Both boundaries already stop and wait for the MC.
+  roundsPerBlock: 2,
+  questionsPerRound: 10,
+  // 20s is the bar-trivia and seatback norm, and it is what makes a visible
+  // countdown feel like one. The accessibility work is done by 19px body text
+  // and 84px targets, not by a long clock: a 35s window mostly produced dead
+  // air, because the question auto-locks as soon as every team has answered.
+  secondsPerQuestion: 20,
   speedBonus: true,
-  speedBonusPoints: 5,
+  // Paid in stepped bands (see SPEED_BANDS above), so at difficulty 3
+  // a decisive answer scores 30, a considered one 25, and a last-second one
+  // the base 20. Big enough to feel, too small to beat knowing the answer.
+  speedBonusPoints: 10,
   finalWager: true,
   readAloud: false,
-  // Medium-hard by design: a warm-up, a climb, and two that should make the
+  // Medium-hard by design: a warm-up, a climb, and three that should make the
   // room argue. Flat-easy rounds are what make educated players stop coming.
-  difficultyMix: [2, 2, 3, 3, 4, 3, 3, 4],
+  //
+  // Must be at least as long as questionsPerRound. The template is cycled when
+  // it is shorter, so an 8-long mix in a 10-question round would end every
+  // round on its two easiest questions.
+  difficultyMix: [2, 2, 3, 3, 4, 3, 3, 4, 3, 4],
   categories: [],
   autoAdvance: true,
   revealDelaySeconds: 4,
@@ -197,6 +239,8 @@ export interface RevealView {
     numberAnswer?: number;
     correct: boolean;
     awarded: number;
+    /** Speed-band points inside `awarded`, so a player sees what pace earned. */
+    bonus: number;
     speedBonus: boolean;
   }>;
   /** Share of teams that got it right, shown to make a hard question feel fair. */
