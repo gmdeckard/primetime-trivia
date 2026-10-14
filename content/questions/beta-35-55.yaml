@@ -1,0 +1,655 @@
+# Beta test set, pitched at 35 to 55 (formative years roughly 1981-2016).
+#
+# This exists so people can test-drive a real night without burning questions
+# from the core bank, and without being asked about Sirimavo Bandaranaike. It
+# is tagged for its own age group, and because every core file is tagged
+# 55-75, picking one group in the MC controls swaps the material wholesale.
+#
+# Eight categories, ten questions each, shaped 2/5/3 across difficulties 2, 3
+# and 4 so any one of them can fill a ten-question round on its own. A night
+# is six rounds, which leaves two categories spare for the block wagers.
+#
+# The numeric tiebreakers are untagged on purpose and serve every group.
+
+audience: 35-55
+
+questions:
+  - id: b35-001
+    category: film-tv
+    difficulty: 2
+    prompt: In Back to the Future, what speed must the DeLorean reach to time travel?
+    answer: 88 miles per hour
+    distractors: [77 miles per hour, 99 miles per hour, 100 miles per hour]
+    fact: The car was picked because the designers wanted something a 1955 farmer could plausibly mistake for a spacecraft.
+
+  - id: b35-002
+    category: film-tv
+    difficulty: 2
+    prompt: Which film features a computer asking whether the user wants to play a game of thermonuclear war?
+    answer: WarGames
+    distractors: [Tron, Sneakers, The Net]
+    fact: It prompted a congressional hearing and is usually credited with shaping the first US computer crime law.
+
+  - id: b35-003
+    category: film-tv
+    difficulty: 3
+    prompt: Which 1993 film opens with a man being dragged into a crate by an unseen animal?
+    answer: Jurassic Park
+    distractors: [Congo, Anaconda, The Lost World]
+    fact: The raptors in that scene are a puppet. Only about fifteen minutes of the film uses computer animation at all.
+
+  - id: b35-004
+    category: film-tv
+    difficulty: 3
+    prompt: In The Shawshank Redemption, what does Andy use to hide his tunnel?
+    answer: A poster
+    distractors: [A bookshelf, A loose stone, A wardrobe]
+    fact: The film lost money on release and found its audience on cable and video rental.
+
+  - id: b35-005
+    category: film-tv
+    difficulty: 3
+    prompt: Which sitcom was set in a Boston bar where everybody knows your name?
+    answer: Cheers
+    distractors: [Taxi, Night Court, Barney Miller]
+    fact: It finished last in the ratings in its first season and was nearly cancelled.
+
+  - id: b35-006
+    category: film-tv
+    difficulty: 3
+    prompt: Which director made Reservoir Dogs and Pulp Fiction?
+    answer: Quentin Tarantino
+    distractors: [Robert Rodriguez, Guy Ritchie, Paul Thomas Anderson]
+    fact: He wrote much of Reservoir Dogs while working in a video rental shop in Manhattan Beach.
+
+  - id: b35-007
+    category: film-tv
+    difficulty: 3
+    prompt: In The Princess Bride, what is Inigo Montoya's stated purpose?
+    answer: To avenge his father
+    distractors: [To rescue Buttercup, To claim a title, To find a lost sword]
+    fact: The novel presents itself as an abridgement of an older book by a writer who never existed.
+
+  - id: b35-008
+    category: film-tv
+    difficulty: 4
+    prompt: Which 1982 film was a commercial disappointment before becoming a touchstone of science fiction?
+    answer: Blade Runner
+    distractors: [The Thing, Tron, Dune]
+    fact: It opened against E.T. and lost badly. There are at least seven distinct released cuts of it.
+
+  - id: b35-009
+    category: film-tv
+    difficulty: 4
+    prompt: Which actor played the lead in both Twelve Monkeys and Fight Club?
+    answer: Brad Pitt
+    distractors: [Edward Norton, Bruce Willis, Matt Damon]
+    fact: Norton and Willis each starred alongside him in one of the two, which is why the question needs both titles.
+
+  - id: b35-010
+    category: film-tv
+    difficulty: 4
+    prompt: Which television drama opened with a man receiving a cancer diagnosis and turning to chemistry?
+    answer: Breaking Bad
+    distractors: [The Shield, Weeds, Justified]
+    fact: The network nearly passed on it. Weeds had aired a suburban-drug-dealer premise two years earlier.
+
+  - id: b35-011
+    category: geography
+    difficulty: 2
+    prompt: Which country has the most natural lakes?
+    answer: Canada
+    distractors: [Russia, Finland, Sweden]
+    fact: More than half the lakes on earth are in Canada, which is one reason nobody has finished counting them.
+
+  - id: b35-012
+    category: geography
+    difficulty: 2
+    prompt: Which sea separates Europe from Africa at its narrowest point?
+    answer: The Mediterranean
+    distractors: [The Red Sea, The Adriatic, The Black Sea]
+    fact: At the Strait of Gibraltar the gap is about nine miles.
+
+  - id: b35-013
+    category: geography
+    difficulty: 3
+    prompt: Which country has the longest coastline in the world?
+    answer: Canada
+    distractors: [Russia, Indonesia, Norway]
+    fact: Its coast runs to roughly 125,000 miles once the Arctic islands are counted, several times that of any other country.
+
+  - id: b35-014
+    category: geography
+    difficulty: 3
+    prompt: Which African country was never colonised by a European power?
+    answer: Ethiopia
+    distractors: [Liberia, Morocco, Egypt]
+    fact: Italy occupied it from 1936 to 1941 but never established colonial rule. Liberia was founded by freed American slaves.
+
+  - id: b35-015
+    category: geography
+    difficulty: 3
+    prompt: Which two countries share the longest international land border?
+    answer: Canada and the United States
+    distractors: [Russia and Kazakhstan, Chile and Argentina, China and Mongolia]
+    fact: Around 5,500 miles. Russia and Kazakhstan are second at roughly 4,750.
+
+  - id: b35-016
+    category: geography
+    difficulty: 3
+    prompt: Which city is split between two continents?
+    answer: Istanbul
+    distractors: [Cairo, Suez, Vladivostok]
+    fact: The Bosphorus runs through it, so a commuter can cross from Europe to Asia on the way to work.
+
+  - id: b35-017
+    category: geography
+    difficulty: 3
+    prompt: Which desert is the largest hot desert in the world?
+    answer: The Sahara
+    distractors: [The Arabian, The Kalahari, The Gobi]
+    fact: Antarctica is the largest desert of any kind, which is why the question has to say hot.
+
+  - id: b35-018
+    category: geography
+    difficulty: 4
+    prompt: Which is the largest country lying entirely within Europe?
+    answer: Ukraine
+    distractors: [France, Spain, Poland]
+    fact: Russia is far larger but most of it is in Asia, which is exactly why the question has to say entirely.
+
+  - id: b35-019
+    category: geography
+    difficulty: 4
+    prompt: Which country has the most islands?
+    answer: Sweden
+    distractors: [Indonesia, The Philippines, Norway]
+    fact: Around 270,000, the overwhelming majority of them uninhabited rock. Indonesia has far more that people actually live on.
+
+  - id: b35-020
+    category: geography
+    difficulty: 4
+    prompt: Which is the only country to border both the Atlantic and the Indian Ocean on the African mainland?
+    answer: South Africa
+    distractors: [Egypt, Morocco, Mozambique]
+    fact: The two oceans are conventionally divided at Cape Agulhas, not the better-known Cape of Good Hope.
+
+  - id: b35-021
+    category: sports
+    difficulty: 2
+    prompt: How many players are on the field per team in a soccer match?
+    answer: Eleven
+    distractors: [Nine, Ten, Twelve]
+    fact: The goalkeeper is the only one permitted to handle the ball, and only inside the penalty area.
+
+  - id: b35-022
+    category: sports
+    difficulty: 2
+    prompt: Which basketball player wore number 23 for the Chicago Bulls?
+    answer: Michael Jordan
+    distractors: [Scottie Pippen, Dennis Rodman, Charles Barkley]
+    fact: He briefly wore 45 after returning from baseball, then switched back.
+
+  - id: b35-023
+    category: sports
+    difficulty: 3
+    prompt: Which country has won the most FIFA World Cups?
+    answer: Brazil
+    distractors: [Germany, Italy, Argentina]
+    fact: Five. Brazil is also the only country to have played in every tournament.
+
+  - id: b35-024
+    category: sports
+    difficulty: 3
+    prompt: In tennis, what is a score of zero called?
+    answer: Love
+    distractors: [Nil, Duck, Blank]
+    fact: The usual explanation is the French l'oeuf, the egg, for the shape of a nought. Nobody has proved it.
+
+  - id: b35-025
+    category: sports
+    difficulty: 3
+    prompt: In which event would you perform a Fosbury Flop?
+    answer: The high jump
+    distractors: [The pole vault, The long jump, The triple jump]
+    fact: Dick Fosbury won the 1968 Olympics going over backwards. Within a decade essentially everyone jumped that way.
+
+  - id: b35-026
+    category: sports
+    difficulty: 3
+    prompt: How many holes are played in a standard round of golf?
+    answer: Eighteen
+    distractors: [Twelve, Fifteen, Twenty-one]
+    fact: St Andrews settled on eighteen in 1764 and the rest of the sport copied it.
+
+  - id: b35-027
+    category: sports
+    difficulty: 3
+    prompt: Which cyclist won the Tour de France seven times before being stripped of all of them?
+    answer: Lance Armstrong
+    distractors: [Miguel Indurain, Greg LeMond, Jan Ullrich]
+    fact: Indurain won five in a row legitimately, and the stripped years were simply left with no winner at all.
+
+  - id: b35-028
+    category: sports
+    difficulty: 4
+    prompt: Which country hosted the first modern Olympic Games, in 1896?
+    answer: Greece
+    distractors: [France, Britain, The United States]
+    fact: A Frenchman, Pierre de Coubertin, organised the revival, which is why France is the tempting answer.
+
+  - id: b35-029
+    category: sports
+    difficulty: 4
+    prompt: In cricket, what is a score of zero by a batsman called?
+    answer: A duck
+    distractors: [A love, A blank, A nought]
+    fact: From duck's egg, the same joke as tennis making an egg out of a nought, arrived at separately.
+
+  - id: b35-030
+    category: sports
+    difficulty: 4
+    prompt: Which NFL team completed a perfect season including the Super Bowl?
+    answer: The 1972 Miami Dolphins
+    distractors: [The 1985 Chicago Bears, The 2007 New England Patriots, The 1976 Oakland Raiders]
+    fact: New England went 16-0 in the regular season in 2007 and then lost the Super Bowl, which is what keeps the record alone.
+
+  - id: b35-031
+    category: invention-tech
+    difficulty: 2
+    prompt: What does the acronym WWW stand for?
+    answer: World Wide Web
+    distractors: [World Wide Wire, Web Wide World, Wide World Web]
+    fact: Tim Berners-Lee wrote the first browser and the first server at CERN, originally to organise physics papers.
+
+  - id: b35-032
+    category: invention-tech
+    difficulty: 2
+    prompt: Which company released the first iPod, in 2001?
+    answer: Apple
+    distractors: [Sony, Creative, Microsoft]
+    fact: Creative had shipped a hard-drive music player two years earlier and later won a patent settlement over the interface.
+
+  - id: b35-033
+    category: invention-tech
+    difficulty: 3
+    prompt: Which format beat Betamax to become the home video standard?
+    answer: VHS
+    distractors: [LaserDisc, Video 2000, U-matic]
+    fact: Betamax had the better picture. VHS had the longer tape, and two hours was what a film needed.
+
+  - id: b35-034
+    category: invention-tech
+    difficulty: 3
+    prompt: Which operating system did Microsoft release in 1995 with a Start button?
+    answer: Windows 95
+    distractors: [Windows 3.1, Windows NT, Windows 98]
+    fact: Microsoft licensed a Rolling Stones song for the launch. It shipped on thirteen floppy disks for anyone without a CD drive.
+
+  - id: b35-035
+    category: invention-tech
+    difficulty: 3
+    prompt: What does GPS stand for?
+    answer: Global Positioning System
+    distractors: [General Positioning Service, Geographic Point System, Global Position Signal]
+    fact: Built by the US military, it was opened to civilians at full accuracy only in 2000.
+
+  - id: b35-036
+    category: invention-tech
+    difficulty: 3
+    prompt: Which company made the Walkman?
+    answer: Sony
+    distractors: [Panasonic, Toshiba, Sharp]
+    fact: The co-founder wanted something to play opera on long flights. It had no recording function, which salespeople thought would kill it.
+
+  - id: b35-037
+    category: invention-tech
+    difficulty: 3
+    prompt: Which search engine was founded in 1998 by two Stanford graduate students?
+    answer: Google
+    distractors: [Yahoo, AltaVista, Lycos]
+    fact: The ranking idea came from counting citations between academic papers.
+
+  - id: b35-038
+    category: invention-tech
+    difficulty: 4
+    prompt: Which protocol family underlies the internet and was adopted in 1983?
+    answer: TCP/IP
+    distractors: [HTTP, FTP, SMTP]
+    fact: The others all run on top of it. The switchover date was known in advance and is sometimes called the internet's birthday.
+
+  - id: b35-039
+    category: invention-tech
+    difficulty: 4
+    prompt: Which handheld device popularised the stylus and handwriting recognition in the 1990s?
+    answer: The PalmPilot
+    distractors: [The Apple Newton, The Psion Organiser, The Nokia Communicator]
+    fact: The Newton came first and its handwriting recognition was mocked so widely it turned up as a joke in Doonesbury.
+
+  - id: b35-040
+    category: invention-tech
+    difficulty: 4
+    prompt: What did the first commercially available mobile phone cost in 1983, roughly?
+    answer: 'About 4,000 dollars'
+    distractors: ['About 400 dollars', 'About 1,000 dollars', 'About 10,000 dollars']
+    fact: The Motorola DynaTAC weighed close to two pounds and gave about half an hour of talk time per ten-hour charge.
+
+  - id: b35-041
+    category: food-drink
+    difficulty: 2
+    prompt: Which country did sushi originate in?
+    answer: Japan
+    distractors: [China, Korea, Thailand]
+    fact: It began as a way of preserving fish in fermented rice, and the rice was thrown away.
+
+  - id: b35-042
+    category: food-drink
+    difficulty: 2
+    prompt: Which bean is coffee made from?
+    answer: The coffee cherry's seed
+    distractors: [The cocoa bean, The vanilla pod, The soy bean]
+    fact: It is not botanically a bean at all, but the stone of a fruit.
+
+  - id: b35-043
+    category: food-drink
+    difficulty: 3
+    prompt: Which spirit is the base of a mojito?
+    answer: Rum
+    distractors: [Vodka, Gin, Tequila]
+    fact: The mint is meant to be pressed, not crushed. Shredding it releases bitterness from the stems.
+
+  - id: b35-044
+    category: food-drink
+    difficulty: 3
+    prompt: Which country produces the most coffee?
+    answer: Brazil
+    distractors: [Colombia, Vietnam, Ethiopia]
+    fact: Brazil has led for over 150 years. Vietnam is second and grows mostly robusta for instant coffee.
+
+  - id: b35-045
+    category: food-drink
+    difficulty: 3
+    prompt: What makes bread rise?
+    answer: Carbon dioxide from yeast
+    distractors: [Steam alone, Oxygen from kneading, Gluten expanding]
+    fact: The gluten is what traps the gas. Without it the bubbles escape and the loaf stays flat.
+
+  - id: b35-046
+    category: food-drink
+    difficulty: 3
+    prompt: Which fish is in a traditional Caesar salad dressing?
+    answer: Anchovy
+    distractors: [Sardine, Mackerel, Tuna]
+    fact: The salad was invented in Tijuana and the original had no anchovies at all. The savoury note came from Worcestershire sauce.
+
+  - id: b35-047
+    category: food-drink
+    difficulty: 3
+    prompt: Which part of the plant is cinnamon?
+    answer: The bark
+    distractors: [The root, The seed, The flower]
+    fact: It is stripped from young shoots and curls into quills as it dries.
+
+  - id: b35-048
+    category: food-drink
+    difficulty: 4
+    prompt: Which wine grape is the most planted in the world?
+    answer: Cabernet Sauvignon
+    distractors: [Merlot, Chardonnay, Airen]
+    fact: It is a natural cross of Cabernet Franc and Sauvignon Blanc, discovered by DNA testing only in 1996.
+
+  - id: b35-049
+    category: food-drink
+    difficulty: 4
+    prompt: What distinguishes bourbon from other whiskeys?
+    answer: A mash of at least 51 percent corn
+    distractors: [Ageing for at least twelve years, Distillation in Kentucky only, A mash of at least 51 percent rye]
+    fact: It must also go into new charred oak barrels, which is why so many used ones end up in Scotland.
+
+  - id: b35-050
+    category: food-drink
+    difficulty: 4
+    prompt: Which acid gives sourdough bread its tang?
+    answer: Lactic acid
+    distractors: [Citric acid, Acetic acid, Malic acid]
+    fact: Bacteria in the starter make both lactic and acetic acid. The ratio is what separates a mild loaf from a sharp one.
+
+  - id: b35-051
+    category: words-language
+    difficulty: 2
+    prompt: Which language has the most native speakers?
+    answer: Mandarin Chinese
+    distractors: [English, Spanish, Hindi]
+    fact: English leads once second-language speakers are counted, which is why the question says native.
+
+  - id: b35-052
+    category: words-language
+    difficulty: 2
+    prompt: What is a word that reads the same backwards called?
+    answer: A palindrome
+    distractors: [An anagram, A homonym, An acronym]
+    fact: From the Greek for running back again.
+
+  - id: b35-053
+    category: words-language
+    difficulty: 3
+    prompt: What is a word formed from the initials of a phrase, pronounced as a word?
+    answer: An acronym
+    distractors: [An initialism, An abbreviation, A contraction]
+    fact: NASA is an acronym; FBI is an initialism, because nobody tries to say it as a word.
+
+  - id: b35-054
+    category: words-language
+    difficulty: 3
+    prompt: Which language contributed the words algebra, alcohol and admiral to English?
+    answer: Arabic
+    distractors: [Latin, Greek, Persian]
+    fact: The al in each is the Arabic definite article, carried into English attached to the noun.
+
+  - id: b35-055
+    category: words-language
+    difficulty: 3
+    prompt: What does the prefix pseudo mean?
+    answer: 'False'
+    distractors: [Before, Beyond, Together]
+    fact: From the Greek. It is the same root behind pseudonym, a false name.
+
+  - id: b35-056
+    category: words-language
+    difficulty: 3
+    prompt: What is it called when a phrase means something different from its literal words?
+    answer: An idiom
+    distractors: [A metaphor, A simile, An allegory]
+    fact: Kicking the bucket is the stock example, and nobody agrees where it came from.
+
+  - id: b35-057
+    category: words-language
+    difficulty: 3
+    prompt: Which punctuation mark joins two independent clauses without a conjunction?
+    answer: The semicolon
+    distractors: [The colon, The comma, The dash]
+    fact: Doing the same job with a comma alone is the comma splice, the most-corrected error in English.
+
+  - id: b35-058
+    category: words-language
+    difficulty: 4
+    prompt: What is a word that sounds like what it describes called?
+    answer: Onomatopoeia
+    distractors: [Assonance, Alliteration, Synecdoche]
+    fact: Languages disagree about the sounds. A dog says woof in English and ouaf in French.
+
+  - id: b35-059
+    category: words-language
+    difficulty: 4
+    prompt: Which writing system did ancient Mesopotamia use?
+    answer: Cuneiform
+    distractors: [Hieroglyphics, Linear B, Demotic]
+    fact: Pressed into wet clay with a reed, which is why the strokes are wedges. Hieroglyphics were Egyptian.
+
+  - id: b35-060
+    category: words-language
+    difficulty: 4
+    prompt: What is the study of word origins called?
+    answer: Etymology
+    distractors: [Entomology, Philology, Lexicography]
+    fact: Entomology is insects, and the two get mixed up often enough that dictionaries list the confusion.
+
+  - id: b35-061
+    category: us-places
+    difficulty: 2
+    prompt: Which city is home to the Space Needle?
+    answer: Seattle
+    distractors: [Portland, Vancouver, San Francisco]
+    fact: Built for the 1962 World's Fair and designed to survive winds far stronger than the city has ever recorded.
+
+  - id: b35-062
+    category: us-places
+    difficulty: 2
+    prompt: Which state is Silicon Valley in?
+    answer: California
+    distractors: [Washington, Oregon, Texas]
+    fact: The name comes from the silicon in semiconductors, coined by a trade journalist in 1971.
+
+  - id: b35-063
+    category: us-places
+    difficulty: 3
+    prompt: Which city is known as the Mile High City?
+    answer: Denver
+    distractors: [Salt Lake City, Albuquerque, Boise]
+    fact: One step on the Colorado capitol building is exactly a mile above sea level, and it has been re-measured and moved twice.
+
+  - id: b35-064
+    category: us-places
+    difficulty: 3
+    prompt: Which US city has the largest population?
+    answer: New York
+    distractors: [Los Angeles, Chicago, Houston]
+    fact: More than twice Los Angeles within the city limits, though the gap narrows sharply on a metro-area basis.
+
+  - id: b35-065
+    category: us-places
+    difficulty: 3
+    prompt: Which national park sits mostly in Wyoming and has a geyser called Old Faithful?
+    answer: Yellowstone
+    distractors: [Grand Teton, Glacier, Yosemite]
+    fact: Old Faithful is not the largest geyser there, only the most predictable, which is how it got the name.
+
+  - id: b35-066
+    category: us-places
+    difficulty: 3
+    prompt: Which US city opened the country's first subway?
+    answer: Boston
+    distractors: [New York, Philadelphia, Chicago]
+    fact: 1897, seven years ahead of New York. The first line was built largely to get streetcars off a congested Tremont Street.
+
+  - id: b35-067
+    category: us-places
+    difficulty: 3
+    prompt: Which state is the Mall of America in?
+    answer: Minnesota
+    distractors: [Illinois, Ohio, Michigan]
+    fact: Built on the site of the old Metropolitan Stadium. A seat inside marks where a Harmon Killebrew home run landed.
+
+  - id: b35-068
+    category: us-places
+    difficulty: 4
+    prompt: Which US state has the fewest people?
+    answer: Wyoming
+    distractors: [Vermont, Alaska, North Dakota]
+    fact: Fewer residents than several individual American cities, in the ninth largest state by area.
+
+  - id: b35-069
+    category: us-places
+    difficulty: 4
+    prompt: Which city hosted the 1996 Summer Olympics?
+    answer: Atlanta
+    distractors: [Los Angeles, Seoul, Barcelona]
+    fact: It beat Athens, which had expected the centenary games and did not take the loss well.
+
+  - id: b35-070
+    category: us-places
+    difficulty: 4
+    prompt: Which American city is built on a series of islands and bayous below sea level?
+    answer: New Orleans
+    distractors: [Charleston, Mobile, Galveston]
+    fact: Much of it sits below the Mississippi, which is held off by levees and runs past the city higher than the streets.
+
+  - id: b35-071
+    category: business-economics
+    difficulty: 2
+    prompt: Which company uses a swoosh as its logo?
+    answer: Nike
+    distractors: [Adidas, Puma, Reebok]
+    fact: A design student was paid 35 dollars for it in 1971. She was given company stock years later.
+
+  - id: b35-072
+    category: business-economics
+    difficulty: 2
+    prompt: Which company is identified by golden arches?
+    answer: McDonald's
+    distractors: [Burger King, Wendy's, Hardee's]
+    fact: The arches were part of the actual architecture of the early restaurants before anyone thought to use them as a logo.
+
+  - id: b35-073
+    category: business-economics
+    difficulty: 3
+    prompt: Which retailer began as a bookseller online in 1995?
+    answer: Amazon
+    distractors: [eBay, Barnes and Noble, Borders]
+    fact: Books were chosen because there were more titles than any shop could stock, so a catalogue was the whole advantage.
+
+  - id: b35-074
+    category: business-economics
+    difficulty: 3
+    prompt: What does IPO stand for?
+    answer: Initial public offering
+    distractors: [International purchase order, Investor profit option, Interim private offering]
+    fact: It is the point at which a private company's shares can be bought by anyone, and its accounts become public reading.
+
+  - id: b35-075
+    category: business-economics
+    difficulty: 3
+    prompt: Which energy company collapsed in 2001 in a major accounting scandal?
+    answer: Enron
+    distractors: [WorldCom, Tyco, Global Crossing]
+    fact: It took its auditor, Arthur Andersen, down with it, ending one of the five largest accounting firms in the world.
+
+  - id: b35-076
+    category: business-economics
+    difficulty: 3
+    prompt: Which company's rental business was disrupted by a mail-order DVD service it declined to buy?
+    answer: Blockbuster
+    distractors: [Hollywood Video, Movie Gallery, Family Video]
+    fact: Netflix is said to have offered itself for 50 million dollars in 2000 and been laughed out of the room.
+
+  - id: b35-077
+    category: business-economics
+    difficulty: 3
+    prompt: What is inflation?
+    answer: A general rise in prices over time
+    distractors: [A rise in unemployment, A fall in the money supply, A rise in interest rates]
+    fact: Central banks generally aim for a low positive rate, on the view that prices falling is harder to escape than prices rising.
+
+  - id: b35-078
+    category: business-economics
+    difficulty: 4
+    prompt: Which crisis began with the collapse of Lehman Brothers in 2008?
+    answer: The global financial crisis
+    distractors: [The dot-com crash, The savings and loan crisis, The Asian financial crisis]
+    fact: It was the largest bankruptcy filing in US history, and the firm had survived the Civil War and the Depression.
+
+  - id: b35-079
+    category: business-economics
+    difficulty: 4
+    prompt: Which Japanese manufacturing approach aims to eliminate waste and hold minimal inventory?
+    answer: Just-in-time
+    distractors: [Six Sigma, Total quality management, Kaizen costing]
+    fact: Developed at Toyota. It works beautifully until a supply chain breaks, which the 2020s demonstrated at length.
+
+  - id: b35-080
+    category: business-economics
+    difficulty: 4
+    prompt: Which currency was introduced in physical form in 2002?
+    answer: The euro
+    distractors: [The Swiss franc, The pound sterling, The Norwegian krone]
+    fact: It had existed since 1999 for accounting and electronic transfers. The notes and coins came three years later.

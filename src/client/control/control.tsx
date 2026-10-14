@@ -6,6 +6,20 @@ import { useCountdown, useGame } from '../shared/useGame';
 import { AutoAdvance, Board, ConnBanner, Toast } from '../shared/ui';
 
 /**
+ * Not shared/packs.ts AUDIENCES. That list drives generation, where 'any'
+ * means no era weighting. Here the config value is a filter, and the value
+ * that means no filter is the empty string: setting it to 'any' would match
+ * only questions literally tagged 'any' and exclude the entire bank.
+ */
+const AGE_GROUPS: Array<{ id: string; name: string }> = [
+  { id: '55-75', name: '55 to 75' },
+  { id: '35-55', name: '35 to 55' },
+  { id: '18-35', name: '18 to 35' },
+  { id: 'family', name: 'All ages' },
+  { id: '', name: 'No filter' },
+];
+
+/**
  * The MC's phone.
  *
  * Two rules shaped this screen. First, there is always exactly one obvious
@@ -215,6 +229,31 @@ function Setup({ state, send }: { state: ControlState; send: ReturnType<typeof u
       >
         Read questions aloud {state.config.readAloud ? 'on' : 'off'}
       </button>
+
+      {/*
+        Age group. The core bank is tagged 55-75, so picking another group
+        swaps the night's material wholesale rather than mixing it. An
+        untagged question (the numeric tiebreakers) suits every group and
+        stays in play throughout. The count is live, and views.ts already
+        warns when the selection cannot fill a block, so a group with nothing
+        written for it announces itself here rather than mid-round.
+      */}
+      <div class="stack" style={{ gap: '6px' }}>
+        <span class="faint">
+          Age group — {state.bank.availableInSelection} questions in play
+        </span>
+        <div class="grid2">
+          {AGE_GROUPS.map((group) => (
+            <button
+              key={group.id}
+              class={`btn btn-sm${state.config.audience === group.id ? ' btn-primary' : ''}`}
+              onClick={() => set({ audience: group.id })}
+            >
+              {group.name}
+            </button>
+          ))}
+        </div>
+      </div>
 
       {state.packs.length > 0 && (
         <div class="stack" style={{ gap: '6px' }}>

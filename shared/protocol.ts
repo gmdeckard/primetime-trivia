@@ -180,7 +180,10 @@ export const DEFAULT_CONFIG: GameConfig = {
   nextQuestionDelaySeconds: 10,
   avoidRecentNights: 8,
   packs: [],
-  audience: '',
+  // Not empty. Empty means no filter, which would let a set written for
+  // another age group into a normal night the moment one existed. The core
+  // bank is tagged 55-75, so this default is the bank as it has always been.
+  audience: '55-75',
 };
 
 // ---------------------------------------------------------------- views
