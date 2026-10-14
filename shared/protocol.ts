@@ -97,6 +97,17 @@ export interface GameConfig {
   categories: string[];
   /** Don't reuse a question asked within this many past nights. */
   avoidRecentNights: number;
+  /**
+   * Run the question -> lock -> reveal -> next cycle on a clock instead of
+   * three taps. The MC still owns every boundary that matters: starting a
+   * block, moving between rounds, the wager. Only the inside of a round runs
+   * itself, because that is the part where tapping competes with hosting.
+   */
+  autoAdvance: boolean;
+  /** Beat between answers locking and the answer appearing. Builds the pause. */
+  revealDelaySeconds: number;
+  /** How long the answer and its fact stay up before the next question. */
+  nextQuestionDelaySeconds: number;
   /** Pack ids switched on for tonight. The core bank is always available. */
   packs: string[];
   /** Restrict to questions for this audience. Empty means no restriction. */
@@ -124,6 +135,10 @@ export const DEFAULT_CONFIG: GameConfig = {
   // room argue. Flat-easy rounds are what make educated players stop coming.
   difficultyMix: [2, 2, 3, 3, 4, 3, 3, 4],
   categories: [],
+  autoAdvance: true,
+  revealDelaySeconds: 4,
+  // Long enough to read the fun fact aloud and let the room react.
+  nextQuestionDelaySeconds: 10,
   avoidRecentNights: 8,
   packs: [],
   audience: '',
@@ -207,6 +222,10 @@ export interface BaseState {
   question?: QuestionView;
   /** Epoch ms. Clients render their own countdown from this. */
   deadline?: number;
+  /** Epoch ms the game will move itself on, when auto-advance is running. */
+  autoAdvanceAt?: number;
+  /** True when the MC has paused auto-advance to talk. */
+  held: boolean;
   /** Team ids that have locked something in, for the "6 of 8 answered" strip. */
   answeredTeamIds: string[];
   reveal?: RevealView;
@@ -276,6 +295,7 @@ export type ClientMessage =
   | { t: 'rename_team'; teamId: string; name: string }
   | { t: 'remove_team'; teamId: string }
   | { t: 'set_round_category'; roundIndex: number; categoryId: string }
+  | { t: 'hold'; held: boolean }
   | { t: 'start_tiebreak' }
   | { t: 'end_night' }
   | { t: 'reset_night' }

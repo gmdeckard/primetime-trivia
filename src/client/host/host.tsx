@@ -3,7 +3,7 @@ import { useEffect } from 'preact/hooks';
 import type { HostState } from '../../../shared/protocol';
 import '../shared/styles.css';
 import { useCountdown, useGame, useSpeech } from '../shared/useGame';
-import { Badge, Board, Timer, Toast } from '../shared/ui';
+import { AutoAdvance, Badge, Board, Timer, Toast } from '../shared/ui';
 
 /**
  * The big screen. Read-only, and sized for a projector at the far end of a
@@ -204,7 +204,15 @@ function App() {
           <AnswerGrid state={state} />
           {state.phase === 'question' && <AnsweredStrip state={state} />}
           {state.phase === 'locked' && (
-            <div class="center"><span class="pill pill-brass" style={{ fontSize: '1.3rem' }}>Answers in</span></div>
+            <div class="stack" style={{ gap: '14px' }}>
+              <div class="center"><span class="pill pill-brass" style={{ fontSize: '1.3rem' }}>Answers in</span></div>
+              <AutoAdvance
+                at={state.autoAdvanceAt}
+                total={state.config.revealDelaySeconds}
+                label="Answer in"
+                held={state.held}
+              />
+            </div>
           )}
           {state.reveal && (
             <>
@@ -214,6 +222,12 @@ function App() {
                   {state.reveal.correctPct}% of teams got it
                 </span>
               </div>
+              <AutoAdvance
+                at={state.autoAdvanceAt}
+                total={state.config.nextQuestionDelaySeconds}
+                label="Next question in"
+                held={state.held}
+              />
             </>
           )}
         </div>

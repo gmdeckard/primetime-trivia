@@ -87,6 +87,10 @@ export interface NightState {
   /** Score snapshot from the last scoreboard shown, for the delta column. */
   prevScores: Record<string, number>;
   tiebreakTeamIds?: string[];
+  /** Epoch ms the game will advance itself, when auto-advance is running. */
+  autoAdvanceAt?: number;
+  /** MC pressed Hold — auto-advance stays parked until they release it. */
+  held?: boolean;
   message?: string;
 }
 
@@ -103,6 +107,8 @@ const LIVE_PHASES: Phase[] = ['question', 'wager_question', 'tiebreak'];
 export class Engine {
   private state: NightState;
   private timer: NodeJS.Timeout | undefined;
+  /** Drives auto-advance. Kept apart from `timer`, which is the answer clock. */
+  private autoTimer: NodeJS.Timeout | undefined;
   private listeners = new Set<() => void>();
 
   constructor(
@@ -121,6 +127,8 @@ export class Engine {
         this.state.phase = this.state.phase === 'question' ? 'locked' : this.state.phase;
         this.state.message = 'Resumed after a restart — answers for this question were locked.';
       }
+      this.state.autoAdvanceAt = undefined;
+      this.state.held = false;
       for (const p of Object.values(this.state.players)) p.connected = false;
     } else {
       this.state = this.freshNight(config);
@@ -382,6 +390,54 @@ export class Engine {
     this.timer = setTimeout(() => this.lockNow('timer'), ms);
   }
 
+  private clearAutoTimer() {
+    if (this.autoTimer) clearTimeout(this.autoTimer);
+    this.autoTimer = undefined;
+    this.state.autoAdvanceAt = undefined;
+  }
+
+  /**
+   * Queue the next automatic step.
+   *
+   * Only ever called for the two beats inside a round: answers locking, and the
+   * answer being up. Everything else — starting a block, moving between rounds,
+   * the wager, a tiebreak — stays on the MC's thumb, because those are the
+   * moments they want to talk over.
+   */
+  private scheduleAuto(seconds: number) {
+    this.clearAutoTimer();
+    if (!this.state.config.autoAdvance || this.state.held) return;
+    const ms = Math.max(500, Math.round(seconds * 1000));
+    this.state.autoAdvanceAt = Date.now() + ms;
+    this.autoTimer = setTimeout(() => {
+      this.autoTimer = undefined;
+      this.state.autoAdvanceAt = undefined;
+      this.advance();
+    }, ms);
+  }
+
+  /** True when advancing from the reveal leads to another question, not a scoreboard. */
+  private moreQuestionsInRound(): boolean {
+    const round = this.state.rounds[this.state.roundIndex];
+    return !!round && !!round.questionIds[round.cursor + 1];
+  }
+
+  /** Pause or resume auto-advance so the MC can tell a story. */
+  setHeld(held: boolean) {
+    this.state.held = held;
+    if (held) {
+      this.clearAutoTimer();
+      this.commit({ kind: 'held' });
+      return;
+    }
+    // Releasing picks the countdown back up from wherever we are.
+    if (this.state.phase === 'locked') this.scheduleAuto(this.state.config.revealDelaySeconds);
+    else if (this.state.phase === 'reveal' && this.moreQuestionsInRound()) {
+      this.scheduleAuto(this.state.config.nextQuestionDelaySeconds);
+    }
+    this.commit({ kind: 'released' });
+  }
+
   extendTimer(seconds: number) {
     const current = this.state.current;
     if (!current || current.locked) return;
@@ -502,6 +558,7 @@ export class Engine {
         if (team) team.score += award.total;
       }
       this.state.phase = 'locked';
+      this.scheduleAuto(this.state.config.revealDelaySeconds);
     } else if (this.state.phase === 'wager_question' && q) {
       const correctIndex = this.correctDisplayIndex();
       current.awards = answers.map((a) => {
@@ -547,6 +604,7 @@ export class Engine {
   skipQuestion() {
     if (!this.state.current) return;
     this.clearTimer();
+    this.clearAutoTimer();
     const round = this.state.rounds[this.state.roundIndex];
     const skipped = this.state.current.questionId;
     this.state.current = undefined;
@@ -587,6 +645,8 @@ export class Engine {
   /** The MC's one big button. Every phase knows what comes next. */
   advance() {
     const s = this.state;
+    // Whether this came from a thumb or the clock, any pending step is now spent.
+    this.clearAutoTimer();
     switch (s.phase) {
       case 'lobby':
         this.startBlock();
@@ -623,6 +683,9 @@ export class Engine {
 
       case 'locked':
         s.phase = 'reveal';
+        if (this.moreQuestionsInRound()) {
+          this.scheduleAuto(s.config.nextQuestionDelaySeconds);
+        }
         this.commit({ kind: 'revealed' });
         return;
 
@@ -771,5 +834,6 @@ export class Engine {
 
   dispose() {
     this.clearTimer();
+    this.clearAutoTimer();
   }
 }

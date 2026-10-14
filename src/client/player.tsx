@@ -3,7 +3,7 @@ import { useEffect, useState } from 'preact/hooks';
 import type { PlayerState } from '../../shared/protocol';
 import './shared/styles.css';
 import { useCountdown, useGame } from './shared/useGame';
-import { Badge, Board, ConnBanner, Keypad, Timer, Toast } from './shared/ui';
+import { AutoAdvance, Badge, Board, ConnBanner, Keypad, Timer, Toast } from './shared/ui';
 
 /**
  * The player view. One screen at a time, one decision at a time.
@@ -241,6 +241,12 @@ function Reveal({ state }: { state: PlayerState }) {
         <p class="muted" style={{ fontFamily: 'var(--serif)' }}>{reveal.funFact}</p>
         <p class="faint">{reveal.correctPct}% of teams got this one.</p>
       </div>
+      <AutoAdvance
+        at={state.autoAdvanceAt}
+        total={state.config.nextQuestionDelaySeconds}
+        label="Next question in"
+        held={state.held}
+      />
     </>
   );
 }

@@ -3,7 +3,7 @@ import { useEffect, useState } from 'preact/hooks';
 import type { ControlState, GameConfig } from '../../../shared/protocol';
 import '../shared/styles.css';
 import { useCountdown, useGame } from '../shared/useGame';
-import { Board, ConnBanner, Toast } from '../shared/ui';
+import { AutoAdvance, Board, ConnBanner, Toast } from '../shared/ui';
 
 /**
  * The MC's phone.
@@ -74,8 +74,14 @@ function primaryAction(state: ControlState): { label: string; hint: string } {
     case 'block_intro': return { label: 'First round', hint: 'Introduce the category' };
     case 'round_intro': return { label: 'First question', hint: state.round?.categoryName ?? '' };
     case 'question': return { label: 'Answers in', hint: `${state.answeredTeamIds.length} of ${state.teams.length} answered` };
-    case 'locked': return { label: 'Reveal the answer', hint: 'Build it up a moment' };
-    case 'reveal': return { label: 'Next question', hint: state.upNext ?? '' };
+    case 'locked':
+      return state.autoAdvanceAt
+        ? { label: 'Reveal now', hint: 'Revealing by itself shortly' }
+        : { label: 'Reveal the answer', hint: 'Build it up a moment' };
+    case 'reveal':
+      return state.autoAdvanceAt
+        ? { label: 'Next now', hint: state.upNext ?? '' }
+        : { label: 'Next question', hint: state.upNext ?? '' };
     case 'round_scores': return { label: 'Continue', hint: 'Read out the top three' };
     case 'wager_bet': return { label: 'Show the final question', hint: 'Once every team has bet' };
     case 'wager_question': return { label: 'Answers in', hint: 'Lock the final question' };
@@ -159,6 +165,48 @@ function Setup({ state, send }: { state: ControlState; send: ReturnType<typeof u
             </button>
           ))}
         </div>
+      </div>
+
+      <div class="stack" style={{ gap: '6px' }}>
+        <span class="faint">
+          Pacing — {state.config.autoAdvance
+            ? `reveals after ${state.config.revealDelaySeconds}s, moves on after ${state.config.nextQuestionDelaySeconds}s`
+            : 'you tap through every step'}
+        </span>
+        <button
+          class={`btn${state.config.autoAdvance ? ' btn-primary' : ''}`}
+          onClick={() => set({ autoAdvance: !state.config.autoAdvance })}
+        >
+          Run the round automatically {state.config.autoAdvance ? 'on' : 'off'}
+        </button>
+        {state.config.autoAdvance && (
+          <>
+            <span class="faint">Pause before the answer</span>
+            <div class="grid3">
+              {[2, 4, 6].map((n) => (
+                <button
+                  key={n}
+                  class={`btn btn-sm${state.config.revealDelaySeconds === n ? ' btn-primary' : ''}`}
+                  onClick={() => set({ revealDelaySeconds: n })}
+                >
+                  {n}s
+                </button>
+              ))}
+            </div>
+            <span class="faint">Time on the answer — long enough to read the fact aloud</span>
+            <div class="grid3">
+              {[7, 10, 15].map((n) => (
+                <button
+                  key={n}
+                  class={`btn btn-sm${state.config.nextQuestionDelaySeconds === n ? ' btn-primary' : ''}`}
+                  onClick={() => set({ nextQuestionDelaySeconds: n })}
+                >
+                  {n}s
+                </button>
+              ))}
+            </div>
+          </>
+        )}
       </div>
 
       <div class="grid2">
@@ -437,6 +485,24 @@ function App() {
       </div>
 
       <div class="control-sticky">
+        {(state.autoAdvanceAt || state.held) && (
+          <div class="row" style={{ gap: '10px', marginBottom: '10px' }}>
+            <div class="grow">
+              <AutoAdvance
+                at={state.autoAdvanceAt}
+                total={state.phase === 'locked' ? state.config.revealDelaySeconds : state.config.nextQuestionDelaySeconds}
+                label={state.phase === 'locked' ? 'Revealing in' : 'Next in'}
+                held={state.held}
+              />
+            </div>
+            <button
+              class={`btn btn-sm${state.held ? ' btn-primary' : ''}`}
+              onClick={() => send({ t: 'hold', held: !state.held })}
+            >
+              {state.held ? 'Resume' : 'Hold'}
+            </button>
+          </div>
+        )}
         <button class="btn btn-primary btn-lg btn-block" onClick={() => send({ t: 'advance' })} disabled={state.phase === 'night_over'}>
           {action.label}
         </button>

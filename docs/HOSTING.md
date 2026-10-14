@@ -80,6 +80,10 @@ On your phone, before you start:
   offered, and the screen tells you the estimated running time
 - **Seconds per question** — 35 is the default; 25 for a sharp crowd, 50 if
   there is a lot of discussion at the tables
+- **Run the round automatically** — on by default. Reveals the answer a few
+  seconds after the timer, then moves on. Tune the two pauses underneath: the
+  beat before the answer, and how long the answer stays up. Lengthen the second
+  one if you like to talk around the fun fact.
 - **Speed bonus** — 5 points for the fastest correct team. Turn it off if the
   room is mixed and you want knowledge alone to decide.
 - **Final wager** — a Jeopardy-style bet to close the block. Leave it on; it
@@ -89,10 +93,29 @@ On your phone, before you start:
 
 ## During the night
 
-There is one large button at the bottom of your phone, and it always does the
-right next thing — start, show the question, lock the answers, reveal, next.
-The label tells you what it will do and the line underneath gives you something
-to say. Space bar does the same thing, so a presentation clicker works.
+**The round runs itself.** Once a question is up, the game locks the answers
+when the timer runs out, pauses a beat, reveals the answer, leaves it up long
+enough for you to read the fact aloud, and moves to the next question. You do
+not need to touch anything for a whole round.
+
+Every screen shows the same countdown — "Next question in 7" — so the room
+knows it is still moving and you know exactly how long you have to talk.
+
+**Hold** pauses it whenever you want to tell a story, settle an argument, or
+wait for someone to come back from the bar. Press it again to carry on from
+where you were. The big button also still works: tapping it skips the rest of
+the countdown and moves on immediately.
+
+Auto-advance deliberately **stops at the end of every round**. Scoreboards,
+the move to the next category, the final wager and tiebreakers all wait for
+you, because those are the moments you want to talk over.
+
+If you would rather drive every step yourself, turn off **Run the round
+automatically** in Setup and the game waits for you at each stage.
+
+One large button sits at the bottom of your phone and always does the right
+next thing. The label tells you what it will do and the line underneath gives
+you something to say. Space bar does the same, so a presentation clicker works.
 
 While a question is live you also get:
 

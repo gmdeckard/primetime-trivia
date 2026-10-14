@@ -303,3 +303,132 @@ test('starting a block with nobody seated is refused', () => {
   const engine = freshEngine();
   assert.throws(() => engine.startBlock(), /no teams/i);
 });
+
+// --------------------------------------------------------------- auto-advance
+
+const wait = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+/** Seat teams and drive to the first live question. */
+function toFirstQuestion(engine: Engine, teams = 2) {
+  const seated = seatTeams(engine, teams);
+  engine.startBlock();
+  engine.advance(); // block_intro -> round_intro
+  engine.advance(); // -> question
+  return seated;
+}
+
+test('auto-advance walks lock -> reveal -> next question on its own', async () => {
+  const engine = freshEngine({
+    questionsPerRound: 3,
+    autoAdvance: true,
+    revealDelaySeconds: 0.6,
+    nextQuestionDelaySeconds: 0.6,
+  });
+  const teams = toFirstQuestion(engine);
+
+  // Everyone answers, which locks the question immediately.
+  for (const team of teams) engine.answer(team.players[0]!, 0);
+  assert.equal(engine.snapshot().phase, 'locked');
+  assert.ok(engine.snapshot().autoAdvanceAt, 'a reveal should be queued');
+
+  await wait(900);
+  assert.equal(engine.snapshot().phase, 'reveal', 'should have revealed by itself');
+  assert.ok(engine.snapshot().autoAdvanceAt, 'the next question should be queued');
+
+  await wait(900);
+  assert.equal(engine.snapshot().phase, 'question', 'should have moved on by itself');
+  assert.equal(engine.snapshot().current?.position, 2, 'and be on the second question');
+});
+
+test('auto-advance stops at the end of a round so the MC can talk', async () => {
+  const engine = freshEngine({
+    questionsPerRound: 1,
+    autoAdvance: true,
+    revealDelaySeconds: 0.6,
+    nextQuestionDelaySeconds: 0.6,
+  });
+  const teams = toFirstQuestion(engine);
+  for (const team of teams) engine.answer(team.players[0]!, 0);
+
+  await wait(900);
+  assert.equal(engine.snapshot().phase, 'reveal');
+  assert.equal(
+    engine.snapshot().autoAdvanceAt,
+    undefined,
+    'the last question of a round must not queue another step',
+  );
+
+  await wait(900);
+  assert.equal(engine.snapshot().phase, 'reveal', 'should still be waiting on the MC');
+});
+
+test('hold parks auto-advance, releasing picks it back up', async () => {
+  const engine = freshEngine({
+    questionsPerRound: 3,
+    autoAdvance: true,
+    revealDelaySeconds: 0.6,
+    nextQuestionDelaySeconds: 0.6,
+  });
+  const teams = toFirstQuestion(engine);
+  for (const team of teams) engine.answer(team.players[0]!, 0);
+
+  engine.setHeld(true);
+  assert.equal(engine.snapshot().autoAdvanceAt, undefined, 'hold should cancel the pending step');
+  await wait(900);
+  assert.equal(engine.snapshot().phase, 'locked', 'held means held');
+
+  engine.setHeld(false);
+  assert.ok(engine.snapshot().autoAdvanceAt, 'releasing should re-arm');
+  await wait(900);
+  assert.equal(engine.snapshot().phase, 'reveal');
+});
+
+test('a manual advance cancels the queued one, so nothing double-fires', async () => {
+  const engine = freshEngine({
+    questionsPerRound: 4,
+    autoAdvance: true,
+    revealDelaySeconds: 5,
+    nextQuestionDelaySeconds: 5,
+  });
+  const teams = toFirstQuestion(engine);
+  for (const team of teams) engine.answer(team.players[0]!, 0);
+
+  engine.advance(); // MC reveals early
+  assert.equal(engine.snapshot().phase, 'reveal');
+  engine.advance(); // MC moves on early
+  assert.equal(engine.snapshot().phase, 'question');
+  assert.equal(engine.snapshot().current?.position, 2);
+
+  // The original 5s timers must not still be out there waiting to skip a question.
+  await wait(700);
+  assert.equal(engine.snapshot().current?.position, 2, 'a stale timer skipped a question');
+});
+
+test('auto-advance off leaves every step to the MC', async () => {
+  const engine = freshEngine({ questionsPerRound: 3, autoAdvance: false });
+  const teams = toFirstQuestion(engine);
+  for (const team of teams) engine.answer(team.players[0]!, 0);
+
+  assert.equal(engine.snapshot().phase, 'locked');
+  assert.equal(engine.snapshot().autoAdvanceAt, undefined);
+  await wait(700);
+  assert.equal(engine.snapshot().phase, 'locked', 'nothing should move without the MC');
+});
+
+test('a resumed night does not fire a countdown that expired while it slept', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'primetime-auto-'));
+  dirs.push(dir);
+  const store = new Store(dir);
+  const first = new Engine(bank, store, { questionsPerRound: 3, autoAdvance: true, revealDelaySeconds: 60 });
+  engines.push(first);
+  const teams = toFirstQuestion(first);
+  for (const team of teams) first.answer(team.players[0]!, 0);
+  assert.ok(first.snapshot().autoAdvanceAt, 'a step was queued before the restart');
+  first.dispose();
+
+  const resumed = new Engine(bank, store, undefined, store.loadNight());
+  engines.push(resumed);
+  assert.equal(resumed.snapshot().autoAdvanceAt, undefined, 'the stale countdown must be dropped');
+  assert.equal(resumed.snapshot().held, false);
+  resumed.dispose();
+});

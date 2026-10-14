@@ -1,4 +1,5 @@
 import type { ComponentChildren } from 'preact';
+import { useEffect, useState } from 'preact/hooks';
 import type { ConnStatus } from './useGame';
 
 export const LETTERS = ['A', 'B', 'C', 'D'] as const;
@@ -26,6 +27,53 @@ export function Timer({ fraction, seconds }: { fraction: number; seconds: number
       </div>
       <div class="timer-count" aria-live="off">{seconds}</div>
       <span class="sr-only" role="timer">{seconds} seconds remaining</span>
+    </div>
+  );
+}
+
+/**
+ * The "moving on in N" strip shown while auto-advance is counting down.
+ *
+ * Deliberately calm: a shrinking bar and a number, no flashing. It exists so
+ * the room knows the game is still running and the MC knows exactly how long
+ * they have to say something before it moves.
+ */
+export function AutoAdvance({
+  at,
+  total,
+  label,
+  held,
+}: {
+  at?: number;
+  total: number;
+  label: string;
+  held?: boolean;
+}) {
+  const [now, setNow] = useState(() => Date.now());
+  useEffect(() => {
+    if (!at || held) return;
+    const id = setInterval(() => setNow(Date.now()), 100);
+    return () => clearInterval(id);
+  }, [at, held]);
+
+  if (held) {
+    return (
+      <div class="row" style={{ justifyContent: 'center' }}>
+        <span class="pill">Paused</span>
+      </div>
+    );
+  }
+  if (!at) return null;
+
+  const msLeft = Math.max(0, at - now);
+  const seconds = Math.ceil(msLeft / 1000);
+  const fraction = Math.max(0, Math.min(1, msLeft / (total * 1000)));
+
+  return (
+    <div class="autonext">
+      <span class="autonext-label">{label}</span>
+      <span class="autonext-bar"><i style={{ width: `${fraction * 100}%` }} /></span>
+      <span class="autonext-count tabular">{seconds}</span>
     </div>
   );
 }

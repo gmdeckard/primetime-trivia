@@ -96,7 +96,9 @@ about it. It never shows the answer key early.
 
 **The MC's phone** (`/control`) has one large primary button pinned to the
 bottom that always does the obvious next thing, plus the answer and a peek at
-the next question. The point of separating this from the host screen is that
+the next question. Inside a round the game advances itself — lock, reveal,
+next — so the MC can work the room instead of the laptop, with a **Hold**
+button for when they want to talk. It stops by itself at every round boundary. The point of separating this from the host screen is that
 the MC can run the room while facing it, instead of hunched over the laptop.
 Space bar also advances, so a bluetooth clicker works.
 

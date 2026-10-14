@@ -128,6 +128,8 @@ function baseState(engine: Engine): BaseState {
     round: roundView(engine),
     question: questionView(engine),
     deadline: current && !current.locked ? current.deadline : undefined,
+    autoAdvanceAt: s.autoAdvanceAt,
+    held: !!s.held,
     answeredTeamIds: current ? Object.keys(current.answers) : [],
     reveal: revealView(engine),
     message: s.message,

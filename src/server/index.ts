@@ -193,7 +193,7 @@ wss.on('connection', (socket) => {
       const controlOnly = new Set<ClientMessage['t']>([
         'set_config', 'start_block', 'advance', 'reveal', 'lock_now', 'extend_timer',
         'skip_question', 'replace_question', 'adjust_score', 'rename_team', 'remove_team',
-        'set_round_category', 'start_tiebreak', 'end_night', 'reset_night', 'say',
+        'set_round_category', 'start_tiebreak', 'end_night', 'reset_night', 'say', 'hold',
       ]);
       if (controlOnly.has(msg.t) && client.role !== 'control') return;
 
@@ -217,6 +217,7 @@ wss.on('connection', (socket) => {
         case 'rename_team': engine.renameTeam(msg.teamId, msg.name); break;
         case 'remove_team': engine.removeTeam(msg.teamId); break;
         case 'set_round_category': engine.setRoundCategory(msg.roundIndex, msg.categoryId); break;
+        case 'hold': engine.setHeld(msg.held); break;
         case 'start_tiebreak': engine.startTiebreak(); break;
         case 'end_night': engine.endNight(); break;
         case 'reset_night': engine.resetNight(); break;
