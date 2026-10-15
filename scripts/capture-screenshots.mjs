@@ -126,12 +126,12 @@ try {
   await shoot(mc, '05-control-login');
   await press(mc, PASSWORD);
   await tap(mc, 'Unlock');
-  await mc.locator('.control-sticky > button').waitFor({ state: 'visible', timeout: 10000 });
+  await mc.locator('.control-primary').waitFor({ state: 'visible', timeout: 10000 });
   await pause(mc, 900);
   await shoot(mc, '06-control-setup');
 
   for (let i = 0; i < 3; i++) {
-    await mc.locator('.control-sticky > button').click();
+    await mc.locator('.control-primary').click();
     await pause(mc, 700);
   }
   await pause(host, 900);
@@ -149,9 +149,9 @@ try {
   await shoot(host, '12-host-answers-arriving');
 
   // --- reveal
-  await mc.locator('.control-sticky > button').click();
+  await mc.locator('.control-primary').click();
   await pause(mc, 700);
-  await mc.locator('.control-sticky > button').click();
+  await mc.locator('.control-primary').click();
   await pause(host, 1100);
   await shoot(host, '13-host-reveal');
   await shoot(ann, '14-player-reveal');
@@ -173,7 +173,7 @@ try {
       await dave.locator('.answer').nth(2).click().catch(() => {});
       await pause(mc, 250);
     }
-    await mc.locator('.control-sticky > button').click();
+    await mc.locator('.control-primary').click();
     await pause(mc, 420);
   }
   await pause(host, 900);

@@ -238,6 +238,48 @@ test('re-tapping the same answer keeps the time the team earned', async () => {
   assert.ok(engine.snapshot().current!.answers[teamId]!.elapsedMs > first, 'changing your mind costs what it costs');
 });
 
+/*
+ * Value: protects=a paused round really stops, including a question already on
+ *   screen, and gives the paused time back rather than eating it;
+ *   fails_when=setHeld goes back to only clearing the auto-advance timer — the
+ *   question then locks on its original deadline while the MC is dealing with
+ *   whatever interrupted them, and the room loses the answer and the points;
+ *   why_new=every existing hold test pauses in the gap between questions,
+ *   which is the one case the old code handled; seam=none;
+ *   no_claim=says nothing about pausing a wager or a tiebreak.
+ */
+test('pausing stops a live question, and resuming gives the time back', async () => {
+  const engine = freshEngine({ questionsPerRound: 3, secondsPerQuestion: 0.6, autoAdvance: false });
+  const teams = seatTeams(engine, 2);
+  engine.startBlock();
+  engine.advance();
+  engine.advance();
+  assert.equal(engine.snapshot().phase, 'question');
+  const before = engine.snapshot().current!.deadline;
+
+  engine.setHeld(true);
+  await wait(500);
+  assert.equal(engine.snapshot().phase, 'question', 'a paused question must not lock on its old clock');
+
+  // And the room cannot answer into a round the MC has stopped.
+  engine.answer(teams[0]!.players[0]!, 1);
+  assert.equal(engine.snapshot().current!.answers[teams[0]!.teamId], undefined, 'paused means paused at the tables too');
+
+  engine.setHeld(false);
+  const after = engine.snapshot().current!;
+  assert.ok(after.deadline > before, 'the paused time is owed back');
+  assert.ok(
+    Math.abs((after.deadline - after.startedAt) - 600) < 120,
+    `the window must keep its width, got ${after.deadline - after.startedAt}ms`,
+  );
+
+  engine.answer(teams[0]!.players[0]!, 1);
+  assert.ok(engine.snapshot().current!.answers[teams[0]!.teamId], 'and answering works again');
+
+  await wait(800);
+  assert.equal(engine.snapshot().phase, 'locked', 'the restarted clock still closes it');
+});
+
 test('the MC can still close a question early', () => {
   const engine = freshEngine({ questionsPerRound: 3 });
   const teams = seatTeams(engine, 2);

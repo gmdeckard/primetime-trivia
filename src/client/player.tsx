@@ -111,7 +111,7 @@ function Question({ state, send }: { state: PlayerState; send: ReturnType<typeof
           {state.round?.categoryName} · {q.position}/{q.ofTotal}
         </span>
         <span class="pill pill-brass pill-live">
-          {onOffer} pts{!locked && state.deadline ? ` · ${secondsLeft}s` : ''}
+          {state.held ? 'Paused' : `${onOffer} pts${!locked && state.deadline ? ` · ${secondsLeft}s` : ''}`}
         </span>
       </div>
 
@@ -150,7 +150,8 @@ function Question({ state, send }: { state: PlayerState; send: ReturnType<typeof
       {chosen !== undefined && !locked && (
         <p class="center muted">{['A', 'B', 'C', 'D'][chosen]} is in. Tap another to change your mind.</p>
       )}
-      {chosen === undefined && !locked && <p class="center muted">Tap your answer.</p>}
+      {state.held && <p class="center muted">The MC paused the round.</p>}
+      {chosen === undefined && !locked && !state.held && <p class="center muted">Tap your answer.</p>}
       {locked && !reveal && (
         <p class="center muted">
           {chosen === undefined ? 'No answer from your team.' : `${['A', 'B', 'C', 'D'][chosen]} is locked in.`}

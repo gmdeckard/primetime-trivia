@@ -160,8 +160,10 @@ function baseState(engine: Engine, role: 'host' | 'control' | 'player', teamId?:
     block: { index: s.blockIndex, ofTotal: null },
     round: roundView(engine),
     question: questionView(engine),
-    deadline: current && !current.locked ? current.deadline : undefined,
-    startedAt: current && !current.locked ? current.startedAt : undefined,
+    // Withheld while paused: a countdown that keeps falling on twenty handsets
+    // while the server's clock is stopped is worse than no countdown at all.
+    deadline: current && !current.locked && !s.held ? current.deadline : undefined,
+    startedAt: current && !current.locked && !s.held ? current.startedAt : undefined,
     autoAdvanceAt: s.autoAdvanceAt,
     held: !!s.held,
     answeredTeamIds: role === 'player' ? [] : answered,

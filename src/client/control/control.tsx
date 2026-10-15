@@ -478,6 +478,7 @@ function App() {
 
   const action = primaryAction(state);
   const live = state.phase === 'question' || state.phase === 'wager_question' || state.phase === 'tiebreak';
+  const pausable = state.phase !== 'lobby' && state.phase !== 'night_over';
 
   return (
     <div class="control">
@@ -529,7 +530,13 @@ function App() {
       <div class="card stack">
         <div class="row-between">
           <span class="pill pill-brass">{state.phase.replace(/_/g, ' ')}</span>
-          {live && <span class="pill">{secondsLeft}s · {state.answeredCount}/{state.entryCount} in</span>}
+          {live && (
+            <span class="pill">
+              {/* The deadline is withheld while paused, so secondsLeft reads 0.
+                  Saying "0s" on a stopped clock is worse than saying nothing. */}
+              {state.held ? 'Paused' : `${secondsLeft}s`} · {state.answeredCount}/{state.entryCount} in
+            </span>
+          )}
           {state.round && <span class="faint">R{state.round.index}/{state.round.ofTotal}</span>}
         </div>
 
@@ -629,7 +636,7 @@ function App() {
       )}
 
       <div class="control-sticky">
-        {(state.autoAdvanceAt || state.held) && (
+        {state.autoAdvanceAt && !state.held && (
           <div class="row" style={{ gap: '10px', marginBottom: '10px' }}>
             <div class="grow">
               <AutoAdvance
@@ -639,17 +646,30 @@ function App() {
                 held={state.held}
               />
             </div>
-            <button
-              class={`btn btn-sm${state.held ? ' btn-primary' : ''}`}
-              onClick={() => send({ t: 'hold', held: !state.held })}
-            >
-              {state.held ? 'Resume' : 'Hold'}
-            </button>
           </div>
         )}
-        <button class="btn btn-primary btn-lg btn-block" onClick={() => send({ t: 'advance' })} disabled={state.phase === 'night_over'}>
-          {action.label}
-        </button>
+        {/* Pause sits beside the big button rather than above it: both have to
+            be under a thumb, and a row of its own was 48px of a 667px phone.
+            Reachable at any point in a block, not only in the gap between
+            questions — the whole reason to want it is something interrupting a
+            live question, which is exactly when it used to be missing. */}
+        <div class={pausable ? 'control-actions' : ''}>
+          {pausable && (
+            <button
+              class={`btn btn-lg${state.held ? ' btn-primary' : ''}`}
+              onClick={() => send({ t: 'hold', held: !state.held })}
+            >
+              {state.held ? 'Resume' : 'Pause'}
+            </button>
+          )}
+          <button
+            class="btn btn-primary btn-lg btn-block control-primary"
+            onClick={() => send({ t: 'advance' })}
+            disabled={state.phase === 'night_over' || state.held}
+          >
+            {state.held ? 'Round paused' : action.label}
+          </button>
+        </div>
         {action.hint && <p class="faint center" style={{ margin: '8px 0 0' }}>{action.hint}</p>}
       </div>
 

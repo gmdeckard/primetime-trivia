@@ -56,6 +56,8 @@ export interface CurrentQuestion {
   order: number[];
   startedAt: number;
   deadline: number;
+  /** When the MC paused, if they did. The clock owes the room this back. */
+  heldAt?: number;
   locked: boolean;
   answers: Record<string, AnswerRec>;
   position: number;
@@ -148,6 +150,7 @@ export class Engine {
       }
       this.state.autoAdvanceAt = undefined;
       this.state.held = false;
+      if (this.state.current) this.state.current.heldAt = undefined;
       for (const p of Object.values(this.state.players)) p.connected = false;
       // Settings added since this night started would otherwise be missing
       // outright. Existing values are left alone: changing the shape of a
@@ -483,13 +486,35 @@ export class Engine {
     }
   }
 
-  /** Pause or resume auto-advance so the MC can tell a story. */
+  /**
+   * Pause the round, or start it again.
+   *
+   * This used to stop only the gap between questions, which meant pausing with
+   * a question on screen did nothing the room could see: the clock kept
+   * running and the answer kept getting cheaper while the MC dealt with
+   * whatever had interrupted them. It now freezes the question too, and gives
+   * the time back on resume by shifting the whole window forward — both ends,
+   * so the window keeps its width and an answer already in keeps the elapsed
+   * time it earned.
+   */
   setHeld(held: boolean) {
+    const current = this.state.current;
     this.state.held = held;
     if (held) {
       this.clearAutoTimer();
+      if (current && !current.locked) {
+        current.heldAt = Date.now();
+        this.clearTimer();
+      }
       this.commit({ kind: 'held' });
       return;
+    }
+    if (current && current.heldAt) {
+      const owed = Date.now() - current.heldAt;
+      current.startedAt += owed;
+      current.deadline += owed;
+      current.heldAt = undefined;
+      this.armTimer();
     }
     this.resumeAutoAdvance();
     this.commit({ kind: 'released' });
@@ -533,7 +558,7 @@ export class Engine {
   answer(playerId: string, choiceIndex: number) {
     const player = this.state.players[playerId];
     const current = this.state.current;
-    if (!player?.teamId || !current || current.locked) return;
+    if (!player?.teamId || !current || current.locked || this.state.held) return;
     if (this.state.phase !== 'question' && this.state.phase !== 'wager_question') return;
     if (choiceIndex < 0 || choiceIndex > 3) return;
     if (!this.activeTeamIds().includes(player.teamId)) return;
@@ -565,7 +590,7 @@ export class Engine {
   answerNumber(playerId: string, value: number) {
     const player = this.state.players[playerId];
     const current = this.state.current;
-    if (!player?.teamId || !current || current.locked) return;
+    if (!player?.teamId || !current || current.locked || this.state.held) return;
     if (this.state.phase !== 'tiebreak') return;
     if (!Number.isFinite(value)) return;
     if (!this.activeTeamIds().includes(player.teamId)) return;
