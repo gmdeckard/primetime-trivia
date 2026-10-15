@@ -178,8 +178,42 @@ export function useCountdown(deadline?: number, totalSeconds = 1) {
  * installed. Deliberately host-only: twenty tablets all speaking would be
  * chaos, and the big screen is where the room's attention already is.
  */
+/**
+ * The least robotic voice the machine has.
+ *
+ * Left to itself a browser picks the first installed voice, which on Windows
+ * is usually one of the old "Desktop" engines — the ones that sound like a
+ * 1990s answering machine. Modern Windows and Edge ship far better neural
+ * voices under names containing "Natural" or "Online", so prefer those, then
+ * anything that is not a Desktop engine, and only then give up and take the
+ * default. Nothing is installed by this; it only picks from what is there.
+ */
+function bestVoice(): SpeechSynthesisVoice | null {
+  const all = window.speechSynthesis.getVoices?.() ?? [];
+  const english = all.filter((v) => /^en(-|$)/i.test(v.lang));
+  const pool = english.length ? english : all;
+  if (!pool.length) return null;
+  const score = (v: SpeechSynthesisVoice) => {
+    const n = v.name.toLowerCase();
+    if (n.includes('natural')) return 4;
+    if (n.includes('online')) return 3;
+    if (!n.includes('desktop')) return 2;
+    return 1;
+  };
+  return pool.slice().sort((a, b) => score(b) - score(a))[0] ?? null;
+}
+
 export function useSpeech(enabled: boolean) {
   const lastRef = useRef('');
+  // getVoices() is empty until the engine has loaded them, so nudge a re-read.
+  useEffect(() => {
+    if (!enabled || !('speechSynthesis' in window)) return;
+    const warm = () => bestVoice();
+    warm();
+    window.speechSynthesis.addEventListener?.('voiceschanged', warm);
+    return () => window.speechSynthesis.removeEventListener?.('voiceschanged', warm);
+  }, [enabled]);
+
   return useCallback(
     (text: string, repeat = false) => {
       if (!enabled || !('speechSynthesis' in window)) return;
@@ -190,8 +224,11 @@ export function useSpeech(enabled: boolean) {
       lastRef.current = repeat ? '' : text;
       window.speechSynthesis.cancel();
       const utterance = new SpeechSynthesisUtterance(text);
-      utterance.rate = 0.95;
-      utterance.pitch = 1;
+      const voice = bestVoice();
+      if (voice) utterance.voice = voice;
+      // A cue is short and wants a bit of lift; a question wants to be clear.
+      utterance.rate = repeat ? 1.05 : 0.95;
+      utterance.pitch = repeat ? 1.15 : 1;
       window.speechSynthesis.speak(utterance);
     },
     [enabled],

@@ -199,13 +199,26 @@ function App() {
   useEffect(() => {
     if (!armed || !music || !state?.autoAdvanceAt || state.held) return;
     if (state.phase !== 'reveal') return;
+    const target = state.autoAdvanceAt;
     const lead = nextUpWindowMs(state.config.nextQuestionDelaySeconds);
-    const wait = state.autoAdvanceAt - lead - Date.now();
-    const id = setTimeout(() => {
-      audioRef.current?.countIn();
-      if (state.config.musicSpeakCountIn) speak('Get ready. Set. Go!', true);
-    }, Math.max(0, wait));
-    return () => clearTimeout(id);
+    const ids: number[] = [];
+    const after = (ms: number, fn: () => void) => {
+      ids.push(setTimeout(fn, Math.max(0, ms)) as unknown as number);
+    };
+
+    after(target - lead - Date.now(), () => audioRef.current?.countIn(target - Date.now()));
+
+    // Said as three cues rather than one sentence. Spoken in one go the engine
+    // takes two to three seconds to get through it, so "Go" landed while the
+    // clock still read 2 or 3 — the room was told to go and then waited. Each
+    // word is now placed against the moment the question actually appears,
+    // with "Go" a beat before it so it finishes on the question.
+    if (state.config.musicSpeakCountIn) {
+      after(target - 3000 - Date.now(), () => speak('Get ready', true));
+      after(target - 1900 - Date.now(), () => speak('Set', true));
+      after(target - 700 - Date.now(), () => speak('Go!', true));
+    }
+    return () => ids.forEach(clearTimeout);
   }, [armed, music, state?.autoAdvanceAt, state?.held, state?.phase]);
 
   useEffect(() => {

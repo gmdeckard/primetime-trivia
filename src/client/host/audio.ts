@@ -24,8 +24,11 @@ export interface HostAudio {
   /** 0..1 intensity for the question bed, driven by the falling value. */
   setIntensity(v: number): void;
   setVolume(v: number): void;
-  /** Three rising ticks and a chord, for the run-up to the next question. */
-  countIn(): void;
+  /**
+   * Three rising ticks and a chord, placed so the chord lands exactly as the
+   * question appears. `msUntilQuestion` is how long is left, not a duration.
+   */
+  countIn(msUntilQuestion: number): void;
   /** Current output level, 0..1. For checking the thing is actually audible. */
   meter(): number;
   running(): boolean;
@@ -304,14 +307,18 @@ export function createHostAudio(): HostAudio {
     setVolume(v) {
       fade(master, Math.max(0, Math.min(1, v)), 0.2);
     },
-    countIn() {
-      // Three rising ticks and a chord on the fourth: get ready, set, go.
-      const t = ctx.currentTime + 0.02;
-      hit(ctx, cueGain, t, 'tick', 0.22, 523.25);
-      hit(ctx, cueGain, t + 0.6, 'tick', 0.22, 659.25);
-      hit(ctx, cueGain, t + 1.2, 'tick', 0.22, 783.99);
+    countIn(msUntilQuestion: number) {
+      // Anchored to the end, not the start. Three ticks a second apart and the
+      // chord on the question itself, so the room counts down to the thing
+      // rather than finishing early and waiting.
+      const target = ctx.currentTime + Math.max(0.05, msUntilQuestion / 1000);
+      const gap = Math.min(1, Math.max(0.35, (target - ctx.currentTime) / 3.2));
+      const at = (before: number) => Math.max(ctx.currentTime + 0.01, target - before);
+      hit(ctx, cueGain, at(gap * 3), 'tick', 0.22, 523.25);
+      hit(ctx, cueGain, at(gap * 2), 'tick', 0.22, 659.25);
+      hit(ctx, cueGain, at(gap), 'tick', 0.22, 783.99);
       for (const f of [1046.5, 1318.5, 1568]) {
-        hit(ctx, cueGain, t + 1.8, 'tick', 0.16, f);
+        hit(ctx, cueGain, at(0.03), 'tick', 0.16, f);
       }
     },
     meter() {
