@@ -26,14 +26,31 @@ export interface HostAudio {
   setVolume(v: number): void;
   /** Three rising ticks and a chord, for the run-up to the next question. */
   countIn(): void;
+  /** Current output level, 0..1. For checking the thing is actually audible. */
+  meter(): number;
   running(): boolean;
   dispose(): void;
 }
 
 type Ctx = AudioContext;
 
-const A_MINOR = [220, 261.63, 329.63, 392]; // A3 C4 E4 G4 — warm, unresolved
-const BASS_STEPS = [55, 55, 82.41, 55, 65.41, 55, 82.41, 98]; // A1 walking figure
+// An octave up from where this started. A TV soundbar and a laptop speaker
+// both roll off hard below about 200Hz, so a pad voiced at A3 measured fine and
+// was inaudible in the room. This sits where small speakers actually work.
+// Four chords rather than one. A single sustained chord is a drone, and a
+// drone is what "boring" means: nothing ever arrives. These move slowly enough
+// to sit under conversation and often enough that the room notices change.
+const PROGRESSION = [
+  [440, 523.25, 659.25, 783.99], // Am7
+  [349.23, 440, 523.25, 698.46], // F
+  [392, 493.88, 587.33, 783.99], // G
+  [329.63, 440, 523.25, 659.25], // Am/C
+];
+/** Two bars of bass, so the figure answers itself instead of repeating. */
+const BASS_STEPS = [
+  55, 55, 82.41, 55, 65.41, 55, 82.41, 98,
+  55, 55, 82.41, 110, 65.41, 98, 82.41, 73.42,
+];
 
 /** One short percussive hit. Used for the kick, the hats and the ticks. */
 function hit(
@@ -66,11 +83,16 @@ function hit(
   const osc = ctx.createOscillator();
   const g = ctx.createGain();
   osc.type = kind === 'kick' ? 'sine' : 'triangle';
-  const start = kind === 'kick' ? 120 : freq;
-  const end = kind === 'kick' ? 45 : freq;
+  const start = kind === 'kick' ? 160 : freq;
+  const end = kind === 'kick' ? 55 : freq;
   const dur = kind === 'kick' ? 0.22 : 0.12;
   osc.frequency.setValueAtTime(start, at);
-  if (kind === 'kick') osc.frequency.exponentialRampToValueAtTime(end, at + dur);
+  if (kind === 'kick') {
+    osc.frequency.exponentialRampToValueAtTime(end, at + dur);
+    // A click on top of the thump. The body of a kick lives below what these
+    // speakers can produce; the click is what makes it register as a beat.
+    hit(ctx, out, at, 'tick', gain * 0.5, 1800);
+  }
   g.gain.setValueAtTime(0.0001, at);
   g.gain.exponentialRampToValueAtTime(gain, at + 0.005);
   g.gain.exponentialRampToValueAtTime(0.0001, at + dur);
@@ -93,6 +115,7 @@ export function createHostAudio(): HostAudio {
       setIntensity: () => {},
       setVolume: () => {},
       countIn: () => {},
+      meter: () => 0,
       running: () => false,
       dispose: () => {},
     };
@@ -101,7 +124,13 @@ export function createHostAudio(): HostAudio {
   const ctx = new Ctor();
   const master = ctx.createGain();
   master.gain.value = 0.35;
+  // Tapped so the level can be read back. A bed that is playing but inaudible
+  // and a bed that is not playing at all look identical from the outside.
+  const analyser = ctx.createAnalyser();
+  analyser.fftSize = 2048;
+  master.connect(analyser);
   master.connect(ctx.destination);
+  const meterBuf = new Float32Array(analyser.fftSize);
 
   // Each bed has its own gain so beds can cross-fade instead of cutting.
   const lobbyGain = ctx.createGain();
@@ -121,22 +150,38 @@ export function createHostAudio(): HostAudio {
   let beat = 0;
   let disposed = false;
 
-  // Pads for the lobby and the breaks: four detuned sines per chord tone,
-  // drifting slowly. Deliberately shapeless — it is there so a silent hall
-  // does not feel like the game has crashed, not to be listened to.
-  const pads: OscillatorNode[] = [];
+  // Pads for the lobby and the breaks. Two detuned voices per chord tone, and
+  // the chord changes every few seconds — slow enough to talk over, often
+  // enough that it is music rather than a held note.
+  const padVoices: Array<{ osc: OscillatorNode; degree: number }> = [];
+  const padAux: OscillatorNode[] = [];
+  let chord = 0;
+  let chordTimer: number | undefined;
+
+  function moveChord() {
+    chord = (chord + 1) % PROGRESSION.length;
+    const notes = PROGRESSION[chord]!;
+    for (const v of padVoices) {
+      // Glide rather than jump: a pad that steps between chords clicks.
+      v.osc.frequency.setTargetAtTime(notes[v.degree] ?? 440, ctx.currentTime, 0.9);
+    }
+    chordTimer = setTimeout(moveChord, 7000) as unknown as number;
+  }
+
   function startPads() {
-    if (pads.length) return;
-    for (const f of A_MINOR) {
-      for (const detune of [-4, 4]) {
+    if (padVoices.length) return;
+    PROGRESSION[0]!.forEach((f, degree) => {
+      for (const detune of [-5, 5]) {
         const osc = ctx.createOscillator();
         const g = ctx.createGain();
         const lfo = ctx.createOscillator();
         const lfoGain = ctx.createGain();
-        osc.type = 'sine';
+        // Triangle rather than sine: a few harmonics is the difference between
+        // a pad you can hear across a room and one that only shows on a meter.
+        osc.type = 'triangle';
         osc.frequency.value = f;
         osc.detune.value = detune;
-        g.gain.value = 0.06;
+        g.gain.value = 0.05;
         // Slow, prime-ish rates so the voices never pulse together.
         lfo.frequency.value = 0.03 + Math.random() * 0.05;
         lfoGain.gain.value = 0.035;
@@ -144,25 +189,67 @@ export function createHostAudio(): HostAudio {
         osc.connect(g).connect(lobbyGain);
         osc.start();
         lfo.start();
-        pads.push(osc, lfo);
+        padVoices.push({ osc, degree });
+        padAux.push(lfo);
       }
+    });
+    chordTimer = setTimeout(moveChord, 7000) as unknown as number;
+  }
+
+  // Tempo is not fixed. It climbs with the clock, which is most of why the
+  // last five seconds of a question feel different from the first five.
+  const bpmAt = (i: number) => 116 + i * 20;
+
+  /** A short chord stab. Arrives late in a question and is most of the lift. */
+  function stab(at: number, gain: number) {
+    const notes = PROGRESSION[(beat >> 4) % PROGRESSION.length]!;
+    for (const f of notes.slice(0, 3)) {
+      const osc = ctx.createOscillator();
+      const g = ctx.createGain();
+      osc.type = 'sawtooth';
+      osc.frequency.value = f;
+      g.gain.setValueAtTime(0.0001, at);
+      g.gain.exponentialRampToValueAtTime(gain, at + 0.008);
+      g.gain.exponentialRampToValueAtTime(0.0001, at + 0.18);
+      osc.connect(g).connect(questionGain);
+      osc.start(at);
+      osc.stop(at + 0.2);
     }
   }
 
-  const BPM = 124;
-  const beatDur = 60 / BPM;
-
-  /** Schedules a little ahead of the clock so timing does not depend on the tab. */
+  /**
+   * Schedules a little ahead of the clock so timing does not depend on the tab.
+   *
+   * The pattern is sixteen beats, not eight, and almost everything in it is a
+   * function of `intensity`, which the host drives from the falling value. At
+   * the start of a question this is a kick, an offbeat hat and a bass figure;
+   * by the end it is faster, busier, brighter and louder, with claps and chord
+   * stabs that were not there before. That climb is the crescendo — it is tied
+   * to the clock rather than to a loop, so it lands with the buzzer.
+   */
   function pump() {
     if (disposed) return;
     const ahead = ctx.currentTime + 0.25;
     while (nextBeat < ahead) {
       const at = Math.max(nextBeat, ctx.currentTime + 0.01);
+      const beatDur = 60 / bpmAt(bed === 'question' ? intensity : 0);
       if (bed === 'question') {
-        const step = beat % 8;
-        hit(ctx, questionGain, at, 'kick', 0.5);
-        hit(ctx, questionGain, at + beatDur / 2, 'hat', 0.12 + intensity * 0.12);
-        if (intensity > 0.45) hit(ctx, questionGain, at + beatDur / 4, 'hat', 0.05);
+        const step = beat % BASS_STEPS.length;
+        const inBar = beat % 4;
+
+        hit(ctx, questionGain, at, 'kick', 0.42 + intensity * 0.16);
+        // Backbeat clap: the first thing that makes it a groove rather than a
+        // pulse. Present from the start, louder as it goes.
+        if (inBar === 1 || inBar === 3) {
+          hit(ctx, questionGain, at, 'hat', 0.1 + intensity * 0.1);
+          hit(ctx, questionGain, at + 0.012, 'hat', 0.08 + intensity * 0.08);
+        }
+        hit(ctx, questionGain, at + beatDur / 2, 'hat', 0.1 + intensity * 0.14);
+        if (intensity > 0.4) hit(ctx, questionGain, at + beatDur / 4, 'hat', 0.04 + intensity * 0.05);
+        if (intensity > 0.7) hit(ctx, questionGain, at + (beatDur * 3) / 4, 'hat', 0.04 + intensity * 0.05);
+        // An open hat on the last eighth of each bar, to turn it over.
+        if (intensity > 0.25 && inBar === 3) hit(ctx, questionGain, at + beatDur / 2, 'hat', 0.16);
+        if (intensity > 0.55 && inBar === 2) stab(at + beatDur / 2, 0.07 + intensity * 0.06);
 
         const bass = ctx.createOscillator();
         const bg = ctx.createGain();
@@ -171,10 +258,10 @@ export function createHostAudio(): HostAudio {
         bass.frequency.value = BASS_STEPS[step] ?? 55;
         filter.type = 'lowpass';
         // Opens up as the clock runs down: the room hears the pressure.
-        filter.frequency.value = 220 + intensity * 900;
-        filter.Q.value = 6;
+        filter.frequency.value = 260 + intensity * 2600;
+        filter.Q.value = 7;
         bg.gain.setValueAtTime(0.0001, at);
-        bg.gain.exponentialRampToValueAtTime(0.16, at + 0.01);
+        bg.gain.exponentialRampToValueAtTime(0.15 + intensity * 0.07, at + 0.01);
         bg.gain.exponentialRampToValueAtTime(0.0001, at + beatDur * 0.7);
         bass.connect(filter).connect(bg).connect(questionGain);
         bass.start(at);
@@ -227,20 +314,28 @@ export function createHostAudio(): HostAudio {
         hit(ctx, cueGain, t + 1.8, 'tick', 0.16, f);
       }
     },
+    meter() {
+      analyser.getFloatTimeDomainData(meterBuf);
+      let sum = 0;
+      for (let i = 0; i < meterBuf.length; i++) sum += meterBuf[i]! * meterBuf[i]!;
+      return Math.sqrt(sum / meterBuf.length);
+    },
     running() {
       return ctx.state === 'running';
     },
     dispose() {
       disposed = true;
       if (timer !== undefined) clearTimeout(timer);
-      for (const n of pads) {
+      if (chordTimer !== undefined) clearTimeout(chordTimer);
+      for (const n of [...padVoices.map((v) => v.osc), ...padAux]) {
         try {
           n.stop();
         } catch {
           /* already stopped */
         }
       }
-      pads.length = 0;
+      padVoices.length = 0;
+      padAux.length = 0;
       void ctx.close();
     },
   };

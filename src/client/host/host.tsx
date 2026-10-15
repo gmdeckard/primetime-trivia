@@ -169,10 +169,18 @@ function App() {
     audioRef.current = createHostAudio();
   }
   useEffect(() => () => audioRef.current?.dispose(), []);
+  // Exposed for diagnosis from the browser console on the laptop driving the
+  // TV: primetimeAudio.meter() says whether anything is actually coming out.
+  if (typeof window !== 'undefined') {
+    (window as unknown as { primetimeAudio?: HostAudio | null }).primetimeAudio = audioRef.current;
+  }
 
   const music = !!state?.config.music;
   const phase = state?.phase;
-  const wantBed: Bed = !armed || !music
+  // A paused round is silent. The pause exists because something interrupted
+  // the night, and a bed carrying on underneath that is the opposite of what
+  // the MC just asked for.
+  const wantBed: Bed = !armed || !music || state?.held
     ? null
     : phase === 'question' || phase === 'wager_question'
       ? state?.config.musicUnderQuestion
