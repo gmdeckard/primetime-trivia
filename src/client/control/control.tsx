@@ -503,6 +503,16 @@ function App() {
         <div key={w} class="warn">{w}</div>
       ))}
 
+      {/* The banner is on the big screen and in every player's hand, so the way
+          to take it down belongs here, not behind the More toggle with the
+          things you touch twice a night. */}
+      {state.message && (
+        <div class="warn row-between">
+          <span>{state.message}</span>
+          <button class="btn btn-sm" onClick={() => send({ t: 'say', message: '' })}>Clear</button>
+        </div>
+      )}
+
       {state.phase === 'lobby' && (
         <div class="card stack">
           <div class="row-between">

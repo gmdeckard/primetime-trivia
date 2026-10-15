@@ -533,6 +533,12 @@ export class Engine {
 
   private startQuestion(questionId: string, seconds: number, position: number, ofTotal: number) {
     const now = Date.now();
+    // Any banner on the screens belongs to the question that has just ended.
+    // "Answers for this question were locked" is false the moment a new one is
+    // up, and nothing cleared it: it sat on the big screen and on every handset
+    // until the MC found the Clear button. A break announcement has the same
+    // life — it is for the break, and the next question ends the break.
+    this.state.message = undefined;
     this.state.current = {
       questionId,
       order: choiceOrder(),

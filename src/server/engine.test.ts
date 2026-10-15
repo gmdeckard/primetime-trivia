@@ -280,6 +280,46 @@ test('pausing stops a live question, and resuming gives the time back', async ()
   assert.equal(engine.snapshot().phase, 'locked', 'the restarted clock still closes it');
 });
 
+/*
+ * Value: protects=the screens clearing their own banner;
+ *   fails_when=startQuestion stops resetting state.message — the resume
+ *   notice, which says "answers for THIS question were locked", then stays on
+ *   the big screen and in every player's hand through the rest of the night,
+ *   because nothing else clears it and the only control is a button the MC has
+ *   to go looking for;
+ *   why_new=the resume tests check the phase and the timer, never the banner,
+ *   and this was reported from a real night; seam=none;
+ *   no_claim=says nothing about how long an MC announcement should live.
+ */
+test('a banner does not outlive the question it describes', () => {
+  const first = freshEngine({ questionsPerRound: 3 });
+  seatTeams(first, 2);
+  while (first.snapshot().phase !== 'question') first.advance();
+  const onDisk = JSON.parse(JSON.stringify(first.snapshot()));
+
+  const resumed = freshEngine(undefined, onDisk);
+  assert.ok(resumed.snapshot().message, 'the restart notice should be up at first');
+
+  // The MC carries on. The next question makes that sentence false.
+  resumed.advance();
+  resumed.advance();
+  assert.equal(resumed.snapshot().phase, 'question');
+  assert.equal(resumed.snapshot().message, undefined, 'the banner must come down by itself');
+});
+
+test('an MC announcement lasts the break and no longer', () => {
+  const engine = freshEngine({ questionsPerRound: 3 });
+  seatTeams(engine, 2);
+  engine.startBlock();
+  engine.say('Short break — back in ten minutes.');
+  assert.ok(engine.snapshot().message, 'it should be up while the room is away');
+
+  engine.advance();
+  engine.advance();
+  assert.equal(engine.snapshot().phase, 'question');
+  assert.equal(engine.snapshot().message, undefined, 'and gone once play resumes');
+});
+
 test('the MC can still close a question early', () => {
   const engine = freshEngine({ questionsPerRound: 3 });
   const teams = seatTeams(engine, 2);

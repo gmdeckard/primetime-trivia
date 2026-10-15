@@ -69,6 +69,8 @@ something real. `inv-007` is the type specimen.
 | tiebreakers | 15 | 13 | 2 · **one wrong answer** |
 | arts-classical | 30 | 25 | 5 · barely searched |
 | music-popular | 30 | 23 | 7 · barely searched |
+| age-35-55 | 80 | 71 | 9 · barely searched |
+| radio-comedy | 25 | 22 | 3 · barely searched |
 
 ---
 
@@ -555,3 +557,32 @@ Treat these as leads with citations, not as a completed audit of their file.
 - **`mus-002`** — the Beatles *are* pictured on the Sgt. Pepper cover, so the
   prompt's premise is shaky, and Revolver's collage makes that distractor
   defensible too.
+
+### The 35-55 set and radio comedy (fetched, not searched)
+
+- **`a35-053`** — **malformed stem.** "Which country did the Soviet Union
+  dissolve into fifteen of" is answered "Independent republics", which does not
+  grammatically answer the question. Only one option is defensible so it is
+  playable, but the sentence does not parse. This is a different class of fault
+  from the rest of the audit and would be caught by reading it aloud.
+- **`a35-010`** — AMC did not nearly pass on Breaking Bad; it bought the rights
+  and went straight to production. **Showtime** passed, citing *Weeds*.
+- **`a35-006`** — CBS objected to the therapy premise, not HBO. HBO's delay was
+  shelving the finished pilot, a separate thing.
+- **`a35-020`** — Spitz was not in Beijing to see his record broken; he said
+  publicly he was never invited.
+- **`a35-012`** — Sampras won six Wimbledons in the 1990s; the seventh was 2000.
+- **`a35-019`** — Ferrari's drought before Schumacher's arrival was seventeen
+  years (Scheckter 1979 to Schumacher 1996); twenty-one is the gap to the title.
+- **`a35-017`** — Hawk landed the 900 on his eleventh attempt, after ten
+  failures, not after eleven.
+- **`a35-021`** — Creative's Nomad Jukebox shipped about a year before the iPod,
+  not two.
+- **`a35-067`** — the Channel Tunnel bores met about a foot apart horizontally,
+  not four inches.
+- **`rad-018`** — "all four of these men worked together" on Your Show of Shows
+  is false; Buck Henry never wrote for it and Gelbart was on Caesar's Hour.
+- **`rad-021`** — Newhart was an advertising copywriter, not an accountant, when
+  the album sold; the accountancy was earlier.
+- **`rad-009`** — Gummo, a distractor, also never spoke on screen, and the fact
+  names him. Another fact-concedes-the-distractor case.
