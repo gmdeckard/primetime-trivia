@@ -67,10 +67,30 @@ if [ -f "$PID_FILE" ] && kill -0 "$(cat "$PID_FILE")" 2>/dev/null; then
   exit 0
 fi
 
-if [ ! -f dist/src/server/index.js ] || [ ! -f dist/client/index.html ]; then
-  echo "Not built yet — building (a few minutes the first time)..."
+# dist/ is gitignored, so `git pull` only ever brings source. Checking that the
+# build merely EXISTS meant an updated box started yesterday's bundle: new code
+# on disk, old game on the screen, and nothing saying so. Rebuild whenever any
+# source is newer than what was built from it. content/ is read at run time, so
+# it is not a build input.
+BUILD_INPUTS="src shared package.json vite.config.ts tsconfig.json tsconfig.server.json"
+needs_build() {
+  local ref
+  for ref in dist/src/server/index.js dist/client/index.html; do
+    [ -f "$ref" ] || return 0
+    # shellcheck disable=SC2086
+    [ -z "$(find $BUILD_INPUTS -newer "$ref" -print -quit 2>/dev/null)" ] || return 0
+  done
+  return 1
+}
+
+if needs_build; then
+  if [ -f dist/client/index.html ]; then
+    echo "Sources changed since the last build — rebuilding..."
+  else
+    echo "Not built yet — building (a few minutes the first time)..."
+  fi
   npm install --no-fund --no-audit
-  npm run build
+  npm run build || { echo "Build failed. The old build is still in place; fix the error above and run this again."; exit 1; }
 fi
 
 # 80 needs privileges we do not have here; the service handles that properly.

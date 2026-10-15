@@ -37,6 +37,23 @@ cd ~/primetime-trivia && sudo ./scripts/install-service.sh
 Re-running pulls the latest code, rebuilds and restarts, and **leaves your
 config and host password alone**.
 
+### Updating a box you start by hand
+
+If you skipped the service and run `./start-server.sh` yourself:
+
+```bash
+cd ~/primetime-trivia && git pull && ./stop-server.sh && ./start-server.sh
+```
+
+`dist/` is not in git, so a pull brings source only. `start-server.sh` notices
+when any source is newer than the last build and rebuilds before starting, so
+the pull above is enough. If the build fails it says so and leaves the previous
+build in place, which means the box still starts and still runs last night's
+version — check the output rather than assuming a silent success.
+
+The quickest way to tell which version is actually running is the banner: it
+prints `Host password` on current builds and `Host PIN` on anything older.
+
 ## Configuration
 
 Settings live in `/etc/default/primetime-trivia`:
