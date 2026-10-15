@@ -54,6 +54,67 @@ version — check the output rather than assuming a silent success.
 The quickest way to tell which version is actually running is the banner: it
 prints `Host password` on current builds and `Host PIN` on anything older.
 
+## Running it on the Windows laptop instead
+
+The Jetson is one way to do this. The other is to run the server on the same
+laptop that drives the TV, which is simpler and, on a workstation, faster than
+the Jetson by a wide margin.
+
+It also fixes something the two-box arrangement cannot. The browser's Screen
+Wake Lock only works in a secure context. `http://localhost` counts as one;
+`http://192.168.1.40` does not. With the server on another machine the big
+screen is always on a LAN address, so the page can never hold the screen awake
+and staying awake is a Windows display setting. Serve and view on the same
+laptop, open the host screen at `http://localhost:8080/host`, and the page
+keeps itself awake.
+
+```powershell
+git clone https://github.com/gmdeckard/primetime-trivia.git
+cd primetime-trivia
+.\start-server.ps1
+```
+
+`start-server.ps1` rebuilds when sources are newer than the last build, same
+rule as the bash script, and leaves the previous build in place if the build
+fails. Stop it with Ctrl+C. Players join at the LAN address it prints; the big
+screen uses the localhost one.
+
+**Three things decide whether this works on the night.**
+
+**The firewall.** Windows blocks inbound connections to Node by default, and
+blocks nearly everything when the network is classified Public. The start
+script warns about both. To allow it once, in an Administrator PowerShell:
+
+```powershell
+New-NetFirewallRule -DisplayName 'PrimeTime Trivia' -Direction Inbound `
+  -Action Allow -Protocol TCP -LocalPort 8080 -Profile Private
+```
+
+Then set the venue wifi to Private under Settings > Network & internet. Test
+from a phone before the room arrives, not at seven o'clock.
+
+**Sleep.** The server dies with the laptop. Set it never to sleep on AC power,
+and if the lid will be closed while it drives the TV, set the lid-close action
+to do nothing.
+
+**The address it advertises.** A workstation with Hyper-V, WSL or VirtualBox
+installed has several private addresses and only one the room can reach.
+Host-only networks (`192.168.56.x`) and Mobile Hotspot (`192.168.137.x`) are
+ranked below the real one, but if the banner ever shows an address a phone
+cannot reach, pin it:
+
+```powershell
+$env:PRIMETIME_HOST_IP = '192.168.1.40'
+```
+
+Give the laptop a DHCP reservation on the router so that address survives
+between nights.
+
+**One difference from Linux.** `data/control-password` is written with mode
+0600, which on Windows only toggles the read-only bit — the file is not
+owner-only the way it is on Linux. For a laptop one person carries, that is
+fine; it is worth knowing before putting a password there you use elsewhere.
+
 ## Configuration
 
 Settings live in `/etc/default/primetime-trivia`:

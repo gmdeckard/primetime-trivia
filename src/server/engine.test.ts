@@ -834,4 +834,16 @@ test('the USB rescue address never becomes the advertised join address', () => {
   assert.equal(ranked[0], '192.168.12.12');
   assert.equal(ranked[1], '192.168.55.1', 'it stays available as the rescue path');
   assert.equal(rankLanAddresses(['169.254.9.9', '10.0.0.4'])[0], '10.0.0.4');
+
+  // A Windows workstation with virtualisation installed carries addresses that
+  // look exactly as plausible as the one the room can reach. VirtualBox's
+  // host-only network and Windows Mobile Hotspot both sit in 192.168, so
+  // without a penalty the join QR is a coin flip.
+  assert.equal(rankLanAddresses(['192.168.56.1', '192.168.1.40'])[0], '192.168.1.40');
+  assert.equal(rankLanAddresses(['192.168.137.1', '192.168.1.40'])[0], '192.168.1.40');
+  assert.equal(
+    rankLanAddresses(['192.168.56.1', '172.28.80.1', '192.168.1.40'])[0],
+    '192.168.1.40',
+    'the venue router beats both a host-only network and a WSL bridge',
+  );
 });

@@ -215,6 +215,20 @@ common; neither is a reason to simplify the questions.
 formative years of players born between about 1950 and 1970, with enough
 general knowledge that it is not purely nostalgia.
 
+## Running it on Windows
+
+The server runs anywhere Node 20 does, including the laptop that drives the TV.
+`.\start-server.ps1` is the Windows equivalent of `./start-server.sh`.
+
+Running server and big screen on the same machine has one advantage worth
+knowing: the browser's wake lock only works in a secure context, which
+`http://localhost` is and a LAN address is not. Open the host screen at
+`http://localhost:8080/host` and it keeps the screen awake by itself.
+
+The firewall is the thing that stops a night — Windows blocks inbound Node by
+default, and blocks nearly everything on a network classified Public. See
+[docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) for the one-line rule and the rest.
+
 ## Configuration
 
 Environment variables:
@@ -226,6 +240,7 @@ Environment variables:
 | `PRIMETIME_SSID` | — | Wifi network name, shown on the join screen |
 | `PRIMETIME_PASSWORD` | generated once, saved to `data/control-password` | Password for `/control` and `/author` |
 | `PRIMETIME_PIN` | — | Deprecated name for the above; still honoured |
+| `PRIMETIME_HOST_IP` | auto-detected | Pin the address shown on the join screen |
 | `PRIMETIME_CONTENT` | `./content` | Question bank directory |
 | `PRIMETIME_DATA` | `./data` | Saved game state and history |
 

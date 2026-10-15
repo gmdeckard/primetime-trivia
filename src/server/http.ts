@@ -112,9 +112,10 @@ export class ControlAuth {
         : `${passwordFile} could not be read, or holds no password line, so it was ignored. The file was left as it is.`;
     }
 
-    // Persist a generated password so the next boot reuses it. Written 0600:
-    // the file is a credential, and the data dir is also where night.json
-    // lives, which is not.
+    // Persist a generated password so the next boot reuses it. Written 0600 so
+    // it is owner-only, because the file is a credential and the data dir it
+    // sits in is not. On Windows that mode only toggles the read-only bit, so
+    // the file is not protected there the way it is on Linux.
     //
     // Never over an existing file. A file that is present but unusable (too
     // short, or unreadable) is still the operator's: replacing it would throw

@@ -6,6 +6,12 @@ import { networkInterfaces } from 'node:os';
  * printed QR) is built on top of it.
  */
 export function lanAddresses(): string[] {
+  // The operator's override wins over any guess. On a workstation with
+  // virtualisation installed there can be several plausible-looking private
+  // addresses and only one the room can reach; this is the way to say which.
+  const pinned = process.env.PRIMETIME_HOST_IP?.trim();
+  if (pinned) return [pinned];
+
   const out: string[] = [];
   for (const addrs of Object.values(networkInterfaces())) {
     for (const addr of addrs ?? []) {
@@ -26,6 +32,13 @@ const rank = (ip: string) => {
   // address it can never reach, with nothing on screen to say why. It is the
   // rescue path, so it stays in the list, but it goes last.
   if (ip.startsWith('192.168.55.')) return 8;
+  // The same trap as the USB bridge, on a Windows host. VirtualBox host-only
+  // networks are 192.168.56.x and Windows Mobile Hotspot / ICS is
+  // 192.168.137.x. Both are real addresses on real adapters, both sort into
+  // the same 192.168 band as the wifi, and neither is reachable from a phone
+  // on the venue's router. Left unranked they tie with the address that works
+  // and the winner depends on the order the OS lists adapters.
+  if (ip.startsWith('192.168.56.') || ip.startsWith('192.168.137.')) return 7;
   if (/^169\.254\./.test(ip)) return 9;
   if (ip.startsWith('192.168.')) return 0;
   if (ip.startsWith('10.')) return 1;
