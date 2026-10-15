@@ -70,7 +70,7 @@ export function useGame<S extends GameState>(role: S['role'], options: { enabled
         if (closedRef.current) return;
         if (event.code === 4001) {
           // Credentials rejected. Drop the stale token and tell the caller, which
-          // shows the PIN screen again. Reloading here instead would spin: the
+          // shows the login again. Reloading here instead would spin: the
           // fresh page reconnects, gets rejected, and reloads again forever.
           localStorage.removeItem('primetime.controlToken');
           closedRef.current = true;
@@ -152,8 +152,12 @@ export function useCountdown(deadline?: number, totalSeconds = 1) {
     if (!deadline) return;
     let frame = 0;
     const tick = () => {
-      setNow(Date.now());
-      frame = requestAnimationFrame(tick);
+      const now = Date.now();
+      setNow(now);
+      // Stop at the deadline instead of spinning until the server's lock
+      // broadcast clears `deadline`. That gap is a timer fire plus a coalesce
+      // window plus a LAN hop, and these are old iPads.
+      if (now < deadline) frame = requestAnimationFrame(tick);
     };
     frame = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(frame);

@@ -9,6 +9,14 @@
  * it reconnects, which matters more than bytes on the wire.
  */
 
+/**
+ * Shortest acceptable control password. Lives here because both login screens
+ * gate their Unlock button on it and the server enforces it: three copies of a
+ * bare 4 meant raising the floor would leave the buttons enabled for passwords
+ * the server rejects.
+ */
+export const MIN_PASSWORD = 4;
+
 export const PROTOCOL_VERSION = 1;
 
 /** Hierarchy: a Night contains Blocks (~30 min each), each Block contains Rounds, each Round contains Questions. */
@@ -156,8 +164,9 @@ export const DEFAULT_CONFIG: GameConfig = {
   questionsPerRound: 10,
   // 20s is the bar-trivia and seatback norm, and it is what makes a visible
   // countdown feel like one. The accessibility work is done by 19px body text
-  // and 84px targets, not by a long clock: a 35s window mostly produced dead
-  // air, because the question auto-locks as soon as every team has answered.
+  // and 84px targets, not by a long clock; a 35s window mostly produced dead
+  // air. Since the window now always runs to its deadline rather than ending
+  // on the last tap, this number is the whole beat between questions.
   secondsPerQuestion: 20,
   speedBonus: true,
   // Paid in stepped bands (see SPEED_BANDS above), so at difficulty 3

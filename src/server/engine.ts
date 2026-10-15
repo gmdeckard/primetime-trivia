@@ -110,6 +110,11 @@ const LIVE_PHASES: Phase[] = ['question', 'wager_question', 'tiebreak'];
 
 export class Engine {
   private state: NightState;
+  /**
+   * How many questions were in `askedQuestionIds` the last time history.json
+   * was written. Starts at -1 so a resumed night records itself once.
+   */
+  private recordedQuestionCount = -1;
   private timer: NodeJS.Timeout | undefined;
   /** Drives auto-advance. Kept apart from `timer`, which is the answer clock. */
   private autoTimer: NodeJS.Timeout | undefined;
@@ -200,11 +205,18 @@ export class Engine {
   /** Persist, log, and push a new snapshot to every connected client. */
   private commit(event?: Record<string, unknown>) {
     this.store.saveNight(this.state);
-    this.store.recordNight({
-      nightId: this.state.nightId,
-      startedAt: this.state.createdAt,
-      questionIds: this.state.askedQuestionIds,
-    });
+    // history.json only ever changes when a question starts, but this ran a
+    // read-parse-rewrite of it on every answer. That did not matter while a
+    // question ended on the last tap; now the window stays open for its whole
+    // length and invites changes of mind, so it is one write per tap per team.
+    if (this.state.askedQuestionIds.length !== this.recordedQuestionCount) {
+      this.recordedQuestionCount = this.state.askedQuestionIds.length;
+      this.store.recordNight({
+        nightId: this.state.nightId,
+        startedAt: this.state.createdAt,
+        questionIds: this.state.askedQuestionIds,
+      });
+    }
     if (event) this.store.logEvent({ nightId: this.state.nightId, phase: this.state.phase, ...event });
     for (const fn of this.listeners) fn();
   }
@@ -526,7 +538,12 @@ export class Engine {
       elapsedMs: Date.now() - current.startedAt,
       byPlayerId: playerId,
     };
-    this.maybeAutoLock();
+    // Deliberately no early lock here. The window always runs to its deadline,
+    // even when every team is already in, so the beat between questions is the
+    // same length for everyone in the room: a table that answers in three
+    // seconds does not yank the reveal onto a table still reading the prompt,
+    // and the speed bands are still paid from `elapsedMs`. The MC's Lock now
+    // is the escape hatch when the room is visibly done.
     this.commit({ kind: 'answer', teamId: player.teamId, choiceIndex });
   }
 
@@ -544,7 +561,6 @@ export class Engine {
       elapsedMs: Date.now() - current.startedAt,
       byPlayerId: playerId,
     };
-    this.maybeAutoLock();
     this.commit({ kind: 'answer_number', teamId: player.teamId, value });
   }
 
@@ -568,16 +584,7 @@ export class Engine {
     this.commit({ kind: 'wager_set', teamId: player.teamId, amount });
   }
 
-  /** Lock as soon as every team that could answer has. No point waiting. */
-  private maybeAutoLock() {
-    const current = this.state.current;
-    if (!current || current.locked) return;
-    const active = this.activeTeamIds();
-    if (active.length === 0) return;
-    if (active.every((id) => current.answers[id])) this.lockNow('all_answered');
-  }
-
-  lockNow(reason: 'timer' | 'all_answered' | 'host' = 'host') {
+  lockNow(reason: 'timer' | 'host' = 'host') {
     const current = this.state.current;
     if (!current || current.locked) return;
     this.clearTimer();

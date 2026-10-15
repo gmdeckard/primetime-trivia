@@ -133,8 +133,8 @@ test('a full block runs start to finish and produces a winner', () => {
   assert.ok(board[0]!.score > board[1]!.score);
 });
 
-test('answering locks automatically once every team is in', () => {
-  const engine = freshEngine({ questionsPerRound: 3 });
+test('the window runs its full length even once every team is in', async () => {
+  const engine = freshEngine({ questionsPerRound: 3, secondsPerQuestion: 0.5 });
   const teams = seatTeams(engine, 2);
   engine.startBlock();
   engine.advance();
@@ -142,9 +142,131 @@ test('answering locks automatically once every team is in', () => {
   assert.equal(engine.snapshot().phase, 'question');
 
   engine.answer(teams[0]!.players[0]!, 0);
-  assert.equal(engine.snapshot().phase, 'question', 'should still be live with one team outstanding');
   engine.answer(teams[1]!.players[0]!, 1);
-  assert.equal(engine.snapshot().phase, 'locked', 'should lock once everyone has answered');
+  // The old behaviour locked right here. A table that answers in three seconds
+  // must not pull the reveal onto a table still reading the prompt, so the
+  // clock, not the last tap, ends the question.
+  assert.equal(engine.snapshot().phase, 'question', 'everyone being in must not cut the clock short');
+
+  await wait(700);
+  assert.equal(engine.snapshot().phase, 'locked', 'the clock should have closed it');
+});
+
+test('the MC can still close a question early', () => {
+  const engine = freshEngine({ questionsPerRound: 3 });
+  const teams = seatTeams(engine, 2);
+  engine.startBlock();
+  engine.advance();
+  engine.advance();
+
+  for (const team of teams) engine.answer(team.players[0]!, 0);
+  engine.lockNow();
+  assert.equal(engine.snapshot().phase, 'locked', 'Lock now is the escape hatch for a room that is visibly done');
+});
+
+/*
+ * Value: protects=the clock still closes the final wager when every bet and
+ *   every answer is already in, now that the last tap no longer ends a window;
+ *   fails_when=armTimer is skipped for the wager question, or lockNow's
+ *   wager_question branch stops paying out on a 'timer' lock, which would leave
+ *   the night parked on the closing question with every table waiting;
+ *   why_new=no test drives the wager to its end without the MC's thumb — the
+ *   existing wager test calls advance() to lock, and the removed maybeAutoLock
+ *   used to be the fallback here; seam=none;
+ *   no_claim=says nothing about which question the wager draws or how the
+ *   speed bands are paid.
+ */
+test('the clock closes the final wager without the MC', async () => {
+  const engine = freshEngine({
+    roundsPerBlock: 1,
+    questionsPerRound: 1,
+    finalWager: true,
+    secondsPerQuestion: 0.4,
+    autoAdvance: false,
+  });
+  const teams = seatTeams(engine, 2);
+  engine.startBlock();
+  engine.advance(); // -> round_intro
+  engine.advance(); // -> question
+  engine.lockNow('host');
+  engine.advance(); // -> reveal
+  engine.advance(); // -> round_scores
+  engine.advance(); // -> wager_bet
+  assert.equal(engine.snapshot().phase, 'wager_bet');
+
+  const scoreOf = (teamId: string) => engine.scoreRows().find((r) => r.teamId === teamId)!.score;
+  for (const team of teams) engine.setWager(team.players[0]!, 10);
+  engine.advance(); // -> wager_question
+  assert.equal(engine.snapshot().phase, 'wager_question');
+
+  const correct = engine.correctDisplayIndex()!;
+  const before = scoreOf(teams[0]!.teamId);
+  for (const team of teams) engine.answer(team.players[0]!, correct);
+  assert.equal(engine.snapshot().phase, 'wager_question', 'every bet being in must not end the wager early');
+
+  // The wager window is 1.5x the question length, rounded to whole seconds.
+  await wait(1400);
+  assert.equal(engine.snapshot().phase, 'wager_reveal', 'the clock has to close the closing question');
+  assert.equal(scoreOf(teams[0]!.teamId), before + 10, 'and a timer lock must still pay the wager out');
+});
+
+/*
+ * Value: protects=a numeric tiebreak also ends on its own clock, and the point
+ *   is still awarded when it does;
+ *   fails_when=startQuestion stops arming the clock for a tiebreak, or
+ *   lockNow's tiebreak branch only ranks answers on a host lock — either way
+ *   sudden death would sit unresolved in front of the room;
+ *   why_new=the existing tiebreak test locks with advance() and is conditional
+ *   on the speed bonus leaving the top two level, so the clock path through
+ *   rankNumeric is never exercised; seam=none;
+ *   no_claim=says nothing about who wins a tie on distance.
+ */
+test('the clock closes a tiebreak without the MC', async () => {
+  const engine = freshEngine({ secondsPerQuestion: 0.4, autoAdvance: false });
+  const teams = seatTeams(engine, 2);
+  engine.startBlock();
+  // Nobody has scored yet, so both entries are tied at the top.
+  engine.startTiebreak();
+  assert.equal(engine.snapshot().phase, 'tiebreak');
+
+  engine.answerNumber(teams[0]!.players[0]!, 1);
+  engine.answerNumber(teams[1]!.players[0]!, 999999);
+  assert.equal(engine.snapshot().phase, 'tiebreak', 'both guesses being in must not end sudden death early');
+
+  await wait(700);
+  assert.equal(engine.snapshot().phase, 'tiebreak_reveal', 'the clock has to resolve the tiebreak');
+  const rows = engine.scoreRows();
+  assert.notEqual(rows[0]!.score, rows[1]!.score, 'and a timer lock must still award the deciding point');
+});
+
+/*
+ * Value: protects=the MC's "+15 seconds" really holds the question open, and a
+ *   room that answers nothing at all still closes on the clock;
+ *   fails_when=extendTimer stops re-arming the clock (the old early lock used
+ *   to cover for that whenever every team had answered), or lockNow refuses to
+ *   close a question with no answers on it — both of which stop the night dead;
+ *   why_new=extendTimer has no engine-level test at all, and no test locks a
+ *   question with an empty answer set; seam=none;
+ *   no_claim=says nothing about how the widened window reshapes the speed
+ *   bands, which scoring.test.ts already covers.
+ */
+test('granted time holds the question open, and a silent room still locks', async () => {
+  const engine = freshEngine({ questionsPerRound: 3, secondsPerQuestion: 0.4, autoAdvance: false });
+  seatTeams(engine, 2);
+  engine.startBlock();
+  engine.advance();
+  engine.advance();
+  assert.equal(engine.snapshot().phase, 'question');
+
+  engine.extendTimer(0.6); // the room is still reading; the window is now ~1s
+  assert.equal(engine.snapshot().current!.extendedBy, 0.6, 'the control log should show what was granted');
+
+  await wait(600);
+  assert.equal(engine.snapshot().phase, 'question', 'granted time must actually hold the question open');
+
+  await wait(700);
+  assert.equal(engine.snapshot().phase, 'locked', 'with nobody answering, the clock still has to close it');
+  assert.deepEqual(engine.snapshot().current!.awards, [], 'a silent room scores nothing rather than failing to lock');
 });
 
 test('an answer can be changed until the lock', () => {
@@ -185,6 +307,7 @@ test('a wrong final wager subtracts the bet', () => {
   engine.advance(); // question
   const correct = engine.correctDisplayIndex()!;
   for (const team of teams) engine.answer(team.players[0]!, correct);
+  engine.advance(); // answers in
   engine.advance(); // reveal
   engine.advance(); // round_scores
   assert.equal(engine.snapshot().phase, 'round_scores');
@@ -201,6 +324,7 @@ test('a wrong final wager subtracts the bet', () => {
   const wagerCorrect = engine.correctDisplayIndex()!;
   engine.answer(teams[0]!.players[0]!, wagerCorrect);
   engine.answer(teams[1]!.players[0]!, (wagerCorrect + 1) % 4);
+  engine.advance(); // answers in
   assert.equal(engine.snapshot().phase, 'wager_reveal');
 
   assert.equal(scoreOf(teams[0]!.teamId), beforeA + 15, 'a correct wager should be added');
@@ -278,6 +402,7 @@ test('a tie at the top can be broken', () => {
   engine.advance();
   const correct = engine.correctDisplayIndex()!;
   for (const team of teams) engine.answer(team.players[0]!, correct);
+  engine.advance(); // answers in
   engine.advance();
   engine.advance();
   engine.advance();
@@ -290,6 +415,7 @@ test('a tie at the top can be broken', () => {
     assert.equal(engine.snapshot().phase, 'tiebreak');
     engine.answerNumber(teams[0]!.players[0]!, 1);
     engine.answerNumber(teams[1]!.players[0]!, 999999);
+    engine.advance(); // answers in
     assert.equal(engine.snapshot().phase, 'tiebreak_reveal');
     const after = engine.scoreRows();
     assert.notEqual(after[0]!.score, after[1]!.score, 'the tiebreak should separate them');
@@ -362,8 +488,10 @@ test('auto-advance walks lock -> reveal -> next question on its own', async () =
   });
   const teams = toFirstQuestion(engine);
 
-  // Everyone answers, which locks the question immediately.
+  // Everyone answers and the clock closes the question, which is the only way
+  // it now ends without the MC.
   for (const team of teams) engine.answer(team.players[0]!, 0);
+  engine.lockNow('timer');
   assert.equal(engine.snapshot().phase, 'locked');
   assert.ok(engine.snapshot().autoAdvanceAt, 'a reveal should be queued');
 
@@ -385,6 +513,7 @@ test('auto-advance stops at the end of a round so the MC can talk', async () => 
   });
   const teams = toFirstQuestion(engine);
   for (const team of teams) engine.answer(team.players[0]!, 0);
+  engine.lockNow('timer');
 
   await wait(900);
   assert.equal(engine.snapshot().phase, 'reveal');
@@ -407,6 +536,7 @@ test('hold parks auto-advance, releasing picks it back up', async () => {
   });
   const teams = toFirstQuestion(engine);
   for (const team of teams) engine.answer(team.players[0]!, 0);
+  engine.lockNow('timer');
 
   engine.setHeld(true);
   assert.equal(engine.snapshot().autoAdvanceAt, undefined, 'hold should cancel the pending step');
@@ -428,6 +558,7 @@ test('a manual advance cancels the queued one, so nothing double-fires', async (
   });
   const teams = toFirstQuestion(engine);
   for (const team of teams) engine.answer(team.players[0]!, 0);
+  engine.lockNow('timer');
 
   engine.advance(); // MC reveals early
   assert.equal(engine.snapshot().phase, 'reveal');
@@ -444,6 +575,7 @@ test('auto-advance off leaves every step to the MC', async () => {
   const engine = freshEngine({ questionsPerRound: 3, autoAdvance: false });
   const teams = toFirstQuestion(engine);
   for (const team of teams) engine.answer(team.players[0]!, 0);
+  engine.lockNow('timer');
 
   assert.equal(engine.snapshot().phase, 'locked');
   assert.equal(engine.snapshot().autoAdvanceAt, undefined);
@@ -451,7 +583,7 @@ test('auto-advance off leaves every step to the MC', async () => {
   assert.equal(engine.snapshot().phase, 'locked', 'nothing should move without the MC');
 });
 
-test('a resumed night does not fire a countdown that expired while it slept', () => {
+test('a resumed night does not fire a countdown that expired while it slept', async () => {
   const dir = mkdtempSync(join(tmpdir(), 'primetime-auto-'));
   dirs.push(dir);
   const store = new Store(dir);
@@ -459,8 +591,12 @@ test('a resumed night does not fire a countdown that expired while it slept', ()
   engines.push(first);
   const teams = toFirstQuestion(first);
   for (const team of teams) first.answer(team.players[0]!, 0);
+  first.lockNow('timer');
   const before = first.snapshot().autoAdvanceAt;
   assert.ok(before, 'a step was queued before the restart');
+  // The restart has to land in a later millisecond than the lock, or a carried
+  // over deadline and a freshly measured one are the same number by accident.
+  await wait(20);
   first.dispose();
 
   const resumed = new Engine(bank, store, undefined, store.loadNight());

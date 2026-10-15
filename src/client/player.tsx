@@ -138,14 +138,21 @@ function Question({ state, send }: { state: PlayerState; send: ReturnType<typeof
         })}
       </div>
 
-      {/* Naming who tapped it stops the "did you lock it in?" confusion at a shared tablet. */}
-      {chosen !== undefined && !reveal && (
-        <p class="center muted">
-          Locked in {['A', 'B', 'C', 'D'][chosen]}. Tap another to change your mind.
-        </p>
+      {/* Name the slot in both states. The chosen row is marked with a tint and
+          a border in the slot's own hue, which is colour alone, and this room
+          is 55 to 75 by design — the letter is the non-colour channel, so it
+          has to survive the lock, not just the open window. The seconds are
+          deliberately not repeated here: the timer above already counts, and a
+          number inside centred prose reflows the line on every tick. */}
+      {chosen !== undefined && !locked && (
+        <p class="center muted">{['A', 'B', 'C', 'D'][chosen]} is in. Tap another to change your mind.</p>
       )}
       {chosen === undefined && !locked && <p class="center muted">Tap your answer.</p>}
-      {locked && chosen === undefined && !reveal && <p class="center muted">No answer from your team.</p>}
+      {locked && !reveal && (
+        <p class="center muted">
+          {chosen === undefined ? 'No answer from your team.' : `${['A', 'B', 'C', 'D'][chosen]} is locked in.`}
+        </p>
+      )}
     </>
   );
 }
