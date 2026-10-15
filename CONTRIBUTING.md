@@ -54,6 +54,13 @@ Before opening a pull request, `npm test` should pass. It runs content
 validation, the engine tests, the control-password tests and the websocket
 integration tests.
 
+Questions are not fact-checked by `npm test`. Validation checks that the YAML
+parses, that categories exist and that nothing is a duplicate — it says nothing
+about whether an answer is true. `npm run fact-check` is the audit: free and
+offline by default, and `--verify` adds a model pass over the whole bank that
+costs money. Neither is proof. Both produce a list for a person to work through,
+and neither ever edits a question.
+
 There are no client-side tests. `src/client/**` is exercised by
 `npm run screenshots`, which plays a real game in a headless browser and fails
 loudly when a screen stops rendering. That is why the lane map in
