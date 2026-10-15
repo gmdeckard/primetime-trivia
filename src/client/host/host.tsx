@@ -2,9 +2,9 @@ import { render } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
 import type { HostState } from '../../../shared/protocol';
 import '../shared/styles.css';
-import { useCountdown, useGame, useSpeech, useWakeLock } from '../shared/useGame';
+import { nextUpWindowMs, useCountdown, useGame, useSpeech, useWakeLock } from '../shared/useGame';
 import { pointsAt } from '../../../shared/protocol';
-import { AutoAdvance, Badge, Board, Toast } from '../shared/ui';
+import { AutoAdvance, Badge, Board, NextUp, Toast } from '../shared/ui';
 
 /**
  * The big screen. Read-only, and sized for a projector at the far end of a
@@ -198,8 +198,7 @@ function App() {
 
   // The answer and its fact get the first part of the gap; the scoreboard takes
   // the last few seconds, so each question ends on where everyone now stands.
-  const gapMs = state.config.nextQuestionDelaySeconds * 1000;
-  const standingsWindowMs = Math.min(5000, gapMs * 0.45);
+  const standingsWindowMs = nextUpWindowMs(state.config.nextQuestionDelaySeconds);
   const showStandings =
     state.phase === 'reveal' &&
     !!state.autoAdvanceAt &&
@@ -285,18 +284,10 @@ function App() {
         <div class={`host-stage${showRail ? ' has-rail' : ''}`}>
         {showStandings ? (
           <div class="host-body">
-            <div class="center">
-              <div class="eyebrow">Standings</div>
-            </div>
+            <NextUp at={state.autoAdvanceAt} held={state.held} big />
             <div style={{ maxWidth: '1000px', margin: '0 auto', width: '100%' }}>
               <Board rows={state.scoreboard} limit={10} />
             </div>
-            <AutoAdvance
-              at={state.autoAdvanceAt}
-              total={state.config.nextQuestionDelaySeconds}
-              label="Next question in"
-              held={state.held}
-            />
           </div>
         ) : (
         <div class="host-body">

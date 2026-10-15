@@ -194,3 +194,28 @@ export function useSpeech(enabled: boolean) {
     [enabled],
   );
 }
+
+/**
+ * A clock that ticks only while something is counting down.
+ *
+ * Used for the beat between questions: the big screen and every handset switch
+ * to the "next question" screen at the same instant because they both compute
+ * it from the same `autoAdvanceAt` the server broadcast.
+ */
+export function useNow(active: boolean, everyMs = 200): number {
+  const [now, setNow] = useState(() => Date.now());
+  useEffect(() => {
+    if (!active) return;
+    const id = setInterval(() => setNow(Date.now()), everyMs);
+    return () => clearInterval(id);
+  }, [active, everyMs]);
+  return now;
+}
+
+/**
+ * How long the run-up to the next question lasts, at the end of the gap the
+ * reveal gets. Shared so the screens cannot disagree about when to switch.
+ */
+export function nextUpWindowMs(gapSeconds: number): number {
+  return Math.min(5000, gapSeconds * 1000 * 0.45);
+}

@@ -1,6 +1,6 @@
 import type { ComponentChildren } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
-import type { ConnStatus } from './useGame';
+import { useNow, type ConnStatus } from './useGame';
 
 export const LETTERS = ['A', 'B', 'C', 'D'] as const;
 export const SHAPES = ['circle', 'square', 'diamond', 'shield'] as const;
@@ -164,6 +164,27 @@ export function Keypad({
         <button class="btn" onClick={() => press('0')}>0</button>
         <button class="btn btn-primary" onClick={onSubmit} disabled={!value}>{submitLabel}</button>
       </div>
+    </div>
+  );
+}
+
+/**
+ * The run-up to the next question.
+ *
+ * Replaced a countdown sitting on top of live content. On the handsets it is
+ * the whole screen, so nobody is reading an answer while a number moves under
+ * it; on the big screen it sits above the standings, which the room is looking
+ * at anyway during the gap.
+ */
+export function NextUp({ at, held, big, full }: { at?: number; held?: boolean; big?: boolean; full?: boolean }) {
+  const now = useNow(!!at && !held);
+  if (held) return <div class="center"><span class="pill">Paused</span></div>;
+  if (!at) return null;
+  const seconds = Math.max(0, Math.ceil((at - now) / 1000));
+  return (
+    <div class={`center stack nextup${full ? ' nextup-full' : ''}`}>
+      <div class="eyebrow">Next question</div>
+      <div class={`clock${big ? ' clock-big' : ''}`}>{seconds}</div>
     </div>
   );
 }

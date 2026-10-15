@@ -2,9 +2,9 @@ import { render } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
 import type { EntryKind, PlayerState } from '../../shared/protocol';
 import './shared/styles.css';
-import { useCountdown, useGame, useWakeLock } from './shared/useGame';
+import { nextUpWindowMs, useCountdown, useGame, useNow, useWakeLock } from './shared/useGame';
 import { pointsAt } from '../../shared/protocol';
-import { AutoAdvance, Badge, Board, ConnBanner, Keypad, Toast } from './shared/ui';
+import { AutoAdvance, Badge, Board, ConnBanner, Keypad, NextUp, Toast } from './shared/ui';
 
 /**
  * The player view. One screen at a time, one decision at a time.
@@ -313,6 +313,11 @@ function App() {
   // The screen must not sleep mid-round on a shared tablet.
   useWakeLock();
 
+  const counting = !!state?.autoAdvanceAt && !state?.held && state?.phase === 'reveal';
+  const gapNow = useNow(counting);
+  const nextUp =
+    counting && state!.autoAdvanceAt! - gapNow <= nextUpWindowMs(state!.config.nextQuestionDelaySeconds);
+
   if (!state) {
     return (
       <div class="shell">
@@ -351,12 +356,19 @@ function App() {
           {(state.phase === 'question' || state.phase === 'locked' || state.phase === 'wager_question') && (
             <Question state={state} send={send} />
           )}
-          {(state.phase === 'reveal' || state.phase === 'wager_reveal') && (
-            <>
-              <Question state={state} send={send} />
-              <Reveal state={state} />
-            </>
-          )}
+          {(state.phase === 'reveal' || state.phase === 'wager_reveal') &&
+            (nextUp ? (
+              // The last seconds of the gap belong to the run-up, not to a
+              // number ticking under an answer nobody is reading any more.
+              // Switches at the same instant as the big screen, because both
+              // measure it from the same autoAdvanceAt.
+              <NextUp at={state.autoAdvanceAt} held={state.held} big full />
+            ) : (
+              <>
+                <Question state={state} send={send} />
+                <Reveal state={state} />
+              </>
+            ))}
           {state.phase === 'round_scores' && (
             // The same two facts the big screen is showing, so a player who is
             // looking down at their phone gets the break length too.
@@ -378,7 +390,9 @@ function App() {
         </>
       )}
 
-      <div class="spacer" />
+      {/* The run-up already claims the height; a second flexible gap under it
+          would split the screen and leave the clock stranded above centre. */}
+      {!nextUp && <div class="spacer" />}
       {(state.phase === 'lobby' || noTeam) && <p class="faint center">Room {state.roomCode}</p>}
       <Toast message={toast} onDismiss={dismissToast} />
     </div>

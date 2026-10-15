@@ -156,9 +156,12 @@ try {
   await shoot(host, '13-host-reveal');
   await shoot(ann, '14-player-reveal');
 
-  // The big screen hands the last seconds of the gap over to the scoreboard.
+  // The big screen hands the last seconds of the gap over to the scoreboard,
+  // with the run-up to the next question above it; the handset switches to the
+  // same run-up at the same moment.
   await pause(host, 6500);
   await shoot(host, '15-host-standings-gap');
+  await shoot(ann, '15b-player-next-up');
 
   // --- run the round out to a scoreboard
   for (let i = 0; i < 40; i++) {

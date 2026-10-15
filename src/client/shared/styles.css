@@ -738,3 +738,21 @@ textarea:focus { border-color: var(--brass); outline: none; }
   .answerkey { padding: 10px 12px; }
   .control-sticky { padding: 10px 0 max(10px, env(safe-area-inset-bottom)); }
 }
+
+/* ------------------------------------------------------- next-question clock
+
+   The countdown that used to sit under live content. A plain tabular number,
+   big enough to read from the back of the hall on the host screen and from a
+   lap on a handset, with nothing moving but the digit. */
+.nextup { gap: 6px; }
+/* On a handset the run-up is the entire screen, so it sits in the middle of it
+   rather than clinging to the top of a page of nothing. */
+.nextup-full { flex: 1; justify-content: center; }
+.clock {
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 4rem;
+  line-height: 1;
+  color: var(--brass);
+}
+.clock-big { font-size: clamp(5rem, 14vw, 11rem); }
