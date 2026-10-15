@@ -641,7 +641,6 @@ function App() {
             <div class="grow">
               <AutoAdvance
                 at={state.autoAdvanceAt}
-                total={state.phase === 'locked' ? state.config.revealDelaySeconds : state.config.nextQuestionDelaySeconds}
                 label={state.phase === 'locked' ? 'Revealing in' : 'Next in'}
                 held={state.held}
               />

@@ -263,29 +263,7 @@ input:focus { border-color: var(--brass); outline: none; }
 
 /* ---------------------------------------------------------------- timer */
 
-.timer {
-  height: 14px;
-  border-radius: 99px;
-  background: var(--line-soft);
-  overflow: hidden;
-}
-.timer > i {
-  display: block;
-  height: 100%;
-  background: linear-gradient(90deg, var(--brass), var(--brass-deep));
-  /* Width is set inline from the deadline; no transition so a host extending
-     the clock doesn't animate backwards through a stale value. */
-}
-.timer.is-low > i { background: linear-gradient(90deg, var(--wrong), #a8392f); }
 
-.timer-row { display: flex; align-items: center; gap: 14px; }
-.timer-count {
-  font-family: var(--mono);
-  font-size: 1.4rem;
-  font-variant-numeric: tabular-nums;
-  min-width: 2.6ch;
-  text-align: right;
-}
 
 /* --------------------------------------------------------- auto-advance */
 
@@ -298,27 +276,13 @@ input:focus { border-color: var(--brass); outline: none; }
   font-size: .95rem;
 }
 .autonext-label { white-space: nowrap; }
-.autonext-bar {
-  display: block;
-  width: min(240px, 30vw);
-  height: 6px;
-  border-radius: 99px;
-  background: var(--line-soft);
-  overflow: hidden;
-}
-.autonext-bar > i {
-  display: block;
-  height: 100%;
-  background: var(--text-faint);
-}
 .autonext-count {
   font-family: var(--mono);
   min-width: 2ch;
   text-align: right;
 }
 .host .autonext { font-size: clamp(1rem, 1.4vw, 1.5rem); }
-.host .autonext-bar { height: 10px; width: min(380px, 26vw); }
-
+.host 
 /* ---------------------------------------------------------------- pills */
 
 .pill {

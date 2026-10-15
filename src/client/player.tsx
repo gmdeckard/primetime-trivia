@@ -188,7 +188,6 @@ function Reveal({ state }: { state: PlayerState }) {
       <p class="faint center">{reveal.correctPct}% of teams got this one.</p>
       <AutoAdvance
         at={state.autoAdvanceAt}
-        total={state.config.nextQuestionDelaySeconds}
         label="Next question in"
         held={state.held}
       />

@@ -248,11 +248,13 @@ function App() {
   // The answer and its fact get the first part of the gap; the scoreboard takes
   // the last few seconds, so each question ends on where everyone now stands.
   const standingsWindowMs = nextUpWindowMs(state.config.nextQuestionDelaySeconds);
+  // Not gated on how many teams are playing. It used to require more than one,
+  // which meant that on a single-entry night — and on every solo test — the big
+  // screen never left the question and the run-up clock never appeared at all.
   const showStandings =
     state.phase === 'reveal' &&
     !!state.autoAdvanceAt &&
     !state.held &&
-    state.scoreboard.length > 1 &&
     state.autoAdvanceAt - tick <= standingsWindowMs;
 
   // No point showing the rail next to a full scoreboard.
@@ -382,7 +384,6 @@ function App() {
               <div class="center"><span class="pill pill-brass" style={{ fontSize: '1.3rem' }}>Answers in</span></div>
               <AutoAdvance
                 at={state.autoAdvanceAt}
-                total={state.config.revealDelaySeconds}
                 label="Answer in"
                 held={state.held}
               />
@@ -398,7 +399,6 @@ function App() {
               </div>
               <AutoAdvance
                 at={state.autoAdvanceAt}
-                total={state.config.nextQuestionDelaySeconds}
                 label="Next question in"
                 held={state.held}
               />

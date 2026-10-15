@@ -18,19 +18,6 @@ export function Badge({ slot, small }: { slot: number; small?: boolean }) {
   );
 }
 
-export function Timer({ fraction, seconds }: { fraction: number; seconds: number }) {
-  const low = seconds <= 10;
-  return (
-    <div class="timer-row">
-      <div class={`timer grow${low ? ' is-low' : ''}`} role="presentation">
-        <i style={{ width: `${fraction * 100}%` }} />
-      </div>
-      <div class="timer-count" aria-live="off">{seconds}</div>
-      <span class="sr-only" role="timer">{seconds} seconds remaining</span>
-    </div>
-  );
-}
-
 /**
  * The "moving on in N" strip shown while auto-advance is counting down.
  *
@@ -40,12 +27,10 @@ export function Timer({ fraction, seconds }: { fraction: number; seconds: number
  */
 export function AutoAdvance({
   at,
-  total,
   label,
   held,
 }: {
   at?: number;
-  total: number;
   label: string;
   held?: boolean;
 }) {
@@ -67,12 +52,10 @@ export function AutoAdvance({
 
   const msLeft = Math.max(0, at - now);
   const seconds = Math.ceil(msLeft / 1000);
-  const fraction = Math.max(0, Math.min(1, msLeft / (total * 1000)));
 
   return (
     <div class="autonext">
       <span class="autonext-label">{label}</span>
-      <span class="autonext-bar"><i style={{ width: `${fraction * 100}%` }} /></span>
       <span class="autonext-count tabular">{seconds}</span>
     </div>
   );
