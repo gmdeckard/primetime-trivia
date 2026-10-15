@@ -97,6 +97,14 @@ export interface GameConfig {
   readSeconds: number;
   /** What a correct answer is still worth when the window closes. */
   minQuestionPoints: number;
+  /** Big-screen sound: a bed in the lobby and the breaks, and the count-in. */
+  music: boolean;
+  /** A bed under a live question too. Its own switch because it is arguable. */
+  musicUnderQuestion: boolean;
+  /** Speak the run-up as well as playing it. */
+  musicSpeakCountIn: boolean;
+  /** Big-screen master volume, 0 to 1. */
+  musicVolume: number;
   /** Minutes the room gets between rounds, announced on every screen. */
   roundBreakMinutes: number;
   /** Minutes the room gets after the block closes. */
@@ -180,6 +188,16 @@ export const DEFAULT_CONFIG: GameConfig = {
   readSeconds: 5,
   // The floor at the buzzer: a fifth of full value, never nothing.
   minQuestionPoints: 200,
+  // Off until a night in the room says otherwise. Sound on the big screen is
+  // the kind of thing that is charming for ten minutes and wearing by the
+  // third round, so it starts silent and the MC turns it on.
+  music: false,
+  // Separate switch, and the more arguable one: a bed under a live question
+  // competes with the MC's microphone in a room where some of the audience
+  // wear hearing aids. Worth trying, not worth defaulting to.
+  musicUnderQuestion: false,
+  musicSpeakCountIn: false,
+  musicVolume: 0.35,
   // Long enough to get to the bar and back. Nothing in the engine counts these
   // down — a break waits for the MC either way — but a number on the big screen
   // is what stops the room asking how long they have.

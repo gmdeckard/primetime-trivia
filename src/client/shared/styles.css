@@ -756,3 +756,12 @@ textarea:focus { border-color: var(--brass); outline: none; }
   color: var(--brass);
 }
 .clock-big { font-size: clamp(5rem, 14vw, 11rem); }
+
+/* The one thing on the big screen that is meant to be clicked, during setup. */
+.host-sound-on {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 20;
+  font-size: 1.1rem;
+}

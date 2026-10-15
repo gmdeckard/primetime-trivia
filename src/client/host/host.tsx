@@ -1,8 +1,9 @@
 import { render } from 'preact';
-import { useEffect, useState } from 'preact/hooks';
+import { useEffect, useRef, useState } from 'preact/hooks';
 import type { HostState } from '../../../shared/protocol';
 import '../shared/styles.css';
-import { nextUpWindowMs, useCountdown, useGame, useSpeech, useWakeLock } from '../shared/useGame';
+import { nextUpWindowMs, useCountdown, useGame, useNow, useSpeech, useWakeLock } from '../shared/useGame';
+import { createHostAudio, type Bed, type HostAudio } from './audio';
 import { pointsAt } from '../../../shared/protocol';
 import { AutoAdvance, Badge, Board, NextUp, Toast } from '../shared/ui';
 
@@ -159,6 +160,46 @@ function App() {
   const { state, send: _send, toast, dismissToast } = useGame<HostState>('host');
   const speak = useSpeech(!!state?.config.readAloud);
 
+  // Built once and kept for the night. A browser refuses to make a sound until
+  // someone has clicked the page, so `armed` stays false until the MC does —
+  // otherwise the screen is silently doing nothing and looks broken.
+  const audioRef = useRef<HostAudio | null>(null);
+  const [armed, setArmed] = useState(false);
+  if (audioRef.current === null && typeof window !== 'undefined') {
+    audioRef.current = createHostAudio();
+  }
+  useEffect(() => () => audioRef.current?.dispose(), []);
+
+  const music = !!state?.config.music;
+  const phase = state?.phase;
+  const wantBed: Bed = !armed || !music
+    ? null
+    : phase === 'question' || phase === 'wager_question'
+      ? state?.config.musicUnderQuestion
+        ? 'question'
+        : null
+      : phase === 'lobby' || phase === 'round_scores' || phase === 'block_results' ||
+          phase === 'block_intro' || phase === 'round_intro' || phase === 'night_over'
+        ? 'lobby'
+        : null;
+
+  useEffect(() => { audioRef.current?.setBed(wantBed); }, [wantBed]);
+  useEffect(() => { audioRef.current?.setVolume(state?.config.musicVolume ?? 0.35); }, [state?.config.musicVolume]);
+
+  // The run-up fires once as the next question approaches, and only once: the
+  // effect keys on the autoAdvanceAt it belongs to.
+  useEffect(() => {
+    if (!armed || !music || !state?.autoAdvanceAt || state.held) return;
+    if (state.phase !== 'reveal') return;
+    const lead = nextUpWindowMs(state.config.nextQuestionDelaySeconds);
+    const wait = state.autoAdvanceAt - lead - Date.now();
+    const id = setTimeout(() => {
+      audioRef.current?.countIn();
+      if (state.config.musicSpeakCountIn) speak('Get ready. Set. Go!');
+    }, Math.max(0, wait));
+    return () => clearTimeout(id);
+  }, [armed, music, state?.autoAdvanceAt, state?.held, state?.phase]);
+
   useEffect(() => {
     if (!state) return;
     if (state.phase !== 'question' && state.phase !== 'wager_question') return;
@@ -212,8 +253,25 @@ function App() {
     state.scoreboard.length > 1 &&
     (state.phase === 'question' || state.phase === 'locked' || state.phase === 'reveal');
 
+  // The bed follows the money: full value is calm, the floor is urgent.
+  const span = state.config.questionPoints - state.config.minQuestionPoints;
+  audioRef.current?.setIntensity(
+    span > 0 ? 1 - (onOffer - state.config.minQuestionPoints) / span : 0,
+  );
+
   return (
     <div class="host">
+      {state.config.music && !armed && (
+        // A browser will not make a sound until the page has been clicked, so
+        // this is the click. It is on the big screen rather than the MC's phone
+        // because the gesture has to happen on the page that plays the audio.
+        <button
+          class="btn btn-primary host-sound-on"
+          onClick={() => { void audioRef.current?.resume().then(() => setArmed(true)); }}
+        >
+          Turn sound on
+        </button>
+      )}
       <div class="host-bar">
         <div>
           <div class="eyebrow">{state.venueName}</div>

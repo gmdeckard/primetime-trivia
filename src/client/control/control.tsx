@@ -247,6 +247,42 @@ function Setup({ state, send }: { state: ControlState; send: ReturnType<typeof u
         Read questions aloud {state.config.readAloud ? 'on' : 'off'}
       </button>
 
+      {/* Sound only ever comes out of the big screen. The first time it is
+          switched on, that screen needs one click before a browser will play
+          anything — there is a button on it saying so. */}
+      <div class="grid2">
+        <button
+          class={`btn${state.config.music ? ' btn-primary' : ''}`}
+          onClick={() => set({ music: !state.config.music })}
+        >
+          Big-screen sound {state.config.music ? 'on' : 'off'}
+        </button>
+        <button
+          class="btn"
+          disabled={!state.config.music}
+          onClick={() => {
+            const next = state.config.musicVolume >= 0.6 ? 0.15 : state.config.musicVolume + 0.15;
+            set({ musicVolume: Math.round(next * 100) / 100 });
+          }}
+        >
+          Volume {Math.round(state.config.musicVolume * 100)}%
+        </button>
+        <button
+          class={`btn${state.config.musicUnderQuestion ? ' btn-primary' : ''}`}
+          disabled={!state.config.music}
+          onClick={() => set({ musicUnderQuestion: !state.config.musicUnderQuestion })}
+        >
+          Under the question {state.config.musicUnderQuestion ? 'on' : 'off'}
+        </button>
+        <button
+          class={`btn${state.config.musicSpeakCountIn ? ' btn-primary' : ''}`}
+          disabled={!state.config.music}
+          onClick={() => set({ musicSpeakCountIn: !state.config.musicSpeakCountIn })}
+        >
+          Spoken run-up {state.config.musicSpeakCountIn ? 'on' : 'off'}
+        </button>
+      </div>
+
       {/*
         Age group. The core bank is tagged 55-75, so picking another group
         swaps the night's material wholesale rather than mixing it. An
