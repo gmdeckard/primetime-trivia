@@ -91,8 +91,16 @@ export interface GameConfig {
   roundsPerBlock: number;
   questionsPerRound: number;
   secondsPerQuestion: number;
-  speedBonus: boolean;
-  speedBonusPoints: number;
+  /** What a correct answer is worth while the room is still reading. */
+  questionPoints: number;
+  /** Seconds at full value before the clock starts taking points off. */
+  readSeconds: number;
+  /** What a correct answer is still worth when the window closes. */
+  minQuestionPoints: number;
+  /** Minutes the room gets between rounds, announced on every screen. */
+  roundBreakMinutes: number;
+  /** Minutes the room gets after the block closes. */
+  blockBreakMinutes: number;
   /** Jeopardy-style wager to close each block. */
   finalWager: boolean;
   /** Host screen reads the question aloud via the browser's speech engine. */
@@ -121,39 +129,35 @@ export interface GameConfig {
 }
 
 /**
- * Stepped speed bands, as a share of the configured bonus.
+ * What a correct answer is worth right now, the Buzztime way.
  *
- * Shared rather than server-only because a band nobody can see is not a game
- * mechanic. The player's screen shows what a correct answer is worth right
- * now, and it has to step at exactly the same places the scoring does.
+ * Full value while the room reads, then a straight slide to a floor as the
+ * clock runs out. Difficulty no longer changes the number: every question is
+ * worth the same, and what separates two teams who both knew it is how fast
+ * they were sure. That is the point of the scale — at twenty to thirty points
+ * a question the board filled with ties, and a night that ends tied is a night
+ * the tiebreaker decides rather than the trivia.
+ *
+ * The floor sits well above zero on purpose. This room is 55 to 75, and a
+ * correct answer arrived at slowly is still a correct answer; a game that pays
+ * nothing for it stops being worth playing by the third round.
+ *
+ * Shared rather than server-only because a curve nobody can see is not a game
+ * mechanic: the handsets show the number falling, and it has to be the same
+ * number the scoring uses. Rounded to ten so it steps rather than flickers.
  */
-export const SPEED_BANDS: ReadonlyArray<{ under: number; share: number }> = [
-  { under: 0.4, share: 1 },
-  { under: 0.7, share: 0.5 },
-];
-
-/** Share of the speed bonus earned, from elapsed as a fraction of the window. */
-export function speedShareAt(elapsed: number): number {
-  if (!Number.isFinite(elapsed)) return 0;
-  const f = Math.max(0, elapsed);
-  for (const band of SPEED_BANDS) {
-    if (f < band.under) return band.share;
-  }
-  return 0;
+export function pointsAt(elapsedMs: number, windowMs: number, config: GameConfig): number {
+  const max = config.questionPoints;
+  const min = Math.min(config.minQuestionPoints, max);
+  if (!Number.isFinite(windowMs) || windowMs <= 0) return max;
+  const readMs = Math.min(Math.max(0, config.readSeconds) * 1000, windowMs);
+  const elapsed = Math.max(0, Math.min(Number.isFinite(elapsedMs) ? elapsedMs : 0, windowMs));
+  if (elapsed <= readMs) return max;
+  const decayMs = windowMs - readMs;
+  if (decayMs <= 0) return max;
+  const fallen = (elapsed - readMs) / decayMs;
+  return Math.round((max - (max - min) * fallen) / 10) * 10;
 }
-
-/** What a correct answer is worth at this moment, speed bonus included. */
-export function pointsAvailable(base: number, config: GameConfig, elapsed: number): number {
-  if (!config.speedBonus) return base;
-  return base + Math.round(config.speedBonusPoints * speedShareAt(elapsed));
-}
-
-export const POINTS_BY_DIFFICULTY: Record<Difficulty, number> = {
-  1: 10,
-  2: 15,
-  3: 20,
-  4: 30,
-};
 
 export const DEFAULT_CONFIG: GameConfig = {
   venueName: 'PrimeTime Trivia',
@@ -168,11 +172,19 @@ export const DEFAULT_CONFIG: GameConfig = {
   // air. Since the window now always runs to its deadline rather than ending
   // on the last tap, this number is the whole beat between questions.
   secondsPerQuestion: 20,
-  speedBonus: true,
-  // Paid in stepped bands (see SPEED_BANDS above), so at difficulty 3
-  // a decisive answer scores 30, a considered one 25, and a last-second one
-  // the base 20. Big enough to feel, too small to beat knowing the answer.
-  speedBonusPoints: 10,
+  // Buzztime's number, and it is the right one: a thousand is wide enough that
+  // two teams who both knew the answer almost never land on the same score.
+  questionPoints: 1000,
+  // Long enough to read the prompt and all four options before anything is at
+  // stake. Much below this and the fast reader wins, not the one who knows it.
+  readSeconds: 5,
+  // The floor at the buzzer: a fifth of full value, never nothing.
+  minQuestionPoints: 200,
+  // Long enough to get to the bar and back. Nothing in the engine counts these
+  // down — a break waits for the MC either way — but a number on the big screen
+  // is what stops the room asking how long they have.
+  roundBreakMinutes: 5,
+  blockBreakMinutes: 10,
   finalWager: true,
   readAloud: false,
   // Medium-hard by design: a warm-up, a climb, and three that should make the
@@ -251,9 +263,10 @@ export interface RevealView {
     numberAnswer?: number;
     correct: boolean;
     awarded: number;
-    /** Speed-band points inside `awarded`, so a player sees what pace earned. */
-    bonus: number;
-    speedBonus: boolean;
+    /** Full value of the question, so a player can see what the clock cost. */
+    max: number;
+    /** True when they answered inside the reading time and paid nothing. */
+    full: boolean;
   }>;
   /** Share of teams that got it right, shown to make a hard question feel fair. */
   correctPct: number;
@@ -291,6 +304,8 @@ export interface BaseState {
   question?: QuestionView;
   /** Epoch ms. Clients render their own countdown from this. */
   deadline?: number;
+  /** When the live question started, so a client can price it exactly. */
+  startedAt?: number;
   /** Epoch ms the game will move itself on, when auto-advance is running. */
   autoAdvanceAt?: number;
   /** True when the MC has paused auto-advance to talk. */

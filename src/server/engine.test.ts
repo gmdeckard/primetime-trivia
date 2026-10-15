@@ -724,9 +724,9 @@ test('a night resumed after a restart keeps running itself', () => {
 test('a night resumed from an older build gains settings added since', () => {
   const engine = freshEngine();
   const onDisk = JSON.parse(JSON.stringify(engine.snapshot()));
-  delete (onDisk.config as Record<string, unknown>).speedBonusPoints;
+  delete (onDisk.config as Record<string, unknown>).questionPoints;
   const resumed = freshEngine(undefined, onDisk);
-  assert.equal(resumed.snapshot().config.speedBonusPoints, DEFAULT_CONFIG.speedBonusPoints);
+  assert.equal(resumed.snapshot().config.questionPoints, DEFAULT_CONFIG.questionPoints);
 });
 
 test('resetting the night restores current defaults and keeps the venue name', () => {

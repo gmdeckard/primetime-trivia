@@ -3,8 +3,8 @@ import { useEffect, useState } from 'preact/hooks';
 import type { EntryKind, PlayerState } from '../../shared/protocol';
 import './shared/styles.css';
 import { useCountdown, useGame, useWakeLock } from './shared/useGame';
-import { pointsAvailable } from '../../shared/protocol';
-import { AutoAdvance, Badge, Board, ConnBanner, Keypad, Timer, Toast } from './shared/ui';
+import { pointsAt } from '../../shared/protocol';
+import { AutoAdvance, Badge, Board, ConnBanner, Keypad, Toast } from './shared/ui';
 
 /**
  * The player view. One screen at a time, one decision at a time.
@@ -89,30 +89,33 @@ function Lobby({ state, send }: { state: PlayerState; send: ReturnType<typeof us
 
 function Question({ state, send }: { state: PlayerState; send: ReturnType<typeof useGame>['send'] }) {
   const q = state.question;
-  const { secondsLeft, fraction } = useCountdown(state.deadline, state.config.secondsPerQuestion);
+  const { secondsLeft, now } = useCountdown(state.deadline, state.config.secondsPerQuestion);
   if (!q) return null;
 
   const locked = state.phase === 'locked' || state.phase === 'reveal' || !state.deadline;
   const reveal = state.reveal;
   const chosen = state.me.choiceIndex;
 
-  // What the question is worth right now. The countdown bar only says how long
-  // is left; this says what hesitating costs, which is the part that makes a
-  // room answer. Once the question locks the bonus window is gone, so it falls
-  // back to the base value and the reveal card reports what was actually won.
-  const onOffer = locked ? q.points : pointsAvailable(q.points, state.config, 1 - fraction);
+  // What the question is worth right now. This is the whole clock as far as a
+  // player is concerned: the number falling is what makes a room answer, and
+  // it replaced a progress bar that moved constantly and said less. Priced off
+  // the real window so time the MC grants stretches the slide rather than
+  // skipping it. Once locked, the reveal card reports what was actually won.
+  const windowMs = state.deadline && state.startedAt ? state.deadline - state.startedAt : 0;
+  const onOffer = locked ? q.points : pointsAt(now - (state.startedAt ?? now), windowMs, state.config);
 
   return (
     <>
       <div class="row-between">
-        <span class="pill">{state.round?.categoryName}</span>
-        <span class={`pill pill-brass${!locked && onOffer > q.points ? ' pill-live' : ''}`}>{onOffer} pts</span>
+        <span class="pill">
+          {state.round?.categoryName} · {q.position}/{q.ofTotal}
+        </span>
+        <span class="pill pill-brass pill-live">
+          {onOffer} pts{!locked && state.deadline ? ` · ${secondsLeft}s` : ''}
+        </span>
       </div>
 
-      {state.deadline && <Timer fraction={fraction} seconds={secondsLeft} />}
-
       <div class="card stack">
-        <div class="faint">Question {q.position} of {q.ofTotal}</div>
         <p class="prompt">{q.prompt}</p>
         {q.image && <img src={`/media/${q.image}`} alt="" style={{ width: '100%', borderRadius: '12px' }} />}
       </div>
@@ -170,19 +173,18 @@ function Reveal({ state }: { state: PlayerState }) {
           <div style={{ fontFamily: 'var(--serif)', fontSize: '3rem', lineHeight: 1 }}>
             {mine.awarded > 0 ? `+${mine.awarded}` : mine.awarded}
           </div>
-          {mine.speedBonus && <span class="pill pill-brass">+{mine.bonus} for a fast answer</span>}
+          {mine.correct && (
+            <span class="pill pill-brass">
+              {mine.full ? 'Full value — inside the reading time' : `of ${mine.max}`}
+            </span>
+          )}
         </div>
       ) : (
         <div class="card center">
           <div class="eyebrow">No answer</div>
         </div>
       )}
-      <div class="card stack">
-        <div class="eyebrow">The answer</div>
-        <p class="prompt">{reveal.answerText}</p>
-        <p class="muted" style={{ fontFamily: 'var(--serif)' }}>{reveal.funFact}</p>
-        <p class="faint">{reveal.correctPct}% of teams got this one.</p>
-      </div>
+      <p class="faint center">{reveal.correctPct}% of teams got this one.</p>
       <AutoAdvance
         at={state.autoAdvanceAt}
         total={state.config.nextQuestionDelaySeconds}
@@ -263,11 +265,12 @@ function Tiebreak({ state, send }: { state: PlayerState; send: ReturnType<typeof
   );
 }
 
-function Standings({ state, title }: { state: PlayerState; title: string }) {
+function Standings({ state, title, sub }: { state: PlayerState; title: string; sub?: string }) {
   const mine = state.scoreboard.find((r) => r.teamId === state.me.teamId);
   const top = state.scoreboard.filter((r) => r.teamId !== state.me.teamId).slice(0, 8);
   return (
     <>
+      {sub && <p class="center" style={{ fontSize: '1.2rem', margin: 0 }}>{sub}</p>}
       <div class="card center stack">
         <div class="eyebrow">{title}</div>
         {mine && (
@@ -354,7 +357,19 @@ function App() {
               <Reveal state={state} />
             </>
           )}
-          {state.phase === 'round_scores' && <Standings state={state} title={`After ${state.round?.categoryName}`} />}
+          {state.phase === 'round_scores' && (
+            // The same two facts the big screen is showing, so a player who is
+            // looking down at their phone gets the break length too.
+            <Standings
+              state={state}
+              title={`End of Round ${state.round?.index ?? 1}`}
+              sub={`${
+                !state.round || state.round.index >= state.round.ofTotal
+                  ? state.config.blockBreakMinutes
+                  : state.config.roundBreakMinutes
+              } minute break`}
+            />
+          )}
           {state.phase === 'wager_bet' && <Wager state={state} send={send} />}
           {state.phase === 'tiebreak' && <Tiebreak state={state} send={send} />}
           {state.phase === 'tiebreak_reveal' && <Standings state={state} title="Tiebreaker settled" />}
@@ -364,7 +379,7 @@ function App() {
       )}
 
       <div class="spacer" />
-      <p class="faint center">Room {state.roomCode}</p>
+      {(state.phase === 'lobby' || noTeam) && <p class="faint center">Room {state.roomCode}</p>}
       <Toast message={toast} onDismiss={dismissToast} />
     </div>
   );

@@ -709,3 +709,32 @@ textarea {
   min-height: 72px;
 }
 textarea:focus { border-color: var(--brass); outline: none; }
+
+/* ------------------------------------------------- short phones (density)
+
+   Measured on a 375x667 handset: a live question rendered 897px into a 667px
+   viewport, so the room was scrolling to see option D. Everything below trims
+   chrome rather than content — gaps, padding and the badge, never the prompt
+   or the answers' readability. Tap targets stay above the 60px floor this
+   project sets, and body text stays at 19px.
+
+   Scoped to short viewports so tablets and the big screen are untouched. */
+@media (max-height: 740px) {
+  .shell { gap: 12px; padding: 12px; }
+  .stack { gap: 10px; }
+  .card { padding: 14px 16px; }
+  .answer { min-height: 72px; padding: 10px 14px; gap: 12px; }
+  .answer .badge { width: 44px; height: 44px; font-size: 1.2rem; }
+  .prompt { font-size: 1.35rem; line-height: 1.25; }
+  /* A paragraph's default margins cost 38px between the answers and the
+     bottom of the screen, which is exactly what pushed option D off. */
+  .shell > p { margin: 0; }
+
+  /* The MC's screen has its own container, and the same reasoning applies:
+     an MC is standing up holding a microphone, so the answer and the big
+     button have to be on screen together without a scroll. */
+  .control { gap: 10px; padding: 12px; }
+  .control > p { margin: 0; }
+  .answerkey { padding: 10px 12px; }
+  .control-sticky { padding: 10px 0 max(10px, env(safe-area-inset-bottom)); }
+}

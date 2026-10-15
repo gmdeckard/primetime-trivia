@@ -1,13 +1,14 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { DEFAULT_CONFIG, pointsAvailable, type GameConfig } from '../../shared/protocol.js';
-import { basePoints, scoreQuestion, speedShare, type AnswerRecord } from './scoring.js';
+import { DEFAULT_CONFIG, pointsAt, type GameConfig } from '../../shared/protocol.js';
+import { scoreQuestion, type AnswerRecord } from './scoring.js';
 
 /**
- * The speed bands decide how a night feels, and they are the one piece of
- * scoring a player can argue with out loud. The property worth protecting is
- * not the exact band widths — it is that speed only ever adds to a correct
- * answer and can never out-score knowing the thing.
+ * The curve decides how a night feels, and it is the one piece of scoring a
+ * player argues with out loud. Two properties are worth protecting: that being
+ * quick can never beat knowing the answer, and that a correct answer always
+ * pays something. A floor of zero turns the back half of every round into
+ * nothing worth playing for, which is the opposite of the point.
  */
 
 const WINDOW = 20_000;
@@ -20,104 +21,117 @@ function answer(teamId: string, choiceIndex: number, elapsedMs: number): AnswerR
   return { teamId, choiceIndex, elapsedMs, byPlayerId: `p-${teamId}` };
 }
 
-test('speedShare steps at the band edges and never goes negative', () => {
-  assert.equal(speedShare(0, WINDOW), 1);
-  assert.equal(speedShare(7_999, WINDOW), 1, 'just inside the 40% band is full');
-  assert.equal(speedShare(8_000, WINDOW), 0.5, 'exactly 40% has stepped down');
-  assert.equal(speedShare(13_999, WINDOW), 0.5);
-  assert.equal(speedShare(14_000, WINDOW), 0, 'exactly 70% earns nothing');
-  assert.equal(speedShare(WINDOW, WINDOW), 0);
-  assert.equal(speedShare(WINDOW * 2, WINDOW), 0, 'past the deadline is still just zero');
-  assert.equal(speedShare(-5_000, WINDOW), 1, 'clock skew cannot mint a negative fraction');
+test('the reading time is free, and the slide starts the moment it ends', () => {
+  const c = cfg();
+  assert.equal(pointsAt(0, WINDOW, c), 1000, 'answering instantly is full value');
+  assert.equal(pointsAt(4_999, WINDOW, c), 1000, 'still inside the five seconds');
+  assert.equal(pointsAt(5_000, WINDOW, c), 1000, 'the boundary itself is still free');
+  assert.ok(pointsAt(5_500, WINDOW, c) < 1000, 'half a second later it has started falling');
 });
 
-test('a missing or zero window pays no bonus rather than dividing by zero', () => {
-  assert.equal(speedShare(1_000, 0), 0);
-  assert.equal(speedShare(1_000, -1), 0);
-  assert.equal(speedShare(1_000, Number.NaN), 0);
+test('the value falls to the floor at the buzzer and never below it', () => {
+  const c = cfg();
+  assert.equal(pointsAt(WINDOW, WINDOW, c), c.minQuestionPoints, 'the last instant is the floor');
+  assert.equal(pointsAt(WINDOW * 2, WINDOW, c), c.minQuestionPoints, 'past the deadline is still the floor');
+  assert.equal(pointsAt(-5_000, WINDOW, c), 1000, 'clock skew cannot mint more than full value');
 });
 
-test('base points are identical at every speed; only the bonus moves', () => {
-  const base = basePoints(3);
+test('the slide is monotonic: waiting never pays better than answering', () => {
+  const c = cfg();
+  let previous = Number.POSITIVE_INFINITY;
+  for (let t = 0; t <= WINDOW; t += 250) {
+    const value = pointsAt(t, WINDOW, c);
+    assert.ok(value <= previous, `value rose at ${t}ms: ${value} after ${previous}`);
+    previous = value;
+  }
+  assert.equal(previous, c.minQuestionPoints);
+});
+
+test('the halfway point of the slide is worth about halfway down', () => {
+  const c = cfg();
+  const readMs = c.readSeconds * 1000;
+  const middle = pointsAt(readMs + (WINDOW - readMs) / 2, WINDOW, c);
+  const expected = (c.questionPoints + c.minQuestionPoints) / 2;
+  assert.ok(Math.abs(middle - expected) <= 10, `expected about ${expected}, got ${middle}`);
+});
+
+test('every value is a round ten, so the handsets step rather than flicker', () => {
+  const c = cfg();
+  for (let t = 0; t <= WINDOW; t += 137) {
+    assert.equal(pointsAt(t, WINDOW, c) % 10, 0, `ragged value at ${t}ms`);
+  }
+});
+
+test('a missing or zero window pays full value rather than dividing by zero', () => {
+  const c = cfg();
+  assert.equal(pointsAt(1_000, 0, c), 1000);
+  assert.equal(pointsAt(1_000, -1, c), 1000);
+  assert.equal(pointsAt(1_000, Number.NaN, c), 1000);
+  assert.equal(pointsAt(Number.NaN, WINDOW, c), 1000, 'a nonsense elapsed is treated as instant');
+});
+
+test('granted time stretches the slide instead of skipping down it', () => {
+  const c = cfg();
+  // The MC adds ten seconds. A team answering at the same wall-clock moment
+  // should be further UP the curve, not further down it.
+  assert.ok(pointsAt(10_000, 30_000, c) > pointsAt(10_000, WINDOW, c));
+});
+
+test('a wrong answer scores nothing, however fast it was', () => {
+  const awards = scoreQuestion([answer('quick', 2, 100)], 1, cfg(), WINDOW);
+  assert.equal(awards[0]!.correct, false);
+  assert.equal(awards[0]!.total, 0);
+  assert.equal(awards[0]!.full, false, 'full value is a property of a right answer');
+});
+
+test('being quick cannot beat being right', () => {
   const awards = scoreQuestion(
-    [answer('fast', 1, 1_000), answer('middling', 1, 10_000), answer('slow', 1, 19_000)],
+    [answer('fast-and-wrong', 2, 0), answer('slow-and-right', 1, WINDOW)],
     1,
-    3,
-    cfg({ speedBonusPoints: 10 }),
-    WINDOW,
-  );
-
-  for (const a of awards) assert.equal(a.base, base, `${a.teamId} kept full base points`);
-  assert.deepEqual(
-    awards.map((a) => a.total),
-    [base + 10, base + 5, base],
-  );
-  assert.deepEqual(
-    awards.map((a) => a.speedBonus),
-    [true, true, false],
-  );
-});
-
-test('a slow correct answer beats a fast wrong one', () => {
-  const [slowRight, fastWrong] = scoreQuestion(
-    [answer('slow', 1, 19_500), answer('quick', 2, 200)],
-    1,
-    2,
     cfg(),
     WINDOW,
   );
-
-  assert.equal(fastWrong!.total, 0, 'speed earns nothing without the right answer');
-  assert.ok(slowRight!.total > fastWrong!.total);
+  const wrong = awards.find((a) => a.teamId === 'fast-and-wrong')!;
+  const right = awards.find((a) => a.teamId === 'slow-and-right')!;
+  assert.ok(right.total > wrong.total, 'the slowest correct answer still beats the fastest wrong one');
 });
 
-test('the only correct team still earns its band', () => {
-  // The first-in bonus this replaced needed someone to beat. A band does not:
-  // it rewards answering decisively, which is true of a lone right answer too.
-  const [only] = scoreQuestion([answer('alone', 0, 500)], 0, 4, cfg({ speedBonusPoints: 10 }), WINDOW);
-  assert.equal(only!.bonus, 10);
-  assert.equal(only!.total, basePoints(4) + 10);
-});
-
-test('speedBonus off pays base points at any pace', () => {
+test('two teams who both knew it are separated by how fast they were sure', () => {
   const awards = scoreQuestion(
-    [answer('fast', 1, 100), answer('slow', 1, 19_000)],
+    [answer('decisive', 1, 2_000), answer('deliberate', 1, 16_000)],
     1,
-    3,
-    cfg({ speedBonus: false }),
+    cfg(),
     WINDOW,
   );
-  for (const a of awards) {
-    assert.equal(a.bonus, 0);
-    assert.equal(a.speedBonus, false);
-    assert.equal(a.total, basePoints(3));
-  }
+  const decisive = awards.find((a) => a.teamId === 'decisive')!;
+  const deliberate = awards.find((a) => a.teamId === 'deliberate')!;
+  assert.ok(decisive.total > deliberate.total, 'this is the whole reason the scale changed');
+  assert.ok(deliberate.total > 0, 'but the slow team still scores: they got it right');
+  assert.equal(decisive.full, true, 'two seconds is inside the reading time');
+  assert.equal(deliberate.full, false);
 });
 
-test('host-granted time widens the bands rather than penalising early answers', () => {
-  const at12s = [answer('team', 1, 12_000)];
-  const tight = scoreQuestion(at12s, 1, 3, cfg({ speedBonusPoints: 10 }), WINDOW);
-  // The MC added 15s, so the same answer now sits inside the full band.
-  const extended = scoreQuestion(at12s, 1, 3, cfg({ speedBonusPoints: 10 }), WINDOW + 15_000);
-
-  assert.equal(tight[0]!.bonus, 5);
-  assert.equal(extended[0]!.bonus, 10);
+test('every award reports the full value, so a player can see what the clock cost', () => {
+  const c = cfg();
+  const awards = scoreQuestion([answer('a', 1, 12_000)], 1, c, WINDOW);
+  assert.equal(awards[0]!.max, c.questionPoints);
+  assert.ok(awards[0]!.total < awards[0]!.max);
 });
 
-test('an unanswered-but-recorded wrong choice scores zero, bonus included', () => {
-  const [wrong] = scoreQuestion([answer('t', 3, 100)], 0, 1, cfg(), WINDOW);
-  assert.deepEqual({ base: wrong!.base, bonus: wrong!.bonus, total: wrong!.total }, { base: 0, bonus: 0, total: 0 });
+test('a flat config turns the slide off without breaking anything', () => {
+  // minQuestionPoints == questionPoints is how an MC would ask for pub rules.
+  const c = cfg({ minQuestionPoints: 1000 });
+  assert.equal(pointsAt(0, WINDOW, c), 1000);
+  assert.equal(pointsAt(WINDOW, WINDOW, c), 1000);
 });
 
-test('the displayed value and the awarded value step at the same places', () => {
-  // The player's screen computes from an elapsed fraction and the scorer from
-  // milliseconds. If these two ever drift apart the game lies to the room.
-  const config = cfg({ speedBonusPoints: 10 });
-  const base = basePoints(3);
+test('a floor above the ceiling is clamped rather than paying extra', () => {
+  const c = cfg({ questionPoints: 500, minQuestionPoints: 900 });
+  assert.equal(pointsAt(WINDOW, WINDOW, c), 500, 'a misconfigured floor cannot exceed full value');
+});
 
-  for (const elapsedMs of [0, 3_000, 7_999, 8_000, 11_000, 13_999, 14_000, 19_000, WINDOW]) {
-    const displayed = pointsAvailable(base, config, elapsedMs / WINDOW);
-    const [awarded] = scoreQuestion([answer('t', 1, elapsedMs)], 1, 3, config, WINDOW);
-    assert.equal(displayed, awarded!.total, `drift at ${elapsedMs}ms`);
-  }
+test('reading time longer than the window leaves every answer at full value', () => {
+  const c = cfg({ readSeconds: 60 });
+  assert.equal(pointsAt(0, WINDOW, c), 1000);
+  assert.equal(pointsAt(WINDOW, WINDOW, c), 1000);
 });

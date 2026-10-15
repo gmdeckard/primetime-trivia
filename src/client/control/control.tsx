@@ -109,7 +109,14 @@ function primaryAction(state: ControlState): { label: string; hint: string } {
       return state.autoAdvanceAt
         ? { label: 'Next now', hint: state.upNext ?? '' }
         : { label: 'Next question', hint: state.upNext ?? '' };
-    case 'round_scores': return { label: 'Continue', hint: 'Read out the top three' };
+    case 'round_scores': {
+      const round = state.round;
+      const last = !round || round.index >= round.ofTotal;
+      const mins = last ? state.config.blockBreakMinutes : state.config.roundBreakMinutes;
+      return last
+        ? { label: 'Start the final question', hint: `Round ended · ${mins} minute break` }
+        : { label: `Start round ${(round?.index ?? 1) + 1}`, hint: `Round ended · ${mins} minute break` };
+    }
     case 'wager_bet': return { label: 'Show the final question', hint: 'Once every team has bet' };
     case 'wager_question': return { label: 'Answers in', hint: 'Lock the final question' };
     case 'wager_reveal': return { label: 'Final standings', hint: '' };
@@ -222,11 +229,8 @@ function Setup({ state, send }: { state: ControlState; send: ReturnType<typeof u
       </div>
 
       <div class="grid2">
-        <button
-          class={`btn${state.config.speedBonus ? ' btn-primary' : ''}`}
-          onClick={() => set({ speedBonus: !state.config.speedBonus })}
-        >
-          Speed bonus {state.config.speedBonus ? 'on' : 'off'}
+        <button class="btn" disabled>
+          {state.config.questionPoints} pts, falling after {state.config.readSeconds}s
         </button>
         <button
           class={`btn${state.config.finalWager ? ' btn-primary' : ''}`}
@@ -399,6 +403,11 @@ function App() {
   const { state, status, send, toast, unauthorized, dismissToast } = useGame<ControlState>('control', { enabled: !!token });
   const { secondsLeft } = useCountdown(state?.deadline, state?.config.secondsPerQuestion ?? 1);
   const [showSetup, setShowSetup] = useState(false);
+  // Mid-question the MC needs the answer, the clock and the big button. The
+  // roster, the announce buttons and the end-of-night controls were adding
+  // ~600px below all that on a 667px phone, so the one screen that has to be
+  // glanceable was the one that scrolled. They live behind this instead.
+  const [showMore, setShowMore] = useState(false);
 
   // Space bar advances, so an MC with a bluetooth clicker or a laptop can run
   // the whole night without looking down.
@@ -443,9 +452,14 @@ function App() {
           <div class="eyebrow">MC controls</div>
           <strong>{state.venueName}</strong>
         </div>
-        <button class={`btn btn-sm${showSetup ? ' btn-primary' : ''}`} onClick={() => setShowSetup(!showSetup)}>
-          {showSetup ? 'Hide setup' : 'Setup'}
-        </button>
+        <div class="row" style={{ gap: '8px' }}>
+          <button class={`btn btn-sm${showSetup ? ' btn-primary' : ''}`} onClick={() => setShowSetup(!showSetup)}>
+            {showSetup ? 'Hide setup' : 'Setup'}
+          </button>
+          <button class={`btn btn-sm${showMore ? ' btn-primary' : ''}`} onClick={() => setShowMore(!showMore)}>
+            {showMore ? 'Less' : 'More'}
+          </button>
+        </div>
       </div>
 
       {state.warnings.map((w) => (
@@ -512,7 +526,7 @@ function App() {
         </div>
       )}
 
-      {state.phase === 'question' && (
+      {state.phase === 'question' && showMore && (
         <button class="btn btn-block btn-sm" onClick={() => send({ t: 'replace_question' })}>
           Swap this question — they've seen it before
         </button>
@@ -541,9 +555,14 @@ function App() {
         </>
       )}
 
-      {state.phase !== 'lobby' && <Teams state={state} send={send} />}
-      {state.phase === 'lobby' && state.entryCount > 0 && <Teams state={state} send={send} />}
+      {(showMore ||
+        state.phase === 'lobby' ||
+        state.phase === 'round_scores' ||
+        state.phase === 'block_results' ||
+        state.phase === 'night_over') &&
+        (state.phase !== 'lobby' || state.entryCount > 0) && <Teams state={state} send={send} />}
 
+      {showMore && (
       <div class="card stack">
         <div class="eyebrow">Announce on the big screen</div>
         <div class="grid2">
@@ -553,7 +572,9 @@ function App() {
           <button class="btn btn-sm" onClick={() => send({ t: 'say', message: '' })}>Clear</button>
         </div>
       </div>
+      )}
 
+      {showMore && (
       <div class="card stack">
         <div class="eyebrow">End of night</div>
         <button class="btn btn-sm btn-block" onClick={() => { if (confirm('End the night and show final standings?')) send({ t: 'end_night' }); }}>
@@ -569,6 +590,7 @@ function App() {
           {state.bank.usedTonight} questions asked tonight · {state.bank.availableInSelection} unused remaining
         </p>
       </div>
+      )}
 
       <div class="control-sticky">
         {(state.autoAdvanceAt || state.held) && (

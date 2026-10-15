@@ -1,5 +1,4 @@
 import {
-  POINTS_BY_DIFFICULTY,
   PROTOCOL_VERSION,
   type BaseState,
   type ControlState,
@@ -75,7 +74,7 @@ function questionView(engine: Engine): QuestionView | undefined {
     kind: q.kind,
     image: q.image,
     difficulty: q.difficulty,
-    points: POINTS_BY_DIFFICULTY[q.difficulty],
+    points: s.config.questionPoints,
     position: current.position,
     ofTotal: current.ofTotal,
   };
@@ -112,8 +111,8 @@ function revealView(engine: Engine, onlyTeamId?: string): RevealView | undefined
       numberAnswer: answer?.numberAnswer,
       correct: a.correct,
       awarded: a.total,
-      bonus: a.bonus,
-      speedBonus: a.speedBonus,
+      max: a.max,
+      full: a.full,
     };
   });
 
@@ -162,6 +161,7 @@ function baseState(engine: Engine, role: 'host' | 'control' | 'player', teamId?:
     round: roundView(engine),
     question: questionView(engine),
     deadline: current && !current.locked ? current.deadline : undefined,
+    startedAt: current && !current.locked ? current.startedAt : undefined,
     autoAdvanceAt: s.autoAdvanceAt,
     held: !!s.held,
     answeredTeamIds: role === 'player' ? [] : answered,
@@ -295,7 +295,7 @@ export function playerState(engine: Engine, playerId: string): PlayerState {
       choiceIndex: answer?.choiceIndex,
       numberAnswer: answer?.numberAnswer,
       wager: teamId ? s.wagerBets?.[teamId] : undefined,
-      maxWager: team ? Math.max(team.score, POINTS_BY_DIFFICULTY[4]) : 0,
+      maxWager: team ? Math.max(team.score, s.config.questionPoints) : 0,
     },
   };
 }

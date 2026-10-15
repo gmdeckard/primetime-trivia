@@ -1,7 +1,6 @@
 import { randomUUID, randomInt } from 'node:crypto';
 import {
   DEFAULT_CONFIG,
-  POINTS_BY_DIFFICULTY,
   type Difficulty,
   type EntryKind,
   type GameConfig,
@@ -597,7 +596,7 @@ export class Engine {
     }
     // A team with nothing on the board can still bet a floor amount, otherwise
     // the last-place table has no reason to still be sitting there.
-    const ceiling = Math.max(team.score, POINTS_BY_DIFFICULTY[4]);
+    const ceiling = Math.max(team.score, this.state.config.questionPoints);
     this.state.wagerBets[player.teamId] = Math.max(0, Math.min(Math.round(amount), ceiling));
     this.commit({ kind: 'wager_set', teamId: player.teamId, amount });
   }
@@ -617,7 +616,6 @@ export class Engine {
       current.awards = scoreQuestion(
         answers,
         this.correctDisplayIndex(),
-        q.difficulty,
         this.state.config,
         current.deadline - current.startedAt,
       );
@@ -633,13 +631,13 @@ export class Engine {
         const correct = a.choiceIndex === correctIndex;
         const bet = this.state.wagerBets?.[a.teamId] ?? 0;
         const total = scoreWager(correct, bet);
-        return { teamId: a.teamId, correct, base: total, bonus: 0, total, speedBonus: false };
+        return { teamId: a.teamId, correct, total, max: bet, full: false };
       });
       // A team that never answered loses its wager — the bet was the commitment.
       for (const teamId of this.activeTeamIds()) {
         if (current.answers[teamId]) continue;
         const bet = this.state.wagerBets?.[teamId] ?? 0;
-        if (bet) current.awards.push({ teamId, correct: false, base: -bet, bonus: 0, total: -bet, speedBonus: false });
+        if (bet) current.awards.push({ teamId, correct: false, total: -bet, max: bet, full: false });
       }
       for (const award of current.awards) {
         const team = this.state.teams[award.teamId];
@@ -652,11 +650,11 @@ export class Engine {
       current.awards = this.activeTeamIds().map((teamId) => ({
         teamId,
         correct: teamId === winner,
-        base: 0,
-        bonus: 0,
-        // One point is enough to break the tie without distorting the night.
+        // One point is enough to break the tie without distorting the night,
+        // and at a thousand a question it cannot change anything else.
         total: teamId === winner ? 1 : 0,
-        speedBonus: false,
+        max: 1,
+        full: false,
       }));
       for (const award of current.awards) {
         const team = this.state.teams[award.teamId];

@@ -1,4 +1,4 @@
-import { POINTS_BY_DIFFICULTY, speedShareAt, type Difficulty, type GameConfig } from '../../shared/protocol.js';
+import { pointsAt, type GameConfig } from '../../shared/protocol.js';
 
 export interface AnswerRecord {
   teamId: string;
@@ -12,60 +12,40 @@ export interface AnswerRecord {
 export interface Award {
   teamId: string;
   correct: boolean;
-  base: number;
-  bonus: number;
+  /** What this answer actually earned. */
   total: number;
-  speedBonus: boolean;
-}
-
-export function basePoints(difficulty: Difficulty): number {
-  return POINTS_BY_DIFFICULTY[difficulty];
-}
-
-/**
- * The bands themselves live in shared/protocol.ts, because the player's screen
- * has to step the displayed value at exactly the same thresholds the scoring
- * uses. See SPEED_BANDS there for why they step rather than slide.
- */
-/** The share of the speed bonus an answer at `elapsedMs` earns. */
-export function speedShare(elapsedMs: number, windowMs: number): number {
-  // A missing or nonsensical window must not hand out free points.
-  if (!Number.isFinite(windowMs) || windowMs <= 0) return 0;
-  return speedShareAt(Math.max(0, elapsedMs) / windowMs);
+  /** The question's full value, for showing what the clock cost. */
+  max: number;
+  /** True when the answer landed inside the reading time and paid nothing. */
+  full: boolean;
 }
 
 /**
  * Score one question for every team that answered.
  *
  * `windowMs` is the real width of the question — `deadline - startedAt`, not
- * the configured seconds — so that time the MC grants mid-question widens the
- * bands for everyone instead of quietly penalising the teams who had already
- * answered.
+ * the configured seconds — so time the MC grants mid-question stretches the
+ * slide for everyone instead of quietly penalising whoever already answered.
  *
- * Unlike the first-in bonus this replaced, the band does not depend on what
- * anyone else did: a team that was the only one to get it right still earns
- * its band, because the band rewards answering decisively, not winning a race.
+ * The value does not depend on what anyone else did: a team that was the only
+ * one to get it right earns exactly what the clock said, because this rewards
+ * being sure quickly, not winning a race.
  */
 export function scoreQuestion(
   answers: AnswerRecord[],
   correctIndex: number | undefined,
-  difficulty: Difficulty,
   config: GameConfig,
   windowMs: number,
 ): Award[] {
-  const base = basePoints(difficulty);
-
   return answers.map((a) => {
     const correct = a.choiceIndex === correctIndex;
-    const share = correct && config.speedBonus ? speedShare(a.elapsedMs, windowMs) : 0;
-    const bonus = Math.round(config.speedBonusPoints * share);
+    const earned = pointsAt(a.elapsedMs, windowMs, config);
     return {
       teamId: a.teamId,
       correct,
-      base: correct ? base : 0,
-      bonus,
-      total: (correct ? base : 0) + bonus,
-      speedBonus: bonus > 0,
+      total: correct ? earned : 0,
+      max: config.questionPoints,
+      full: correct && earned >= config.questionPoints,
     };
   });
 }

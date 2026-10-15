@@ -163,12 +163,13 @@ export function useCountdown(deadline?: number, totalSeconds = 1) {
     return () => cancelAnimationFrame(frame);
   }, [deadline]);
 
-  if (!deadline) return { secondsLeft: 0, fraction: 0, running: false };
+  if (!deadline) return { secondsLeft: 0, fraction: 0, running: false, now };
   const msLeft = Math.max(0, deadline - now);
   return {
     secondsLeft: Math.ceil(msLeft / 1000),
     fraction: Math.max(0, Math.min(1, msLeft / (totalSeconds * 1000))),
     running: msLeft > 0,
+    now,
   };
 }
 

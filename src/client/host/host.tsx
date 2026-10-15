@@ -3,8 +3,8 @@ import { useEffect, useState } from 'preact/hooks';
 import type { HostState } from '../../../shared/protocol';
 import '../shared/styles.css';
 import { useCountdown, useGame, useSpeech, useWakeLock } from '../shared/useGame';
-import { pointsAvailable } from '../../../shared/protocol';
-import { AutoAdvance, Badge, Board, Timer, Toast } from '../shared/ui';
+import { pointsAt } from '../../../shared/protocol';
+import { AutoAdvance, Badge, Board, Toast } from '../shared/ui';
 
 /**
  * The big screen. Read-only, and sized for a projector at the far end of a
@@ -15,6 +15,16 @@ import { AutoAdvance, Badge, Board, Timer, Toast } from '../shared/ui';
  * usually mirroring this, and a reflection in a window has ruined more than
  * one quiz night.
  */
+
+/**
+ * Which break the room is on. The last round of a block runs into the wager
+ * and then the long break; any earlier round gets the short one.
+ */
+function breakMinutes(state: HostState): number {
+  const round = state.round;
+  const last = !round || round.index >= round.ofTotal;
+  return last ? state.config.blockBreakMinutes : state.config.roundBreakMinutes;
+}
 
 function JoinPanel({ state }: { state: HostState }) {
   return (
@@ -160,12 +170,13 @@ function App() {
   }, [state?.phase, state?.question?.prompt, speak]);
 
   // Hooks run before any early return, so the countdown can't be conditional.
-  const { secondsLeft, fraction } = useCountdown(state?.deadline, state?.config.secondsPerQuestion ?? 1);
-  // Matches the player's handset exactly: both derive from the same deadline
-  // and the same shared bands, so the two screens cannot disagree.
+  const { secondsLeft, now } = useCountdown(state?.deadline, state?.config.secondsPerQuestion ?? 1);
+  // Matches the player's handset exactly: both price off the same window and
+  // the same shared curve, so the two screens cannot disagree.
+  const hostWindowMs = state?.deadline && state?.startedAt ? state.deadline - state.startedAt : 0;
   const onOffer =
-    state?.question && state.deadline && state.phase === 'question'
-      ? pointsAvailable(state.question.points, state.config, 1 - fraction)
+    state?.question && state.deadline && state.startedAt && state.phase === 'question'
+      ? pointsAt(now - state.startedAt, hostWindowMs, state.config)
       : state?.question?.points ?? 0;
 
   // Drives the switch from the answer to the scoreboard during the gap between
@@ -289,19 +300,14 @@ function App() {
           </div>
         ) : (
         <div class="host-body">
+          {/* The room watches this screen, not their phones. A progress bar
+              moving constantly at the top of it was the most distracting thing
+              in the hall, and said less than the falling number does. */}
           {state.deadline && (
-            <div style={{ maxWidth: '1100px', margin: '0 auto', width: '100%' }}>
-              <Timer fraction={fraction} seconds={secondsLeft} />
-              {/* The room is watching this screen, not their phones, so the
-                  falling value belongs here as much as on the handset. */}
-              <div class="center" style={{ marginTop: '8px' }}>
-                <span
-                  class={`pill pill-brass${onOffer > q.points ? ' pill-live' : ''}`}
-                  style={{ fontSize: '1.3rem' }}
-                >
-                  {onOffer} pts
-                </span>
-              </div>
+            <div class="center">
+              <span class="pill pill-brass pill-live" style={{ fontSize: '1.6rem' }}>
+                {onOffer} pts · {secondsLeft}s
+              </span>
             </div>
           )}
           <h1 class="prompt center">{q.prompt}</h1>
@@ -349,7 +355,14 @@ function App() {
 
       {state.phase === 'round_scores' && (
         <div class="host-body">
-          <div class="center">
+          {/* The room needs two things at a break: that the round is over, and
+              how long they have. Both go above the board, in the size the back
+              of the hall can read. */}
+          <div class="center stack">
+            <h1 class="host-display">End of Round {state.round?.index ?? 1}</h1>
+            <p style={{ fontSize: '2rem', margin: 0 }}>
+              {breakMinutes(state)} minute break
+            </p>
             <div class="eyebrow">After {state.round?.categoryName}</div>
           </div>
           <div style={{ maxWidth: '900px', margin: '0 auto', width: '100%' }}>
@@ -381,8 +394,8 @@ function App() {
           <div class="eyebrow">Tiebreaker — closest answer wins</div>
           <h1 class="prompt">{q.prompt}</h1>
           {state.deadline && (
-            <div style={{ maxWidth: '900px', margin: '0 auto', width: '100%' }}>
-              <Timer fraction={fraction} seconds={secondsLeft} />
+            <div class="center">
+              <span class="pill pill-brass pill-live" style={{ fontSize: '1.6rem' }}>{secondsLeft}s</span>
             </div>
           )}
         </div>
