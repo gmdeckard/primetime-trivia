@@ -21,7 +21,8 @@
     "screenshots": "node scripts/capture-screenshots.mjs",
     "start": "node dist/src/server/index.js",
     "stats": "tsx scripts/content-stats.ts",
-    "test": "npm run validate && tsx --test src/server/*.test.ts",
+    "test": "npm run validate && npm run typecheck && tsx --test src/server/*.test.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
     "validate": "tsx scripts/normalize-content.ts --check && tsx scripts/validate-content.ts"
   },
   "dependencies": {
