@@ -79,6 +79,21 @@ rule as the bash script, and leaves the previous build in place if the build
 fails. Stop it with Ctrl+C. Players join at the LAN address it prints; the big
 screen uses the localhost one.
 
+**If you use WSL, clone from inside it.** Cloning with Windows git into
+`/mnt/c/...` and then running the scripts from WSL fails with
+
+```
+env: 'bash\r': No such file or directory
+```
+
+which names a program nobody typed. Git for Windows rewrites line endings on
+checkout, so the shebang becomes `#!/usr/bin/env bash\r`. The repo's
+`.gitattributes` forces LF on the shell scripts to prevent this, but an older
+clone made before that still carries CRLF — `sed -i 's/\r$//' *.sh` repairs one
+in place. Cloning into `~` from inside WSL avoids it entirely, and is also much
+faster: `npm install` and `vite build` touch thousands of small files, and
+every one of them crosses the filesystem boundary under `/mnt/c`.
+
 **Three things decide whether this works on the night.**
 
 **The firewall.** Windows blocks inbound connections to Node by default, and

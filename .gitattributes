@@ -1,0 +1,29 @@
+# Line endings.
+#
+# Git for Windows ships with core.autocrlf=true, so a clone made on Windows
+# rewrites every text file to CRLF on checkout. That is harmless for most of
+# this repo and fatal for the shell scripts: the shebang becomes
+# `#!/usr/bin/env bash\r`, and running one under WSL fails with
+#
+#     env: 'bash\r': No such file or directory
+#
+# which names a program nobody typed and does not mention line endings at all.
+# Forcing LF here means a Windows clone still produces scripts WSL can run.
+
+* text=auto eol=lf
+
+# Unambiguously LF: these are interpreted by a Unix shell wherever they run.
+*.sh text eol=lf
+
+# PowerShell is only ever run by Windows, and CRLF is what a Windows editor
+# will produce anyway, so let it keep the local convention.
+*.ps1 text eol=crlf
+
+# Never touch binaries. The screenshots are checked in for the README.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.ico binary
+*.woff2 binary
+*.mp3 binary
