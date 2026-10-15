@@ -5,7 +5,7 @@ import { join } from 'node:path';
 import { after, test } from 'node:test';
 import { DEFAULT_CONFIG } from '../../shared/protocol.js';
 import { loadBank } from './content.js';
-import { rankLanAddresses } from './lan.js';
+import { hasNoReachableAddress, rankLanAddresses } from './lan.js';
 import { Engine } from './engine.js';
 import { Store } from './store.js';
 import { controlState, playerState } from './views.js';
@@ -846,4 +846,21 @@ test('the USB rescue address never becomes the advertised join address', () => {
     '192.168.1.40',
     'the venue router beats both a host-only network and a WSL bridge',
   );
+  // WSL's NAT gateway sits in the 10.x band, which otherwise outranks the
+  // 172.x the VM actually uses, so it led the list and the banner advertised
+  // the one address in the room that could never work.
+  assert.equal(rankLanAddresses(['10.255.255.254', '192.168.12.109'])[0], '192.168.12.109');
+});
+
+test('a server nothing can reach says so instead of printing a join URL', () => {
+  // WSL in its default NAT mode: a gateway on the loopback and the VM's own
+  // private adapter. Everything looks healthy and no phone can join.
+  assert.equal(hasNoReachableAddress(['10.255.255.254', '172.28.80.1']), true);
+
+  // Mirrored mode, which is the fix: the real address shows up.
+  assert.equal(hasNoReachableAddress(['10.255.255.254', '192.168.12.109']), false);
+
+  // And a venue genuinely running on 172.16-31 must not be told its own
+  // network is unreachable. Without the gateway present this is a real LAN.
+  assert.equal(hasNoReachableAddress(['172.20.4.8']), false);
 });

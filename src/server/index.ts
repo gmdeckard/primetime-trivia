@@ -11,7 +11,7 @@ import { loadBank } from './content.js';
 import { DraftStore } from './drafts.js';
 import { Engine, type NightState } from './engine.js';
 import { ControlAuth, createRequestHandler } from './http.js';
-import { primaryLanAddress, lanAddresses } from './lan.js';
+import { primaryLanAddress, lanAddresses, isWsl, hasNoReachableAddress } from './lan.js';
 import { Store } from './store.js';
 import { controlState, hostState, playerState } from './views.js';
 
@@ -326,6 +326,20 @@ server.listen(PORT, () => {
   if (!info.urls.length) {
     console.log('\n  No local network address found. Connect the laptop to the venue wifi');
     console.log('  (or your own travel router) before players try to join.');
+  } else if (isWsl() && hasNoReachableAddress(info.urls.map((u) => u.replace(/^https?:\/\//, '').split(':')[0] ?? ''))) {
+    // The worst kind of failure: everything looks fine here and no phone can
+    // join. Say so now rather than letting the room discover it.
+    console.log('\n  WSL networking is NAT, so the address above exists only inside WSL.');
+    console.log('  Nothing on the venue wifi can reach this server as it stands.');
+    console.log('');
+    console.log('  Fix it in Windows, in %USERPROFILE%\\.wslconfig:');
+    console.log('      [wsl2]');
+    console.log('      networkingMode=mirrored');
+    console.log('  then `wsl --shutdown` and start again. WSL will then share the');
+    console.log('  laptop\'s real address and players can join.');
+    console.log('');
+    console.log('  If your Windows build does not support mirrored mode, run the');
+    console.log('  server on Windows itself with .\\start-server.ps1 instead.');
   }
   console.log('');
 });

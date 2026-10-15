@@ -1,4 +1,42 @@
 import { networkInterfaces } from 'node:os';
+import { existsSync, readFileSync } from 'node:fs';
+
+/**
+ * True when this is a WSL VM rather than Windows or a real Linux box.
+ *
+ * It matters because WSL's default networking is NAT: the VM gets its own
+ * private network, and nothing on the venue wifi can reach a server inside it
+ * however correct the server looks from the machine it runs on.
+ */
+export function isWsl(): boolean {
+  if (process.env.WSL_DISTRO_NAME) return true;
+  try {
+    return existsSync('/proc/version') && /microsoft/i.test(readFileSync('/proc/version', 'utf8'));
+  } catch {
+    return false;
+  }
+}
+
+/** Addresses that exist inside WSL's NAT and mean nothing to a phone. */
+export function isWslNatAddress(ip: string): boolean {
+  // 10.255.255.254 is the gateway WSL hands the VM, and 172.16-31 is the range
+  // its virtual adapter sits in.
+  return ip === '10.255.255.254' || /^172\.(1[6-9]|2\d|3[01])\./.test(ip);
+}
+
+/**
+ * True when every address we can see is one only this machine can use, so the
+ * banner is about to advertise a join URL that cannot work.
+ *
+ * The 10.255.255.254 gateway has to be present to call it. On its own, a
+ * 172.16-31 address proves nothing: plenty of real networks use that range,
+ * and under WSL's mirrored mode a venue router handing out 172.20.x would
+ * otherwise be told its perfectly good address was unreachable.
+ */
+export function hasNoReachableAddress(addresses: string[]): boolean {
+  if (!addresses.some((ip) => ip === '10.255.255.254')) return false;
+  return addresses.every((ip) => isWslNatAddress(ip) || /^169\.254\./.test(ip));
+}
 
 /**
  * Work out the address players should type in. With no internet there is no
@@ -39,6 +77,9 @@ const rank = (ip: string) => {
   // on the venue's router. Left unranked they tie with the address that works
   // and the winner depends on the order the OS lists adapters.
   if (ip.startsWith('192.168.56.') || ip.startsWith('192.168.137.')) return 7;
+  // WSL's NAT gateway. A real address on a real interface, and the one thing
+  // in the list a phone on the venue wifi can never reach.
+  if (ip === '10.255.255.254') return 7;
   if (/^169\.254\./.test(ip)) return 9;
   if (ip.startsWith('192.168.')) return 0;
   if (ip.startsWith('10.')) return 1;
