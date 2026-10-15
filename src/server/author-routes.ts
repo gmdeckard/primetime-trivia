@@ -50,7 +50,7 @@ export async function handleAuthorRoute(
   if (!path.startsWith('/api/author')) return false;
 
   if (!deps.authorised(req)) {
-    send(res, 401, { error: 'The question bank editor needs the host PIN.' });
+    send(res, 401, { error: 'The question bank editor needs the host password.' });
     return true;
   }
 

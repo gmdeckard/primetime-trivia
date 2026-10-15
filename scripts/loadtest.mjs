@@ -16,15 +16,18 @@ import { WebSocket } from 'ws';
 import { mkdtempSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+import { randomBytes } from 'node:crypto';
 
 const N = Number(process.argv[2] ?? 100);
 const PORT = 8500 + Math.floor(Math.random() * 300);
 const DATA = join(tmpdir(), `pt-load-${Date.now()}`);
-const PIN = '424242';
+// Made up per run rather than written here, so the repository never carries a
+// string that reads like a host password.
+const PASSWORD = `load-${randomBytes(6).toString('hex')}`;
 
 const server = spawn(process.execPath, ['dist/src/server/index.js'], {
   cwd: process.cwd(),
-  env: { ...process.env, PORT: String(PORT), PRIMETIME_PIN: PIN, PRIMETIME_DATA: DATA },
+  env: { ...process.env, PORT: String(PORT), PRIMETIME_PASSWORD: PASSWORD, PRIMETIME_DATA: DATA },
   stdio: 'ignore',
 });
 process.on('exit', () => { try { server.kill('SIGKILL'); } catch {} });
@@ -58,7 +61,7 @@ for (let i = 0; i < N; i++) players.push(await open('player'));
 const host = await open('host');
 
 const token = (await (await fetch(`http://localhost:${PORT}/api/control/login`, {
-  method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ pin: PIN }),
+  method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ password: PASSWORD }),
 })).json()).token;
 const mc = await open('control', token);
 await new Promise((r) => setTimeout(r, 500));

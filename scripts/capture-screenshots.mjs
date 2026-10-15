@@ -14,6 +14,7 @@
 import { chromium } from 'playwright-core';
 import { mkdirSync, rmSync } from 'node:fs';
 import { spawn } from 'node:child_process';
+import { randomBytes } from 'node:crypto';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
@@ -24,12 +25,15 @@ mkdirSync(out, { recursive: true });
 // rerun always starts from an empty lobby.
 const PORT = 8200 + Math.floor(Math.random() * 600);
 const DATA = join(tmpdir(), `primetime-shots-${Date.now()}`);
+// Made up per run rather than written here, so the repository never carries a
+// string that reads like a host password.
+const PASSWORD = `shots-${randomBytes(6).toString('hex')}`;
 const server = spawn(process.execPath, ['dist/src/server/index.js'], {
   cwd: process.cwd(),
   env: {
     ...process.env,
     PORT: String(PORT),
-    PRIMETIME_PIN: '123456',
+    PRIMETIME_PASSWORD: PASSWORD,
     PRIMETIME_VENUE: 'Thursday Trivia',
     PRIMETIME_SSID: 'Clubhouse-Guest',
     PRIMETIME_DATA: DATA,
@@ -119,8 +123,8 @@ try {
 
   // --- the MC takes over
   const mc = await open('control', '/control', 420, 900);
-  await shoot(mc, '05-control-pin');
-  await press(mc, '123456');
+  await shoot(mc, '05-control-login');
+  await press(mc, PASSWORD);
   await tap(mc, 'Unlock');
   await mc.locator('.control-sticky > button').waitFor({ state: 'visible', timeout: 10000 });
   await pause(mc, 900);

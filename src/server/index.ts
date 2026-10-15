@@ -5,7 +5,7 @@ import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { WebSocketServer, type WebSocket } from 'ws';
 import QRCode from 'qrcode';
-import type { ClientMessage, GameConfig, ServerMessage } from '../../shared/protocol.js';
+import { MIN_PASSWORD, type ClientMessage, type GameConfig, type ServerMessage } from '../../shared/protocol.js';
 import { handleAuthorRoute } from './author-routes.js';
 import { loadBank } from './content.js';
 import { DraftStore } from './drafts.js';
@@ -44,7 +44,11 @@ const CLIENT_DIR = join(root, 'dist', 'client');
 let bank = loadBank(CONTENT_DIR);
 const store = new Store(DATA_DIR);
 const drafts = new DraftStore(DATA_DIR);
-const auth = new ControlAuth(process.env.PRIMETIME_PIN);
+const auth = new ControlAuth({
+  password: process.env.PRIMETIME_PASSWORD,
+  legacyPin: process.env.PRIMETIME_PIN,
+  dir: DATA_DIR,
+});
 
 const errors = bank.issues.filter((i) => i.severity === 'error');
 const warnings = bank.issues.filter((i) => i.severity === 'warning');
@@ -196,7 +200,7 @@ wss.on('connection', (socket) => {
       if (msg.t === 'hello') {
         client.role = msg.role;
         if (msg.role === 'control' && !auth.valid(msg.token)) {
-          send(socket, { t: 'error', message: 'Control view needs the host PIN.' });
+          send(socket, { t: 'error', message: 'Control view needs the host password.' });
           socket.close(4001, 'unauthorized');
           return;
         }
@@ -283,9 +287,26 @@ server.listen(PORT, () => {
   console.log(`  Big screen        ${info.url}/host`);
   console.log(`  MC controls       ${info.url}/control`);
   console.log(`  Question editor   ${info.url}/author`);
-  console.log(`  Host PIN          ${auth.pin}`);
+  console.log(`  Host password     ${auth.password}`);
   console.log(`  Room code         ${engine.snapshot().roomCode}`);
   console.log(`  ${line}`);
+  if (auth.warning) {
+    console.log(`  ! ${auth.warning}`);
+  }
+  if (auth.generated && auth.persisted) {
+    console.log(`  No password was set, so one was generated and saved to`);
+    console.log(`  ${join(DATA_DIR, 'control-password')} — edit that file to change it.`);
+    console.log(`  It is the same every night until you do.`);
+  } else if (auth.generated) {
+    // The warning above already says why it was not written down.
+    console.log(`  This password is for this run only. Set PRIMETIME_PASSWORD, or put`);
+    console.log(`  one of at least ${MIN_PASSWORD} characters in ${join(DATA_DIR, 'control-password')}.`);
+  }
+  if (auth.fromLegacyPin) {
+    console.log(`  Using PRIMETIME_PIN, which is deprecated. Rename it to`);
+    console.log(`  PRIMETIME_PASSWORD, or put the password in`);
+    console.log(`  ${join(DATA_DIR, 'control-password')} instead.`);
+  }
   console.log(`  ${bank.questions.length} questions in ${bank.categories.length} categories` +
     (warnings.length ? `, ${warnings.length} content warning(s)` : ''));
   if (!process.env.ANTHROPIC_API_KEY && !process.env.ANTHROPIC_AUTH_TOKEN) {

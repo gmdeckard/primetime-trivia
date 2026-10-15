@@ -6,7 +6,7 @@
 #   sudo ./scripts/install-service.sh
 #
 # Safe to re-run: it pulls the latest code, rebuilds, and restarts. Your config
-# and host PIN are left alone.
+# and host password are left alone.
 set -euo pipefail
 
 APP_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -44,7 +44,6 @@ echo "==> 4/5  Config"
 if [ -f "$ENV_FILE" ]; then
   echo "    $ENV_FILE exists, leaving it alone"
 else
-  PIN=$(shuf -i 100000-999999 -n 1)
   cat > "$ENV_FILE" <<EOF
 # PrimeTime Trivia settings.
 # After editing:  sudo systemctl restart primetime-trivia
@@ -52,13 +51,17 @@ else
 # Port 80 means players type a bare address with no ":8080" on the end.
 PORT=${PORT}
 PRIMETIME_VENUE=PrimeTime Trivia
-PRIMETIME_PIN=${PIN}
+# The MC types this once per phone. It does not change between games, so set it
+# here and restart to change it — that signs every device out. Left unset, the
+# server generates one on first boot and saves it to data/control-password,
+# which is the value printed below.
+#PRIMETIME_PASSWORD=
 PRIMETIME_DATA=${APP_DIR}/data
 # Shown on the join screen so players know which wifi to join first.
 #PRIMETIME_SSID=Clubhouse-Guest
 EOF
   chmod 600 "$ENV_FILE"
-  echo "    wrote $ENV_FILE (host PIN ${PIN})"
+  echo "    wrote $ENV_FILE (the server will generate the password on first boot)"
 fi
 
 echo "==> 5/5  Service"
@@ -104,7 +107,13 @@ if systemctl is-active --quiet primetime-trivia; then
   echo "  Big screen        http://${IP}${SUFFIX}/host"
   echo "  MC controls       http://${IP}${SUFFIX}/control"
   echo "  Question editor   http://${IP}${SUFFIX}/author"
-  echo "  Host PIN          $(grep PRIMETIME_PIN "$ENV_FILE" | cut -d= -f2)"
+  PW_LINE="$(grep -E '^(PRIMETIME_PASSWORD|PRIMETIME_PIN)=' "$ENV_FILE" 2>/dev/null | head -1)"
+  PW_VALUE="${PW_LINE#*=}"
+  case "$PW_LINE" in
+    PRIMETIME_PIN=*) echo "  Host password     ${PW_VALUE} (from the deprecated PRIMETIME_PIN)" ;;
+    PRIMETIME_PASSWORD=*) echo "  Host password     ${PW_VALUE}" ;;
+    *) echo "  Host password     $(cat "$APP_DIR/data/control-password" 2>/dev/null || echo '(see data/control-password)')" ;;
+  esac
   echo "────────────────────────────────────────────"
   echo "  Logs:    journalctl -u primetime-trivia -f"
   echo "  Restart: sudo systemctl restart primetime-trivia"

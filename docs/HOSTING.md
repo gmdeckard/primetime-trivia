@@ -51,7 +51,7 @@ game. Closing it ends the night.
   Players join at   http://192.168.1.42:8080
   Big screen        http://192.168.1.42:8080/host
   MC controls       http://192.168.1.42:8080/control
-  Host PIN          297392
+  Host password     brass-lantern-42
   Room code         CORAL-9
   ────────────────────────────────────────────────────
 ```
@@ -60,8 +60,10 @@ Then:
 
 1. Open the **Big screen** address in a browser on the laptop, and press F11
    for full screen. Drag it to the TV.
-2. Open the **MC controls** address on your phone and type the **Host PIN**.
-   Your phone remembers it after that.
+2. Open the **MC controls** address on your phone and type the **Host
+   password**. Your phone remembers it after that, and the password itself does
+   not change between games, so this is a once-per-phone step rather than a
+   once-per-night one.
 3. Tell the room the join address. The big screen is showing it in large type
    with a QR code — point at it rather than reading the numbers out.
 

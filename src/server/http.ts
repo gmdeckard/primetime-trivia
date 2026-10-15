@@ -1,8 +1,12 @@
-import { createReadStream, existsSync, statSync } from 'node:fs';
+import { chmodSync, createReadStream, existsSync, readFileSync, renameSync, statSync, writeFileSync } from 'node:fs';
 import { extname, join, normalize, resolve, sep } from 'node:path';
-import { randomBytes, randomInt, timingSafeEqual } from 'node:crypto';
+import { createHash, randomBytes, randomInt, timingSafeEqual } from 'node:crypto';
 import type { IncomingMessage, ServerResponse } from 'node:http';
 import QRCode from 'qrcode';
+import { MIN_PASSWORD } from '../../shared/protocol.js';
+
+/** A login body is `{"password":"..."}`; 4 KB is already absurdly generous. */
+const MAX_LOGIN_BODY = 4096;
 
 /**
  * Static file serving and the handful of REST endpoints. Everything else runs
@@ -25,27 +29,164 @@ const TYPES: Record<string, string> = {
   '.mp3': 'audio/mpeg',
 };
 
+/** Readable words for a generated password: no lookalikes, nothing to misread aloud. */
+const WORDS = [
+  'amber', 'anchor', 'badge', 'brass', 'cedar', 'copper', 'cobalt', 'domino',
+  'ember', 'falcon', 'granite', 'harbor', 'indigo', 'juniper', 'kettle', 'lantern',
+  'marble', 'nutmeg', 'onyx', 'pepper', 'quarry', 'ribbon', 'saddle', 'timber',
+  'umber', 'velvet', 'walnut', 'yarrow',
+];
+
+export interface ControlAuthOptions {
+  /** Explicit password, normally from PRIMETIME_PASSWORD. Wins over everything. */
+  password?: string;
+  /** Where to keep the password and the issued tokens. Normally the data dir. */
+  dir?: string;
+  /** Deprecated PRIMETIME_PIN, honoured so an existing box keeps working. */
+  legacyPin?: string;
+}
+
 /**
  * The control view can rename teams, change scores and see every answer, so it
  * needs a gate. On a shared clubhouse network the threat isn't a hacker, it's
  * a curious guest who opens /control on their phone because the host screen
- * told them the address. A six-digit PIN read off the MC's screen is the right
- * amount of friction.
+ * told them the address.
+ *
+ * The password is set once on the server and does not change between games.
+ * A per-boot random PIN meant the MC had to go and read it off a terminal
+ * before every night, which is friction paid by the one person who is already
+ * busiest. Resolution order:
+ *
+ *   1. `PRIMETIME_PASSWORD`
+ *   2. `control-password` in the data dir
+ *   3. `PRIMETIME_PIN`, the old env var, still honoured
+ *   4. a generated passphrase, written to (2) so it is the same next time
+ *
+ * Step 4 is why there is no "no password configured" failure: a box that will
+ * not start an hour before trivia is worse than one with a password nobody
+ * chose, and because it is written down it is still stable and still editable.
  */
 export class ControlAuth {
-  readonly pin: string;
+  /** The live password. Printed in the start-up banner. */
+  readonly password: string;
+  /** True when nobody chose this password and the server made one up. */
+  readonly generated: boolean;
+  /** True when the password came from the deprecated PRIMETIME_PIN. */
+  readonly fromLegacyPin: boolean;
+  /** True when a generated password was written down, so the next boot reuses it. */
+  readonly persisted: boolean = false;
+  /**
+   * Set when a password an operator configured was not usable, so the start-up
+   * banner can say why the one it is printing is not theirs. Silence here was
+   * a bug: a short password in the file was replaced by a generated one and
+   * the operator had no way to tell.
+   */
+  readonly warning?: string;
+  private readonly tokenFile?: string;
   private tokens = new Set<string>();
 
-  constructor(pin?: string) {
-    this.pin = pin && /^\d{4,8}$/.test(pin) ? pin : String(randomInt(100000, 1000000));
+  constructor(opts: ControlAuthOptions = {}) {
+    const passwordFile = opts.dir ? join(opts.dir, 'control-password') : undefined;
+    this.tokenFile = opts.dir ? join(opts.dir, 'control-tokens.json') : undefined;
+
+    const rawEnv = opts.password;
+    const rawFile = passwordFile ? readIfPresent(passwordFile) : undefined;
+    const fromEnv = clean(rawEnv);
+    const fromFile = clean(rawFile);
+    const fromPin = clean(opts.legacyPin);
+
+    this.fromLegacyPin = !fromEnv && !fromFile && !!fromPin;
+    this.generated = !fromEnv && !fromFile && !fromPin;
+    this.password = fromEnv ?? fromFile ?? fromPin ?? generatePassword();
+
+    // Say so when something was set and rejected. Falling through silently is
+    // how an operator ends up typing a password the server never adopted.
+    if (rawEnv?.trim() && !fromEnv) {
+      this.warning = `PRIMETIME_PASSWORD is shorter than ${MIN_PASSWORD} characters, so it was ignored.`;
+    } else if (passwordFile && !fromFile && existsSync(passwordFile)) {
+      // Present but unusable, in any of the three ways: too short, unreadable
+      // (root-owned after a `sudo vi`, say), or nothing but comments. All three
+      // used to fall through as silently as a missing file.
+      this.warning = rawFile
+        ? `The password in ${passwordFile} is shorter than ${MIN_PASSWORD} characters, so it was ignored. The file was left as it is.`
+        : `${passwordFile} could not be read, or holds no password line, so it was ignored. The file was left as it is.`;
+    }
+
+    // Persist a generated password so the next boot reuses it. Written 0600:
+    // the file is a credential, and the data dir is also where night.json
+    // lives, which is not.
+    //
+    // Never over an existing file. A file that is present but unusable (too
+    // short, or unreadable) is still the operator's: replacing it would throw
+    // away what they typed and hide the mistake behind a working login.
+    if (this.generated && passwordFile && !existsSync(passwordFile)) {
+      try {
+        writeFileSync(passwordFile, `${this.password}\n`, { encoding: 'utf8', mode: 0o600 });
+        this.persisted = true;
+      } catch (err) {
+        // A data directory that cannot be written means a different password
+        // every boot, which is the whole thing this is meant to stop. The box
+        // still starts, but the operator has to be told.
+        this.warning = `Could not save the generated password to ${passwordFile} (${(err as Error).message}). It will be different after every restart until that path is writable.`;
+      }
+    }
+
+    this.loadTokens();
+  }
+
+  /**
+   * Sessions outlive the process on purpose.
+   *
+   * Tokens used to live only in memory, so restarting the server mid-evening
+   * threw the MC back to the login screen — indistinguishable, from their side,
+   * from being timed out. With a stable password there is no reason to make
+   * them type it again.
+   */
+  private loadTokens() {
+    if (!this.tokenFile || !existsSync(this.tokenFile)) return;
+    try {
+      const saved = JSON.parse(readFileSync(this.tokenFile, 'utf8')) as unknown;
+      if (!isTokenFile(saved)) return;
+      // Tokens are bound to the password, so changing it signs every device out.
+      if (saved.passwordHash !== this.hash()) return;
+      for (const token of saved.tokens) if (typeof token === 'string') this.tokens.add(token);
+    } catch {
+      /* a corrupt file just means everyone logs in again */
+    }
+  }
+
+  private saveTokens() {
+    if (!this.tokenFile) return;
+    try {
+      const body = JSON.stringify({ passwordHash: this.hash(), tokens: [...this.tokens] });
+      // Temp file then rename, the same way store.ts writes night.json: a power
+      // cut mid-write cannot leave a truncated file. `mode` is only honoured
+      // when a file is created, so an existing token file would otherwise keep
+      // whatever permissions it already had — chmod makes 0600 stick on every
+      // write, not just the first.
+      const tmp = `${this.tokenFile}.tmp`;
+      writeFileSync(tmp, body, { encoding: 'utf8', mode: 0o600 });
+      chmodSync(tmp, 0o600);
+      renameSync(tmp, this.tokenFile);
+    } catch {
+      /* non-fatal: the session is still good until this process stops */
+    }
+  }
+
+  private hash(value = this.password): string {
+    return createHash('sha256').update(value, 'utf8').digest('hex');
   }
 
   login(candidate: string): string | undefined {
-    const a = Buffer.from(candidate.padEnd(16, '\0').slice(0, 16));
-    const b = Buffer.from(this.pin.padEnd(16, '\0').slice(0, 16));
+    // Compared as digests so the check is constant time whatever the lengths
+    // are. The old version padded to 16 bytes and sliced, which quietly meant
+    // only the first 16 characters of a long password had to match.
+    const a = Buffer.from(this.hash(candidate ?? ''), 'hex');
+    const b = Buffer.from(this.hash(), 'hex');
     if (!timingSafeEqual(a, b)) return undefined;
     const token = randomBytes(24).toString('hex');
     this.tokens.add(token);
+    this.saveTokens();
     return token;
   }
 
@@ -60,6 +201,42 @@ export class ControlAuth {
     const match = /^Bearer\s+(.+)$/i.exec(header.trim());
     return this.valid(match?.[1]);
   }
+}
+
+function clean(value?: string): string | undefined {
+  const trimmed = (value ?? '').trim();
+  return trimmed.length >= MIN_PASSWORD ? trimmed : undefined;
+}
+
+/** First non-empty line, so the file can carry a comment above the password. */
+function readIfPresent(file: string): string | undefined {
+  if (!existsSync(file)) return undefined;
+  try {
+    for (const line of readFileSync(file, 'utf8').split(/\r?\n/)) {
+      const trimmed = line.trim();
+      if (trimmed && !trimmed.startsWith('#')) return trimmed;
+    }
+  } catch {
+    /* unreadable file is the same as no file */
+  }
+  return undefined;
+}
+
+/**
+ * Three words and two digits: still sayable down a phone, and about two million
+ * combinations rather than seventy thousand. The password no longer rotates
+ * every boot, so its size is what carries it; this is a sensible default for a
+ * clubhouse LAN, not a hardened credential.
+ */
+function generatePassword(): string {
+  const word = () => WORDS[randomInt(WORDS.length)]!;
+  return `${word()}-${word()}-${word()}-${randomInt(10, 100)}`;
+}
+
+function isTokenFile(value: unknown): value is { passwordHash: string; tokens: unknown[] } {
+  if (!value || typeof value !== 'object') return false;
+  const v = value as { passwordHash?: unknown; tokens?: unknown };
+  return typeof v.passwordHash === 'string' && Array.isArray(v.tokens);
 }
 
 export interface HttpDeps {
@@ -130,17 +307,35 @@ export function createRequestHandler(deps: HttpDeps) {
     }
 
     if (path === '/api/control/login' && req.method === 'POST') {
+      // The only unauthenticated POST here, so it does not get to buffer an
+      // unbounded body: a guest on the clubhouse wifi could otherwise stream
+      // until the process runs out of memory, before any credential is checked.
       const chunks: Buffer[] = [];
-      for await (const chunk of req) chunks.push(chunk as Buffer);
-      let pin = '';
+      let size = 0;
+      for await (const chunk of req) {
+        const buf = chunk as Buffer;
+        size += buf.length;
+        if (size > MAX_LOGIN_BODY) {
+          sendJson(res, 413, { error: 'That request was too large.' });
+          return;
+        }
+        chunks.push(buf);
+      }
+      let password = '';
       try {
-        pin = String((JSON.parse(Buffer.concat(chunks).toString('utf8') || '{}') as { pin?: unknown }).pin ?? '');
+        // `pin` is the old field name; a control page cached on the MC's phone
+        // from before this change still sends it.
+        const body = JSON.parse(Buffer.concat(chunks).toString('utf8') || '{}') as {
+          password?: unknown;
+          pin?: unknown;
+        };
+        password = String(body.password ?? body.pin ?? '');
       } catch {
         /* fall through to the failure path below */
       }
-      const token = deps.auth.login(pin);
+      const token = deps.auth.login(password);
       if (!token) {
-        sendJson(res, 401, { error: 'That PIN is not right.' });
+        sendJson(res, 401, { error: 'That password is not right.' });
         return;
       }
       sendJson(res, 200, { token });

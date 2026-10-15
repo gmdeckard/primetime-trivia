@@ -1,6 +1,7 @@
 import { render } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
 import type { Audience, DraftBatch, DraftQuestion, PackMeta } from '../../../shared/packs';
+import { MIN_PASSWORD } from '../../../shared/protocol';
 import '../shared/styles.css';
 import { Toast } from '../shared/ui';
 
@@ -57,24 +58,25 @@ function api(token: string) {
 }
 
 function Login({ onToken }: { onToken: (t: string) => void }) {
-  const [pin, setPin] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   return (
     <div class="shell">
       <div class="card stack">
         <div class="eyebrow">Question bank</div>
-        <h1>Host PIN</h1>
-        <p class="muted">The same PIN as the MC controls, printed in the terminal.</p>
+        <h1>Host password</h1>
+        <p class="muted">The same password as the MC controls, set on the server.</p>
         <input
-          value={pin}
-          onInput={(e) => setPin((e.target as HTMLInputElement).value)}
+          value={password}
+          onInput={(e) => setPassword((e.target as HTMLInputElement).value)}
           onKeyDown={(e) => { if (e.key === 'Enter') void submit(); }}
-          inputMode="numeric"
-          placeholder="000000"
-          style={{ fontSize: '2rem', textAlign: 'center', fontFamily: 'var(--mono)' }}
+          type="password"
+          autocomplete="current-password"
+          placeholder="Host password"
+          style={{ fontSize: '1.5rem', textAlign: 'center' }}
         />
         {error && <p class="pill pill-bad">{error}</p>}
-        <button class="btn btn-primary btn-lg btn-block" disabled={pin.length < 4} onClick={() => void submit()}>
+        <button class="btn btn-primary btn-lg btn-block" disabled={password.length < MIN_PASSWORD} onClick={() => void submit()}>
           Unlock
         </button>
       </div>
@@ -87,9 +89,9 @@ function Login({ onToken }: { onToken: (t: string) => void }) {
       const res = await fetch('/api/control/login', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ pin }),
+        body: JSON.stringify({ password }),
       });
-      if (!res.ok) { setError('That PIN is not right.'); return; }
+      if (!res.ok) { setError('That password is not right.'); return; }
       const { token } = (await res.json()) as { token: string };
       localStorage.setItem('primetime.controlToken', token);
       onToken(token);
@@ -489,7 +491,7 @@ function App() {
           <div class="eyebrow">Problem</div>
           <p>{error}</p>
           <button class="btn" onClick={() => { localStorage.removeItem('primetime.controlToken'); setToken(null); }}>
-            Enter the PIN again
+            Enter the password again
           </button>
         </div>
       </div>

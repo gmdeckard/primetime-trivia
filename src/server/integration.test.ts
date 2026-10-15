@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { spawn, type ChildProcess } from 'node:child_process';
-import { mkdtempSync, rmSync } from 'node:fs';
+import { existsSync, mkdtempSync, readFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { after, before, test } from 'node:test';
@@ -11,11 +11,11 @@ import type { ClientMessage, PlayerState, ServerMessage } from '../../shared/pro
  * Boots the real server as a child process and drives it over websockets.
  *
  * The engine tests cover the rules; this covers the wiring — role gating, the
- * PIN, identity handoff and whether a state snapshot actually reaches a tablet.
+ * password, identity handoff and whether a state snapshot actually reaches a tablet.
  */
 
 const PORT = 8411;
-const PIN = '424242';
+const PASSWORD = 'clubhouse-thursday-7';
 const BASE = `http://127.0.0.1:${PORT}`;
 let server: ChildProcess;
 let dataDir: string;
@@ -84,7 +84,7 @@ before(async () => {
     env: {
       ...process.env,
       PORT: String(PORT),
-      PRIMETIME_PIN: PIN,
+      PRIMETIME_PASSWORD: PASSWORD,
       PRIMETIME_DATA: dataDir,
       // Pinned off so the no-credentials path is exercised deterministically,
       // whatever the developer has in their shell.
@@ -118,13 +118,47 @@ test('the join endpoint advertises a reachable URL and a QR code', async () => {
   assert.match(info.roomCode, /^[A-Z]+-\d$/);
 });
 
-test('a wrong control PIN is rejected', async () => {
+test('a wrong control password is rejected', async () => {
   const res = await fetch(`${BASE}/api/control/login`, {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
-    body: JSON.stringify({ pin: '000000' }),
+    body: JSON.stringify({ password: 'not-the-password' }),
   });
   assert.equal(res.status, 401);
+});
+
+test('a prefix of the password is rejected', async () => {
+  // The old comparison padded both sides to 16 bytes and sliced, so anything
+  // sharing the first 16 characters was accepted. This password is longer.
+  const res = await fetch(`${BASE}/api/control/login`, {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({ password: PASSWORD.slice(0, 16) }),
+  });
+  assert.equal(res.status, 401, 'matching the first 16 characters must not be enough');
+});
+
+test('a malformed login body is a refusal, not a crash', async () => {
+  // The JSON parse in the login route is wrapped in a catch that is new in this
+  // change. A tablet that posts junk, or an empty body from a flaky connection,
+  // has to come back as a plain 401 rather than a 500 the MC cannot read.
+  for (const body of ['', 'not json at all', '{"password":', '[]', 'null']) {
+    const res = await fetch(`${BASE}/api/control/login`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body,
+    });
+    assert.equal(res.status, 401, `a body of ${JSON.stringify(body)} should be refused, not crash the server`);
+  }
+});
+
+test('a control page cached before the rename still logs in', async () => {
+  const res = await fetch(`${BASE}/api/control/login`, {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({ pin: PASSWORD }),
+  });
+  assert.equal(res.status, 200, 'the old `pin` field must still be accepted');
 });
 
 test('the control socket is closed without a valid token', async () => {
@@ -140,7 +174,7 @@ test('players join, answer, and the MC drives the night', async () => {
     await fetch(`${BASE}/api/control/login`, {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ pin: PIN }),
+      body: JSON.stringify({ password: PASSWORD }),
     })
   ).json()) as { token: string }).token;
 
@@ -198,7 +232,7 @@ test('players join, answer, and the MC drives the night', async () => {
   for (const client of [mc, ann, bob]) client.close();
 });
 
-test('the question bank editor is closed without the host PIN', async () => {
+test('the question bank editor is closed without the host password', async () => {
   const res = await fetch(`${BASE}/api/author/context`);
   assert.equal(res.status, 401, 'an unauthenticated request must not see the editor');
 
@@ -211,7 +245,7 @@ test('the question bank editor is closed without the host PIN', async () => {
     headers: { 'content-type': 'application/json' },
     body: JSON.stringify({ audience: '55-75', category: 'geography', count: 5, difficulties: [2] }),
   });
-  assert.equal(generate.status, 401, 'generation must not be callable without the PIN');
+  assert.equal(generate.status, 401, 'generation must not be callable without the password');
 });
 
 test('the editor reports honestly when there are no API credentials', async () => {
@@ -219,7 +253,7 @@ test('the editor reports honestly when there are no API credentials', async () =
     await fetch(`${BASE}/api/control/login`, {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ pin: PIN }),
+      body: JSON.stringify({ password: PASSWORD }),
     })
   ).json()) as { token: string }).token;
 
@@ -254,4 +288,71 @@ test('a player reconnecting with their token keeps their seat', async () => {
   const state = await again.next<PlayerState>((s) => !!s.me?.playerId, 'resumed identity');
   assert.equal(state.me.playerId, identity.playerId, 'the same player id should come back');
   again.close();
+});
+
+/*
+ * Value: protects=the wiring in index.ts that gives ControlAuth the data dir,
+ *   which is what makes the password stable and the MC's session survive a
+ *   restart;
+ *   fails_when=`dir: DATA_DIR` is dropped from the ControlAuth construction in
+ *   index.ts — every auth.test.ts case still passes, because they pass `dir`
+ *   themselves, while the real server silently goes back to a new password and
+ *   an empty token set on every boot, which is the exact thing this change
+ *   exists to stop;
+ *   why_new=no test starts the built server without PRIMETIME_PASSWORD, and
+ *   none starts it twice against one data directory; seam=none;
+ *   no_claim=says nothing about file permissions or about what happens when
+ *   two servers share a data directory at the same time.
+ */
+test('the real server keeps its password and its sessions across a restart', async () => {
+  const dir = mkdtempSync(join(tmpdir(), 'primetime-restart-'));
+  const port = 8413;
+  const base = `http://127.0.0.1:${port}`;
+
+  const boot = async () => {
+    const child = spawn(process.execPath, ['dist/src/server/index.js'], {
+      env: { ...process.env, PORT: String(port), PRIMETIME_DATA: dir, ANTHROPIC_API_KEY: '', ANTHROPIC_AUTH_TOKEN: '' },
+      stdio: 'ignore',
+    });
+    for (let i = 0; i < 80; i++) {
+      try {
+        if ((await fetch(`${base}/api/info`)).ok) return child;
+      } catch {
+        /* not up yet */
+      }
+      await new Promise((r) => setTimeout(r, 100));
+    }
+    child.kill('SIGKILL');
+    throw new Error('the server never came up');
+  };
+  const stop = async (child: ChildProcess) => {
+    child.kill('SIGTERM');
+    await new Promise((r) => child.once('exit', r));
+  };
+
+  try {
+    // Nothing configured: the server has to make a password and write it down.
+    let child = await boot();
+    const file = join(dir, 'control-password');
+    assert.ok(existsSync(file), 'an unconfigured box must save the password it generated');
+    const password = readFileSync(file, 'utf8').trim();
+
+    const first = await fetch(`${base}/api/control/login`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ password }),
+    });
+    assert.equal(first.status, 200, 'the password it wrote down has to be the one it accepts');
+    const token = ((await first.json()) as { token: string }).token;
+    await stop(child);
+
+    // Same box, next night.
+    child = await boot();
+    assert.equal(readFileSync(file, 'utf8').trim(), password, 'the password must not change on a restart');
+    const after = await fetch(`${base}/api/author/context`, { headers: { authorization: `Bearer ${token}` } });
+    assert.notEqual(after.status, 401, 'and a restart must not send the MC back to the login screen');
+    await stop(child);
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
 });

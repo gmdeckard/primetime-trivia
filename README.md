@@ -98,15 +98,23 @@ The terminal prints everything you need:
   Big screen        http://192.168.1.42:8080/host
   MC controls       http://192.168.1.42:8080/control
   Question editor   http://192.168.1.42:8080/author
-  Host PIN          297392
+  Host password     brass-lantern-42
   Room code         CORAL-9
   ────────────────────────────────────────────────────
   435 questions in 15 categories
 ```
 
 Open `/host` on the screen the room can see, open `/control` on your phone and
-enter the PIN, and tell everyone else the join address. The host screen shows a
-QR code, which is how most people will actually join.
+enter the host password, and tell everyone else the join address. The host
+screen shows a QR code, which is how most people will actually join.
+
+The password is set on the server and does not change between games, so the MC
+types it once per phone rather than once per night. Set it with
+`PRIMETIME_PASSWORD`, or write it into `data/control-password` — the first
+non-empty line of that file is the password, and lines starting with `#` are
+comments. If neither is set, the server generates one on first start and saves
+it to that file, so it is still the same next time. Edit the file and restart
+to change it; that signs every device out.
 
 ## The three screens
 
@@ -216,7 +224,8 @@ Environment variables:
 | `PORT` | `8080` | HTTP port |
 | `PRIMETIME_VENUE` | `Trivia Night` | Event name on the big screen |
 | `PRIMETIME_SSID` | — | Wifi network name, shown on the join screen |
-| `PRIMETIME_PIN` | random 6 digits | Control-view PIN |
+| `PRIMETIME_PASSWORD` | generated once, saved to `data/control-password` | Password for `/control` and `/author` |
+| `PRIMETIME_PIN` | — | Deprecated name for the above; still honoured |
 | `PRIMETIME_CONTENT` | `./content` | Question bank directory |
 | `PRIMETIME_DATA` | `./data` | Saved game state and history |
 

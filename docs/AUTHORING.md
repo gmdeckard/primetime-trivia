@@ -39,7 +39,7 @@ npm start
 ```
 
 Then open the **Question editor** address the server prints and enter the host
-PIN — the same one the MC controls use.
+password — the same one the MC controls use.
 
 Without a key the screen loads and says so rather than failing obscurely.
 

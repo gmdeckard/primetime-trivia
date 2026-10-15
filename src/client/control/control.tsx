@@ -1,6 +1,6 @@
 import { render } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
-import type { ControlState, GameConfig } from '../../../shared/protocol';
+import { MIN_PASSWORD, type ControlState, type GameConfig } from '../../../shared/protocol';
 import '../shared/styles.css';
 import { useCountdown, useGame, useWakeLock } from '../shared/useGame';
 import { AutoAdvance, Board, ConnBanner, Toast } from '../shared/ui';
@@ -31,8 +31,15 @@ const AGE_GROUPS: Array<{ id: string; name: string }> = [
  * it instead of hunching over the laptop.
  */
 
+/**
+ * Typed once per device, not once per game.
+ *
+ * The password is set on the server and does not rotate, and the server keeps
+ * issued tokens across a restart, so in practice the MC sees this screen when
+ * they pick up a new phone and never again.
+ */
 function Login({ onToken }: { onToken: (token: string) => void }) {
-  const [pin, setPin] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
 
@@ -43,10 +50,10 @@ function Login({ onToken }: { onToken: (token: string) => void }) {
       const res = await fetch('/api/control/login', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ pin }),
+        body: JSON.stringify({ password }),
       });
       if (!res.ok) {
-        setError('That PIN is not right.');
+        setError('That password is not right.');
         return;
       }
       const { token } = (await res.json()) as { token: string };
@@ -63,18 +70,23 @@ function Login({ onToken }: { onToken: (token: string) => void }) {
     <div class="shell">
       <div class="card stack">
         <div class="eyebrow">MC controls</div>
-        <h1>Host PIN</h1>
-        <p class="muted">Printed in the terminal window where you started the game.</p>
+        <h1>Host password</h1>
+        <p class="muted">
+          The one set on the server. It is printed in the start-up banner and is the same every night.
+        </p>
         <input
-          value={pin}
-          onInput={(e) => setPin((e.target as HTMLInputElement).value)}
-          inputMode="numeric"
-          autocomplete="off"
-          placeholder="000000"
-          style={{ fontSize: '2rem', textAlign: 'center', fontFamily: 'var(--mono)' }}
+          value={password}
+          onInput={(e) => setPassword((e.target as HTMLInputElement).value)}
+          onKeyDown={(e) => {
+            if ((e as KeyboardEvent).key === 'Enter' && password.length >= MIN_PASSWORD) submit();
+          }}
+          type="password"
+          autocomplete="current-password"
+          placeholder="Host password"
+          style={{ fontSize: '1.5rem', textAlign: 'center' }}
         />
         {error && <p class="pill pill-bad">{error}</p>}
-        <button class="btn btn-primary btn-lg btn-block" onClick={submit} disabled={busy || pin.length < 4}>
+        <button class="btn btn-primary btn-lg btn-block" onClick={submit} disabled={busy || password.length < MIN_PASSWORD}>
           Unlock
         </button>
       </div>
@@ -403,7 +415,7 @@ function App() {
     return () => window.removeEventListener('keydown', onKey);
   }, [send]);
 
-  // A rejected token (server restarted, PIN changed) drops us back to the PIN screen.
+  // A rejected token (the password changed, or it was revoked) drops us back to the login.
   useEffect(() => {
     if (unauthorized) setToken(null);
   }, [unauthorized]);

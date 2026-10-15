@@ -43,7 +43,15 @@ if have_service; then
   if systemctl is-active --quiet primetime-trivia; then
     PORT_IN_USE="$(grep -E '^PORT=' /etc/default/primetime-trivia 2>/dev/null | cut -d= -f2 || echo 80)"
     join_banner "${PORT_IN_USE:-80}"
-    echo "  Host PIN          $(grep -E '^PRIMETIME_PIN=' /etc/default/primetime-trivia 2>/dev/null | cut -d= -f2 || echo '(see config)')"
+    # Capture first and branch on emptiness: `cut` exits 0 on empty input, so
+    # `|| echo ...` never fired and a box still on PRIMETIME_PIN printed nothing.
+    PW_LINE="$(grep -E '^(PRIMETIME_PASSWORD|PRIMETIME_PIN)=' /etc/default/primetime-trivia 2>/dev/null | head -1)"
+    PW_VALUE="${PW_LINE#*=}"
+    case "$PW_LINE" in
+      PRIMETIME_PIN=*) echo "  Host password     ${PW_VALUE} (from the deprecated PRIMETIME_PIN)" ;;
+      PRIMETIME_PASSWORD=*) echo "  Host password     ${PW_VALUE}" ;;
+      *) echo "  Host password     (see data/control-password)" ;;
+    esac
     echo "  Logs              journalctl -u primetime-trivia -f"
   else
     echo "The service failed to start. Last 20 lines:"
@@ -76,7 +84,7 @@ echo $! > "$PID_FILE"
 sleep 2
 
 if kill -0 "$(cat "$PID_FILE")" 2>/dev/null; then
-  grep -E "Host PIN|Room code|questions in" "$LOG_FILE" | sed 's/^/  /' || true
+  grep -E "Host password|Room code|questions in" "$LOG_FILE" | sed 's/^/  /' || true
   join_banner "$PORT"
   echo "  Logs              tail -f $(pwd)/${LOG_FILE}"
   echo "  Stop              ./stop-server.sh"

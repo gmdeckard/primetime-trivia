@@ -71,7 +71,7 @@ deadline that expired while the laptop was asleep, and tells the MC it did so.
 | `src/server/engine.ts` | The state machine. All mutation lives here. |
 | `src/server/views.ts` | Role projections. The answer-key boundary. |
 | `src/server/store.ts` | Atomic JSON persistence and night history. |
-| `src/server/http.ts` | Static serving, `/api`, control PIN. |
+| `src/server/http.ts` | Static serving, `/api`, control password. |
 | `src/server/lan.ts` | Work out the address players should type. |
 | `src/server/index.ts` | Boot, websocket wiring, role gating. |
 | `src/client/shared/` | Styles, socket hook, countdown, shared components. |
@@ -108,8 +108,19 @@ hint shown on that button.
 The threat is not an attacker, it is a curious guest. The host screen displays
 an address; somebody will try `/control` on their phone.
 
-- The control view requires a six-digit PIN, printed in the terminal, exchanged
-  for a bearer token. Comparison is constant-time.
+- The control view requires the host password, exchanged for a bearer token.
+  Both sides are SHA-256'd and the digests compared with `timingSafeEqual`, so
+  the check is constant-time at any length. (An earlier version padded to 16
+  bytes and sliced, which meant only the first 16 characters had to match.)
+- The password is set on the server and is stable across games: from
+  `PRIMETIME_PASSWORD`, else `data/control-password`, else the deprecated
+  `PRIMETIME_PIN`, else generated once and written to that file. There is no
+  unconfigured failure mode on purpose — a box that will not start an hour
+  before trivia is worse than a password nobody chose, and a generated one is
+  written down, so it is still stable and still editable.
+- Issued tokens are kept in `data/control-tokens.json`, keyed by a hash of the
+  password, so restarting the server does not sign the MC out but changing the
+  password does.
 - Control messages are rejected server-side if the socket did not authenticate
   as control, so a player cannot drive the game by crafting a websocket frame.
   There is an integration test for exactly this.
@@ -126,11 +137,14 @@ a browser warning. Everything on the wire is trivia questions.
 ## Testing
 
 - `src/server/engine.test.ts` plays real games against the real bank: full
-  blocks, auto-lock, wagers, tiebreaks, no-repeat guarantees, the answer-key
-  boundary, mid-question restart.
+  blocks, the question window running its full length, wagers, tiebreaks,
+  no-repeat guarantees, the answer-key boundary, mid-question restart.
 - `src/server/integration.test.ts` spawns the built server and drives it over
-  websockets: the PIN gate, role gating, identity handoff, reconnection, and a
-  player and partner seeing each other's answer.
+  websockets: the password gate, role gating, identity handoff, reconnection,
+  and a player and partner seeing each other's answer.
+- `src/server/auth.test.ts` covers the control password on its own: where it is
+  read from, that a generated one is reused rather than rotated, that a login
+  survives a restart, and that a prefix of the password is rejected.
 
 `npm test` runs content validation and both suites.
 
@@ -138,8 +152,8 @@ a browser warning. Everything on the wire is trivia questions.
 
 `npm run screenshots` spawns a throwaway server on a random port, drives four
 browser contexts through a real game — three teams joining, the MC unlocking
-with a PIN, a question, answers, a reveal, a scoreboard — and captures each
-screen.
+with the host password, a question, answers, a reveal, a scoreboard — and
+captures each screen.
 
 It is kept because it earns its place twice. It produces the README images,
 and it fails loudly on UI regressions the unit tests are blind to. Both of the
@@ -148,8 +162,8 @@ bugs it has caught so far were invisible to the test suite:
 - The name-entry screen branched on whether the typed name was empty, so it
   vanished after the first keystroke and threw the player into team selection
   mid-word.
-- Opening `/control` without a PIN connected, was rejected with close code
-  4001, and called `location.reload()` — an infinite reload loop.
+- Opening `/control` without a password connected, was rejected with close
+  code 4001, and called `location.reload()` — an infinite reload loop.
 
 Neither is expressible as an assertion about engine state, which is exactly
 why driving the real thing matters.

@@ -25,8 +25,8 @@ sudo ./scripts/install-service.sh
 ```
 
 The script installs Node if it's missing, builds, writes a config file, installs
-the systemd unit, and starts it. It prints the join URLs and the host PIN when
-it finishes.
+the systemd unit, and starts it. It prints the join URLs and the host password
+when it finishes.
 
 It's safe to re-run — that's also how you update:
 
@@ -35,7 +35,7 @@ cd ~/primetime-trivia && sudo ./scripts/install-service.sh
 ```
 
 Re-running pulls the latest code, rebuilds and restarts, and **leaves your
-config and host PIN alone**.
+config and host password alone**.
 
 ## Configuration
 
@@ -44,7 +44,7 @@ Settings live in `/etc/default/primetime-trivia`:
 ```bash
 PORT=80
 PRIMETIME_VENUE=Thursday Trivia
-PRIMETIME_PIN=297392
+PRIMETIME_PASSWORD=brass-lantern-42
 PRIMETIME_DATA=/home/pi/primetime-trivia/data
 #PRIMETIME_SSID=Clubhouse-Guest
 ```
@@ -54,6 +54,16 @@ After editing:
 ```bash
 sudo systemctl restart primetime-trivia
 ```
+
+`PRIMETIME_PASSWORD` is what the MC types to open `/control` and `/author`. It
+is set once here and does not change between games, so the MC types it when
+they pick up a new phone rather than before every night. Changing it and
+restarting signs every device out.
+
+If you leave it unset, the server generates one on first start and saves it to
+`data/control-password`, which keeps it stable across restarts; edit that file
+to choose your own. The old `PRIMETIME_PIN` still works and logs a deprecation
+notice at start-up.
 
 Set `PRIMETIME_SSID` to the wifi network name and the join screen will tell
 people which network to connect to before showing them the address — worth
