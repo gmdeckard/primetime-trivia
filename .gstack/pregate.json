@@ -1,0 +1,80 @@
+{
+  "$schema": "https://github.com/garrytan/gstack/docs/pregate.md#pregate-v1",
+  "runner": "npx tsx --test {files}",
+  "dependencies": {
+    "src/server/engine.ts": [
+      "src/server/engine.test.ts",
+      "src/server/integration.test.ts"
+    ],
+    "src/server/http.ts": [
+      "src/server/auth.test.ts",
+      "src/server/integration.test.ts"
+    ],
+    "src/server/index.ts": [
+      "src/server/integration.test.ts"
+    ],
+    "src/server/author-routes.ts": [
+      "src/server/integration.test.ts"
+    ],
+    "src/server/author.ts": [
+      "src/server/integration.test.ts"
+    ],
+    "src/server/views.ts": [
+      "src/server/engine.test.ts",
+      "src/server/integration.test.ts"
+    ],
+    "src/server/scoring.ts": [
+      "src/server/scoring.test.ts",
+      "src/server/engine.test.ts"
+    ],
+    "src/server/selector.ts": [
+      "src/server/engine.test.ts",
+      "src/server/packs.test.ts"
+    ],
+    "src/server/packs.ts": [
+      "src/server/packs.test.ts"
+    ],
+    "src/server/content.ts": [
+      "src/server/engine.test.ts"
+    ],
+    "src/server/store.ts": [
+      "src/server/engine.test.ts"
+    ],
+    "src/server/drafts.ts": [
+      "src/server/integration.test.ts"
+    ],
+    "src/server/lan.ts": [
+      "src/server/integration.test.ts"
+    ],
+    "shared/protocol.ts": [
+      "src/server/engine.test.ts",
+      "src/server/scoring.test.ts",
+      "src/server/integration.test.ts"
+    ],
+    "shared/packs.ts": [
+      "src/server/packs.test.ts"
+    ],
+    "content/**": [],
+    "data/**": [],
+    "docs/**": [],
+    "public/**": [],
+    "*.md": [],
+    "LICENSE": [],
+    "src/client/**": [],
+    "scripts/**": [],
+    "*.sh": [],
+    "*.json": [],
+    "vite.config.ts": [],
+    "tsconfig*.json": [],
+    ".gitignore": [],
+    ".gstack/**": []
+  },
+  "strays": {
+    "allow": [
+      "server.log",
+      "start-server.sh",
+      "stop-server.sh",
+      ".gstack/"
+    ]
+  }
+}

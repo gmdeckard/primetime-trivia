@@ -51,7 +51,14 @@ npm test
 ```
 
 Before opening a pull request, `npm test` should pass. It runs content
-validation, the engine tests and the websocket integration tests.
+validation, the engine tests, the control-password tests and the websocket
+integration tests.
+
+There are no client-side tests. `src/client/**` is exercised by
+`npm run screenshots`, which plays a real game in a headless browser and fails
+loudly when a screen stops rendering. That is why the lane map in
+`.gstack/pregate.json` maps the client to no tests: a statement of what exists,
+not a gate anyone turned off.
 
 A few things to know:
 

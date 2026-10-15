@@ -5,8 +5,12 @@ data/
 .DS_Store
 .vite/
 
-# gstack browse artifacts
-.gstack/
+# gstack browse artifacts. The contents, not the directory itself: git does not
+# descend into an ignored directory, so `.gstack/` would hide the negation below.
+.gstack/*
+# The pre-gate's lane map only counts when it is committed — the gate reads the
+# copy on origin/main, so a branch cannot smuggle a lane downgrade into its own run.
+!.gstack/pregate.json
 
 # local run artifacts
 server.log
