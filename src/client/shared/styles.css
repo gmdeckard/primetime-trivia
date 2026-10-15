@@ -282,7 +282,7 @@ input:focus { border-color: var(--brass); outline: none; }
   text-align: right;
 }
 .host .autonext { font-size: clamp(1rem, 1.4vw, 1.5rem); }
-.host 
+
 /* ---------------------------------------------------------------- pills */
 
 .pill {

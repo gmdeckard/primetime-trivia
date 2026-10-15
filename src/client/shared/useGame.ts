@@ -181,10 +181,13 @@ export function useCountdown(deadline?: number, totalSeconds = 1) {
 export function useSpeech(enabled: boolean) {
   const lastRef = useRef('');
   return useCallback(
-    (text: string) => {
+    (text: string, repeat = false) => {
       if (!enabled || !('speechSynthesis' in window)) return;
-      if (lastRef.current === text) return;
-      lastRef.current = text;
+      // The repeat guard exists so a re-render does not read the same question
+      // twice. A cue said before every question is the same words every time
+      // and must say them again, so it opts out.
+      if (!repeat && lastRef.current === text) return;
+      lastRef.current = repeat ? '' : text;
       window.speechSynthesis.cancel();
       const utterance = new SpeechSynthesisUtterance(text);
       utterance.rate = 0.95;

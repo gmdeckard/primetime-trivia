@@ -158,7 +158,7 @@ function App() {
   // The big screen sits untouched through a ten-minute break.
   useWakeLock();
   const { state, send: _send, toast, dismissToast } = useGame<HostState>('host');
-  const speak = useSpeech(!!state?.config.readAloud);
+  const speak = useSpeech(!!state?.config.readAloud || !!state?.config.musicSpeakCountIn);
 
   // Built once and kept for the night. A browser refuses to make a sound until
   // someone has clicked the page, so `armed` stays false until the MC does —
@@ -203,7 +203,7 @@ function App() {
     const wait = state.autoAdvanceAt - lead - Date.now();
     const id = setTimeout(() => {
       audioRef.current?.countIn();
-      if (state.config.musicSpeakCountIn) speak('Get ready. Set. Go!');
+      if (state.config.musicSpeakCountIn) speak('Get ready. Set. Go!', true);
     }, Math.max(0, wait));
     return () => clearTimeout(id);
   }, [armed, music, state?.autoAdvanceAt, state?.held, state?.phase]);
@@ -211,6 +211,7 @@ function App() {
   useEffect(() => {
     if (!state) return;
     if (state.phase !== 'question' && state.phase !== 'wager_question') return;
+    if (!state.config.readAloud) return;
     const q = state.question;
     if (!q) return;
     const letters = ['A', 'B', 'C', 'D'];
