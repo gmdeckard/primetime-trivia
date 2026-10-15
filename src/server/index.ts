@@ -287,7 +287,18 @@ server.listen(PORT, () => {
   console.log(`  Big screen        ${info.url}/host`);
   console.log(`  MC controls       ${info.url}/control`);
   console.log(`  Question editor   ${info.url}/author`);
-  console.log(`  Host password     ${auth.password}`);
+  // Printed only when the server made it up, because that is the one case
+  // where nobody can look it up anywhere else. stdout lands in server.log and
+  // in the journal, and this credential no longer expires at the next boot the
+  // way the old per-boot PIN did, so echoing a password the operator already
+  // chose just copies it somewhere easier to read.
+  if (auth.generated) {
+    console.log(`  Host password     ${auth.password}`);
+  } else if (auth.fromLegacyPin) {
+    console.log(`  Host password     (from PRIMETIME_PIN)`);
+  } else {
+    console.log(`  Host password     (as configured)`);
+  }
   console.log(`  Room code         ${engine.snapshot().roomCode}`);
   console.log(`  ${line}`);
   if (auth.warning) {

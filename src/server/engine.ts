@@ -133,8 +133,19 @@ export class Engine {
       // laptop was asleep.
       if (this.state.current && !this.state.current.locked && LIVE_PHASES.includes(this.state.phase)) {
         this.state.current.locked = true;
-        this.state.phase = this.state.phase === 'question' ? 'locked' : this.state.phase;
-        this.state.message = 'Resumed after a restart — answers for this question were locked.';
+        // Every live phase needs a phase it can advance OUT of. Parking a
+        // wager or a tiebreak as locked while leaving its phase alone left
+        // advance() calling lockNow(), which returns immediately on a locked
+        // question without committing: the MC's one big button did nothing,
+        // forever, and the night could only be abandoned.
+        this.state.current.awards ??= [];
+        if (this.state.phase === 'question') this.state.phase = 'locked';
+        else if (this.state.phase === 'wager_question') this.state.phase = 'wager_reveal';
+        else if (this.state.phase === 'tiebreak') this.state.phase = 'tiebreak_reveal';
+        this.state.message =
+          this.state.phase === 'wager_reveal'
+            ? 'Resumed after a restart — the final wager was interrupted, so no bets were won or lost.'
+            : 'Resumed after a restart — answers for this question were locked.';
       }
       this.state.autoAdvanceAt = undefined;
       this.state.held = false;
@@ -532,10 +543,15 @@ export class Engine {
     // what actually happens at a table: one person taps, their partner says
     // "no, it's the other one". The name of whoever last touched it is shown
     // back to the team so that conversation has a referent.
+    // Keep the moment the team first landed on THIS choice. The window now
+    // stays open for its whole length and the handset invites a re-tap, so a
+    // nervous second tap on the same letter must not cost the speed band.
+    // Changing to a different letter is a real decision and is timed afresh.
+    const held = current.answers[player.teamId];
     current.answers[player.teamId] = {
       teamId: player.teamId,
       choiceIndex,
-      elapsedMs: Date.now() - current.startedAt,
+      elapsedMs: held?.choiceIndex === choiceIndex ? held.elapsedMs : Date.now() - current.startedAt,
       byPlayerId: playerId,
     };
     // Deliberately no early lock here. The window always runs to its deadline,
@@ -555,10 +571,12 @@ export class Engine {
     if (!Number.isFinite(value)) return;
     if (!this.activeTeamIds().includes(player.teamId)) return;
 
+    const rounded = Math.round(value);
+    const heldNumber = current.answers[player.teamId];
     current.answers[player.teamId] = {
       teamId: player.teamId,
-      numberAnswer: Math.round(value),
-      elapsedMs: Date.now() - current.startedAt,
+      numberAnswer: rounded,
+      elapsedMs: heldNumber?.numberAnswer === rounded ? heldNumber.elapsedMs : Date.now() - current.startedAt,
       byPlayerId: playerId,
     };
     this.commit({ kind: 'answer_number', teamId: player.teamId, value });

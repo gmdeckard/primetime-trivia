@@ -79,6 +79,10 @@ export PORT
 export PRIMETIME_VENUE="${PRIMETIME_VENUE:-PrimeTime Trivia}"
 
 echo "Starting in the background on port ${PORT}..."
+# The banner can carry a freshly generated password, and this file outlives the
+# night. Create it before the redirect so it is never briefly world-readable.
+: > "$LOG_FILE"
+chmod 600 "$LOG_FILE"
 nohup node dist/src/server/index.js > "$LOG_FILE" 2>&1 &
 echo $! > "$PID_FILE"
 sleep 2

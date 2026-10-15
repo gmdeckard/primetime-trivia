@@ -152,6 +152,92 @@ test('the window runs its full length even once every team is in', async () => {
   assert.equal(engine.snapshot().phase, 'locked', 'the clock should have closed it');
 });
 
+/*
+ * Value: protects=a night interrupted during the final wager or a tiebreak can
+ *   still be finished by the MC;
+ *   fails_when=the resume path parks one of those phases as locked without
+ *   moving it on — advance() then calls lockNow(), which returns immediately on
+ *   a locked question without committing, so the big button does nothing and
+ *   the only ways out are End night or Reset;
+ *   why_new=every existing resume test covers the plain question phase, which
+ *   is the one phase the old code did remap; seam=none;
+ *   no_claim=says nothing about scoring the interrupted wager, which is
+ *   deliberately voided rather than guessed at.
+ */
+test('a night interrupted during the final wager can still be finished', () => {
+  const engine = freshEngine({ roundsPerBlock: 1, questionsPerRound: 1, finalWager: true });
+  const teams = seatTeams(engine, 2);
+  engine.startBlock();
+  engine.advance(); // round_intro
+  engine.advance(); // question
+  engine.lockNow('host');
+  engine.advance(); // reveal
+  engine.advance(); // round_scores
+  engine.advance(); // wager_bet
+  for (const team of teams) engine.setWager(team.players[0]!, 10);
+  engine.advance(); // wager_question
+  assert.equal(engine.snapshot().phase, 'wager_question');
+  for (const team of teams) engine.answer(team.players[0]!, engine.correctDisplayIndex()!);
+
+  // The power goes out with the closing question on screen.
+  const onDisk = JSON.parse(JSON.stringify(engine.snapshot()));
+  const resumed = freshEngine(undefined, onDisk);
+  assert.equal(resumed.snapshot().phase, 'wager_reveal', 'the wager has to land somewhere it can leave');
+  assert.ok(resumed.snapshot().message, 'and the MC should be told what happened to the bets');
+
+  const before = resumed.snapshot().phase;
+  resumed.advance();
+  assert.notEqual(resumed.snapshot().phase, before, "the MC's button must actually do something");
+});
+
+test('a night interrupted during a tiebreak can still be finished', () => {
+  const engine = freshEngine({ roundsPerBlock: 1, questionsPerRound: 1, finalWager: false });
+  const teams = seatTeams(engine, 2);
+  engine.startBlock();
+  engine.startTiebreak();
+  assert.equal(engine.snapshot().phase, 'tiebreak');
+  engine.answerNumber(teams[0]!.players[0]!, 5);
+
+  const onDisk = JSON.parse(JSON.stringify(engine.snapshot()));
+  const resumed = freshEngine(undefined, onDisk);
+  assert.equal(resumed.snapshot().phase, 'tiebreak_reveal', 'sudden death has to resolve to something');
+  const before = resumed.snapshot().phase;
+  resumed.advance();
+  assert.notEqual(resumed.snapshot().phase, before, "the MC's button must actually do something");
+});
+
+/*
+ * Value: protects=the speed band a team already earned, when someone taps the
+ *   same letter again;
+ *   fails_when=answer() goes back to overwriting elapsedMs unconditionally — a
+ *   double-tap or a nervous re-confirm then silently costs the whole stepped
+ *   bonus, with nothing on the handset to explain it;
+ *   why_new=no test taps the same choice twice, and the window now stays open
+ *   for its full length with copy inviting a re-tap; seam=none;
+ *   no_claim=says nothing about changing to a different letter, which is timed
+ *   afresh on purpose.
+ */
+test('re-tapping the same answer keeps the time the team earned', async () => {
+  const engine = freshEngine({ questionsPerRound: 3 });
+  const teams = seatTeams(engine, 2);
+  engine.startBlock();
+  engine.advance();
+  engine.advance();
+
+  const device = teams[0]!.players[0]!;
+  const teamId = teams[0]!.teamId;
+  engine.answer(device, 1);
+  const first = engine.snapshot().current!.answers[teamId]!.elapsedMs;
+
+  await wait(60);
+  engine.answer(device, 1); // the same letter, tapped again to be sure
+  assert.equal(engine.snapshot().current!.answers[teamId]!.elapsedMs, first, 'a re-tap is not a new answer');
+
+  await wait(60);
+  engine.answer(device, 2); // a real change of mind is timed afresh
+  assert.ok(engine.snapshot().current!.answers[teamId]!.elapsedMs > first, 'changing your mind costs what it costs');
+});
+
 test('the MC can still close a question early', () => {
   const engine = freshEngine({ questionsPerRound: 3 });
   const teams = seatTeams(engine, 2);
