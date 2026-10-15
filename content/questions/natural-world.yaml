@@ -104,7 +104,7 @@ questions:
     prompt: By which process do plants lose water through their leaves?
     answer: Transpiration
     distractors: [Respiration, Translocation, Osmosis]
-    fact: A mature oak can move several hundred litres a day, which is most of what pulls water up the trunk in the first place.
+    fact: A mature oak can move several hundred liters a day, which is most of what pulls water up the trunk in the first place.
 
   - id: nat-017
     difficulty: 3
@@ -125,7 +125,7 @@ questions:
     prompt: What causes the aurora borealis?
     answer: Charged particles from the sun hitting the atmosphere
     distractors: [Sunlight bending through ice crystals, Light reflecting off the polar ice, Electrical storms high in the atmosphere]
-    fact: The colour depends on which gas is struck and how high up. Oxygen gives the green, and the rarer red comes from much higher still.
+    fact: The color depends on which gas is struck and how high up. Oxygen gives the green, and the rarer red comes from much higher still.
 
   - id: nat-020
     difficulty: 3

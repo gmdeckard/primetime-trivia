@@ -74,7 +74,7 @@ questions:
 
   - id: spo-011
     difficulty: 2
-    prompt: Which baseball player broke the colour barrier in the major leagues in 1947?
+    prompt: Which baseball player broke the color barrier in the major leagues in 1947?
     answer: Jackie Robinson
     distractors: [Larry Doby, Satchel Paige, Roy Campanella]
     fact: Doby followed him into the American League eleven weeks later.
@@ -140,7 +140,7 @@ questions:
     prompt: Which football team won four Super Bowls in the 1970s?
     answer: The Pittsburgh Steelers
     distractors: [The Dallas Cowboys, The Miami Dolphins, The Oakland Raiders]
-    fact: Their defence of that era is still called the Steel Curtain.
+    fact: Their defense of that era is still called the Steel Curtain.
 
   - id: spo-021
     difficulty: 2
@@ -259,7 +259,7 @@ questions:
     prompt: Which country hosted the first modern Olympic Games, in 1896?
     answer: Greece
     distractors: [France, Britain, The United States]
-    fact: A Frenchman, Pierre de Coubertin, organised the revival, which is why France is the tempting answer.
+    fact: A Frenchman, Pierre de Coubertin, organized the revival, which is why France is the tempting answer.
 
   - id: spo-038
     difficulty: 4

@@ -157,7 +157,7 @@ questions:
     prompt: Which policy kept Japan closed to foreigners from the 1630s until 1853?
     answer: Sakoku
     distractors: [The Meiji Restoration, The Sengoku period, The Heian period]
-    fact: Dutch traders were allowed a single artificial island in Nagasaki harbour throughout. Commodore Perry's warships ended it.
+    fact: Dutch traders were allowed a single artificial island in Nagasaki harbor throughout. Commodore Perry's warships ended it.
 
   - id: wld-023
     difficulty: 4

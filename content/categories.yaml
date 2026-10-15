@@ -1,7 +1,7 @@
 # The category registry. Every question file names one of these ids.
 #
 # The set is deliberately weighted for an audience that is college-educated,
-# widely travelled and often military — categories that reward a life of
+# widely traveled and often military — categories that reward a life of
 # reading rather than recent pop culture. Nothing here requires knowledge of
 # anything after about 1995.
 
@@ -62,7 +62,7 @@
 
 - id: film-tv
   name: Classic Film & Television
-  blurb: The pictures and programmes that defined four decades.
+  blurb: The pictures and programs that defined four decades.
   sample: Oscars, casts, catchphrases
 
 - id: music-popular

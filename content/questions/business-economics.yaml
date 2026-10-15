@@ -196,7 +196,7 @@ questions:
     prompt: What is the New York Stock Exchange's nickname, taken from its address?
     answer: The Big Board
     distractors: [The Street, The Curb, The Pit]
-    fact: '"The Curb" was the old name for the American Stock Exchange, which really did trade on the kerb outside.'
+    fact: '"The Curb" was the old name for the American Stock Exchange, which really did trade on the curb outside.'
 
   - id: biz-029
     difficulty: 4

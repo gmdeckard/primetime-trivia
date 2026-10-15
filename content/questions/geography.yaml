@@ -105,14 +105,14 @@ questions:
     prompt: Which country is home to Angel Falls, the world's highest uninterrupted waterfall?
     answer: Venezuela
     distractors: [Brazil, Colombia, Guyana]
-    fact: It drops 979 metres from the Auyán-Tepui plateau — so far that much of the water becomes mist before reaching the bottom.
+    fact: It drops 979 meters from the Auyán-Tepui plateau — so far that much of the water becomes mist before reaching the bottom.
 
   - id: geo-016
     difficulty: 4
     prompt: Which Canadian province is the only officially bilingual one?
     answer: New Brunswick
     distractors: [Quebec, Ontario, Manitoba]
-    fact: Quebec is officially French-only; New Brunswick recognises both English and French.
+    fact: Quebec is officially French-only; New Brunswick recognizes both English and French.
 
   - id: geo-017
     difficulty: 2

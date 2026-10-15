@@ -34,7 +34,7 @@ questions:
     prompt: The Battle of the Bulge was fought in which forested region?
     answer: The Ardennes
     distractors: [The Hürtgen Forest, The Black Forest, The Teutoburg Forest]
-    fact: The German attack of December 1944 achieved complete surprise partly because the Ardennes was considered unsuitable for armour.
+    fact: The German attack of December 1944 achieved complete surprise partly because the Ardennes was considered unsuitable for armor.
     era: 1940s
     tags: [wwii, europe]
 
@@ -52,7 +52,7 @@ questions:
     prompt: Operation Overlord was the Normandy invasion. What was the codename for its naval component?
     answer: Neptune
     distractors: [Mulberry, Bodyguard, Fortitude]
-    fact: Mulberry was the artificial harbour project and Bodyguard the overall deception plan, of which Fortitude was a part.
+    fact: Mulberry was the artificial harbor project and Bodyguard the overall deception plan, of which Fortitude was a part.
     era: 1940s
     tags: [wwii, dday]
 
@@ -124,7 +124,7 @@ questions:
     prompt: Which 1944 engagement was the largest naval battle of the Second World War?
     answer: Leyte Gulf
     distractors: [The Philippine Sea, Coral Sea, Midway]
-    fact: It was also the last battle in which battleships engaged each other, and saw the first organised kamikaze attacks.
+    fact: It was also the last battle in which battleships engaged each other, and saw the first organized kamikaze attacks.
     era: 1940s
     tags: [wwii, pacific]
 
@@ -160,7 +160,7 @@ questions:
     prompt: Which 1941 act allowed the United States to supply war materiel to the Allies before it entered the war?
     answer: Lend-Lease
     distractors: [The Neutrality Act, The Atlantic Charter, The Selective Service Act]
-    fact: Roosevelt compared it to lending a garden hose to a neighbour whose house was on fire.
+    fact: Roosevelt compared it to lending a garden hose to a neighbor whose house was on fire.
     era: 1940s
     tags: [wwii, politics]
 
@@ -187,7 +187,7 @@ questions:
     prompt: Which president ordered the desegregation of the US armed forces in 1948?
     answer: Harry Truman
     distractors: [Franklin Roosevelt, Dwight Eisenhower, Lyndon Johnson]
-    fact: Executive Order 9981 required equality of treatment regardless of race, colour, religion or national origin.
+    fact: Executive Order 9981 required equality of treatment regardless of race, color, religion or national origin.
     era: 1940s
     tags: [us-politics]
 
@@ -241,16 +241,16 @@ questions:
     prompt: Which general commanded coalition forces during Operation Desert Storm?
     answer: Norman Schwarzkopf
     distractors: [Colin Powell, Tommy Franks, Wesley Clark]
-    fact: Powell was Chairman of the Joint Chiefs at the time; Schwarzkopf held the theatre command.
+    fact: Powell was Chairman of the Joint Chiefs at the time; Schwarzkopf held the theater command.
     era: 1990s
     tags: [gulf-war]
 
   - id: mil-028
     difficulty: 3
-    prompt: What was the codename of the US nuclear weapons programme during the Second World War?
+    prompt: What was the codename of the US nuclear weapons program during the Second World War?
     answer: The Manhattan Project
     distractors: [Project Trinity, The Tube Alloys Project, Operation Crossroads]
-    fact: Tube Alloys was the parallel British programme; Trinity was the first test and Crossroads the 1946 Bikini tests.
+    fact: Tube Alloys was the parallel British program; Trinity was the first test and Crossroads the 1946 Bikini tests.
     era: 1940s
     tags: [wwii, science]
 
@@ -291,7 +291,7 @@ questions:
     prompt: Which tank was built in the greatest numbers during the Second World War?
     answer: The T-34
     distractors: [The Sherman, The Panzer IV, The Churchill]
-    fact: The Sherman came second. German designers who saw a T-34 in 1941 went back and redrew their own tanks around its sloped armour.
+    fact: The Sherman came second. German designers who saw a T-34 in 1941 went back and redrew their own tanks around its sloped armor.
 
   - id: mil-034
     difficulty: 3

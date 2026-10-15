@@ -28,7 +28,7 @@ questions:
     prompt: Which 1969 festival was held on a dairy farm in Bethel, New York?
     answer: Woodstock
     distractors: [Altamont, Monterey Pop, The Isle of Wight Festival]
-    fact: It was named for a town about 40 miles away, where the organisers had originally hoped to hold it.
+    fact: It was named for a town about 40 miles away, where the organizers had originally hoped to hold it.
 
   - id: mus-005
     difficulty: 2

@@ -39,7 +39,7 @@ questions:
 
   - id: ftv-006
     difficulty: 2
-    prompt: Which 1939 film opens in sepia and switches to colour?
+    prompt: Which 1939 film opens in sepia and switches to color?
     answer: The Wizard of Oz
     distractors: [Gone with the Wind, Snow White, Fantasia]
     fact: The Kansas scenes were shot in black and white and tinted sepia; Technicolor begins when the door opens.
@@ -123,7 +123,7 @@ questions:
 
   - id: ftv-018
     difficulty: 2
-    prompt: 'Which television programme began with "Space: the final frontier"?'
+    prompt: 'Which television program began with "Space: the final frontier"?'
     answer: Star Trek
     distractors: [The Twilight Zone, Lost in Space, The Outer Limits]
     fact: It ran only three seasons from 1966 and was revived largely because of syndication.
@@ -151,7 +151,7 @@ questions:
 
   - id: ftv-022
     difficulty: 2
-    prompt: Which family did "All in the Family" centre on?
+    prompt: Which family did "All in the Family" center on?
     answer: The Bunkers
     distractors: [The Jeffersons, The Evanses, The Stivics]
     fact: The Jeffersons and Maude were both spun off from it, as was Good Times from Maude.
@@ -245,7 +245,7 @@ questions:
     prompt: Which sitcom was set in a Boston bar where everybody knows your name?
     answer: Cheers
     distractors: [Taxi, Night Court, Barney Miller]
-    fact: It finished last in the ratings in its first season and was nearly cancelled.
+    fact: It finished last in the ratings in its first season and was nearly canceled.
 
   - id: ftv-036
     difficulty: 3

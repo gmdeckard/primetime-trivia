@@ -35,7 +35,7 @@ questions:
 
   - id: stg-005
     difficulty: 2
-    prompt: Which awards honour achievement in Broadway theatre?
+    prompt: Which awards honor achievement in Broadway theater?
     answer: The Tony Awards
     distractors: [The Obie Awards, The Drama Desk Awards, The Olivier Awards]
     fact: Named for Antoinette Perry. The Obies cover off-Broadway and the Oliviers are the London equivalent, so all three others are real.
@@ -77,7 +77,7 @@ questions:
 
   - id: stg-011
     difficulty: 3
-    prompt: In theatre, which direction does an actor move when going upstage?
+    prompt: In theater, which direction does an actor move when going upstage?
     answer: Away from the audience
     distractors: [Toward the audience, To the actor's left, Into the wings]
     fact: Older stages were raked, sloping up away from the audience, so going upstage genuinely meant walking uphill.
@@ -87,7 +87,7 @@ questions:
     prompt: In which London playhouse did Shakespeare's company perform from 1599?
     answer: The Globe
     distractors: [The Rose, The Swan, The Curtain]
-    fact: All four were real Elizabethan playhouses. The Globe was built partly from the timbers of an earlier theatre the company dismantled.
+    fact: All four were real Elizabethan playhouses. The Globe was built partly from the timbers of an earlier theater the company dismantled.
 
   - id: stg-013
     difficulty: 3

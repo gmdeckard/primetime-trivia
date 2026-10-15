@@ -53,7 +53,7 @@ questions:
     prompt: Which part of a plant takes in water from the soil?
     answer: The roots
     distractors: [The leaves, The flower, The stem]
-    fact: The leaves do the opposite, letting water out as vapour, and that is partly what pulls more up the stem.
+    fact: The leaves do the opposite, letting water out as vapor, and that is partly what pulls more up the stem.
 
   - id: kid-007
     difficulty: 3
@@ -71,7 +71,7 @@ questions:
 
   - id: kid-009
     difficulty: 4
-    prompt: Which animal can change colour to match its mood?
+    prompt: Which animal can change color to match its mood?
     answer: The chameleon
     distractors: [The gecko, The iguana, The salamander]
     fact: Everyone thinks it is for hiding. Mostly it is about temperature and mood, and an angry chameleon goes bright on purpose.
@@ -521,7 +521,7 @@ questions:
     prompt: How many rings are on the Olympic flag?
     answer: Five
     distractors: [Four, Six, Seven]
-    fact: One for each inhabited continent, and between them the six colours include at least one from every national flag in the world.
+    fact: One for each inhabited continent, and between them the six colors include at least one from every national flag in the world.
 
   - id: kid-066
     category: sports
@@ -582,7 +582,7 @@ questions:
   - id: kid-073
     category: us-places
     difficulty: 3
-    prompt: Which statue stands on an island in New York harbour?
+    prompt: Which statue stands on an island in New York harbor?
     answer: The Statue of Liberty
     distractors: [Christ the Redeemer, The Colossus of Rhodes, The Little Mermaid]
     fact: It was a gift from France and arrived in 214 crates, in pieces, to be put together on site.
@@ -633,7 +633,7 @@ questions:
     prompt: Which city is famous for its cable cars and a bridge painted orange?
     answer: San Francisco
     distractors: [Seattle, Portland, San Diego]
-    fact: The colour is officially called international orange, chosen so ships could see the bridge through the fog.
+    fact: The color is officially called international orange, chosen so ships could see the bridge through the fog.
 
   - id: kid-080
     category: us-places

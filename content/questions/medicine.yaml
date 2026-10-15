@@ -47,7 +47,7 @@ questions:
     prompt: Which scientist discovered penicillin?
     answer: Alexander Fleming
     distractors: [Louis Pasteur, Jonas Salk, Paul Ehrlich]
-    fact: He noticed mould killing bacteria on a neglected culture plate in 1928. Florey and Chain made it a usable drug a decade later.
+    fact: He noticed mold killing bacteria on a neglected culture plate in 1928. Florey and Chain made it a usable drug a decade later.
   - id: med-008
     difficulty: 4
     prompt: Which part of the brain controls balance and coordination?
@@ -171,4 +171,4 @@ questions:
     prompt: Which anaesthetic was first publicly demonstrated at Massachusetts General Hospital in 1846?
     answer: Ether
     distractors: [Chloroform, Nitrous oxide, Cocaine]
-    fact: The operating theatre there is still called the Ether Dome. Chloroform followed in Edinburgh the next year.
+    fact: The operating theater there is still called the Ether Dome. Chloroform followed in Edinburgh the next year.

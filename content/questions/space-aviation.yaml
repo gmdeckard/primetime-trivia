@@ -46,7 +46,7 @@ questions:
 
   - id: spa-007
     difficulty: 2
-    prompt: Which brothers made the first powered aeroplane flight in 1903?
+    prompt: Which brothers made the first powered airplane flight in 1903?
     answer: The Wright brothers
     distractors: [The Montgolfier brothers, The Lilienthal brothers, The Voisin brothers]
     fact: The Montgolfiers flew the first hot air balloon, in 1783.
@@ -126,7 +126,7 @@ questions:
     prompt: Which planet did the Viking landers reach in 1976?
     answer: Mars
     distractors: [Venus, Jupiter, Mercury]
-    fact: Viking 1 and 2 returned the first colour panoramas from the Martian surface and ran for years past their design life.
+    fact: Viking 1 and 2 returned the first color panoramas from the Martian surface and ran for years past their design life.
 
   - id: spa-019
     difficulty: 3
@@ -193,7 +193,7 @@ questions:
 
   - id: spa-028
     difficulty: 2
-    prompt: What was Project Mercury's successor programme, which flew two-man crews?
+    prompt: What was Project Mercury's successor program, which flew two-man crews?
     answer: Gemini
     distractors: [Apollo, Vostok, Skylab]
     fact: Gemini proved rendezvous, docking and spacewalking — all of it necessary before Apollo could work.
@@ -210,7 +210,7 @@ questions:
     prompt: Which was the first aircraft to carry passengers faster than the speed of sound in scheduled service from the West?
     answer: Concorde
     distractors: [The Boeing 2707, The Tu-144, The Lockheed L-2000]
-    fact: British Airways and Air France began Concorde service on the same day in January 1976. The Boeing and Lockheed designs were cancelled before flying.
+    fact: British Airways and Air France began Concorde service on the same day in January 1976. The Boeing and Lockheed designs were canceled before flying.
   - id: spa-031
     difficulty: 2
     prompt: Which planet has the Great Red Spot?

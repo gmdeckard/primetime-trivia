@@ -63,7 +63,7 @@ questions:
     prompt: The word "robot" entered English from which language?
     answer: Czech
     distractors: [Russian, German, Polish]
-    fact: Karel Capek used it in his 1920 play R.U.R., from a word meaning forced labour.
+    fact: Karel Capek used it in his 1920 play R.U.R., from a word meaning forced labor.
 
   - id: wrd-010
     difficulty: 2
@@ -154,7 +154,7 @@ questions:
     prompt: Which word originally meant a small shield, and now means a protective barrier?
     answer: Escutcheon
     distractors: [Bulwark, Rampart, Aegis]
-    fact: An escutcheon is the shield shape on a coat of arms; "a blot on the escutcheon" means a stain on one's honour.
+    fact: An escutcheon is the shield shape on a coat of arms; "a blot on the escutcheon" means a stain on one's honor.
 
   - id: wrd-023
     difficulty: 4
@@ -266,7 +266,7 @@ questions:
     prompt: Which term covers substituting an associated word for the thing meant, as in the crown for the monarchy?
     answer: Metonymy
     distractors: [Synecdoche, Metaphor, Allegory]
-    fact: Synecdoche is its close neighbour and uses a part for the whole instead, as in all hands on deck.
+    fact: Synecdoche is its close neighbor and uses a part for the whole instead, as in all hands on deck.
 
   - id: wrd-039
     difficulty: 4

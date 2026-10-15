@@ -27,7 +27,7 @@ questions:
     prompt: What is the speed of light in a vacuum, to the nearest thousand kilometres per second?
     answer: 300,000 km per second
     distractors: ['150,000 km per second', '500,000 km per second', '1,000,000 km per second']
-    fact: More precisely 299,792 kilometres per second, a value now used to define the metre.
+    fact: More precisely 299,792 kilometers per second, a value now used to define the meter.
   - id: phy-005
     difficulty: 3
     prompt: What is the chemical symbol for gold?
@@ -122,7 +122,7 @@ questions:
     prompt: Which type of radiation is stopped by a sheet of paper?
     answer: Alpha
     distractors: [Beta, Gamma, X-rays]
-    fact: Beta needs aluminium and gamma needs lead or thick concrete. Alpha is only dangerous if you breathe it in or swallow it.
+    fact: Beta needs aluminum and gamma needs lead or thick concrete. Alpha is only dangerous if you breathe it in or swallow it.
 
   - id: phy-019
     difficulty: 3
@@ -171,4 +171,4 @@ questions:
     prompt: Which industrial process pulls nitrogen from the air to make fertiliser?
     answer: The Haber process
     distractors: [The contact process, The Solvay process, Electrolysis of brine]
-    fact: It feeds a large share of the world. The same man ran Germany's chemical weapons programme in the First World War.
+    fact: It feeds a large share of the world. The same man ran Germany's chemical weapons program in the First World War.

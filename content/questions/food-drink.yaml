@@ -21,7 +21,7 @@ questions:
     prompt: Which cut of beef is used for a classic Chateaubriand?
     answer: Tenderloin
     distractors: [Sirloin, Ribeye, Brisket]
-    fact: It is cut from the thick centre of the fillet and traditionally served for two.
+    fact: It is cut from the thick center of the fillet and traditionally served for two.
 
   - id: fnd-004
     difficulty: 4
@@ -42,7 +42,7 @@ questions:
     prompt: Champagne must be made in which French region?
     answer: Champagne
     distractors: [Burgundy, The Loire, Alsace]
-    fact: Sparkling wine made the same way elsewhere in France is labelled crémant.
+    fact: Sparkling wine made the same way elsewhere in France is labeled crémant.
 
   - id: fnd-007
     difficulty: 2
@@ -63,7 +63,7 @@ questions:
     prompt: Which cheese is traditionally used on a Margherita pizza?
     answer: Mozzarella
     distractors: [Parmesan, Provolone, Pecorino]
-    fact: The colours of the dish — red, white and green — are said to represent the Italian flag.
+    fact: The colors of the dish — red, white and green — are said to represent the Italian flag.
 
   - id: fnd-010
     difficulty: 3
@@ -123,7 +123,7 @@ questions:
 
   - id: fnd-018
     difficulty: 3
-    prompt: What is the main flavouring in a traditional gin?
+    prompt: What is the main flavoring in a traditional gin?
     answer: Juniper
     distractors: [Coriander, Angelica, Anise]
     fact: The word gin comes from genever, itself from the Latin for juniper. Coriander and angelica are common supporting botanicals.
@@ -172,7 +172,7 @@ questions:
 
   - id: fnd-025
     difficulty: 2
-    prompt: Which herb is the principal flavour in classic pesto alla genovese?
+    prompt: Which herb is the principal flavor in classic pesto alla genovese?
     answer: Basil
     distractors: [Parsley, Oregano, Mint]
     fact: With pine nuts, garlic, Parmesan, pecorino and olive oil, pounded rather than blended in the traditional method.

@@ -38,7 +38,7 @@ questions:
     prompt: Which 1773 protest saw colonists destroy a shipment of tea?
     answer: The Boston Tea Party
     distractors: [The Stamp Act Riots, The Boston Massacre, Shays' Rebellion]
-    fact: They dumped 342 chests into the harbour. The tax being protested had actually lowered the price of tea.
+    fact: They dumped 342 chests into the harbor. The tax being protested had actually lowered the price of tea.
 
   - id: amh-006
     difficulty: 3
@@ -73,7 +73,7 @@ questions:
     prompt: Which 1848 convention launched the American women's suffrage movement?
     answer: Seneca Falls
     distractors: [Akron, Rochester, Philadelphia]
-    fact: Elizabeth Cady Stanton and Lucretia Mott organised it. Sojourner Truth gave her best-known speech in Akron three years later.
+    fact: Elizabeth Cady Stanton and Lucretia Mott organized it. Sojourner Truth gave her best-known speech in Akron three years later.
 
   - id: amh-011
     difficulty: 3

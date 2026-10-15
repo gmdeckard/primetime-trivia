@@ -171,11 +171,11 @@ questions:
     prompt: Which Canadian sketch series produced Rick Moranis, John Candy and Martin Short?
     answer: SCTV
     distractors: [The Kids in the Hall, Second City, Codco]
-    fact: Second City is the theatre company the cast came out of, which is why the two names are so easily confused.
+    fact: Second City is the theater company the cast came out of, which is why the two names are so easily confused.
 
   - id: rad-025
     difficulty: 4
-    prompt: Which radio variety programme has broadcast from Nashville since 1925?
+    prompt: Which radio variety program has broadcast from Nashville since 1925?
     answer: The Grand Ole Opry
     distractors: [The National Barn Dance, Louisiana Hayride, The Midwestern Hayride]
     fact: All four were real country radio shows with national audiences. The Opry simply outlasted every one of them.

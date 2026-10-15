@@ -31,7 +31,7 @@ questions:
     prompt: Which material did Charles Goodyear learn to vulcanise in 1839?
     answer: Rubber
     distractors: [Celluloid, Bakelite, Nylon]
-    fact: He got there by dropping a mixture on a hot stove. He died in debt, and the tyre company simply borrowed his name forty years later.
+    fact: He got there by dropping a mixture on a hot stove. He died in debt, and the tire company simply borrowed his name forty years later.
 
   - id: inv-005
     difficulty: 2
@@ -87,7 +87,7 @@ questions:
     prompt: Who built the first commercially successful mechanical reaper?
     answer: Cyrus McCormick
     distractors: [John Deere, Eli Whitney, Jethro Tull]
-    fact: Deere's contribution was the steel plough, which shed the sticky prairie soil that clogged iron ones.
+    fact: Deere's contribution was the steel plow, which shed the sticky prairie soil that clogged iron ones.
 
   - id: inv-013
     difficulty: 3
@@ -185,7 +185,7 @@ questions:
     prompt: What does the acronym WWW stand for?
     answer: World Wide Web
     distractors: [World Wide Wire, Web Wide World, Wide World Web]
-    fact: Tim Berners-Lee wrote the first browser and the first server at CERN, originally to organise physics papers.
+    fact: Tim Berners-Lee wrote the first browser and the first server at CERN, originally to organize physics papers.
 
   - id: inv-027
     difficulty: 3

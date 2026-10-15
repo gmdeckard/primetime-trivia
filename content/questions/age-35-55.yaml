@@ -263,7 +263,7 @@ questions:
     prompt: Which Swedish retailer sells flat-pack furniture with Scandinavian names?
     answer: IKEA
     distractors: [Habitat, MFI, Jysk]
-    fact: Flat packing began when an employee took the legs off a table to fit it in a car, and the firm realised shipping air was the cost.
+    fact: Flat packing began when an employee took the legs off a table to fit it in a car, and the firm realized shipping air was the cost.
 
   - id: a35-033
     category: business-economics
@@ -370,7 +370,7 @@ questions:
   - id: a35-045
     category: us-places
     difficulty: 3
-    prompt: Which American city rebuilt its downtown around a convention centre after the 1984 World's Fair bankrupted it?
+    prompt: Which American city rebuilt its downtown around a convention center after the 1984 World's Fair bankrupted it?
     answer: New Orleans
     distractors: [Knoxville, Spokane, San Antonio]
     fact: It is the only World's Fair in history to declare bankruptcy while still open to visitors.
@@ -498,7 +498,7 @@ questions:
   - id: a35-061
     category: history-20c
     difficulty: 2
-    prompt: Which spacecraft programme ended with its final flight in 2011?
+    prompt: Which spacecraft program ended with its final flight in 2011?
     answer: The Space Shuttle
     distractors: [Apollo, Soyuz, Skylab]
     fact: Five orbiters flew 135 missions over thirty years. Soyuz is still flying and is now far older than the shuttle ever got.
