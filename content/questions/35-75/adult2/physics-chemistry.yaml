@@ -14,7 +14,7 @@ questions:
     prompt: Which gas makes up about 21 percent of the air we breathe?
     answer: Oxygen
     distractors: [Carbon dioxide, Argon, Hydrogen]
-    fact: Almost all the rest is nitrogen. The carbon dioxide everyone worries about is well under a tenth of one percent of it.
+    fact: Almost all the rest is one inert gas. The carbon dioxide everyone worries about is well under a tenth of one percent of it.
 
   - id: a2-phy-002
     difficulty: 2

@@ -77,10 +77,21 @@ let found = 0;
 
 // ------------------------------------------------------------- giveaway
 
-const scope = onlyPack ? choice.filter((q) => q.pack === onlyPack) : choice;
+/**
+ * A pack is checked in both directions.
+ *
+ * The first version only asked whether something already in the bank gave away
+ * a question in the new batch. Run it the other way and the new batch turned
+ * out to be naming adult1's answers out loud: a reveal about the C language
+ * mentioning Bell Labs, a prompt about Mackenzie mentioning Lewis and Clark.
+ * Fourteen of those were sitting in one batch.
+ */
+const inPack = (q: Question, other: Question) =>
+  !onlyPack || q.pack === onlyPack || other.pack === onlyPack;
+
 console.log(
-  `\n  Checking ${scope.length} question(s)${onlyPack ? ` in pack ${onlyPack}` : ''} ` +
-    `against all ${choice.length} in the bank.\n`,
+  `\n  Checking ${onlyPack ? `pack ${onlyPack} both ways against` : ''} ` +
+    `all ${choice.length} question(s) in the bank.\n`,
 );
 
 /**
@@ -100,14 +111,14 @@ const ORDINARY = new Set(
 const plain = (s: string) => s.toLowerCase().replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim();
 
 const giveaways: string[] = [];
-for (const q of scope) {
+for (const q of choice) {
   const answer = plain(answerOf(q)).replace(/^(the|a|an) /, '');
   // Short answers collide by accident; a six-character phrase is about where
   // a verbatim match stops being a coincidence.
   if (answer.length < 6 || ORDINARY.has(answer)) continue;
 
   const sayers = choice.filter((other) => {
-    if (other.id === q.id || !canMeet(q, other)) return false;
+    if (other.id === q.id || !canMeet(q, other) || !inPack(q, other)) return false;
     // Only what is read out counts. A distractor naming another answer is a
     // milder and different problem.
     return `${plain(other.prompt)} ${plain(other.funFact)}`.includes(answer);
