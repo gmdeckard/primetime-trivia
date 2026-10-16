@@ -1,0 +1,250 @@
+category: medicine
+pack:
+  id: adult2
+  name: Adult set 2
+
+questions:
+  - id: a2-med-001
+    difficulty: 2
+    prompt: Which organ filters waste from the blood to make urine?
+    answer: The kidneys
+    distractors: [The liver, The spleen, The bladder]
+    fact: They process about fifty gallons of blood a day to produce under two pints of urine. A person can live normally on one.
+
+  - id: a2-med-002
+    difficulty: 2
+    prompt: How many lungs does a person have?
+    answer: Two
+    distractors: [One, Three, Four]
+    fact: They are not the same size. The left is smaller, with two lobes to the right's three, because the heart sits on that side.
+
+  - id: a2-med-003
+    difficulty: 2
+    prompt: What is the normal human body temperature, roughly, in Fahrenheit?
+    answer: 98.6 degrees
+    distractors: [96.0 degrees, 100.4 degrees, 94.2 degrees]
+    fact: The figure comes from a German study in 1851 and is a conversion of 37 Celsius. Modern measurements put the average slightly lower.
+
+  - id: a2-med-004
+    difficulty: 2
+    prompt: Which part of the body does a cardiologist specialize in?
+    answer: The heart
+    distractors: [The lungs, The kidneys, The brain]
+    fact: The word comes from the Greek for heart. The specialty split from general internal medicine only in the twentieth century.
+
+  - id: a2-med-005
+    difficulty: 2
+    prompt: What does a vaccine do?
+    answer: Teaches the immune system to recognize a disease in advance
+    distractors: [Kills the germ directly, Replaces a missing antibody, Blocks the germ from entering the body]
+    fact: The word comes from the Latin for cow, because the first one used cowpox to protect against smallpox.
+
+  - id: a2-med-006
+    difficulty: 2
+    prompt: Which fluid lubricates and cushions the joints?
+    answer: Synovial fluid
+    distractors: [Lymph, Plasma, Bile]
+    fact: It thickens when still and thins under pressure, which is why a joint feels stiff first thing and loosens with use.
+
+  - id: a2-med-007
+    difficulty: 2
+    prompt: What is the medical name for the kneecap?
+    answer: The patella
+    distractors: [The tibia, The fibula, The meniscus]
+    fact: It is a sesamoid bone, one that forms inside a tendon. It works as a pulley, letting the thigh muscle pull the lower leg straight with far less effort.
+
+  - id: a2-med-008
+    difficulty: 3
+    prompt: Which English doctor used cowpox to protect against smallpox in 1796?
+    answer: Edward Jenner
+    distractors: [Thomas Sydenham, John Hunter, Joseph Lister]
+    fact: Milkmaids who had caught cowpox were known not to get smallpox. He tested it on a gardener's son and then on about twenty others.
+
+  - id: a2-med-009
+    difficulty: 3
+    prompt: Which surgeon introduced carbolic acid to operating theaters in the 1860s?
+    answer: Joseph Lister
+    distractors: [Ambroise Paré, John Snow, Astley Cooper]
+    fact: Surgeons had operated in coats stiff with old blood, taking the stains as evidence of experience. His mortality rates fell by about two thirds.
+
+  - id: a2-med-010
+    difficulty: 3
+    prompt: Which London physician traced an 1854 cholera outbreak to a single water pump?
+    answer: John Snow
+    distractors: [William Farr, Edwin Chadwick, Thomas Wakley]
+    fact: He mapped the deaths and found they clustered around one pump on Broad Street. The idea that cholera spread through water rather than bad air took years to be accepted.
+
+  - id: a2-med-011
+    difficulty: 3
+    prompt: What does the immune system produce to lock onto a specific invader?
+    answer: Antibodies
+    distractors: [Enzymes, Hormones, Platelets]
+    fact: Each one is shaped for a single target. The reason a second infection is milder is that the body keeps the pattern on file.
+
+  - id: a2-med-012
+    difficulty: 3
+    prompt: Which nerve is the longest in the human body?
+    answer: The sciatic
+    distractors: [The vagus, The femoral, The optic]
+    fact: It runs from the lower back to the foot and is about as thick as a finger where it leaves the spine.
+
+  - id: a2-med-013
+    difficulty: 3
+    prompt: What is the function of red blood cells' lack of a nucleus?
+    answer: It leaves more room to carry oxygen
+    distractors: [It lets them divide faster, It stops them clotting, It makes them live longer]
+    fact: They also cannot repair themselves, which is why they last about four months and the body replaces two million a second.
+
+  - id: a2-med-014
+    difficulty: 3
+    prompt: Which condition did the Dutch physician Christiaan Eijkman trace to polished rice in the 1890s?
+    answer: Beriberi
+    distractors: [Pellagra, Rickets, Goitre]
+    fact: He noticed hospital chickens fed on leftover polished rice developed the same symptoms as the patients. The husk removed in polishing holds the vitamin.
+
+  - id: a2-med-015
+    difficulty: 3
+    prompt: Which is the largest organ of the human body?
+    answer: The skin
+    distractors: [The liver, The small intestine, The lungs]
+    fact: It runs to about twenty square feet on an adult and replaces itself roughly every month. It is also where vitamin D production starts.
+
+  - id: a2-med-016
+    difficulty: 3
+    prompt: What does an electrocardiogram record?
+    answer: The electrical activity of the heart
+    distractors: [The pressure in the arteries, The oxygen in the blood, The sound of the valves]
+    fact: Willem Einthoven's original machine weighed six hundred pounds and needed five people to operate. He won a Nobel for it in 1924.
+
+  - id: a2-med-017
+    difficulty: 3
+    prompt: Which gas did dentists first use as an anesthetic, long after it had been a party entertainment?
+    answer: Nitrous oxide
+    distractors: [Chloroform, Carbon dioxide, Helium]
+    fact: It had been inhaled for amusement for forty years before anybody connected the fact that people under its influence did not notice injuries.
+
+  - id: a2-med-018
+    difficulty: 3
+    prompt: What is the largest artery in the body?
+    answer: The aorta
+    distractors: [The carotid, The femoral, The pulmonary vein]
+    fact: It leaves the heart about the width of a garden hose and arches over before running the length of the trunk.
+
+  - id: a2-med-019
+    difficulty: 3
+    prompt: Which part of the eye focuses light onto the retina?
+    answer: The lens
+    distractors: [The cornea alone, The iris, The pupil]
+    fact: The cornea does most of the bending and the lens does the adjusting. The lens stiffens with age, which is why reading glasses arrive in the forties.
+
+  - id: a2-med-020
+    difficulty: 3
+    prompt: Which pair at Oxford turned a laboratory curiosity into an injectable drug in the 1940s?
+    answer: Howard Florey and Ernst Chain
+    distractors: ["Gerhard Domagk and Paul Ehrlich", "Selman Waksman and Albert Schatz", "William Osler and Harvey Cushing"]
+    fact: They had no patent and no American-scale plant, so the production work went to Peoria, Illinois, where a mold from a cantaloupe outyielded every other strain tried.
+
+  - id: a2-med-021
+    difficulty: 3
+    prompt: What is the name for the body's maintenance of a steady internal state?
+    answer: Homeostasis
+    distractors: [Metabolism, Osmosis, Hemostasis]
+    fact: Hemostasis, which sounds almost the same, is the stopping of bleeding. The two are confused constantly.
+
+  - id: a2-med-022
+    difficulty: 3
+    prompt: Deficiency of which vitamin causes pellagra?
+    answer: Niacin
+    distractors: [Thiamine, Riboflavin, Folate]
+    fact: It killed thousands across the American South, where a diet of corn, molasses and fat pork left it out. Joseph Goldberger proved it was diet rather than infection by feeding it to volunteers.
+
+  - id: a2-med-023
+    difficulty: 4
+    prompt: Which Austrian neurologist's work on the unconscious reshaped psychiatry from the 1890s?
+    answer: Sigmund Freud
+    distractors: [Carl Jung, Alfred Adler, Jean-Martin Charcot]
+    fact: Much of the specific theory has not survived. The idea that a symptom might have a cause the patient cannot report is what did.
+
+  - id: a2-med-024
+    difficulty: 4
+    prompt: Which cells, taken without consent in 1951, became the first human line to grow indefinitely in culture?
+    answer: HeLa cells
+    distractors: [Vero cells, CHO cells, Jurkat cells]
+    fact: They came from Henrietta Lacks, who died of the cancer they were taken from. Her family learned of it twenty years later and had never been asked.
+
+  - id: a2-med-025
+    difficulty: 4
+    prompt: What did Werner Forssmann do to himself in 1929 to prove a point about the heart?
+    answer: Threaded a catheter into his own heart and walked to the X-ray room
+    distractors: [Injected himself with a dye of unknown toxicity, Stopped his own heart with a drug, Transfused himself with another blood type]
+    fact: He was dismissed for it. He shared a Nobel twenty-seven years later, by which time he was a country urologist.
+
+  - id: a2-med-026
+    difficulty: 4
+    prompt: Which compound, sold as a sedative from 1957, caused severe birth defects before being withdrawn?
+    answer: Thalidomide
+    distractors: [Diethylstilbestrol, Chloramphenicol, Phenacetin]
+    fact: An American reviewer refused to approve it on thin safety data and was criticized for obstruction at the time. The episode is why drug trials look the way they do.
+
+  - id: a2-med-027
+    difficulty: 4
+    prompt: What does the Hippocratic Oath actually not contain?
+    answer: The phrase "first, do no harm"
+    distractors: [A promise to teach the art without fee, A prohibition on surgery for stones, An oath sworn by Apollo]
+    fact: That phrase comes from a different Hippocratic text. The oath does swear by Apollo and does hand the business of cutting for stones to specialists.
+
+  - id: a2-med-028
+    difficulty: 4
+    prompt: Which structure did Rosalind Franklin, James Watson and Francis Crick's work describe in 1953?
+    answer: The double helix of DNA
+    distractors: [The folding of a protein, The structure of insulin, The shape of hemoglobin]
+    fact: The model was built in an afternoon once the key image was seen. The argument about how it came to be seen has gone on ever since.
+
+  - id: a2-med-029
+    difficulty: 4
+    prompt: Which treatment did Philip Showalter Hench's 1948 work introduce for rheumatoid arthritis?
+    answer: Cortisone
+    distractors: [Aspirin, Gold salts, Methotrexate]
+    fact: The first patients got up and walked after years in bed, and the effect was so dramatic it was filmed. The side effects took longer to appear.
+
+  - id: a2-med-030
+    difficulty: 4
+    prompt: What did Barry Marshall drink in 1984 to prove his theory about stomach ulcers?
+    answer: A culture of Helicobacter pylori
+    distractors: [Concentrated stomach acid, A solution of aspirin, An untested antibiotic]
+    fact: He developed gastritis within days. Ulcers had been blamed on stress and spicy food, and the bacterial explanation was rejected for years before the Nobel.
+
+  - id: a2-med-031
+    difficulty: 4
+    prompt: Which organ's removal was once routine for a sore throat and is now rare?
+    answer: The tonsils
+    distractors: [The appendix, The gallbladder, The adenoids]
+    fact: Hundreds of thousands were taken out annually in the 1950s. Studies comparing children who had the operation with those who did not found very little difference.
+
+  - id: a2-med-032
+    difficulty: 4
+    prompt: What is a placebo?
+    answer: A treatment with no active ingredient
+    distractors: [A drug given at a reduced dose, A treatment for a symptom rather than a cause, An untested compound]
+    fact: It is the comparison a trial is measured against, because people improve for all sorts of reasons. The effect is strongest for pain and weakest for anything measurable.
+
+  - id: a2-med-033
+    difficulty: 4
+    prompt: Which blood protein's absence causes hemophilia?
+    answer: A clotting factor
+    distractors: [Hemoglobin, Albumin, An immunoglobulin]
+    fact: It passed through European royalty from Queen Victoria, who carried it, into the Spanish, German and Russian courts.
+
+  - id: a2-med-034
+    difficulty: 4
+    prompt: Which imaging technique did Godfrey Hounsfield develop at a record company in 1971?
+    answer: The CT scanner
+    distractors: [The MRI scanner, The ultrasound scanner, The PET scanner]
+    fact: EMI funded the research, and the money is often said to have come from its pop records. The first machine took hours to scan a head and days to compute the image.
+
+  - id: a2-med-035
+    difficulty: 4
+    prompt: What did the Framingham study, begun in 1948, establish about heart disease?
+    answer: That smoking, blood pressure and cholesterol predict risk
+    distractors: [That it is largely inherited, That it is caused by a virus, That exercise has no measurable effect]
+    fact: It followed the same town across generations. The phrase "risk factor" entered medicine through it.
