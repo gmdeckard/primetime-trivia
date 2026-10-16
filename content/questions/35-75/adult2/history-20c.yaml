@@ -1,0 +1,250 @@
+category: history-20c
+pack:
+  id: adult2
+  name: Adult set 2
+
+questions:
+  - id: a2-h20-001
+    difficulty: 2
+    prompt: Which two Japanese cities were hit by atomic bombs in 1945?
+    answer: Hiroshima and Nagasaki
+    distractors: [Hiroshima and Kobe, Yokohama and Nagasaki, Osaka and Sasebo]
+    fact: Three days apart, and the second target was changed on the morning of the flight because the first choice was under cloud.
+
+  - id: a2-h20-002
+    difficulty: 2
+    prompt: In which year did the Second World War end?
+    answer: 1945
+    distractors: [1944, 1946, 1943]
+    fact: Germany surrendered in May and Japan in August, with the formal signing on a battleship in Tokyo Bay in September.
+
+  - id: a2-h20-003
+    difficulty: 2
+    prompt: In which year did the United States enter the First World War?
+    answer: 1917
+    distractors: [1914, 1915, 1916]
+    fact: Unrestricted submarine warfare and an intercepted German offer of American territory to Mexico settled it. The first large American force did not fight until the following summer.
+
+  - id: a2-h20-004
+    difficulty: 2
+    prompt: Which country did Germany invade in September 1939?
+    answer: Poland
+    distractors: [Czechoslovakia, Belgium, Norway]
+    fact: The Soviets came in from the east a fortnight later under a secret clause of a pact signed that August.
+
+  - id: a2-h20-005
+    difficulty: 2
+    prompt: Which disease swept the world in a pandemic beginning in 1918?
+    answer: Influenza
+    distractors: [Cholera, Typhus, Polio]
+    fact: It killed more people than the war that was ending, and it took the young and healthy hardest. Wartime censors kept it out of the papers of the countries fighting.
+
+  - id: a2-h20-006
+    difficulty: 2
+    prompt: Which American president was elected to four terms?
+    answer: Franklin Roosevelt
+    distractors: [Woodrow Wilson, Theodore Roosevelt, Harry Truman]
+    fact: He died four months into the fourth. An amendment capping presidents at two terms was ratified six years later.
+
+  - id: a2-h20-007
+    difficulty: 2
+    prompt: In which American city was the charter of the United Nations signed in 1945?
+    answer: San Francisco
+    distractors: [New York, Washington, Philadelphia]
+    fact: Fifty nations sent delegates and argued for two months. The headquarters went to New York afterward, on land bought with a Rockefeller gift.
+
+  - id: a2-h20-008
+    difficulty: 3
+    prompt: What was the codename for the German invasion of the Soviet Union in 1941?
+    answer: Operation Barbarossa
+    distractors: [Operation Citadel, Operation Typhoon, Operation Blue]
+    fact: Three million men went in on a front of eighteen hundred miles, expecting to finish before winter. The German army never recovered the losses of the next four years.
+
+  - id: a2-h20-009
+    difficulty: 3
+    prompt: How did Adolf Hitler become chancellor of Germany in January 1933?
+    answer: He was appointed by the president
+    distractors: [He won an outright majority at an election, He seized power in a coup, He was named by the army]
+    fact: His party had just lost seats. Conservatives around Hindenburg thought a chancellor they could manage was better than another election, and gave him the job.
+
+  - id: a2-h20-010
+    difficulty: 3
+    prompt: Which war began in June 1950 when one half of a divided country invaded the other?
+    answer: The Korean War
+    distractors: [The Vietnam War, The Chinese Civil War, The Malayan Emergency]
+    fact: It has never formally ended. The armistice of 1953 left the line almost exactly where it had been three years and two million deaths earlier.
+
+  - id: a2-h20-011
+    difficulty: 3
+    prompt: Which 1961 trial in Jerusalem put a Holocaust organizer in a glass booth?
+    answer: The Eichmann trial
+    distractors: [The Demjanjuk trial, The Barbie trial, The Auschwitz trial]
+    fact: He had been taken from Argentina by Israeli agents. It was televised, and the survivors' testimony did more than any book to make the subject public.
+
+  - id: a2-h20-012
+    difficulty: 3
+    prompt: Which 1972 break-in at a Washington office building led to a presidency unraveling?
+    answer: The Watergate burglary
+    distractors: [The Pentagon Papers leak, The Ellsberg break-in, The Chennault affair]
+    fact: The burglars were caught taping a door latch by a night watchman. Two years of hearings and tapes later, the cover-up had cost more than forty convictions.
+
+  - id: a2-h20-013
+    difficulty: 3
+    prompt: Who proclaimed the People's Republic of China in 1949?
+    answer: Mao Zedong
+    distractors: [Zhou Enlai, Chiang Kai-shek, Deng Xiaoping]
+    fact: His rival's government withdrew to Taiwan with the gold reserves and the art collection, and both sides claimed to be the real China for decades.
+
+  - id: a2-h20-014
+    difficulty: 3
+    prompt: Which 1944 conference set up the postwar system of fixed exchange rates?
+    answer: Bretton Woods
+    distractors: [Dumbarton Oaks, Lake Success, Geneva]
+    fact: Forty-four countries met at a New Hampshire hotel. The dollar was pegged to gold and everything else to the dollar, and the arrangement held until 1971.
+
+  - id: a2-h20-015
+    difficulty: 3
+    prompt: Which 1938 agreement handed the Sudetenland to Germany?
+    answer: The Munich Agreement
+    distractors: [The Anschluss, The Pact of Steel, The Locarno Treaties]
+    fact: The Czechs were not invited to the meeting that dismembered their country. Six months later Germany took the rest of it anyway.
+
+  - id: a2-h20-016
+    difficulty: 3
+    prompt: In which city were the 1936 Summer Olympics held?
+    answer: Berlin
+    distractors: [Munich, Vienna, Amsterdam]
+    fact: The anti-Jewish signs came down for the duration and went straight back up. Jesse Owens won four golds in front of the men staging it as a racial showcase.
+
+  - id: a2-h20-017
+    difficulty: 3
+    prompt: Which 1917 revolution brought the Bolsheviks to power?
+    answer: The October Revolution
+    distractors: [The February Revolution, The Kronstadt Rising, The Decembrist Revolt]
+    fact: It happened in November by the calendar the rest of Europe used, because Russia was still thirteen days behind.
+
+  - id: a2-h20-018
+    difficulty: 3
+    prompt: Which 1944 American law paid veterans' college tuition and backed their mortgages?
+    answer: The GI Bill
+    distractors: [The Veterans Readjustment Act of 1952, The Lanham Act, The Servicemen's Dependents Act]
+    fact: Nearly half of all college admissions were veterans by 1947. Southern administration of the housing benefit largely cut black veterans out of it.
+
+  - id: a2-h20-019
+    difficulty: 3
+    prompt: Who refused to give up a bus seat in Montgomery in 1955?
+    answer: Rosa Parks
+    distractors: [Claudette Colvin, Daisy Bates, Fannie Lou Hamer]
+    fact: She was a trained activist and a local NAACP secretary, not a tired passenger who happened to say no. A teenager had been arrested for the same thing nine months earlier.
+
+  - id: a2-h20-020
+    difficulty: 3
+    prompt: Which 1954 defeat ended French rule in Indochina?
+    answer: Dien Bien Phu
+    distractors: [Hue, Haiphong, Lang Son]
+    fact: The French held a valley and assumed artillery could not be brought over the hills. It was carried over in pieces by hand and dug in above them.
+
+  - id: a2-h20-021
+    difficulty: 3
+    prompt: Which 1947 doctrine pledged American support to countries resisting communism?
+    answer: The Truman Doctrine
+    distractors: [The Monroe Corollary, The Eisenhower Doctrine, The Acheson Line]
+    fact: The immediate case was Greece and Turkey, which Britain could no longer afford to prop up. The commitment turned out to have no geographic limit.
+
+  - id: a2-h20-022
+    difficulty: 3
+    prompt: In which Alabama city were marchers turned back at a bridge in March 1965?
+    answer: Selma
+    distractors: [Birmingham, Mobile, Tuscaloosa]
+    fact: Film of the beatings ran on the evening news. A voting rights act was signed five months later.
+
+  - id: a2-h20-023
+    difficulty: 3
+    prompt: Which country did Soviet forces invade in December 1979?
+    answer: Afghanistan
+    distractors: [Iran, Pakistan, Yemen]
+    fact: They expected a short operation to prop up a client government and stayed nine years. The cost in money and legitimacy helped finish the union itself.
+
+  - id: a2-h20-024
+    difficulty: 3
+    prompt: Where were the major Nazi leaders tried in 1945 and 1946?
+    answer: Nuremberg
+    distractors: [Potsdam, Leipzig, The Hague]
+    fact: The city was chosen partly because its courthouse and an attached prison were still standing, and partly for what the place had meant to the party.
+
+  - id: a2-h20-025
+    difficulty: 3
+    prompt: Which 1921 treaty created the Irish Free State?
+    answer: The Anglo-Irish Treaty
+    distractors: [The Government of Ireland Act, The Easter Proclamation, The Treaty of Limerick]
+    fact: It gave dominion status rather than a republic and left six counties out. The men who signed it knew it would split their own side, and it did, into a civil war.
+
+  - id: a2-h20-026
+    difficulty: 4
+    prompt: Which 1917 British declaration backed a Jewish national home in Palestine?
+    answer: The Balfour Declaration
+    distractors: [The Churchill White Paper, The Peel Report, The McMahon Pledge]
+    fact: It ran to sixty-seven words in a letter. It also promised nothing would prejudice the rights of the people already living there, and both halves were quoted against each other for thirty years.
+
+  - id: a2-h20-027
+    difficulty: 4
+    prompt: Which 1935 law created American old-age pensions and unemployment insurance?
+    answer: The Social Security Act
+    distractors: [The Wagner Act, The Fair Labor Standards Act, The Townsend Plan]
+    fact: Farm and domestic workers were left out, which excluded most black workers in the South. That was the price of the southern votes needed to pass it.
+
+  - id: a2-h20-028
+    difficulty: 4
+    prompt: Which group of veterans camped in Washington in 1932 and was driven out by troops?
+    answer: The Bonus Army
+    distractors: [The Coxey Marchers, The Grand Army of the Republic, The Veterans Relief League]
+    fact: They wanted early payment of a promised war bonus. Cavalry and tanks cleared the camp and burned it, which did Hoover's reelection no good at all.
+
+  - id: a2-h20-029
+    difficulty: 4
+    prompt: Which clause of the Versailles settlement assigned Germany responsibility for the war?
+    answer: Article 231
+    distractors: [Article 48, Article 19, Article 119]
+    fact: It was written to establish legal liability for reparations rather than moral blame, but it was read at home as a war guilt clause and resented as one.
+
+  - id: a2-h20-030
+    difficulty: 4
+    prompt: Which 1956 uprising was crushed by Soviet tanks in a matter of weeks?
+    answer: The Hungarian Revolution
+    distractors: [The Poznan protests, The East German rising, The Romanian strikes]
+    fact: Western radio had encouraged the rebels to expect help that was never coming, while Britain and France were busy with a crisis of their own in the Middle East.
+
+  - id: a2-h20-031
+    difficulty: 4
+    prompt: Which secret 1916 agreement carved up the Ottoman Middle East between Britain and France?
+    answer: Sykes-Picot
+    distractors: [The Treaty of Sevres, The Constantinople Agreement, The Damascus Protocol]
+    fact: The Bolsheviks found it in the tsarist archives and published it, to the embarrassment of allies who had promised Arab independence.
+
+  - id: a2-h20-032
+    difficulty: 4
+    prompt: At which February 1945 conference did the three main Allies settle the shape of postwar Europe?
+    answer: Yalta
+    distractors: [Tehran, Casablanca, Quebec]
+    fact: Roosevelt was two months from death and the Red Army was already standing on most of the ground being discussed, which settled much of the argument in advance.
+
+  - id: a2-h20-033
+    difficulty: 4
+    prompt: Which Italian leader took the word totalitarian as a compliment and built a state on it?
+    answer: Benito Mussolini
+    distractors: [Gabriele D'Annunzio, Victor Emmanuel III, Pietro Badoglio]
+    fact: He had been a socialist newspaper editor. His regime ran for twenty-one years and ended with his body hung upside down in a Milan square.
+
+  - id: a2-h20-034
+    difficulty: 4
+    prompt: What is the name for the Soviet-era famine that killed millions in Ukraine in 1932 and 1933?
+    answer: The Holodomor
+    distractors: [The Great Purge, The Kulak Terror, The Collectivization Decree]
+    fact: Grain was requisitioned and export continued while villages starved, and the borders were closed so peasants could not leave to find food.
+
+  - id: a2-h20-035
+    difficulty: 4
+    prompt: Which 1971 war ended with the creation of Bangladesh?
+    answer: The third Indo-Pakistani War
+    distractors: [The Kargil conflict, The Rann of Kutch war, The Sino-Indian War]
+    fact: It lasted thirteen days. Ten million refugees had already crossed into India, which is what brought India in.

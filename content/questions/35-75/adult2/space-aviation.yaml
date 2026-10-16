@@ -167,10 +167,10 @@ questions:
 
   - id: a2-spa-024
     difficulty: 3
-    prompt: Which German weapon of 1944 was the first ballistic missile used in war?
-    answer: The V-2
-    distractors: [The V-1, The Fritz X, The Rheintochter]
-    fact: It arrived faster than its own sound, so there was no warning at all. More people died building it in tunnels than were killed by it.
+    prompt: What does an aircraft's angle of attack measure?
+    answer: The angle between the wing and the oncoming air
+    distractors: [The angle between the nose and the horizon, The bank angle in a turn, The pitch of the propeller blades]
+    fact: Push it too far and the airflow separates and lift collapses, which is a stall. It can happen at any speed and in any attitude, which is what catches pilots out.
 
   - id: a2-spa-025
     difficulty: 3
