@@ -1,0 +1,250 @@
+category: military-history
+pack:
+  id: adult2
+  name: Adult set 2
+
+questions:
+  - id: a2-mil-001
+    difficulty: 2
+    prompt: Which branch of the United States armed forces is the oldest?
+    answer: The Army
+    distractors: [The Navy, The Marine Corps, The Coast Guard]
+    fact: It was founded in June 1775, a year before the country it serves. The Navy and Marines followed within months and were both disbanded for a while afterward.
+
+  - id: a2-mil-002
+    difficulty: 2
+    prompt: What do the letters in Navy SEAL stand for?
+    answer: Sea, Air and Land
+    distractors: ["Special Expeditionary Assault Landing", "Sea, Evasion and Landing", "Submarine, Explosive and Air Landing"]
+    fact: They grew out of the war-time underwater demolition teams that cleared obstacles off landing beaches. The present units were created in 1962.
+
+  - id: a2-mil-003
+    difficulty: 2
+    prompt: Whose soldiers were called redcoats in the American Revolution?
+    answer: Britain's
+    distractors: [France's, Spain's, Hesse's]
+    fact: The dye was cheap madder rather than expensive scarlet for the ranks. Visibility mattered less than keeping formation in the smoke of a musket line.
+
+  - id: a2-mil-004
+    difficulty: 2
+    prompt: How many stars does the highest active rank of US general wear?
+    answer: Four
+    distractors: [Three, Five, Six]
+    fact: Five-star rank exists but has not been awarded since 1950. It is reserved for wartime and the holder stays on the active list for life.
+
+  - id: a2-mil-005
+    difficulty: 2
+    prompt: In which year did the Spanish Armada sail against England?
+    answer: 1588
+    distractors: [1492, 1545, 1620]
+    fact: The weather did more damage than the fighting. Of about a hundred and thirty ships, a third never got home, many wrecked on the Irish coast.
+
+  - id: a2-mil-006
+    difficulty: 2
+    prompt: What does the Purple Heart recognize?
+    answer: Being wounded or killed in action
+    distractors: [Valor under fire, Long and honorable service, Leadership in command]
+    fact: Washington created an earlier version in cloth and it then lapsed for a century and a half. It is the oldest American military decoration still awarded.
+
+  - id: a2-mil-007
+    difficulty: 2
+    prompt: About how many soldiers are in an army battalion?
+    answer: Several hundred
+    distractors: [About forty, About ten thousand, About fifty thousand]
+    fact: Roughly three to five companies, commanded by a lieutenant colonel. Three or four battalions make a brigade and the numbers multiply from there.
+
+  - id: a2-mil-008
+    difficulty: 3
+    prompt: What was the Union's 1861 strategy of blockade and river control called?
+    answer: The Anaconda Plan
+    distractors: [The Cordon Plan, The Mississippi Doctrine, The Scott Line]
+    fact: Newspapers mocked it as too slow and the general who proposed it was pushed out. It was more or less what the North ended up doing for four years.
+
+  - id: a2-mil-009
+    difficulty: 3
+    prompt: Which 1943 battle was the largest tank engagement ever fought?
+    answer: Kursk
+    distractors: [Kharkov, Smolensk, Minsk]
+    fact: The Soviets knew the plan in advance and dug eight belts of defenses. After it the German army on that front never attacked on a large scale again.
+
+  - id: a2-mil-010
+    difficulty: 3
+    prompt: Which Soviet city was besieged for nearly nine hundred days?
+    answer: Leningrad
+    distractors: [Sevastopol, Odessa, Murmansk]
+    fact: Something like a million civilians died, most of them of starvation in the first winter. Supplies came in over a frozen lake by truck.
+
+  - id: a2-mil-011
+    difficulty: 3
+    prompt: Which 1950 amphibious landing cut the invading army's supply lines far behind the front?
+    answer: Inchon
+    distractors: [Wonsan, Pusan, Hungnam]
+    fact: The tides there run over thirty feet and the approach was a narrow channel, which is why every planner but one called it impossible.
+
+  - id: a2-mil-012
+    difficulty: 3
+    prompt: Which 1916 battle cost the British nearly sixty thousand casualties on its first day?
+    answer: The Somme
+    distractors: [Passchendaele, Loos, Mons]
+    fact: A week of shelling was supposed to cut the wire and it did not. Whole battalions raised from single towns were destroyed in an hour.
+
+  - id: a2-mil-013
+    difficulty: 3
+    prompt: Which May 1942 battle was the first fought entirely between aircraft carriers?
+    answer: The Coral Sea
+    distractors: [The Java Sea, The Philippine Sea, Savo Island]
+    fact: Neither fleet saw the other. It was a draw on paper that stopped a Japanese move on Port Moresby and damaged two carriers out of the next battle.
+
+  - id: a2-mil-014
+    difficulty: 3
+    prompt: Which German battleship was hunted down and sunk in May 1941?
+    answer: The Bismarck
+    distractors: [The Tirpitz, The Scharnhorst, The Graf Spee]
+    fact: She had sunk a British battlecruiser three days earlier with a magazine hit. A torpedo from an obsolete biplane jammed her rudder and left her steaming in circles.
+
+  - id: a2-mil-015
+    difficulty: 3
+    prompt: What was the longest continuous campaign of the Second World War called?
+    answer: The Battle of the Atlantic
+    distractors: [The Mediterranean campaign, The Arctic convoys, The Siege of Malta]
+    fact: It ran from the first day to the last. Churchill said it was the only thing that ever really frightened him, because losing it lost everything else.
+
+  - id: a2-mil-016
+    difficulty: 3
+    prompt: Which 1836 siege in Texas lasted thirteen days?
+    answer: The Alamo
+    distractors: [Goliad, San Jacinto, Gonzales]
+    fact: The defenders were wiped out and bought time for the army that won the war six weeks later. The mission was a ruin on the edge of a small town at the time.
+
+  - id: a2-mil-017
+    difficulty: 3
+    prompt: Which regiment did George Custer command in 1876?
+    answer: The 7th Cavalry
+    distractors: [The 1st Dragoons, The 10th Cavalry, The 5th Infantry]
+    fact: He had finished last in his class at West Point and was the youngest brevet general in the Union army at twenty-three.
+
+  - id: a2-mil-018
+    difficulty: 3
+    prompt: What was the Allied codeword for intelligence taken from broken German ciphers?
+    answer: Ultra
+    distractors: [Magic, Purple, Overcast]
+    fact: Acting on it without revealing its source was the hard part, so convoys were rerouted as if by luck and reconnaissance flights were sent to find what was already known.
+
+  - id: a2-mil-019
+    difficulty: 3
+    prompt: Which wartime vehicle, nicknamed the duck, could drive off a landing craft and swim?
+    answer: The DUKW
+    distractors: [The Weasel, The Buffalo, The Terrapin]
+    fact: The letters were a factory model code, not an acronym for anything. Twenty thousand were built and they ran supplies over the Normandy beaches for months.
+
+  - id: a2-mil-020
+    difficulty: 3
+    prompt: Which Marine base was besieged for seventy-seven days in 1968?
+    answer: Khe Sanh
+    distractors: [Da Nang, Con Thien, A Shau]
+    fact: It was held by air supply under constant shelling, then abandoned a few months after the siege lifted, which left the whole argument about its value unresolved.
+
+  - id: a2-mil-021
+    difficulty: 3
+    prompt: Which weapon was the A-10 attack aircraft designed around?
+    answer: A thirty-millimeter cannon
+    distractors: [A laser-guided bomb rack, A twin missile pod, A rotary grenade launcher]
+    fact: The gun is the length of a car and the airplane is built behind it. The pilot sits in a titanium bathtub and the aircraft can fly with half of one wing gone.
+
+  - id: a2-mil-022
+    difficulty: 3
+    prompt: Which 1939 pact between Berlin and Moscow cleared the way for the invasion of Poland?
+    answer: The Molotov-Ribbentrop Pact
+    distractors: [The Anti-Comintern Pact, The Pact of Steel, The Rapallo Treaty]
+    fact: Its secret protocol split eastern Europe into spheres. The Soviets denied the protocol existed until 1989.
+
+  - id: a2-mil-023
+    difficulty: 3
+    prompt: Which US Army rank sits between colonel and major general?
+    answer: Brigadier general
+    distractors: [Lieutenant colonel, Lieutenant general, Commodore]
+    fact: One star. The next two ranks up are major general and lieutenant general, which puts major above lieutenant at that level and below it at the junior one.
+
+  - id: a2-mil-024
+    difficulty: 3
+    prompt: Which is the highest American decoration for valor in combat?
+    answer: The Medal of Honor
+    distractors: [The Distinguished Service Cross, The Silver Star, The Legion of Merit]
+    fact: Around half of those awarded since 1941 went to men who did not survive the action. Officers salute the holder regardless of rank.
+
+  - id: a2-mil-025
+    difficulty: 3
+    prompt: Which American general captured Mexico City in 1847?
+    answer: Winfield Scott
+    distractors: [Zachary Taylor, Stephen Kearny, John Fremont]
+    fact: He landed at Veracruz and marched inland, cutting loose from his supply line. A young engineer named Robert E. Lee scouted the routes for him.
+
+  - id: a2-mil-026
+    difficulty: 4
+    prompt: Which 1704 victory made the Duke of Marlborough's reputation?
+    answer: Blenheim
+    distractors: [Ramillies, Oudenarde, Malplaquet]
+    fact: He marched an army two hundred and fifty miles across Europe without telling his own government. Parliament gave him a palace for it.
+
+  - id: a2-mil-027
+    difficulty: 4
+    prompt: Which 1879 battle destroyed a British column at the hands of a Zulu army?
+    answer: Isandlwana
+    distractors: [Rorke's Drift, Ulundi, Blood River]
+    fact: About thirteen hundred British and colonial troops were killed by men armed mostly with spears. A mission station held by a hundred men the same evening got all the attention afterward.
+
+  - id: a2-mil-028
+    difficulty: 4
+    prompt: Which 1866 war settled which power would lead Germany, in seven weeks?
+    answer: The Austro-Prussian War
+    distractors: [The Schleswig War, The Franco-Prussian War, The War of the Bavarian Succession]
+    fact: Prussia's railways and breech-loading rifles decided it. Its chancellor then insisted on lenient terms, because he wanted Austria neutral in the next war rather than vengeful.
+
+  - id: a2-mil-029
+    difficulty: 4
+    prompt: Which 1854 cavalry charge was launched into a valley of guns by a garbled order?
+    answer: The Charge of the Light Brigade
+    distractors: [The Charge of the Heavy Brigade, The storming of the Redan, The Thin Red Line]
+    fact: Of about six hundred and seventy riders, a third were killed or wounded in twenty minutes. A poem published six weeks later made it immortal.
+
+  - id: a2-mil-030
+    difficulty: 4
+    prompt: Which 1917 battle was the first to use massed tanks on a planned front?
+    answer: Cambrai
+    distractors: [Arras, Messines, Amiens]
+    fact: Nearly four hundred of them broke through where artillery had failed, and church bells were rung in England. A German counterattack took most of the ground back within ten days.
+
+  - id: a2-mil-031
+    difficulty: 4
+    prompt: Where did Rome lose three legions to Germanic tribes in the year 9?
+    answer: The Teutoburg Forest
+    distractors: [The Rhine delta, Mons Graupius, Carrhae]
+    fact: Augustus is said to have beaten his head against doors calling for the commander to give him back his legions. Rome never seriously tried to hold Germany again.
+
+  - id: a2-mil-032
+    difficulty: 4
+    prompt: Which fleet was destroyed at Tsushima in 1905 after sailing halfway around the world?
+    answer: The Russian Baltic Fleet
+    distractors: [The Russian Black Sea Fleet, The Chinese Beiyang Fleet, The Japanese Combined Fleet]
+    fact: It had steamed eighteen thousand miles with no friendly coaling stations and was annihilated in an afternoon. The defeat helped trigger a revolution at home.
+
+  - id: a2-mil-033
+    difficulty: 4
+    prompt: Which 1690 battle in Ireland is still commemorated by parades each July?
+    answer: The Boyne
+    distractors: [Aughrim, Kinsale, Clontarf]
+    fact: A Dutch-born Protestant king beat his Catholic father-in-law with an army of English, Dutch, Danish and Huguenot troops. The anniversary is marked by the old calendar.
+
+  - id: a2-mil-034
+    difficulty: 4
+    prompt: Which 1898 battle in Cuba made Theodore Roosevelt a national figure?
+    answer: San Juan Hill
+    distractors: [El Caney, Las Guasimas, Santiago Bay]
+    fact: He had resigned as assistant secretary of the navy to raise a volunteer regiment. He spent years lobbying for a medal for it and got one posthumously in 2001.
+
+  - id: a2-mil-035
+    difficulty: 4
+    prompt: What was the purpose of a Q-ship in the First World War?
+    answer: To look like a freighter and lure submarines into gun range
+    distractors: [To sweep mines ahead of a convoy, To lay dummy torpedo nets, To carry troops disguised as cargo]
+    fact: The guns were hidden behind collapsing deck houses and a crew would pretend to abandon ship. They sank about a dozen submarines and lost far more of their own.
