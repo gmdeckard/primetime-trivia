@@ -115,13 +115,44 @@ export function loadBank(contentDir: string): Bank {
   const categories: Category[] = [];
   const categoryById = new Map<string, Category>();
 
+  /**
+   * Every question names a category, and every category has to be declared
+   * here. That makes this one file able to invalidate the entire bank: lose
+   * it, or mistype it, and all 919 questions report "unknown category" while
+   * the one line that explains why scrolls off the top of the log.
+   *
+   * So it is read defensively and its failure is reported as what it is.
+   */
   const catPath = join(contentDir, 'categories.yaml');
   if (!existsSync(catPath)) {
-    issues.push({ file: 'categories.yaml', message: 'missing category registry', severity: 'error' });
+    issues.push({
+      file: 'categories.yaml',
+      message: `missing category registry — expected it at ${catPath}`,
+      severity: 'error',
+    });
   } else {
-    const raw = parse(readFileSync(catPath, 'utf8')) as unknown;
-    if (!Array.isArray(raw)) {
-      issues.push({ file: 'categories.yaml', message: 'expected a list of categories', severity: 'error' });
+    let raw: unknown;
+    try {
+      raw = parse(readFileSync(catPath, 'utf8')) as unknown;
+    } catch (err) {
+      // Previously this threw straight out of loadBank, so a stray tab in the
+      // registry took the server down with a YAML stack trace instead of a
+      // sentence naming the file.
+      issues.push({
+        file: 'categories.yaml',
+        message: `YAML parse error: ${(err as Error).message}`,
+        severity: 'error',
+      });
+      raw = undefined;
+    }
+    if (raw === null || raw === undefined) {
+      issues.push({ file: 'categories.yaml', message: 'the category registry is empty', severity: 'error' });
+    } else if (!Array.isArray(raw)) {
+      issues.push({
+        file: 'categories.yaml',
+        message: `expected a list of categories, found ${typeof raw}`,
+        severity: 'error',
+      });
     } else {
       for (const entry of raw as Array<Record<string, unknown>>) {
         const id = asString(entry.id);
@@ -144,6 +175,24 @@ export function loadBank(contentDir: string): Bank {
         categoryById.set(id, cat);
       }
     }
+  }
+
+  /**
+   * With no categories, every single question is about to be rejected for
+   * naming one. Reporting that per question buries the cause under hundreds
+   * of identical lines, which is exactly how this failed in front of a room:
+   * the log said "unknown category" nine hundred times and the sentence that
+   * mattered was the first one, long since scrolled past.
+   */
+  const registryFailed = categoryById.size === 0;
+  if (registryFailed) {
+    issues.push({
+      file: 'categories.yaml',
+      message:
+        'no categories loaded, so every question will be rejected — fix this file first, ' +
+        'the errors below are all downstream of it',
+      severity: 'error',
+    });
   }
 
   const questions: Question[] = [];
@@ -206,7 +255,8 @@ export function loadBank(contentDir: string): Bank {
         continue;
       }
       if (!categoryById.has(categoryId)) {
-        fail(`unknown category "${categoryId}" (add it to categories.yaml)`);
+        // Silent when the registry itself failed: one cause, one message.
+        if (!registryFailed) fail(`unknown category "${categoryId}" (add it to categories.yaml)`);
         continue;
       }
       if (!id) { fail('question is missing `id`'); continue; }

@@ -57,8 +57,19 @@ if (errors.length) {
   for (const issue of errors.slice(0, 20)) {
     console.error(`    ${issue.file}${issue.id ? ` [${issue.id}]` : ''}: ${issue.message}`);
   }
+  if (errors.length > 20) console.error(`    ... and ${errors.length - 20} more`);
   if (!bank.questions.length) {
-    console.error('\n  No questions loaded. Fix the errors above, then start again.\n');
+    // Repeat the first error at the bottom. The MC is looking at a tail of a
+    // log twenty minutes before a night starts, and the line that explains
+    // the failure is the one furthest from where their eye is.
+    const first = errors[0];
+    console.error('\n  No questions loaded, so there is no game to run.');
+    if (first) {
+      console.error(`  The first error, which is usually the only one that matters:`);
+      console.error(`    ${first.file}${first.id ? ` [${first.id}]` : ''}: ${first.message}`);
+    }
+    console.error(`  Content was read from ${CONTENT_DIR}`);
+    console.error('  Fix that, then start again.\n');
     process.exit(1);
   }
 }

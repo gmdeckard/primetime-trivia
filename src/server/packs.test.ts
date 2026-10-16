@@ -151,3 +151,82 @@ test('slugify produces a safe file stem', () => {
   assert.equal(slugify('  ../../etc/passwd  '), 'etc-passwd');
   assert.equal(slugify('!!!'), 'pack');
 });
+
+// ------------------------------------------------- the category registry
+
+/**
+ * One file can invalidate the whole bank, so it has to fail legibly.
+ *
+ * Every question names a category and every category is declared in
+ * categories.yaml. Lose that file and all 919 questions report "unknown
+ * category" — which is how this actually failed: a log tail showing nine
+ * hundred identical lines, with the one sentence that explained it scrolled
+ * off the top twenty minutes before a night.
+ */
+test('a missing category registry is one error, not one per question', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'primetime-registry-'));
+  mkdirSync(join(dir, 'questions', '55-75'), { recursive: true });
+  writeFileSync(
+    join(dir, 'questions', '55-75', 'geography.yaml'),
+    [
+      'category: geography',
+      'questions:',
+      ...Array.from({ length: 30 }, (_, i) => [
+        `  - id: geo-${String(i + 1).padStart(3, '0')}`,
+        '    difficulty: 2',
+        '    prompt: Which is the largest ocean?',
+        '    answer: The Pacific',
+        '    distractors: [The Atlantic, The Indian, The Arctic]',
+        '    fact: It covers about a third of the surface of the earth.',
+      ].join('\n')),
+    ].join('\n'),
+    'utf8',
+  );
+
+  const bank = loadBank(dir);
+  const errors = bank.issues.filter((i) => i.severity === 'error');
+  assert.equal(bank.questions.length, 0, 'nothing can load without the registry');
+  assert.ok(
+    errors.length <= 3,
+    `30 questions produced ${errors.length} errors; the cause should not be buried: ` +
+      errors.map((e) => e.message).join(' | '),
+  );
+  assert.ok(
+    errors.some((e) => /missing category registry/.test(e.message)),
+    'the first error should name the real problem',
+  );
+  assert.ok(
+    !errors.some((e) => /unknown category/.test(e.message)),
+    'per-question errors downstream of a failed registry are noise',
+  );
+  rmSync(dir, { recursive: true, force: true });
+});
+
+test('a registry that is not valid YAML is an error, not a crash', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'primetime-registry-bad-'));
+  mkdirSync(join(dir, 'questions'), { recursive: true });
+  // A tab for indentation, which YAML refuses. This used to throw straight
+  // out of loadBank and take the server down with a stack trace.
+  writeFileSync(join(dir, 'categories.yaml'), 'a: b\n  - c\n\tbad\n', 'utf8');
+
+  const bank = loadBank(dir);
+  const errors = bank.issues.filter((i) => i.severity === 'error');
+  assert.ok(
+    errors.some((e) => e.file === 'categories.yaml' && /parse error/i.test(e.message)),
+    'a malformed registry should be reported against its own file',
+  );
+  rmSync(dir, { recursive: true, force: true });
+});
+
+test('a registry that is a map rather than a list says so', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'primetime-registry-map-'));
+  mkdirSync(join(dir, 'questions'), { recursive: true });
+  writeFileSync(join(dir, 'categories.yaml'), 'geography:\n  name: Geography\n', 'utf8');
+
+  const bank = loadBank(dir);
+  assert.ok(
+    bank.issues.some((i) => /expected a list of categories, found object/.test(i.message)),
+    'the shape of what was found is the thing that fixes it',
+  );
+  rmSync(dir, { recursive: true, force: true });
+});
