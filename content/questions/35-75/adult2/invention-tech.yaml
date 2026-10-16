@@ -119,7 +119,7 @@ questions:
     prompt: What does a Fresnel lens use instead of a thick curved piece of glass?
     answer: Concentric rings that bend light the same way
     distractors: [A stack of thin flat sheets, A mirror behind the lamp, A rotating prism]
-    fact: It made lighthouse lenses light enough to float on mercury and turn with a clockwork weight, and the same idea is now moulded into plastic on the back window of a van.
+    fact: It made lighthouse lenses light enough to float on mercury and turn with a clockwork weight, and the same idea is now molded into plastic on the back window of a van.
 
   - id: a2-inv-017
     difficulty: 3

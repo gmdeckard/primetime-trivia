@@ -195,10 +195,10 @@ questions:
 
   - id: a2-trn-028
     difficulty: 4
-    prompt: Which 1952 British jet airliner was grounded after its fuselage failed in flight?
-    answer: The de Havilland Comet
-    distractors: [The Vickers Viscount, The Bristol Britannia, The Avro Tudor]
-    fact: Metal fatigue cracked outward from square window corners. Every airliner since has rounded windows, and the investigation built the field of fatigue testing.
+    prompt: Which flaw in wartime Liberty ships caused hulls to crack apart in cold water?
+    answer: Brittle fracture in the welded steel
+    distractors: [Corrosion of the rivet lines, Overloading of the forward holds, Vibration from the single screw]
+    fact: Welding let them build a ship in weeks instead of months, but the whole hull became one piece of metal, so a crack had nothing to stop it. About a dozen broke in two.
 
   - id: a2-trn-029
     difficulty: 4

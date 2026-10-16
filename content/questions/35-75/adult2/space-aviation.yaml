@@ -1,0 +1,250 @@
+category: space-aviation
+pack:
+  id: adult2
+  name: Adult set 2
+
+questions:
+  - id: a2-spa-001
+    difficulty: 2
+    prompt: Which planet is circled by the most prominent ring system?
+    answer: Saturn
+    distractors: [Uranus, Neptune, Venus]
+    fact: The rings are almost entirely water ice and in places only thirty feet thick. Galileo saw them through a poor telescope and thought they were two moons.
+
+  - id: a2-spa-002
+    difficulty: 2
+    prompt: Roughly how long does sunlight take to reach the earth?
+    answer: About eight minutes
+    distractors: [About eight seconds, About two hours, Just under a day]
+    fact: Which means you always see the sun where it was, not where it is. The nearest star after it is four years away at the same speed.
+
+  - id: a2-spa-003
+    difficulty: 2
+    prompt: What is the name of the galaxy the earth sits in?
+    answer: The Milky Way
+    distractors: [Andromeda, The Magellanic Cloud, Orion]
+    fact: It holds a few hundred billion stars and we are about halfway out from the center, taking around 230 million years to go once around.
+
+  - id: a2-spa-004
+    difficulty: 2
+    prompt: What does an airliner's black box record?
+    answer: Flight data and cockpit sound
+    distractors: [Engine temperatures only, Radio traffic with controllers only, The autopilot's inputs only]
+    fact: There are usually two of them, they are bright orange, and they sit in the tail because that is the part most likely to survive.
+
+  - id: a2-spa-005
+    difficulty: 2
+    prompt: What are the four forces acting on an aircraft in flight?
+    answer: Lift, weight, thrust and drag
+    distractors: ["Lift, pitch, roll and yaw", "Thrust, torque, camber and drag", "Lift, weight, pressure and friction"]
+    fact: In steady level flight they cancel out in both directions. Everything a pilot does with the controls is a way of unbalancing them on purpose.
+
+  - id: a2-spa-006
+    difficulty: 2
+    prompt: Which country put the first artificial satellite into orbit?
+    answer: The Soviet Union
+    distractors: [The United States, Britain, France]
+    fact: It transmitted a beep for three weeks and anyone with a shortwave set could hear it. The American reaction founded a space agency and rewrote school science.
+
+  - id: a2-spa-007
+    difficulty: 2
+    prompt: Which part of a wing is extended to give more lift at landing speed?
+    answer: The flaps
+    distractors: [The ailerons, The spoilers, The rudder]
+    fact: They add camber and area, which lets the aircraft fly slower without stalling. Spoilers do the opposite job on purpose, dumping lift after touchdown.
+
+  - id: a2-spa-008
+    difficulty: 3
+    prompt: Which mission first drove a wheeled vehicle on the moon?
+    answer: Apollo 15
+    distractors: [Apollo 12, Apollo 14, Apollo 16]
+    fact: The rover folded against the side of the lander and unfolded with pulleys. It took the crew nearly twenty miles from the lander over three days.
+
+  - id: a2-spa-009
+    difficulty: 3
+    prompt: Who was the second man to set foot on the moon?
+    answer: Buzz Aldrin
+    distractors: [Pete Conrad, Alan Bean, Charles Duke]
+    fact: He took communion privately in the lunar module before stepping out. The order was settled by which side of the cabin the hatch opened toward.
+
+  - id: a2-spa-010
+    difficulty: 3
+    prompt: Who made the first spacewalk, in March 1965?
+    answer: Alexei Leonov
+    distractors: [Ed White, Gherman Titov, Pavel Popovich]
+    fact: His suit stiffened and ballooned so badly he could not get back through the hatch, and he bled off air to deflate it, telling nobody until years later.
+
+  - id: a2-spa-011
+    difficulty: 3
+    prompt: Which German-born engineer led the team that built the Saturn V?
+    answer: Wernher von Braun
+    distractors: [Hermann Oberth, Kurt Debus, Arthur Rudolph]
+    fact: He had built rockets for the Nazis using concentration camp labor and surrendered to the Americans deliberately. The arrangement that brought him over was called Operation Paperclip.
+
+  - id: a2-spa-012
+    difficulty: 3
+    prompt: From which Florida site did the Apollo launches lift off?
+    answer: Cape Canaveral
+    distractors: [Cape Hatteras, Vandenberg, Wallops Island]
+    fact: It was picked because rockets could fail over open water and because launching eastward near the equator borrows a few hundred miles an hour from the earth's spin.
+
+  - id: a2-spa-013
+    difficulty: 3
+    prompt: Which Soviet probe first transmitted from the surface of Venus, in 1970?
+    answer: Venera 7
+    distractors: [Mariner 2, Zond 3, Luna 9]
+    fact: It lasted twenty-three minutes before the heat and pressure finished it. The surface is hot enough to melt lead and the air pressure is like being half a mile underwater.
+
+  - id: a2-spa-014
+    difficulty: 3
+    prompt: Which two planets have no moons at all?
+    answer: Mercury and Venus
+    distractors: [Venus and Mars, Mercury and Mars, Neptune and Uranus]
+    fact: Mars has two, both small and probably captured asteroids. The giants have dozens each and the count keeps rising as telescopes improve.
+
+  - id: a2-spa-015
+    difficulty: 3
+    prompt: Which engineer ran the early Soviet space program while his name was kept secret?
+    answer: Sergei Korolev
+    distractors: [Valentin Glushko, Vladimir Chelomei, Mstislav Keldysh]
+    fact: He had spent six years in the camps, some of it in a gold mine, before being put to work on rockets. He was named publicly only in his 1966 obituary.
+
+  - id: a2-spa-016
+    difficulty: 3
+    prompt: Which American reconnaissance aircraft was shot down over the Soviet Union in 1960?
+    answer: The U-2
+    distractors: [The RB-47, The F-105, The A-12]
+    fact: Eisenhower's cover story was a weather flight. The Soviets then produced the pilot alive and the wreckage, which wrecked a Paris summit a fortnight later.
+
+  - id: a2-spa-017
+    difficulty: 3
+    prompt: Which Russian-born engineer built the first practical American helicopter in 1939?
+    answer: Igor Sikorsky
+    distractors: [Arthur Young, Frank Piasecki, Stanley Hiller]
+    fact: He had built large multi-engined airplanes in Russia before the revolution, then flying boats in America, and came back to the helicopter after thirty years.
+
+  - id: a2-spa-018
+    difficulty: 3
+    prompt: Which bomber has served the Strategic Air Command and its successors since 1955?
+    answer: The B-52
+    distractors: [The B-47, The B-58, The B-36]
+    fact: The design was sketched over a weekend in a hotel room in Dayton. Crews now fly aircraft older than their grandfathers.
+
+  - id: a2-spa-019
+    difficulty: 3
+    prompt: Which B-29 dropped the first atomic bomb used in war?
+    answer: The Enola Gay
+    distractors: [Bockscar, The Great Artiste, Straight Flush]
+    fact: The pilot named it for his mother. It is now on display outside Washington, restored over two decades.
+
+  - id: a2-spa-020
+    difficulty: 3
+    prompt: Which airline, founded in 1919, is the oldest still flying under its original name?
+    answer: KLM
+    distractors: [Qantas, Avianca, Aeroflot]
+    fact: Its first flight carried two English journalists and a bundle of newspapers from London to Amsterdam. Qantas is a year younger.
+
+  - id: a2-spa-021
+    difficulty: 3
+    prompt: What does the Karman line mark?
+    answer: The boundary of space, about sixty-two miles up
+    distractors: [The highest a jet engine can breathe, The lowest stable orbit, The top of the weather]
+    fact: It is where you would have to fly faster than orbital speed to get enough lift to stay up. The American military used fifty miles instead, which is why some pilots count as astronauts and some do not.
+
+  - id: a2-spa-022
+    difficulty: 3
+    prompt: Which 1975 mission docked an American and a Soviet spacecraft together?
+    answer: Apollo-Soyuz
+    distractors: [Gemini-Vostok, Skylab 5, Salyut 4]
+    fact: The two craft used different cabin pressures and atmospheres, so a special adapter module had to be built as an airlock between them.
+
+  - id: a2-spa-023
+    difficulty: 3
+    prompt: Which animal became the first to orbit the earth, in 1957?
+    answer: A dog
+    distractors: [A monkey, A mouse, A chimpanzee]
+    fact: Laika was a stray picked up on the Moscow streets. There was never a plan to bring her back, and the Soviets admitted only decades later how quickly she died.
+
+  - id: a2-spa-024
+    difficulty: 3
+    prompt: Which German weapon of 1944 was the first ballistic missile used in war?
+    answer: The V-2
+    distractors: [The V-1, The Fritz X, The Rheintochter]
+    fact: It arrived faster than its own sound, so there was no warning at all. More people died building it in tunnels than were killed by it.
+
+  - id: a2-spa-025
+    difficulty: 3
+    prompt: Which 1935 Douglas airliner made carrying passengers profitable without mail subsidy?
+    answer: The DC-3
+    distractors: [The DC-2, The Lockheed Electra, The Boeing 247]
+    fact: Over sixteen thousand were built counting the military version, and some are still flying freight. Pilots say its replacement was always another one of the same.
+
+  - id: a2-spa-026
+    difficulty: 4
+    prompt: Which English aviator flew solo from Britain to Australia in 1930?
+    answer: Amy Johnson
+    distractors: [Jean Batten, Beryl Markham, Mary Bailey]
+    fact: She had under a hundred hours in her logbook and a secondhand biplane. She was killed in 1941 ferrying aircraft, shot at by her own side's guns.
+
+  - id: a2-spa-027
+    difficulty: 4
+    prompt: Whose surnames give the MiG fighter its name?
+    answer: Mikoyan and Gurevich
+    distractors: [Myasishchev and Gromov, Mil and Guryev, Molotov and Gagarin]
+    fact: Mikoyan's brother was one of Stalin's closest ministers, which did the design bureau no harm. Gurevich did most of the engineering and almost none of the talking.
+
+  - id: a2-spa-028
+    difficulty: 4
+    prompt: Which of the original seven American astronauts was grounded for over a decade by a heart murmur?
+    answer: Deke Slayton
+    distractors: [Gus Grissom, Wally Schirra, Scott Carpenter]
+    fact: He ran the crew assignments for the whole lunar program instead, deciding who flew and who did not, and finally got his own flight in 1975.
+
+  - id: a2-spa-029
+    difficulty: 4
+    prompt: Which rocket-powered research aircraft reached nearly seven times the speed of sound?
+    answer: The X-15
+    distractors: [The X-2, The D-558, The XB-70]
+    fact: It was dropped from under a bomber's wing and landed on a dry lake bed. Eight of its pilots flew high enough to be awarded astronaut wings.
+
+  - id: a2-spa-030
+    difficulty: 4
+    prompt: Which cosmonaut died in 1967 when his capsule's parachutes failed on return?
+    answer: Vladimir Komarov
+    distractors: [Pavel Belyayev, Georgy Dobrovolsky, Viktor Patsayev]
+    fact: Engineers had found over two hundred faults before launch and said so. He flew anyway, reportedly to spare his backup, who was Gagarin.
+
+  - id: a2-spa-031
+    difficulty: 4
+    prompt: Which probe orbited Saturn from 2004 until it was flown into the planet in 2017?
+    answer: Cassini
+    distractors: [Galileo, Juno, New Horizons]
+    fact: It dropped a lander onto the moon Titan and found lakes of liquid methane. It was deliberately destroyed to make sure it could never contaminate a moon that might hold life.
+
+  - id: a2-spa-032
+    difficulty: 4
+    prompt: Which company built the enormous wooden flying boat that flew once, in 1947?
+    answer: Hughes Aircraft
+    distractors: [Glenn L. Martin, Consolidated, Vought]
+    fact: It was birch rather than spruce, despite the nickname, and it flew about a mile at seventy feet. Its wingspan was not exceeded for seventy years.
+
+  - id: a2-spa-033
+    difficulty: 4
+    prompt: Which 1962 satellite relayed the first live television pictures between America and Europe?
+    answer: Telstar
+    distractors: [Echo 1, Syncom 2, Early Bird]
+    fact: Its orbit was low, so each broadcast window lasted about twenty minutes. An instrumental record named after it went to number one the same year.
+
+  - id: a2-spa-034
+    difficulty: 4
+    prompt: Which 1967 accident killed three astronauts during a ground test?
+    answer: Apollo 1
+    distractors: [Gemini 6, Apollo 4, Mercury-Redstone 1]
+    fact: Pure oxygen at high pressure, a hatch that opened inward and miles of worn wiring. The redesign that followed is one reason the later flights worked.
+
+  - id: a2-spa-035
+    difficulty: 4
+    prompt: At roughly what altitude does a satellite hold a fixed spot over the equator?
+    answer: About 22,300 miles
+    distractors: ["About 1,200 miles", "About 5,600 miles", "About 48,000 miles"]
+    fact: At that height one orbit takes exactly a day, so the satellite appears to hang still. Arthur C. Clarke described the idea in a 1945 magazine article.

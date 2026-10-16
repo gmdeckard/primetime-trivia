@@ -129,7 +129,7 @@ questions:
 
   - id: a2-exp-018
     difficulty: 3
-    prompt: Which American reporter travelled around the world in 72 days in 1889?
+    prompt: Which American reporter traveled around the world in 72 days in 1889?
     answer: Nellie Bly
     distractors: [Ida Tarbell, Elizabeth Bisland, Annie Londonderry]
     fact: A rival magazine sent its own writer the opposite way round on the same day. Bly won by four days and had stopped off to meet Jules Verne.
@@ -171,7 +171,7 @@ questions:
 
   - id: a2-exp-024
     difficulty: 4
-    prompt: Which fourteenth-century Moroccan travelled further than the famous Venetian and is far less known for it?
+    prompt: Which fourteenth-century Moroccan traveled further than the famous Venetian and is far less known for it?
     answer: Ibn Battuta
     distractors: [Al-Idrisi, Ibn Khaldun, Al-Masudi]
     fact: He covered perhaps seventy-five thousand miles over thirty years, from West Africa to China, and dictated the account on his return.
@@ -185,7 +185,7 @@ questions:
 
   - id: a2-exp-026
     difficulty: 4
-    prompt: Which Englishwoman travelled West Africa alone in the 1890s, in full Victorian dress, collecting fish?
+    prompt: Which Englishwoman traveled West Africa alone in the 1890s, in full Victorian dress, collecting fish?
     answer: Mary Kingsley
     distractors: [Isabella Bird, Marianne North, Alexandrine Tinné]
     fact: Three species she brought back were new to science. She credited her skirt with saving her when she fell into a game pit lined with spikes.
@@ -216,7 +216,7 @@ questions:
     prompt: Which Englishman crossed the Empty Quarter of Arabia twice in the 1940s?
     answer: Wilfred Thesiger
     distractors: [Harry St John Philby, Charles Doughty, Bertram Thomas]
-    fact: He travelled with Bedu companions and on their terms, and spent the rest of his life regretting that the oil money arrived behind him.
+    fact: He traveled with Bedu companions and on their terms, and spent the rest of his life regretting that the oil money arrived behind him.
 
   - id: a2-exp-031
     difficulty: 4

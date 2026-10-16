@@ -146,7 +146,7 @@ questions:
     prompt: Which trade route carried goods between China and the Mediterranean for centuries?
     answer: The Silk Road
     distractors: [The Amber Road, The Incense Route, The Royal Road]
-    fact: The name was coined by a German geographer in 1877, long after the route mattered. Almost nobody travelled the whole length of it; goods changed hands many times.
+    fact: The name was coined by a German geographer in 1877, long after the route mattered. Almost nobody traveled the whole length of it; goods changed hands many times.
 
   - id: a2-wld-021
     difficulty: 3
