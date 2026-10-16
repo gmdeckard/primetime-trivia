@@ -16,10 +16,24 @@ LOG_FILE="server.log"
 
 have_service() { systemctl cat primetime-trivia >/dev/null 2>&1; }
 
+# The server already works out which address the room can reach, and it knows
+# things this script does not: which adapters are virtual, which is WSL's NAT
+# gateway, whether PRIMETIME_HOST_IP was set. This used to recompute it with
+# `ip ... | head -1`, which takes whatever the kernel lists first — under WSL
+# that is the 10.255.255.254 gateway on loopback, so the script confidently
+# printed the one address in the room no phone can reach while the server was
+# printing the right one into the log. One source of truth now: the server's.
 join_banner() {
-  local port="$1"
-  local ip suffix
-  ip="$(ip -4 -o addr show scope global 2>/dev/null | awk '{print $4}' | cut -d/ -f1 | head -1)"
+  local port="$1" log="$2" ip suffix
+  if [ -n "$log" ] && [ -f "$log" ] && grep -q "Players join at" "$log" 2>/dev/null; then
+    echo "────────────────────────────────────────────"
+    sed -n '/Players join at/,/Question editor/p' "$log"
+    echo "────────────────────────────────────────────"
+    return
+  fi
+  # Only reached before the server has written its banner, e.g. the service
+  # path. Skip loopback so this cannot repeat the bug it replaced.
+  ip="$(ip -4 -o addr show scope global 2>/dev/null | grep -v ' lo ' | awk '{print $4}' | cut -d/ -f1 | head -1)"
   [ -n "$ip" ] || ip="localhost"
   suffix=""; [ "$port" = "80" ] || suffix=":${port}"
   echo "────────────────────────────────────────────"
@@ -42,7 +56,7 @@ if have_service; then
 
   if systemctl is-active --quiet primetime-trivia; then
     PORT_IN_USE="$(grep -E '^PORT=' /etc/default/primetime-trivia 2>/dev/null | cut -d= -f2 || echo 80)"
-    join_banner "${PORT_IN_USE:-80}"
+    join_banner "${PORT_IN_USE:-80}" ""
     # Capture first and branch on emptiness: `cut` exits 0 on empty input, so
     # `|| echo ...` never fired and a box still on PRIMETIME_PIN printed nothing.
     PW_LINE="$(grep -E '^(PRIMETIME_PASSWORD|PRIMETIME_PIN)=' /etc/default/primetime-trivia 2>/dev/null | head -1)"
@@ -109,7 +123,7 @@ sleep 2
 
 if kill -0 "$(cat "$PID_FILE")" 2>/dev/null; then
   grep -E "Host password|Room code|questions in" "$LOG_FILE" | sed 's/^/  /' || true
-  join_banner "$PORT"
+  join_banner "$PORT" "$LOG_FILE"
   echo "  Logs              tail -f $(pwd)/${LOG_FILE}"
   echo "  Stop              ./stop-server.sh"
   echo
