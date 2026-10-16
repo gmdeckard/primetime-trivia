@@ -248,3 +248,213 @@ questions:
     answer: Reykjavik
     distractors: [Helsinki, Oslo, Nuuk]
     fact: It sits just under the Arctic Circle and is heated almost entirely by geothermal water piped from the ground, which is why the city has no smoke.
+
+  - id: a2-geo-036
+    difficulty: 2
+    prompt: Which gulf lies between Iran and the Arabian peninsula?
+    answer: The Persian Gulf
+    distractors: [The Gulf of Oman, The Gulf of Aden, The Red Sea]
+    fact: It is shallow, rarely more than two hundred feet, and very warm and salty. A third of the world's seaborne oil leaves through the strait at its mouth.
+
+  - id: a2-geo-037
+    difficulty: 2
+    prompt: What is the capital of Russia?
+    answer: Moscow
+    distractors: [St Petersburg, Novosibirsk, Kazan]
+    fact: It has been the capital twice, losing the job to a new city on the Baltic for two centuries and getting it back in 1918.
+
+  - id: a2-geo-038
+    difficulty: 2
+    prompt: Which country lies directly south of the United States?
+    answer: Mexico
+    distractors: [Guatemala, Cuba, Belize]
+    fact: Its formal name is the United Mexican States, and it has thirty-two of them. The border between the two countries runs nineteen hundred miles.
+
+  - id: a2-geo-039
+    difficulty: 2
+    prompt: Which continent lies almost entirely in the southern hemisphere and is also a country?
+    answer: Australia
+    distractors: [Antarctica, Africa, South America]
+    fact: It is the flattest and driest inhabited continent, and its highest point is lower than the tallest building people have since built.
+
+  - id: a2-geo-040
+    difficulty: 2
+    prompt: Which mountain range separates India from Tibet?
+    answer: The Himalayas
+    distractors: [The Karakoram alone, The Hindu Kush, The Tian Shan]
+    fact: The name means abode of snow. All fourteen of the world's peaks above eight thousand meters are in it or the ranges immediately beside it.
+
+  - id: a2-geo-041
+    difficulty: 2
+    prompt: Which is the smallest and shallowest ocean?
+    answer: The Arctic
+    distractors: [The Southern, The Indian, The Atlantic]
+    fact: It is about one and a half times the size of the United States and ringed by shallow continental shelf, which is why so much of it freezes.
+
+  - id: a2-geo-042
+    difficulty: 3
+    prompt: Which African country is divided by the Great Rift Valley and sits on the equator?
+    answer: Kenya
+    distractors: [Sudan, Zambia, Angola]
+    fact: The valley is a continent tearing apart at about the speed a fingernail grows. In a few million years the eastern strip will be an island.
+
+  - id: a2-geo-043
+    difficulty: 3
+    prompt: Which European country has the most land below sea level?
+    answer: The Netherlands
+    distractors: [Belgium, Denmark, Poland]
+    fact: About a quarter of it, protected by dikes and pumped dry for centuries, first by windmills and now by diesel. The lowest point is twenty-two feet down.
+
+  - id: a2-geo-044
+    difficulty: 3
+    prompt: Which strait separates Denmark from Sweden?
+    answer: The Oresund
+    distractors: [The Kattegat, The Skagerrak, The Great Belt]
+    fact: Under two and a half miles at its narrowest. A bridge and tunnel have carried road and rail across it since 2000.
+
+  - id: a2-geo-045
+    difficulty: 3
+    prompt: Which country has three capital cities?
+    answer: South Africa
+    distractors: [Bolivia, Malaysia, Sri Lanka]
+    fact: The executive, the legislature and the courts sit in three different cities, a compromise struck in 1910 so no province felt cheated.
+
+  - id: a2-geo-046
+    difficulty: 3
+    prompt: Which river flows through Cairo and Khartoum?
+    answer: The Nile
+    distractors: [The Niger, The Limpopo, The Orange]
+    fact: Its two branches meet in the Sudanese capital, one coming from the Ethiopian highlands and carrying most of the flood water.
+
+  - id: a2-geo-047
+    difficulty: 3
+    prompt: Which is the largest country in Africa by area?
+    answer: Algeria
+    distractors: [Libya, Chad, Egypt]
+    fact: It took the title in 2011 when its southern neighbor split in two. Nine tenths of it is desert and almost everyone lives on the coastal strip.
+
+  - id: a2-geo-048
+    difficulty: 3
+    prompt: Which line of latitude marks the northern edge of the tropics?
+    answer: The Tropic of Cancer
+    distractors: [The Tropic of Capricorn, The Arctic Circle, The Prime Meridian]
+    fact: It marks the furthest north the sun is ever directly overhead. It moves slightly each year as the earth's tilt wobbles.
+
+  - id: a2-geo-049
+    difficulty: 3
+    prompt: Which country surrounds the small kingdom of Bhutan on three sides?
+    answer: India
+    distractors: [China, Nepal, Bangladesh]
+    fact: Its remaining border is with Tibet and has been closed for decades. The country measures its progress by a published index of national happiness.
+
+  - id: a2-geo-050
+    difficulty: 3
+    prompt: Which peninsula do Spain and Portugal share?
+    answer: The Iberian
+    distractors: [The Balkan, The Apennine, The Anatolian]
+    fact: It is cut off from the rest of Europe by a mountain wall, which is why Napoleon called the continent's politics a different matter beyond it.
+
+  - id: a2-geo-051
+    difficulty: 3
+    prompt: Which American state is closest to Russia?
+    answer: Alaska
+    distractors: [Washington, Hawaii, Maine]
+    fact: Two islands in the strait between them are American and Russian and lie two and a half miles apart, with the date line running between.
+
+  - id: a2-geo-052
+    difficulty: 3
+    prompt: Which sea is enclosed by Russia, Ukraine, Turkey, Bulgaria, Romania and Georgia?
+    answer: The Black Sea
+    distractors: [The Caspian, The Baltic, The Aegean]
+    fact: Below about five hundred feet it has no oxygen at all, so nothing lives down there and wooden shipwrecks survive almost intact.
+
+  - id: a2-geo-053
+    difficulty: 3
+    prompt: Which European capital stands on the Vistula?
+    answer: Warsaw
+    distractors: [Budapest, Riga, Vilnius]
+    fact: Something like eighty-five percent of it was deliberately destroyed in 1944. The old town was rebuilt from paintings and photographs and is now a heritage site for that reason.
+
+  - id: a2-geo-054
+    difficulty: 3
+    prompt: Which country owns the Galapagos Islands?
+    answer: Ecuador
+    distractors: [Peru, Chile, Colombia]
+    fact: They sit about six hundred miles offshore. The currents that meet there bring cold water to the equator, which is why penguins live alongside tropical fish.
+
+  - id: a2-geo-055
+    difficulty: 3
+    prompt: Which is the longest mountain range in Europe?
+    answer: The Scandinavian Mountains
+    distractors: [The Alps, The Carpathians, The Caucasus]
+    fact: About a thousand miles down the spine of Norway and Sweden. They are the worn-down roots of a range that was once as high as any on earth.
+
+  - id: a2-geo-056
+    difficulty: 3
+    prompt: Which desert covers most of Botswana and parts of Namibia and South Africa?
+    answer: The Kalahari
+    distractors: [The Namib, The Karoo, The Danakil]
+    fact: It is a sand basin rather than a true desert, since enough rain falls for grass and trees. A river empties into its northern edge and never reaches the sea.
+
+  - id: a2-geo-057
+    difficulty: 4
+    prompt: Which country has the most World Heritage sites?
+    answer: Italy
+    distractors: [China, Spain, France]
+    fact: Around sixty of them, with China a site or two behind. The list has been running since 1978 and now covers over a thousand places.
+
+  - id: a2-geo-058
+    difficulty: 4
+    prompt: What is an exclave?
+    answer: Part of a country cut off by other countries' territory
+    distractors: [A territory with no permanent residents, A region governed jointly by two states, A disputed border zone]
+    fact: Kaliningrad is the best-known example in Europe. The Indian and Bangladeshi border once held over a hundred of them, including one inside another inside another.
+
+  - id: a2-geo-059
+    difficulty: 4
+    prompt: Which country is divided into cantons?
+    answer: Switzerland
+    distractors: [Austria, Belgium, Luxembourg]
+    fact: There are twenty-six, some of them smaller than a city, and each sets its own taxes and schooling. A few still vote by show of hands in an open square.
+
+  - id: a2-geo-060
+    difficulty: 4
+    prompt: Which African lake is the second deepest in the world?
+    answer: Lake Tanganyika
+    distractors: [Lake Malawi, Lake Turkana, Lake Chad]
+    fact: Nearly a mile deep and shared by four countries. Like the deep sea, its lower layers hold no oxygen, so everything alive is in the top few hundred feet.
+
+  - id: a2-geo-061
+    difficulty: 4
+    prompt: Which island was known to Europeans as Formosa?
+    answer: Taiwan
+    distractors: [Sri Lanka, Hainan, Okinawa]
+    fact: The name is Portuguese for beautiful. The Dutch and then the Spanish held parts of it in the seventeenth century before a Ming loyalist drove them out.
+
+  - id: a2-geo-062
+    difficulty: 4
+    prompt: Which capital city sits highest in Europe?
+    answer: Andorra la Vella
+    distractors: [Bern, Vaduz, Ljubljana]
+    fact: About thirty-four hundred feet in a valley in the Pyrenees. The country has two heads of state, one of them a French president and the other a Spanish bishop.
+
+  - id: a2-geo-063
+    difficulty: 4
+    prompt: Which sea's level has dropped so far that ships lie stranded in sand?
+    answer: The Aral
+    distractors: [The Dead Sea, The Caspian, Lake Chad]
+    fact: Soviet planners diverted both feeder rivers to cotton in the 1960s knowing this would happen, and judged the cotton worth more.
+
+  - id: a2-geo-064
+    difficulty: 4
+    prompt: Which country is the only one to border both Haiti and no other state?
+    answer: The Dominican Republic
+    distractors: [Cuba, Jamaica, The Bahamas]
+    fact: Two countries on one island and nothing else touching either. The border was settled by treaty in 1929 and adjusted again in 1936.
+
+  - id: a2-geo-065
+    difficulty: 4
+    prompt: What does a fjord's shape tell you about how it formed?
+    answer: It was carved by a glacier and then flooded by the sea
+    distractors: [It was cut by a river and widened by tides, It is a sunken fault line, It is a drowned volcanic crater]
+    fact: The floor is often deeper inside than at the mouth, where the ice dropped its load of rubble. That sill is why the deep water inside can go stagnant.

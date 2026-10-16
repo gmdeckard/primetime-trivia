@@ -93,7 +93,7 @@ questions:
     prompt: Who proclaimed the People's Republic of China in 1949?
     answer: Mao Zedong
     distractors: [Zhou Enlai, Chiang Kai-shek, Deng Xiaoping]
-    fact: His rival's government withdrew to Taiwan with the gold reserves and the art collection, and both sides claimed to be the real China for decades.
+    fact: His rival's government withdrew across the strait with the gold reserves and the art collection, and both sides claimed to be the real China for decades.
 
   - id: a2-h20-014
     difficulty: 3
