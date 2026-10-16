@@ -43,13 +43,6 @@ questions:
     distractors: [Eswatini, Botswana, Malawi]
     fact: It is one of only three fully enclaved countries in the world, with San Marino and Vatican City.
 
-  - id: geo-007
-    difficulty: 2
-    prompt: Which US state has the longest coastline?
-    answer: Alaska
-    distractors: [Florida, California, Maine]
-    fact: Alaska's coast is longer than that of all the other states put together.
-
   - id: geo-008
     difficulty: 3
     prompt: The Bosphorus strait separates which two continents?
@@ -169,13 +162,6 @@ questions:
     distractors: [Sardinia, Cyprus, Crete]
     fact: Sicily edges out Sardinia; Cyprus is third.
 
-  - id: geo-025
-    difficulty: 3
-    prompt: Which US state borders only one other state?
-    answer: Maine
-    distractors: [Florida, Alaska, Washington]
-    fact: Maine touches only New Hampshire. Alaska borders no state at all.
-
   - id: geo-026
     difficulty: 2
     prompt: Which mountain range separates France from Spain?
@@ -204,13 +190,6 @@ questions:
     distractors: [Oslo, Copenhagen, Helsinki]
     fact: It spreads over fourteen islands where Lake Mälaren meets the Baltic.
 
-  - id: geo-030
-    difficulty: 3
-    prompt: Which U.S. state is the only long-standing commercial coffee producer?
-    answer: Hawaii
-    distractors: [Florida, California, Louisiana]
-    fact: The Kona district of the Big Island is the best known growing area. California now has small plantings, but Hawaii remains the only long-standing commercial producer.
-
   - id: geo-031
     difficulty: 2
     prompt: Which country has the most natural lakes?
@@ -232,13 +211,6 @@ questions:
     distractors: [Russia, Indonesia, Norway]
     fact: Its coast runs to roughly 125,000 miles once the Arctic islands are counted, several times that of any other country.
 
-  - id: geo-034
-    difficulty: 3
-    prompt: Which African country was occupied by Italy from 1936 to 1941?
-    answer: Ethiopia
-    distractors: [Liberia, Morocco, Egypt]
-    fact: Italy occupied it from 1936 to 1941 but never established colonial rule. Liberia was founded by freed American slaves.
-
   - id: geo-035
     difficulty: 3
     prompt: Which two countries share the longest international land border?
@@ -254,11 +226,11 @@ questions:
     fact: The Bosphorus runs through it, so a commuter can cross from Europe to Asia on the way to work.
 
   - id: geo-037
-    difficulty: 3
-    prompt: Which desert is the largest hot desert in the world?
-    answer: The Sahara
-    distractors: [The Arabian, The Kalahari, The Gobi]
-    fact: Antarctica is the largest desert of any kind, which is why the question has to say hot.
+    difficulty: 4
+    prompt: Which is the largest desert in the world, counting the cold ones?
+    answer: Antarctica
+    distractors: [The Sahara, The Arabian Desert, The Gobi]
+    fact: A desert is defined by how little falls on it rather than by heat, and Antarctica gets less precipitation than the Sahara does.
 
   - id: geo-038
     difficulty: 4
@@ -280,3 +252,10 @@ questions:
     answer: South Africa
     distractors: [Egypt, Morocco, Mozambique]
     fact: The two oceans are conventionally divided at Cape Agulhas, not the better-known Cape of Good Hope.
+
+  - id: geo-041
+    difficulty: 3
+    prompt: Which strait separates mainland South America from Tierra del Fuego?
+    answer: The Strait of Magellan
+    distractors: [The Drake Passage, The Beagle Channel, Cape Horn]
+    fact: The Drake Passage is the open water further south, and the Beagle Channel runs south of the strait again. Sailors feared all three.

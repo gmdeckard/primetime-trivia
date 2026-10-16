@@ -92,13 +92,6 @@ questions:
     distractors: [The Paris Charter, The Rome Statute, The Geneva Conventions]
     fact: The human rights provisions gave dissidents in the Eastern bloc something concrete to appeal to, which was not the Soviet intention.
 
-  - id: wor-014
-    difficulty: 2
-    prompt: Who was the first Catholic president of the United States?
-    answer: John F. Kennedy
-    distractors: [Al Smith, Lyndon Johnson, Joe Biden]
-    fact: Al Smith was the first Catholic nominee of a major party, in 1928, and lost heavily.
-
   - id: wor-015
     difficulty: 3
     prompt: Which country left the Commonwealth in 1961 over apartheid and rejoined in 1994?
@@ -106,26 +99,12 @@ questions:
     distractors: [Rhodesia, Pakistan, Ireland]
     fact: Ireland left in 1949 and has never rejoined; Pakistan left in 1972 and returned in 1989.
 
-  - id: wor-016
-    difficulty: 2
-    prompt: Which US president resigned in the wake of the Watergate scandal?
-    answer: Richard Nixon
-    distractors: [Gerald Ford, Lyndon Johnson, Jimmy Carter]
-    fact: Ford succeeded him and pardoned him a month later, a decision that probably cost Ford the 1976 election.
-
   - id: wor-017
     difficulty: 4
     prompt: Which international body was the predecessor of the United Nations?
     answer: The League of Nations
     distractors: [The Concert of Europe, The Hague Tribunal, The International Court of Justice]
     fact: The United States never joined, despite Woodrow Wilson having championed its creation.
-
-  - id: wor-018
-    difficulty: 3
-    prompt: Which Indian leader led the Salt March of 1930?
-    answer: Mahatma Gandhi
-    distractors: [Jawaharlal Nehru, Subhas Chandra Bose, Sardar Patel]
-    fact: He walked some 240 miles to the sea to make salt in defiance of the British monopoly on it.
 
   - id: wor-019
     difficulty: 2
@@ -210,3 +189,87 @@ questions:
     answer: The Arab League
     distractors: [The Gulf Cooperation Council, The Organisation of Islamic Cooperation, The United Arab Republic]
     fact: The United Arab Republic was the short-lived 1958-61 union of Egypt and Syria, a different thing entirely.
+
+  - id: a35-052
+    difficulty: 2
+    prompt: Which country did Hong Kong return to in 1997?
+    answer: China
+    distractors: [Taiwan, Japan, Singapore]
+    fact: The handover ended 156 years of British rule, and the lease that triggered it had been for ninety-nine years.
+
+  - id: a35-053
+    difficulty: 3
+    prompt: Which country did the Soviet Union dissolve into fifteen of in 1991?
+    answer: Independent republics
+    distractors: [A single Russian federation, A confederation under Moscow, Two successor states]
+    fact: The flag came down over the Kremlin on Christmas Day 1991, and the largest successor state kept the UN Security Council seat.
+
+  - id: a35-055
+    difficulty: 3
+    prompt: Which 1986 nuclear accident happened in what is now Ukraine?
+    answer: Chernobyl
+    distractors: [Three Mile Island, Fukushima, Windscale]
+    fact: Swedish monitoring stations detected the fallout and raised the alarm before the Soviet government acknowledged anything.
+
+  - id: a35-056
+    difficulty: 3
+    prompt: Which treaty created the European Union in 1993?
+    answer: Maastricht
+    distractors: [Rome, Lisbon, Nice]
+    fact: Rome founded the earlier common market in 1957, and Lisbon reorganized the union in 2009, so all three are real and in order.
+
+  - id: a35-057
+    difficulty: 3
+    prompt: Which country's apartheid system formally ended with elections in 1994?
+    answer: South Africa
+    distractors: [Zimbabwe, Namibia, Mozambique]
+    fact: Queues at some polling stations ran for more than a mile, and voting had to be extended by an extra day.
+
+  - id: a35-058
+    difficulty: 4
+    prompt: Which international agreement on reducing greenhouse gases was signed in 1997?
+    answer: The Kyoto Protocol
+    distractors: [The Montreal Protocol, The Rio Declaration, The Paris Agreement]
+    fact: Montreal came first, in 1987, and dealt with the ozone layer. It is generally judged the more successful of the two.
+
+  - id: a35-059
+    difficulty: 4
+    prompt: Which European currency union did Britain leave in 1992 on a day known as Black Wednesday?
+    answer: The Exchange Rate Mechanism
+    distractors: [The eurozone, The gold standard, The sterling area]
+    fact: The Treasury spent billions in a single day defending the pound and then gave up by evening.
+
+  - id: a35-060
+    difficulty: 4
+    prompt: Which country was divided by a 1995 agreement signed in Dayton, Ohio?
+    answer: Bosnia and Herzegovina
+    distractors: [Serbia, Croatia, Kosovo]
+    fact: The talks were held on a US air force base specifically so the delegations could not leave or talk to the press.
+
+  - id: a35-070
+    difficulty: 4
+    prompt: Which 1992 UN conference is usually called the Earth Summit?
+    answer: Rio de Janeiro
+    distractors: [Stockholm, Johannesburg, Kyoto]
+    fact: Stockholm hosted the first such conference in 1972 and Johannesburg the follow-up in 2002, so the sequence is real.
+
+  - id: wor-031
+    difficulty: 4
+    prompt: Which French president took his country out of NATO's integrated military command in 1966?
+    answer: Charles de Gaulle
+    distractors: [Georges Pompidou, François Mitterrand, Valéry Giscard d'Estaing]
+    fact: He gave NATO a year to move its headquarters off French soil. It went to Brussels and has stayed there.
+
+  - id: wor-032
+    difficulty: 3
+    prompt: Which movement did Tito, Nehru and Nasser found for states refusing to take sides in the Cold War?
+    answer: The Non-Aligned Movement
+    distractors: [The Warsaw Pact, The Commonwealth, The Organization of African Unity]
+    fact: The first conference met in Belgrade in 1961. Within twenty years it had more members than either bloc it declined to join.
+
+  - id: wor-033
+    difficulty: 4
+    prompt: Which 1987 treaty was the first to abolish an entire class of nuclear weapons rather than cap it?
+    answer: The INF Treaty
+    distractors: [SALT I, START I, The Partial Test Ban Treaty]
+    fact: Reagan and Gorbachev signed it in Washington. It removed every American and Soviet ground-launched missile of intermediate range from Europe.

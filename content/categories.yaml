@@ -2,8 +2,12 @@
 #
 # The set is deliberately weighted for an audience that is college-educated,
 # widely traveled and often military — categories that reward a life of
-# reading rather than recent pop culture. Nothing here requires knowledge of
-# anything after about 1995.
+# reading rather than recent pop culture.
+#
+# This used to end "nothing here requires knowledge of anything after about
+# 1995". That line was retired when the 35-55 and 55-75 banks merged: a player
+# at the older end of 35-75 was in their twenties in 1990, so the 1980s and
+# 1990s are shared ground rather than someone else's era.
 
 - id: history-20c
   name: The Twentieth Century

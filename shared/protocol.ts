@@ -281,9 +281,10 @@ export const DEFAULT_CONFIG: GameConfig = {
   nextQuestionDelaySeconds: 10,
   packs: [],
   // Not empty. Empty means no filter, which would let a set written for
-  // another age group into a normal night the moment one existed. The core
-  // bank is tagged 55-75, so this default is the bank as it has always been.
-  audience: '55-75',
+  // another age group into a normal night the moment one existed. 35-75 is
+  // the adult bank: someone at the older end of that range was in their
+  // twenties in 1990, so one group covers both ends of the room.
+  audience: '35-75',
 };
 
 // ---------------------------------------------------------------- views

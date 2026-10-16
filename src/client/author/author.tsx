@@ -131,7 +131,7 @@ function GenerateForm({
   onGenerated: (batch: DraftBatch) => void;
   setToast: (m: string) => void;
 }) {
-  const [audience, setAudience] = useState<Audience>('55-75');
+  const [audience, setAudience] = useState<Audience>('35-75');
   const [category, setCategory] = useState(context.categories[0]?.id ?? '');
   const [count, setCount] = useState(10);
   const [preset, setPreset] = useState(0);

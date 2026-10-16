@@ -149,18 +149,11 @@ questions:
     fact: Five F-1 engines burned about 15 tons of propellant a second. The J-2 powered the upper stages.
 
   - id: spa-022
-    difficulty: 3
-    prompt: Who was the first woman to fly solo across the Atlantic?
-    answer: Amelia Earhart
-    distractors: [Beryl Markham, Amy Johnson, Jacqueline Cochran]
-    fact: She did it in 1932, five years after Lindbergh. Markham was the first woman to fly it solo east to west, in 1936.
-
-  - id: spa-023
     difficulty: 2
-    prompt: Which telescope was launched into orbit in 1990?
-    answer: The Hubble Space Telescope
-    distractors: [The James Webb Space Telescope, The Spitzer Space Telescope, The Chandra X-ray Observatory]
-    fact: Its primary mirror was ground to the wrong shape; a shuttle crew fitted corrective optics in 1993.
+    prompt: Which ocean did Amelia Earhart become the first woman to fly solo across, in 1932?
+    answer: The Atlantic
+    distractors: [The Pacific, The Indian, The Arctic]
+    fact: She flew from Newfoundland to a field in Northern Ireland in under fifteen hours, five years after Lindbergh did it.
 
   - id: spa-024
     difficulty: 3
@@ -222,3 +215,31 @@ questions:
     answer: Mercury
     distractors: [Mars, Venus, Pluto]
     fact: Since Pluto's reclassification in 2006, Mercury holds the title.
+
+  - id: a35-061
+    difficulty: 2
+    prompt: Which spacecraft program ended with its final flight in 2011?
+    answer: The Space Shuttle
+    distractors: [Apollo, Soyuz, Skylab]
+    fact: Five orbiters flew 135 missions over thirty years. Soyuz is still flying and is now far older than the shuttle ever got.
+
+  - id: a35-065
+    difficulty: 3
+    prompt: Which space telescope launched in 1990 with a flawed mirror?
+    answer: Hubble
+    distractors: [Chandra, Spitzer, Kepler]
+    fact: The mirror was ground to the wrong shape by a fraction of a hair's width. A 1993 servicing mission fitted it with corrective optics.
+
+  - id: a35-069
+    difficulty: 4
+    prompt: Which probe landed on Mars in 1997 carrying a small rover called Sojourner?
+    answer: Mars Pathfinder
+    distractors: [Viking 1, Mars Observer, Phoenix]
+    fact: It bounced to a stop inside airbags. The rover was about the size of a microwave oven and ran for three months.
+
+  - id: spa-033
+    difficulty: 3
+    prompt: Which was the last Apollo mission to land men on the moon?
+    answer: Apollo 17
+    distractors: [Apollo 15, Apollo 16, Apollo 18]
+    fact: Eugene Cernan stepped off the surface in December 1972 and nobody has returned since. Apollo 18 was planned and then cancelled.

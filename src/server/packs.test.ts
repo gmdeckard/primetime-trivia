@@ -46,7 +46,7 @@ test('only approved questions are written to a pack', () => {
   const dir = tempContent();
   const { file } = publishPack(dir, {
     name: 'Mixed Batch',
-    audience: '55-75',
+    audience: '35-75',
     reviewedBy: 'Gary',
     questions: [
       draft('d1', 'approved', 'Approved one?'),
@@ -68,7 +68,7 @@ test('publishing with nothing approved is refused', () => {
   assert.throws(
     () => publishPack(dir, {
       name: 'Empty',
-      audience: '55-75',
+      audience: '35-75',
       reviewedBy: 'Gary',
       questions: [draft('d1', 'pending'), draft('d2', 'rejected')],
     }),
@@ -81,7 +81,7 @@ test('publishing without a named reviewer is refused', () => {
   assert.throws(
     () => publishPack(dir, {
       name: 'Anonymous',
-      audience: '55-75',
+      audience: '35-75',
       reviewedBy: '   ',
       questions: [draft('d1', 'approved')],
     }),
@@ -101,7 +101,7 @@ test('a published pack loads cleanly and carries its pack id and audience', () =
 
   publishPack(dir, {
     name: 'Desert Round',
-    audience: '55-75',
+    audience: '35-75',
     reviewedBy: 'Gary',
     model: 'claude-opus-5-5',
     questions: [draft('d1', 'approved', 'Which desert covers northern Africa?')],
@@ -112,7 +112,7 @@ test('a published pack loads cleanly and carries its pack id and audience', () =
   assert.equal(bank.questions.length, 1);
   const question = bank.questions[0]!;
   assert.equal(question.pack, 'desert-round');
-  assert.equal(question.audience, '55-75');
+  assert.equal(question.audience, '35-75');
   assert.equal(question.category, 'geography');
   // Authored answer-first, like every other content file.
   assert.equal(question.answerIndex, 0);
@@ -165,9 +165,9 @@ test('slugify produces a safe file stem', () => {
  */
 test('a missing category registry is one error, not one per question', () => {
   const dir = mkdtempSync(join(tmpdir(), 'primetime-registry-'));
-  mkdirSync(join(dir, 'questions', '55-75'), { recursive: true });
+  mkdirSync(join(dir, 'questions', '35-75'), { recursive: true });
   writeFileSync(
-    join(dir, 'questions', '55-75', 'geography.yaml'),
+    join(dir, 'questions', '35-75', 'geography.yaml'),
     [
       'category: geography',
       'questions:',

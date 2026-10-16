@@ -178,3 +178,17 @@ questions:
     answer: A Chorus Line
     distractors: [Pippin, Dancin', Sweet Charity]
     fact: It ran 6,137 performances. Bob Fosse choreographed all three of the others, which is the trap.
+
+  - id: stg-026
+    difficulty: 2
+    prompt: Which Shakespeare play features the characters Rosencrantz and Guildenstern?
+    answer: Hamlet
+    distractors: [Macbeth, King Lear, Othello]
+    fact: Tom Stoppard's 1966 play retells the story from their point of view.
+
+  - id: stg-027
+    difficulty: 3
+    prompt: Who wrote the play "Death of a Salesman"?
+    answer: Arthur Miller
+    distractors: [Tennessee Williams, Eugene O'Neill, Edward Albee]
+    fact: It won the Pulitzer in 1949. Willy Loman has been played by Lee J. Cobb, Dustin Hoffman and Brian Dennehy, among many others.

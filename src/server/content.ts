@@ -55,7 +55,7 @@ const MAX_PROMPT = 240;
  * The folder a question file sits in names the age group it was written for.
  *
  * `content/questions/8-12/geography.yaml` is geography for children, and
- * `content/questions/55-75/geography.yaml` is geography for the main room.
+ * `content/questions/35-75/geography.yaml` is geography for the main room.
  * Before this, both lived in one flat folder and the age group was a key
  * inside the file, which meant the kids' geography and the adults' geography
  * were the same file name apart and told apart only by reading them. Worse,

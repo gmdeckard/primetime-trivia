@@ -152,7 +152,7 @@ A deck is keyed by **age group and category together**, filed as
 `8-12::geography`, and is built from only the questions that group can be
 asked. Both halves of that are load-bearing. Keyed on the category alone, one
 deck held every group's questions, so a kids night dealt from a `geography`
-deck that was mostly 55-75 cards: they were filtered out correctly, and left
+deck that was mostly adult cards: they were filtered out correctly, and left
 in the deck correctly, which meant the deck could never empty, so it never
 reshuffled — and once the eighty kids' questions were gone, that category
 yielded nothing. Measured: the eleventh kids night drew a round of zero
@@ -163,8 +163,7 @@ debugging a night wants to open it and read it.
 
 ```
 content/questions/
-  55-75/         geography.yaml, sports.yaml, …
-  35-55/
+  35-75/         geography.yaml, sports.yaml, …
   8-12/
   shared/        tiebreakers.yaml
 ```
@@ -191,12 +190,19 @@ the headline count. A default night asks 60 questions, so:
 
 | group  | questions | nights before anything repeats |
 |--------|-----------|--------------------------------|
-| 55-75  | 744       | about 12 — a weekly night runs a season |
-| 35-55  | 80        | 1.3 — the second night repeats |
+| 35-75  | 824       | about 13 — a weekly night runs a season |
 | 8-12   | 80        | 1.3 — the second night repeats |
 
-The no-repeat machinery works for all three; two of the folders are simply too
-thin to have anything to promise. `npm run validate` and `npm run stats
+The no-repeat machinery works for both; the kids' folder is simply too thin to
+have anything to promise.
+
+The adult group was two — a 55-75 set and a 35-55 set written to stay out of
+its way — until the arithmetic was checked. Someone who is sixty-five today
+was twenty-five in 1991, so the material held back for the younger group was
+the older group's adult life. Merging them added eighty questions to every
+adult night and surfaced seven duplicate pairs that the split had been hiding,
+because two questions in different audience groups can never meet and so were
+never compared. `npm run validate` and `npm run stats
 --audience all` both report this per group, and the MC's setup screen says it
 on the age-group button, because "80 questions" reads as plenty and is one and
 a bit nights.

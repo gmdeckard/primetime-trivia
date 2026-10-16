@@ -48,7 +48,7 @@ Without a key the screen loads and says so rather than failing obscurely.
 Pick an audience, a category, how many, and a difficulty shape.
 
 **Audience** sets the era the questions are pitched at. The core bank is built
-for 55-75, whose formative years ran roughly 1961-1996. Choosing another
+for 35-75, whose formative years span roughly 1961-2010. Choosing another
 audience shifts that window; `All ages` drops era weighting entirely.
 
 **Model.** Opus 5.5 by default — it is the most accurate, and accuracy is the

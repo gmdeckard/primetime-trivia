@@ -171,3 +171,10 @@ questions:
     answer: Ether
     distractors: [Chloroform, Nitrous oxide, Cocaine]
     fact: The operating theater there is still called the Ether Dome. Chloroform followed in Edinburgh the next year.
+
+  - id: a35-066
+    difficulty: 3
+    prompt: Which genome project was declared essentially complete in 2003?
+    answer: The human genome
+    distractors: [The mouse genome, The wheat genome, The fruit fly genome]
+    fact: It ran thirteen years and finished ahead of schedule because a private competitor forced the pace.

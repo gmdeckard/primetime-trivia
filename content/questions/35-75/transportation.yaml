@@ -178,3 +178,17 @@ questions:
     answer: The shipping container
     distractors: [The supertanker, The bulk carrier, The roll-on roll-off ferry]
     fact: He ran a trucking company, not a shipping line, which is exactly why he could see that the loading was the expensive part.
+
+  - id: trn-026
+    difficulty: 3
+    prompt: Which US city opened the country's first subway?
+    answer: Boston
+    distractors: [New York, Philadelphia, Chicago]
+    fact: 1897, seven years ahead of New York. The first line was built largely to get streetcars off a congested Tremont Street.
+
+  - id: a35-067
+    difficulty: 3
+    prompt: Which tunnel opened in 1994 linking Britain and France?
+    answer: The Channel Tunnel
+    distractors: [The Gotthard Tunnel, The Seikan Tunnel, The Mont Blanc Tunnel]
+    fact: Digging started from both ends and the two bores met with an error of about four inches.

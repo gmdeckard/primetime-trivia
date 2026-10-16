@@ -24,7 +24,7 @@ import { shuffle } from './selector.js';
  * And per AGE GROUP as well as per category, which is not an optimisation —
  * it is the difference between the kids' bank working and not working. The
  * same category holds questions for several groups, so one deck per category
- * mixed them: deal from `geography` on a kids night and most cards are 55-75
+ * mixed them: deal from `geography` on a kids night and most cards are adult
  * ones the filter rejects. They stay in the deck, correctly, because they
  * were not used. But then the deck is never empty, so it never reshuffles,
  * and once the eighty kids' questions are gone that category yields nothing
@@ -62,7 +62,7 @@ export const EMPTY_ROTATION: RotationFile = { decks: {}, dealt: {}, cycles: {} }
  * and greppable — somebody debugging a night wants to open rotation.json and
  * read it. `*` is the group with no filter, which is its own deck: a night
  * run with every age group in play is genuinely a different sequence from a
- * 55-75 night, and giving it its own deck keeps either from spending the
+ * adult night, and giving it its own deck keeps either from spending the
  * other's cards.
  */
 export function deckKey(audience: string, categoryId: string): string {

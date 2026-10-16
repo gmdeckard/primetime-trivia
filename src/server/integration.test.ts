@@ -243,7 +243,7 @@ test('the question bank editor is closed without the host password', async () =>
   const generate = await fetch(`${BASE}/api/author/generate`, {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
-    body: JSON.stringify({ audience: '55-75', category: 'geography', count: 5, difficulties: [2] }),
+    body: JSON.stringify({ audience: '35-75', category: 'geography', count: 5, difficulties: [2] }),
   });
   assert.equal(generate.status, 401, 'generation must not be callable without the password');
 });

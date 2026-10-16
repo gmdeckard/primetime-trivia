@@ -35,8 +35,7 @@ export const MODELS = [
  * between 1961 and 1996, and that window is where trivia lands hardest.
  */
 const ERA_HINT: Record<Audience, string> = {
-  '55-75': 'Players are 55 to 75, so their formative years ran roughly 1961-1996. Weight toward that window. Nothing that requires knowledge of anything after about 1995.',
-  '35-55': 'Players are 35 to 55, so their formative years ran roughly 1981-2016. Weight toward that window.',
+  '35-75': 'Players are 35 to 75, so their formative years span roughly 1961 to 2010. Weight toward that window. Someone at the older end was still in their twenties in 1990, so the 1980s and 1990s are fair game for all of them.',
   '18-35': 'Players are 18 to 35, so their formative years ran roughly 1998 onward. Weight toward that window.',
   '8-12': 'Players are children of 8 to 12. Keep subject matter to what is taught at school or met in ordinary life: animals, space, the body, geography, sport, food, words. Nothing that needs adult experience, nothing frightening, and no alcohol, war casualties or politics.',
   family: 'Mixed ages including children. Avoid anything era-dependent, and keep subject matter suitable for all ages.',

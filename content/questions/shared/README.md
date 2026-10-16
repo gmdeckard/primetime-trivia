@@ -7,7 +7,7 @@ whichever age group the MC picks.
 
 That is not a loophole, it is the point. The numeric tiebreakers live here
 because a tie at the top has to be breakable on a kids night as much as on a
-55-75 night, and there is nothing age-specific about guessing the height of a
+adult night, and there is nothing age-specific about guessing the height of a
 waterfall. Before this folder existed they achieved the same thing by being
 the one file in the bank with no `audience:` key, which worked and explained
 itself to nobody.

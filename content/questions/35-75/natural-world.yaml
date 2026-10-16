@@ -170,7 +170,7 @@ questions:
 
   - id: nat-026
     difficulty: 4
-    prompt: Which element do plants draw from the soil in the greatest quantity?
-    answer: Nitrogen
-    distractors: [Carbon, Phosphorus, Potassium]
-    fact: Carbon is the trap. Plants take almost all of it from the air, not the ground, which is why a log weighs mostly sky.
+    prompt: Which process do soil bacteria use to turn nitrogen from the air into a form plants can take up?
+    answer: Nitrogen fixation
+    distractors: [Transpiration, Photosynthesis, Respiration]
+    fact: Legumes house the bacteria in nodules on their roots, which is why a field is sown with clover or beans to put the nitrogen back.

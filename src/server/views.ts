@@ -275,7 +275,7 @@ export function controlState(engine: Engine): ControlState {
   const groupIds = new Set<string>();
   for (const question of bank.questions) if (question.audience) groupIds.add(question.audience);
   // Sorted by the age they start at, not as strings: a plain sort puts
-  // "8-12" after "55-75", so the kids came last in a list of numbers that
+  // "8-12" after "35-75", so the kids came last in a list of numbers that
   // otherwise climbs.
   const startsAt = (id: string) => Number(/^(\d+)/.exec(id)?.[1] ?? Number.MAX_SAFE_INTEGER);
   const audiences = [...groupIds]
@@ -384,7 +384,7 @@ export function playerState(engine: Engine, playerId: string): PlayerState {
 /**
  * An age group's id as something to put on a button.
  *
- * The ids are folder names, and a folder name is a range: `8-12`, `55-75`.
+ * The ids are folder names, and a folder name is a range: `8-12`, `35-75`.
  * Anything that is not a range is shown as written, so a group called
  * `family` arrives as "Family" rather than being mangled into a number.
  */

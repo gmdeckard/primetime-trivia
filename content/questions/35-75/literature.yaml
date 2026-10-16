@@ -99,13 +99,6 @@ questions:
     distractors: [Hannah Arendt, Betty Friedan, Germaine Greer]
     fact: Its claim that "one is not born, but rather becomes, a woman" shaped a generation of feminist thought.
 
-  - id: lit-015
-    difficulty: 2
-    prompt: Which Shakespeare play features the characters Rosencrantz and Guildenstern?
-    answer: Hamlet
-    distractors: [Macbeth, King Lear, Othello]
-    fact: Tom Stoppard's 1966 play retells the story from their point of view.
-
   - id: lit-016
     difficulty: 3
     prompt: Who wrote "The Remains of the Day"?
@@ -168,13 +161,6 @@ questions:
     answer: Huckleberry Finn
     distractors: [Tom Sawyer, Hank Morgan, David Wilson]
     fact: Hemingway claimed all modern American literature came from that one book.
-
-  - id: lit-025
-    difficulty: 3
-    prompt: Who wrote the play "Death of a Salesman"?
-    answer: Arthur Miller
-    distractors: [Tennessee Williams, Eugene O'Neill, Edward Albee]
-    fact: It won the Pulitzer in 1949. Willy Loman has been played by Lee J. Cobb, Dustin Hoffman and Brian Dennehy, among many others.
 
   - id: lit-026
     difficulty: 4

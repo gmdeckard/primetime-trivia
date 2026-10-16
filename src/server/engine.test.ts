@@ -1259,12 +1259,11 @@ test('one age group does not spend another age group\'s questions', () => {
   const store = new Store(dir);
 
   const kids = new Set(playNights(store, '8-12', 5));
-  playNights(store, '55-75', 5);
-  const teens = new Set(playNights(store, '35-55', 5));
+  const adults = new Set(playNights(store, '35-75', 5));
 
   const audienceOf = (id: string) => bank.questions.find((q) => q.id === id)?.audience;
   for (const id of kids) assert.equal(audienceOf(id), '8-12', `a kids night drew ${id}`);
-  for (const id of teens) assert.equal(audienceOf(id), '35-55', `a 35-55 night drew ${id}`);
+  for (const id of adults) assert.equal(audienceOf(id), '35-75', `an adult night drew ${id}`);
 
   // And the adults' nights in between must not have dealt from the kids' deck.
   const kidsAgain = playNights(store, '8-12', 5);
@@ -1282,7 +1281,7 @@ test('the shared folder stays in play whichever age group is picked', () => {
     'only the tiebreakers are age-neutral today; anything else here deserves a second look',
   );
 
-  for (const audience of ['8-12', '35-55', '55-75']) {
+  for (const audience of ['8-12', '35-75']) {
     const dir = mkdtempSync(join(tmpdir(), 'primetime-tie-'));
     dirs.push(dir);
     const engine = new Engine(bank, new Store(dir), { audience, questionsPerRound: 2, roundsPerGame: 1 });
@@ -1299,7 +1298,7 @@ test('the shared folder stays in play whichever age group is picked', () => {
 
 test('the folder a question file sits in names its age group', () => {
   const kidsGeography = bank.questions.filter((q) => q.category === 'geography' && q.audience === '8-12');
-  const adultGeography = bank.questions.filter((q) => q.category === 'geography' && q.audience === '55-75');
+  const adultGeography = bank.questions.filter((q) => q.category === 'geography' && q.audience === '35-75');
   assert.ok(kidsGeography.length > 0, 'content/questions/8-12/geography.yaml should load as 8-12');
   assert.ok(adultGeography.length > 0, 'content/questions/55-75/geography.yaml should load as 55-75');
   assert.equal(

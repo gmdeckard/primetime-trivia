@@ -240,3 +240,52 @@ questions:
     distractors: [Omar Bradley, Walton Walker, Mark Clark]
     fact: His address to Congress — "old soldiers never die; they just fade away" — drew an enormous public response.
     era: 1950s
+
+  - id: a35-062
+    difficulty: 2
+    prompt: In which decade did the first Gulf War take place?
+    answer: The 1990s
+    distractors: [The 1970s, The 1980s, The 2000s]
+    fact: It began in January 1991 and the ground campaign lasted about a hundred hours.
+
+  - id: a35-064
+    difficulty: 3
+    prompt: Which sheep, born in 1996, was the first mammal cloned from an adult cell?
+    answer: Dolly
+    distractors: [Polly, Molly, Megan]
+    fact: Named after Dolly Parton, because the cell came from a mammary gland. Polly and Megan were real cloned sheep from the same institute.
+
+  - id: a35-068
+    difficulty: 4
+    prompt: Which computer beat the world chess champion in a match in 1997?
+    answer: Deep Blue
+    distractors: [Deep Thought, Watson, AlphaGo]
+    fact: Deep Thought was its own predecessor and lost badly in 1989, which is what makes it the plausible wrong answer.
+
+  - id: h20-031
+    difficulty: 3
+    prompt: Which African country was occupied by Italy from 1936 to 1941?
+    answer: Ethiopia
+    distractors: [Liberia, Morocco, Egypt]
+    fact: Italy occupied it from 1936 to 1941 but never established colonial rule. Liberia was founded by freed American slaves.
+
+  - id: h20-032
+    difficulty: 2
+    prompt: Who was the first Catholic president of the United States?
+    answer: John F. Kennedy
+    distractors: [Al Smith, Lyndon Johnson, Joe Biden]
+    fact: Al Smith was the first Catholic nominee of a major party, in 1928, and lost heavily.
+
+  - id: h20-033
+    difficulty: 3
+    prompt: Which Indian leader led the Salt March of 1930?
+    answer: Mahatma Gandhi
+    distractors: [Jawaharlal Nehru, Subhas Chandra Bose, Sardar Patel]
+    fact: He walked some 240 miles to the sea to make salt in defiance of the British monopoly on it.
+
+  - id: h20-034
+    difficulty: 3
+    prompt: Which New Deal agency put young men to work planting trees and building trails on public land?
+    answer: The Civilian Conservation Corps
+    distractors: [The Works Progress Administration, The Tennessee Valley Authority, The National Recovery Administration]
+    fact: Three million men passed through it between 1933 and 1942. They were paid thirty dollars a month and required to send twenty-five of it home.

@@ -109,13 +109,6 @@ questions:
     distractors: [Richard Burton, John Hanning Speke, Samuel Baker]
     fact: Stanley was a newspaperman sent by the New York Herald. He may well have composed the line afterwards for the readers.
 
-  - id: exp-016
-    difficulty: 3
-    prompt: Which strait separates mainland South America from Tierra del Fuego?
-    answer: The Strait of Magellan
-    distractors: [The Drake Passage, The Beagle Channel, Cape Horn]
-    fact: The Drake Passage is the open water further south, and the Beagle Channel runs south of the strait again. Sailors feared all three.
-
   - id: exp-017
     difficulty: 3
     prompt: Which conquistador overthrew the Inca empire?

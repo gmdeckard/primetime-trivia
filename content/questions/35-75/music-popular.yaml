@@ -210,3 +210,73 @@ questions:
     answer: Live Aid
     distractors: [Farm Aid, The Concert for Bangladesh, Band Aid]
     fact: Band Aid was the 1984 charity single that preceded it; Farm Aid began later the same year as Live Aid.
+
+  - id: a35-071
+    difficulty: 2
+    prompt: Which band released Nevermind in 1991?
+    answer: Nirvana
+    distractors: [Pearl Jam, Soundgarden, Alice in Chains]
+    fact: It knocked Michael Jackson off the top of the US album chart, which is usually taken as the moment the 1980s ended.
+
+  - id: a35-072
+    difficulty: 2
+    prompt: Which channel launched in 1981 with a video titled Video Killed the Radio Star?
+    answer: MTV
+    distractors: [VH1, BET, The Box]
+    fact: It reached very few homes at first, and the campaign that fixed that asked viewers to ring their cable company and demand it.
+
+  - id: a35-074
+    difficulty: 3
+    prompt: Which group's members were nicknamed Scary, Sporty, Baby, Ginger and Posh?
+    answer: The Spice Girls
+    distractors: [All Saints, TLC, Bananarama]
+    fact: A magazine made the nicknames up, and the group adopted them because they were easier to remember than the real names.
+
+  - id: a35-075
+    difficulty: 3
+    prompt: Which album spent most of the 1980s as the best-selling of all time?
+    answer: Thriller
+    distractors: [Back in Black, Rumours, The Wall]
+    fact: Seven of its nine tracks were released as singles, which was unheard of and is roughly why it sold as it did.
+
+  - id: a35-076
+    difficulty: 3
+    prompt: Which file-sharing service was shut down by lawsuits in 2001?
+    answer: Napster
+    distractors: [Kazaa, LimeWire, Morpheus]
+    fact: The others carried on for years afterwards, which is why Napster being the answer depends on the date rather than the name.
+
+  - id: a35-077
+    difficulty: 3
+    prompt: Which Seattle genre took over rock radio in the early 1990s?
+    answer: Grunge
+    distractors: [Britpop, New wave, Shoegaze]
+    fact: Britpop was the British answer to it a few years later, and the two were set against each other by the music press.
+
+  - id: a35-078
+    difficulty: 4
+    prompt: Which rapper's 1988 album was titled Straight Outta Compton?
+    answer: N.W.A
+    distractors: [Public Enemy, Ice-T, Run-DMC]
+    fact: The FBI wrote to the record label about one of its tracks, which did the sales no harm whatsoever.
+
+  - id: a35-079
+    difficulty: 4
+    prompt: Which instrument defined the sound of 1980s synth-pop and was made by Yamaha?
+    answer: The DX7
+    distractors: [The Moog Minimoog, The Mellotron, The Hammond organ]
+    fact: Its factory electric-piano preset turns up on an enormous share of records from 1984 onward, usually untouched.
+
+  - id: a35-080
+    difficulty: 4
+    prompt: Which 1995 chart battle was framed as Blur against Oasis?
+    answer: The Battle of Britpop
+    distractors: [The Second British Invasion, The Madchester split, The NME wars]
+    fact: Blur won the week and Oasis sold several times more records over the following year.
+
+  - id: mus-031
+    difficulty: 3
+    prompt: Which singer recorded the 1971 album "Tapestry"?
+    answer: Carole King
+    distractors: [Joni Mitchell, Carly Simon, Linda Ronstadt]
+    fact: She had already written Will You Love Me Tomorrow for the Shirelles and The Loco-Motion for Little Eva before she recorded in her own voice.

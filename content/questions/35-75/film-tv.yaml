@@ -156,11 +156,11 @@ questions:
     fact: The Jeffersons and Maude were both spun off from it, as was Good Times from Maude.
 
   - id: ftv-023
-    difficulty: 3
-    prompt: Which film features the line "I'm going to make him an offer he can't refuse"?
-    answer: The Godfather
-    distractors: [Goodfellas, Scarface, On the Waterfront]
-    fact: The American Film Institute ranked it among the most memorable lines in American cinema.
+    difficulty: 2
+    prompt: Who says "I'm going to make him an offer he can't refuse" in "The Godfather"?
+    answer: Vito Corleone
+    distractors: [Michael Corleone, Sonny Corleone, Tom Hagen]
+    fact: Marlon Brando says it early on, explaining to his godson how a bandleader came to release him from a contract.
 
   - id: ftv-024
     difficulty: 2
@@ -198,11 +198,11 @@ questions:
     fact: It was the highest-grossing film in the world for several years and is credited with saving 20th Century Fox.
 
   - id: ftv-029
-    difficulty: 4
-    prompt: Which director made "Rear Window", using a single enormous set of a Greenwich Village courtyard?
-    answer: Alfred Hitchcock
-    distractors: [Elia Kazan, Fred Zinnemann, George Stevens]
-    fact: The set filled a Paramount sound stage and required its own drainage system for the rain sequences.
+    difficulty: 2
+    prompt: In "Rear Window", what confines James Stewart's character to his apartment?
+    answer: A broken leg
+    distractors: [A heart condition, A court order, A fear of open spaces]
+    fact: He is a news photographer laid up after an accident at a motor race, which is also why he has the long lens he spies with.
 
   - id: ftv-030
     difficulty: 3
@@ -266,3 +266,73 @@ questions:
     answer: Blade Runner
     distractors: [The Thing, Tron, Dune]
     fact: It opened against E.T. and lost badly. There are at least seven distinct released cuts of it.
+
+  - id: a35-001
+    difficulty: 2
+    prompt: Which 1999 film has a character explain the difference between a red pill and a blue pill?
+    answer: The Matrix
+    distractors: [Fight Club, Dark City, eXistenZ]
+    fact: The bullet-dodging effect used 120 still cameras fired in sequence, and the technique was promptly copied into adverts for years.
+
+  - id: a35-002
+    difficulty: 2
+    prompt: Which animated studio made Toy Story in 1995?
+    answer: Pixar
+    distractors: [DreamWorks, Blue Sky, Illumination]
+    fact: It was the first feature film animated entirely by computer, and the studio had been making adverts and short films until then.
+
+  - id: a35-003
+    difficulty: 3
+    prompt: Which sitcom ended in 2004 with the main characters leaving a New York apartment and its purple door?
+    answer: Friends
+    distractors: [Seinfeld, Will and Grace, Mad About You]
+    fact: Seinfeld had finished six years earlier, which is why it is the obvious wrong answer.
+
+  - id: a35-004
+    difficulty: 3
+    prompt: Which film opens with a briefcase being recovered for a crime boss named Marsellus Wallace?
+    answer: Pulp Fiction
+    distractors: [Reservoir Dogs, Jackie Brown, True Romance]
+    fact: What is in the briefcase is never shown or stated, and the director has said flatly that there is no answer.
+
+  - id: a35-005
+    difficulty: 3
+    prompt: Which 2001 film was the first of three adapted from a single Tolkien novel?
+    answer: The Fellowship of the Ring
+    distractors: [The Two Towers, The Hobbit, The Return of the King]
+    fact: All three were shot at once over roughly fifteen months, which is why the cast visibly does not age across them.
+
+  - id: a35-006
+    difficulty: 3
+    prompt: Which HBO drama followed a New Jersey crime family and a mob boss in therapy?
+    answer: The Sopranos
+    distractors: [The Wire, Oz, Boardwalk Empire]
+    fact: It is usually named as the show that began prestige television, and the network nearly passed on the therapy premise.
+
+  - id: a35-007
+    difficulty: 3
+    prompt: Which 1997 film became the first to gross a billion dollars worldwide?
+    answer: Titanic
+    distractors: [Jurassic Park, Independence Day, The Phantom Menace]
+    fact: It was widely expected to fail. The production had run badly over budget and the release was pushed back by months.
+
+  - id: a35-008
+    difficulty: 4
+    prompt: Which 1999 film was marketed as recovered footage and shot largely by its own cast?
+    answer: The Blair Witch Project
+    distractors: [Cannibal Holocaust, Paranormal Activity, Cloverfield]
+    fact: The actors were given directions left in milk crates in the woods and improvised the rest, which is why they look genuinely irritated.
+
+  - id: a35-009
+    difficulty: 4
+    prompt: Which actor starred in both Twelve Monkeys and Fight Club?
+    answer: Brad Pitt
+    distractors: [Edward Norton, Bruce Willis, Matt Damon]
+    fact: Norton and Willis each appeared in one of the two, which is exactly why the question has to name both films.
+
+  - id: a35-010
+    difficulty: 4
+    prompt: Which television drama opened with a chemistry teacher receiving a cancer diagnosis?
+    answer: Breaking Bad
+    distractors: [The Shield, Weeds, Justified]
+    fact: The network nearly passed. Weeds had aired a suburban-drug-dealer premise two years earlier and looked too close for comfort.

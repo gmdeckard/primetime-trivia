@@ -75,19 +75,18 @@ memorised it, drop the question.
 
 ```
 content/questions/
-  55-75/          the main room, and the bulk of the bank
+  35-75/          the adult room, and the bulk of the bank
     geography.yaml
     sports.yaml
     ...
-  35-55/
   8-12/
   shared/         in play whichever group the MC picks
     tiebreakers.yaml
 ```
 
 **The folder is the age group.** `content/questions/8-12/geography.yaml` is
-geography written for children; `content/questions/55-75/geography.yaml` is
-geography for the main room. The loader tags every question in a folder with
+geography written for children; `content/questions/35-75/geography.yaml` is
+geography for the adult room. The loader tags every question in a folder with
 that folder's name, so a file never has to say its own `audience:` — and the
 two sets of geography questions are now a directory apart instead of being
 told apart by reading them.

@@ -272,8 +272,7 @@ entries.
 one file per category inside it:
 
 ```
-content/questions/55-75/geography.yaml     the main room, 744 questions
-content/questions/35-55/…                  80
+content/questions/35-75/geography.yaml     the adult room, 824 questions
 content/questions/8-12/…                   80
 content/questions/shared/tiebreakers.yaml  in play on every night
 ```
@@ -283,7 +282,7 @@ material wholesale, and the MC's screen lists the groups the bank actually
 holds something for, with live counts — adding `content/questions/18-35/` is
 all it takes to add a group.
 
-At two rounds of ten a game, the 55-75 bank is about twelve full nights with
+At two rounds of ten a game, the adult bank is about thirteen full nights with
 no repeats — a good season, but not the "thousands" a venue running weekly for
 years will eventually want. `npm run validate` prints what each age group can
 support. The bank is designed to grow by pull request, and `content/` is the
