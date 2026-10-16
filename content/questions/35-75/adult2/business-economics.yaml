@@ -99,7 +99,7 @@ questions:
     difficulty: 3
     prompt: Which American retailer sold houses, cars and tombstones by mail order catalog?
     answer: Sears
-    distractors: [Montgomery Ward, JCPenney, Woolworth]
+    distractors: [Aldens, JCPenney, Woolworth]
     fact: The catalog ran to over a thousand pages and the company shipped about seventy thousand kit houses. Rural free delivery is what made the business possible.
 
   - id: a2-biz-015

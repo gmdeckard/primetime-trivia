@@ -198,7 +198,7 @@ questions:
     prompt: Who compiled the thesaurus published in 1852?
     answer: Peter Mark Roget
     distractors: [Samuel Johnson, James Murray, Henry Fowler]
-    fact: He was a doctor who made lists as a lifelong habit, apparently to hold off the mental illness that ran in his family. He was seventy-three when he published it.
+    fact: He was a physician who made lists as a lifelong habit, apparently to hold off the mental illness that ran in his family. He was seventy-three when he published it.
 
   - id: a2-wrd-029
     difficulty: 4

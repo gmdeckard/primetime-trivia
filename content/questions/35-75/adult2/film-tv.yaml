@@ -1,0 +1,250 @@
+category: film-tv
+pack:
+  id: adult2
+  name: Adult set 2
+
+questions:
+  - id: a2-ftv-001
+    difficulty: 2
+    prompt: Which 1994 film follows a slow-witted Alabama man through three decades of American history?
+    answer: Forrest Gump
+    distractors: [Rain Man, Being There, The Green Mile]
+    fact: It won six Academy Awards. The running sequence was shot in Utah and Montana over a few weeks, with the star's brother standing in for the long shots.
+
+  - id: a2-ftv-002
+    difficulty: 2
+    prompt: Which actor played James Bond first on screen in a feature film?
+    answer: Sean Connery
+    distractors: [Roger Moore, George Lazenby, David Niven]
+    fact: He was a former milkman and bodybuilder from Edinburgh. The author thought him wrong for the part and changed his mind after seeing the first picture.
+
+  - id: a2-ftv-003
+    difficulty: 2
+    prompt: Which was the first full-length animated feature made in Hollywood?
+    answer: Snow White and the Seven Dwarfs
+    distractors: [Pinocchio, Fantasia, Bambi]
+    fact: The industry called it Disney's folly and expected it to ruin him. It cost about one and a half million dollars in 1937 and earned eight.
+
+  - id: a2-ftv-004
+    difficulty: 2
+    prompt: Which 1950s sitcom starred Lucille Ball as a housewife with show business ambitions?
+    answer: I Love Lucy
+    distractors: [The Burns and Allen Show, Our Miss Brooks, December Bride]
+    fact: She insisted her real husband play her screen husband, which the network resisted. Filming on 35mm instead of broadcasting live is what created the rerun business.
+
+  - id: a2-ftv-005
+    difficulty: 2
+    prompt: Which actor played Dirty Harry?
+    answer: Clint Eastwood
+    distractors: [Charles Bronson, Steve McQueen, Lee Marvin]
+    fact: The part was offered to three other stars first. He had become famous in Italian westerns after television had him typed as a supporting cowboy.
+
+  - id: a2-ftv-006
+    difficulty: 2
+    prompt: Which 1960s sitcom featured a talking horse?
+    answer: Mister Ed
+    distractors: [Green Acres, Petticoat Junction, The Beverly Hillbillies]
+    fact: The horse was a palomino called Bamboo Harvester and the voice was a former western actor who refused screen credit for years.
+
+  - id: a2-ftv-007
+    difficulty: 2
+    prompt: Which actress played Scarlett O'Hara?
+    answer: Vivien Leigh
+    distractors: [Bette Davis, Joan Fontaine, Olivia de Havilland]
+    fact: Fourteen hundred women were interviewed for the part before an English actress got it. Filming had already begun when she was cast.
+
+  - id: a2-ftv-008
+    difficulty: 3
+    prompt: Which 1939 Civil War epic won eight competitive Academy Awards?
+    answer: Gone with the Wind
+    distractors: [Stagecoach, Dark Victory, Mr. Smith Goes to Washington]
+    fact: Hattie McDaniel became the first black performer to win an Oscar for it, and was seated at a segregated table at the ceremony.
+
+  - id: a2-ftv-009
+    difficulty: 3
+    prompt: Which 1952 musical is set in Hollywood's switch from silent pictures to sound?
+    answer: Singin' in the Rain
+    distractors: [An American in Paris, The Band Wagon, Easter Parade]
+    fact: Almost every song in it was an old one from the studio's catalog. The title number was shot over two days with milk mixed into the rain so it would show on camera.
+
+  - id: a2-ftv-010
+    difficulty: 3
+    prompt: Which anthology series opened by telling viewers they were entering another dimension?
+    answer: The Twilight Zone
+    distractors: [One Step Beyond, The Outer Limits, Thriller]
+    fact: Its creator wrote about ninety of the hundred and fifty-six episodes himself, after years of fighting sponsors who cut anything political out of his scripts.
+
+  - id: a2-ftv-011
+    difficulty: 3
+    prompt: Which 1951 film put Humphrey Bogart on an African river with a missionary?
+    answer: The African Queen
+    distractors: [Mogambo, Beat the Devil, Key Largo]
+    fact: Almost the whole crew fell ill from the water. The director and the male star drank whiskey instead and were the only two who stayed well.
+
+  - id: a2-ftv-012
+    difficulty: 3
+    prompt: Which actor won Best Actor two years running, in 1994 and 1995?
+    answer: Tom Hanks
+    distractors: [Nicolas Cage, Jack Nicholson, Anthony Hopkins]
+    fact: Only one other actor has done it, sixty years earlier. He had been known mainly for comedy up to that point.
+
+  - id: a2-ftv-013
+    difficulty: 3
+    prompt: Which 1959 comedy about two musicians in hiding ends with the line "Nobody's perfect"?
+    answer: Some Like It Hot
+    distractors: [The Seven Year Itch, Bells Are Ringing, Operation Petticoat]
+    fact: It was shot in black and white because the makeup on the two men looked green in color tests. It was released without a production code seal.
+
+  - id: a2-ftv-014
+    difficulty: 3
+    prompt: In which 1967 film is a young graduate seduced by a friend of his parents?
+    answer: The Graduate
+    distractors: [The Apartment, Petulia, Goodbye Columbus]
+    fact: The actress playing the older woman was six years older than the actor playing the young man. The soundtrack sold more copies than tickets were sold.
+
+  - id: a2-ftv-015
+    difficulty: 3
+    prompt: Which director made E.T., Schindler's List and Saving Private Ryan?
+    answer: Steven Spielberg
+    distractors: [Robert Zemeckis, Ron Howard, Richard Donner]
+    fact: He was rejected twice by the film school at USC and later donated enough to have a building named for him.
+
+  - id: a2-ftv-016
+    difficulty: 3
+    prompt: Which 1970s sitcom was set in a Minneapolis television newsroom?
+    answer: The Mary Tyler Moore Show
+    distractors: [Rhoda, Phyllis, One Day at a Time]
+    fact: The lead was a single career woman over thirty, which the network worried about. An episode about a clown's funeral is still taught as a model of comic writing.
+
+  - id: a2-ftv-017
+    difficulty: 3
+    prompt: Which 1966 western ends with a three-way standoff in a circular cemetery?
+    answer: The Good, the Bad and the Ugly
+    distractors: [Once Upon a Time in the West, A Fistful of Dollars, The Magnificent Seven]
+    fact: It was shot in Spain with Italian money and a largely Spanish crew. The famous score uses a two-note motif meant to imitate a coyote.
+
+  - id: a2-ftv-018
+    difficulty: 3
+    prompt: Which actor played the raincoated detective Columbo?
+    answer: Peter Falk
+    distractors: [Telly Savalas, Dennis Weaver, Karl Malden]
+    fact: He had a glass eye, which he said helped the squinting. The audience is shown the murder first, so the suspense is in watching the suspect realize he is caught.
+
+  - id: a2-ftv-019
+    difficulty: 3
+    prompt: Which 1977 miniseries followed an American family from capture in Africa through slavery?
+    answer: Roots
+    distractors: [Holocaust, Rich Man Poor Man, Shogun]
+    fact: The network scheduled it on eight consecutive nights to limit the damage it expected. About eighty-five percent of American households watched some of it.
+
+  - id: a2-ftv-020
+    difficulty: 3
+    prompt: Which 1969 film paired Paul Newman and Robert Redford as fleeing outlaws?
+    answer: Butch Cassidy and the Sundance Kid
+    distractors: [The Sting, Cool Hand Luke, Jeremiah Johnson]
+    fact: The studio wanted the two men to fight over the woman and the writer refused. The script sold for four hundred thousand dollars, a record at the time.
+
+  - id: a2-ftv-021
+    difficulty: 3
+    prompt: Which British series has followed a time-traveling alien since 1963?
+    answer: Doctor Who
+    distractors: [Blake's 7, Quatermass, The Avengers]
+    fact: The first episode aired the day after the Kennedy assassination and was repeated the next week because so few had seen it. Recasting the lead was invented to cover an actor's illness.
+
+  - id: a2-ftv-022
+    difficulty: 3
+    prompt: In which 1976 film does a New York cab driver ask his mirror "You talkin' to me?"
+    answer: Taxi Driver
+    distractors: [Serpico, Dog Day Afternoon, Mean Streets]
+    fact: The line was improvised. The composer finished the score days before dying and the last cue is the last music he wrote.
+
+  - id: a2-ftv-023
+    difficulty: 3
+    prompt: Which actress played Ripley in Alien?
+    answer: Sigourney Weaver
+    distractors: [Veronica Cartwright, Karen Allen, Jamie Lee Curtis]
+    fact: The part was written for a man and the script was not changed when a woman was cast. The cast were not told how violent the dinner scene would be.
+
+  - id: a2-ftv-024
+    difficulty: 3
+    prompt: Which prime-time soap opera left America asking who shot J.R.?
+    answer: Dallas
+    distractors: [Dynasty, Falcon Crest, Knots Landing]
+    fact: The gap ran eight months because of an actors' strike. The answer drew something like eighty million American viewers and was bet on in Las Vegas.
+
+  - id: a2-ftv-025
+    difficulty: 3
+    prompt: Which 1946 film about a small-town banker failed at the box office and became a Christmas fixture?
+    answer: It's a Wonderful Life
+    distractors: [Miracle on 34th Street, The Bishop's Wife, Holiday Inn]
+    fact: A lapsed copyright let television stations run it free in the 1970s, which is the only reason anyone remembers it. The FBI thought it was communist propaganda.
+
+  - id: a2-ftv-026
+    difficulty: 4
+    prompt: Which 1927 film ended the silent era by putting synchronized speech in a feature?
+    answer: The Jazz Singer
+    distractors: [Don Juan, The Lights of New York, Sunrise]
+    fact: It has only a few minutes of talking, most of it improvised by the star. The studio that made it was the smallest of the majors and nearly broke.
+
+  - id: a2-ftv-027
+    difficulty: 4
+    prompt: Which set of rules governed what American films could show from 1934 to the 1960s?
+    answer: The Hays Code
+    distractors: [The Legion of Decency Charter, The Breen Charter, The Studio Compact]
+    fact: Married couples slept in separate beds and criminals always paid. The industry wrote it itself to head off government censorship and enforced it through distribution.
+
+  - id: a2-ftv-028
+    difficulty: 4
+    prompt: Who was the highest-paid star of the silent era and a founder of her own studio?
+    answer: Mary Pickford
+    distractors: [Gloria Swanson, Lillian Gish, Clara Bow]
+    fact: She negotiated her own contracts from her teens and was earning ten thousand dollars a week by 1916. She co-founded United Artists to escape the studios entirely.
+
+  - id: a2-ftv-029
+    difficulty: 4
+    prompt: In which 1950 film does a forgotten silent star say the pictures got small?
+    answer: Sunset Boulevard
+    distractors: [All About Eve, The Bad and the Beautiful, A Star Is Born]
+    fact: A real silent star played the part and a real silent director played her butler. One studio head said the writer should be tarred and run out of town.
+
+  - id: a2-ftv-030
+    difficulty: 4
+    prompt: What did the 1948 Supreme Court decision force the big studios to give up?
+    answer: Their movie theaters
+    distractors: [Their exclusive actor contracts, Their newsreel divisions, Their foreign distribution arms]
+    fact: Owning production, distribution and the cinemas had let them force a whole season's output on any theater. The ruling took about a decade to carry out and ended the studio system.
+
+  - id: a2-ftv-031
+    difficulty: 4
+    prompt: Which widescreen process did Hollywood introduce in 1953 to win audiences back from television?
+    answer: CinemaScope
+    distractors: [Technicolor, Vistavision, Todd-AO]
+    fact: It squeezed a wide image onto standard film with an anamorphic lens and unsqueezed it in the projector. Directors complained it was only good for funerals and snakes.
+
+  - id: a2-ftv-032
+    difficulty: 4
+    prompt: Which French film movement did Francois Truffaut and Jean-Luc Godard lead?
+    answer: The New Wave
+    distractors: [Poetic Realism, Cinema Verite, The Left Bank Group]
+    fact: Most of them were critics first and attacked the polished French cinema of their elders. Light cameras and fast film stock let them shoot in the street without permits.
+
+  - id: a2-ftv-033
+    difficulty: 4
+    prompt: Which 1980 western's failure effectively destroyed United Artists?
+    answer: Heaven's Gate
+    distractors: [Ishtar, Cleopatra, One from the Heart]
+    fact: It ran four times over budget and was pulled from release after a week. The episode ended the brief period when directors had final say over big pictures.
+
+  - id: a2-ftv-034
+    difficulty: 4
+    prompt: Who directed The Maltese Falcon and The Treasure of the Sierra Madre?
+    answer: John Huston
+    distractors: [Howard Hawks, Raoul Walsh, William Wyler]
+    fact: He directed his own father to an Oscar in the second of those, and won for writing and directing it himself the same night.
+
+  - id: a2-ftv-035
+    difficulty: 4
+    prompt: Which 1968 film built its reputation on a ten-minute car chase through San Francisco?
+    answer: Bullitt
+    distractors: [The French Connection, Vanishing Point, Dirty Harry]
+    fact: 'The star did much of his own driving. The chase has a continuity error that has been catalogued ever since: the same green Volkswagen is passed four times.'
