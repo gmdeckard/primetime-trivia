@@ -1,0 +1,250 @@
+category: natural-world
+pack:
+  id: adult2
+  name: Adult set 2
+
+questions:
+  - id: a2-nat-001
+    difficulty: 2
+    prompt: Which is the largest of the big cats?
+    answer: The tiger
+    distractors: [The lion, The jaguar, The leopard]
+    fact: A large male runs to about six hundred pounds. More of them live in captivity in the United States than remain in the wild anywhere.
+
+  - id: a2-nat-002
+    difficulty: 2
+    prompt: Which is the fastest land animal over a short distance?
+    answer: The cheetah
+    distractors: [The pronghorn, The lion, The greyhound]
+    fact: It can hit about seventy miles an hour but overheats within half a minute. The pronghorn is slower and can hold its pace for miles.
+
+  - id: a2-nat-003
+    difficulty: 2
+    prompt: What is an animal that eats only plants called?
+    answer: A herbivore
+    distractors: [A carnivore, An omnivore, A detritivore]
+    fact: Almost none of them digest cellulose themselves. The work is done by bacteria in the gut, which is why a cow has four stomach compartments.
+
+  - id: a2-nat-004
+    difficulty: 2
+    prompt: Which sea creature has eight arms?
+    answer: The octopus
+    distractors: [The squid, The cuttlefish, The nautilus]
+    fact: Squid and cuttlefish have eight arms plus two longer tentacles. An octopus has three hearts and blue blood, and most of its neurons are in its arms.
+
+  - id: a2-nat-005
+    difficulty: 2
+    prompt: What kind of animal is a Komodo dragon?
+    answer: A lizard
+    distractors: [A crocodile, A salamander, A snake]
+    fact: It is the heaviest lizard alive, reaching about one hundred and fifty pounds, and it was unknown to science until 1910.
+
+  - id: a2-nat-006
+    difficulty: 2
+    prompt: What is a baby kangaroo called?
+    answer: A joey
+    distractors: [A kit, A cub, A calf]
+    fact: It is born about the size of a jellybean after a month, crawls unaided to the pouch, and stays there for the better part of a year.
+
+  - id: a2-nat-007
+    difficulty: 2
+    prompt: Which is the largest living reptile?
+    answer: The saltwater crocodile
+    distractors: [The Nile crocodile, The American alligator, The leatherback turtle]
+    fact: A big male runs over a ton and twenty feet. They swim far out to sea, which is how they reached islands across the Pacific.
+
+  - id: a2-nat-008
+    difficulty: 3
+    prompt: Which is the deepest known trench in the ocean?
+    answer: The Mariana Trench
+    distractors: [The Tonga Trench, The Java Trench, The Puerto Rico Trench]
+    fact: Nearly seven miles down, where the pressure is over a thousand times what it is at the surface. Three crewed descents have reached the bottom.
+
+  - id: a2-nat-009
+    difficulty: 3
+    prompt: Which is the largest species of shark?
+    answer: The whale shark
+    distractors: [The great white, The basking shark, The tiger shark]
+    fact: It reaches forty feet and lives on plankton and small fish, filtering water through its gills. Its skin pattern is unique to each animal, like a fingerprint.
+
+  - id: a2-nat-010
+    difficulty: 3
+    prompt: Which animal has the largest eye of any living creature?
+    answer: The giant squid
+    distractors: [The blue whale, The elephant seal, The swordfish]
+    fact: Nearly a foot across, probably to spot the approach of a sperm whale in near darkness. No one photographed a live one until 2004.
+
+  - id: a2-nat-011
+    difficulty: 3
+    prompt: What is a rhinoceros horn made of?
+    answer: Keratin
+    distractors: [Bone, Ivory, Cartilage]
+    fact: The same protein as hair and fingernails, with no bone core at all. It is worth more by weight than gold in some markets, which is why the animals are nearly gone.
+
+  - id: a2-nat-012
+    difficulty: 3
+    prompt: Which mammal lays eggs?
+    answer: The platypus
+    distractors: [The sloth, The armadillo, The pangolin]
+    fact: The first specimen sent to England was taken for a hoax stitched together from other animals. The males also carry venom in a spur on the hind leg.
+
+  - id: a2-nat-013
+    difficulty: 3
+    prompt: Which is the largest species of penguin?
+    answer: The emperor penguin
+    distractors: [The king penguin, The gentoo, The Adelie]
+    fact: The males incubate the single egg on their feet through the Antarctic winter, going without food for about four months.
+
+  - id: a2-nat-014
+    difficulty: 3
+    prompt: What is the process by which a liquid becomes a gas at its surface without boiling?
+    answer: Evaporation
+    distractors: [Condensation, Sublimation, Precipitation]
+    fact: It takes heat with it, which is why sweating cools you and why a wet towel in a breeze feels cold.
+
+  - id: a2-nat-015
+    difficulty: 3
+    prompt: What does the Mohs scale measure?
+    answer: The hardness of minerals
+    distractors: [The density of rock, The acidity of soil, The magnetism of ore]
+    fact: 'It is just an order, not a measurement: each mineral scratches the one below. A geologist in the field used a fingernail, a coin and a steel knife.'
+
+  - id: a2-nat-016
+    difficulty: 3
+    prompt: Which group of living things has no nucleus in its cells?
+    answer: Bacteria
+    distractors: [Fungi, Algae, Protozoa]
+    fact: Their DNA floats loose in the cell. There are more of them in one person's gut than there are human cells in the whole body.
+
+  - id: a2-nat-017
+    difficulty: 3
+    prompt: Which scale rates the strength of a hurricane?
+    answer: The Saffir-Simpson scale
+    distractors: [The Beaufort scale, The Fujita scale, The Palmer index]
+    fact: It runs one to five on sustained wind speed alone, so it says nothing about rainfall or storm surge, which do most of the killing.
+
+  - id: a2-nat-018
+    difficulty: 3
+    prompt: Which winds blow steadily toward the equator from the east?
+    answer: The trade winds
+    distractors: [The westerlies, The monsoon winds, The jet stream]
+    fact: Sailing ships rode them west and came home on the westerlies further north. The belt of calm between the two was the sailor's dread.
+
+  - id: a2-nat-019
+    difficulty: 3
+    prompt: Which tree produces acorns?
+    answer: The oak
+    distractors: [The beech, The elm, The sycamore]
+    fact: A mature tree can drop ten thousand in a good year and almost nothing in a poor one, which keeps the animals that eat them from building up numbers.
+
+  - id: a2-nat-020
+    difficulty: 3
+    prompt: Beetles belong to which insect order?
+    answer: Coleoptera
+    distractors: [Hymenoptera, Lepidoptera, Diptera]
+    fact: About one in four known animal species is a beetle. Asked what his studies told him of the creator, one biologist said he must have an inordinate fondness for them.
+
+  - id: a2-nat-021
+    difficulty: 3
+    prompt: Which flightless bird of Mauritius was extinct within a century of being found?
+    answer: The dodo
+    distractors: [The great auk, The moa, The passenger pigeon]
+    fact: Sailors ate some, but the pigs, rats and monkeys they landed did most of the work. No complete specimen survives anywhere.
+
+  - id: a2-nat-022
+    difficulty: 3
+    prompt: What is the word for an animal active mainly at dawn and dusk?
+    answer: Crepuscular
+    distractors: [Nocturnal, Diurnal, Vespertine]
+    fact: Deer, rabbits and most cats fall in this group. The light is poor enough to hide in and good enough to hunt by.
+
+  - id: a2-nat-023
+    difficulty: 3
+    prompt: What does a bird's preen gland supply?
+    answer: Oil to waterproof the feathers
+    distractors: [Grit for the gizzard, Calcium for eggshells, Scent for marking territory]
+    fact: It sits at the base of the tail and the bird spreads the oil with its beak. A detergent spill strips it, which is why oiled birds drown or freeze.
+
+  - id: a2-nat-024
+    difficulty: 3
+    prompt: What is a plant called that germinates, flowers and dies within one year?
+    answer: An annual
+    distractors: [A perennial, A biennial, An ephemeral]
+    fact: Almost every grain crop is one, which is why a field has to be sown again every season. A biennial flowers in its second year and then dies.
+
+  - id: a2-nat-025
+    difficulty: 3
+    prompt: Which bird reaches the highest speed of any animal, in a dive?
+    answer: The peregrine falcon
+    distractors: [The golden eagle, The frigatebird, The swift]
+    fact: Over two hundred miles an hour, with bony tubercles in the nostrils to keep the airflow from stopping its breathing.
+
+  - id: a2-nat-026
+    difficulty: 4
+    prompt: What is the boundary between the earth's crust and mantle called?
+    answer: The Moho
+    distractors: [The Gutenberg discontinuity, The Lehmann boundary, The Conrad layer]
+    fact: A Croatian seismologist found it in 1909 because earthquake waves speed up abruptly when they cross it. No drill has ever reached it.
+
+  - id: a2-nat-027
+    difficulty: 4
+    prompt: What is permafrost?
+    answer: Ground that stays frozen for two years or more
+    distractors: [A layer of ice over a river in winter, Soil that never thaws below its surface crust, Frost that forms on glacier faces]
+    fact: It covers about a quarter of the northern hemisphere's land. Thawing it releases methane that was locked up long before there were people.
+
+  - id: a2-nat-028
+    difficulty: 4
+    prompt: Which mass extinction, about 252 million years ago, killed the largest share of life?
+    answer: The end-Permian
+    distractors: [The end-Cretaceous, The late Devonian, The end-Triassic]
+    fact: Something like nine in ten marine species went. The likeliest culprit is a vast volcanic province in Siberia that burned through coal beds.
+
+  - id: a2-nat-029
+    difficulty: 4
+    prompt: What kind of organism is the largest single living thing yet found?
+    answer: A fungus
+    distractors: [A tree, A coral, A seagrass]
+    fact: One honey fungus in Oregon spreads over three and a half square miles of forest floor and may be thousands of years old. Almost all of it is underground.
+
+  - id: a2-nat-030
+    difficulty: 4
+    prompt: Which ocean current carries warm water from the Gulf of Mexico toward Europe?
+    answer: The Gulf Stream
+    distractors: [The Canary Current, The Labrador Current, The North Equatorial Current]
+    fact: Benjamin Franklin had it charted to speed up the mail packets. It is why Britain is mild at the latitude of Labrador.
+
+  - id: a2-nat-031
+    difficulty: 4
+    prompt: What is the thermocline in a body of water?
+    answer: The depth at which temperature drops sharply
+    distractors: [The depth sunlight stops reaching, The layer where salinity changes, The level of maximum pressure]
+    fact: It reflects sound, which is how a submarine hides beneath it. Fish stack up along it too, which anglers with sonar look for.
+
+  - id: a2-nat-032
+    difficulty: 4
+    prompt: Which bird leaves its egg in another species' nest to be raised?
+    answer: The cuckoo
+    distractors: [The shrike, The jay, The nightjar]
+    fact: The chick hatches early and shoves the host's own eggs over the side. Some hosts have learned to spot the fraud, and those cuckoos have had to improve their forgeries.
+
+  - id: a2-nat-033
+    difficulty: 4
+    prompt: Which naturalist reached the idea of natural selection independently and forced its publication?
+    answer: Alfred Russel Wallace
+    distractors: [Thomas Huxley, Joseph Hooker, Charles Lyell]
+    fact: He sent his paper from the Malay Archipelago to a man who had sat on the same conclusion for twenty years. They read jointly to the Linnean Society in 1858.
+
+  - id: a2-nat-034
+    difficulty: 4
+    prompt: What are the white cliffs of Dover made of?
+    answer: Chalk
+    distractors: [Limestone, Gypsum, Marble]
+    fact: It is the compressed shells of microscopic algae that lived in a warm sea about ninety million years ago, laid down at roughly an inch a century.
+
+  - id: a2-nat-035
+    difficulty: 4
+    prompt: Which element makes up the largest share of the earth's crust by weight?
+    answer: Oxygen
+    distractors: [Silicon, Iron, Aluminum]
+    fact: Nearly half, locked into silicate minerals rather than floating free. Silicon is second, and the two together are most of the rock underfoot.
