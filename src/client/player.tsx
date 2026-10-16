@@ -266,7 +266,9 @@ function Wager({ state, send }: { state: PlayerState; send: ReturnType<typeof us
       <div class="eyebrow">Final question</div>
       <h1>Place your wager</h1>
       {closing && <WagerClock at={closing} held={state.held} />}
-      <p class="muted">Up to {max} points. Right answer wins it, wrong answer loses it.</p>
+      <p class="muted">
+        Up to {max} points. Right answer wins it, wrong answer loses it. No bet, nothing either way.
+      </p>
       <div class="grid3">
         {[0.25, 0.5, 1].map((frac) => (
           <button key={frac} class="btn" onClick={() => send({ t: 'set_wager', amount: Math.round(max * frac) })}>
@@ -300,11 +302,7 @@ function WagerClock({ at, held, placed }: { at: number; held?: boolean; placed?:
   return (
     <div class="center stack" style={{ gap: '2px' }}>
       <div class="clock" style={{ fontSize: '2.6rem' }}>{seconds}</div>
-      <p class="faint" style={{ margin: 0 }}>
-        {placed
-          ? seconds > 0 ? 'seconds left to change it' : 'betting closed'
-          : seconds > 0 ? 'seconds left — no bet means no points won or lost' : 'betting closed'}
-      </p>
+      <p class="faint" style={{ margin: 0 }}>{seconds > 0 ? 'seconds left to bet' : 'betting closed'}</p>
     </div>
   );
 }
@@ -436,7 +434,7 @@ function App() {
             <Waiting
               state={state}
               title={`Game ${state.game.index} of ${state.game.ofTotal ?? 1}`}
-              sub={`${state.config.roundsPerGame} rounds of ${state.config.questionsPerRound}. Starting now.`}
+              sub={`${state.config.roundsPerGame} rounds of ${state.config.questionsPerRound}`}
             />
           )}
           {state.phase === 'round_intro' && (
@@ -477,8 +475,6 @@ function App() {
                   <BreakClock
                     at={state.breakEndsAt}
                     held={state.held}
-                    minutes={state.config.roundBreakMinutes}
-                    auto={state.config.autoStartAfterBreak}
                   />
                 ) : undefined
               }
@@ -496,8 +492,6 @@ function App() {
                   <BreakClock
                     at={state.breakEndsAt}
                     held={state.held}
-                    minutes={state.config.gameBreakMinutes}
-                    auto={state.config.autoStartAfterBreak}
                   />
                 ) : undefined
               }

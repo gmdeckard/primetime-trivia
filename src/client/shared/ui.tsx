@@ -183,46 +183,26 @@ export function NextUp({ at, held, big, full }: { at?: number; held?: boolean; b
  * It renders mm:ss rather than a bare number of seconds because this is the
  * one clock in the game that runs for minutes, and "247" is not a length of
  * time anybody reads at a glance.
+ *
+ * A clock and nothing else. It used to caption itself with "5 minute break ·
+ * starts by itself", which is the software explaining its own behaviour to a
+ * room that did not ask: everyone in the hall can see it is a break and can
+ * read a falling clock. Whether it ends on the clock or on the MC is a
+ * setting, and belongs on the MC's screen, not on the wall.
  */
-export function BreakClock({
-  at,
-  held,
-  minutes,
-  auto,
-  big,
-}: {
-  at?: number;
-  held?: boolean;
-  minutes: number;
-  /** Whether reaching zero starts the next round by itself. */
-  auto?: boolean;
-  big?: boolean;
-}) {
+export function BreakClock({ at, held, big }: { at?: number; held?: boolean; big?: boolean }) {
   const now = useNow(!!at && !held);
-  // A whole number of minutes is a length the room understands. Anything else
-  // is just "break" — "0.15 minute break" is not a sentence, and the clock
-  // underneath is already telling them the real answer.
-  const length = Number.isInteger(minutes) && minutes >= 1 ? `${minutes} minute break` : 'Break';
-  if (!at) {
-    return <p class={big ? 'breakclock-note' : 'faint'}>{length} · waiting for the MC</p>;
-  }
+  if (!at) return null;
   if (held) {
     return <div class="center"><span class="pill">Paused</span></div>;
   }
-  const msLeft = Math.max(0, at - now);
-  const totalSeconds = Math.ceil(msLeft / 1000);
+  const totalSeconds = Math.max(0, Math.ceil((at - now) / 1000));
   const mm = Math.floor(totalSeconds / 60);
   const ss = String(totalSeconds % 60).padStart(2, '0');
-  const over = msLeft <= 0;
 
   return (
     <div class={`breakclock${big ? ' breakclock-big' : ''}`}>
-      <div class="breakclock-time tabular">{over ? '0:00' : `${mm}:${ss}`}</div>
-      <div class="breakclock-note">
-        {over
-          ? auto ? 'Starting now' : 'Break over — the MC starts the next round'
-          : auto ? `${length} · starts by itself` : `${length} · the MC starts it`}
-      </div>
+      <div class="breakclock-time tabular">{`${mm}:${ss}`}</div>
     </div>
   );
 }

@@ -459,10 +459,14 @@ function App() {
           {state.phase === 'question' && <AnsweredStrip state={state} />}
           {state.phase === 'locked' && (
             <div class="stack" style={{ gap: '14px' }}>
+              {/* "Answers in" is the state — everyone has locked. "Answer in
+                  4" underneath it was the countdown to the reveal, and the
+                  two together read as an instruction to answer within four
+                  seconds, which is the opposite of what just happened. */}
               <div class="center"><span class="pill pill-brass" style={{ fontSize: '1.3rem' }}>Answers in</span></div>
               <AutoAdvance
                 at={state.autoAdvanceAt}
-                label="Answer in"
+                label="Revealing in"
                 held={state.held}
               />
             </div>
@@ -499,8 +503,6 @@ function App() {
               <BreakClock
                 at={state.breakEndsAt}
                 held={state.held}
-                minutes={breakMinutes(state)}
-                auto={state.config.autoStartAfterBreak}
                 big
               />
             ) : (
@@ -584,8 +586,6 @@ function App() {
             <BreakClock
               at={state.breakEndsAt}
               held={state.held}
-              minutes={state.config.gameBreakMinutes}
-              auto={state.config.autoStartAfterBreak}
               big
             />
           )}

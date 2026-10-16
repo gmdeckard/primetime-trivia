@@ -130,8 +130,8 @@ function primaryAction(state: ControlState): { label: string; hint: string } {
     case 'question': return { label: 'Answers in', hint: `${state.answeredCount} of ${state.entryCount} answered` };
     case 'locked':
       return state.autoAdvanceAt
-        ? { label: 'Reveal now', hint: 'Revealing by itself shortly' }
-        : { label: 'Reveal the answer', hint: 'Build it up a moment' };
+        ? { label: 'Reveal now', hint: `${state.answeredCount} of ${state.entryCount} answered` }
+        : { label: 'Reveal the answer', hint: `${state.answeredCount} of ${state.entryCount} answered` };
     case 'reveal':
       return state.autoAdvanceAt
         ? { label: 'Next now', hint: state.upNext ?? '' }
@@ -148,17 +148,20 @@ function primaryAction(state: ControlState): { label: string; hint: string } {
       }
       return {
         label: `Start round ${(round?.index ?? 1) + 1}`,
-        hint: `Round ${round?.index} of ${round?.ofTotal} ended · ${state.config.roundBreakMinutes} min break`,
+        hint: `${state.config.roundBreakMinutes} min break · ${
+          state.config.autoStartAfterBreak ? 'starts itself' : 'waiting on you'
+        }`,
       };
     }
     case 'wager_bet':
       return {
         label: 'Show the final question',
-        hint: state.wagerEndsAt
-          ? `Betting closes by itself · ${state.answeredCount} of ${state.entryCount} in`
-          : 'Once every team has bet',
+        hint: `${state.answeredCount} of ${state.entryCount} have bet${
+          state.wagerEndsAt ? '' : ' · waiting on you'
+        }`,
       };
-    case 'wager_question': return { label: 'Answers in', hint: 'Lock the final question' };
+    case 'wager_question':
+      return { label: 'Answers in', hint: `${state.answeredCount} of ${state.entryCount} answered` };
     case 'wager_reveal': return { label: `Game ${state.game.index} standings`, hint: '' };
     case 'tiebreak': return { label: 'Answers in', hint: 'Closest wins' };
     case 'tiebreak_reveal': return { label: 'Back to standings', hint: '' };
@@ -168,7 +171,9 @@ function primaryAction(state: ControlState): { label: string; hint: string } {
         ? { label: 'Finish the night', hint: `Game ${state.game.index} of ${games} — that was the last one` }
         : {
             label: `Start game ${state.game.index + 1}`,
-            hint: `Game ${state.game.index} of ${games} done · ${state.config.gameBreakMinutes} min break`,
+            hint: `${state.config.gameBreakMinutes} min break · ${
+              state.config.autoStartAfterBreak ? 'starts itself' : 'waiting on you'
+            }`,
           };
     }
     case 'night_over': return { label: '—', hint: 'Night finished' };
@@ -922,10 +927,6 @@ function App() {
             <BreakClock
               at={state.breakEndsAt}
               held={state.held}
-              minutes={
-                state.phase === 'game_results' ? state.config.gameBreakMinutes : state.config.roundBreakMinutes
-              }
-              auto={state.config.autoStartAfterBreak}
             />
           </div>
         )}

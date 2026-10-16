@@ -116,6 +116,19 @@ try {
 
   const seen = new Set();
   const wording = [];
+
+  /**
+   * An opportunistic tap: click if it is there, carry on if it is not.
+   *
+   * The timeout is the whole point. Playwright waits 30 SECONDS by default
+   * for an element to become clickable, and `.catch(() => {})` swallows the
+   * eventual error without shortening the wait — so a tap aimed at a button
+   * that has already gone, like "All in" after the betting window closes,
+   * parks this loop for half a minute. Three phases went by inside one of
+   * those, and the run reported them as a stall in the game. They were a
+   * stall in the harness.
+   */
+  const tap = (locator) => locator.click({ timeout: 1000 }).catch(() => {});
   // The one and only tap.
   await mc.locator('.control-primary').click();
 
@@ -124,8 +137,18 @@ try {
   // every time the night gained a beat — and when the final wager went in,
   // a run quietly ran out of polls before the end and reported it as a stall.
   const deadline = Date.now() + 8 * 60_000;
+  // A blank reading means the MC page is not rendering — it crashed, or its
+  // assets went out from under it because somebody rebuilt mid-run. Either
+  // way the sampler is now blind, and a blind sampler reports "the night
+  // never reached X" as though the game had stalled, which sends you looking
+  // in the engine for a bug that is in the harness.
+  let blind = 0;
   while (Date.now() < deadline) {
     const phase = await mc.evaluate(() => document.querySelector('.pill-brass')?.textContent ?? '');
+    blind = phase ? 0 : blind + 1;
+    if (blind === 12) {
+      errors.push('the MC page stopped rendering — sampling is blind from here, so any missing phase below is unproven');
+    }
     if (phase && !seen.has(phase)) {
       seen.add(phase);
       await host.waitForTimeout(350);
@@ -147,12 +170,12 @@ try {
       console.log(`  ${phase}`);
     }
     if (phase === 'Live' || phase === 'Final') {
-      for (const [n, p] of players.entries()) await p.locator('.answer').nth(n % 4).click().catch(() => {});
+      for (const [n, p] of players.entries()) await tap(p.locator('.answer').nth(n % 4));
     }
     // One table bets, the others deliberately do not — a night has to survive
     // a table that simply never taps.
     if (phase === 'Wagers') {
-      await players[0].getByRole('button', { name: 'All in' }).click().catch(() => {});
+      await tap(players[0].getByRole('button', { name: 'All in' }));
     }
     if (phase === 'Night over') break;
     await mc.waitForTimeout(400);
