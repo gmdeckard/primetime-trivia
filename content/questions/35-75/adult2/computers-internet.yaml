@@ -189,7 +189,7 @@ questions:
 
   - id: a2-cmp-026
     difficulty: 4
-    prompt: Who designed the C programming language at Bell Labs in the early 1970s?
+    prompt: Who designed the C programming language in the early 1970s?
     answer: Dennis Ritchie
     distractors: [Niklaus Wirth, John McCarthy, Bjarne Stroustrup]
     fact: He wrote it to rewrite an operating system in, which had never been practical in a high-level language before. Almost everything written since descends from it.
@@ -224,7 +224,7 @@ questions:
 
   - id: a2-cmp-031
     difficulty: 4
-    prompt: What was unusual about the way ARPANET's successor assigned addresses, exhausted in 2011?
+    prompt: What was unusual about the way internet addresses, exhausted in 2011, were originally assigned?
     answer: It used 32-bit numbers, about four billion in total
     distractors: [It assigned them by country, It reused them every ninety days, It gave each machine two]
     fact: Four billion looked inexhaustible when the number was chosen in 1981. The replacement has enough for every grain of sand many times over.

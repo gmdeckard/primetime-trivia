@@ -16,7 +16,7 @@ questions:
     prompt: Which side of the road do drivers use in Britain, Japan and Australia?
     answer: The left
     distractors: [The right, The left in towns and the right elsewhere, It varies by state or prefecture]
-    fact: About a third of the world's population drives on that side. Sweden switched to the right overnight in 1967.
+    fact: About a third of the world's population drives on that side. One Scandinavian country switched to the right overnight in 1967.
 
   - id: a2-trn-003
     difficulty: 2
@@ -93,7 +93,7 @@ questions:
     prompt: Which waterway opened in 1959 to let ocean ships reach the Great Lakes?
     answer: The St. Lawrence Seaway
     distractors: [The Welland Canal, The Soo Locks, The Hudson Ship Channel]
-    fact: Canada and the United States built it jointly after decades of argument. Ships any larger than its locks are stuck on the lakes for life.
+    fact: The two countries built it jointly after decades of argument. Ships any larger than its locks are stuck on the lakes for life.
 
   - id: a2-trn-014
     difficulty: 3

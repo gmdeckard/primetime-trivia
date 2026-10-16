@@ -17,10 +17,10 @@ questions:
 
   - id: a2-exp-002
     difficulty: 2
-    prompt: Which sea did Thor Heyerdahl's balsa raft cross in 1947?
-    answer: The Pacific
-    distractors: [The Atlantic, The Indian, The Arctic]
-    fact: He wanted to show the voyage was possible, not that it happened. The drift took 101 days and ended on a reef.
+    prompt: Which continent did Ernest Shackleton set out to cross on foot in 1914?
+    answer: Antarctica
+    distractors: [Australia, Greenland, South America]
+    fact: The party never got ashore. All twenty-eight men survived two years on the ice and an open-boat voyage of eight hundred miles for help.
 
   - id: a2-exp-003
     difficulty: 2
@@ -101,7 +101,7 @@ questions:
 
   - id: a2-exp-014
     difficulty: 3
-    prompt: Which Scot crossed Canada to the Pacific in 1793, twelve years before Lewis and Clark reached it?
+    prompt: Which Scot crossed Canada to the Pacific in 1793, twelve years before any American expedition reached it?
     answer: Alexander Mackenzie
     distractors: [Simon Fraser, David Thompson, Samuel Hearne]
     fact: He painted a note on a rock recording the date and that he had come overland from Canada. The river now named after him he had followed the wrong way, to the Arctic.
@@ -171,7 +171,7 @@ questions:
 
   - id: a2-exp-024
     difficulty: 4
-    prompt: Which fourteenth-century Moroccan travelled further than Marco Polo and is far less known for it?
+    prompt: Which fourteenth-century Moroccan travelled further than the famous Venetian and is far less known for it?
     answer: Ibn Battuta
     distractors: [Al-Idrisi, Ibn Khaldun, Al-Masudi]
     fact: He covered perhaps seventy-five thousand miles over thirty years, from West Africa to China, and dictated the account on his return.

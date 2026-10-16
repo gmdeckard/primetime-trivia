@@ -172,10 +172,10 @@ questions:
 
   - id: a2-cel-024
     difficulty: 4
-    prompt: Which company sold the first commercial transistor radio, the TR-1, in 1954?
+    prompt: Which company sold the TR-1 of 1954, the first radio built with transistors?
     answer: Regency
     distractors: [Zenith, Emerson, Motorola]
-    fact: It cost about fifty dollars, which is several hundred today, and sold on novelty rather than sound. A Japanese company nobody had heard of took the idea seriously.
+    fact: It cost about fifty dollars, which is several hundred today, and sold on novelty rather than sound. The set was pocket-sized only if the pocket was generous.
 
   - id: a2-cel-025
     difficulty: 4

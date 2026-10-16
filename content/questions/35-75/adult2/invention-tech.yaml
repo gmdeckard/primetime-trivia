@@ -144,7 +144,7 @@ questions:
 
   - id: a2-inv-020
     difficulty: 3
-    prompt: What did the Wright brothers build in 1901 to solve the problem their gliders kept revealing?
+    prompt: What did the brothers from Dayton build in 1901 to solve the problem their gliders kept revealing?
     answer: A wind tunnel
     distractors: [A catapult launcher, A larger workshop, A lightweight engine]
     fact: The published lift tables everyone relied on turned out to be wrong. They tested two hundred wing shapes themselves and trusted their own numbers instead.

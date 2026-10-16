@@ -233,7 +233,7 @@ questions:
     prompt: Which producer staged lavish annual revues in New York from 1907 for a quarter of a century?
     answer: Florenz Ziegfeld
     distractors: [Charles Dillingham, Lee Shubert, George White]
-    fact: He hired Fanny Brice, W.C. Fields and Will Rogers, spent without restraint, and died broke after the 1929 crash.
+    fact: He hired Fanny Brice, W.C. Fields and Eddie Cantor, spent without restraint, and died broke after the 1929 crash.
 
   - id: a2-stg-034
     difficulty: 4

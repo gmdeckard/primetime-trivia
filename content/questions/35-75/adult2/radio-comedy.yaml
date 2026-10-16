@@ -172,10 +172,10 @@ questions:
 
   - id: a2-rad-024
     difficulty: 4
-    prompt: Which comedian was Johnny Carson's permanent guest host before taking a rival late-night show in 1986?
+    prompt: Which comedian was The Tonight Show's permanent guest host before taking a rival late-night show in 1986?
     answer: Joan Rivers
     distractors: [Phyllis Diller, Totie Fields, Moms Mabley]
-    fact: He never spoke to her again. Her show was cancelled within the year and she spent a decade working her way back.
+    fact: The host never spoke to her again. Her show was cancelled within the year and she spent a decade working her way back.
 
   - id: a2-rad-025
     difficulty: 4

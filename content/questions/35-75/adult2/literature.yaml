@@ -209,7 +209,7 @@ questions:
 
   - id: a2-lit-030
     difficulty: 4
-    prompt: Who wrote Invisible Cities, in which Marco Polo describes cities to Kublai Khan?
+    prompt: Who wrote Invisible Cities, in which a Venetian traveler describes cities to Kublai Khan?
     answer: Italo Calvino
     distractors: [Umberto Eco, Primo Levi, Cesare Pavese]
     fact: There are fifty-five cities and all of them, Polo eventually admits, are Venice. The structure follows a pattern he worked out on index cards.

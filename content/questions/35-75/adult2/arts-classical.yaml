@@ -1,0 +1,250 @@
+category: arts-classical
+pack:
+  id: adult2
+  name: Adult set 2
+
+questions:
+  - id: a2-art-001
+    difficulty: 2
+    prompt: Who painted the Mona Lisa?
+    answer: Leonardo da Vinci
+    distractors: [Raphael, Titian, Donatello]
+    fact: He carried it unfinished to France and it hung in a royal bathroom for a while. It became a worldwide name only after it was stolen in 1911.
+
+  - id: a2-art-002
+    difficulty: 2
+    prompt: Which Dutch painter produced The Night Watch?
+    answer: Rembrandt
+    distractors: [Johannes Vermeer, Frans Hals, Jan Steen]
+    fact: It was trimmed on all four sides in 1715 to fit a wall in Amsterdam's town hall, and the cut strips were never recovered.
+
+  - id: a2-art-003
+    difficulty: 2
+    prompt: How many strings does a standard violin have?
+    answer: Four
+    distractors: [Five, Six, Three]
+    fact: They are tuned in fifths, and the lowest is wound with metal over gut or synthetic core. A viola has four as well, pitched a fifth lower.
+
+  - id: a2-art-004
+    difficulty: 2
+    prompt: In which ballet is a princess turned into a swan by a sorcerer?
+    answer: Swan Lake
+    distractors: [Giselle, Coppelia, La Sylphide]
+    fact: Its first production in 1877 was judged a failure and the choreography was lost. The version danced today was staged two years after the composer's death.
+
+  - id: a2-art-005
+    difficulty: 2
+    prompt: The oboe, clarinet and bassoon belong to which family of instruments?
+    answer: The woodwinds
+    distractors: [The brass, The strings, The percussion]
+    fact: The flute is counted among them though it is usually metal, and the saxophone too, because the family is defined by how the air is set vibrating.
+
+  - id: a2-art-006
+    difficulty: 2
+    prompt: In which city is the opera house La Scala?
+    answer: Milan
+    distractors: [Rome, Venice, Naples]
+    fact: It was built on the site of a church, which is where the name comes from. Its gallery audience is famous for booing singers it judges underprepared.
+
+  - id: a2-art-007
+    difficulty: 2
+    prompt: Who painted the Campbell's Soup cans in 1962?
+    answer: Andy Warhol
+    distractors: [Roy Lichtenstein, Jasper Johns, Robert Rauschenberg]
+    fact: There are thirty-two canvases, one for every variety the company then sold. A Los Angeles gallery stacked real cans outside at a discount to mock the show.
+
+  - id: a2-art-008
+    difficulty: 3
+    prompt: Which composer wrote the oratorio Messiah in 1741?
+    answer: George Frideric Handel
+    distractors: [Henry Purcell, Arcangelo Corelli, Georg Philipp Telemann]
+    fact: He was German, worked in London, and wrote it in about three weeks. The first performance was a charity benefit in Dublin.
+
+  - id: a2-art-009
+    difficulty: 3
+    prompt: Which Austrian composer wrote over a hundred symphonies and is called the father of the string quartet?
+    answer: Joseph Haydn
+    distractors: [Johann Nepomuk Hummel, Carl Philipp Emanuel Bach, Luigi Boccherini]
+    fact: He spent nearly thirty years in uniform as a Hungarian prince's house composer. His skull was stolen from the grave by phrenologists and reunited with him in 1954.
+
+  - id: a2-art-010
+    difficulty: 3
+    prompt: Whose Eighth Symphony is known as the Unfinished?
+    answer: Franz Schubert
+    distractors: [Anton Bruckner, Gustav Mahler, Robert Schumann]
+    fact: He wrote two movements in 1822 and lived another six years without going back to it. He published almost none of his symphonies and died at thirty-one.
+
+  - id: a2-art-011
+    difficulty: 3
+    prompt: Which Czech composer wrote the symphony From the New World?
+    answer: Antonin Dvorak
+    distractors: [Bedrich Smetana, Leos Janacek, Zoltan Kodaly]
+    fact: He wrote it while running a conservatory in New York and spent a summer in a Czech-speaking village in Iowa. He insisted American composers should build on American melody.
+
+  - id: a2-art-012
+    difficulty: 3
+    prompt: Which Russian composer wrote Pictures at an Exhibition for piano?
+    answer: Modest Mussorgsky
+    distractors: [Nikolai Rimsky-Korsakov, Alexander Borodin, Mily Balakirev]
+    fact: It is a walk around a memorial show of a dead friend's drawings. Ravel's orchestration is now played far more often than the original.
+
+  - id: a2-art-013
+    difficulty: 3
+    prompt: Which French composer wrote Bolero?
+    answer: Maurice Ravel
+    distractors: [Claude Debussy, Camille Saint-Saens, Gabriel Faure]
+    fact: One tune, one rhythm, seventeen minutes, and a crescendo that never lets up. He called it a piece without music and was annoyed by its success.
+
+  - id: a2-art-014
+    difficulty: 3
+    prompt: Which Finnish composer wrote Finlandia?
+    answer: Jean Sibelius
+    distractors: [Edvard Grieg, Carl Nielsen, Franz Berwald]
+    fact: It was written as covert protest while Russia censored Finnish politics, so it was performed under harmless titles. He stopped composing for the last thirty years of his life.
+
+  - id: a2-art-015
+    difficulty: 3
+    prompt: Who painted Las Meninas?
+    answer: Diego Velazquez
+    distractors: [El Greco, Bartolome Esteban Murillo, Francisco de Zurbaran]
+    fact: He put himself at the easel and the royal couple in a mirror, so nobody agrees on who is looking at whom. Picasso painted fifty-eight variations on it.
+
+  - id: a2-art-016
+    difficulty: 3
+    prompt: Who painted The Third of May 1808, showing a firing squad at work?
+    answer: Francisco Goya
+    distractors: [Eugene Delacroix, Theodore Gericault, Jacques-Louis David]
+    fact: He painted it six years after the event, for the restored Spanish monarchy. He had been court painter through the occupation he was now condemning.
+
+  - id: a2-art-017
+    difficulty: 3
+    prompt: Which Surrealist painted the melting clocks of The Persistence of Memory?
+    answer: Salvador Dali
+    distractors: [Rene Magritte, Max Ernst, Joan Miro]
+    fact: The canvas is smaller than a sheet of notebook paper. He said the clocks came from watching camembert soften.
+
+  - id: a2-art-018
+    difficulty: 3
+    prompt: Which movement did Picasso and Georges Braque develop from about 1908?
+    answer: Cubism
+    distractors: [Fauvism, Futurism, Expressionism]
+    fact: The two worked so closely for five years that they sometimes could not tell their canvases apart. The name began as a critic's insult about little cubes.
+
+  - id: a2-art-019
+    difficulty: 3
+    prompt: Which architect solved the dome of Santa Maria del Fiore, finishing it in 1436?
+    answer: Filippo Brunelleschi
+    distractors: [Leon Battista Alberti, Andrea Palladio, Donato Bramante]
+    fact: It had stood open for decades because nobody could span it. He built it in two shells with a herringbone brick pattern and no supporting framework underneath.
+
+  - id: a2-art-020
+    difficulty: 3
+    prompt: Who painted American Gothic?
+    answer: Grant Wood
+    distractors: [Thomas Hart Benton, John Steuart Curry, Charles Sheeler]
+    fact: The models were his sister and his dentist, and the house is in Eldon, Iowa. Iowans wrote to complain that he had made them look sour.
+
+  - id: a2-art-021
+    difficulty: 3
+    prompt: Who painted Nighthawks, with four figures in a late-night diner?
+    answer: Edward Hopper
+    distractors: [George Bellows, Reginald Marsh, Stuart Davis]
+    fact: No door is visible into the diner. He said he probably painted the loneliness of a large city without intending to.
+
+  - id: a2-art-022
+    difficulty: 3
+    prompt: Which Bizet opera follows a Seville cigarette-factory worker and a soldier?
+    answer: Carmen
+    distractors: [The Pearl Fishers, Manon, Thais]
+    fact: The first audience was shocked by a heroine who smokes, fights and dies on stage. He died three months later at thirty-six, believing it a failure.
+
+  - id: a2-art-023
+    difficulty: 3
+    prompt: Which Verdi opera centers on a hunchbacked court jester and his daughter?
+    answer: Rigoletto
+    distractors: [Il Trovatore, La Traviata, Falstaff]
+    fact: Censors in Venice made him move the story out of the French court and demote the king to a duke before they would allow it.
+
+  - id: a2-art-024
+    difficulty: 3
+    prompt: Which conductor led the Boston Pops for half a century from 1930?
+    answer: Arthur Fiedler
+    distractors: [Serge Koussevitzky, Erich Leinsdorf, Charles Munch]
+    fact: He started the free riverside concerts on the Esplanade and recorded light music by the hundred. He also collected fire engines and chased alarms.
+
+  - id: a2-art-025
+    difficulty: 3
+    prompt: What does it mean to sing a cappella?
+    answer: Without instrumental accompaniment
+    distractors: [Without a written score, Without a conductor, In unison rather than in parts]
+    fact: The phrase means in the chapel style, from an era when church singing went unaccompanied while secular music did not.
+
+  - id: a2-art-026
+    difficulty: 4
+    prompt: Which Madrid museum holds Spain's national collection of paintings?
+    answer: The Prado
+    distractors: [The Reina Sofia, The Thyssen-Bornemisza, The Royal Academy of San Fernando]
+    fact: Its core is what Spanish kings happened to buy, which is why it is thin on the Dutch and unmatched on Spanish and Venetian work.
+
+  - id: a2-art-027
+    difficulty: 4
+    prompt: Which Italian conductor left Fascist Italy and led the NBC Symphony from 1937?
+    answer: Arturo Toscanini
+    distractors: [Victor de Sabata, Tullio Serafin, Bruno Walter]
+    fact: He was beaten in Bologna for refusing to open a concert with the Fascist anthem. He conducted from memory, being too shortsighted to read a score on the podium.
+
+  - id: a2-art-028
+    difficulty: 4
+    prompt: Who spent twenty-seven years on the gilded baptistery doors known as the Gates of Paradise?
+    answer: Lorenzo Ghiberti
+    distractors: [Andrea Pisano, Luca della Robbia, Jacopo della Quercia]
+    fact: He won the commission in a competition against Brunelleschi. The originals were damaged by a flood in 1966 and the doors in place now are copies.
+
+  - id: a2-art-029
+    difficulty: 4
+    prompt: Which American composer wrote Appalachian Spring and Fanfare for the Common Man?
+    answer: Aaron Copland
+    distractors: [Virgil Thomson, Roy Harris, Walter Piston]
+    fact: The ballet had no title until Martha Graham supplied one from a poem, and the poem's spring is a water source rather than the season.
+
+  - id: a2-art-030
+    difficulty: 4
+    prompt: Which English composer wrote the opera Peter Grimes?
+    answer: Benjamin Britten
+    distractors: [Ralph Vaughan Williams, William Walton, Michael Tippett]
+    fact: It reopened Sadler's Wells in 1945 with half the company against it. He wrote much of his later work for the voice of his partner, the tenor Peter Pears.
+
+  - id: a2-art-031
+    difficulty: 4
+    prompt: Which Hungarian composer traveled the villages with Zoltan Kodaly recording folk songs?
+    answer: Bela Bartok
+    distractors: [Erno Dohnanyi, Leo Weiner, Gyorgy Ligeti]
+    fact: They used a wax-cylinder phonograph and collected thousands of melodies. He died in New York in 1945, poor and largely unperformed there.
+
+  - id: a2-art-032
+    difficulty: 4
+    prompt: Who painted the triptych The Garden of Earthly Delights?
+    answer: Hieronymus Bosch
+    distractors: [Matthias Grunewald, Lucas Cranach the Elder, Hans Memling]
+    fact: Only about twenty-five paintings are firmly his, and no letters or records in his own hand survive. Nobody knows what the middle panel was meant to mean.
+
+  - id: a2-art-033
+    difficulty: 4
+    prompt: Which German composer wrote Der Rosenkavalier and Also sprach Zarathustra?
+    answer: Richard Strauss
+    distractors: [Max Reger, Hans Pfitzner, Engelbert Humperdinck]
+    fact: The opening of the tone poem became famous through a 1968 film. He accepted a post under the Nazis and spent the rest of his life answering for it.
+
+  - id: a2-art-034
+    difficulty: 4
+    prompt: Which Viennese composer devised the twelve-tone method of composition?
+    answer: Arnold Schoenberg
+    distractors: [Alban Berg, Anton Webern, Ernst Krenek]
+    fact: Every note of the scale gets equal weight and no key is left. He was also a painter, and he feared the number thirteen enough to misspell his own name to avoid it.
+
+  - id: a2-art-035
+    difficulty: 4
+    prompt: Which Danish architect designed the Sydney Opera House?
+    answer: Jorn Utzon
+    distractors: [Arne Jacobsen, Alvar Aalto, Eero Saarinen]
+    fact: His winning drawing was pulled from the rejected pile by one judge. He quit in 1966 over money and interference and never saw the finished building.

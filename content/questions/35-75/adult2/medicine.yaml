@@ -107,7 +107,7 @@ questions:
     prompt: Which is the largest organ of the human body?
     answer: The skin
     distractors: [The liver, The small intestine, The lungs]
-    fact: It runs to about twenty square feet on an adult and replaces itself roughly every month. It is also where vitamin D production starts.
+    fact: It runs to about twenty square feet on an adult and replaces itself roughly every month. It is also the body's first barrier against infection.
 
   - id: a2-med-016
     difficulty: 3
