@@ -1,0 +1,255 @@
+category: american-history
+pack:
+  id: adult2
+  name: Adult set 2
+
+# The founding through to about 1900, which is where this category stops and
+# The Twentieth Century takes over. Adult set 1 covers the documents and the
+# famous turning points; this goes at the arguments between them — the crises,
+# the compromises and the people on the losing side of both.
+
+questions:
+  - id: a2-amh-001
+    difficulty: 2
+    prompt: How many colonies declared independence in 1776?
+    answer: Thirteen
+    distractors: [Eleven, Fifteen, Twenty]
+    fact: The stripes on the flag still record them. The stars were added for new states until somebody realized the flag would not survive fifty stripes.
+
+  - id: a2-amh-002
+    difficulty: 2
+    prompt: Who was the first president of the United States?
+    answer: George Washington
+    distractors: [John Adams, Thomas Jefferson, Benjamin Franklin]
+    fact: He stood down after two terms when nothing obliged him to, and that restraint held as an unwritten rule for a hundred and forty years.
+
+  - id: a2-amh-003
+    difficulty: 2
+    prompt: What is the Bill of Rights?
+    answer: The first ten amendments to the Constitution
+    distractors: [The preamble to the Declaration, A list of grievances against the king, The articles the states signed in 1781]
+    fact: Twelve were sent to the states. Ten were ratified in 1791, and one of the leftovers was finally ratified in 1992, after two hundred and two years.
+
+  - id: a2-amh-004
+    difficulty: 2
+    prompt: Who is credited with the line "Give me liberty, or give me death"?
+    answer: Patrick Henry
+    distractors: [Samuel Adams, Nathan Hale, John Hancock]
+    fact: Nobody wrote it down at the time. The version everyone quotes was reconstructed from memory forty years later by a biographer.
+
+  - id: a2-amh-005
+    difficulty: 2
+    prompt: Which state did thousands of prospectors head for in 1849?
+    answer: California
+    distractors: [Alaska, Colorado, Nevada]
+    fact: The ones who did well sold shovels. The man whose mill the gold was found at died broke, having never managed to keep anyone off his land.
+
+  - id: a2-amh-006
+    difficulty: 2
+    prompt: Which agreement did the Pilgrims sign aboard ship in 1620 before going ashore?
+    answer: The Mayflower Compact
+    distractors: [The Plymouth Charter, The Articles of Plantation, The New England Covenant]
+    fact: They had landed well north of where their patent allowed, so their right to govern themselves rested on nothing but their own agreement to do it.
+
+  - id: a2-amh-007
+    difficulty: 2
+    prompt: Which amendment abolished slavery?
+    answer: The Thirteenth
+    distractors: [The Tenth, The Fourteenth, The Fifteenth]
+    fact: The Emancipation Proclamation had only reached states in rebellion. The amendment is what ended it everywhere, including in states that had stayed loyal.
+
+  - id: a2-amh-008
+    difficulty: 3
+    prompt: Which Union general marched from Atlanta to the sea in 1864?
+    answer: William Sherman
+    distractors: [Philip Sheridan, George Meade, Ambrose Burnside]
+    fact: 'He cut loose from his own supply lines and lived off the country, which was the point: the march was aimed at the South''s willingness to go on rather than at its army.'
+
+  - id: a2-amh-009
+    difficulty: 3
+    prompt: Which 1823 policy warned European powers against new colonies in the Americas?
+    answer: The Monroe Doctrine
+    distractors: [The Adams-Onis Treaty, The Open Door Policy, Manifest Destiny]
+    fact: The United States could not have enforced a word of it for decades. The Royal Navy could, and did, because Britain wanted the same thing.
+
+  - id: a2-amh-010
+    difficulty: 3
+    prompt: Who led the 1859 raid on the federal arsenal at Harpers Ferry?
+    answer: John Brown
+    distractors: [Nat Turner, Denmark Vesey, Frederick Douglass]
+    fact: The raid failed in thirty-six hours and the marines who took him were commanded by Robert E. Lee, eighteen months before he resigned his commission.
+
+  - id: a2-amh-011
+    difficulty: 3
+    prompt: At which 1876 battle was George Custer's command destroyed?
+    answer: The Little Bighorn
+    distractors: [Wounded Knee, Sand Creek, Rosebud]
+    fact: News reached the east during the centennial celebrations, which is part of why it landed as hard as it did.
+
+  - id: a2-amh-012
+    difficulty: 3
+    prompt: Which 1787 compromise gave the House seats by population and the Senate two per state?
+    answer: The Great Compromise
+    distractors: [The Three-Fifths Compromise, The Virginia Plan, The Northwest Ordinance]
+    fact: The small states had threatened to walk out. The arrangement means Wyoming and California have the same voice in one chamber and a seventy-fold difference in the other.
+
+  - id: a2-amh-013
+    difficulty: 3
+    prompt: Which waterway, opened in 1825, linked the Hudson River to Lake Erie?
+    answer: The Erie Canal
+    distractors: [The Chesapeake and Ohio Canal, The Welland Canal, The Illinois and Michigan Canal]
+    fact: It cut the cost of moving a ton of freight inland by about ninety percent and made New York the country's busiest port almost overnight.
+
+  - id: a2-amh-014
+    difficulty: 3
+    prompt: Which 1898 war brought Puerto Rico, Guam and the Philippines under American control?
+    answer: The Spanish-American War
+    distractors: [The Mexican-American War, The Boxer Rebellion, The Philippine Insurrection]
+    fact: It lasted about ten weeks. Far more American soldiers died of disease than of wounds, which was true of most wars before the next century.
+
+  - id: a2-amh-015
+    difficulty: 3
+    prompt: Which Shawnee leader built a confederacy of tribes to resist settlement, and died at the Thames in 1813?
+    answer: Tecumseh
+    distractors: [Pontiac, Black Hawk, Osceola]
+    fact: His brother, known as the Prophet, held the religious half of the movement together and lost the battle that broke it while Tecumseh was away recruiting.
+
+  - id: a2-amh-016
+    difficulty: 3
+    prompt: Which capital city did British troops burn in August 1814?
+    answer: Washington
+    distractors: [Baltimore, Philadelphia, Annapolis]
+    fact: A storm put the fires out two days later. The story that the house was painted white to hide the scorching is not true; it had been whitewashed since 1798.
+
+  - id: a2-amh-017
+    difficulty: 3
+    prompt: Which Secretary of State arranged the purchase of Alaska in 1867?
+    answer: William Seward
+    distractors: [Hamilton Fish, Daniel Webster, John Hay]
+    fact: Critics called it his icebox and his folly. It worked out at about two cents an acre.
+
+  - id: a2-amh-018
+    difficulty: 3
+    prompt: What was Reconstruction?
+    answer: The period of rebuilding and federal oversight of the South after the Civil War
+    distractors: [The rebuilding of Washington after it was burned, The resettlement of the plains, The reorganization of the army after 1865]
+    fact: It brought hundreds of Black officials into office across the South, and almost all of them were out again within a generation.
+
+  - id: a2-amh-019
+    difficulty: 3
+    prompt: Which 1890 killing in South Dakota is usually taken as the end of the Indian Wars?
+    answer: Wounded Knee
+    distractors: [Sand Creek, Washita, Bear River]
+    fact: It followed an attempt to disarm a band who had been performing the Ghost Dance, a movement the agents on the ground had badly misread.
+
+  - id: a2-amh-020
+    difficulty: 3
+    prompt: Which president was the only one to serve two terms that did not run back to back?
+    answer: Grover Cleveland
+    distractors: [Benjamin Harrison, Rutherford Hayes, Chester Arthur]
+    fact: He is counted twice in the numbering, which is why the list of presidents runs higher than the number of men who have held the office.
+
+  - id: a2-amh-021
+    difficulty: 3
+    prompt: Which 1804 duel killed Alexander Hamilton?
+    answer: His duel with Aaron Burr
+    distractors: [His duel with James Monroe, His duel with John Adams, His duel with Charles Lee]
+    fact: Burr was the sitting vice president at the time. He was charged with murder in two states, never tried, and finished his term.
+
+  - id: a2-amh-022
+    difficulty: 3
+    prompt: What did the Fugitive Slave Act of 1850 require of citizens in free states?
+    answer: To assist in capturing escaped slaves
+    distractors: [To register any free Black residents, To pay a tax funding the slave states, To report the movement of any ship from the South]
+    fact: Refusing carried a fine and a jail term. More than any other law it turned northerners who had been indifferent into people with a side.
+
+  - id: a2-amh-023
+    difficulty: 3
+    prompt: Which escaped slave became the best known abolitionist orator and founded the newspaper The North Star?
+    answer: Frederick Douglass
+    distractors: [Sojourner Truth, Harriet Tubman, Booker T. Washington]
+    fact: He taught himself to read as a boy. His first autobiography named so many names that he left for Britain for two years in case his former owner came after him.
+
+  - id: a2-amh-024
+    difficulty: 3
+    prompt: Which 1773 act prompted colonists to dump a shipment into Boston harbor?
+    answer: The Tea Act
+    distractors: [The Stamp Act, The Townshend Acts, The Quartering Act]
+    fact: It made the tea cheaper, not dearer. The objection was to the principle of a tax imposed without consent, and to the monopoly it handed one company.
+
+  - id: a2-amh-025
+    difficulty: 4
+    prompt: Which 1798 laws let the president deport foreigners and made criticizing the government a crime?
+    answer: The Alien and Sedition Acts
+    distractors: [The Judiciary Act, The Naturalization Compact, The Enforcement Acts]
+    fact: About twenty-five people were arrested under them, mostly newspaper editors. The backlash helped put Jefferson in office two years later.
+
+  - id: a2-amh-026
+    difficulty: 4
+    prompt: Which 1832 crisis saw South Carolina declare a federal tariff void within its borders?
+    answer: The Nullification Crisis
+    distractors: [The Hartford Convention, Bleeding Kansas, The Dorr Rebellion]
+    fact: Jackson, a southerner and a slaveholder, offered to lead troops there himself. The argument over whether a state could refuse a federal law did not end there.
+
+  - id: a2-amh-027
+    difficulty: 4
+    prompt: Which 1797 affair, over French officials demanding bribes before talks, nearly brought war?
+    answer: The XYZ Affair
+    distractors: [The Citizen Genet Affair, The Chesapeake Affair, The Quasi-War Commission]
+    fact: The letters X, Y and Z are what Adams substituted for the French agents' names when he gave the papers to Congress.
+
+  - id: a2-amh-028
+    difficulty: 4
+    prompt: Which 1819 Supreme Court case established that federal law overrides a conflicting state law?
+    answer: McCulloch v. Maryland
+    distractors: [Gibbons v. Ogden, Fletcher v. Peck, Worcester v. Georgia]
+    fact: Maryland had taxed a branch of the national bank out of existence. The ruling contains the line that the power to tax involves the power to destroy.
+
+  - id: a2-amh-029
+    difficulty: 4
+    prompt: Which bargain in 1877 settled a disputed presidential election and ended Reconstruction?
+    answer: The Compromise of 1877
+    distractors: [The Crittenden Compromise, The Wilmot Proviso, The Force Bill]
+    fact: Hayes took the presidency and federal troops left the South. Nothing was written down, which is why historians still argue about what exactly was agreed.
+
+  - id: a2-amh-030
+    difficulty: 4
+    prompt: What was the Know-Nothing party chiefly organized against?
+    answer: Immigration, and Catholic immigration in particular
+    distractors: [The expansion of slavery, The national bank, The annexation of Texas]
+    fact: The name comes from members being told to say they knew nothing when asked about the order. It briefly held dozens of seats in Congress before the slavery question swallowed it.
+
+  - id: a2-amh-031
+    difficulty: 4
+    prompt: Which 1794 treaty with Britain was so unpopular that its author was burned in effigy?
+    answer: The Jay Treaty
+    distractors: [The Pinckney Treaty, The Treaty of Greenville, The Convention of 1800]
+    fact: It avoided a war the country could not have fought, and settled almost nothing the public cared about. Jay said he could have crossed the country by the light of his own effigies.
+
+  - id: a2-amh-032
+    difficulty: 4
+    prompt: Which 1807 law closed American ports to foreign trade in an attempt to punish Britain and France?
+    answer: The Embargo Act
+    distractors: [The Navigation Act, The Tariff of Abominations, The Force Bill]
+    fact: It hurt New England shipping far more than it hurt Europe, and smuggling across the Canadian border became an industry. It was repealed within fifteen months.
+
+  - id: a2-amh-033
+    difficulty: 4
+    prompt: Which 1820s political faction formed around opposition to Andrew Jackson?
+    answer: The Whigs
+    distractors: [The Free Soilers, The Anti-Masons, The Copperheads]
+    fact: They took the name from the British party that had opposed royal power, because they said Jackson was behaving like a king.
+
+  - id: a2-amh-034
+    difficulty: 4
+    prompt: What did the Dawes Act of 1887 do to tribal land?
+    answer: Broke it into individual allotments
+    distractors: [Guaranteed it against sale, Returned it to federal ownership, Exempted it from taxation]
+    fact: Whatever was left after the allotments was sold off, and about two thirds of the land held by tribes passed out of their hands within fifty years.
+
+  - id: a2-amh-035
+    difficulty: 4
+    prompt: Which 1848 document, modeled on the Declaration of Independence, listed women's grievances?
+    answer: The Declaration of Sentiments
+    distractors: [The Lowell Appeal, The Seneca Address, The Rochester Memorial]
+    fact: It held that all men and women are created equal. Of its resolutions, the demand for the vote was the only one that did not pass unanimously.
