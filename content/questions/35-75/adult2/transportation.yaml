@@ -1,0 +1,250 @@
+category: transportation
+pack:
+  id: adult2
+  name: Adult set 2
+
+questions:
+  - id: a2-trn-001
+    difficulty: 2
+    prompt: What does the VIN on a vehicle stand for?
+    answer: Vehicle Identification Number
+    distractors: [Vehicle Inspection Notice, Verified Import Number, Vehicle Insurance Number]
+    fact: It has been seventeen characters since 1981. The letters I, O and Q are never used, because they look like digits.
+
+  - id: a2-trn-002
+    difficulty: 2
+    prompt: Which side of the road do drivers use in Britain, Japan and Australia?
+    answer: The left
+    distractors: [The right, The left in towns and the right elsewhere, It varies by state or prefecture]
+    fact: About a third of the world's population drives on that side. Sweden switched to the right overnight in 1967.
+
+  - id: a2-trn-003
+    difficulty: 2
+    prompt: What is a beltway?
+    answer: A highway that loops around a city
+    distractors: [A highway with no exits, A lane reserved for buses, The outermost lane of an interstate]
+    fact: The one around Washington gave American English a figure of speech for the political class that lives inside it.
+
+  - id: a2-trn-004
+    difficulty: 2
+    prompt: What does a car's odometer measure?
+    answer: The total distance the car has traveled
+    distractors: [The engine's speed in revolutions, The fuel used since the last fill, The hours the engine has run]
+    fact: Rolling one back is a federal crime. Digital clusters did not end the practice, they just moved it to a laptop.
+
+  - id: a2-trn-005
+    difficulty: 2
+    prompt: Which Japanese company builds the Civic and the Accord?
+    answer: Honda
+    distractors: [Mazda, Subaru, Isuzu]
+    fact: It started by bolting small engines onto bicycle frames in postwar Japan and was the world's largest motorcycle maker before it built a car.
+
+  - id: a2-trn-006
+    difficulty: 2
+    prompt: What did John Boyd Dunlop develop in 1888 to improve his son's tricycle?
+    answer: The pneumatic tire
+    distractors: [The chain drive, The ball bearing, The coaster brake]
+    fact: An earlier Scottish patent for the same idea had lapsed and been forgotten. Air-filled tires reached bicycles a decade before cars needed them.
+
+  - id: a2-trn-007
+    difficulty: 2
+    prompt: Which ocean did Pan Am's first jet passenger service cross in 1958?
+    answer: The Atlantic
+    distractors: [The Pacific, The Indian, The Arctic]
+    fact: The Boeing 707 cut the New York to Paris run to about seven hours and emptied the ocean liners within a decade.
+
+  - id: a2-trn-008
+    difficulty: 3
+    prompt: Which German engineer patented a three-wheeled gasoline automobile in 1886?
+    answer: Karl Benz
+    distractors: [Nikolaus Otto, Wilhelm Maybach, Rudolf Uhlenhaut]
+    fact: His wife took the car on a sixty-mile trip without telling him, fixing it with a hatpin and a garter along the way, and the publicity made the business.
+
+  - id: a2-trn-009
+    difficulty: 3
+    prompt: Which company did Walter Chrysler build out of the ailing Maxwell firm in 1925?
+    answer: Chrysler
+    distractors: [Hudson, Packard, Nash]
+    fact: He had run locomotive shops and then Buick. Three years after founding it he bought the Dodge brothers' company and became one of the big three.
+
+  - id: a2-trn-010
+    difficulty: 3
+    prompt: Which railroad built west from Omaha to meet the Central Pacific in 1869?
+    answer: The Union Pacific
+    distractors: [The Northern Pacific, The Santa Fe, The Rock Island]
+    fact: Congress paid by the mile, which is why some of the track wandered. Much of the labor was Irish immigrants and Civil War veterans.
+
+  - id: a2-trn-011
+    difficulty: 3
+    prompt: Where was the golden spike driven in May 1869?
+    answer: Promontory Summit, Utah
+    distractors: ["Ogden, Utah", "Cheyenne, Wyoming", "Sacramento, California"]
+    fact: The spike was pulled straight back out and is now in a museum. The telegraph operator sent one word, "done", and bells rang in both coasts' cities.
+
+  - id: a2-trn-012
+    difficulty: 3
+    prompt: Who built the locomotive Rocket, which won the Rainhill Trials in 1829?
+    answer: George Stephenson
+    distractors: [Richard Trevithick, Timothy Hackworth, Matthew Murray]
+    fact: His son Robert did much of the design work. The layout they settled on, with a multi-tube boiler and blast pipe, set the pattern for a century.
+
+  - id: a2-trn-013
+    difficulty: 3
+    prompt: Which waterway opened in 1959 to let ocean ships reach the Great Lakes?
+    answer: The St. Lawrence Seaway
+    distractors: [The Welland Canal, The Soo Locks, The Hudson Ship Channel]
+    fact: Canada and the United States built it jointly after decades of argument. Ships any larger than its locks are stuck on the lakes for life.
+
+  - id: a2-trn-014
+    difficulty: 3
+    prompt: Which airship caught fire while mooring at Lakehurst, New Jersey in 1937?
+    answer: The Hindenburg
+    distractors: [The Graf Zeppelin, The Akron, The R101]
+    fact: Most of the ninety-seven people aboard survived. The newsreel footage and the live radio report ended commercial airship travel within months.
+
+  - id: a2-trn-015
+    difficulty: 3
+    prompt: Which American marque introduced the first mass-produced automatic transmission, in 1940?
+    answer: Oldsmobile
+    distractors: [Buick, Pontiac, DeSoto]
+    fact: It was called Hydra-Matic and cost about fifty-seven dollars extra. The same gearbox went into tanks during the war.
+
+  - id: a2-trn-016
+    difficulty: 3
+    prompt: Which 1965 book attacked the American auto industry's safety record?
+    answer: Unsafe at Any Speed
+    distractors: [The Insolent Chariots, Wheels, The Reckoning]
+    fact: General Motors hired investigators to dig into the author's private life. When that came out in Senate hearings it did more for the cause than the book had.
+
+  - id: a2-trn-017
+    difficulty: 3
+    prompt: Which rear-engined compact was the target of that book's opening chapter?
+    answer: The Chevrolet Corvair
+    distractors: [The Ford Falcon, The Plymouth Valiant, The AMC Rambler]
+    fact: Later federal testing found it no worse than its rivals. By then the name was finished and production had stopped.
+
+  - id: a2-trn-018
+    difficulty: 3
+    prompt: What is a VLCC?
+    answer: A very large crude carrier
+    distractors: [A vessel licensed for coastal cargo, A variable-load container crane, A very light commercial chassis]
+    fact: One holds around two million barrels and is too big for the Panama Canal. The next size up cannot use the Suez either and goes around Africa.
+
+  - id: a2-trn-019
+    difficulty: 3
+    prompt: What raises and lowers ships about eighty-five feet on the Panama Canal?
+    answer: Locks
+    distractors: [Hydraulic lifts, Inclined rail cradles, Tidal gates]
+    fact: The water is purely gravity-fed from an artificial lake above. Each transit uses about fifty million gallons and sends it out to sea.
+
+  - id: a2-trn-020
+    difficulty: 3
+    prompt: Which American city still runs cable cars on Andrew Hallidie's 1873 system?
+    answer: San Francisco
+    distractors: [Seattle, Pittsburgh, Cincinnati]
+    fact: He was moved to build it after watching horses dragged downhill by a loaded streetcar. Three of the original twenty-odd lines survive.
+
+  - id: a2-trn-021
+    difficulty: 3
+    prompt: Which railroad's 1970 collapse was the largest American bankruptcy to that date?
+    answer: The Penn Central
+    distractors: [The Erie Lackawanna, The Milwaukee Road, The Reading]
+    fact: It was formed two years earlier by merging bitter rivals whose computer systems, work rules and managers never combined. Freight simply got lost.
+
+  - id: a2-trn-022
+    difficulty: 3
+    prompt: Which corporation took over America's intercity passenger trains in 1971?
+    answer: Amtrak
+    distractors: [Conrail, The Interstate Rail Board, The Pullman Company]
+    fact: The private railroads were glad to hand over a service losing money on every ticket. It inherited worn equipment in twenty different paint schemes.
+
+  - id: a2-trn-023
+    difficulty: 3
+    prompt: What does a ship's gross tonnage actually measure?
+    answer: Its total enclosed volume
+    distractors: [The weight of cargo it can carry, The weight of water it displaces, The weight of the empty hull]
+    fact: The word comes from the tun, a wine cask. Port fees are charged on it, so naval architects have spent centuries designing around the formula.
+
+  - id: a2-trn-024
+    difficulty: 3
+    prompt: In trucking, what does it mean to run deadhead?
+    answer: To drive with no load
+    distractors: [To drive beyond legal hours, To drive without a second driver, To drive a route with no scheduled stops]
+    fact: Nobody pays for those miles, which is why a driver will wait a day for a backhaul rather than go home empty.
+
+  - id: a2-trn-025
+    difficulty: 3
+    prompt: Which American bus company grew out of a Minnesota miner's 1914 car service to the iron range?
+    answer: Greyhound
+    distractors: [Trailways, Peter Pan, Continental Trailways]
+    fact: Carl Wickman charged fifteen cents to haul miners four miles in a seven-seat car. The name came later, from a passerby's remark about the buses' shape.
+
+  - id: a2-trn-026
+    difficulty: 4
+    prompt: Which engineer designed the Brooklyn Bridge and died of an injury suffered while surveying it?
+    answer: John Roebling
+    distractors: [James Eads, Gustav Lindenthal, Othmar Ammann]
+    fact: His son took over and was crippled by decompression sickness from the caissons. His daughter-in-law then ran the work for eleven years.
+
+  - id: a2-trn-027
+    difficulty: 4
+    prompt: Which steamboat made the first commercially successful run up the Hudson, in 1807?
+    answer: The Clermont
+    distractors: [The Phoenix, The Charlotte Dundas, The New Orleans]
+    fact: Robert Fulton did not invent the steamboat and said so. He put a working engine, a hull and a paying route together, which nobody before him had.
+
+  - id: a2-trn-028
+    difficulty: 4
+    prompt: Which 1952 British jet airliner was grounded after its fuselage failed in flight?
+    answer: The de Havilland Comet
+    distractors: [The Vickers Viscount, The Bristol Britannia, The Avro Tudor]
+    fact: Metal fatigue cracked outward from square window corners. Every airliner since has rounded windows, and the investigation built the field of fatigue testing.
+
+  - id: a2-trn-029
+    difficulty: 4
+    prompt: Which union leader led the 1894 boycott of trains hauling Pullman cars?
+    answer: Eugene Debs
+    distractors: [Samuel Gompers, Terence Powderly, Peter McGuire]
+    fact: He went to jail for six months for defying a federal injunction and read economics the whole time. He came out a socialist and ran for president five times.
+
+  - id: a2-trn-030
+    difficulty: 4
+    prompt: Which 1873 invention of Eli Janney meant no one had to stand between two cars to join them?
+    answer: The knuckle coupler
+    distractors: [The air hose, The buffer plate, The link and pin]
+    fact: The old link-and-pin method cost brakemen fingers and hands routinely. A one-armed railroad man was a recognizable figure before Congress banned the older gear.
+
+  - id: a2-trn-031
+    difficulty: 4
+    prompt: What did American railroads impose on the country in November 1883?
+    answer: Standard time zones
+    distractors: [A uniform ticket tariff, A common freight classification, A national telegraph code]
+    fact: Cities had kept their own sun time, giving the country hundreds of local noons. Congress did not get around to making it law until 1918.
+
+  - id: a2-trn-032
+    difficulty: 4
+    prompt: Which Scottish engineer gave his name to a method of surfacing roads with crushed stone?
+    answer: John Loudon McAdam
+    distractors: [Thomas Telford, John Metcalf, Robert Stevenson]
+    fact: The trick was a cambered bed of small graded stones that drained and locked together. Tar came later and gave the surface its modern name.
+
+  - id: a2-trn-033
+    difficulty: 4
+    prompt: Which stainless-steel streamliner ran Denver to Chicago nonstop in 1934 at an average of seventy-seven miles an hour?
+    answer: The Pioneer Zephyr
+    distractors: [The Hiawatha, The Super Chief, The Flying Yankee]
+    fact: It was diesel, articulated and shotwelded, and it went straight from the record run to the stage of a Chicago world's fair.
+
+  - id: a2-trn-034
+    difficulty: 4
+    prompt: Which Alpine rail tunnel opened in 1882 after nine years and two hundred deaths?
+    answer: The Gotthard Tunnel
+    distractors: [The Simplon Tunnel, The Mont Cenis Tunnel, The Arlberg Tunnel]
+    fact: Its engineer died of a stroke before it was finished, with the two headings not yet meeting. They met within a foot of each other.
+
+  - id: a2-trn-035
+    difficulty: 4
+    prompt: In American steam practice, which wheel arrangement was called a Northern?
+    answer: A 4-8-4
+    distractors: [A 4-6-2, A 2-8-2, A 4-6-4]
+    fact: Four leading wheels, eight drivers, four trailing. Railroads that disliked the name used their own, so the same engine was a Niagara, a Pocono or a Greenbrier.
