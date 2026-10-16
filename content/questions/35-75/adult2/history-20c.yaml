@@ -248,3 +248,213 @@ questions:
     answer: The third Indo-Pakistani War
     distractors: [The Kargil conflict, The Rann of Kutch war, The Sino-Indian War]
     fact: It lasted thirteen days. Ten million refugees had already crossed into India, which is what brought India in.
+
+  - id: a2-h20-036
+    difficulty: 2
+    prompt: Which decade is known as the Roaring Twenties?
+    answer: The 1920s
+    distractors: [The 1910s, The 1930s, The 1950s]
+    fact: Radio, cars, credit and the movies all arrived in the same ten years. It ended with a crash that took most of the gains back.
+
+  - id: a2-h20-037
+    difficulty: 2
+    prompt: Which country was ruled by Francisco Franco until 1975?
+    answer: Spain
+    distractors: [Portugal, Argentina, Chile]
+    fact: He stayed neutral in the Second World War, outlived every other dictator of his generation, and arranged for a king to succeed him.
+
+  - id: a2-h20-038
+    difficulty: 2
+    prompt: Which vice president took office in April 1945 when the president died?
+    answer: Harry Truman
+    distractors: [Dwight Eisenhower, Herbert Hoover, Alben Barkley]
+    fact: He had been vice president for twelve weeks and had not been told the atomic bomb existed.
+
+  - id: a2-h20-039
+    difficulty: 2
+    prompt: Whose flag was raised over the Reichstag in a famous 1945 photograph?
+    answer: The Soviet Union's
+    distractors: [The United States', Britain's, France's]
+    fact: The picture was staged a day after the event and retouched afterward to remove a second wristwatch from one soldier's arm.
+
+  - id: a2-h20-040
+    difficulty: 2
+    prompt: In which decade did people first walk on the moon?
+    answer: The 1960s
+    distractors: [The 1950s, The 1970s, The 1980s]
+    fact: Six crews landed in all, the last of them in December 1972, and nobody has been back since.
+
+  - id: a2-h20-041
+    difficulty: 2
+    prompt: Which 1930s economic collapse began in 1929 and lasted a decade?
+    answer: The Great Depression
+    distractors: [The Panic of 1907, The Long Depression, The Recession of 1937]
+    fact: American unemployment reached about a quarter of the workforce. World trade fell by two thirds in three years.
+
+  - id: a2-h20-042
+    difficulty: 3
+    prompt: Which 1954 Supreme Court case was argued by Thurgood Marshall?
+    answer: Brown v. Board of Education
+    distractors: [Plessy v. Ferguson, Sweatt v. Painter, Loving v. Virginia]
+    fact: It combined five separate cases. He later became the first black justice on the court that had decided it.
+
+  - id: a2-h20-043
+    difficulty: 3
+    prompt: Which 1917 document promised Russians peace, land and bread?
+    answer: The Bolshevik program
+    distractors: [The Petrograd Charter, The Duma Manifesto, The Brest Declaration]
+    fact: It was a slogan rather than a document and it won the argument. The peace came within months at a brutal price and the land was taken back within fifteen years.
+
+  - id: a2-h20-044
+    difficulty: 3
+    prompt: Which country did Italy invade in 1935, exposing the League of Nations as powerless?
+    answer: Ethiopia
+    distractors: [Albania, Libya, Somalia]
+    fact: Its emperor addressed the league in Geneva and warned the delegates that it would be their turn next. Sanctions were imposed on everything but oil.
+
+  - id: a2-h20-045
+    difficulty: 3
+    prompt: Which 1942 conference planned the extermination of Europe's Jews?
+    answer: Wannsee
+    distractors: [Nuremberg, Munich, Posen]
+    fact: It lasted about ninety minutes over lunch at a lakeside villa. Killing was already underway; the meeting was about coordinating departments.
+
+  - id: a2-h20-046
+    difficulty: 3
+    prompt: Which French general led the Free French from London after 1940?
+    answer: Charles de Gaulle
+    distractors: [Philippe Petain, Maxime Weygand, Jean Moulin]
+    fact: He was a junior general nobody had heard of, condemned to death in absentia by his own government, who simply declared that France had lost a battle and not the war.
+
+  - id: a2-h20-047
+    difficulty: 3
+    prompt: Which 1964 law outlawed segregation in hotels, restaurants and workplaces?
+    answer: The Civil Rights Act
+    distractors: [The Fair Housing Act, The Equal Opportunity Act, The Twenty-fourth Amendment]
+    fact: The Senate debate ran eighty-three days, the longest filibuster in its history, and the bill passed anyway.
+
+  - id: a2-h20-048
+    difficulty: 3
+    prompt: Which country's Great Leap Forward caused a famine from 1959 to 1961?
+    answer: China
+    distractors: [North Korea, Vietnam, The Soviet Union]
+    fact: Backyard steel furnaces melted down farm tools while the harvest went unpicked. Estimates of the dead run from fifteen to forty-five million.
+
+  - id: a2-h20-049
+    difficulty: 3
+    prompt: What did Roosevelt order in his first week in office in March 1933?
+    answer: Every bank in the country closed for four days
+    distractors: [A freeze on all wages and prices, The seizure of the railroads, A moratorium on farm mortgages]
+    fact: Examiners certified the sound banks and only those reopened. Deposits flowed back in within a fortnight, which is what broke the panic.
+
+  - id: a2-h20-050
+    difficulty: 3
+    prompt: Which 1948 Indian leader was assassinated by a Hindu nationalist?
+    answer: Mahatma Gandhi
+    distractors: [Jawaharlal Nehru, Vallabhbhai Patel, Subhas Chandra Bose]
+    fact: The killer objected to his insistence that Pakistan be paid money it was owed. Half a million people walked in the funeral procession.
+
+  - id: a2-h20-051
+    difficulty: 3
+    prompt: Which American spacecraft program was announced by Kennedy in 1961 with a deadline?
+    answer: The Apollo program
+    distractors: [The Gemini program, The Mercury program, The Ranger program]
+    fact: The deadline was the end of the decade and the budget reached about four percent of all federal spending at its peak.
+
+  - id: a2-h20-052
+    difficulty: 3
+    prompt: Which American agency did J. Edgar Hoover run for forty-eight years?
+    answer: The FBI
+    distractors: [The CIA, The Secret Service, The Treasury Department]
+    fact: He served under eight presidents and kept files on most of them. Congress capped the term of his successors at ten years.
+
+  - id: a2-h20-053
+    difficulty: 3
+    prompt: Which Soviet leader ruled from the late 1920s until 1953?
+    answer: Joseph Stalin
+    distractors: [Vyacheslav Molotov, Lavrentiy Beria, Georgy Malenkov]
+    fact: He was a seminary student in Georgia before becoming a bank robber for the party. His name was taken, and means made of steel.
+
+  - id: a2-h20-054
+    difficulty: 3
+    prompt: Which 1927 flight made its pilot the most famous man in the world for a time?
+    answer: The first solo nonstop Atlantic crossing
+    distractors: [The first flight over the North Pole, The first round-the-world flight, The first transpacific flight]
+    fact: He flew thirty-three and a half hours with no radio and no front window, navigating by dead reckoning, and landed in front of a hundred thousand people in Paris.
+
+  - id: a2-h20-055
+    difficulty: 3
+    prompt: Which country left the Second World War in 1943 and then declared war on Germany?
+    answer: Italy
+    distractors: [Hungary, Romania, Finland]
+    fact: Its king dismissed and arrested the dictator, who was then rescued by German paratroopers and installed over a puppet state in the north.
+
+  - id: a2-h20-056
+    difficulty: 4
+    prompt: Which 1919 strike shut down an entire American city for five days?
+    answer: The Seattle general strike
+    distractors: [The Boston police strike, The Homestead strike, The Pullman walkout]
+    fact: Sixty-five thousand workers walked out and union committees kept the milk and hospital laundry running. It ended without violence and without winning anything.
+
+  - id: a2-h20-057
+    difficulty: 4
+    prompt: Which 1924 American law cut immigration with quotas based on the 1890 census?
+    answer: The Johnson-Reed Act
+    distractors: [The Chinese Exclusion Act, The Palmer Act, The Hart-Celler Act]
+    fact: The old census was chosen deliberately, because it predated the arrival of most southern and eastern Europeans. The system lasted forty-one years.
+
+  - id: a2-h20-058
+    difficulty: 4
+    prompt: Which African country's independence in 1957 was the first south of the Sahara?
+    answer: Ghana
+    distractors: [Nigeria, Kenya, Senegal]
+    fact: Its leader had been jailed by the British and won an election from his cell. He told the crowd that independence was meaningless unless the whole continent followed.
+
+  - id: a2-h20-059
+    difficulty: 4
+    prompt: Which 1961 trial of Nazi doctors' records was not held, because the main trials had ended when?
+    answer: Nineteen forty-nine
+    distractors: [Nineteen forty-six, Nineteen fifty-three, Nineteen fifty-eight]
+    fact: Twelve further American-run trials followed the famous one, of doctors, judges, industrialists and generals, and ran until 1949.
+
+  - id: a2-h20-060
+    difficulty: 4
+    prompt: Which two countries fought the Winter War in 1939 and 1940?
+    answer: Finland and the Soviet Union
+    distractors: [Norway and Germany, Poland and Germany, Sweden and Russia]
+    fact: A vastly smaller army on skis held off an invasion for three months in forty below. The poor Soviet performance helped convince Berlin the Red Army could be beaten.
+
+  - id: a2-h20-061
+    difficulty: 4
+    prompt: What did the Zimmermann telegram of 1917 propose?
+    answer: A German alliance with Mexico against the United States
+    distractors: [A separate peace with Russia, A submarine truce in the Atlantic, A German loan to Ireland]
+    fact: British codebreakers read it and had to disguise how. Publication did more than any battle to bring American opinion round to war.
+
+  - id: a2-h20-062
+    difficulty: 4
+    prompt: Which 1973 Supreme Court decision did the Senate's confirmation fights revolve around for decades?
+    answer: Roe v. Wade
+    distractors: [Griswold v. Connecticut, Miranda v. Arizona, Bakke]
+    fact: It was decided seven to two, with five of the seven appointed by Republican presidents, and was overturned forty-nine years later.
+
+  - id: a2-h20-063
+    difficulty: 4
+    prompt: Which 1932 crime led Congress to make kidnapping a federal offense?
+    answer: The Lindbergh kidnapping
+    distractors: [The Leopold and Loeb case, The Urschel kidnapping, The Weyerhaeuser case]
+    fact: The baby was taken from an upstairs window and found dead two months later. The trial that followed was called the circus of the century.
+
+  - id: a2-h20-064
+    difficulty: 4
+    prompt: Which country was divided by the 17th parallel in 1954?
+    answer: Vietnam
+    distractors: [Korea, Germany, Laos]
+    fact: The split was meant to last two years until elections, which were never held. Nine hundred thousand people moved north to south in the interval.
+
+  - id: a2-h20-065
+    difficulty: 4
+    prompt: Which country's 1989 revolution ended with the execution of its ruling couple?
+    answer: Romania
+    distractors: [Bulgaria, East Germany, Albania]
+    fact: It was the only one of that year's upheavals to turn violent. The trial lasted about an hour and was shown on television on Christmas Day.

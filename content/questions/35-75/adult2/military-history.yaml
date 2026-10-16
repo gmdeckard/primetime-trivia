@@ -153,7 +153,7 @@ questions:
 
   - id: a2-mil-022
     difficulty: 3
-    prompt: Which 1939 pact between Berlin and Moscow cleared the way for the invasion of Poland?
+    prompt: Which 1939 pact between Berlin and Moscow cleared the way for war in the east?
     answer: The Molotov-Ribbentrop Pact
     distractors: [The Anti-Comintern Pact, The Pact of Steel, The Rapallo Treaty]
     fact: Its secret protocol split eastern Europe into spheres. The Soviets denied the protocol existed until 1989.
