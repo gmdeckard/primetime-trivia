@@ -756,10 +756,25 @@ function App() {
         <div class="row-between">
           <span class="pill pill-brass">{PHASE_LABELS[state.phase] ?? state.phase.replace(/_/g, ' ')}</span>
           {live && (
-            <span class="pill">
+            <span class="pill qhead-live">
               {/* The deadline is withheld while paused, so secondsLeft reads 0.
-                  Saying "0s" on a stopped clock is worse than saying nothing. */}
-              {state.held ? 'Paused' : `${secondsLeft}s`} · {state.answeredCount}/{state.entryCount} in
+                  Saying "0s" on a stopped clock is worse than saying nothing.
+                  Digits reserve their width here too: this row carries the
+                  phase and the position beside it, and a pill that changes
+                  size every second shoves both of them about. */}
+              {state.held ? (
+                'Paused'
+              ) : (
+                <span>
+                  <span class="tabular" style={{ minWidth: `${String(state.config.secondsPerQuestion).length}ch` }}>
+                    {secondsLeft}
+                  </span>s
+                </span>
+              )}
+              <span aria-hidden="true">·</span>
+              <span>
+                <span class="tabular">{state.answeredCount}/{state.entryCount}</span> in
+              </span>
             </span>
           )}
           {/* G1/3 R2/2 rather than the words. This row carries the phase and

@@ -104,17 +104,57 @@ function Question({ state, send }: { state: PlayerState; send: ReturnType<typeof
   const windowMs = state.deadline && state.startedAt ? state.deadline - state.startedAt : 0;
   const onOffer = locked ? q.points : pointsAt(now - (state.startedAt ?? now), windowMs, state.config);
 
+  // Widths reserved from the largest value each number can take, so the pill
+  // is the same size at 1000 as at 200 and at 19s as at 9s. Read off the
+  // config rather than hardcoded, because both are settings the MC can change.
+  const pointsWidth = `${String(state.config.questionPoints).length}ch`;
+  const secondsWidth = `${String(state.config.secondsPerQuestion).length}ch`;
+
   return (
     <>
-      <div class="row-between">
-        <span class="pill">
+      <div class="row-between qhead">
+        <span class="pill qhead-cat">
           {/* The question's own category, not the round's: in a mixed round
               the round has no subject and this is the only place a player is
-              told what they are being asked about. */}
-          {q.categoryName} · {q.position}/{q.ofTotal}
+              told what they are being asked about. The name gives way to an
+              ellipsis before the position does — "Classic Film & Television"
+              is 25 characters and the 7 that say where you are in the round
+              matter more than the last word of the subject. */}
+          <span class="ellipsis">{q.categoryName}</span>
+          <span class="nowrap">· {q.position}/{q.ofTotal}</span>
         </span>
-        <span class="pill pill-brass pill-live">
-          {state.held ? 'Paused' : `${onOffer} pts${!locked && state.deadline ? ` · ${secondsLeft}s` : ''}`}
+        {/*
+          The falling score and the clock.
+
+          Every part of this is pinned. The pill never wraps, never shrinks,
+          and reserves the width of the widest value each number can reach, so
+          a tick from 1000 to 990 or 10s to 9s changes the digits and nothing
+          else. It used to be one interpolated string in a flexible pill: as
+          the numbers lost a digit the pill got narrower, fitted beside the
+          category, and snapped back to one line — then the next tick pushed
+          it to two again. It did that every second, for twenty seconds, on
+          every question.
+        */}
+        <span class="pill pill-brass pill-live qhead-live">
+          {state.held ? (
+            'Paused'
+          ) : (
+            <>
+              {/* Number and unit inside one flex child, so the gap between
+                  the metrics does not also open up between "19" and "s". */}
+              <span>
+                <span class="tabular" style={{ minWidth: pointsWidth }}>{onOffer}</span> pts
+              </span>
+              {!locked && state.deadline && (
+                <>
+                  <span aria-hidden="true">·</span>
+                  <span>
+                    <span class="tabular" style={{ minWidth: secondsWidth }}>{secondsLeft}</span>s
+                  </span>
+                </>
+              )}
+            </>
+          )}
         </span>
       </div>
 

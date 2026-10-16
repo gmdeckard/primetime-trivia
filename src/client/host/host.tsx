@@ -408,8 +408,21 @@ function App() {
               in the hall, and said less than the falling number does. */}
           {state.deadline && (
             <div class="center">
-              <span class="pill pill-brass pill-live" style={{ fontSize: '1.6rem' }}>
-                {onOffer} pts · {secondsLeft}s
+              {/* Same pinning as the handsets. Alone on its line this cannot
+                  wrap, but it re-centred itself every time a digit dropped,
+                  which on a projector is a word visibly jumping sideways. */}
+              <span class="pill pill-brass pill-live qhead-live" style={{ fontSize: '1.6rem' }}>
+                <span>
+                  <span class="tabular" style={{ minWidth: `${String(state.config.questionPoints).length}ch` }}>
+                    {onOffer}
+                  </span> pts
+                </span>
+                <span aria-hidden="true">·</span>
+                <span>
+                  <span class="tabular" style={{ minWidth: `${String(state.config.secondsPerQuestion).length}ch` }}>
+                    {secondsLeft}
+                  </span>s
+                </span>
               </span>
             </div>
           )}

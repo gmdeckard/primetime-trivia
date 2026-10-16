@@ -945,3 +945,46 @@ textarea:focus { border-color: var(--brass); outline: none; }
   .field-label { flex-direction: column; align-items: flex-start; gap: 2px; }
   .field-hint { text-align: left; }
 }
+
+/* --------------------------------------------------- the question header
+
+   The category on the left, the falling score and the clock on the right.
+
+   The clock pill is the one thing on this screen that changes every second,
+   so it is the one thing whose size must not. Both numbers reserve the width
+   of their largest value and are set in tabular figures, and the pill refuses
+   to wrap or shrink. Without that it narrowed as the digits dropped, fitted
+   beside the category, and bounced back to two lines on the next tick —
+   once a second, for the whole question.
+
+   Tighter padding than a standalone pill, and only here. The two are
+   competing for 343px on the narrowest phone we support, and every pixel
+   taken out of padding is a pixel of category name the player can read. The
+   longest name in the bank, "Classic Film & Television", still clips — the
+   prompt underneath says what the subject is, so the name is context rather
+   than information, and the position it sits beside is not. */
+.qhead { align-items: flex-start; gap: 8px; }
+.qhead > .pill { padding-left: 10px; padding-right: 10px; }
+.qhead-live {
+  flex: 0 0 auto;
+  white-space: nowrap;
+  gap: 5px;
+}
+/* min-width has no effect on an inline box, so the reserved slot only works
+   once these are inline-block. */
+.qhead-live .tabular { display: inline-block; text-align: right; }
+
+/* The category takes what is left and loses its tail rather than its line.
+   `min-width: 0` is what actually lets a flex child shrink below its content:
+   without it the ellipsis never fires and the pill pushes the clock off. */
+.qhead-cat {
+  flex: 1 1 auto;
+  min-width: 0;
+  gap: 5px;
+}
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}

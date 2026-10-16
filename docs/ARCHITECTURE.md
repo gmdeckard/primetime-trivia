@@ -256,6 +256,30 @@ and fatal once breaks were meant to end themselves. Every unit test passed and
 every screenshot rendered; the night simply stopped on an answer and sat
 there.
 
+## Clocks that do not move
+
+`npm run jitter` is the third audit, and it exists because of a bug neither
+of the others can see.
+
+The falling score and the countdown are the only things on these screens that
+change every second, so they are the only things whose SIZE must not. They
+were one interpolated string in a flexible pill: as the numbers lost a digit
+the pill narrowed, fitted beside the category, and snapped back to one line —
+then the next tick pushed it to two again. Once a second, for twenty seconds,
+on every question, four inches from a player's face.
+
+A unit test asserts about a value, and a screenshot is one instant. This is
+about the same element at two instants being the same shape, so it is
+measured: sample the bounding box of every clock on every tick of a real
+question, on the handset, the big screen and the MC's phone, and fail if any
+width or height takes more than one value.
+
+The fix is in `.qhead-live`: the pill never wraps and never shrinks, and each
+number reserves the width of the largest value it can reach, in tabular
+figures, taken from the config rather than hardcoded — `questionPoints` and
+`secondsPerQuestion` are both settings. Verified against the widest an MC can
+set: `SECS=120 PTS=5000 npm run jitter`.
+
 ## Screenshots as a smoke test
 
 `npm run screenshots` spawns a throwaway server on a random port, drives four
