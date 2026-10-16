@@ -52,13 +52,17 @@ function roundView(engine: Engine): RoundView | undefined {
   const s = engine.snapshot();
   const round = s.rounds[s.roundIndex];
   if (!round) return undefined;
-  const cat = engine.getBank().categoryById.get(round.categoryId);
+  const cat = round.categoryId ? engine.getBank().categoryById.get(round.categoryId) : undefined;
+  // A mixed round has no subject to name, so it gets one the screens can use
+  // as a title instead of an empty line where the category used to be.
+  const mixed = !round.categoryId;
   return {
     index: s.roundIndex + 1,
     ofTotal: s.rounds.length,
     categoryId: round.categoryId,
-    categoryName: cat?.name ?? round.categoryId,
-    blurb: cat?.blurb ?? '',
+    categoryName: mixed ? 'Mixed bag' : cat?.name ?? round.categoryId,
+    blurb: mixed ? 'A different category every question.' : cat?.blurb ?? '',
+    mixed,
     format: round.format,
   };
 }
@@ -77,6 +81,7 @@ function questionView(engine: Engine): QuestionView | undefined {
     points: s.config.questionPoints,
     position: current.position,
     ofTotal: current.ofTotal,
+    categoryName: engine.getBank().categoryById.get(q.category)?.name ?? q.category,
   };
 }
 
@@ -157,7 +162,7 @@ function baseState(engine: Engine, role: 'host' | 'control' | 'player', teamId?:
     teams: role === 'player' ? [] : teamViews(engine),
     entryCount: s.teamOrder.length,
     scoreboard: board,
-    block: { index: s.blockIndex, ofTotal: null },
+    game: { index: s.gameIndex, ofTotal: Math.max(1, s.config.gamesPerNight) },
     round: roundView(engine),
     question: questionView(engine),
     // Withheld while paused: a countdown that keeps falling on twenty handsets
@@ -165,6 +170,8 @@ function baseState(engine: Engine, role: 'host' | 'control' | 'player', teamId?:
     deadline: current && !current.locked && !s.held ? current.deadline : undefined,
     startedAt: current && !current.locked && !s.held ? current.startedAt : undefined,
     autoAdvanceAt: s.autoAdvanceAt,
+    moreInRound: engine.moreQuestionsInRound(),
+    breakEndsAt: s.breakEndsAt,
     held: !!s.held,
     answeredTeamIds: role === 'player' ? [] : answered,
     // Withheld from players on purpose. "80 of 100 have answered" is pressure
@@ -204,6 +211,8 @@ export function controlState(engine: Engine): ControlState {
       }
     : undefined;
 
+  const bank = engine.getBank();
+
   // One line of lookahead so the MC can introduce the next question verbally
   // instead of reading it cold off the screen.
   const round = s.rounds[s.roundIndex];
@@ -211,10 +220,12 @@ export function controlState(engine: Engine): ControlState {
   if (round) {
     const nextId = round.questionIds[round.cursor + (s.phase === 'reveal' || s.phase === 'locked' ? 1 : 0)];
     const next = nextId ? engine.question(nextId) : undefined;
-    upNext = next ? `D${next.difficulty} · ${next.prompt}` : 'End of round';
+    // The category leads, because in a mixed round it is the thing the MC says
+    // out loud before reading the question.
+    const nextCat = next ? bank.categoryById.get(next.category)?.name ?? next.category : '';
+    upNext = next ? `${nextCat} · D${next.difficulty} · ${next.prompt}` : 'End of round';
   }
 
-  const bank = engine.getBank();
   const allowed = s.config.categories.length ? s.config.categories : bank.categories.map((c) => c.id);
   const availableInSelection = bank.questions.filter((question) => {
     if (!allowed.includes(question.category)) return false;
@@ -225,9 +236,21 @@ export function controlState(engine: Engine): ControlState {
   }).length;
 
   const warnings: string[] = [];
-  const needed = s.config.roundsPerBlock * s.config.questionsPerRound;
+  const needed = s.config.roundsPerGame * s.config.questionsPerRound;
   if (availableInSelection < needed) {
-    warnings.push(`Only ${availableInSelection} unused questions in the selected categories — a full block needs ${needed}.`);
+    warnings.push(`Only ${availableInSelection} unused questions in the selected categories — a full game needs ${needed}.`);
+  }
+  if (s.config.roundCategoryMode === 'mixed') {
+    // A mixed round takes one question from each of `questionsPerRound`
+    // different categories, so a night cut down to four categories cannot
+    // make a round of ten distinct subjects. It still plays — it comes round
+    // again and takes a second from each — but the MC should know why.
+    const usable = allowed.filter((id) => (bank.byCategory.get(id) ?? []).some((q) => q.kind === 'choice')).length;
+    if (usable < s.config.questionsPerRound) {
+      warnings.push(
+        `Only ${usable} categories in play, so a round of ${s.config.questionsPerRound} will ask some of them twice.`,
+      );
+    }
   }
   for (const issue of bank.issues.filter((i) => i.severity === 'error').slice(0, 3)) {
     warnings.push(`Content error in ${issue.file}: ${issue.message}`);

@@ -205,8 +205,8 @@ test('players join, answer, and the MC drives the night', async () => {
   const stillLobby = await ann.next<PlayerState>((s) => s.phase === 'lobby', 'still in the lobby');
   assert.equal(stillLobby.phase, 'lobby', 'a player should not be able to start the game');
 
-  mc.send({ t: 'set_config', patch: { roundsPerBlock: 1, questionsPerRound: 2, finalWager: false } });
-  mc.send({ t: 'advance' }); // lobby -> block_intro
+  mc.send({ t: 'set_config', patch: { roundsPerGame: 1, questionsPerRound: 2, finalWager: false } });
+  mc.send({ t: 'advance' }); // lobby -> game_intro
   mc.send({ t: 'advance' }); // -> round_intro
   mc.send({ t: 'advance' }); // -> question
 

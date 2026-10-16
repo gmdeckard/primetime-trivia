@@ -9,7 +9,15 @@ import {
   type RoundFormat,
 } from '../../shared/protocol.js';
 import type { Bank } from './content.js';
-import { choiceOrder, pickCategories, pickNumeric, pickRound, type SelectionContext } from './selector.js';
+import {
+  choiceOrder,
+  pickCategories,
+  pickMixedRound,
+  pickNumeric,
+  pickRound,
+  type SelectionContext,
+} from './selector.js';
+import { Rotation } from './rotation.js';
 import { rankNumeric, scoreQuestion, scoreWager, type AnswerRecord, type Award } from './scoring.js';
 import type { Store } from './store.js';
 
@@ -68,6 +76,7 @@ export interface CurrentQuestion {
 }
 
 export interface RoundRec {
+  /** '' for a mixed round, where every question brings its own category. */
   categoryId: string;
   format: RoundFormat;
   questionIds: string[];
@@ -80,7 +89,7 @@ export interface NightState {
   createdAt: string;
   config: GameConfig;
   phase: Phase;
-  blockIndex: number;
+  gameIndex: number;
   rounds: RoundRec[];
   roundIndex: number;
   current?: CurrentQuestion;
@@ -94,6 +103,8 @@ export interface NightState {
   tiebreakTeamIds?: string[];
   /** Epoch ms the game will advance itself, when auto-advance is running. */
   autoAdvanceAt?: number;
+  /** Epoch ms the break currently on screen runs out. */
+  breakEndsAt?: number;
   /** MC pressed Hold — auto-advance stays parked until they release it. */
   held?: boolean;
   message?: string;
@@ -109,6 +120,26 @@ function makeRoomCode(): string {
 /** Phases where a countdown is running and answers are being taken. */
 const LIVE_PHASES: Phase[] = ['question', 'wager_question', 'tiebreak'];
 
+/** The two phases that are a break: scoreboard up, clock running down. */
+const BREAK_PHASES: Phase[] = ['round_scores', 'game_results'];
+
+/**
+ * Names this build has changed, and what they used to be called.
+ *
+ * A night is written to disk after every transition, so an update can land on
+ * a box with a half-played night on it — and renaming Block to Game would have
+ * resumed that night into a phase the state machine no longer has, where the
+ * MC's one big button does nothing at all. Cheap to carry, so it is carried.
+ */
+const RENAMED_PHASES: Record<string, Phase> = {
+  block_intro: 'game_intro',
+  block_results: 'game_results',
+};
+const RENAMED_CONFIG: Record<string, keyof GameConfig> = {
+  roundsPerBlock: 'roundsPerGame',
+  blockBreakMinutes: 'gameBreakMinutes',
+};
+
 export class Engine {
   private state: NightState;
   /**
@@ -120,6 +151,8 @@ export class Engine {
   /** Drives auto-advance. Kept apart from `timer`, which is the answer clock. */
   private autoTimer: NodeJS.Timeout | undefined;
   private listeners = new Set<() => void>();
+  /** The persistent question deck. Outlives the night and the process. */
+  private rotation: Rotation;
 
   constructor(
     private bank: Bank,
@@ -127,8 +160,19 @@ export class Engine {
     config?: Partial<GameConfig>,
     resume?: NightState | null,
   ) {
+    this.rotation = new Rotation(store);
     if (resume && resume.nightId) {
       this.state = resume;
+      // A night written by an older build names things this one has renamed.
+      // Translate before anything reads the phase, or the night resumes into a
+      // state the machine has no case for.
+      const renamedPhase = RENAMED_PHASES[this.state.phase as string];
+      if (renamedPhase) this.state.phase = renamedPhase;
+      const legacy = this.state.config as unknown as Record<string, unknown>;
+      for (const [was, now] of Object.entries(RENAMED_CONFIG)) {
+        if (legacy[was] !== undefined && legacy[now] === undefined) legacy[now] = legacy[was];
+        delete legacy[was];
+      }
       // Nothing is mid-flight after a restart; park on the current question
       // rather than scoring answers against a deadline that passed while the
       // laptop was asleep.
@@ -149,6 +193,11 @@ export class Engine {
             : 'Resumed after a restart — answers for this question were locked.';
       }
       this.state.autoAdvanceAt = undefined;
+      // breakEndsAt is deliberately kept. It is an absolute time, so a break
+      // interrupted by a restart resumes with the time it had left, and one
+      // that ran out while the box was down is simply over. Clearing it would
+      // either hand the room a second ten minutes or strand the night with a
+      // clock that reads nothing.
       this.state.held = false;
       if (this.state.current) this.state.current.heldAt = undefined;
       for (const p of Object.values(this.state.players)) p.connected = false;
@@ -175,7 +224,7 @@ export class Engine {
       createdAt: new Date().toISOString(),
       config: { ...DEFAULT_CONFIG, ...config },
       phase: 'lobby',
-      blockIndex: 0,
+      gameIndex: 0,
       rounds: [],
       roundIndex: 0,
       players: {},
@@ -218,6 +267,8 @@ export class Engine {
   /** Persist, log, and push a new snapshot to every connected client. */
   private commit(event?: Record<string, unknown>) {
     this.store.saveNight(this.state);
+    // No-op unless a card was dealt since the last write.
+    this.rotation.save();
     // history.json only ever changes when a question starts, but this ran a
     // read-parse-rewrite of it on every answer. That did not matter while a
     // question ended on the last tap; now the window stays open for its whole
@@ -353,7 +404,16 @@ export class Engine {
     // Changing the shape of a block mid-block would leave rounds half-built,
     // so structural keys are lobby-only. Pacing keys stay live because an MC
     // reads the room and speeds up or slows down as they go.
-    const structural: Array<keyof GameConfig> = ['roundsPerBlock', 'questionsPerRound', 'difficultyMix', 'categories'];
+    const structural: Array<keyof GameConfig> = [
+      'roundsPerGame',
+      'questionsPerRound',
+      'difficultyMix',
+      'categories',
+      // Changing this mid-game would leave the rounds already built one way
+      // and the rounds after them the other, and the round intro card would
+      // promise a category the questions do not come from.
+      'roundCategoryMode',
+    ];
     const next = { ...this.state.config };
     for (const [key, value] of Object.entries(patch) as Array<[keyof GameConfig, never]>) {
       if (this.state.phase !== 'lobby' && structural.includes(key)) continue;
@@ -370,7 +430,13 @@ export class Engine {
       bank: this.bank,
       config: this.state.config,
       usedTonight: new Set(this.state.askedQuestionIds),
-      usedRecently: this.store.recentlyUsed(this.state.config.avoidRecentNights, this.state.nightId),
+      // Empty, and the rotation is why. "Don't reuse anything from the last
+      // eight nights" was the old promise; the deck's is "nothing comes back
+      // until everything has been asked", which contains it. Two overlapping
+      // rules would only ever disagree in the direction of blocking a
+      // question the deck says is due.
+      usedRecently: new Set(),
+      rotation: this.rotation,
     };
   }
 
@@ -395,27 +461,50 @@ export class Engine {
     return this.state.current.order.map((i) => q.choices![i]!);
   }
 
-  private buildBlock() {
+  private buildGame() {
     const ctx = this.selectionContext();
-    const categoryIds = pickCategories(ctx, this.state.config.roundsPerBlock);
-    this.state.rounds = categoryIds.map((categoryId) => {
-      const questions = pickRound(ctx, categoryId, this.state.config.questionsPerRound);
-      for (const q of questions) ctx.usedTonight.add(q.id);
-      const hasImages = questions.some((q) => q.image);
-      return {
-        categoryId,
-        format: hasImages ? 'picture' : 'standard',
-        questionIds: questions.map((q) => q.id),
-        cursor: 0,
-      } satisfies RoundRec;
-    });
+    const mixed = this.state.config.roundCategoryMode === 'mixed';
+
+    if (mixed) {
+      // No category draw at this level: every round is one question from each
+      // of ten shuffled categories, so the round's identity is the ramp
+      // through it rather than its subject.
+      this.state.rounds = Array.from({ length: this.state.config.roundsPerGame }, () => {
+        const questions = pickMixedRound(ctx, this.state.config.questionsPerRound);
+        return {
+          categoryId: '',
+          format: questions.some((q) => q.image) ? 'picture' : 'standard',
+          questionIds: questions.map((q) => q.id),
+          cursor: 0,
+        } satisfies RoundRec;
+      });
+    } else {
+      const categoryIds = pickCategories(ctx, this.state.config.roundsPerGame);
+      this.state.rounds = categoryIds.map((categoryId) => {
+        const questions = pickRound(ctx, categoryId, this.state.config.questionsPerRound);
+        for (const q of questions) ctx.usedTonight.add(q.id);
+        const hasImages = questions.some((q) => q.image);
+        return {
+          categoryId,
+          format: hasImages ? 'picture' : 'standard',
+          questionIds: questions.map((q) => q.id),
+          cursor: 0,
+        } satisfies RoundRec;
+      });
+    }
     this.state.roundIndex = 0;
+    // The decks were dealt from while building this game; write them now so a
+    // crash between here and the first question cannot deal them twice.
+    this.rotation.save();
   }
 
   /** Swap a round's category before it starts, for an MC reading the room. */
   setRoundCategory(roundIndex: number, categoryId: string) {
     const round = this.state.rounds[roundIndex];
     if (!round || roundIndex < this.state.roundIndex) return;
+    if (this.state.config.roundCategoryMode === 'mixed') {
+      throw new Error('Rounds are mixed-category tonight. Switch to one category per round first.');
+    }
     const ctx = this.selectionContext();
     const questions = pickRound(ctx, categoryId, this.state.config.questionsPerRound);
     if (!questions.length) throw new Error('No questions left in that category.');
@@ -447,6 +536,33 @@ export class Engine {
   }
 
   /**
+   * Put a break on the clock.
+   *
+   * The minutes were always on screen; what was missing is that they counted
+   * for anything. A break that says five minutes and then waits indefinitely
+   * for the MC is how a night loses twenty minutes between rounds, and the
+   * room has no way to tell a long break from a broken game.
+   *
+   * The clock is set whether or not it ends the break itself, because the
+   * question it answers — how long have we got — is the same either way.
+   * `autoStartAfterBreak` only decides whether reaching zero presses the
+   * button.
+   */
+  private beginBreak(minutes: number) {
+    this.clearAutoTimer();
+    const ms = Math.max(0, Math.round(minutes * 60_000));
+    this.state.breakEndsAt = Date.now() + ms;
+    if (this.state.config.autoStartAfterBreak && !this.state.held) this.scheduleAuto(ms / 1000);
+  }
+
+  /** Minutes due at the break the night is currently sitting on. */
+  breakMinutes(): number {
+    return this.state.phase === 'game_results'
+      ? this.state.config.gameBreakMinutes
+      : this.state.config.roundBreakMinutes;
+  }
+
+  /**
    * Queue the next automatic step.
    *
    * Only ever called for the two beats inside a round: answers locking, and the
@@ -456,7 +572,13 @@ export class Engine {
    */
   private scheduleAuto(seconds: number) {
     this.clearAutoTimer();
-    if (!this.state.config.autoAdvance || this.state.held) return;
+    // Breaks and intros have their own switches. `autoAdvance` is about the
+    // inside of a round — the lock, the reveal, the next question — and an MC
+    // who taps through questions on purpose still wants the break to end by
+    // itself.
+    const insideARound = this.state.phase === 'locked' || this.state.phase === 'reveal';
+    if (insideARound && !this.state.config.autoAdvance) return;
+    if (this.state.held) return;
     const ms = Math.max(500, Math.round(seconds * 1000));
     this.state.autoAdvanceAt = Date.now() + ms;
     this.autoTimer = setTimeout(() => {
@@ -467,7 +589,7 @@ export class Engine {
   }
 
   /** True when advancing from the reveal leads to another question, not a scoreboard. */
-  private moreQuestionsInRound(): boolean {
+  moreQuestionsInRound(): boolean {
     const round = this.state.rounds[this.state.roundIndex];
     return !!round && !!round.questionIds[round.cursor + 1];
   }
@@ -480,9 +602,17 @@ export class Engine {
    * it, and without this the game simply stops until someone presses a button.
    */
   private resumeAutoAdvance() {
-    if (this.state.phase === 'locked') this.scheduleAuto(this.state.config.revealDelaySeconds);
-    else if (this.state.phase === 'reveal' && this.moreQuestionsInRound()) {
-      this.scheduleAuto(this.state.config.nextQuestionDelaySeconds);
+    const s = this.state;
+    if (s.phase === 'locked') this.scheduleAuto(s.config.revealDelaySeconds);
+    else if (s.phase === 'reveal') this.scheduleAuto(s.config.nextQuestionDelaySeconds);
+    else if (s.phase === 'game_intro' || s.phase === 'round_intro') {
+      this.scheduleAuto(s.config.introSeconds);
+    } else if (BREAK_PHASES.includes(s.phase) && s.config.autoStartAfterBreak) {
+      // Whatever is left of the break, floored at a beat so a break that
+      // expired while the box was down does not fire inside the same tick as
+      // the reconnect, with the screens still showing the last question.
+      const left = s.breakEndsAt ? s.breakEndsAt - Date.now() : 0;
+      this.scheduleAuto(Math.max(2000, left) / 1000);
     }
   }
 
@@ -718,7 +848,12 @@ export class Engine {
     const round = this.state.rounds[this.state.roundIndex];
     if (!round || !this.state.current) return;
     const ctx = this.selectionContext();
-    const replacement = pickRound(ctx, round.categoryId, 1)[0];
+    // A mixed round has no category of its own, so the replacement comes from
+    // anywhere in the selection. In a single-category round it stays in
+    // category, because the round intro card just promised the room a subject.
+    const replacement = round.categoryId
+      ? pickRound(ctx, round.categoryId, 1)[0]
+      : pickMixedRound(ctx, 1)[0];
     if (!replacement) throw new Error('No unused questions left in this category.');
     round.questionIds[round.cursor] = replacement.id;
     this.startQuestion(replacement.id, this.state.config.secondsPerQuestion, round.cursor + 1, round.questionIds.length);
@@ -728,15 +863,20 @@ export class Engine {
 
   // ------------------------------------------------------------ flow
 
-  startBlock() {
+  startGame() {
     if (!this.state.teamOrder.length) throw new Error('No teams have joined yet.');
-    this.state.blockIndex += 1;
-    this.buildBlock();
+    this.state.gameIndex += 1;
+    this.buildGame();
     this.state.wagerBets = undefined;
     this.state.current = undefined;
     this.state.tiebreakTeamIds = undefined;
-    this.state.phase = 'block_intro';
-    this.commit({ kind: 'block_started', blockIndex: this.state.blockIndex });
+    this.state.breakEndsAt = undefined;
+    this.state.phase = 'game_intro';
+    // The intro card is a beat, not a stop. It holds long enough for the MC to
+    // say "game two, here we go" and then moves, which is what makes the rest
+    // of the night runnable without a thumb on it.
+    this.scheduleAuto(this.state.config.introSeconds);
+    this.commit({ kind: 'game_started', gameIndex: this.state.gameIndex });
   }
 
   /** The MC's one big button. Every phase knows what comes next. */
@@ -746,12 +886,13 @@ export class Engine {
     this.clearAutoTimer();
     switch (s.phase) {
       case 'lobby':
-        this.startBlock();
+        this.startGame();
         return;
 
-      case 'block_intro':
+      case 'game_intro':
         s.prevScores = Object.fromEntries(s.teamOrder.map((id) => [id, s.teams[id]?.score ?? 0]));
         s.phase = 'round_intro';
+        this.scheduleAuto(s.config.introSeconds);
         this.commit({ kind: 'advance' });
         return;
 
@@ -764,6 +905,13 @@ export class Engine {
         if (!nextId) {
           s.current = undefined;
           s.phase = 'round_scores';
+          // Only a round with another round after it gets a break. The last
+          // round of a game runs into the wager and then the long break, so
+          // its scoreboard is a beat to read the standings, not a trip to the
+          // bar — announcing five minutes there and then opening the betting
+          // was the screens contradicting each other.
+          if (s.roundIndex + 1 < s.rounds.length) this.beginBreak(s.config.roundBreakMinutes);
+          else this.scheduleAuto(s.config.nextQuestionDelaySeconds);
           this.commit({ kind: 'round_finished', roundIndex: s.roundIndex });
           return;
         }
@@ -780,29 +928,39 @@ export class Engine {
 
       case 'locked':
         s.phase = 'reveal';
-        if (this.moreQuestionsInRound()) {
-          this.scheduleAuto(s.config.nextQuestionDelaySeconds);
-        }
+        // Scheduled whether or not another question follows. This used to stop
+        // at the last reveal of a round on purpose, back when a round boundary
+        // always waited for the MC — which meant a night set up to run itself
+        // ran one round and then sat on an answer until somebody noticed. The
+        // scoreboard it moves to arms its own break, and that break is where
+        // the MC gets their stop if they want one.
+        this.scheduleAuto(s.config.nextQuestionDelaySeconds);
         this.commit({ kind: 'revealed' });
         return;
 
       case 'round_scores': {
+        s.breakEndsAt = undefined;
         if (s.roundIndex + 1 < s.rounds.length) {
           s.roundIndex += 1;
           // Rebase the deltas so the next scoreboard reports that round alone.
           s.prevScores = Object.fromEntries(s.teamOrder.map((id) => [id, s.teams[id]?.score ?? 0]));
           s.phase = 'round_intro';
+          this.scheduleAuto(s.config.introSeconds);
           this.commit({ kind: 'advance' });
           return;
         }
         if (s.config.finalWager) {
           s.wagerBets = {};
           s.phase = 'wager_bet';
+          // Betting is the one beat that genuinely waits for the room: a team
+          // that has not bet yet loses its whole stake, so nothing here runs
+          // on a clock the MC did not choose to start.
           this.commit({ kind: 'wager_betting' });
           return;
         }
-        s.phase = 'block_results';
-        this.commit({ kind: 'block_finished' });
+        s.phase = 'game_results';
+        this.beginBreak(s.config.gameBreakMinutes);
+        this.commit({ kind: 'game_finished' });
         return;
       }
 
@@ -827,8 +985,9 @@ export class Engine {
         return;
 
       case 'wager_reveal':
-        s.phase = 'block_results';
-        this.commit({ kind: 'block_finished' });
+        s.phase = 'game_results';
+        this.beginBreak(s.config.gameBreakMinutes);
+        this.commit({ kind: 'game_finished' });
         return;
 
       case 'tiebreak':
@@ -838,13 +997,23 @@ export class Engine {
       case 'tiebreak_reveal':
         s.tiebreakTeamIds = undefined;
         s.current = undefined;
-        s.phase = 'block_results';
+        s.phase = 'game_results';
+        this.beginBreak(s.config.gameBreakMinutes);
         this.commit({ kind: 'tiebreak_finished' });
         return;
 
-      case 'block_results':
-        // Another 30-minute block, same teams, scores carried.
-        this.startBlock();
+      case 'game_results':
+        s.breakEndsAt = undefined;
+        // The night knows how many games it is. It used to offer another one
+        // forever, which meant the only way a night ended was the MC
+        // remembering to end it — and the screens said "start another" when
+        // the schedule was already done.
+        if (s.gameIndex >= Math.max(1, s.config.gamesPerNight)) {
+          this.endNight();
+          return;
+        }
+        // Another game, same teams, scores carried.
+        this.startGame();
         return;
 
       case 'night_over':

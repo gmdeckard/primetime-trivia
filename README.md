@@ -126,9 +126,12 @@ about it. It never shows the answer key early.
 **The MC's phone** (`/control`) has one large primary button pinned to the
 bottom that always does the obvious next thing, plus the answer and a peek at
 the next question. Inside a round the game advances itself — lock, reveal,
-next — so the MC can work the room instead of the laptop, with a **Hold**
-button for when they want to talk. It stops by itself at every round boundary. The point of separating this from the host screen is that
-the MC can run the room while facing it, instead of hunched over the laptop.
+next — so the MC can work the room instead of the laptop, with a **Pause**
+button for when they want to talk. Breaks run on a clock too, and a switch
+decides whether reaching zero starts the next round or waits for the MC, so
+the night can run itself end to end or stop at every boundary. The point of
+separating this from the host screen is that the MC can run the room while
+facing it, instead of hunched over the laptop.
 Space bar also advances, so a bluetooth clicker works.
 
 **The players' devices** (`/`) show one decision at a time. Four big buttons,
@@ -176,18 +179,26 @@ PRIMETIME_SSID="Clubhouse-Guest" PRIMETIME_VENUE="Thursday Trivia" npm start
 
 ## Running a night
 
-The structure is **Night → Block → Round → Question**.
+The structure is **Night → Game → Round → Question**, which are the words the
+MC says out loud.
 
-A **block** is about thirty minutes: three rounds of eight questions plus a
-Jeopardy-style final wager. When a block ends you can start another with the
-same teams and carried-over scores, so a thirty-minute activity slot and a
-two-hour evening are the same software.
+A **round** is ten questions. A **game** is a couple of rounds closed by a
+Jeopardy-style final wager, about forty minutes with its break. A **night** is
+however many games you set, and it ends itself after the last one. Scores
+carry across games, so a thirty-minute activity slot and a two-hour evening
+are the same software.
 
-The MC can adjust pacing live (seconds per question, speed bonus, read-aloud)
-and fix things as they go: extend the clock, swap a question the room has
-clearly seen, adjust a score, rename or remove a team. No question repeats
-within a night, and by default none repeats within eight nights either — so a
-weekly game does not recycle in a month.
+Five minutes between rounds, ten between games, both configurable and both
+counted down on every screen. By default a round draws **one question from
+each of ten shuffled categories**, so nobody sits out a round because they
+know nothing about opera; a themed round on a single category is a switch
+away.
+
+The MC can adjust pacing live and fix things as they go: extend the clock,
+swap a question the room has clearly seen, adjust a score, rename or remove a
+team. **No question comes back until the bank has been used up** — each
+category is a deck that is only reshuffled when it runs out, and that survives
+restarts, new nights and Reset everything.
 
 Ties at the top are broken with a numeric sudden-death question where the
 closest guess wins.
@@ -201,10 +212,14 @@ on a four-point scale. For an audience with advanced degrees the failure mode
 is condescension, not frustration. Distractors have to be genuinely plausible;
 a question where three options are obviously wrong is worthless.
 
-**The speed bonus goes only to the fastest correct team**, and is worth 5 points
-against 10-30 for a correct answer. A sliding reaction-time scale sounds fairer
-but turns every question into a reflex test, which measures eyesight rather
-than knowledge. It can be switched off entirely.
+**Scoring is Buzztime-style.** Every question is worth 1000 points, holds full
+value for the first five seconds while the room reads, then slides to 200 at
+the buzzer. Difficulty does not change the value; what separates two teams who
+both knew the answer is how fast they were sure. At twenty to thirty points a
+question the board filled with ties. The floor sits well above zero on
+purpose: a correct answer arrived at slowly is still a correct answer, and a
+game that pays nothing for one stops being worth playing by the third round.
+All three numbers are settings.
 
 **Type is large and answers are redundantly coded.** Body text starts at 19px,
 tap targets are 84px tall, and every option carries a letter *and* a colour
@@ -244,8 +259,8 @@ Environment variables:
 | `PRIMETIME_CONTENT` | `./content` | Question bank directory |
 | `PRIMETIME_DATA` | `./data` | Saved game state and history |
 
-Everything else — team size, block shape, timing, categories, speed bonus,
-final wager, read-aloud — is set from the control view before you start.
+Everything else — the shape of the night, timing, breaks, scoring, categories,
+final wager, sound, read-aloud — is set from the control view.
 
 Players choose for themselves whether they're solo or a table sharing one
 device. Nothing caps the room — it's been load-tested at 100 simultaneous
@@ -253,11 +268,12 @@ entries.
 
 ## The question bank
 
-435 questions across 15 categories, as YAML in `content/`. That is enough for
-roughly eighteen thirty-minute blocks with no repeats — a good season, but not
-the "thousands" a venue running weekly for years will eventually want. The
-bank is designed to grow by pull request, and `content/` is the easiest place
-to contribute.
+920 questions across 27 categories, as YAML in `content/`. At two rounds of
+ten a game that is about twelve full nights with no repeats — a good season,
+but not the "thousands" a venue running weekly for years will eventually want.
+`npm run stats` prints the real number for your bank and settings. The bank is
+designed to grow by pull request, and `content/` is the easiest place to
+contribute.
 
 ```yaml
 category: military-history
@@ -311,6 +327,7 @@ See [docs/AUTHORING.md](docs/AUTHORING.md).
 ```bash
 npm run dev       # server on 8080, client with hot reload on 5173
 npm test          # content validation, engine tests, integration tests
+npm run flow      # play a whole night in a browser, with nobody touching it
 npm run build     # production bundles
 ```
 

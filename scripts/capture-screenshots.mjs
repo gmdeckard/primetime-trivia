@@ -166,8 +166,8 @@ try {
   // --- run the round out to a scoreboard
   for (let i = 0; i < 40; i++) {
     const phase = await mc.evaluate(() => document.querySelector('.pill-brass')?.textContent ?? '');
-    if (phase.includes('round scores')) break;
-    if (phase.includes('question')) {
+    if (phase.includes('Round over')) break;
+    if (phase.includes('Question live')) {
       await ann.locator('.answer').nth(0).click().catch(() => {});
       await carol.locator('.answer').nth(1).click().catch(() => {});
       await dave.locator('.answer').nth(2).click().catch(() => {});
@@ -179,6 +179,23 @@ try {
   await pause(host, 900);
   await shoot(host, '16-host-scoreboard');
   await shoot(ann, '17-player-standings');
+  await shoot(mc, '18-control-break');
+
+  // The settings page, which is where the MC sets the shape of the night. Each
+  // section opened in turn, because a closed accordion in a screenshot tells
+  // you nothing about what is in it.
+  await tap(mc, 'Setup');
+  await pause(mc, 400);
+  for (const [name, shot] of [
+    ['Shape of the night', '19-control-setup-shape'],
+    ['Timing', '20-control-setup-timing'],
+    ['Scoring', '21-control-setup-scoring'],
+    ['Sound and speech', '22-control-setup-sound'],
+  ]) {
+    await mc.locator('.section-head', { hasText: name }).first().click();
+    await pause(mc, 350);
+    await shoot(mc, shot);
+  }
 
   console.log('CONSOLE_ERRORS=' + JSON.stringify(errors, null, 1));
 

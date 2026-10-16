@@ -510,7 +510,10 @@ input:focus { border-color: var(--brass); outline: none; }
   position: sticky;
   bottom: 0;
   padding: 14px 0 max(14px, env(safe-area-inset-bottom));
-  background: linear-gradient(180deg, transparent, var(--ink) 30%);
+  /* A fixed-length fade, not a percentage one. At 30% the transparent part
+     grew with the bar, and once the break clock went in it was tall enough to
+     show the settings card straight through the countdown. */
+  background: linear-gradient(180deg, transparent 0, var(--ink) 20px);
 }
 .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
@@ -732,3 +735,186 @@ textarea:focus { border-color: var(--brass); outline: none; }
 
 /* Pause and the big button share one row, so neither costs the MC a scroll. */
 .control-actions { display: grid; grid-template-columns: auto 1fr; gap: 10px; align-items: stretch; }
+
+/* ------------------------------------------------------------- break clock
+
+   The one clock in the game measured in minutes, so mm:ss rather than a bare
+   count. On the big screen it is the size of the answer; on a handset and in
+   the MC's sticky bar it is a line. */
+.breakclock { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.breakclock-time {
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 2.6rem;
+  line-height: 1;
+  color: var(--brass);
+}
+.breakclock-note { color: var(--text-dim); font-size: .95rem; text-align: center; }
+.breakclock-big .breakclock-time { font-size: clamp(4rem, 12vw, 9rem); }
+.breakclock-big .breakclock-note { font-size: 1.5rem; }
+
+/* ------------------------------------------------------- settings controls
+
+   The MC's settings page. Three buttons offering three values is not a
+   setting, it is three settings, and the one the MC wants is the fourth. These
+   are real inputs: a number you can type, a slider where the feel matters more
+   than the digit, a switch that shows its state without being pressed.
+
+   Everything here stays at 44px or taller. The page is used standing up,
+   holding a microphone, by someone who may be wearing reading glasses. */
+
+.setup { gap: 10px; }
+
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field.is-disabled { opacity: .45; }
+.field-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+  font-size: .95rem;
+  color: var(--text-dim);
+}
+.field-hint { color: var(--text-faint); font-size: .85rem; text-align: right; }
+.field-row { display: flex; align-items: stretch; gap: 8px; }
+.field-input {
+  flex: 1;
+  min-width: 0;
+  min-height: 48px;
+  text-align: center;
+  font-size: 1.15rem;
+}
+/* The native spinners are 12px of hit area next to our own 48px steppers,
+   and on a phone they are decoration that steals taps. */
+.field-input::-webkit-outer-spin-button,
+.field-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.field-input[type='number'] { -moz-appearance: textfield; appearance: textfield; }
+.field-unit { align-self: center; color: var(--text-faint); font-size: .95rem; min-width: 2.4em; }
+.step {
+  flex: 0 0 48px;
+  min-height: 48px;
+  font-size: 1.4rem;
+  line-height: 1;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  color: var(--text);
+}
+.step:disabled { opacity: .35; }
+
+/* Two columns once there is room for them — the MC's phone gets one, a tablet
+   or the laptop gets two, which is where the wasted space went. */
+.fieldgrid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+@media (min-width: 520px) {
+  .fieldgrid { grid-template-columns: 1fr 1fr; }
+}
+
+.slider {
+  width: 100%;
+  height: 44px;
+  margin: 0;
+  background: transparent;
+  accent-color: var(--brass);
+}
+
+/* A switch, not a button that lights up. The track says which state it is in
+   before anyone touches it. */
+.toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  width: 100%;
+  min-height: 56px;
+  padding: 10px 14px;
+  text-align: left;
+  background: var(--surface-2);
+  border: 1px solid var(--line-soft);
+  border-radius: 12px;
+  color: var(--text);
+}
+.toggle:disabled { opacity: .45; }
+.toggle.is-on { border-color: var(--brass-deep); background: linear-gradient(180deg, #1f3458 0%, var(--surface-2) 100%); }
+.toggle-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.toggle-label { font-size: 1rem; }
+.toggle-hint { color: var(--text-faint); font-size: .85rem; }
+.toggle-track {
+  flex: 0 0 54px;
+  height: 30px;
+  border-radius: 15px;
+  background: var(--ink);
+  border: 1px solid var(--line);
+  position: relative;
+  transition: background .12s linear;
+}
+.toggle-track i {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--text-faint);
+  transition: transform .12s ease-out, background .12s linear;
+}
+.toggle.is-on .toggle-track { background: var(--brass-deep); border-color: var(--brass); }
+.toggle.is-on .toggle-track i { transform: translateX(24px); background: var(--text); }
+
+/* Two or three choices where a switch could not name both sides. */
+.segmented { display: flex; gap: 0; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+.segment {
+  flex: 1;
+  min-height: 48px;
+  background: var(--surface-2);
+  border: none;
+  border-right: 1px solid var(--line);
+  color: var(--text-dim);
+  font-size: .98rem;
+}
+.segment:last-child { border-right: none; }
+.segment.is-on { background: linear-gradient(180deg, var(--brass) 0%, var(--brass-deep) 100%); color: #fff; }
+
+/* Settings that are a set rather than a scale: age groups, packs. */
+.chipgrid { display: flex; flex-wrap: wrap; gap: 8px; }
+.chipbtn {
+  min-height: 44px;
+  padding: 8px 14px;
+  background: var(--surface-2);
+  border: 1px solid var(--line-soft);
+  border-radius: 999px;
+  color: var(--text-dim);
+  font-size: .95rem;
+}
+.chipbtn.is-on {
+  background: linear-gradient(180deg, var(--brass) 0%, var(--brass-deep) 100%);
+  border-color: var(--brass-deep);
+  color: #fff;
+}
+
+/* A group of settings that summarises itself when closed, so the common case
+   is reading the header rather than scrolling the page. */
+.section { border: 1px solid var(--line-soft); border-radius: 12px; overflow: hidden; }
+.section.is-open { border-color: var(--line); }
+.section-head {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas: 'title chevron' 'summary chevron';
+  align-items: center;
+  gap: 2px 12px;
+  width: 100%;
+  min-height: 60px;
+  padding: 10px 14px;
+  text-align: left;
+  background: var(--surface-2);
+  border: none;
+  color: var(--text);
+}
+.section-title { grid-area: title; font-size: 1.02rem; }
+.section-summary { grid-area: summary; color: var(--text-faint); font-size: .85rem; }
+.section-chevron { grid-area: chevron; color: var(--text-faint); font-size: 1.1rem; }
+.section-body { display: flex; flex-direction: column; gap: 12px; padding: 14px; }
+
+/* The MC's status row packs the phase, the clock and the position into one
+   line on a 375px screen. Without this the position wraps and the answer key
+   goes below the fold, which is the one thing that screen exists to show. */
+.nowrap { white-space: nowrap; }

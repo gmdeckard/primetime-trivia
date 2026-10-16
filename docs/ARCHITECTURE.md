@@ -79,29 +79,63 @@ deadline that expired while the laptop was asleep, and tells the MC it did so.
 
 ## Phases
 
-```
-lobby ─▶ block_intro ─▶ round_intro ─▶ question ─▶ locked ─▶ reveal ─┐
-                            ▲                                       │
-                            └───────── more questions ◀─────────────┘
-                                              │ round over
-                                              ▼
-                            round_scores ─▶ more rounds? ─▶ round_intro
-                                              │ last round
-                                              ▼
-                       wager_bet ─▶ wager_question ─▶ wager_reveal
-                                              │
-                                              ▼
-                       block_results ─▶ another block? ─▶ block_intro
-                                              │              (scores carry)
-                                              ▼
-                                          night_over
+A night contains games, a game contains rounds, a round contains questions.
+Those are the words the MC says out loud, so they are the words in the code:
+the middle layer used to be called a block, which nobody in a clubhouse has
+ever said.
 
-    tiebreak ─▶ tiebreak_reveal   (entered from block_results on a tie)
+```
+lobby ─▶ game_intro ─▶ round_intro ─▶ question ─▶ locked ─▶ reveal ─┐
+                           ▲                                       │
+                           └───────── more questions ◀─────────────┘
+                                             │ round over
+                                             ▼
+                           round_scores ─▶ more rounds? ─▶ round_intro
+                            (5 min break)    │ last round
+                                             ▼
+                      wager_bet ─▶ wager_question ─▶ wager_reveal
+                                             │
+                                             ▼
+                      game_results ─▶ another game? ─▶ game_intro
+                       (10 min break)  │              (scores carry)
+                                       │ that was gamesPerNight
+                                       ▼
+                                   night_over
+
+    tiebreak ─▶ tiebreak_reveal   (entered from game_results on a tie)
 ```
 
 `engine.advance()` is the MC's single button: every phase knows what comes
 next. `primaryAction()` in the control view maps each phase to the label and
 hint shown on that button.
+
+Every one of those arrows can also be taken by a clock rather than a thumb.
+Inside a round that is `autoAdvance`; at the intros it is `introSeconds`; at
+the two breaks it is `autoStartAfterBreak`. The break clock is set whether or
+not it ends the break itself, because the room's question is how long they
+have, and that does not depend on who presses the button at zero. The one beat
+that never runs on a clock is `wager_bet`: a team that has not bet loses its
+whole stake, so the MC decides when betting closes.
+
+## Picking questions
+
+Two decisions, one level apart.
+
+**Which categories a round draws from.** The default is `mixed`: one question
+from each of `questionsPerRound` shuffled categories, so ten questions means
+ten subjects. Ten questions on one subject is ten minutes in which anyone who
+does not follow that subject has nothing to do, and in a mixed room that is
+most of the room. `single` is still there for a themed round, and it is what
+makes the round intro card worth showing.
+
+**Which question comes out of a category.** `src/server/rotation.ts` keeps a
+deck of cards per category in `data/rotation.json`: deal off the top, and when
+a deck runs out reshuffle the whole category. That gives the property a
+question bank actually needs — every question gets asked once before any
+question gets asked twice — and it survives a server restart, a new night, and
+Reset everything, because the regulars it protects come back every week.
+`avoidRecentNights` only ever looked at the last eight nights, which let a
+question repeat in a season while a hundred others had never been asked.
 
 ## Security model
 
@@ -137,8 +171,10 @@ a browser warning. Everything on the wire is trivia questions.
 ## Testing
 
 - `src/server/engine.test.ts` plays real games against the real bank: full
-  blocks, the question window running its full length, wagers, tiebreaks,
-  no-repeat guarantees, the answer-key boundary, mid-question restart.
+  games, the question window running its full length, wagers, tiebreaks,
+  mixed rounds, the deck's no-repeat guarantee across restarts, the break
+  clocks, the night ending itself, the answer-key boundary, mid-question
+  restart, and a night written by a build that still said Block.
 - `src/server/integration.test.ts` spawns the built server and drives it over
   websockets: the password gate, role gating, identity handoff, reconnection,
   and a player and partner seeing each other's answer.
@@ -147,6 +183,25 @@ a browser warning. Everything on the wire is trivia questions.
   survives a restart, and that a prefix of the password is rejected.
 
 `npm test` runs content validation and both suites.
+
+## Playing a whole night with nobody in the room
+
+`npm run flow` is the third kind of test, and it is the one that catches the
+failure the other two are structurally blind to: the night running out of
+road.
+
+The unit tests drive the engine a call at a time. The screenshot pass drives
+the UI a click at a time. Both of them supply the thumb. `npm run flow` sets
+up a two-game night with short breaks, taps the big button once, and then
+watches: it answers on the handsets while a question is up, photographs each
+phase the first time it appears, and fails if the night has not reached
+`night_over`.
+
+It earned its keep on the first run. The reveal of the last question in a
+round queued nothing — correct when every round boundary waited for the MC,
+and fatal once breaks were meant to end themselves. Every unit test passed and
+every screenshot rendered; the night simply stopped on an answer and sat
+there.
 
 ## Screenshots as a smoke test
 

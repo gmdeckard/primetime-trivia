@@ -3,7 +3,18 @@ import { useEffect, useState } from 'preact/hooks';
 import { MIN_PASSWORD, type ControlState, type GameConfig } from '../../../shared/protocol';
 import '../shared/styles.css';
 import { useCountdown, useGame, useWakeLock } from '../shared/useGame';
-import { AutoAdvance, Board, ConnBanner, Toast } from '../shared/ui';
+import {
+  AutoAdvance,
+  Board,
+  BreakClock,
+  Choice,
+  ConnBanner,
+  NumberField,
+  Section,
+  Slider,
+  Toast,
+  Toggle,
+} from '../shared/ui';
 
 /**
  * Not shared/packs.ts AUDIENCES. That list drives generation, where 'any'
@@ -94,12 +105,42 @@ function Login({ onToken }: { onToken: (token: string) => void }) {
   );
 }
 
+/**
+ * The phase, in the room's words.
+ *
+ * `state.phase.replace(/_/g, ' ')` printed "round scores" and "game results",
+ * which are state machine names. The MC reads this pill mid-sentence.
+ */
+const PHASE_LABELS: Record<string, string> = {
+  lobby: 'Joining',
+  game_intro: 'Game intro',
+  round_intro: 'Round intro',
+  question: 'Live',
+  locked: 'Locked',
+  reveal: 'Answer up',
+  round_scores: 'Round over',
+  wager_bet: 'Wagers',
+  wager_question: 'Final',
+  wager_reveal: 'Final answer',
+  tiebreak: 'Tiebreak',
+  tiebreak_reveal: 'Tiebreak answer',
+  game_results: 'Game over',
+  night_over: 'Night over',
+};
+
 /** What the big button does, in words the MC can glance at. */
 function primaryAction(state: ControlState): { label: string; hint: string } {
+  const games = state.game.ofTotal ?? 1;
   switch (state.phase) {
-    case 'lobby': return { label: 'Start the block', hint: `${state.entryCount} ready` };
-    case 'block_intro': return { label: 'First round', hint: 'Introduce the category' };
-    case 'round_intro': return { label: 'First question', hint: state.round?.categoryName ?? '' };
+    case 'lobby':
+      return { label: 'Start game 1', hint: `${state.entryCount} ready · ${games} ${games === 1 ? 'game' : 'games'} tonight` };
+    case 'game_intro':
+      return { label: 'First round', hint: `Game ${state.game.index} of ${games}` };
+    case 'round_intro':
+      return {
+        label: 'First question',
+        hint: state.round?.mixed ? 'Mixed categories' : state.round?.categoryName ?? '',
+      };
     case 'question': return { label: 'Answers in', hint: `${state.answeredCount} of ${state.entryCount} answered` };
     case 'locked':
       return state.autoAdvanceAt
@@ -112,31 +153,85 @@ function primaryAction(state: ControlState): { label: string; hint: string } {
     case 'round_scores': {
       const round = state.round;
       const last = !round || round.index >= round.ofTotal;
-      const mins = last ? state.config.blockBreakMinutes : state.config.roundBreakMinutes;
-      return last
-        ? { label: 'Start the final question', hint: `Round ended · ${mins} minute break` }
-        : { label: `Start round ${(round?.index ?? 1) + 1}`, hint: `Round ended · ${mins} minute break` };
+      // The last round of a game runs into the wager, so there is no break to
+      // announce there — the long one comes after the game closes.
+      if (last) {
+        return state.config.finalWager
+          ? { label: 'Start the final question', hint: `Round ${round?.index ?? 1} ended · wagers next` }
+          : { label: `Close game ${state.game.index}`, hint: `Round ${round?.index ?? 1} ended` };
+      }
+      return {
+        label: `Start round ${(round?.index ?? 1) + 1}`,
+        hint: `Round ${round?.index} of ${round?.ofTotal} ended · ${state.config.roundBreakMinutes} min break`,
+      };
     }
     case 'wager_bet': return { label: 'Show the final question', hint: 'Once every team has bet' };
     case 'wager_question': return { label: 'Answers in', hint: 'Lock the final question' };
-    case 'wager_reveal': return { label: 'Final standings', hint: '' };
+    case 'wager_reveal': return { label: `Game ${state.game.index} standings`, hint: '' };
     case 'tiebreak': return { label: 'Answers in', hint: 'Closest wins' };
     case 'tiebreak_reveal': return { label: 'Back to standings', hint: '' };
-    case 'block_results': return { label: 'Start another block', hint: 'Same teams, scores carry over' };
+    case 'game_results': {
+      const last = state.game.index >= games;
+      return last
+        ? { label: 'Finish the night', hint: `Game ${state.game.index} of ${games} — that was the last one` }
+        : {
+            label: `Start game ${state.game.index + 1}`,
+            hint: `Game ${state.game.index} of ${games} done · ${state.config.gameBreakMinutes} min break`,
+          };
+    }
     case 'night_over': return { label: '—', hint: 'Night finished' };
   }
 }
 
+/**
+ * The MC's settings page.
+ *
+ * Rebuilt from a column of lit-up buttons. The old version offered three
+ * seconds-per-question values and the one you wanted was always a fourth; it
+ * said "Volume 45%" on a button you pressed to cycle; and everything was open
+ * at once, so finding one setting meant scrolling past twenty. Now: real
+ * number fields with steppers, sliders where the feel matters more than the
+ * number, switches that show their state without being pressed, and sections
+ * that summarise themselves closed.
+ *
+ * Grouped the way an MC thinks about a night — the shape of it, how fast it
+ * moves, what it pays, what it sounds like, where the questions come from —
+ * rather than by which part of the config object the setting lives in.
+ */
 function Setup({ state, send }: { state: ControlState; send: ReturnType<typeof useGame>['send'] }) {
+  const c = state.config;
   const set = (patch: Partial<GameConfig>) => send({ t: 'set_config', patch });
   const [venue, setVenue] = useState(state.venueName);
+  const [open, setOpen] = useState<string | null>('shape');
+  const only = (id: string) => setOpen(open === id ? null : id);
+
+  // Structural settings are refused once a game is running, because a round
+  // half-built one shape and half another is worse than a shape you cannot
+  // change until the break. The panel says so rather than silently ignoring
+  // the tap, which is what it used to do.
+  const inLobby = state.phase === 'lobby';
+
+  const questionBeat = c.secondsPerQuestion + c.revealDelaySeconds + c.nextQuestionDelaySeconds;
+  const roundMinutes = (c.questionsPerRound * questionBeat + c.introSeconds) / 60;
+  const gameMinutes =
+    c.roundsPerGame * roundMinutes +
+    (c.roundsPerGame - 1) * c.roundBreakMinutes +
+    (c.finalWager ? 2.5 : 0);
+  const nightMinutes = c.gamesPerNight * gameMinutes + (c.gamesPerNight - 1) * c.gameBreakMinutes;
+  const clock = (mins: number) => {
+    const total = Math.round(mins);
+    const h = Math.floor(total / 60);
+    const m = total % 60;
+    return h ? `${h}h ${m}m` : `${m}m`;
+  };
 
   return (
-    <div class="card stack">
-      <div class="eyebrow">Before you start</div>
-
-      <label class="stack" style={{ gap: '6px' }}>
-        <span class="faint">Event name (shown on the big screen)</span>
+    <div class="card stack setup">
+      <label class="field">
+        <span class="field-label">
+          <span>Event name</span>
+          <span class="field-hint">shown on the big screen</span>
+        </span>
         <input
           value={venue}
           onInput={(e) => setVenue((e.target as HTMLInputElement).value)}
@@ -145,198 +240,298 @@ function Setup({ state, send }: { state: ControlState; send: ReturnType<typeof u
         />
       </label>
 
-      <div class="stack" style={{ gap: '6px' }}>
-        <span class="faint">
-          Shape of a block — {state.config.roundsPerBlock} × {state.config.questionsPerRound} questions ≈{' '}
-          {Math.round(
-            (state.config.roundsPerBlock * state.config.questionsPerRound * (state.config.secondsPerQuestion + 22) +
-              (state.config.finalWager ? 150 : 0)) / 60,
-          )}{' '}
-          min
-        </span>
-        <div class="grid3">
-          {[
-            { label: '3 × 8', rounds: 3, questions: 8 },
-            { label: '4 × 6', rounds: 4, questions: 6 },
-            { label: '2 × 10', rounds: 2, questions: 10 },
-          ].map((opt) => (
-            <button
-              key={opt.label}
-              class={`btn${state.config.roundsPerBlock === opt.rounds && state.config.questionsPerRound === opt.questions ? ' btn-primary' : ''}`}
-              onClick={() => set({ roundsPerBlock: opt.rounds, questionsPerRound: opt.questions })}
-            >
-              {opt.label}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      <div class="stack" style={{ gap: '6px' }}>
-        <span class="faint">Seconds per question — {state.config.secondsPerQuestion}</span>
-        <div class="grid3">
-          {[25, 35, 50].map((n) => (
-            <button
-              key={n}
-              class={`btn${state.config.secondsPerQuestion === n ? ' btn-primary' : ''}`}
-              onClick={() => set({ secondsPerQuestion: n })}
-            >
-              {n}s
-            </button>
-          ))}
-        </div>
-      </div>
-
-      <div class="stack" style={{ gap: '6px' }}>
-        <span class="faint">
-          Pacing — {state.config.autoAdvance
-            ? `reveals after ${state.config.revealDelaySeconds}s, moves on after ${state.config.nextQuestionDelaySeconds}s`
-            : 'you tap through every step'}
-        </span>
-        <button
-          class={`btn${state.config.autoAdvance ? ' btn-primary' : ''}`}
-          onClick={() => set({ autoAdvance: !state.config.autoAdvance })}
-        >
-          Run the round automatically {state.config.autoAdvance ? 'on' : 'off'}
-        </button>
-        {state.config.autoAdvance && (
-          <>
-            <span class="faint">Pause before the answer</span>
-            <div class="grid3">
-              {[2, 4, 6].map((n) => (
-                <button
-                  key={n}
-                  class={`btn btn-sm${state.config.revealDelaySeconds === n ? ' btn-primary' : ''}`}
-                  onClick={() => set({ revealDelaySeconds: n })}
-                >
-                  {n}s
-                </button>
-              ))}
-            </div>
-            <span class="faint">Time on the answer — long enough to read the fact aloud</span>
-            <div class="grid3">
-              {[7, 10, 15].map((n) => (
-                <button
-                  key={n}
-                  class={`btn btn-sm${state.config.nextQuestionDelaySeconds === n ? ' btn-primary' : ''}`}
-                  onClick={() => set({ nextQuestionDelaySeconds: n })}
-                >
-                  {n}s
-                </button>
-              ))}
-            </div>
-          </>
-        )}
-      </div>
-
-      <div class="grid2">
-        <button class="btn" disabled>
-          {state.config.questionPoints} pts, falling after {state.config.readSeconds}s
-        </button>
-        <button
-          class={`btn${state.config.finalWager ? ' btn-primary' : ''}`}
-          onClick={() => set({ finalWager: !state.config.finalWager })}
-        >
-          Final wager {state.config.finalWager ? 'on' : 'off'}
-        </button>
-      </div>
-
-      <button
-        class={`btn${state.config.readAloud ? ' btn-primary' : ''}`}
-        onClick={() => set({ readAloud: !state.config.readAloud })}
+      <Section
+        title="Shape of the night"
+        summary={`${c.gamesPerNight} games × ${c.roundsPerGame} rounds × ${c.questionsPerRound} questions · ${clock(nightMinutes)}`}
+        open={open === 'shape'}
+        onToggle={() => only('shape')}
       >
-        Read questions aloud {state.config.readAloud ? 'on' : 'off'}
-      </button>
-
-      {/* Sound only ever comes out of the big screen. The first time it is
-          switched on, that screen needs one click before a browser will play
-          anything — there is a button on it saying so. */}
-      <div class="grid2">
-        <button
-          class={`btn${state.config.music ? ' btn-primary' : ''}`}
-          onClick={() => set({ music: !state.config.music })}
-        >
-          Big-screen sound {state.config.music ? 'on' : 'off'}
-        </button>
-        <button
-          class="btn"
-          disabled={!state.config.music}
-          onClick={() => {
-            const next = state.config.musicVolume >= 0.6 ? 0.15 : state.config.musicVolume + 0.15;
-            set({ musicVolume: Math.round(next * 100) / 100 });
-          }}
-        >
-          Volume {Math.round(state.config.musicVolume * 100)}%
-        </button>
-        <button
-          class={`btn${state.config.musicUnderQuestion ? ' btn-primary' : ''}`}
-          disabled={!state.config.music}
-          onClick={() => set({ musicUnderQuestion: !state.config.musicUnderQuestion })}
-        >
-          Under the question {state.config.musicUnderQuestion ? 'on' : 'off'}
-        </button>
-        <button
-          class={`btn${state.config.musicSpeakCountIn ? ' btn-primary' : ''}`}
-          disabled={!state.config.music}
-          onClick={() => set({ musicSpeakCountIn: !state.config.musicSpeakCountIn })}
-        >
-          Spoken run-up {state.config.musicSpeakCountIn ? 'on' : 'off'}
-        </button>
-      </div>
-
-      {/*
-        Age group. The core bank is tagged 55-75, so picking another group
-        swaps the night's material wholesale rather than mixing it. An
-        untagged question (the numeric tiebreakers) suits every group and
-        stays in play throughout. The count is live, and views.ts already
-        warns when the selection cannot fill a block, so a group with nothing
-        written for it announces itself here rather than mid-round.
-      */}
-      <div class="stack" style={{ gap: '6px' }}>
-        <span class="faint">
-          Age group — {state.bank.availableInSelection} questions in play
-        </span>
-        <div class="grid2">
-          {AGE_GROUPS.map((group) => (
-            <button
-              key={group.id}
-              class={`btn btn-sm${state.config.audience === group.id ? ' btn-primary' : ''}`}
-              onClick={() => set({ audience: group.id })}
-            >
-              {group.name}
-            </button>
-          ))}
+        {!inLobby && (
+          <p class="faint">
+            A game is running, so the shape is locked until the night is reset. Everything else below is live.
+          </p>
+        )}
+        <div class="fieldgrid">
+          <NumberField
+            label="Questions per round"
+            value={c.questionsPerRound}
+            min={1}
+            max={25}
+            disabled={!inLobby}
+            onChange={(questionsPerRound) => set({ questionsPerRound })}
+          />
+          <NumberField
+            label="Rounds per game"
+            value={c.roundsPerGame}
+            min={1}
+            max={10}
+            disabled={!inLobby}
+            onChange={(roundsPerGame) => set({ roundsPerGame })}
+          />
+          <NumberField
+            label="Games tonight"
+            hint="the night ends after the last one"
+            value={c.gamesPerNight}
+            min={1}
+            max={8}
+            onChange={(gamesPerNight) => set({ gamesPerNight })}
+          />
         </div>
-      </div>
+        <p class="faint">
+          A round runs about {clock(roundMinutes)}, a game about {clock(gameMinutes)} with its breaks.
+        </p>
+        <Choice
+          label="Categories in a round"
+          hint={
+            c.roundCategoryMode === 'mixed'
+              ? 'one question each from ten shuffled categories'
+              : 'the whole round on one subject'
+          }
+          value={c.roundCategoryMode}
+          disabled={!inLobby}
+          options={[
+            { value: 'mixed', label: 'Mixed' },
+            { value: 'single', label: 'One per round' },
+          ]}
+          onChange={(roundCategoryMode) => set({ roundCategoryMode })}
+        />
+        <Toggle
+          label="Final wager"
+          hint="a Jeopardy-style bet closes each game"
+          on={c.finalWager}
+          onChange={(finalWager) => set({ finalWager })}
+        />
+      </Section>
 
-      {state.packs.length > 0 && (
-        <div class="stack" style={{ gap: '6px' }}>
-          <span class="faint">Extra packs — the core bank is always in play</span>
-          {state.packs.map((pack) => {
-            const on = state.config.packs.includes(pack.id);
-            return (
+      <Section
+        title="Timing"
+        summary={`${c.secondsPerQuestion}s a question · ${c.roundBreakMinutes}/${c.gameBreakMinutes} min breaks · ${c.autoStartAfterBreak ? 'runs itself' : 'MC starts each round'}`}
+        open={open === 'timing'}
+        onToggle={() => only('timing')}
+      >
+        <div class="fieldgrid">
+          <NumberField
+            label="Answer window"
+            unit="s"
+            value={c.secondsPerQuestion}
+            min={5}
+            max={120}
+            onChange={(secondsPerQuestion) => set({ secondsPerQuestion })}
+          />
+          <NumberField
+            label="Pause before the answer"
+            unit="s"
+            value={c.revealDelaySeconds}
+            min={0}
+            max={30}
+            onChange={(revealDelaySeconds) => set({ revealDelaySeconds })}
+          />
+          <NumberField
+            label="Time on the answer"
+            hint="long enough to read the fact aloud"
+            unit="s"
+            value={c.nextQuestionDelaySeconds}
+            min={2}
+            max={60}
+            onChange={(nextQuestionDelaySeconds) => set({ nextQuestionDelaySeconds })}
+          />
+          <NumberField
+            label="Intro cards"
+            hint="how long a round or game title holds"
+            unit="s"
+            value={c.introSeconds}
+            min={0}
+            max={60}
+            onChange={(introSeconds) => set({ introSeconds })}
+          />
+          <NumberField
+            label="Break between rounds"
+            unit="min"
+            value={c.roundBreakMinutes}
+            min={0}
+            max={60}
+            onChange={(roundBreakMinutes) => set({ roundBreakMinutes })}
+          />
+          <NumberField
+            label="Break between games"
+            unit="min"
+            value={c.gameBreakMinutes}
+            min={0}
+            max={90}
+            onChange={(gameBreakMinutes) => set({ gameBreakMinutes })}
+          />
+        </div>
+        <Toggle
+          label="Breaks end themselves"
+          hint={
+            c.autoStartAfterBreak
+              ? 'the clock runs out and the next round starts'
+              : 'the clock still counts down, but you start the next round'
+          }
+          on={c.autoStartAfterBreak}
+          onChange={(autoStartAfterBreak) => set({ autoStartAfterBreak })}
+        />
+        <Toggle
+          label="Run the round automatically"
+          hint={
+            c.autoAdvance
+              ? 'lock, reveal and next question all on the clock'
+              : 'you tap through every step'
+          }
+          on={c.autoAdvance}
+          onChange={(autoAdvance) => set({ autoAdvance })}
+        />
+      </Section>
+
+      <Section
+        title="Scoring"
+        summary={`${c.questionPoints} points, falling to ${c.minQuestionPoints} after ${c.readSeconds}s`}
+        open={open === 'scoring'}
+        onToggle={() => only('scoring')}
+      >
+        <div class="fieldgrid">
+          <NumberField
+            label="Question value"
+            unit="pts"
+            value={c.questionPoints}
+            min={100}
+            max={5000}
+            step={100}
+            onChange={(questionPoints) => set({ questionPoints })}
+          />
+          <NumberField
+            label="Worth at the buzzer"
+            hint="never nothing for a slow correct answer"
+            unit="pts"
+            value={c.minQuestionPoints}
+            min={0}
+            max={c.questionPoints}
+            step={50}
+            onChange={(minQuestionPoints) => set({ minQuestionPoints })}
+          />
+        </div>
+        <Slider
+          label="Full value for"
+          value={c.readSeconds}
+          min={0}
+          max={Math.max(1, c.secondsPerQuestion)}
+          format={(v) => `${v}s of ${c.secondsPerQuestion}s`}
+          onChange={(readSeconds) => set({ readSeconds })}
+        />
+        <p class="faint">
+          Answer inside {c.readSeconds}s and it pays {c.questionPoints}. After that it slides to{' '}
+          {c.minQuestionPoints} at the buzzer, so two teams who both knew it are split by how fast they were sure.
+        </p>
+      </Section>
+
+      <Section
+        title="Sound and speech"
+        summary={
+          c.music
+            ? `on at ${Math.round(c.musicVolume * 100)}%${c.musicUnderQuestion ? ' · under questions' : ''}`
+            : c.readAloud ? 'music off · questions read aloud' : 'off'
+        }
+        open={open === 'sound'}
+        onToggle={() => only('sound')}
+      >
+        {/* Sound only ever comes out of the big screen. The first time it is
+            switched on, that screen needs one click before a browser will play
+            anything — there is a button on it saying so. */}
+        <Toggle
+          label="Big-screen sound"
+          hint="synthesized on the big screen, nothing over the wifi"
+          on={c.music}
+          onChange={(music) => set({ music })}
+        />
+        <Slider
+          label="Volume"
+          value={Math.round(c.musicVolume * 100)}
+          min={0}
+          max={100}
+          step={5}
+          format={(v) => `${v}%`}
+          disabled={!c.music}
+          onChange={(v) => set({ musicVolume: Math.round(v) / 100 })}
+        />
+        <Toggle
+          label="Music under the question"
+          hint="competes with the microphone in a room with hearing aids"
+          on={c.musicUnderQuestion}
+          disabled={!c.music}
+          onChange={(musicUnderQuestion) => set({ musicUnderQuestion })}
+        />
+        <Toggle
+          label="Spoken run-up"
+          hint="get ready, set, go before each question"
+          on={c.musicSpeakCountIn}
+          disabled={!c.music}
+          onChange={(musicSpeakCountIn) => set({ musicSpeakCountIn })}
+        />
+        <Toggle
+          label="Read questions aloud"
+          hint="the big screen's own voice reads the prompt and options"
+          on={c.readAloud}
+          onChange={(readAloud) => set({ readAloud })}
+        />
+      </Section>
+
+      <Section
+        title="Questions"
+        summary={`${AGE_GROUPS.find((g) => g.id === c.audience)?.name ?? 'No filter'} · ${state.bank.availableInSelection} in play`}
+        open={open === 'content'}
+        onToggle={() => only('content')}
+      >
+        {/*
+          Age group. The core bank is tagged 55-75, so picking another group
+          swaps the night's material wholesale rather than mixing it. An
+          untagged question (the numeric tiebreakers) suits every group and
+          stays in play throughout. The count is live, and views.ts already
+          warns when the selection cannot fill a game, so a group with nothing
+          written for it announces itself here rather than mid-round.
+        */}
+        <div class="field">
+          <span class="field-label">
+            <span>Age group</span>
+            <span class="field-hint">{state.bank.availableInSelection} questions in play</span>
+          </span>
+          <div class="chipgrid">
+            {AGE_GROUPS.map((group) => (
               <button
-                key={pack.id}
-                class={`btn btn-sm${on ? ' btn-primary' : ''}`}
-                style={{ justifyContent: 'space-between' }}
-                onClick={() =>
-                  set({
-                    packs: on
-                      ? state.config.packs.filter((p) => p !== pack.id)
-                      : [...state.config.packs, pack.id],
-                  })
-                }
+                key={group.id}
+                class={`chipbtn${c.audience === group.id ? ' is-on' : ''}`}
+                onClick={() => set({ audience: group.id })}
               >
-                <span>{pack.name}</span>
-                <span class="faint">{pack.questionCount} · {pack.audience}</span>
+                {group.name}
               </button>
-            );
-          })}
+            ))}
+          </div>
         </div>
-      )}
 
-      <p class="faint">
-        {state.bank.total} questions loaded · {state.bank.availableInSelection} unused in the current selection
-      </p>
+        {state.packs.length > 0 && (
+          <div class="field">
+            <span class="field-label">
+              <span>Extra packs</span>
+              <span class="field-hint">the core bank is always in play</span>
+            </span>
+            {state.packs.map((pack) => (
+              <Toggle
+                key={pack.id}
+                label={pack.name}
+                hint={`${pack.questionCount} questions · ${pack.audience}`}
+                on={c.packs.includes(pack.id)}
+                onChange={(on) =>
+                  set({ packs: on ? [...c.packs, pack.id] : c.packs.filter((p) => p !== pack.id) })
+                }
+              />
+            ))}
+          </div>
+        )}
+
+        <p class="faint">
+          {state.bank.total} questions loaded · {state.bank.availableInSelection} unused in the current selection.
+          No question comes back until its category has been all the way through.
+        </p>
+      </Section>
     </div>
   );
 }
@@ -344,6 +539,7 @@ function Setup({ state, send }: { state: ControlState; send: ReturnType<typeof u
 function Teams({ state, send }: { state: ControlState; send: ReturnType<typeof useGame>['send'] }) {
   const [open, setOpen] = useState<string | null>(null);
   const [filter, setFilter] = useState('');
+  const full = state.config.questionPoints;
 
   // At a hundred entries, scrolling to find one is hopeless. Filter by name,
   // and otherwise show the table in score order so the ones the MC is most
@@ -390,8 +586,13 @@ function Teams({ state, send }: { state: ControlState; send: ReturnType<typeof u
             </button>
             {open === row.teamId && (
               <div class="stack" style={{ gap: '8px', paddingLeft: '8px' }}>
+                {/* Scaled off the question value, not fixed. These were
+                    -10/+5/+10 from the old scoring, and against a board where
+                    one question is worth a thousand they adjusted nothing at
+                    all: the MC awarding a disputed answer needs the value of
+                    the answer. */}
                 <div class="grid3">
-                  {[-10, 5, 10].map((delta) => (
+                  {[-full, Math.round(full / 2), full].map((delta) => (
                     <button key={delta} class="btn btn-sm" onClick={() => send({ t: 'adjust_score', teamId: row.teamId, delta })}>
                       {delta > 0 ? `+${delta}` : delta}
                     </button>
@@ -477,6 +678,7 @@ function App() {
   }
 
   const action = primaryAction(state);
+  const onBreak = state.phase === 'round_scores' || state.phase === 'game_results';
   const live = state.phase === 'question' || state.phase === 'wager_question' || state.phase === 'tiebreak';
   const pausable = state.phase !== 'lobby' && state.phase !== 'night_over';
 
@@ -539,7 +741,7 @@ function App() {
       {/* Phase, answer key and lookahead: everything the MC speaks from. */}
       <div class="card stack">
         <div class="row-between">
-          <span class="pill pill-brass">{state.phase.replace(/_/g, ' ')}</span>
+          <span class="pill pill-brass">{PHASE_LABELS[state.phase] ?? state.phase.replace(/_/g, ' ')}</span>
           {live && (
             <span class="pill">
               {/* The deadline is withheld while paused, so secondsLeft reads 0.
@@ -547,11 +749,22 @@ function App() {
               {state.held ? 'Paused' : `${secondsLeft}s`} · {state.answeredCount}/{state.entryCount} in
             </span>
           )}
-          {state.round && <span class="faint">R{state.round.index}/{state.round.ofTotal}</span>}
+          {/* G1/3 R2/2 rather than the words. This row carries the phase and
+              the clock as well, and on a 375px phone the spelled-out version
+              wrapped to a second line and pushed the answer key off screen. */}
+          <span class="faint nowrap">
+            G{state.game.index || 1}/{state.game.ofTotal ?? 1}
+            {state.round ? ` R${state.round.index}/${state.round.ofTotal}` : ''}
+          </span>
         </div>
 
         {state.question && (
           <>
+            {/* The category, because in a mixed round it changes every
+                question and it is the thing the MC says before reading it. */}
+            <div class="eyebrow">
+              {state.question.categoryName} · Q{state.question.position}/{state.question.ofTotal}
+            </div>
             <p style={{ fontFamily: 'var(--serif)', fontSize: '1.15rem', margin: 0 }}>{state.question.prompt}</p>
             {state.answerKey && (
               <div class="answerkey">
@@ -597,7 +810,7 @@ function App() {
         </div>
       )}
 
-      {(state.phase === 'block_results' || state.phase === 'round_scores' || state.phase === 'night_over') && (
+      {(state.phase === 'game_results' || state.phase === 'round_scores' || state.phase === 'night_over') && (
         <>
           <Board rows={state.scoreboard} />
           {state.scoreboard.filter((r) => r.rank === 1).length > 1 && (
@@ -611,7 +824,7 @@ function App() {
       {(showMore ||
         state.phase === 'lobby' ||
         state.phase === 'round_scores' ||
-        state.phase === 'block_results' ||
+        state.phase === 'game_results' ||
         state.phase === 'night_over') &&
         (state.phase !== 'lobby' || state.entryCount > 0) && <Teams state={state} send={send} />}
 
@@ -619,7 +832,12 @@ function App() {
       <div class="card stack">
         <div class="eyebrow">Announce on the big screen</div>
         <div class="grid2">
-          <button class="btn btn-sm" onClick={() => send({ t: 'say', message: 'Short break — back in 10 minutes.' })}>
+          <button
+            class="btn btn-sm"
+            onClick={() =>
+              send({ t: 'say', message: `Short break — back in ${state.config.roundBreakMinutes} minutes.` })
+            }
+          >
             Break
           </button>
           <button class="btn btn-sm" onClick={() => send({ t: 'say', message: '' })}>Clear</button>
@@ -646,12 +864,33 @@ function App() {
       )}
 
       <div class="control-sticky">
-        {state.autoAdvanceAt && !state.held && (
+        {onBreak && (
+          <div style={{ marginBottom: '10px' }}>
+            <BreakClock
+              at={state.breakEndsAt}
+              held={state.held}
+              minutes={
+                state.phase === 'game_results' ? state.config.gameBreakMinutes : state.config.roundBreakMinutes
+              }
+              auto={state.config.autoStartAfterBreak}
+            />
+          </div>
+        )}
+        {/* The break clock above already counts this down, in minutes, which
+            is the unit the room is thinking in. A second countdown saying
+            "Next in 298" underneath it is the same fact told worse. */}
+        {state.autoAdvanceAt && !state.held && !onBreak && (
           <div class="row" style={{ gap: '10px', marginBottom: '10px' }}>
             <div class="grow">
               <AutoAdvance
                 at={state.autoAdvanceAt}
-                label={state.phase === 'locked' ? 'Revealing in' : 'Next in'}
+                label={
+                  state.phase === 'locked'
+                    ? 'Revealing in'
+                    : state.phase === 'game_intro' || state.phase === 'round_intro'
+                      ? 'Starting in'
+                      : 'Next in'
+                }
                 held={state.held}
               />
             </div>

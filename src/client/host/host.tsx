@@ -1,11 +1,11 @@
-import { render } from 'preact';
+import { render, type ComponentChildren } from 'preact';
 import { useEffect, useRef, useState } from 'preact/hooks';
 import type { HostState } from '../../../shared/protocol';
 import '../shared/styles.css';
 import { nextUpWindowMs, useCountdown, useGame, useNow, useSpeech, useWakeLock } from '../shared/useGame';
 import { createHostAudio, type Bed, type HostAudio } from './audio';
 import { pointsAt } from '../../../shared/protocol';
-import { AutoAdvance, Badge, Board, NextUp, Toast } from '../shared/ui';
+import { AutoAdvance, Badge, Board, BreakClock, NextUp, Toast } from '../shared/ui';
 
 /**
  * The big screen. Read-only, and sized for a projector at the far end of a
@@ -18,13 +18,15 @@ import { AutoAdvance, Badge, Board, NextUp, Toast } from '../shared/ui';
  */
 
 /**
- * Which break the room is on. The last round of a block runs into the wager
- * and then the long break; any earlier round gets the short one.
+ * Which break the room is on.
+ *
+ * A round with another round after it gets the short break. The last round of
+ * a game runs into the wager and then the long break, so its scoreboard is a
+ * beat and not a break — the engine agrees, and only sets a break clock on the
+ * ones that are one.
  */
 function breakMinutes(state: HostState): number {
-  const round = state.round;
-  const last = !round || round.index >= round.ofTotal;
-  return last ? state.config.blockBreakMinutes : state.config.roundBreakMinutes;
+  return state.phase === 'game_results' ? state.config.gameBreakMinutes : state.config.roundBreakMinutes;
 }
 
 function JoinPanel({ state }: { state: HostState }) {
@@ -130,7 +132,7 @@ function StandingsRail({ state }: { state: HostState }) {
   );
 }
 
-function Podium({ state, title }: { state: HostState; title: string }) {
+function Podium({ state, title, children }: { state: HostState; title: string; children?: ComponentChildren }) {
   const rows = state.scoreboard;
   const winner = rows[0];
   return (
@@ -147,6 +149,7 @@ function Podium({ state, title }: { state: HostState; title: string }) {
           </>
         )}
       </div>
+      {children}
       <div style={{ maxWidth: '900px', margin: '0 auto', width: '100%' }}>
         <Board rows={rows} limit={10} />
       </div>
@@ -186,8 +189,8 @@ function App() {
       ? state?.config.musicUnderQuestion
         ? 'question'
         : null
-      : phase === 'lobby' || phase === 'round_scores' || phase === 'block_results' ||
-          phase === 'block_intro' || phase === 'round_intro' || phase === 'night_over'
+      : phase === 'lobby' || phase === 'round_scores' || phase === 'game_results' ||
+          phase === 'game_intro' || phase === 'round_intro' || phase === 'night_over'
         ? 'lobby'
         : null;
 
@@ -269,6 +272,10 @@ function App() {
     state.phase === 'reveal' &&
     !!state.autoAdvanceAt &&
     !state.held &&
+    // Only when a question actually follows. At the end of a round the
+    // scoreboard is where we are going anyway, so handing the screen over to
+    // a run-up clock first would be a countdown to the thing already on it.
+    state.moreInRound !== false &&
     state.autoAdvanceAt - tick <= standingsWindowMs;
 
   // No point showing the rail next to a full scoreboard.
@@ -299,18 +306,35 @@ function App() {
       <div class="host-bar">
         <div>
           <div class="eyebrow">{state.venueName}</div>
-          {state.round && (
+          {/* The standings screens say where the night is in their own
+              headline, so the corner repeating "Mixed bag · round 2 of 2"
+              over the champions is noise at the one moment nobody is
+              thinking about which round it was. */}
+          {state.round && state.phase !== 'night_over' && state.phase !== 'game_results' && (
             <div class="serif" style={{ fontSize: '1.5rem' }}>
-              {state.round.categoryName}
-              <span class="muted" style={{ fontSize: '1rem' }}>
-                {' '}· round {state.round.index} of {state.round.ofTotal}
-                {q ? ` · question ${q.position} of ${q.ofTotal}` : ''}
-              </span>
+              {/* While a question is up, the category is named in the middle
+                  of the screen where the room is already looking, so the
+                  header carries the position alone. Printing it in both
+                  places just made the corner compete with the centre. */}
+              {q ? (
+                <span class="muted" style={{ fontSize: '1.1rem' }}>
+                  Round {state.round.index} of {state.round.ofTotal} · question {q.position} of {q.ofTotal}
+                </span>
+              ) : (
+                <>
+                  {state.round.categoryName}
+                  <span class="muted" style={{ fontSize: '1rem' }}>
+                    {' '}· round {state.round.index} of {state.round.ofTotal}
+                  </span>
+                </>
+              )}
             </div>
           )}
         </div>
         <div class="row" style={{ gap: '14px' }}>
-          {state.block.index > 0 && <span class="pill">Block {state.block.index}</span>}
+          {state.game.index > 0 && (
+            <span class="pill">Game {state.game.index} of {state.game.ofTotal ?? 1}</span>
+          )}
           <span class="pill">{state.entryCount} playing</span>
           <span class="pill pill-brass">{state.roomCode}</span>
         </div>
@@ -342,22 +366,28 @@ function App() {
         </div>
       )}
 
-      {state.phase === 'block_intro' && (
+      {state.phase === 'game_intro' && (
         <div class="host-body center stack">
           <div class="eyebrow">Here we go</div>
-          <h1 class="host-display">Block {state.block.index}</h1>
+          <h1 class="host-display">Game {state.game.index} of {state.game.ofTotal ?? 1}</h1>
           <p class="muted" style={{ fontSize: '1.5rem' }}>
-            {state.config.roundsPerBlock} rounds · {state.config.questionsPerRound} questions each
+            {state.config.roundsPerGame} rounds · {state.config.questionsPerRound} questions each
             {state.config.finalWager ? ' · final wager to close' : ''}
           </p>
+          <AutoAdvance at={state.autoAdvanceAt} label="Starting in" held={state.held} />
         </div>
       )}
 
       {state.phase === 'round_intro' && state.round && (
         <div class="host-body center stack">
-          <div class="eyebrow">Round {state.round.index} of {state.round.ofTotal}</div>
-          <h1 class="host-display">{state.round.categoryName}</h1>
-          <p class="muted" style={{ fontSize: '1.6rem', maxWidth: '26ch', margin: '0 auto' }}>{state.round.blurb}</p>
+          <div class="eyebrow">Game {state.game.index} of {state.game.ofTotal ?? 1}</div>
+          <h1 class="host-display">Round {state.round.index} of {state.round.ofTotal}</h1>
+          <p class="muted" style={{ fontSize: '1.6rem', maxWidth: '26ch', margin: '0 auto' }}>
+            {state.round.mixed
+              ? `${state.config.questionsPerRound} questions, a different category every time`
+              : `${state.round.categoryName} — ${state.round.blurb}`}
+          </p>
+          <AutoAdvance at={state.autoAdvanceAt} label="First question in" held={state.held} />
         </div>
       )}
 
@@ -383,6 +413,12 @@ function App() {
               </span>
             </div>
           )}
+          {/* Named before the prompt, every question. The room is used to a
+              round announcing its subject once; a mixed round has to announce
+              it ten times, and this is where the eye already is. */}
+          <div class="center">
+            <span class="pill" style={{ fontSize: '1.3rem' }}>{q.categoryName}</span>
+          </div>
           <h1 class="prompt center">{q.prompt}</h1>
           {q.image && (
             <img
@@ -413,7 +449,7 @@ function App() {
               </div>
               <AutoAdvance
                 at={state.autoAdvanceAt}
-                label="Next question in"
+                label={state.moreInRound ? 'Next question in' : 'Round ends in'}
                 held={state.held}
               />
             </>
@@ -431,10 +467,26 @@ function App() {
               of the hall can read. */}
           <div class="center stack">
             <h1 class="host-display">End of Round {state.round?.index ?? 1}</h1>
-            <p style={{ fontSize: '2rem', margin: 0 }}>
-              {breakMinutes(state)} minute break
-            </p>
-            <div class="eyebrow">After {state.round?.categoryName}</div>
+            {state.breakEndsAt ? (
+              <BreakClock
+                at={state.breakEndsAt}
+                held={state.held}
+                minutes={breakMinutes(state)}
+                auto={state.config.autoStartAfterBreak}
+                big
+              />
+            ) : (
+              <>
+                <p style={{ fontSize: '1.8rem', margin: 0 }}>
+                  {state.config.finalWager ? 'Final question next' : 'Game closing'}
+                </p>
+                <AutoAdvance at={state.autoAdvanceAt} label="Next in" held={state.held} />
+              </>
+            )}
+            <div class="eyebrow">
+              Round {state.round?.index} of {state.round?.ofTotal} · Game {state.game.index} of{' '}
+              {state.game.ofTotal ?? 1}
+            </div>
           </div>
           <div style={{ maxWidth: '900px', margin: '0 auto', width: '100%' }}>
             <Board rows={state.scoreboard} limit={12} />
@@ -487,7 +539,22 @@ function App() {
         </div>
       )}
 
-      {state.phase === 'block_results' && <Podium state={state} title={`Block ${state.block.index} — final standings`} />}
+      {state.phase === 'game_results' && (
+        <Podium state={state} title={`Game ${state.game.index} of ${state.game.ofTotal ?? 1} — final standings`}>
+          {/* The long break, with the clock on it. The room's question at the
+              end of a game is how long they have, and this is the screen
+              they are all looking at while they ask it. */}
+          {state.game.index < (state.game.ofTotal ?? 1) && (
+            <BreakClock
+              at={state.breakEndsAt}
+              held={state.held}
+              minutes={state.config.gameBreakMinutes}
+              auto={state.config.autoStartAfterBreak}
+              big
+            />
+          )}
+        </Podium>
+      )}
       {state.phase === 'night_over' && <Podium state={state} title="Tonight's champions" />}
 
       {state.phase !== 'lobby' && (

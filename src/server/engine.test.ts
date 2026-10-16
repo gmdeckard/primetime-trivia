@@ -93,8 +93,8 @@ test('the correct answer is not always in the same slot', () => {
   seatTeams(engine, 2);
   const positions = new Set<number>();
   for (let i = 0; i < 40; i++) {
-    engine.startBlock();
-    engine.advance(); // block_intro -> round_intro
+    engine.startGame();
+    engine.advance(); // game_intro -> round_intro
     engine.advance(); // -> question
     const index = engine.correctDisplayIndex();
     assert.ok(index !== undefined && index >= 0 && index <= 3);
@@ -105,14 +105,14 @@ test('the correct answer is not always in the same slot', () => {
 });
 
 test('a full block runs start to finish and produces a winner', () => {
-  const engine = freshEngine({ roundsPerBlock: 2, questionsPerRound: 3, finalWager: true });
+  const engine = freshEngine({ roundsPerGame: 2, questionsPerRound: 3, finalWager: true });
   const teams = seatTeams(engine, 3);
 
-  engine.startBlock();
-  assert.equal(engine.snapshot().phase, 'block_intro');
+  engine.startGame();
+  assert.equal(engine.snapshot().phase, 'game_intro');
 
   let guard = 0;
-  while (engine.snapshot().phase !== 'block_results' && guard++ < 200) {
+  while (engine.snapshot().phase !== 'game_results' && guard++ < 200) {
     const phase = engine.snapshot().phase;
 
     if (phase === 'question' || phase === 'wager_question') {
@@ -126,7 +126,7 @@ test('a full block runs start to finish and produces a winner', () => {
     engine.advance();
   }
 
-  assert.ok(guard < 200, 'the block never reached block_results');
+  assert.ok(guard < 200, 'the block never reached game_results');
   const board = engine.scoreRows();
   assert.equal(board.length, 3);
   assert.equal(board[0]!.teamId, teams[0]!.teamId, 'the always-correct team should lead');
@@ -136,7 +136,7 @@ test('a full block runs start to finish and produces a winner', () => {
 test('the window runs its full length even once every team is in', async () => {
   const engine = freshEngine({ questionsPerRound: 3, secondsPerQuestion: 0.5 });
   const teams = seatTeams(engine, 2);
-  engine.startBlock();
+  engine.startGame();
   engine.advance();
   engine.advance();
   assert.equal(engine.snapshot().phase, 'question');
@@ -165,9 +165,9 @@ test('the window runs its full length even once every team is in', async () => {
  *   deliberately voided rather than guessed at.
  */
 test('a night interrupted during the final wager can still be finished', () => {
-  const engine = freshEngine({ roundsPerBlock: 1, questionsPerRound: 1, finalWager: true });
+  const engine = freshEngine({ roundsPerGame: 1, questionsPerRound: 1, finalWager: true });
   const teams = seatTeams(engine, 2);
-  engine.startBlock();
+  engine.startGame();
   engine.advance(); // round_intro
   engine.advance(); // question
   engine.lockNow('host');
@@ -191,9 +191,9 @@ test('a night interrupted during the final wager can still be finished', () => {
 });
 
 test('a night interrupted during a tiebreak can still be finished', () => {
-  const engine = freshEngine({ roundsPerBlock: 1, questionsPerRound: 1, finalWager: false });
+  const engine = freshEngine({ roundsPerGame: 1, questionsPerRound: 1, finalWager: false });
   const teams = seatTeams(engine, 2);
-  engine.startBlock();
+  engine.startGame();
   engine.startTiebreak();
   assert.equal(engine.snapshot().phase, 'tiebreak');
   engine.answerNumber(teams[0]!.players[0]!, 5);
@@ -220,7 +220,7 @@ test('a night interrupted during a tiebreak can still be finished', () => {
 test('re-tapping the same answer keeps the time the team earned', async () => {
   const engine = freshEngine({ questionsPerRound: 3 });
   const teams = seatTeams(engine, 2);
-  engine.startBlock();
+  engine.startGame();
   engine.advance();
   engine.advance();
 
@@ -251,7 +251,7 @@ test('re-tapping the same answer keeps the time the team earned', async () => {
 test('pausing stops a live question, and resuming gives the time back', async () => {
   const engine = freshEngine({ questionsPerRound: 3, secondsPerQuestion: 0.6, autoAdvance: false });
   const teams = seatTeams(engine, 2);
-  engine.startBlock();
+  engine.startGame();
   engine.advance();
   engine.advance();
   assert.equal(engine.snapshot().phase, 'question');
@@ -310,7 +310,7 @@ test('a banner does not outlive the question it describes', () => {
 test('an MC announcement lasts the break and no longer', () => {
   const engine = freshEngine({ questionsPerRound: 3 });
   seatTeams(engine, 2);
-  engine.startBlock();
+  engine.startGame();
   engine.say('Short break — back in ten minutes.');
   assert.ok(engine.snapshot().message, 'it should be up while the room is away');
 
@@ -323,7 +323,7 @@ test('an MC announcement lasts the break and no longer', () => {
 test('the MC can still close a question early', () => {
   const engine = freshEngine({ questionsPerRound: 3 });
   const teams = seatTeams(engine, 2);
-  engine.startBlock();
+  engine.startGame();
   engine.advance();
   engine.advance();
 
@@ -346,14 +346,14 @@ test('the MC can still close a question early', () => {
  */
 test('the clock closes the final wager without the MC', async () => {
   const engine = freshEngine({
-    roundsPerBlock: 1,
+    roundsPerGame: 1,
     questionsPerRound: 1,
     finalWager: true,
     secondsPerQuestion: 0.4,
     autoAdvance: false,
   });
   const teams = seatTeams(engine, 2);
-  engine.startBlock();
+  engine.startGame();
   engine.advance(); // -> round_intro
   engine.advance(); // -> question
   engine.lockNow('host');
@@ -392,7 +392,7 @@ test('the clock closes the final wager without the MC', async () => {
 test('the clock closes a tiebreak without the MC', async () => {
   const engine = freshEngine({ secondsPerQuestion: 0.4, autoAdvance: false });
   const teams = seatTeams(engine, 2);
-  engine.startBlock();
+  engine.startGame();
   // Nobody has scored yet, so both entries are tied at the top.
   engine.startTiebreak();
   assert.equal(engine.snapshot().phase, 'tiebreak');
@@ -421,7 +421,7 @@ test('the clock closes a tiebreak without the MC', async () => {
 test('granted time holds the question open, and a silent room still locks', async () => {
   const engine = freshEngine({ questionsPerRound: 3, secondsPerQuestion: 0.4, autoAdvance: false });
   seatTeams(engine, 2);
-  engine.startBlock();
+  engine.startGame();
   engine.advance();
   engine.advance();
   assert.equal(engine.snapshot().phase, 'question');
@@ -440,7 +440,7 @@ test('granted time holds the question open, and a silent room still locks', asyn
 test('an answer can be changed until the lock', () => {
   const engine = freshEngine();
   const teams = seatTeams(engine, 2);
-  engine.startBlock();
+  engine.startGame();
   engine.advance();
   engine.advance();
 
@@ -468,9 +468,9 @@ test('a player is sent the top of the table plus their own row, not all hundred'
 });
 
 test('a wrong final wager subtracts the bet', () => {
-  const engine = freshEngine({ roundsPerBlock: 1, questionsPerRound: 1, finalWager: true });
+  const engine = freshEngine({ roundsPerGame: 1, questionsPerRound: 1, finalWager: true });
   const teams = seatTeams(engine, 2);
-  engine.startBlock();
+  engine.startGame();
   engine.advance(); // round_intro
   engine.advance(); // question
   const correct = engine.correctDisplayIndex()!;
@@ -500,9 +500,9 @@ test('a wrong final wager subtracts the bet', () => {
 });
 
 test('clearing a wager is distinct from betting nothing', () => {
-  const engine = freshEngine({ roundsPerBlock: 1, questionsPerRound: 1 });
+  const engine = freshEngine({ roundsPerGame: 1, questionsPerRound: 1 });
   const teams = seatTeams(engine, 2);
-  engine.startBlock();
+  engine.startGame();
   engine.advance();
   engine.advance();
   engine.lockNow('host');
@@ -519,10 +519,10 @@ test('clearing a wager is distinct from betting nothing', () => {
 });
 
 test('no question repeats within a night', () => {
-  const engine = freshEngine({ roundsPerBlock: 3, questionsPerRound: 8 });
+  const engine = freshEngine({ roundsPerGame: 3, questionsPerRound: 8 });
   seatTeams(engine, 2);
   for (let block = 0; block < 4; block++) {
-    engine.startBlock();
+    engine.startGame();
     const ids = engine.snapshot().rounds.flatMap((r) => r.questionIds);
     const seen = new Set(ids);
     assert.equal(seen.size, ids.length, `block ${block + 1} drew a duplicate question`);
@@ -534,7 +534,7 @@ test('no question repeats within a night', () => {
 test('the player view never leaks the answer before the reveal', () => {
   const engine = freshEngine();
   const teams = seatTeams(engine, 2);
-  engine.startBlock();
+  engine.startGame();
   engine.advance();
   engine.advance();
 
@@ -553,7 +553,7 @@ test('the player view never leaks the answer before the reveal', () => {
 test('the control view always sees the answer key', () => {
   const engine = freshEngine();
   seatTeams(engine, 2);
-  engine.startBlock();
+  engine.startGame();
   engine.advance();
   engine.advance();
   const view = controlState(engine);
@@ -563,9 +563,9 @@ test('the control view always sees the answer key', () => {
 });
 
 test('a tie at the top can be broken', () => {
-  const engine = freshEngine({ roundsPerBlock: 1, questionsPerRound: 1, finalWager: false });
+  const engine = freshEngine({ roundsPerGame: 1, questionsPerRound: 1, finalWager: false });
   const teams = seatTeams(engine, 2);
-  engine.startBlock();
+  engine.startGame();
   engine.advance();
   engine.advance();
   const correct = engine.correctDisplayIndex()!;
@@ -574,7 +574,7 @@ test('a tie at the top can be broken', () => {
   engine.advance();
   engine.advance();
   engine.advance();
-  assert.equal(engine.snapshot().phase, 'block_results');
+  assert.equal(engine.snapshot().phase, 'game_results');
 
   const rows = engine.scoreRows();
   // Both answered correctly; with the speed bonus they may differ by that much.
@@ -598,7 +598,7 @@ test('the night survives a restart mid-question', () => {
   const store = new Store(dir);
   const engine = freshEngineWith(store);
   const teams = seatTeams(engine, 2);
-  engine.startBlock();
+  engine.startGame();
   engine.advance();
   engine.advance();
   engine.answer(teams[0]!.players[0]!, 0);
@@ -622,7 +622,7 @@ test('the night survives a restart mid-question', () => {
 test('structural config changes are refused mid-block', () => {
   const engine = freshEngine({ questionsPerRound: 8 });
   seatTeams(engine, 2);
-  engine.startBlock();
+  engine.startGame();
   engine.setConfig({ questionsPerRound: 2, secondsPerQuestion: 20 });
   const config = engine.snapshot().config;
   assert.equal(config.questionsPerRound, 8, 'round shape must not change mid-block');
@@ -631,7 +631,7 @@ test('structural config changes are refused mid-block', () => {
 
 test('starting a block with nobody seated is refused', () => {
   const engine = freshEngine();
-  assert.throws(() => engine.startBlock(), /no teams/i);
+  assert.throws(() => engine.startGame(), /no teams/i);
 });
 
 // --------------------------------------------------------------- auto-advance
@@ -641,8 +641,8 @@ const wait = (ms: number) => new Promise((r) => setTimeout(r, ms));
 /** Seat teams and drive to the first live question. */
 function toFirstQuestion(engine: Engine, teams = 2) {
   const seated = seatTeams(engine, teams);
-  engine.startBlock();
-  engine.advance(); // block_intro -> round_intro
+  engine.startGame();
+  engine.advance(); // game_intro -> round_intro
   engine.advance(); // -> question
   return seated;
 }
@@ -672,12 +672,19 @@ test('auto-advance walks lock -> reveal -> next question on its own', async () =
   assert.equal(engine.snapshot().current?.position, 2, 'and be on the second question');
 });
 
-test('auto-advance stops at the end of a round so the MC can talk', async () => {
+test('the last reveal of a round rolls into the scoreboard by itself', async () => {
+  // This used to stop here on purpose, back when every round boundary waited
+  // for the MC. A night set up to run itself ran one round and then sat on an
+  // answer until somebody noticed. The stop the MC wants is the break, which
+  // the scoreboard arms, and which they can set to wait for them.
   const engine = freshEngine({
     questionsPerRound: 1,
+    roundsPerGame: 2,
     autoAdvance: true,
     revealDelaySeconds: 0.6,
     nextQuestionDelaySeconds: 0.6,
+    roundBreakMinutes: 5,
+    autoStartAfterBreak: false,
   });
   const teams = toFirstQuestion(engine);
   for (const team of teams) engine.answer(team.players[0]!, 0);
@@ -685,14 +692,31 @@ test('auto-advance stops at the end of a round so the MC can talk', async () => 
 
   await wait(900);
   assert.equal(engine.snapshot().phase, 'reveal');
-  assert.equal(
-    engine.snapshot().autoAdvanceAt,
-    undefined,
-    'the last question of a round must not queue another step',
-  );
+  assert.ok(engine.snapshot().autoAdvanceAt, 'the last reveal of a round still queues its next step');
 
   await wait(900);
-  assert.equal(engine.snapshot().phase, 'reveal', 'should still be waiting on the MC');
+  const s = engine.snapshot();
+  assert.equal(s.phase, 'round_scores', 'it reaches the scoreboard without a thumb');
+  assert.ok(s.breakEndsAt, 'and the break is on the clock');
+  assert.equal(s.autoAdvanceAt, undefined, 'but a manual break is where it waits for the MC');
+});
+
+test('a reveal says what actually comes next', () => {
+  const engine = freshEngine({ questionsPerRound: 2, roundsPerGame: 1, finalWager: false });
+  const teams = toFirstQuestion(engine);
+  for (const team of teams) engine.answer(team.players[0]!, 0);
+  engine.lockNow('host');
+  engine.advance(); // -> reveal, with another question behind it
+  assert.equal(controlState(engine).moreInRound, true);
+
+  engine.advance(); // -> question 2
+  engine.lockNow('host');
+  engine.advance(); // -> reveal, last in the round
+  assert.equal(
+    controlState(engine).moreInRound,
+    false,
+    'the run-up must not promise a question that is really a scoreboard',
+  );
 });
 
 test('hold parks auto-advance, releasing picks it back up', async () => {
@@ -863,4 +887,327 @@ test('a server nothing can reach says so instead of printing a join URL', () => 
   // And a venue genuinely running on 172.16-31 must not be told its own
   // network is unreachable. Without the gateway present this is a real LAN.
   assert.equal(hasNoReachableAddress(['172.20.4.8']), false);
+});
+
+// ------------------------------------------------- mixed rounds and rotation
+
+test('a mixed round asks one question per category', () => {
+  const engine = freshEngine({ roundsPerGame: 2, questionsPerRound: 10, roundCategoryMode: 'mixed' });
+  seatTeams(engine, 2);
+  engine.startGame();
+  const s = engine.snapshot();
+  for (const round of s.rounds) {
+    assert.equal(round.questionIds.length, 10, 'a mixed round still fills its ten slots');
+    assert.equal(round.categoryId, '', 'a mixed round claims no category of its own');
+    const categories = round.questionIds.map((id) => engine.question(id)!.category);
+    assert.equal(new Set(categories).size, 10, `a mixed round repeated a category: ${categories.join(', ')}`);
+  }
+  // Across the whole game, not just within a round.
+  const all = s.rounds.flatMap((r) => r.questionIds);
+  assert.equal(new Set(all).size, all.length, 'a game drew the same question twice');
+});
+
+test('one question per round is still available for a themed round', () => {
+  const engine = freshEngine({ roundsPerGame: 2, questionsPerRound: 8, roundCategoryMode: 'single' });
+  seatTeams(engine, 2);
+  engine.startGame();
+  for (const round of engine.snapshot().rounds) {
+    assert.ok(round.categoryId, 'a single-category round names its category');
+    for (const id of round.questionIds) {
+      assert.equal(engine.question(id)!.category, round.categoryId);
+    }
+  }
+});
+
+test('a mixed round keeps the difficulty ramp', () => {
+  const engine = freshEngine({ roundsPerGame: 1, questionsPerRound: 10, roundCategoryMode: 'mixed' });
+  seatTeams(engine, 2);
+  engine.startGame();
+  const ids = engine.snapshot().rounds[0]!.questionIds;
+  const got = ids.map((id) => engine.question(id)!.difficulty);
+  const wanted = DEFAULT_CONFIG.difficultyMix.slice(0, 10);
+  // Not an equality check: a category may hold nothing at the wanted level,
+  // and the deck's order comes first. What must hold is that the round is not
+  // flat and tracks the template's shape.
+  const drift = got.reduce((sum, d, i) => sum + Math.abs(d - wanted[i]!), 0) / got.length;
+  assert.ok(drift <= 1, `the ramp drifted by ${drift.toFixed(2)} per question: ${got.join(',')}`);
+});
+
+test('no question comes back until its category has been all the way through', () => {
+  // One category, so the deck is small enough to exhaust inside a test.
+  const small = [...bank.byCategory.entries()]
+    .map(([id, qs]) => ({ id, n: qs.filter((q) => q.kind === 'choice').length }))
+    .filter((c) => c.n >= 8)
+    .sort((a, b) => a.n - b.n)[0]!;
+
+  const engine = freshEngine({
+    roundsPerGame: 1,
+    questionsPerRound: 4,
+    roundCategoryMode: 'single',
+    categories: [small.id],
+    finalWager: false,
+  });
+  seatTeams(engine, 1);
+
+  const dealt: string[] = [];
+  // Each night is a fresh night on the same box, which is what resets
+  // askedQuestionIds and leaves the rotation as the only thing promising
+  // anything. Deal the whole category and one question past it.
+  const nights = Math.ceil(small.n / 4) + 1;
+  for (let n = 0; n < nights; n++) {
+    engine.resetNight();
+    seatTeams(engine, 1);
+    engine.startGame();
+    dealt.push(...engine.snapshot().rounds[0]!.questionIds);
+  }
+
+  const firstPass = dealt.slice(0, small.n);
+  assert.equal(
+    new Set(firstPass).size,
+    firstPass.length,
+    'a question repeated before the category was exhausted',
+  );
+  assert.ok(dealt.length > small.n, 'the test needs to deal past the end of the deck');
+});
+
+test('the rotation survives a restart and a reset of the night', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'primetime-rot-'));
+  dirs.push(dir);
+  const config = {
+    roundsPerGame: 1,
+    questionsPerRound: 5,
+    roundCategoryMode: 'mixed' as const,
+    finalWager: false,
+  };
+
+  const first = new Engine(bank, new Store(dir), config);
+  engines.push(first);
+  seatTeams(first, 1);
+  first.startGame();
+  const before = first.snapshot().rounds[0]!.questionIds;
+  first.dispose();
+
+  // A new process on the same box, with the night thrown away.
+  const second = new Engine(bank, new Store(dir), config);
+  engines.push(second);
+  second.resetNight();
+  seatTeams(second, 1);
+  second.startGame();
+  const after = second.snapshot().rounds[0]!.questionIds;
+
+  const repeated = after.filter((id) => before.includes(id));
+  assert.deepEqual(repeated, [], `the deck was re-dealt across a restart: ${repeated.join(', ')}`);
+});
+
+// ------------------------------------------------------- breaks and the night
+
+test('the break between rounds goes on the clock', () => {
+  const engine = freshEngine({
+    roundsPerGame: 2,
+    questionsPerRound: 1,
+    roundBreakMinutes: 5,
+    autoStartAfterBreak: false,
+    finalWager: false,
+  });
+  seatTeams(engine, 1);
+  engine.startGame();
+  engine.advance(); // game_intro -> round_intro
+  engine.advance(); // -> question
+  engine.lockNow('host');
+  engine.advance(); // locked -> reveal
+  engine.advance(); // reveal -> round_scores
+
+  const s = engine.snapshot();
+  assert.equal(s.phase, 'round_scores');
+  assert.ok(s.breakEndsAt, 'a break between rounds has an end time');
+  const minutes = (s.breakEndsAt! - Date.now()) / 60_000;
+  assert.ok(minutes > 4.5 && minutes <= 5, `expected about five minutes, got ${minutes.toFixed(2)}`);
+  // Off, so nothing is armed to press the button at zero.
+  assert.equal(s.autoAdvanceAt, undefined, 'a manual break must not schedule itself');
+});
+
+test('a break ends itself when the MC asks it to', () => {
+  const engine = freshEngine({
+    roundsPerGame: 2,
+    questionsPerRound: 1,
+    // Six seconds, so the test watches a real break expire rather than mocking
+    // the clock. The MC can type any number of minutes; the engine takes it.
+    roundBreakMinutes: 0.1,
+    autoStartAfterBreak: true,
+    introSeconds: 0,
+    finalWager: false,
+  });
+  seatTeams(engine, 1);
+  engine.startGame();
+  engine.advance();
+  engine.advance();
+  engine.lockNow('host');
+  engine.advance();
+  engine.advance(); // -> round_scores
+
+  const s = engine.snapshot();
+  assert.equal(s.phase, 'round_scores');
+  assert.ok(s.autoAdvanceAt, 'an automatic break arms the next round');
+  const seconds = (s.autoAdvanceAt! - Date.now()) / 1000;
+  assert.ok(seconds > 4 && seconds <= 6, `expected about six seconds, got ${seconds.toFixed(1)}`);
+});
+
+test('the last round of a game runs into the wager, with no break announced', () => {
+  const engine = freshEngine({
+    roundsPerGame: 1,
+    questionsPerRound: 1,
+    finalWager: true,
+    autoStartAfterBreak: false,
+  });
+  seatTeams(engine, 1);
+  engine.startGame();
+  engine.advance();
+  engine.advance();
+  engine.lockNow('host');
+  engine.advance();
+  engine.advance(); // -> round_scores
+
+  const s = engine.snapshot();
+  assert.equal(s.phase, 'round_scores');
+  assert.equal(
+    s.breakEndsAt,
+    undefined,
+    'the scoreboard before the final question must not promise the room a break',
+  );
+});
+
+test('the game break is the long one', () => {
+  const engine = freshEngine({
+    gamesPerNight: 2,
+    roundsPerGame: 1,
+    questionsPerRound: 1,
+    gameBreakMinutes: 10,
+    finalWager: false,
+  });
+  seatTeams(engine, 1);
+  engine.startGame();
+  engine.advance();
+  engine.advance();
+  engine.lockNow('host');
+  engine.advance();
+  engine.advance(); // -> round_scores (last round, no break)
+  engine.advance(); // -> game_results
+
+  const s = engine.snapshot();
+  assert.equal(s.phase, 'game_results');
+  const minutes = (s.breakEndsAt! - Date.now()) / 60_000;
+  assert.ok(minutes > 9.5 && minutes <= 10, `expected about ten minutes, got ${minutes.toFixed(2)}`);
+});
+
+test('the night ends itself after the last scheduled game', () => {
+  const engine = freshEngine({
+    gamesPerNight: 2,
+    roundsPerGame: 1,
+    questionsPerRound: 1,
+    finalWager: false,
+  });
+  seatTeams(engine, 1);
+
+  const playAGame = () => {
+    engine.advance(); // lobby/game_results -> game_intro (startGame)
+    engine.advance(); // -> round_intro
+    engine.advance(); // -> question
+    engine.lockNow('host');
+    engine.advance(); // -> reveal
+    engine.advance(); // -> round_scores
+    engine.advance(); // -> game_results
+  };
+
+  playAGame();
+  assert.equal(engine.snapshot().gameIndex, 1);
+  assert.equal(engine.snapshot().phase, 'game_results');
+
+  playAGame();
+  assert.equal(engine.snapshot().gameIndex, 2);
+  assert.equal(engine.snapshot().phase, 'game_results');
+
+  engine.advance();
+  assert.equal(engine.snapshot().phase, 'night_over', 'two games were scheduled, so the night is over');
+  // And it stays over.
+  engine.advance();
+  assert.equal(engine.snapshot().phase, 'night_over');
+});
+
+test('an intro card moves itself on', () => {
+  const engine = freshEngine({ roundsPerGame: 1, questionsPerRound: 1, introSeconds: 7 });
+  seatTeams(engine, 1);
+  engine.startGame();
+  const s = engine.snapshot();
+  assert.equal(s.phase, 'game_intro');
+  const seconds = (s.autoAdvanceAt! - Date.now()) / 1000;
+  assert.ok(seconds > 6 && seconds <= 7, `expected about seven seconds, got ${seconds.toFixed(1)}`);
+});
+
+test('a night resumed mid-break keeps the time the break had left', () => {
+  const engine = freshEngine({
+    roundsPerGame: 2,
+    questionsPerRound: 1,
+    roundBreakMinutes: 5,
+    finalWager: false,
+  });
+  seatTeams(engine, 1);
+  engine.startGame();
+  engine.advance();
+  engine.advance();
+  engine.lockNow('host');
+  engine.advance();
+  engine.advance(); // -> round_scores
+  const parked = JSON.parse(JSON.stringify(engine.snapshot()));
+
+  const resumed = freshEngine(undefined, parked);
+  const s = resumed.snapshot();
+  assert.equal(s.phase, 'round_scores');
+  assert.equal(s.breakEndsAt, parked.breakEndsAt, 'the break keeps its absolute end time across a restart');
+  assert.ok(s.autoAdvanceAt, 'and it picks the countdown back up');
+});
+
+test('a night written by a build that said Block still runs', () => {
+  const engine = freshEngine({ roundsPerGame: 2, questionsPerRound: 2 });
+  seatTeams(engine, 1);
+  engine.startGame();
+  const parked = JSON.parse(JSON.stringify(engine.snapshot())) as Record<string, unknown>;
+
+  // What an older build wrote: the old phase name and the old config keys.
+  parked.phase = 'block_intro';
+  const config = parked.config as Record<string, unknown>;
+  config.roundsPerBlock = 3;
+  config.blockBreakMinutes = 12;
+  delete config.roundsPerGame;
+  delete config.gameBreakMinutes;
+
+  const resumed = freshEngine(undefined, parked as never);
+  const s = resumed.snapshot();
+  assert.equal(s.phase, 'game_intro', 'the old phase name is translated, not left unhandled');
+  assert.equal(s.config.roundsPerGame, 3, 'the old setting carries over to its new name');
+  assert.equal(s.config.gameBreakMinutes, 12);
+  assert.equal((s.config as unknown as Record<string, unknown>).roundsPerBlock, undefined);
+
+  // And the one big button still does something.
+  resumed.advance();
+  assert.equal(resumed.snapshot().phase, 'round_intro');
+});
+
+test('switching a round to one category is refused while rounds are mixed', () => {
+  const engine = freshEngine({ roundsPerGame: 2, questionsPerRound: 4, roundCategoryMode: 'mixed' });
+  seatTeams(engine, 1);
+  engine.startGame();
+  assert.throws(() => engine.setRoundCategory(1, bank.categories[0]!.id), /mixed/i);
+});
+
+test('swapping a question in a mixed round finds one anywhere in the selection', () => {
+  const engine = freshEngine({ roundsPerGame: 1, questionsPerRound: 4, roundCategoryMode: 'mixed' });
+  seatTeams(engine, 1);
+  engine.startGame();
+  engine.advance();
+  engine.advance(); // -> question
+  const was = engine.snapshot().current!.questionId;
+  engine.replaceQuestion();
+  const now = engine.snapshot().current!.questionId;
+  assert.notEqual(now, was, 'the question on screen must actually change');
+  assert.equal(engine.snapshot().phase, 'question');
 });

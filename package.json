@@ -18,6 +18,7 @@
     "dev": "concurrently -n server,client -c cyan,magenta \"tsx watch src/server/index.ts\" \"vite\"",
     "fact-check": "tsx scripts/fact-check.ts",
     "fix:content": "tsx scripts/normalize-content.ts",
+    "flow": "node scripts/flow-audit.mjs",
     "loadtest": "node scripts/loadtest.mjs",
     "screenshots": "node scripts/capture-screenshots.mjs",
     "start": "node dist/src/server/index.js",

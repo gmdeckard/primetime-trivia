@@ -1,10 +1,10 @@
-import { render } from 'preact';
+import { render, type ComponentChildren } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
 import type { EntryKind, PlayerState } from '../../shared/protocol';
 import './shared/styles.css';
 import { nextUpWindowMs, useCountdown, useGame, useNow, useWakeLock } from './shared/useGame';
 import { pointsAt } from '../../shared/protocol';
-import { AutoAdvance, Badge, Board, ConnBanner, Keypad, NextUp, Toast } from './shared/ui';
+import { AutoAdvance, Badge, Board, BreakClock, ConnBanner, Keypad, NextUp, Toast } from './shared/ui';
 
 /**
  * The player view. One screen at a time, one decision at a time.
@@ -108,7 +108,10 @@ function Question({ state, send }: { state: PlayerState; send: ReturnType<typeof
     <>
       <div class="row-between">
         <span class="pill">
-          {state.round?.categoryName} · {q.position}/{q.ofTotal}
+          {/* The question's own category, not the round's: in a mixed round
+              the round has no subject and this is the only place a player is
+              told what they are being asked about. */}
+          {q.categoryName} · {q.position}/{q.ofTotal}
         </span>
         <span class="pill pill-brass pill-live">
           {state.held ? 'Paused' : `${onOffer} pts${!locked && state.deadline ? ` · ${secondsLeft}s` : ''}`}
@@ -188,7 +191,7 @@ function Reveal({ state }: { state: PlayerState }) {
       <p class="faint center">{reveal.correctPct}% of teams got this one.</p>
       <AutoAdvance
         at={state.autoAdvanceAt}
-        label="Next question in"
+        label={state.moreInRound ? 'Next question in' : 'Round ends in'}
         held={state.held}
       />
     </>
@@ -265,12 +268,24 @@ function Tiebreak({ state, send }: { state: PlayerState; send: ReturnType<typeof
   );
 }
 
-function Standings({ state, title, sub }: { state: PlayerState; title: string; sub?: string }) {
+function Standings({
+  state,
+  title,
+  sub,
+  clock,
+}: {
+  state: PlayerState;
+  title: string;
+  sub?: string;
+  /** The break clock, when this scoreboard is a break rather than a beat. */
+  clock?: ComponentChildren;
+}) {
   const mine = state.scoreboard.find((r) => r.teamId === state.me.teamId);
   const top = state.scoreboard.filter((r) => r.teamId !== state.me.teamId).slice(0, 8);
   return (
     <>
       {sub && <p class="center" style={{ fontSize: '1.2rem', margin: 0 }}>{sub}</p>}
+      {clock}
       <div class="card center stack">
         <div class="eyebrow">{title}</div>
         {mine && (
@@ -316,7 +331,9 @@ function App() {
   const counting = !!state?.autoAdvanceAt && !state?.held && state?.phase === 'reveal';
   const gapNow = useNow(counting);
   const nextUp =
-    counting && state!.autoAdvanceAt! - gapNow <= nextUpWindowMs(state!.config.nextQuestionDelaySeconds);
+    counting &&
+    state!.moreInRound !== false &&
+    state!.autoAdvanceAt! - gapNow <= nextUpWindowMs(state!.config.nextQuestionDelaySeconds);
 
   if (!state) {
     return (
@@ -345,12 +362,22 @@ function App() {
 
       {!noTeam && (
         <>
-          {state.phase === 'block_intro' && <Waiting state={state} title={`Block ${state.block.index}`} sub="Starting now." />}
+          {state.phase === 'game_intro' && (
+            <Waiting
+              state={state}
+              title={`Game ${state.game.index} of ${state.game.ofTotal ?? 1}`}
+              sub={`${state.config.roundsPerGame} rounds of ${state.config.questionsPerRound}. Starting now.`}
+            />
+          )}
           {state.phase === 'round_intro' && (
             <Waiting
               state={state}
-              title={state.round?.categoryName ?? 'Next round'}
-              sub={`Round ${state.round?.index} of ${state.round?.ofTotal} · ${state.round?.blurb ?? ''}`}
+              title={`Round ${state.round?.index} of ${state.round?.ofTotal}`}
+              sub={
+                state.round?.mixed
+                  ? `${state.config.questionsPerRound} questions, a different category every time.`
+                  : `${state.round?.categoryName ?? ''} · ${state.round?.blurb ?? ''}`
+              }
             />
           )}
           {(state.phase === 'question' || state.phase === 'locked' || state.phase === 'wager_question') && (
@@ -370,22 +397,42 @@ function App() {
               </>
             ))}
           {state.phase === 'round_scores' && (
-            // The same two facts the big screen is showing, so a player who is
-            // looking down at their phone gets the break length too.
+            // The same facts the big screen is showing, so a player looking
+            // down at their phone gets the break and its clock too.
             <Standings
               state={state}
               title={`End of Round ${state.round?.index ?? 1}`}
-              sub={`${
-                !state.round || state.round.index >= state.round.ofTotal
-                  ? state.config.blockBreakMinutes
-                  : state.config.roundBreakMinutes
-              } minute break`}
+              clock={
+                state.breakEndsAt ? (
+                  <BreakClock
+                    at={state.breakEndsAt}
+                    held={state.held}
+                    minutes={state.config.roundBreakMinutes}
+                    auto={state.config.autoStartAfterBreak}
+                  />
+                ) : undefined
+              }
             />
           )}
           {state.phase === 'wager_bet' && <Wager state={state} send={send} />}
           {state.phase === 'tiebreak' && <Tiebreak state={state} send={send} />}
           {state.phase === 'tiebreak_reveal' && <Standings state={state} title="Tiebreaker settled" />}
-          {state.phase === 'block_results' && <Standings state={state} title={`Block ${state.block.index} final`} />}
+          {state.phase === 'game_results' && (
+            <Standings
+              state={state}
+              title={`Game ${state.game.index} of ${state.game.ofTotal ?? 1} final`}
+              clock={
+                state.game.index < (state.game.ofTotal ?? 1) ? (
+                  <BreakClock
+                    at={state.breakEndsAt}
+                    held={state.held}
+                    minutes={state.config.gameBreakMinutes}
+                    auto={state.config.autoStartAfterBreak}
+                  />
+                ) : undefined
+              }
+            />
+          )}
           {state.phase === 'night_over' && <Standings state={state} title="Final standings" />}
         </>
       )}

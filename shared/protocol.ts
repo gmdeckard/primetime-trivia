@@ -19,10 +19,19 @@ export const MIN_PASSWORD = 4;
 
 export const PROTOCOL_VERSION = 1;
 
-/** Hierarchy: a Night contains Blocks (~30 min each), each Block contains Rounds, each Round contains Questions. */
+/**
+ * Hierarchy, in the words the room uses:
+ *
+ *   a Night contains Games, a Game contains Rounds, a Round contains Questions.
+ *
+ * Ten questions is a Round, and a handful of Rounds is a Game. This used to
+ * call the middle layer a Block, which nobody in a clubhouse has ever said out
+ * loud: the MC says "last round" and "this game", and when the screen says
+ * something else the MC has to translate it live.
+ */
 export type Phase =
   | 'lobby'
-  | 'block_intro'
+  | 'game_intro'
   | 'round_intro'
   | 'question'
   | 'locked'
@@ -33,7 +42,7 @@ export type Phase =
   | 'wager_reveal'
   | 'tiebreak'
   | 'tiebreak_reveal'
-  | 'block_results'
+  | 'game_results'
   | 'night_over';
 
 export type Difficulty = 1 | 2 | 3 | 4;
@@ -88,7 +97,13 @@ export interface Question {
 
 export interface GameConfig {
   venueName: string;
-  roundsPerBlock: number;
+  /**
+   * Games the night is scheduled for. The night ends itself after the last
+   * one rather than offering another, so an MC who set up three games does
+   * not have to remember to stop.
+   */
+  gamesPerNight: number;
+  roundsPerGame: number;
   questionsPerRound: number;
   secondsPerQuestion: number;
   /** What a correct answer is worth while the room is still reading. */
@@ -105,20 +120,40 @@ export interface GameConfig {
   musicSpeakCountIn: boolean;
   /** Big-screen master volume, 0 to 1. */
   musicVolume: number;
-  /** Minutes the room gets between rounds, announced on every screen. */
+  /** Minutes the room gets between rounds, counted down on every screen. */
   roundBreakMinutes: number;
-  /** Minutes the room gets after the block closes. */
-  blockBreakMinutes: number;
-  /** Jeopardy-style wager to close each block. */
+  /** Minutes the room gets after a game closes. The longer one. */
+  gameBreakMinutes: number;
+  /**
+   * Whether a break ends by itself.
+   *
+   * On, the clock runs out and the next round starts: the night runs itself
+   * and the MC can be at the bar. Off, the clock still counts down and still
+   * says what it is counting to, but the game waits for the MC's button at
+   * zero. An MC who has to make an announcement wants off; an MC running a
+   * quiet night wants on.
+   */
+  autoStartAfterBreak: boolean;
+  /** Seconds a game or round intro card holds before the first question. */
+  introSeconds: number;
+  /** Jeopardy-style wager to close each game. */
   finalWager: boolean;
   /** Host screen reads the question aloud via the browser's speech engine. */
   readAloud: boolean;
   /** Per-question difficulty template for a round, cycled if shorter. */
   difficultyMix: Difficulty[];
+  /**
+   * How a round draws its categories.
+   *
+   * 'mixed' is one question per category, categories shuffled, so ten
+   * questions means ten different subjects and nobody sits out a round
+   * because they know nothing about opera. 'single' is the old behaviour —
+   * the whole round from one category, which suits a themed round and is
+   * what makes a round intro card worth showing.
+   */
+  roundCategoryMode: 'mixed' | 'single';
   /** Category ids to draw from; empty means all of them. */
   categories: string[];
-  /** Don't reuse a question asked within this many past nights. */
-  avoidRecentNights: number;
   /**
    * Run the question -> lock -> reveal -> next cycle on a clock instead of
    * three taps. The MC still owns every boundary that matters: starting a
@@ -169,10 +204,14 @@ export function pointsAt(elapsedMs: number, windowMs: number, config: GameConfig
 
 export const DEFAULT_CONFIG: GameConfig = {
   venueName: 'PrimeTime Trivia',
+  // Three games is a two-and-a-bit hour night: a game is two rounds of ten
+  // plus the wager, about forty minutes with its break. The night stops
+  // itself after the last one.
+  gamesPerNight: 3,
   // Two rounds of ten, which is the shape of the evening: ten questions, a
-  // short break, ten more, then the wager closes the block and the room gets
-  // a long break. Both boundaries already stop and wait for the MC.
-  roundsPerBlock: 2,
+  // five minute break, ten more, then the wager closes the game and the room
+  // gets the long break.
+  roundsPerGame: 2,
   questionsPerRound: 10,
   // 20s is the bar-trivia and seatback norm, and it is what makes a visible
   // countdown feel like one. The accessibility work is done by 19px body text
@@ -198,11 +237,16 @@ export const DEFAULT_CONFIG: GameConfig = {
   musicUnderQuestion: false,
   musicSpeakCountIn: false,
   musicVolume: 0.35,
-  // Long enough to get to the bar and back. Nothing in the engine counts these
-  // down — a break waits for the MC either way — but a number on the big screen
-  // is what stops the room asking how long they have.
+  // Long enough to get to the bar and back. The engine counts these down for
+  // real now, so the number on the big screen is a clock and not a claim.
   roundBreakMinutes: 5,
-  blockBreakMinutes: 10,
+  gameBreakMinutes: 10,
+  // On, because the thing that actually goes wrong on a night is a break that
+  // never ends: the MC gets talking to a table and twenty minutes go by. The
+  // clock is visible on every screen either way, so nobody is surprised by it.
+  autoStartAfterBreak: true,
+  // Long enough to say "round three, here we go" over it.
+  introSeconds: 8,
   finalWager: true,
   readAloud: false,
   // Medium-hard by design: a warm-up, a climb, and three that should make the
@@ -212,12 +256,15 @@ export const DEFAULT_CONFIG: GameConfig = {
   // it is shorter, so an 8-long mix in a 10-question round would end every
   // round on its two easiest questions.
   difficultyMix: [2, 2, 3, 3, 4, 3, 3, 4, 3, 4],
+  // One question per category, shuffled. Ten questions on one subject means
+  // nine of them are dead air for whoever does not follow that subject, and
+  // in a mixed room that is most of it.
+  roundCategoryMode: 'mixed',
   categories: [],
   autoAdvance: true,
   revealDelaySeconds: 4,
   // Long enough to read the fun fact aloud and let the room react.
   nextQuestionDelaySeconds: 10,
-  avoidRecentNights: 8,
   packs: [],
   // Not empty. Empty means no filter, which would let a set written for
   // another age group into a normal night the moment one existed. The core
@@ -266,6 +313,15 @@ export interface QuestionView {
   /** 1-based position within the round. */
   position: number;
   ofTotal: number;
+  /**
+   * This question's own category, named for the screen.
+   *
+   * It used to be enough to say it once on the round intro card, because a
+   * round was one category. In a mixed round every question is a different
+   * subject, and the room needs telling which one before it reads the prompt
+   * — that is the beat an MC fills with "and now, geography".
+   */
+  categoryName: string;
 }
 
 export interface RevealView {
@@ -293,9 +349,12 @@ export interface RevealView {
 export interface RoundView {
   index: number;
   ofTotal: number;
+  /** The round's own category, or '' for a mixed round. */
   categoryId: string;
   categoryName: string;
   blurb: string;
+  /** True when this round draws one question per category. */
+  mixed: boolean;
   format: RoundFormat;
   /** For 'theme' rounds, revealed only at the end of the round. */
   theme?: string;
@@ -317,7 +376,7 @@ export interface BaseState {
   entryCount: number;
   /** Top of the table, plus the player's own row on the player projection. */
   scoreboard: ScoreRow[];
-  block: { index: number; ofTotal: number | null };
+  game: { index: number; ofTotal: number | null };
   round?: RoundView;
   question?: QuestionView;
   /** Epoch ms. Clients render their own countdown from this. */
@@ -326,6 +385,21 @@ export interface BaseState {
   startedAt?: number;
   /** Epoch ms the game will move itself on, when auto-advance is running. */
   autoAdvanceAt?: number;
+  /**
+   * True when what comes after this reveal is another question rather than the
+   * end of the round. The run-up clock says "Next question"; on the last
+   * question of a round that is a lie, and the room notices when the promised
+   * question turns out to be a scoreboard.
+   */
+  moreInRound?: boolean;
+  /**
+   * Epoch ms the current break is over.
+   *
+   * Set on both break phases whether or not the break ends itself, because
+   * the room asking "how long have we got" is the problem being solved, and
+   * that question does not depend on who presses the button at zero.
+   */
+  breakEndsAt?: number;
   /** True when the MC has paused auto-advance to talk. */
   held: boolean;
   /** Entry ids that have locked an answer. Host and MC only — see `teams`. */
@@ -389,7 +463,7 @@ export type ClientMessage =
   | { t: 'set_wager'; amount: number }
   // control
   | { t: 'set_config'; patch: Partial<GameConfig> }
-  | { t: 'start_block' }
+  | { t: 'start_game' }
   | { t: 'advance' }
   | { t: 'reveal' }
   | { t: 'lock_now' }

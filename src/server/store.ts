@@ -2,14 +2,20 @@ import { readFileSync, writeFileSync, renameSync, mkdirSync, existsSync, appendF
 import { join } from 'node:path';
 
 /**
- * Durable state is two small JSON files plus an append-only event log.
+ * Durable state is three small JSON files plus an append-only event log.
  *
- * `night.json`   the live game, rewritten on every transition so a closed lid
- *                or a yanked power cord costs at most the current question.
- * `history.json` question ids asked on past nights, so a venue running this
- *                weekly doesn't serve the same question a month later.
- * `events.jsonl` every transition, for post-hoc "which questions were too hard"
- *                analysis. Nothing reads it at runtime.
+ * `night.json`    the live game, rewritten on every transition so a closed lid
+ *                 or a yanked power cord costs at most the current question.
+ * `rotation.json` the deck of unasked questions per category. This is what
+ *                 keeps a venue running weekly from serving the same question
+ *                 twice before it has served all the others, so it outlives
+ *                 the night, the process and Reset everything.
+ * `history.json`  question ids asked on past nights. A record now rather than
+ *                 a rule: the rotation makes the stronger promise, and two
+ *                 overlapping no-repeat rules could only disagree in the
+ *                 direction of blocking a question that was due.
+ * `events.jsonl`  every transition, for post-hoc "which questions were too
+ *                 hard" analysis. Nothing reads it at runtime.
  */
 
 export interface NightHistoryEntry {
@@ -68,6 +74,22 @@ export class Store {
     return this.readJson<History>('history.json', { nights: [] });
   }
 
+  /**
+   * The question rotation: which cards are left in each category's deck.
+   *
+   * Separate from history.json, which is a log of nights, because this is
+   * live state with a different lifetime — it outlives a night, survives
+   * Reset everything, and is the thing that promises a regular they will not
+   * see the same question twice until they have seen them all.
+   */
+  loadRotation<T>(): T | null {
+    return this.readJson<T | null>('rotation.json', null);
+  }
+
+  saveRotation(rotation: unknown) {
+    this.writeAtomic('rotation.json', rotation);
+  }
+
   /** Record (or update) tonight's asked questions, keeping the last 52 nights. */
   recordNight(entry: NightHistoryEntry) {
     const history = this.loadHistory();
@@ -76,17 +98,6 @@ export class Store {
     else history.nights.push(entry);
     history.nights = history.nights.slice(-52);
     this.writeAtomic('history.json', history);
-  }
-
-  /** Question ids used in the most recent `n` nights, excluding the live one. */
-  recentlyUsed(n: number, excludeNightId?: string): Set<string> {
-    const used = new Set<string>();
-    if (n <= 0) return used;
-    const nights = this.loadHistory()
-      .nights.filter((entry) => entry.nightId !== excludeNightId)
-      .slice(-n);
-    for (const night of nights) for (const id of night.questionIds) used.add(id);
-    return used;
   }
 
   logEvent(event: Record<string, unknown>) {

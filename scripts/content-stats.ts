@@ -9,7 +9,7 @@
  * of them, and the selector quietly substitutes easier questions rather than
  * failing — so a bank that looks healthy plays flat.
  *
- *   npx tsx scripts/content-stats.ts [contentDir] [--blocks-per-night N]
+ *   npx tsx scripts/content-stats.ts [contentDir] [--games-per-night N]
  */
 import { join } from 'node:path';
 import { DEFAULT_CONFIG, type Difficulty } from '../shared/protocol.js';
@@ -32,14 +32,15 @@ function numFlag(name: string, fallback: number): number {
   return n;
 }
 
-const blocksPerNight = numFlag('--blocks-per-night', 3);
+/** Games in a night. Defaults to whatever the config ships with. */
+const gamesPerNight = numFlag('--games-per-night', DEFAULT_CONFIG.gamesPerNight);
 const targetNights = args.includes('--nights') ? numFlag('--nights', 0) : undefined;
 const contentDir =
   args.find((a, i) => !consumed.has(i) && !a.startsWith('--')) ?? join(process.cwd(), 'content');
 
-const { roundsPerBlock, questionsPerRound, difficultyMix } = DEFAULT_CONFIG;
-const perBlock = roundsPerBlock * questionsPerRound;
-const roundsPerNight = roundsPerBlock * blocksPerNight;
+const { roundsPerGame, questionsPerRound, difficultyMix } = DEFAULT_CONFIG;
+const perGame = roundsPerGame * questionsPerRound;
+const roundsPerNight = roundsPerGame * gamesPerNight;
 
 // The mix is cycled when it is shorter than the round, exactly as the engine
 // does it, so this reflects what a round will really ask for.
@@ -98,8 +99,8 @@ for (const { cat, qs, rounds, binding } of rows) {
 const nights = totalRounds / roundsPerNight;
 console.log(`\n  Difficulty spread shown as [d1/d2/d3/d4]`);
 console.log(`  A round asks for ${[...needPerRound].sort().map(([d, n]) => `${n}xd${d}`).join(' + ')}`);
-console.log(`  A block is ${roundsPerBlock} x ${questionsPerRound} = ${perBlock} questions; a night is ${blocksPerNight} blocks = ${roundsPerNight} rounds`);
-console.log(`  Raw total would stretch to ${Math.floor(playable.length / (perBlock * blocksPerNight))} nights.`);
+console.log(`  A game is ${roundsPerGame} x ${questionsPerRound} = ${perGame} questions; a night is ${gamesPerNight} games = ${roundsPerNight} rounds`);
+console.log(`  Raw total would stretch to ${Math.floor(playable.length / (perGame * gamesPerNight))} nights.`);
 console.log(`  At the real mix it is ${totalRounds.toFixed(0)} rounds, or ${nights.toFixed(1)} nights, with no repeats.\n`);
 
 // What to write next, stated in questions rather than vibes. Pass --nights to

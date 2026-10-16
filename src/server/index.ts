@@ -222,7 +222,7 @@ wss.on('connection', (socket) => {
 
       // Everything below mutates the game; control messages need the gate.
       const controlOnly = new Set<ClientMessage['t']>([
-        'set_config', 'start_block', 'advance', 'reveal', 'lock_now', 'extend_timer',
+        'set_config', 'start_game', 'advance', 'reveal', 'lock_now', 'extend_timer',
         'skip_question', 'replace_question', 'adjust_score', 'rename_team', 'remove_team',
         'set_round_category', 'start_tiebreak', 'end_night', 'reset_night', 'say', 'hold',
       ]);
@@ -236,7 +236,7 @@ wss.on('connection', (socket) => {
         case 'set_wager': engine.setWager(client.playerId!, msg.amount); break;
 
         case 'set_config': engine.setConfig(msg.patch); break;
-        case 'start_block': engine.startBlock(); break;
+        case 'start_game': engine.startGame(); break;
         case 'advance': engine.advance(); break;
         case 'reveal': engine.reveal(); break;
         case 'lock_now': engine.lockNow('host'); break;

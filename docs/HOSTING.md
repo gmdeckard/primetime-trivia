@@ -87,25 +87,61 @@ often than just typing a name.
 A table of four who want to play together simply share one tablet. A couple who
 want to compete against each other use two.
 
+## What the words mean
+
+Three layers, and the screens use the same three words you will:
+
+- a **round** is ten questions
+- a **game** is a few rounds, closed by the final wager
+- a **night** is a few games
+
+Ten questions, five minute break, ten more, the wager, ten minute break, next
+game. Set all of it under **Setup** on your phone.
+
 ## Setting up the game
 
-On your phone, before you start:
+Setup is five groups, each of which says what it is set to without being
+opened.
 
+**Shape of the night.** Questions per round, rounds per game, games tonight.
+Type the number or use the steppers; the panel works out how long the night
+runs and tells you. The night ends itself after the last game, so you do not
+have to remember to stop.
 
-- **Block shape** — 3 × 8 is about thirty minutes; 4 × 6 and 2 × 10 are also
-  offered, and the screen tells you the estimated running time
-- **Seconds per question** — 35 is the default; 25 for a sharp crowd, 50 if
-  there is a lot of discussion at the tables
-- **Run the round automatically** — on by default. Reveals the answer a few
-  seconds after the timer, then moves on. Tune the two pauses underneath: the
-  beat before the answer, and how long the answer stays up. Lengthen the second
-  one if you like to talk around the fun fact.
-- **Speed bonus** — 5 points for the fastest correct team. Turn it off if the
-  room is mixed and you want knowledge alone to decide.
-- **Final wager** — a Jeopardy-style bet to close the block. Leave it on; it
-  keeps the last-place table interested right to the end.
-- **Read questions aloud** — the big screen speaks each question using the
-  laptop's own voice. Useful for low-vision players and needs no internet.
+Also here: **Categories in a round**. *Mixed* is the default and means one
+question from each of ten shuffled categories — nobody sits out a round
+because they know nothing about opera. *One per round* puts the whole round on
+one subject, which is what you want for a themed round.
+
+**Timing.** Every number is a field, not a choice of three. The answer window,
+the pause before the answer, how long the answer stays up, how long an intro
+card holds, and the two breaks: between rounds and between games. Defaults are
+20 seconds a question, 5 minutes between rounds, 10 between games.
+
+Two switches here matter most:
+
+- **Breaks end themselves** — on by default. The break counts down on every
+  screen and the next round starts at zero. Turn it off and the clock still
+  counts down and still says five minutes, but the game waits for your button.
+  Turn it off when you have an announcement to make.
+- **Run the round automatically** — on by default. The lock, the reveal and
+  the next question all run on the clock, so you do not touch anything for a
+  whole round.
+
+With both on, the night runs itself from the first question to the last.
+
+**Scoring.** A question is worth 1000 points, holds full value for the first 5
+seconds while the room reads, then slides to 200 at the buzzer. All three
+numbers are yours to change. The floor sits well above zero on purpose: a
+correct answer arrived at slowly is still a correct answer.
+
+**Sound and speech.** Big-screen sound, volume, music under the question, the
+spoken run-up, and reading questions aloud. All off by default. Sound only ever
+comes out of the big screen, and that screen needs one click on **Turn sound
+on** before a browser will play anything.
+
+**Questions.** Age group and any extra packs, with a live count of what is in
+play.
 
 ## During the night
 
@@ -128,12 +164,18 @@ wait for someone to come back from the bar. Press it again to carry on from
 where you were. The big button also still works: tapping it skips the rest of
 the countdown and moves on immediately.
 
-Auto-advance deliberately **stops at the end of every round**. Scoreboards,
-the move to the next category, the final wager and tiebreakers all wait for
-you, because those are the moments you want to talk over.
+**Breaks are on a clock.** At the end of a round every screen shows the
+standings and a countdown — 4:58, then 4:57 — so nobody has to ask how long
+they have, including you. With **Breaks end themselves** on, the next round
+starts at zero; with it off, the clock still runs and the game waits for your
+button. The big button always skips the rest of it.
+
+The one beat that never runs on a clock is **the final wager**. A team that
+has not bet loses its whole stake, so you decide when betting closes.
 
 If you would rather drive every step yourself, turn off **Run the round
-automatically** in Setup and the game waits for you at each stage.
+automatically** and **Breaks end themselves**, and the game waits for you at
+every stage.
 
 One large button sits at the bottom of your phone and always does the right
 next thing. The label tells you what it will do and the line underneath gives
@@ -145,7 +187,8 @@ While a question is live you also get:
 - **Lock now** — everyone has clearly finished
 - **Skip** — this question is a dud, bin it with no score
 - **Swap this question** — they have seen it before; replaces it with another
-  from the same category
+  from the same category, or from anywhere in the selection if the round is
+  mixed
 
 Tap any team to adjust their score, rename them, or remove them.
 
@@ -166,9 +209,16 @@ so. Reveal it and carry on.
 question where the closest guess wins. It is sudden death and only the tied
 teams play.
 
-**The thirty minutes are up and nobody wants to stop.** Press the button again
-and it starts another block with the same teams and carried-over scores. No
-question repeats, so you can run three blocks back to back.
+**A game ends and nobody wants to stop.** Raise **Games tonight** in Setup —
+it is the one shape setting you can change mid-night — and the button offers
+another game with the same teams and carried-over scores.
+
+**No question comes back until the bank has been used up.** Each category is a
+deck of cards: deal off the top, reshuffle only when it runs out. That holds
+across restarts, across nights and across **Reset everything**, because the
+people it protects are the regulars who come every week. It lives in
+`data/rotation.json`; delete that file if you ever want to start the whole
+bank over.
 
 ## Afterwards
 
@@ -177,6 +227,8 @@ server.
 
 If you want a completely fresh night — new teams, zero scores — use **Reset
 everything** in the controls, or just restart with an empty `data/` folder.
+Reset everything deliberately leaves the question rotation alone, so a fresh
+night does not start re-asking questions the room has already had.
 
 By default the game avoids any question used in the previous eight nights, so
 a weekly game will not recycle material for about two months.
