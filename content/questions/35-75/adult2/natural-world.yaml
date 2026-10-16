@@ -248,3 +248,213 @@ questions:
     answer: Oxygen
     distractors: [Silicon, Iron, Aluminum]
     fact: Nearly half, locked into silicate minerals rather than floating free. Silicon is second, and the two together are most of the rock underfoot.
+
+  - id: a2-nat-036
+    difficulty: 2
+    prompt: Which sense is a dog's sharpest?
+    answer: Smell
+    distractors: [Hearing, Sight, Taste]
+    fact: It has something like three hundred million scent receptors to a person's six million, and a second organ in the roof of the mouth for heavy molecules.
+
+  - id: a2-nat-037
+    difficulty: 2
+    prompt: What do bees collect from flowers to make honey?
+    answer: Nectar
+    distractors: [Pollen, Sap, Resin]
+    fact: It takes about two million flower visits to make a pound of it. Pollen is collected too, but as protein for the young rather than for honey.
+
+  - id: a2-nat-038
+    difficulty: 2
+    prompt: Which gas do plants release during photosynthesis?
+    answer: Oxygen
+    distractors: [Nitrogen, Methane, Hydrogen]
+    fact: Almost all of the oxygen in the air was put there by living things. For the first two billion years of life on earth there was next to none of it.
+
+  - id: a2-nat-039
+    difficulty: 2
+    prompt: Which animal is the tallest living species?
+    answer: The giraffe
+    distractors: [The elephant, The moose, The camel]
+    fact: Its neck holds seven vertebrae, the same number as a person's, each one about ten inches long. Its heart weighs around twenty-five pounds to push blood that high.
+
+  - id: a2-nat-040
+    difficulty: 2
+    prompt: What is the center of a hurricane called?
+    answer: The eye
+    distractors: [The core, The vortex, The well]
+    fact: It is calm and often clear, ringed by the wall where the worst winds are. People caught in it have walked outside believing the storm had passed.
+
+  - id: a2-nat-041
+    difficulty: 2
+    prompt: Which part of a tree carries water from the roots to the leaves?
+    answer: The xylem
+    distractors: [The phloem, The bark, The cambium]
+    fact: The water is pulled up rather than pushed, as it leaves the pores of the leaves and drags an unbroken thread behind it.
+
+  - id: a2-nat-042
+    difficulty: 3
+    prompt: Which animal has the most powerful bite measured in the wild?
+    answer: The saltwater crocodile
+    distractors: [The hippopotamus, The great white shark, The polar bear]
+    fact: The muscles that close the jaw are enormous and those that open it are weak enough that a strap around the snout holds it shut.
+
+  - id: a2-nat-043
+    difficulty: 3
+    prompt: What is the term for an animal that is active at night?
+    answer: Nocturnal
+    distractors: [Diurnal, Hibernal, Vespertine]
+    fact: Our own ancestors kept to the dark for a hundred million years while the dinosaurs had the daylight, which is why so many of us see color poorly.
+
+  - id: a2-nat-044
+    difficulty: 3
+    prompt: Which insect's colony has a single reproducing female and sterile workers?
+    answer: The honeybee
+    distractors: [The locust, The cicada, The dragonfly]
+    fact: A queen mates once, on a single flight, and stores the sperm for years. A worker is a half-sister to the rest, which is the clue to why she does not breed herself.
+
+  - id: a2-nat-045
+    difficulty: 3
+    prompt: What does an animal do when it undergoes torpor?
+    answer: Drops its body temperature and metabolism to save energy
+    distractors: [Sheds and regrows its outer layer, Migrates in response to daylight, Stores fat in a single organ]
+    fact: Hummingbirds do it every night, dropping their heart rate from over a thousand beats a minute to a few dozen. Hibernation is the long version.
+
+  - id: a2-nat-046
+    difficulty: 3
+    prompt: Which tree is the oldest known individual living thing?
+    answer: A bristlecone pine
+    distractors: [A giant sequoia, A baobab, A yew]
+    fact: One in the White Mountains of California is over forty-eight hundred years old. They grow in poor soil at altitude, where little else competes and little rots.
+
+  - id: a2-nat-047
+    difficulty: 3
+    prompt: What is the difference between weather and climate?
+    answer: Weather is what happens, climate is the long-run pattern
+    distractors: [Weather is local and climate is global, Weather is measured and climate is modeled, Weather is seasonal and climate is yearly]
+    fact: Thirty years is the usual period for defining a climate. A cold week says nothing about either, which is what makes the argument so durable.
+
+  - id: a2-nat-048
+    difficulty: 3
+    prompt: Which animal group do squid, snails and clams belong to?
+    answer: Molluscs
+    distractors: [Crustaceans, Arthropods, Annelids]
+    fact: It is the second largest animal group after the insects and their relatives. A squid and a garden snail share a body plan that is hard to see from outside.
+
+  - id: a2-nat-049
+    difficulty: 3
+    prompt: What is an atoll?
+    answer: A ring of coral around a lagoon
+    distractors: [A volcanic island with no beach, A sandbank exposed at low tide, A chain of islets joined by reef]
+    fact: 'Darwin worked out how they form: coral grows around a volcanic island, the island sinks, and the ring keeps building upward.'
+
+  - id: a2-nat-050
+    difficulty: 3
+    prompt: Which bird is the heaviest able to fly?
+    answer: The great bustard
+    distractors: [The swan, The condor, The pelican]
+    fact: Males reach over forty pounds, which is close to the limit of what wings and muscle can lift. They have to run to take off.
+
+  - id: a2-nat-051
+    difficulty: 3
+    prompt: What causes the seasons?
+    answer: The tilt of the earth's axis
+    distractors: [The changing distance from the sun, The speed of the earth's orbit, The movement of the moon]
+    fact: The earth is closest to the sun in January. The tilt is twenty-three and a half degrees, and without it there would be no seasons at all.
+
+  - id: a2-nat-052
+    difficulty: 3
+    prompt: Which large mammal spends most of the day in water and is among Africa's most dangerous?
+    answer: The hippopotamus
+    distractors: [The Cape buffalo, The rhinoceros, The crocodile]
+    fact: It cannot swim well and walks along the bottom. Its skin secretes a red fluid that works as a sunblock and an antiseptic.
+
+  - id: a2-nat-053
+    difficulty: 3
+    prompt: Which cloud type brings thunderstorms?
+    answer: Cumulonimbus
+    distractors: [Cirrus, Stratus, Altocumulus]
+    fact: It can stand ten miles high, flattening into an anvil where it hits the stratosphere and can rise no further.
+
+  - id: a2-nat-054
+    difficulty: 3
+    prompt: Which animal's young is called a kit?
+    answer: The fox
+    distractors: [The otter alone, The badger, The hare]
+    fact: Beavers, rabbits and ferrets use it too. A fox family lives in an earth and the young stay with the parents through their first summer.
+
+  - id: a2-nat-055
+    difficulty: 3
+    prompt: What is guano and why was it fought over?
+    answer: Seabird droppings, mined as fertilizer
+    distractors: [Volcanic ash used in cement, Coral sand used in glassmaking, Dried seaweed used as feed]
+    fact: It was so valuable in the nineteenth century that Congress passed a law letting Americans claim any unoccupied island that had it. Peru fought a war partly over the deposits.
+
+  - id: a2-nat-056
+    difficulty: 4
+    prompt: What is the hottest shade temperature reliably recorded on earth?
+    answer: About 134 degrees Fahrenheit
+    distractors: [About 118 degrees, About 152 degrees, About 165 degrees]
+    fact: Recorded in Death Valley in 1913 and still argued over. A later Libyan reading of 136 was thrown out in 2012 after the equipment was reexamined.
+
+  - id: a2-nat-057
+    difficulty: 4
+    prompt: Which creature can survive being dried out, frozen and exposed to vacuum?
+    answer: The tardigrade
+    distractors: [The brine shrimp, The nematode, The rotifer]
+    fact: Under a tenth of a millimeter long, with eight legs and claws. It survives by pulling in its legs, expelling its water and shutting down almost completely.
+
+  - id: a2-nat-058
+    difficulty: 4
+    prompt: What is the function of a whale's baleen?
+    answer: It strains small animals out of seawater
+    distractors: [It carries sound to the inner ear, It stores oxygen while diving, It scrapes food off the seabed]
+    fact: It is made of the same stuff as fingernails and hair, and hangs in plates from the upper jaw. It was the whalebone used for corsets and umbrella ribs.
+
+  - id: a2-nat-059
+    difficulty: 4
+    prompt: What is the El Nino pattern?
+    answer: A warming of the eastern Pacific that shifts weather worldwide
+    distractors: [A cooling of the North Atlantic current, A shift in the Asian monsoon winds, A ten-year cycle in solar output]
+    fact: Peruvian fishermen named it for the Christ child because it usually arrives around Christmas, killing the fishing by cutting off the cold upwelling.
+
+  - id: a2-nat-060
+    difficulty: 4
+    prompt: Which American bird was hunted from billions to extinction by 1914?
+    answer: The passenger pigeon
+    distractors: [The Carolina parakeet, The heath hen, The ivory-billed woodpecker]
+    fact: Flocks darkened the sky for days at a time. The last one died in a Cincinnati zoo, and nobody had quite believed a bird that numerous could go.
+
+  - id: a2-nat-061
+    difficulty: 4
+    prompt: What is the Coriolis effect responsible for?
+    answer: The curving path of winds and currents on a spinning earth
+    distractors: [The tilt of the earth's axis, The twice-daily tides, The jet stream's speed]
+    fact: It is far too weak to turn the water in a sink. It matters over hundreds of miles, which is why storms spin opposite ways in the two hemispheres.
+
+  - id: a2-nat-062
+    difficulty: 4
+    prompt: Which fish can change sex during its life?
+    answer: The clownfish
+    distractors: [The salmon, The herring, The pike]
+    fact: A group has one breeding female and when she dies the dominant male becomes female. Wrasses and groupers do a version of the same thing.
+
+  - id: a2-nat-063
+    difficulty: 4
+    prompt: What is a keystone species?
+    answer: One whose removal changes the whole ecosystem out of proportion to its numbers
+    distractors: [The most numerous species in a habitat, The largest predator in a food chain, The species a habitat is named after]
+    fact: Sea otters are the standard case. Remove them and urchins eat the kelp forest, taking everything that lived in it with them.
+
+  - id: a2-nat-064
+    difficulty: 4
+    prompt: What does a dendrologist study?
+    answer: Trees
+    distractors: [Teeth, Soil, Caves]
+    fact: The root is the Greek for tree, which it shares with the study of growth rings and with the branching diagrams used to show descent.
+
+  - id: a2-nat-065
+    difficulty: 4
+    prompt: Which bird navigates using a magnetic sense as well as the stars?
+    answer: Most migrating songbirds
+    distractors: [Only pigeons, Only seabirds, Only raptors]
+    fact: The mechanism may be a protein in the eye that reacts to the magnetic field, so the bird could in some sense see direction as a pattern over the landscape.
