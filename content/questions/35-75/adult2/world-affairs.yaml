@@ -1,0 +1,250 @@
+category: world-affairs
+pack:
+  id: adult2
+  name: Adult set 2
+
+questions:
+  - id: a2-wor-001
+    difficulty: 2
+    prompt: In which city is the United Nations headquarters?
+    answer: New York
+    distractors: [Geneva, Brussels, Vienna]
+    fact: The site is international territory with its own post office and stamps. The land was bought with a gift from John D. Rockefeller Jr. after a plan to build in Philadelphia fell through.
+
+  - id: a2-wor-002
+    difficulty: 2
+    prompt: What do the letters NATO stand for?
+    answer: North Atlantic Treaty Organization
+    distractors: [Northern Alliance Treaty Organization, North Atlantic Trade Organization, National Atlantic Treaty Office]
+    fact: Its founding article says an attack on one is an attack on all. It has been invoked exactly once, by the United States, after September 2001.
+
+  - id: a2-wor-003
+    difficulty: 2
+    prompt: Which continent contains the most countries?
+    answer: Africa
+    distractors: [Asia, Europe, South America]
+    fact: Fifty-four of them, most drawn by European officials who never visited. A third of the borders run along lines of latitude or longitude.
+
+  - id: a2-wor-004
+    difficulty: 2
+    prompt: What color are the helmets worn by United Nations peacekeepers?
+    answer: Blue
+    distractors: [White, Green, Orange]
+    fact: Painted that way so neither side would mistake them for combatants. The first force of them went to Egypt in 1956.
+
+  - id: a2-wor-005
+    difficulty: 2
+    prompt: Which country voted in 2016 to leave the European Union and did so in 2020?
+    answer: The United Kingdom
+    distractors: [Denmark, Greece, Ireland]
+    fact: It had taken a decade of French vetoes to get in. The result was fifty-two to forty-eight on a turnout of seventy-two percent.
+
+  - id: a2-wor-006
+    difficulty: 2
+    prompt: What does the WHO in world health work stand for?
+    answer: The World Health Organization
+    distractors: [The World Hygiene Office, The Welfare and Health Organization, The World Hospital Organization]
+    fact: It is a UN agency based in Geneva, founded in 1948. Its one outright eradication of a disease took twenty years and about three hundred million dollars.
+
+  - id: a2-wor-007
+    difficulty: 2
+    prompt: Which 1948 document set out the rights the UN says every person holds?
+    answer: The Universal Declaration of Human Rights
+    distractors: [The Geneva Conventions, The Atlantic Charter, The Helsinki Final Act]
+    fact: Eight countries abstained and none voted against. It binds nobody by itself, and almost every human rights treaty since quotes it.
+
+  - id: a2-wor-008
+    difficulty: 3
+    prompt: Which city fell in April 1975, ending the Vietnam War?
+    answer: Saigon
+    distractors: [Hanoi, Hue, Da Nang]
+    fact: The last Americans went out by helicopter from a rooftop, and the aircraft were pushed off carrier decks to make room for more. The city was renamed within the year.
+
+  - id: a2-wor-009
+    difficulty: 3
+    prompt: Which 1977 treaties agreed to hand the Panama Canal over to Panama?
+    answer: The Torrijos-Carter Treaties
+    distractors: [The Hay-Bunau-Varilla Treaty, The Rio Pact, The Bogota Accords]
+    fact: The Senate ratified by one vote more than the two-thirds needed, and several senators who voted for it lost their seats. The handover was completed in 1999.
+
+  - id: a2-wor-010
+    difficulty: 3
+    prompt: Who declared the state of Israel in May 1948?
+    answer: David Ben-Gurion
+    distractors: [Chaim Weizmann, Moshe Sharett, Menachem Begin]
+    fact: He read the declaration in a Tel Aviv museum because an air raid was expected. The United States recognized the new state eleven minutes later.
+
+  - id: a2-wor-011
+    difficulty: 3
+    prompt: Which Pakistani prime minister was hanged in 1979 two years after being deposed?
+    answer: Zulfikar Ali Bhutto
+    distractors: [Liaquat Ali Khan, Mohammad Ali Bogra, Feroz Khan Noon]
+    fact: The general who hanged him ruled for another nine years. His daughter later held the same office twice and was assassinated in 2007.
+
+  - id: a2-wor-012
+    difficulty: 3
+    prompt: Which 1967 war left Israel holding the Sinai, the Golan Heights and the West Bank?
+    answer: The Six-Day War
+    distractors: [The War of Attrition, The Suez War, The Lebanon War]
+    fact: It opened with an air strike that destroyed most of the Egyptian air force on the ground in three hours. The territory taken is still the substance of every negotiation since.
+
+  - id: a2-wor-013
+    difficulty: 3
+    prompt: Which group took Israeli athletes hostage at the 1972 Olympics?
+    answer: Black September
+    distractors: [The Red Brigades, Baader-Meinhof, The Japanese Red Army]
+    fact: The rescue at a military airfield was improvised with five marksmen and no armored vehicles. Germany built its first dedicated counter-terrorist unit in response.
+
+  - id: a2-wor-014
+    difficulty: 3
+    prompt: Which organization did Yasser Arafat lead from 1969?
+    answer: The PLO
+    distractors: [Hezbollah, The Muslim Brotherhood, The Arab Higher Committee]
+    fact: He addressed the UN General Assembly in 1974 wearing a holster, telling the hall he carried an olive branch in one hand and a gun in the other.
+
+  - id: a2-wor-015
+    difficulty: 3
+    prompt: Which Beijing square was cleared of protesters by the army in June 1989?
+    answer: Tiananmen Square
+    distractors: [Tiantan Square, The Forbidden Square, Zhongnanhai]
+    fact: The protests had run for seven weeks and spread to dozens of cities. The photograph of one man in front of a column of tanks was taken from a hotel balcony.
+
+  - id: a2-wor-016
+    difficulty: 3
+    prompt: Which country did the Khmer Rouge empty its cities in 1975?
+    answer: Cambodia
+    distractors: [Laos, Burma, Thailand]
+    fact: Phnom Penh was cleared in three days. Around a quarter of the population died over the next four years from executions, starvation and overwork.
+
+  - id: a2-wor-017
+    difficulty: 3
+    prompt: In which country did a genocide kill around eight hundred thousand people in a hundred days in 1994?
+    answer: Rwanda
+    distractors: [Burundi, Uganda, Congo]
+    fact: A small UN force was on the ground and asked for a mandate to intervene. It was refused and most of the troops were withdrawn as the killing began.
+
+  - id: a2-wor-018
+    difficulty: 3
+    prompt: Which country's 1974 coup ended a long dictatorship and gave up its African colonies?
+    answer: Portugal
+    distractors: [Spain, Greece, Turkey]
+    fact: Soldiers put carnations in their rifle barrels and almost nobody was killed. Angola and Mozambique were independent within eighteen months.
+
+  - id: a2-wor-019
+    difficulty: 3
+    prompt: In which Indonesian city did Asian and African states meet in 1955 to refuse both Cold War blocs?
+    answer: Bandung
+    distractors: [Jakarta, Surabaya, Medan]
+    fact: Twenty-nine countries came, representing more than half the world's people and almost none of its wealth. The movement it started outlived the conflict it was avoiding.
+
+  - id: a2-wor-020
+    difficulty: 3
+    prompt: Which institution lends to countries facing a balance-of-payments crisis?
+    answer: The International Monetary Fund
+    distractors: [The World Bank, The Bank for International Settlements, The OECD]
+    fact: Its loans come with conditions on spending and currency, which is why its arrival in a capital is usually followed by street protests.
+
+  - id: a2-wor-021
+    difficulty: 3
+    prompt: Which American president called the Soviet Union an evil empire in 1983?
+    answer: Ronald Reagan
+    distractors: [Jimmy Carter, Gerald Ford, George H. W. Bush]
+    fact: He said it to a convention of evangelicals in Orlando. Four years later he was signing arms-reduction treaties with the same government.
+
+  - id: a2-wor-022
+    difficulty: 3
+    prompt: How many countries joined the European Community with Britain in 1973, its first enlargement?
+    answer: Two
+    distractors: [One, Three, Five]
+    fact: Ireland and Denmark came in at the same time. Norway had negotiated entry too and then voted it down in a referendum.
+
+  - id: a2-wor-023
+    difficulty: 3
+    prompt: Which eight-year war between two Gulf neighbors ended in 1988 with no gain for either?
+    answer: The Iran-Iraq War
+    distractors: [The Gulf War, The Yemen conflict, The Dhofar Rebellion]
+    fact: Both sides used trench lines and human-wave attacks, and one used poison gas. Most of the outside world quietly supplied the aggressor.
+
+  - id: a2-wor-024
+    difficulty: 3
+    prompt: Which European institution sits in Frankfurt?
+    answer: The European Central Bank
+    distractors: [The European Court of Justice, The European Investment Bank, The European Commission]
+    fact: Germany would only give up the mark if the new currency was run from a German city on German terms. The bank answers to no single government.
+
+  - id: a2-wor-025
+    difficulty: 3
+    prompt: Which Congolese prime minister was murdered in 1961, months after independence?
+    answer: Patrice Lumumba
+    distractors: [Moise Tshombe, Joseph Kasavubu, Mobutu Sese Seko]
+    fact: Belgian officers were present at his killing and a Belgian minister apologized for it forty years later. A Belgian policeman kept one of his teeth.
+
+  - id: a2-wor-026
+    difficulty: 4
+    prompt: Which 1972 treaty limited American and Soviet defenses against missiles?
+    answer: The ABM Treaty
+    distractors: [SALT II, The Outer Space Treaty, The Threshold Test Ban]
+    fact: The logic was that defenses invite a bigger attack, so both sides agreed to stay vulnerable. The United States withdrew from it in 2002.
+
+  - id: a2-wor-027
+    difficulty: 4
+    prompt: Which UN agency is responsible for refugees?
+    answer: The UNHCR
+    distractors: [UNICEF, UNRWA, The IOM]
+    fact: It was set up in 1950 for a three-year job resettling Europeans and has been renewed ever since. It has won the Nobel Peace Prize twice.
+
+  - id: a2-wor-028
+    difficulty: 4
+    prompt: In which South American country did a 1973 coup kill the elected president in the palace?
+    answer: Chile
+    distractors: [Argentina, Peru, Uruguay]
+    fact: Salvador Allende died as the air force bombed the building. The general who replaced him held power for seventeen years and then lost a referendum.
+
+  - id: a2-wor-029
+    difficulty: 4
+    prompt: Which Ugandan ruler was driven out in 1979 after eight years of terror?
+    answer: Idi Amin
+    distractors: [Milton Obote, Yoweri Museveni, Godfrey Binaisa]
+    fact: He expelled the country's Asian population in ninety days and wrecked the economy. He styled himself conqueror of the British Empire and died in exile in Jeddah.
+
+  - id: a2-wor-030
+    difficulty: 4
+    prompt: Which African colony declared independence from Britain unilaterally in 1965?
+    answer: Rhodesia
+    distractors: [Kenya, Nyasaland, Bechuanaland]
+    fact: A white minority government acted rather than accept majority rule. Sanctions, a long bush war and fifteen years later it became Zimbabwe.
+
+  - id: a2-wor-031
+    difficulty: 4
+    prompt: Which Czechoslovak leader's reforms were ended by tanks in 1968?
+    answer: Alexander Dubcek
+    distractors: [Antonin Novotny, Gustav Husak, Ludvik Svoboda]
+    fact: His phrase was socialism with a human face. He spent the next twenty years working for the forestry service and reappeared in public in 1989.
+
+  - id: a2-wor-032
+    difficulty: 4
+    prompt: What was the codename of the failed 1980 attempt to rescue the American hostages in Tehran?
+    answer: Operation Eagle Claw
+    distractors: [Operation Desert One, Operation Rice Bowl, Operation Credible Sport]
+    fact: Three of eight helicopters failed and a collision at the desert staging point killed eight men. The failure led to the creation of a joint special operations command.
+
+  - id: a2-wor-033
+    difficulty: 4
+    prompt: In which country did a 1986 superpower summit come close to scrapping all nuclear weapons?
+    answer: Iceland
+    distractors: [Finland, Austria, Switzerland]
+    fact: Two days of talks in a Reykjavik house ended in failure over missile defense research, but the proposals made at it shaped the treaty signed the following year.
+
+  - id: a2-wor-034
+    difficulty: 4
+    prompt: Which 1959 treaty reserved a whole continent for science and banned weapons there?
+    answer: The Antarctic Treaty
+    distractors: [The Law of the Sea Convention, The Svalbard Treaty, The Montreux Convention]
+    fact: Twelve countries signed, including both superpowers at the worst of the Cold War. Territorial claims were not settled, just set aside.
+
+  - id: a2-wor-035
+    difficulty: 4
+    prompt: Which organization did Egypt's expulsion in 1979 leave without its largest member for a decade?
+    answer: The Arab League
+    distractors: [OPEC, The Organization of African Unity, The Gulf Cooperation Council]
+    fact: The expulsion was punishment for making peace with Israel, and the headquarters moved from Cairo to Tunis. Egypt was readmitted in 1989 and the offices went back.

@@ -223,10 +223,10 @@ questions:
 
   - id: a2-h20-032
     difficulty: 4
-    prompt: At which February 1945 conference did the three main Allies settle the shape of postwar Europe?
-    answer: Yalta
-    distractors: [Tehran, Casablanca, Quebec]
-    fact: Roosevelt was two months from death and the Red Army was already standing on most of the ground being discussed, which settled much of the argument in advance.
+    prompt: Which senator's hunt for communists in government ended in Senate censure in 1954?
+    answer: Joseph McCarthy
+    distractors: [Pat McCarran, Karl Mundt, Martin Dies]
+    fact: He never exposed a single spy. Televised hearings and the question of whether he had any decency left finished him inside a year.
 
   - id: a2-h20-033
     difficulty: 4
