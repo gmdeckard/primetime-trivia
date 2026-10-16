@@ -14,6 +14,11 @@
  *
  * Two passes, because the bank has two different problems.
  *
+ * CONCESSION is offline too, and finds the failure this bank kept producing:
+ * a reveal sentence that names one of its own distractors and grants it. The
+ * sentence is usually true, which is why it survived review. The question is
+ * the thing that is wrong.
+ *
  * DRIFT is offline, deterministic and free. A superlative anchored to a date —
  * "the first to gross a billion, in 1997" — is history and cannot change. An
  * unanchored one — "which country has the most people" — is a claim about
@@ -118,6 +123,108 @@ function driftPass(questions: Question[]) {
   }
 }
 
+// ------------------------------------------------------------- concession
+
+/**
+ * Words a sentence uses when it is granting something to the other side.
+ *
+ * "The Antonine Wall is ALSO real." "American Tobacco was BROKEN UP THE SAME
+ * YEAR." These are the author, three months later, remembering that the
+ * question is not as clean as it looks and writing the caveat into the one
+ * place nobody checks.
+ */
+const CONCESSION =
+  /\b(also|too|as well|both|the same (year|time|day|way)|equally|likewise|as did|did too|are real|is real|was real|count(s|ed)? (too|as well))\b/i;
+
+/**
+ * Grammar words only.
+ *
+ * This list was much longer and included the nouns that turn up in option
+ * text — wall, company, band, film, awards. That was backwards: stripping
+ * them reduced "Band Aid" to "aid", which then matched a sentence about Farm
+ * Aid and reported a concession nobody had made. A distractor is identified
+ * by ALL of its words, so the only safe things to drop are the words that
+ * carry no identity at all.
+ */
+const GRAMMAR = new Set('the a an of in on at to for and or'.split(' '));
+
+/** Distinctive words in a phrase: what actually names the thing. */
+function distinctive(phrase: string): string[] {
+  return phrase
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim()
+    .split(' ')
+    .filter((w) => w.length >= 3 && !GRAMMAR.has(w));
+}
+
+/** Loose stem so "Obies" matches "Obie" and "barrels" matches "barrel". */
+const stem = (w: string) => w.replace(/(ies|es|s)$/, '');
+
+/**
+ * A fact that names one of its own distractors.
+ *
+ * This is the failure the bank kept producing, and it is not really a fact
+ * problem. A question is written, a distractor turns out to be defensible
+ * too, and instead of fixing the question the author adds a sentence to the
+ * reveal admitting it. The sentence is true. The question is still wrong, and
+ * now the MC reads the admission out loud to a room that just lost points on
+ * it.
+ *
+ * So this flags the fact and tells you to look at the PROMPT. Nearly every
+ * hit is a prompt that does not say enough to exclude the distractor:
+ * "which wall did the Romans build across northern Britain" has two correct
+ * answers, and no sentence appended afterwards can fix that.
+ *
+ * Mentioning a distractor is not automatically wrong — "not to be confused
+ * with X" is a good reveal line — so this reports and never edits. The
+ * concession words raise it from a mention to a likely admission.
+ *
+ * Expect a fixed question to keep tripping this, and do not chase it. The
+ * repair for "which company was broken up in 1911" is to put the qualifier
+ * in the prompt — "which OIL company" — and then say in the reveal why the
+ * qualifier is there: "American Tobacco was broken up the same year, which
+ * is why the question says oil." That is the shape of a question that has
+ * been dealt with, and it reads to this check exactly like the shape of one
+ * that has not. Roughly four in five hits are a reveal legitimately
+ * contrasting with a distractor; the check exists to put twenty questions in
+ * front of a person rather than nine hundred.
+ */
+function concessionPass(questions: Question[]) {
+  for (const q of questions) {
+    if (q.kind !== 'choice' || !q.choices) continue;
+    const answerIndex = q.answerIndex ?? 0;
+    // Sentence by sentence. A fact may contrast with a distractor in one
+    // breath and concede something unrelated in the next; only a concession
+    // sitting in the same sentence as the distractor is making a claim about
+    // that distractor.
+    const sentences = q.funFact.split(/(?<=[.!?])\s+/).filter(Boolean);
+
+    for (const [i, choice] of q.choices.entries()) {
+      if (i === answerIndex) continue;
+      const words = distinctive(choice).map(stem);
+      if (!words.length) continue;
+
+      for (const sentence of sentences) {
+        const here = new Set(distinctive(sentence).map(stem));
+        // Every distinctive word of the distractor has to appear, so "The
+        // Obie Awards" needs "obie" and not merely "awards".
+        if (!words.every((w) => here.has(w))) continue;
+        if (!CONCESSION.test(sentence)) continue;
+        add(
+          'wrong',
+          'concedes',
+          q,
+          `the reveal grants "${choice}", which is on the board as a wrong answer: ` +
+            `"${sentence.trim()}" — the fix is almost always in the PROMPT, which probably ` +
+            `admits more than one right answer`,
+        );
+        break;
+      }
+    }
+  }
+}
+
 // ---------------------------------------------------------------- report
 
 function report(stats?: { checked: number; costCents: number; failed: number }) {
@@ -129,6 +236,7 @@ function report(stats?: { checked: number; costCents: number; failed: number }) 
 
   const titles: Record<string, string> = {
     drift: 'Will go out of date — present-tense superlative with no date',
+    concedes: 'The reveal argues with its own answer — check the prompt, not the fact',
     wrong: 'The verifier says the marked answer is wrong',
     suspect: 'The verifier says this is arguable, or a distractor is defensible too',
   };
@@ -167,7 +275,10 @@ if (onlyCategory) questions = questions.filter((q) => q.category === onlyCategor
 if (limit) questions = questions.slice(0, limit);
 
 console.log(`Checking ${questions.length} questions from ${contentDir}`);
-if (runDrift) driftPass(questions);
+if (runDrift) {
+  driftPass(questions);
+  concessionPass(questions);
+}
 
 let stats: { checked: number; costCents: number; failed: number } | undefined;
 if (runVerify) {

@@ -45,10 +45,10 @@ questions:
 
   - id: biz-007
     difficulty: 3
-    prompt: Which company was broken up by antitrust action in 1911?
+    prompt: Which oil company was broken up by antitrust action in 1911?
     answer: Standard Oil
     distractors: [US Steel, AT&T, American Tobacco]
-    fact: It split into 34 companies, among them the ancestors of Exxon, Mobil and Chevron. American Tobacco was also broken up the same year.
+    fact: It split into 34 companies, among them the ancestors of Exxon, Mobil and Chevron. American Tobacco was broken up the same year, which is why the question says oil.
 
   - id: biz-008
     difficulty: 2

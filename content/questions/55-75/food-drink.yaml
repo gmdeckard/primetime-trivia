@@ -276,7 +276,7 @@ questions:
 
   - id: fnd-040
     difficulty: 4
-    prompt: Which acid gives sourdough bread its tang?
+    prompt: Which acid do the bacteria in a sourdough starter produce the most of?
     answer: Lactic acid
     distractors: [Citric acid, Acetic acid, Malic acid]
-    fact: Bacteria in the starter make both lactic and acetic acid. The ratio is what separates a mild loaf from a sharp one.
+    fact: They make acetic acid as well, and the ratio between the two is what separates a mild loaf from a sharp one.

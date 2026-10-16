@@ -13,10 +13,10 @@ questions:
 
   - id: wld-002
     difficulty: 2
-    prompt: Which wall did the Romans build across northern Britain?
+    prompt: The Romans built two walls across northern Britain. Which is the longer?
     answer: Hadrian's Wall
     distractors: [The Antonine Wall, Offa's Dyke, The Great Wall]
-    fact: The Antonine Wall is also real and lies further north. The Romans held it for about twenty years and then fell back.
+    fact: Hadrian's runs 73 miles from the Tyne to the Solway. The Antonine Wall, further north, is half that and the Romans held it for only about twenty years.
 
   - id: wld-003
     difficulty: 2

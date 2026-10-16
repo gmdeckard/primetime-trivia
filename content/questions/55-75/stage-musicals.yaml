@@ -34,10 +34,10 @@ questions:
 
   - id: stg-005
     difficulty: 2
-    prompt: Which awards honor achievement in Broadway theater?
+    prompt: Which awards go only to Broadway productions, and not to off-Broadway ones?
     answer: The Tony Awards
     distractors: [The Obie Awards, The Drama Desk Awards, The Olivier Awards]
-    fact: Named for Antoinette Perry. The Obies cover off-Broadway and the Oliviers are the London equivalent, so all three others are real.
+    fact: Named for Antoinette Perry. The Obies are the off-Broadway prize, the Drama Desk Awards let both compete together, and the Oliviers are London's.
 
   - id: stg-006
     difficulty: 3

@@ -67,7 +67,7 @@ questions:
 
   - id: a35-050
     difficulty: 4
-    prompt: Which American city built a park on a disused elevated railway line?
+    prompt: Which American city built the first park on a disused elevated railway line?
     answer: New York
     distractors: [Chicago, Philadelphia, Atlanta]
-    fact: The High Line was due for demolition. Chicago and Atlanta both built their own versions after it worked.
+    fact: The High Line was awaiting demolition when neighbours campaigned to keep it. Paris had done the same on a viaduct in 1993, and Chicago followed on its own elevated line in 2015.

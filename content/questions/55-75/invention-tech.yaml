@@ -149,7 +149,7 @@ questions:
     prompt: Which 1839 process produced the first widely used photographs?
     answer: The daguerreotype
     distractors: [The calotype, The ambrotype, The tintype]
-    fact: Talbot's calotype arrived the same year and made a negative, which is what photography actually descends from. The daguerreotype was a one-off on silvered metal.
+    fact: The daguerreotype was a one-off on silvered metal. Talbot patented the calotype two years later, and because it made a negative, that is the line photography descends from.
 
   - id: inv-022
     difficulty: 4

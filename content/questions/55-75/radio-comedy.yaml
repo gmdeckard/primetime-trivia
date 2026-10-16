@@ -62,10 +62,10 @@ questions:
 
   - id: rad-009
     difficulty: 3
-    prompt: Which of the Marx Brothers never spoke on screen?
+    prompt: Which Marx Brother appeared in the films without ever speaking in one?
     answer: Harpo
     distractors: [Chico, Zeppo, Gummo]
-    fact: He spoke perfectly normally off screen. Gummo and Zeppo both left the act, which is why five brothers produced a trio.
+    fact: He spoke perfectly normally off screen. Gummo left before the films were ever made, so he never spoke in one either; Zeppo played the straight man in the first five.
 
   - id: rad-010
     difficulty: 3
