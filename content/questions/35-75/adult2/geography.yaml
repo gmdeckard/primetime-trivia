@@ -1,0 +1,250 @@
+category: geography
+pack:
+  id: adult2
+  name: Adult set 2
+
+questions:
+  - id: a2-geo-001
+    difficulty: 2
+    prompt: Which is the longest river in Africa?
+    answer: The Nile
+    distractors: [The Congo, The Niger, The Zambezi]
+    fact: It drains eleven countries and is fed by two branches that meet at Khartoum. Which of it or the Amazon is the longest river on earth is still argued over.
+
+  - id: a2-geo-002
+    difficulty: 2
+    prompt: Which is the highest mountain above sea level?
+    answer: Mount Everest
+    distractors: [K2, Kangchenjunga, Mount McKinley]
+    fact: It grows about a quarter inch a year as India pushes into Asia, and it moves northeast at a similar rate.
+
+  - id: a2-geo-003
+    difficulty: 2
+    prompt: What is the capital of Canada?
+    answer: Ottawa
+    distractors: [Toronto, Montreal, Vancouver]
+    fact: Queen Victoria settled on it as a compromise between the English and French candidates, and because it was far enough from the American border to be defensible.
+
+  - id: a2-geo-004
+    difficulty: 2
+    prompt: What is the capital of Egypt?
+    answer: Cairo
+    distractors: [Alexandria, Luxor, Giza]
+    fact: It is the largest city in the Arab world, built where the river fans out into its delta, and its medieval quarter has more standing Islamic monuments than anywhere else.
+
+  - id: a2-geo-005
+    difficulty: 2
+    prompt: What is the capital of Argentina?
+    answer: Buenos Aires
+    distractors: [Cordoba, Rosario, Montevideo]
+    fact: Its people are called portenos, people of the port. More of them claim Italian descent than Spanish.
+
+  - id: a2-geo-006
+    difficulty: 2
+    prompt: On which continent is the Amazon rainforest?
+    answer: South America
+    distractors: [Africa, Asia, Australia]
+    fact: It covers about a third of the continent across nine countries. Roughly a fifth of it has been cleared since 1970.
+
+  - id: a2-geo-007
+    difficulty: 2
+    prompt: What is the capital of Japan?
+    answer: Tokyo
+    distractors: [Kyoto, Osaka, Nagoya]
+    fact: It was called Edo until 1868 and the name means eastern capital. The old capital, Kyoto, has a name made of the same two characters reversed.
+
+  - id: a2-geo-008
+    difficulty: 3
+    prompt: Which is the highest capital city in the world?
+    answer: La Paz
+    distractors: [Quito, Bogota, Kathmandu]
+    fact: Over eleven thousand feet, high enough that visitors are told to do nothing for a day. Fires burn poorly and the city's airport has one of the longest runways anywhere.
+
+  - id: a2-geo-009
+    difficulty: 3
+    prompt: Which two countries share the island of Hispaniola?
+    answer: Haiti and the Dominican Republic
+    distractors: [Cuba and Jamaica, Haiti and Puerto Rico, Trinidad and Tobago]
+    fact: One speaks French and Creole, the other Spanish, and the forest cover on either side of the border is visibly different from the air.
+
+  - id: a2-geo-010
+    difficulty: 3
+    prompt: Which country has the longest border with Brazil?
+    answer: Bolivia
+    distractors: [Argentina, Peru, Venezuela]
+    fact: Over two thousand miles of it, most through forest and wetland with no road crossing for hundreds of miles at a stretch.
+
+  - id: a2-geo-011
+    difficulty: 3
+    prompt: Which sea lies between Italy and the Balkan coast?
+    answer: The Adriatic
+    distractors: [The Ionian, The Tyrrhenian, The Aegean]
+    fact: Venice built an empire on its trade and threw a ring into it every year to marry the city to the water.
+
+  - id: a2-geo-012
+    difficulty: 3
+    prompt: Which mountain range runs down the western side of South America?
+    answer: The Andes
+    distractors: [The Sierra Madre, The Guiana Highlands, The Brazilian Shield]
+    fact: Over four thousand miles long, the longest continental range there is. It holds the highest volcanoes and the highest navigable lake.
+
+  - id: a2-geo-013
+    difficulty: 3
+    prompt: The Gobi Desert lies in China and which other country?
+    answer: Mongolia
+    distractors: [Kazakhstan, Nepal, Kyrgyzstan]
+    fact: It is a cold desert where temperatures swing more than a hundred degrees across the year, and it is growing south toward Beijing.
+
+  - id: a2-geo-014
+    difficulty: 3
+    prompt: Which is the largest inland body of water on earth?
+    answer: The Caspian Sea
+    distractors: [Lake Michigan, The Black Sea, Lake Tanganyika]
+    fact: Whether it counts as a sea or a lake decides who owns the oil beneath it, so five countries argued about the word for decades.
+
+  - id: a2-geo-015
+    difficulty: 3
+    prompt: Which island off the southeast coast of Africa is the fourth largest in the world?
+    answer: Madagascar
+    distractors: [Sri Lanka, Zanzibar, Socotra]
+    fact: It broke away from the mainland about eighty-eight million years ago, so most of what lives there lives nowhere else, lemurs included.
+
+  - id: a2-geo-016
+    difficulty: 3
+    prompt: Which is the largest country in South America?
+    answer: Brazil
+    distractors: [Argentina, Peru, Colombia]
+    fact: It takes up nearly half the continent and borders every country on it but two. It is the only one there where Portuguese is spoken.
+
+  - id: a2-geo-017
+    difficulty: 3
+    prompt: Which river flows through Paris?
+    answer: The Seine
+    distractors: [The Loire, The Rhone, The Marne]
+    fact: The city began on an island in it. Paris house numbers run in the direction the water flows, which is why the system looks arbitrary until you know.
+
+  - id: a2-geo-018
+    difficulty: 3
+    prompt: Which body of water sits at the lowest land elevation on earth?
+    answer: The Dead Sea
+    distractors: [The Caspian Depression, Lake Assal, The Qattara Depression]
+    fact: Over fourteen hundred feet below sea level and dropping about three feet a year, because the river that fed it is almost entirely taken for drinking and farming.
+
+  - id: a2-geo-019
+    difficulty: 3
+    prompt: What is the capital of Brazil?
+    answer: Brasilia
+    distractors: [Rio de Janeiro, Sao Paulo, Salvador]
+    fact: It was built from nothing in forty-one months on empty plateau, laid out in the shape of an aircraft, and opened in 1960 to move the country's center inland.
+
+  - id: a2-geo-020
+    difficulty: 3
+    prompt: Which is the largest island in the world?
+    answer: Greenland
+    distractors: [New Guinea, Borneo, Baffin Island]
+    fact: Three times the size of Texas with about fifty-six thousand people. Mercator maps make it look the size of Africa, which is fourteen times larger.
+
+  - id: a2-geo-021
+    difficulty: 3
+    prompt: What is the capital of Turkey?
+    answer: Ankara
+    distractors: [Izmir, Bursa, Antalya]
+    fact: It was a provincial town of thirty thousand when the new republic chose it in 1923, inland and defensible, over the old imperial capital on the water.
+
+  - id: a2-geo-022
+    difficulty: 3
+    prompt: Which African country has the largest population?
+    answer: Nigeria
+    distractors: [Egypt, Ethiopia, Congo]
+    fact: Over two hundred million people and more than five hundred languages. Lagos alone is bigger than most countries on the continent.
+
+  - id: a2-geo-023
+    difficulty: 3
+    prompt: Which canal lets ships cut from the North Sea to the Baltic?
+    answer: The Kiel Canal
+    distractors: [The Gota Canal, The White Sea Canal, The Rhine-Main-Danube Canal]
+    fact: It saves about two hundred and fifty miles around Denmark and is the busiest artificial waterway in the world by number of ships.
+
+  - id: a2-geo-024
+    difficulty: 3
+    prompt: Which mountain range runs down the spine of Italy?
+    answer: The Apennines
+    distractors: [The Dolomites, The Carpathians, The Dinaric Alps]
+    fact: They are young, soft and slipping, which is why the country has so many landslides and why its hill towns sit where they do.
+
+  - id: a2-geo-025
+    difficulty: 3
+    prompt: Which is the longest river in Asia?
+    answer: The Yangtze
+    distractors: [The Yellow River, The Mekong, The Ob]
+    fact: Nearly four thousand miles, and the only river wholly within one country among the world's longest. A third of China's people live in its basin.
+
+  - id: a2-geo-026
+    difficulty: 4
+    prompt: Which US state lies closest to Africa?
+    answer: Maine
+    distractors: [Florida, South Carolina, Massachusetts]
+    fact: The eastern bulge of Brazil is closer to Africa than anything in North America, but among the states the northeastern corner wins by a few hundred miles.
+
+  - id: a2-geo-027
+    difficulty: 4
+    prompt: Which African country has Spanish as an official language?
+    answer: Equatorial Guinea
+    distractors: [Western Sahara, Morocco, Angola]
+    fact: It was a Spanish colony until 1968 and is the only one on the continent. Its oil gives it one of Africa's highest incomes per head and almost none of it reaches the people.
+
+  - id: a2-geo-028
+    difficulty: 4
+    prompt: Which mountain is the tallest on earth measured from its own base?
+    answer: Mauna Kea
+    distractors: [Denali, Chimborazo, Mount Fuji]
+    fact: Over thirty-three thousand feet from the seafloor, with only about a third of it above water. Its summit holds the world's largest cluster of big telescopes.
+
+  - id: a2-geo-029
+    difficulty: 4
+    prompt: Which river carries the water over Iguazu Falls on the Brazil-Argentina border?
+    answer: The Parana
+    distractors: [The Uruguay, The Paraguay, The Negro]
+    fact: The falls are nearly two miles of cliff in two hundred and seventy separate drops. A dam downstream was for years the largest producer of hydroelectricity on earth.
+
+  - id: a2-geo-030
+    difficulty: 4
+    prompt: Which is the largest country with no permanent rivers?
+    answer: Saudi Arabia
+    distractors: [Libya, Mongolia, Niger]
+    fact: Its water comes from desalination and from aquifers filled during the last ice age. It is the world's biggest producer of fresh water from the sea.
+
+  - id: a2-geo-031
+    difficulty: 4
+    prompt: Which two countries are doubly landlocked, surrounded only by landlocked neighbors?
+    answer: Liechtenstein and Uzbekistan
+    distractors: [Nepal and Bolivia, Austria and Paraguay, Bhutan and Mongolia]
+    fact: Uzbekistan borders the Caspian's neighbors but not the sea. Liechtenstein is ringed by Switzerland and Austria, both landlocked themselves.
+
+  - id: a2-geo-032
+    difficulty: 4
+    prompt: Which country's name comes from the Arabic for land of the blacks?
+    answer: Sudan
+    distractors: [Chad, Mali, Niger]
+    fact: The term covered the whole belt south of the desert. The country split in two in 2011 after a civil war of more than twenty years.
+
+  - id: a2-geo-033
+    difficulty: 4
+    prompt: Which is the largest river delta in the world?
+    answer: The Ganges-Brahmaputra
+    distractors: [The Nile delta, The Mississippi delta, The Mekong delta]
+    fact: Around a hundred and thirty million people live on it, much of it less than thirty feet above the sea, which makes a storm surge there among the deadliest events on earth.
+
+  - id: a2-geo-034
+    difficulty: 4
+    prompt: Which strait is the busiest shipping channel in the world?
+    answer: The Strait of Malacca
+    distractors: [The Strait of Hormuz, The English Channel, The Bab-el-Mandeb]
+    fact: About a quarter of all traded goods pass through it, and at its narrowest it is under two miles wide, which has kept piracy in business there for centuries.
+
+  - id: a2-geo-035
+    difficulty: 4
+    prompt: Which is the northernmost capital city in the world?
+    answer: Reykjavik
+    distractors: [Helsinki, Oslo, Nuuk]
+    fact: It sits just under the Arctic Circle and is heated almost entirely by geothermal water piped from the ground, which is why the city has no smoke.

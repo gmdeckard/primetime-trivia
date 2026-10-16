@@ -233,7 +233,7 @@ questions:
     prompt: In which country did a 1986 superpower summit come close to scrapping all nuclear weapons?
     answer: Iceland
     distractors: [Finland, Austria, Switzerland]
-    fact: Two days of talks in a Reykjavik house ended in failure over missile defense research, but the proposals made at it shaped the treaty signed the following year.
+    fact: Two days of talks in a house in the capital ended in failure over missile defense research, but the proposals made at it shaped the treaty signed the following year.
 
   - id: a2-wor-034
     difficulty: 4

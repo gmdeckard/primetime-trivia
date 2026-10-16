@@ -111,7 +111,7 @@ questions:
     prompt: What was the Terra Nova?
     answer: Scott's ship on his last Antarctic expedition
     distractors: [Shackleton's ship, Amundsen's ship, Cook's ship]
-    fact: She was a whaler, built for ice, and twenty years old when she sailed south. She sank off Greenland in 1943.
+    fact: She was a whaler, built for ice, and twenty years old when she sailed south. She sank in the North Atlantic in 1943.
 
   - id: a2-exp-016
     difficulty: 3
