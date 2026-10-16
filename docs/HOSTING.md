@@ -178,12 +178,15 @@ they have, including you. With **Breaks end themselves** on, the next round
 starts at zero; with it off, the clock still runs and the game waits for your
 button. The big button always skips the rest of it.
 
-The one beat that never runs on a clock is **the final wager**. A team that
-has not bet loses its whole stake, so you decide when betting closes.
+**The final wager runs on a clock too.** The room gets 40 seconds to bet,
+counted down on every screen, and then the final question appears. A table
+that has not bet when it closes has bet nothing, so they win nothing and lose
+nothing — which is the fair outcome for not deciding. Set **Betting window**
+to 0 in Timing if you would rather close it yourself.
 
 If you would rather drive every step yourself, turn off **Run the round
-automatically** and **Breaks end themselves**, and the game waits for you at
-every stage.
+automatically** and **Breaks end themselves** and set the betting window to 0,
+and the game waits for you at every stage.
 
 One large button sits at the bottom of your phone and always does the right
 next thing. The label tells you what it will do and the line underneath gives

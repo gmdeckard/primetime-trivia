@@ -132,6 +132,21 @@ function StandingsRail({ state }: { state: HostState }) {
   );
 }
 
+/** The betting clock, at the size the back of the hall can read. */
+function WagerCountdown({ at, held }: { at: number; held?: boolean }) {
+  const now = useNow(!held);
+  if (held) return <div class="center"><span class="pill">Betting paused</span></div>;
+  const seconds = Math.max(0, Math.ceil((at - now) / 1000));
+  return (
+    <div class="center stack" style={{ gap: '4px' }}>
+      <div class="clock clock-big">{seconds}</div>
+      <p class="muted" style={{ fontSize: '1.4rem', margin: 0 }}>
+        {seconds > 0 ? 'seconds left to bet' : 'betting closed'}
+      </p>
+    </div>
+  );
+}
+
 function Podium({ state, title, children }: { state: HostState; title: string; children?: ComponentChildren }) {
   const rows = state.scoreboard;
   const winner = rows[0];
@@ -509,16 +524,24 @@ function App() {
 
       {state.phase === 'wager_bet' && (
         <div class="host-body center stack">
-          <div class="eyebrow">Final question of the block</div>
+          <div class="eyebrow">Final question of the game</div>
           <h1 class="host-display">Place your wagers</h1>
           <p class="muted" style={{ fontSize: '1.5rem' }}>
             Bet any part of your score. Right answer wins it, wrong answer loses it.
           </p>
+          {/* The clock that closes the betting. The room is looking at this
+              screen while it decides, so this is where the number belongs. */}
+          {state.wagerEndsAt && <WagerCountdown at={state.wagerEndsAt} held={state.held} />}
           <div class="teamgrid" style={{ maxWidth: '1000px', margin: '0 auto' }}>
             {state.scoreboard.map((row) => (
-              <div key={row.teamId} class="teamchip">
+              <div
+                key={row.teamId}
+                class={`teamchip${state.answeredTeamIds.includes(row.teamId) ? ' is-in' : ''}`}
+              >
                 <strong>{row.name}</strong>
-                <span class="faint">{row.score} on the board</span>
+                <span class="faint">
+                  {state.answeredTeamIds.includes(row.teamId) ? 'bet placed' : `${row.score} on the board`}
+                </span>
               </div>
             ))}
           </div>

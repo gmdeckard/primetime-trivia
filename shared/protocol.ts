@@ -136,6 +136,16 @@ export interface GameConfig {
   autoStartAfterBreak: boolean;
   /** Seconds a game or round intro card holds before the first question. */
   introSeconds: number;
+  /**
+   * Seconds the room gets to place a final wager.
+   *
+   * Zero means the betting window waits for the MC, which is what it always
+   * did. Any other number puts a clock on it and closes the betting itself,
+   * so a night set to run on its own does not stop dead at the one phase
+   * that used to need a thumb. A team that has not bet when it closes has
+   * bet nothing, and nothing is exactly what they win or lose.
+   */
+  wagerSeconds: number;
   /** Jeopardy-style wager to close each game. */
   finalWager: boolean;
   /** Host screen reads the question aloud via the browser's speech engine. */
@@ -157,7 +167,7 @@ export interface GameConfig {
   /**
    * Run the question -> lock -> reveal -> next cycle on a clock instead of
    * three taps. The MC still owns every boundary that matters: starting a
-   * block, moving between rounds, the wager. Only the inside of a round runs
+   * game, moving between rounds, the wager. Only the inside of a round runs
    * itself, because that is the part where tapping competes with hosting.
    */
   autoAdvance: boolean;
@@ -247,6 +257,10 @@ export const DEFAULT_CONFIG: GameConfig = {
   autoStartAfterBreak: true,
   // Long enough to say "round three, here we go" over it.
   introSeconds: 8,
+  // Long enough to decide and tap, short enough that the room does not cool
+  // off. The sum is small: most tables know whether they are going all in
+  // before the screen finishes asking.
+  wagerSeconds: 40,
   finalWager: true,
   readAloud: false,
   // Medium-hard by design: a warm-up, a climb, and three that should make the
@@ -400,6 +414,8 @@ export interface BaseState {
    * that question does not depend on who presses the button at zero.
    */
   breakEndsAt?: number;
+  /** Epoch ms the betting window closes, when one is running. */
+  wagerEndsAt?: number;
   /** True when the MC has paused auto-advance to talk. */
   held: boolean;
   /** Entry ids that have locked an answer. Host and MC only — see `teams`. */

@@ -267,12 +267,16 @@ questions:
     distractors: [Merlot, Chardonnay, Airen]
     fact: It is a natural cross of Cabernet Franc and Sauvignon Blanc, discovered by DNA testing only in 1996.
 
+  # Replaces a second bourbon question that asked the same thing as fnd-014 in
+  # different words — "at least 51 percent corn" against "51 per cent". The
+  # duplicate checker compares answers, and those two are not the same string,
+  # so a night could have asked both.
   - id: fnd-039
     difficulty: 4
-    prompt: What distinguishes bourbon from other whiskeys?
-    answer: A mash of at least 51 percent corn
-    distractors: [Ageing for at least twelve years, Distillation in Kentucky only, A mash of at least 51 percent rye]
-    fact: It must also go into new charred oak barrels, which is why so many used ones end up in Scotland.
+    prompt: Which process grinds chocolate fine enough that the tongue cannot feel the particles?
+    answer: Conching
+    distractors: [Tempering, Winnowing, Roasting]
+    fact: Rodolphe Lindt built the first conche in 1879. Tempering is the separate step that sets the cocoa butter crystals and gives chocolate its snap.
 
   - id: fnd-040
     difficulty: 4

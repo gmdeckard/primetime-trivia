@@ -242,6 +242,10 @@ function Wager({ state, send }: { state: PlayerState; send: ReturnType<typeof us
   const [value, setValue] = useState('');
   const max = state.me.maxWager;
   const placed = state.me.wager;
+  // The betting window closes on a clock now, so a table deciding whether to
+  // go all in needs to know how long it has to decide. Without it the screen
+  // simply changes underneath them.
+  const closing = state.wagerEndsAt;
 
   if (placed !== undefined) {
     return (
@@ -249,6 +253,7 @@ function Wager({ state, send }: { state: PlayerState; send: ReturnType<typeof us
         <div class="eyebrow">Wager placed</div>
         <div style={{ fontFamily: 'var(--serif)', fontSize: '3.4rem', lineHeight: 1 }}>{placed}</div>
         <p class="muted">Get it right and you gain {placed}. Get it wrong and you lose {placed}.</p>
+        {closing && <WagerClock at={closing} held={state.held} placed />}
         <button class="btn btn-ghost" onClick={() => { setValue(''); send({ t: 'set_wager', amount: -1 }); }}>
           Change it
         </button>
@@ -260,6 +265,7 @@ function Wager({ state, send }: { state: PlayerState; send: ReturnType<typeof us
     <div class="card stack">
       <div class="eyebrow">Final question</div>
       <h1>Place your wager</h1>
+      {closing && <WagerClock at={closing} held={state.held} />}
       <p class="muted">Up to {max} points. Right answer wins it, wrong answer loses it.</p>
       <div class="grid3">
         {[0.25, 0.5, 1].map((frac) => (
@@ -275,6 +281,30 @@ function Wager({ state, send }: { state: PlayerState; send: ReturnType<typeof us
         submitLabel="Wager"
         onSubmit={() => send({ t: 'set_wager', amount: Number(value) })}
       />
+    </div>
+  );
+}
+
+/**
+ * How long is left to bet.
+ *
+ * Deliberately blunt about the consequence of running out, because it is the
+ * one place in the game where doing nothing is a decision: no bet means no
+ * points won and none lost, and a table that did not realise the clock was
+ * running would rightly be annoyed.
+ */
+function WagerClock({ at, held, placed }: { at: number; held?: boolean; placed?: boolean }) {
+  const now = useNow(!held);
+  if (held) return <p class="center muted">The MC paused the betting.</p>;
+  const seconds = Math.max(0, Math.ceil((at - now) / 1000));
+  return (
+    <div class="center stack" style={{ gap: '2px' }}>
+      <div class="clock" style={{ fontSize: '2.6rem' }}>{seconds}</div>
+      <p class="faint" style={{ margin: 0 }}>
+        {placed
+          ? seconds > 0 ? 'seconds left to change it' : 'betting closed'
+          : seconds > 0 ? 'seconds left — no bet means no points won or lost' : 'betting closed'}
+      </p>
     </div>
   );
 }

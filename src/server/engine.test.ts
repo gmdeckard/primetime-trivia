@@ -1308,3 +1308,186 @@ test('the folder a question file sits in names its age group', () => {
     'no geography question should be untagged now that the folders carry the group',
   );
 });
+
+// ------------------------------------------------------ the betting window
+
+/** Play to the point where betting opens. */
+function toWagerBet(engine: Engine) {
+  const teams = seatTeams(engine, 3);
+  engine.startGame();
+  engine.advance(); // game_intro -> round_intro
+  let guard = 0;
+  while (engine.snapshot().phase !== 'wager_bet' && guard++ < 200) {
+    if (engine.snapshot().phase === 'question') engine.lockNow('host');
+    else engine.advance();
+  }
+  assert.equal(engine.snapshot().phase, 'wager_bet', 'never reached the betting window');
+  return teams;
+}
+
+test('the betting window runs on a clock and closes itself', async () => {
+  const engine = freshEngine({
+    roundsPerGame: 1,
+    questionsPerRound: 1,
+    finalWager: true,
+    wagerSeconds: 1,
+    introSeconds: 0,
+  });
+  toWagerBet(engine);
+
+  const s = engine.snapshot();
+  assert.ok(s.wagerEndsAt, 'betting should have an end time');
+  assert.ok(s.autoAdvanceAt, 'and should be armed to close itself');
+  const seconds = (s.wagerEndsAt! - Date.now()) / 1000;
+  assert.ok(seconds > 0 && seconds <= 1, `expected about a second, got ${seconds.toFixed(2)}`);
+
+  await wait(1400);
+  assert.equal(
+    engine.snapshot().phase,
+    'wager_question',
+    'the night used to stop dead here until the MC noticed',
+  );
+  assert.equal(engine.snapshot().wagerEndsAt, undefined, 'the clock is spent once betting closes');
+});
+
+test('a betting window of zero waits for the MC, as it always did', () => {
+  const engine = freshEngine({ roundsPerGame: 1, questionsPerRound: 1, finalWager: true, wagerSeconds: 0 });
+  toWagerBet(engine);
+  const s = engine.snapshot();
+  assert.equal(s.wagerEndsAt, undefined, 'no clock');
+  assert.equal(s.autoAdvanceAt, undefined, 'and nothing armed to press the button');
+});
+
+test('a team that never bets neither wins nor loses', async () => {
+  const engine = freshEngine({
+    roundsPerGame: 1,
+    questionsPerRound: 1,
+    finalWager: true,
+    wagerSeconds: 1,
+    introSeconds: 0,
+  });
+  const teams = toWagerBet(engine);
+  const before = teams.map((t) => engine.snapshot().teams[t.teamId]!.score);
+
+  // One team bets, one bets nothing explicitly, one never touches it.
+  engine.setWager(teams[0]!.players[0]!, 100);
+  engine.setWager(teams[1]!.players[0]!, 0);
+
+  await wait(1400);
+  assert.equal(engine.snapshot().phase, 'wager_question');
+
+  // Nobody answers. The clock closes the question.
+  engine.lockNow('host');
+  const after = teams.map((t) => engine.snapshot().teams[t.teamId]!.score);
+
+  assert.equal(after[0], before[0]! - 100, 'a team that bet and did not answer loses the bet');
+  assert.equal(after[1], before[1], 'a team that bet nothing loses nothing');
+  assert.equal(after[2], before[2], 'a team that never bet at all loses nothing');
+});
+
+test('pausing the betting gives the time back', async () => {
+  const engine = freshEngine({
+    roundsPerGame: 1,
+    questionsPerRound: 1,
+    finalWager: true,
+    wagerSeconds: 30,
+    introSeconds: 0,
+  });
+  toWagerBet(engine);
+  const closesAt = engine.snapshot().wagerEndsAt!;
+
+  engine.setHeld(true);
+  assert.equal(engine.snapshot().autoAdvanceAt, undefined, 'a paused window is not counting');
+  await wait(600);
+  engine.setHeld(false);
+
+  const owed = engine.snapshot().wagerEndsAt! - closesAt;
+  assert.ok(owed >= 500, `the pause should be handed back, got ${owed}ms`);
+  assert.ok(engine.snapshot().autoAdvanceAt, 'and the clock picks back up');
+  assert.equal(engine.snapshot().phase, 'wager_bet');
+});
+
+test('betting is refused once the window has closed', async () => {
+  const engine = freshEngine({
+    roundsPerGame: 1,
+    questionsPerRound: 1,
+    finalWager: true,
+    wagerSeconds: 1,
+    introSeconds: 0,
+  });
+  const teams = toWagerBet(engine);
+  await wait(1400);
+  assert.equal(engine.snapshot().phase, 'wager_question');
+
+  engine.setWager(teams[0]!.players[0]!, 500);
+  assert.equal(
+    engine.snapshot().wagerBets?.[teams[0]!.teamId],
+    undefined,
+    'a bet placed after the window shut must not count',
+  );
+});
+
+test('the MC and the big screen can see who has bet', () => {
+  const engine = freshEngine({ roundsPerGame: 1, questionsPerRound: 1, finalWager: true, wagerSeconds: 30 });
+  const teams = toWagerBet(engine);
+  assert.equal(controlState(engine).answeredCount, 0, 'nobody has bet yet');
+
+  engine.setWager(teams[0]!.players[0]!, 250);
+  const view = controlState(engine);
+  assert.equal(view.answeredCount, 1);
+  assert.deepEqual(view.answeredTeamIds, [teams[0]!.teamId], 'the bet should show as being in');
+});
+
+test('a restart while paused does not hand back the time it was down', async () => {
+  const engine = freshEngine({
+    roundsPerGame: 1,
+    questionsPerRound: 1,
+    finalWager: true,
+    wagerSeconds: 30,
+    introSeconds: 0,
+  });
+  toWagerBet(engine);
+  engine.setHeld(true);
+  const parked = JSON.parse(JSON.stringify(engine.snapshot()));
+  assert.ok(parked.heldAt, 'the pause mark is written to disk with everything else');
+
+  // The box goes down while paused and comes back some time later.
+  await wait(300);
+  const resumed = freshEngine(undefined, parked);
+  assert.equal(resumed.snapshot().heldAt, undefined, 'the stale pause mark is cleared on resume');
+  const closesAt = resumed.snapshot().wagerEndsAt!;
+
+  // The next pause and release should hand back only that pause.
+  resumed.setHeld(true);
+  await wait(200);
+  resumed.setHeld(false);
+  const owed = resumed.snapshot().wagerEndsAt! - closesAt;
+  assert.ok(owed < 2000, `only the real pause should be refunded, got ${owed}ms`);
+});
+
+test('the final answer moves on by itself', async () => {
+  // The last beat in the game that queued nothing. Betting closes itself and
+  // the final question runs on its own clock, and then the night used to sit
+  // on the final answer until the MC noticed — which, at the moment the game
+  // is decided, is the worst place in the night to stop.
+  const engine = freshEngine({
+    roundsPerGame: 1,
+    questionsPerRound: 1,
+    finalWager: true,
+    wagerSeconds: 1,
+    secondsPerQuestion: 1,
+    nextQuestionDelaySeconds: 1,
+    introSeconds: 0,
+  });
+  toWagerBet(engine);
+  await wait(1400);
+  assert.equal(engine.snapshot().phase, 'wager_question', 'betting closed itself');
+
+  // The question's own clock locks it, which lands on the reveal.
+  await wait(2000);
+  assert.equal(engine.snapshot().phase, 'wager_reveal', 'the final question locked itself');
+  assert.ok(engine.snapshot().autoAdvanceAt, 'and the reveal queued its own next step');
+
+  await wait(1400);
+  assert.equal(engine.snapshot().phase, 'game_results', 'the game closed without a thumb');
+});

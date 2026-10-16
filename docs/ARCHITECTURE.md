@@ -111,11 +111,22 @@ hint shown on that button.
 
 Every one of those arrows can also be taken by a clock rather than a thumb.
 Inside a round that is `autoAdvance`; at the intros it is `introSeconds`; at
-the two breaks it is `autoStartAfterBreak`. The break clock is set whether or
-not it ends the break itself, because the room's question is how long they
-have, and that does not depend on who presses the button at zero. The one beat
-that never runs on a clock is `wager_bet`: a team that has not bet loses its
-whole stake, so the MC decides when betting closes.
+the two breaks it is `autoStartAfterBreak`; at the betting window it is
+`wagerSeconds`. The break clock is set whether or not it ends the break
+itself, because the room's question is how long they have, and that does not
+depend on who presses the button at zero.
+
+`wager_bet` was the last beat that waited for a thumb, on the grounds that a
+team caught mid-decision loses its whole stake. That reasoning was wrong about
+the stake — a team that has not bet has bet nothing, and wins and loses
+nothing — and it stopped a night set to run itself at the most visible moment
+of every game, where somebody had to notice. It now closes on `wagerSeconds`
+(default 40, 0 to wait for the MC).
+
+Two clocks are shifted rather than restarted when the MC pauses: the question
+window moves both of its ends, and the break and betting windows move their
+single end by what the pause took. A pause that ate the betting window would
+be the MC taking the room's decision away from them.
 
 ## Picking questions
 

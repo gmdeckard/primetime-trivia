@@ -53,7 +53,13 @@ if (!up) { server.kill('SIGKILL'); throw new Error(`server never came up on ${PO
 process.on('exit', () => { try { server.kill('SIGKILL'); } catch {} });
 
 /** Every phase a complete night must pass through, in order. */
-const REQUIRED = ['Game intro', 'Round intro', 'Live', 'Locked', 'Answer up', 'Round over', 'Game over', 'Night over'];
+const REQUIRED = [
+  'Game intro', 'Round intro', 'Live', 'Locked', 'Answer up', 'Round over',
+  // The wager, unattended: the betting window has to open, close itself, and
+  // hand on to the final question without the MC.
+  'Wagers', 'Final', 'Final answer',
+  'Game over', 'Night over',
+];
 
 let browser;
 let failure;
@@ -90,8 +96,10 @@ try {
 
   // A night small enough to play out in a couple of minutes, with every beat
   // still a real beat: two games, two rounds each, breaks short enough to
-  // watch expire. The wager is off because betting is the one phase that is
-  // meant to wait for the MC, and this script is testing what does not.
+  // watch expire, and the final wager ON with a short betting window. The
+  // wager used to be excluded here because it was the one phase that waited
+  // for a thumb; it is now the phase most worth covering, because a night
+  // that runs itself has to get through it unattended.
   await mc.evaluate(() => {
     const ws = new WebSocket(location.origin.replace('http', 'ws') + '/ws');
     ws.onopen = () => {
@@ -100,17 +108,23 @@ try {
         gamesPerNight: 2, roundsPerGame: 2, questionsPerRound: 2,
         roundBreakMinutes: 0.15, gameBreakMinutes: 0.25, introSeconds: 2,
         secondsPerQuestion: 4, revealDelaySeconds: 1, nextQuestionDelaySeconds: 2,
-        finalWager: false, autoStartAfterBreak: true,
+        finalWager: true, wagerSeconds: 6, autoStartAfterBreak: true,
       } })), 150);
     };
   });
   await mc.waitForTimeout(700);
 
   const seen = new Set();
+  const wording = [];
   // The one and only tap.
   await mc.locator('.control-primary').click();
 
-  for (let i = 0; i < 400; i++) {
+  // A wall-clock deadline, not an iteration count. Each new phase costs two
+  // screenshots and two page reads, so "400 polls" was a budget that shrank
+  // every time the night gained a beat — and when the final wager went in,
+  // a run quietly ran out of polls before the end and reported it as a stall.
+  const deadline = Date.now() + 8 * 60_000;
+  while (Date.now() < deadline) {
     const phase = await mc.evaluate(() => document.querySelector('.pill-brass')?.textContent ?? '');
     if (phase && !seen.has(phase)) {
       seen.add(phase);
@@ -118,14 +132,40 @@ try {
       const slug = phase.toLowerCase().replace(/[^a-z0-9]+/g, '-');
       await host.screenshot({ path: `${out}/${slug}-host.png`, animations: 'disabled' });
       await players[0].screenshot({ path: `${out}/${slug}-player.png`, animations: 'disabled' });
+
+      // The hierarchy is Night > Game > Round > Question, and "block" is what
+      // the middle layer used to be called. A bulk rename caught every
+      // identifier and missed a line of prose on the wager screen, which then
+      // sat on the big screen saying FINAL QUESTION OF THE BLOCK until a
+      // screenshot was looked at. Since this script already visits every
+      // phase on both screens, it may as well read them.
+      for (const [who, page] of [['big screen', host], ['handset', players[0]]]) {
+        const text = await page.evaluate(() => document.body.innerText);
+        const stale = text.match(/\bblocks?\b/i);
+        if (stale) wording.push(`${phase} / ${who}: "${stale[0]}"`);
+      }
       console.log(`  ${phase}`);
     }
-    if (phase === 'Live') {
+    if (phase === 'Live' || phase === 'Final') {
       for (const [n, p] of players.entries()) await p.locator('.answer').nth(n % 4).click().catch(() => {});
+    }
+    // One table bets, the others deliberately do not — a night has to survive
+    // a table that simply never taps.
+    if (phase === 'Wagers') {
+      await players[0].getByRole('button', { name: 'All in' }).click().catch(() => {});
     }
     if (phase === 'Night over') break;
     await mc.waitForTimeout(400);
   }
+
+  if (wording.length) {
+    failure = `screens still say "block", which is not a word this game uses: ${wording.join(' · ')}`;
+  }
+  // Errors are reported whatever else went wrong. They used to be an `else`
+  // branch after the missing-phases check, which is backwards: a page that
+  // throws stops updating, so the sampling stalls and the run reports missing
+  // phases — hiding the exception that actually caused it.
+  if (errors.length) console.log(`\n  page errors:\n    ${errors.join('\n    ')}`);
 
   const missed = REQUIRED.filter((p) => !seen.has(p));
   if (missed.length) {

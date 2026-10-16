@@ -141,7 +141,21 @@ function baseState(engine: Engine, role: 'host' | 'control' | 'player', teamId?:
   const s = engine.snapshot();
   const current = s.current;
   const everyone = engine.scoreRows();
-  const answered = current ? Object.keys(current.answers) : [];
+  /**
+   * Who is "in" on this beat.
+   *
+   * Normally that means who has locked an answer. While the betting window is
+   * open there is no question to answer, and the thing the MC and the big
+   * screen want to show is who has bet — so the same field carries the bets.
+   * One concept, one field: the "12 of 20 in" line and the filled dots on the
+   * big screen then work during betting without knowing anything new.
+   */
+  const answered =
+    s.phase === 'wager_bet'
+      ? Object.keys(s.wagerBets ?? {})
+      : current
+        ? Object.keys(current.answers)
+        : [];
 
   let board = everyone;
   if (role === 'player') {
@@ -172,6 +186,7 @@ function baseState(engine: Engine, role: 'host' | 'control' | 'player', teamId?:
     autoAdvanceAt: s.autoAdvanceAt,
     moreInRound: engine.moreQuestionsInRound(),
     breakEndsAt: s.breakEndsAt,
+    wagerEndsAt: s.wagerEndsAt,
     held: !!s.held,
     answeredTeamIds: role === 'player' ? [] : answered,
     // Withheld from players on purpose. "80 of 100 have answered" is pressure

@@ -151,7 +151,13 @@ function primaryAction(state: ControlState): { label: string; hint: string } {
         hint: `Round ${round?.index} of ${round?.ofTotal} ended · ${state.config.roundBreakMinutes} min break`,
       };
     }
-    case 'wager_bet': return { label: 'Show the final question', hint: 'Once every team has bet' };
+    case 'wager_bet':
+      return {
+        label: 'Show the final question',
+        hint: state.wagerEndsAt
+          ? `Betting closes by itself · ${state.answeredCount} of ${state.entryCount} in`
+          : 'Once every team has bet',
+      };
     case 'wager_question': return { label: 'Answers in', hint: 'Lock the final question' };
     case 'wager_reveal': return { label: `Game ${state.game.index} standings`, hint: '' };
     case 'tiebreak': return { label: 'Answers in', hint: 'Closest wins' };
@@ -301,7 +307,13 @@ function Setup({ state, send }: { state: ControlState; send: ReturnType<typeof u
         />
         <Toggle
           label="Final wager"
-          hint="a Jeopardy-style bet closes each game"
+          hint={
+            c.finalWager
+              ? c.wagerSeconds
+                ? `a Jeopardy-style bet closes each game · ${c.wagerSeconds}s to bet`
+                : 'a Jeopardy-style bet closes each game · you close the betting'
+              : 'no bet; the last round ends the game'
+          }
           on={c.finalWager}
           onChange={(finalWager) => set({ finalWager })}
         />
@@ -309,7 +321,9 @@ function Setup({ state, send }: { state: ControlState; send: ReturnType<typeof u
 
       <Section
         title="Timing"
-        summary={`${c.secondsPerQuestion}s a question · ${c.roundBreakMinutes}/${c.gameBreakMinutes} min breaks · ${c.autoStartAfterBreak ? 'runs itself' : 'MC starts each round'}`}
+        summary={`${c.secondsPerQuestion}s a question · ${c.roundBreakMinutes}/${c.gameBreakMinutes} min breaks · ${
+          c.autoStartAfterBreak && (!c.finalWager || c.wagerSeconds) ? 'runs itself' : 'waits for you'
+        }`}
         open={open === 'timing'}
         onToggle={() => only('timing')}
       >
@@ -347,6 +361,17 @@ function Setup({ state, send }: { state: ControlState; send: ReturnType<typeof u
             min={0}
             max={60}
             onChange={(introSeconds) => set({ introSeconds })}
+          />
+          <NumberField
+            label="Betting window"
+            hint={c.wagerSeconds ? 'closes by itself' : '0 means you close it'}
+            unit="s"
+            value={c.wagerSeconds}
+            min={0}
+            max={300}
+            step={5}
+            disabled={!c.finalWager}
+            onChange={(wagerSeconds) => set({ wagerSeconds })}
           />
           <NumberField
             label="Break between rounds"
@@ -926,7 +951,7 @@ function App() {
         )}
         {/* Pause sits beside the big button rather than above it: both have to
             be under a thumb, and a row of its own was 48px of a 667px phone.
-            Reachable at any point in a block, not only in the gap between
+            Reachable at any point in a game, not only in the gap between
             questions — the whole reason to want it is something interrupting a
             live question, which is exactly when it used to be missing. */}
         <div class={pausable ? 'control-actions' : ''}>

@@ -988,3 +988,10 @@ textarea:focus { border-color: var(--brass); outline: none; }
   white-space: nowrap;
   min-width: 0;
 }
+
+/* A team that has placed its wager. The same signal as the filled dot during
+   a question: the MC can see who is still deciding without asking. */
+.teamchip.is-in {
+  border-color: var(--correct);
+  background: color-mix(in srgb, var(--correct) 14%, var(--surface));
+}

@@ -105,6 +105,14 @@ export interface NightState {
   autoAdvanceAt?: number;
   /** Epoch ms the break currently on screen runs out. */
   breakEndsAt?: number;
+  /** Epoch ms the betting window closes, when one is running. */
+  wagerEndsAt?: number;
+  /**
+   * When the MC paused something that is not a question — a break or the
+   * betting window. The question clock keeps its own `heldAt` because it has
+   * two ends to shift; these have one.
+   */
+  heldAt?: number;
   /** MC pressed Hold — auto-advance stays parked until they release it. */
   held?: boolean;
   message?: string;
@@ -200,6 +208,11 @@ export class Engine {
       // clock that reads nothing.
       this.state.held = false;
       if (this.state.current) this.state.current.heldAt = undefined;
+      // Both pause marks go with it. A box that went down while paused would
+      // otherwise keep the moment it was paused at, and the next release —
+      // possibly a day later — would hand the break or the betting window
+      // back every second since.
+      this.state.heldAt = undefined;
       for (const p of Object.values(this.state.players)) p.connected = false;
       // Settings added since this night started would otherwise be missing
       // outright. Existing values are left alone: changing the shape of a
@@ -555,6 +568,24 @@ export class Engine {
     if (this.state.config.autoStartAfterBreak && !this.state.held) this.scheduleAuto(ms / 1000);
   }
 
+  /**
+   * Put the betting window on a clock.
+   *
+   * Zero seconds means the MC closes it by hand, which is what this phase
+   * always did. The clock is shown either way, because "how long have I got
+   * to decide" is the question a table is actually asking.
+   */
+  private openWagerWindow() {
+    this.clearAutoTimer();
+    const seconds = Math.max(0, this.state.config.wagerSeconds);
+    if (!seconds) {
+      this.state.wagerEndsAt = undefined;
+      return;
+    }
+    this.state.wagerEndsAt = Date.now() + seconds * 1000;
+    if (!this.state.held) this.scheduleAuto(seconds);
+  }
+
   /** Minutes due at the break the night is currently sitting on. */
   breakMinutes(): number {
     return this.state.phase === 'game_results'
@@ -604,9 +635,16 @@ export class Engine {
   private resumeAutoAdvance() {
     const s = this.state;
     if (s.phase === 'locked') this.scheduleAuto(s.config.revealDelaySeconds);
-    else if (s.phase === 'reveal') this.scheduleAuto(s.config.nextQuestionDelaySeconds);
+    else if (s.phase === 'reveal' || s.phase === 'wager_reveal') {
+      this.scheduleAuto(s.config.nextQuestionDelaySeconds);
+    }
     else if (s.phase === 'game_intro' || s.phase === 'round_intro') {
       this.scheduleAuto(s.config.introSeconds);
+    } else if (s.phase === 'wager_bet' && s.wagerEndsAt) {
+      // Whatever is left of the betting window, floored at a beat so a window
+      // that expired while the box was down does not close in the same tick
+      // as the reconnect, with a table halfway through deciding.
+      this.scheduleAuto(Math.max(2000, s.wagerEndsAt - Date.now()) / 1000);
     } else if (BREAK_PHASES.includes(s.phase) && s.config.autoStartAfterBreak) {
       // Whatever is left of the break, floored at a beat so a break that
       // expired while the box was down does not fire inside the same tick as
@@ -636,6 +674,11 @@ export class Engine {
         current.heldAt = Date.now();
         this.clearTimer();
       }
+      // The break and the betting window have one end to shift rather than
+      // two, so they share a single mark. Without it a pause during betting
+      // would eat the window: the deadline is absolute and would go on
+      // passing while the room waited for the MC to finish talking.
+      if (this.state.breakEndsAt || this.state.wagerEndsAt) this.state.heldAt = Date.now();
       this.commit({ kind: 'held' });
       return;
     }
@@ -645,6 +688,12 @@ export class Engine {
       current.deadline += owed;
       current.heldAt = undefined;
       this.armTimer();
+    }
+    if (this.state.heldAt) {
+      const owed = Date.now() - this.state.heldAt;
+      if (this.state.breakEndsAt) this.state.breakEndsAt += owed;
+      if (this.state.wagerEndsAt) this.state.wagerEndsAt += owed;
+      this.state.heldAt = undefined;
     }
     this.resumeAutoAdvance();
     this.commit({ kind: 'released' });
@@ -805,6 +854,13 @@ export class Engine {
         if (team) team.score += award.total;
       }
       this.state.phase = 'wager_reveal';
+      // Queue the step out of it. This was the last beat in the game that
+      // queued nothing: betting now closes itself and the final question runs
+      // on its own clock, and then the night sat on the final answer forever
+      // because nothing had been scheduled to leave it. Exactly the same
+      // shape as the last reveal of a round, found the same way — by playing
+      // a whole night with nobody touching it.
+      this.scheduleAuto(this.state.config.nextQuestionDelaySeconds);
     } else if (this.state.phase === 'tiebreak' && q) {
       const order = rankNumeric(answers, q.answerNumber ?? 0);
       const winner = order[0];
@@ -822,6 +878,12 @@ export class Engine {
         if (team) team.score += award.total;
       }
       this.state.phase = 'tiebreak_reveal';
+      // Deliberately queues nothing, and this is the one place that is right.
+      // A tiebreak only exists because the MC started one, so the MC is
+      // standing there; the moment two tables find out which of them won the
+      // night is theirs to narrate, not a clock's. Every other reveal in the
+      // game now moves on by itself.
+      this.clearAutoTimer();
     }
 
     this.commit({ kind: 'locked', reason, questionId: current.questionId });
@@ -871,6 +933,7 @@ export class Engine {
     this.state.current = undefined;
     this.state.tiebreakTeamIds = undefined;
     this.state.breakEndsAt = undefined;
+    this.state.wagerEndsAt = undefined;
     this.state.phase = 'game_intro';
     // The intro card is a beat, not a stop. It holds long enough for the MC to
     // say "game two, here we go" and then moves, which is what makes the rest
@@ -952,9 +1015,14 @@ export class Engine {
         if (s.config.finalWager) {
           s.wagerBets = {};
           s.phase = 'wager_bet';
-          // Betting is the one beat that genuinely waits for the room: a team
-          // that has not bet yet loses its whole stake, so nothing here runs
-          // on a clock the MC did not choose to start.
+          // Betting used to be the one beat that waited for a thumb, on the
+          // grounds that a team caught mid-decision loses its whole stake.
+          // In practice that stopped a night set to run itself at the most
+          // visible moment of every game, and the MC had to notice. It gets a
+          // clock like everything else now; a team that has not bet when it
+          // closes has bet nothing, and wins and loses nothing. Set
+          // wagerSeconds to 0 to go back to waiting.
+          this.openWagerWindow();
           this.commit({ kind: 'wager_betting' });
           return;
         }
@@ -965,6 +1033,7 @@ export class Engine {
       }
 
       case 'wager_bet': {
+        s.wagerEndsAt = undefined;
         const ctx = this.selectionContext();
         const allowed = s.config.categories.length ? s.config.categories : this.bank.categories.map((c) => c.id);
         // The closing question should be a genuinely hard one from anywhere in
