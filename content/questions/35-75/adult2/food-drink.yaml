@@ -1,0 +1,250 @@
+category: food-drink
+pack:
+  id: adult2
+  name: Adult set 2
+
+questions:
+  - id: a2-fnd-001
+    difficulty: 2
+    prompt: Which vegetable is the base of a classic French onion soup besides onions?
+    answer: Nothing but stock, bread and cheese
+    distractors: [Celery, Leek, Carrot]
+    fact: The onions are cooked down for the better part of an hour until the sugars brown. Rushing that step is the only way to get the dish wrong.
+
+  - id: a2-fnd-002
+    difficulty: 2
+    prompt: Which cheese goes on a traditional Greek salad?
+    answer: Feta
+    distractors: [Halloumi, Ricotta, Queso fresco]
+    fact: It is made from sheep's milk, or sheep with a little goat, and kept in brine. The name is protected in Europe, so anything made elsewhere has to be called something else.
+
+  - id: a2-fnd-003
+    difficulty: 2
+    prompt: Which fruit is used to make traditional cider?
+    answer: Apples
+    distractors: [Pears, Grapes, Plums]
+    fact: 'Cider apples are too bitter to eat, which is the point: the tannin gives the drink structure. Pears make perry instead.'
+
+  - id: a2-fnd-004
+    difficulty: 2
+    prompt: What are the two main ingredients of a classic vinaigrette?
+    answer: Oil and vinegar
+    distractors: [Cream and lemon, Butter and wine, Egg yolk and oil]
+    fact: The usual ratio is three to one. Mustard is not there for flavor so much as to hold the two together, which is what an emulsifier does.
+
+  - id: a2-fnd-005
+    difficulty: 2
+    prompt: Which country is the home of the dish moussaka?
+    answer: Greece
+    distractors: [Turkey, Lebanon, Egypt]
+    fact: The version with a béchamel top was created in the 1920s by a French-trained Greek chef. Older versions across the region have no white sauce at all.
+
+  - id: a2-fnd-006
+    difficulty: 2
+    prompt: What is tofu made from?
+    answer: Soybeans
+    distractors: [Rice, Wheat gluten, Chickpeas]
+    fact: Soy milk is curdled and pressed, much as cheese is made. The firmness depends entirely on how much water is pressed out.
+
+  - id: a2-fnd-007
+    difficulty: 2
+    prompt: Which drink is made by steeping leaves of the camellia sinensis plant?
+    answer: Tea
+    distractors: [Coffee, Cocoa, Mate]
+    fact: Black, green, white and oolong all come from that one plant. The difference is how far the leaves are allowed to oxidize before heating stops it.
+
+  - id: a2-fnd-008
+    difficulty: 3
+    prompt: Which French mother sauce is made from milk thickened with a white roux?
+    answer: Bechamel
+    distractors: [Veloute, Espagnole, Hollandaise]
+    fact: It is named for a seventeenth-century court official who probably had nothing to do with it. Add cheese and it becomes the sauce for macaroni.
+
+  - id: a2-fnd-009
+    difficulty: 3
+    prompt: Which fortified wine comes from the town of Jerez?
+    answer: Sherry
+    distractors: [Madeira, Marsala, Vermouth]
+    fact: It is aged in a stack of barrels where a little is drawn from the oldest and replaced from the next, so every bottle holds a trace of every year.
+
+  - id: a2-fnd-010
+    difficulty: 3
+    prompt: What is the Maillard reaction responsible for?
+    answer: The browning and flavor of seared and baked food
+    distractors: [The souring of milk, The setting of egg whites, The rising of dough]
+    fact: Sugars and amino acids react above about 285 degrees. It is not caramelization, which is sugar alone, and both are often happening in the same pan.
+
+  - id: a2-fnd-011
+    difficulty: 3
+    prompt: Which country does the cheese Manchego come from?
+    answer: Spain
+    distractors: [Portugal, Mexico, Italy]
+    fact: It is made from the milk of one breed of sheep on the plain south of Madrid, and the zigzag pattern on the rind comes from the grass molds once used to press it.
+
+  - id: a2-fnd-012
+    difficulty: 3
+    prompt: What gives a dish labeled au gratin its name?
+    answer: A browned crust on top
+    distractors: [Cream in the sauce, Potatoes as the base, Cooking in a shallow dish]
+    fact: The word comes from the scrapings left in the pan. Cheese is usual but breadcrumbs under the broiler qualify just as well.
+
+  - id: a2-fnd-013
+    difficulty: 3
+    prompt: Which spirit is distilled from the blue agave plant?
+    answer: Tequila
+    distractors: [Mezcal from any agave, Pisco, Cachaca]
+    fact: It must come from one region of Mexico and one variety of agave, which takes six to eight years to mature before it is cut.
+
+  - id: a2-fnd-014
+    difficulty: 3
+    prompt: What is the difference between stock and broth as a cook uses the words?
+    answer: Stock is made from bones, broth from meat
+    distractors: [Stock is salted and broth is not, Stock is strained and broth is not, Stock is made with wine]
+    fact: Bones give collagen, which turns to gelatin and makes the liquid thicken when it cools. That wobble in the fridge is the test of a good one.
+
+  - id: a2-fnd-015
+    difficulty: 3
+    prompt: Which country is the origin of the dish pho?
+    answer: Vietnam
+    distractors: [Thailand, Cambodia, Laos]
+    fact: It appeared in the north around 1900 and spread south after the country was divided in 1954. The broth is simmered with charred onion and ginger for hours.
+
+  - id: a2-fnd-016
+    difficulty: 3
+    prompt: Which pepper measurement scale was devised in 1912?
+    answer: The Scoville scale
+    distractors: [The Richter heat index, The Capsaicin index, The Tabasco scale]
+    fact: The original test was a panel of tasters diluting an extract in sugar water until nobody could feel the burn. Machines now measure the compound directly.
+
+  - id: a2-fnd-017
+    difficulty: 3
+    prompt: Which part of the pig is a ham cut from?
+    answer: The hind leg
+    distractors: [The shoulder, The belly, The loin]
+    fact: The shoulder cut is sold as picnic ham in America, which is not ham at all by the older definition. Bacon comes from the belly or the back.
+
+  - id: a2-fnd-018
+    difficulty: 3
+    prompt: What does it mean to deglaze a pan?
+    answer: To loosen the browned bits with liquid
+    distractors: [To wipe out burnt fat before the next batch, To coat the pan in oil before heating, To cool it quickly with water]
+    fact: Wine, stock or even water will do it. Those stuck brown bits are where most of the flavor of a sauce comes from.
+
+  - id: a2-fnd-019
+    difficulty: 3
+    prompt: Which country drinks the most tea per person?
+    answer: Turkey
+    distractors: [Britain, Ireland, China]
+    fact: Around seven pounds of leaf a head each year, brewed strong in a stacked double pot and served in tulip glasses without milk.
+
+  - id: a2-fnd-020
+    difficulty: 3
+    prompt: Which Italian dish's name means little worms?
+    answer: Vermicelli
+    distractors: [Linguine, Orzo, Farfalle]
+    fact: 'Pasta shapes are named with a cheerful literalism: little tongues, barley, butterflies, little ears, and in one case priest stranglers.'
+
+  - id: a2-fnd-021
+    difficulty: 3
+    prompt: Which two ingredients make a classic hollandaise?
+    answer: Egg yolk and butter
+    distractors: [Cream and lemon, Flour and butter, Egg white and oil]
+    fact: Acid and heat control decide whether it holds. Too hot and the yolk scrambles, too cool and the butter refuses to go in.
+
+  - id: a2-fnd-022
+    difficulty: 3
+    prompt: Which country produces port wine?
+    answer: Portugal
+    distractors: [Spain, Italy, France]
+    fact: The grapes come from terraces on the Douro and the fermentation is stopped with brandy, which is why it stays sweet and runs strong.
+
+  - id: a2-fnd-023
+    difficulty: 3
+    prompt: What makes a cut of beef prime rather than choice in American grading?
+    answer: More marbling of fat through the muscle
+    distractors: [A younger animal, A longer hanging time, A grass-fed diet]
+    fact: Only a few percent of carcasses grade prime and most of that goes to restaurants. The grade says nothing about how the animal was raised.
+
+  - id: a2-fnd-024
+    difficulty: 3
+    prompt: Which vegetable family do broccoli, cabbage and kale all belong to?
+    answer: The brassicas
+    distractors: [The nightshades, The alliums, The legumes]
+    fact: Broccoli, cabbage, kale, cauliflower, kohlrabi and brussels sprouts are all the same species, bred for different parts of the plant.
+
+  - id: a2-fnd-025
+    difficulty: 3
+    prompt: Which alcohol is the base of a negroni along with vermouth and Campari?
+    answer: Gin
+    distractors: [Vodka, Bourbon, Brandy]
+    fact: Equal parts of all three, stirred, with an orange peel. The story is that a count in Florence asked for his americano to be made stronger.
+
+  - id: a2-fnd-026
+    difficulty: 4
+    prompt: What does the term terroir mean in winemaking?
+    answer: The whole effect of soil, slope and climate on a wine
+    distractors: [The age of the vines, The yeast native to a cellar, The house style of a producer]
+    fact: French appellation law is built on the idea and American labeling mostly is not, which is why one system names places and the other names grapes.
+
+  - id: a2-fnd-027
+    difficulty: 4
+    prompt: Which Japanese seasoning is made by fermenting beans with a mold called koji?
+    answer: Miso
+    distractors: [Mirin, Dashi, Ponzu]
+    fact: The same mold is used for soy sauce and sake. Fermentation runs from a few weeks to three years, and the color darkens the whole time.
+
+  - id: a2-fnd-028
+    difficulty: 4
+    prompt: What is the difference between a sweet potato and a yam?
+    answer: They are unrelated plants from different continents
+    distractors: [One is a root and the other a tuber, One is simply a sweeter variety, The yam is picked younger]
+    fact: True yams are African and Asian, starchy and barked. Almost everything labeled yam in an American supermarket is a sweet potato.
+
+  - id: a2-fnd-029
+    difficulty: 4
+    prompt: Which wine region makes Barolo?
+    answer: Piedmont
+    distractors: [Tuscany, Veneto, Umbria]
+    fact: The grape is nebbiolo, named for the fog that sits in those hills at harvest. The wine was sweet until a French-trained winemaker dried it out in the 1840s.
+
+  - id: a2-fnd-030
+    difficulty: 4
+    prompt: What does a sommelier actually do?
+    answer: Manages a restaurant's wine list and service
+    distractors: [Grades wine for an appellation board, Blends wine for a producer, Teaches tasting at a wine school]
+    fact: The word originally meant the servant in charge of the pack animals, and then of the household's provisions, before it narrowed to the cellar.
+
+  - id: a2-fnd-031
+    difficulty: 4
+    prompt: Which cooking technique seals food in a bag and holds it in warm water for hours?
+    answer: Sous vide
+    distractors: [Braising, Poaching, Confit]
+    fact: The whole piece reaches one temperature and cannot go past it, so a steak is the same color edge to edge. It began as a way to stop foie gras losing fat.
+
+  - id: a2-fnd-032
+    difficulty: 4
+    prompt: Which flavor was identified as a fifth basic taste in 1908?
+    answer: Umami
+    distractors: [Astringency, Pungency, Fattiness]
+    fact: A Tokyo chemist traced it to glutamate in seaweed broth and patented a way to make the seasoning. Western science accepted it as a basic taste only in the 1980s.
+
+  - id: a2-fnd-033
+    difficulty: 4
+    prompt: Which French dish is a slow-cooked stew of white beans with preserved meats?
+    answer: Cassoulet
+    distractors: [Coq au vin, Pot-au-feu, Blanquette de veau]
+    fact: Three towns in the southwest each claim the original and argue about whether it takes mutton, partridge or neither. Everyone agrees on the duck and the crust.
+
+  - id: a2-fnd-034
+    difficulty: 4
+    prompt: What does tempering chocolate achieve?
+    answer: It sets the cocoa butter into one stable crystal form
+    distractors: [It removes the last of the water, It softens the sugar grains, It darkens the color evenly]
+    fact: Done right it snaps and shines. Done wrong the fat separates out over a few days and leaves the dull grey bloom on an old chocolate bar.
+
+  - id: a2-fnd-035
+    difficulty: 4
+    prompt: Why does cutting an onion make eyes water?
+    answer: A sulfur compound released by the cut forms acid on contact with tears
+    distractors: [Pollen is released from the core, The juice is mildly alkaline, Fine fibers irritate the eye directly]
+    fact: The reaction needs an enzyme that works slowly when cold, which is why a chilled onion is kinder. A sharp knife helps by crushing fewer cells.
