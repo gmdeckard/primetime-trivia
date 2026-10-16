@@ -100,7 +100,7 @@ questions:
     prompt: Which 1944 conference set up the postwar system of fixed exchange rates?
     answer: Bretton Woods
     distractors: [Dumbarton Oaks, Lake Success, Geneva]
-    fact: Forty-four countries met at a New Hampshire hotel. The dollar was pegged to gold and everything else to the dollar, and the arrangement held until 1971.
+    fact: Forty-four countries met at a hotel in the White Mountains. The dollar was pegged to gold and everything else to the dollar, and the arrangement held until 1971.
 
   - id: a2-h20-015
     difficulty: 3

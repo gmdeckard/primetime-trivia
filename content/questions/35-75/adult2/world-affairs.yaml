@@ -9,7 +9,7 @@ questions:
     prompt: In which city is the United Nations headquarters?
     answer: New York
     distractors: [Geneva, Brussels, Vienna]
-    fact: The site is international territory with its own post office and stamps. The land was bought with a gift from John D. Rockefeller Jr. after a plan to build in Philadelphia fell through.
+    fact: The site is international territory with its own post office and stamps. The land was bought with a gift from John D. Rockefeller Jr. after an earlier plan to build in Pennsylvania fell through.
 
   - id: a2-wor-002
     difficulty: 2

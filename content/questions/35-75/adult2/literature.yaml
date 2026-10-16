@@ -170,7 +170,7 @@ questions:
     prompt: Who wrote The Catcher in the Rye?
     answer: J.D. Salinger
     distractors: [John Updike, John Cheever, Philip Roth]
-    fact: He published nothing after 1965 and lived another forty-five years in New Hampshire, writing every day by his neighbors' account.
+    fact: He published nothing after 1965 and lived another forty-five years in rural New England, writing every day by his neighbors' account.
 
   - id: a2-lit-025
     difficulty: 3

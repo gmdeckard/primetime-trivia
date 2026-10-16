@@ -137,7 +137,7 @@ questions:
 
   - id: a2-amh-019
     difficulty: 3
-    prompt: Which 1890 killing in South Dakota is usually taken as the end of the Indian Wars?
+    prompt: Which 1890 killing on a Lakota reservation is usually taken as the end of the Indian Wars?
     answer: Wounded Knee
     distractors: [Sand Creek, Washita, Bear River]
     fact: It followed an attempt to disarm a band who had been performing the Ghost Dance, a movement the agents on the ground had badly misread.

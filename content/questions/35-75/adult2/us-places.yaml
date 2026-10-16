@@ -1,0 +1,250 @@
+category: us-places
+pack:
+  id: adult2
+  name: Adult set 2
+
+questions:
+  - id: a2-usp-001
+    difficulty: 2
+    prompt: What is the capital of California?
+    answer: Sacramento
+    distractors: [Los Angeles, San Diego, Fresno]
+    fact: It grew out of a fort and a gold rush supply town, and became the capital in 1854 after the legislature had already tried four other cities.
+
+  - id: a2-usp-002
+    difficulty: 2
+    prompt: Which river flows past Memphis, Vicksburg and Baton Rouge?
+    answer: The Mississippi
+    distractors: [The Ohio, The Tennessee, The Arkansas]
+    fact: It drains thirty-one states and two Canadian provinces. The Army Corps of Engineers has spent a century keeping it from switching to a shorter route to the Gulf.
+
+  - id: a2-usp-003
+    difficulty: 2
+    prompt: What is the capital of New York State?
+    answer: Albany
+    distractors: [New York City, Buffalo, Syracuse]
+    fact: It is one of the oldest continuously chartered cities in the country, Dutch in origin, and was chosen as capital in 1797 partly for being up the river and out of reach.
+
+  - id: a2-usp-004
+    difficulty: 2
+    prompt: Which city hosts the Kentucky Derby?
+    answer: Louisville
+    distractors: [Lexington, Frankfort, Bowling Green]
+    fact: The race is a mile and a quarter and takes about two minutes. The track's twin spires have stood since 1895.
+
+  - id: a2-usp-005
+    difficulty: 2
+    prompt: Which state is Graceland in?
+    answer: Tennessee
+    distractors: [Mississippi, Alabama, Arkansas]
+    fact: It is the second most visited house in America after the White House. The owner bought it at twenty-two for about a hundred thousand dollars.
+
+  - id: a2-usp-006
+    difficulty: 2
+    prompt: Which mountain range runs from Georgia up to Maine?
+    answer: The Appalachians
+    distractors: [The Rockies, The Cascades, The Alleghenies alone]
+    fact: They are older than the Atlantic Ocean and were once as high as the Alps. The same range continues in Scotland and Norway, which were attached when it formed.
+
+  - id: a2-usp-007
+    difficulty: 2
+    prompt: What is the capital of Illinois?
+    answer: Springfield
+    distractors: [Chicago, Peoria, Rockford]
+    fact: A group of legislators including a young Abraham Lincoln pushed the capital there from Vandalia in 1837. He is buried in the city.
+
+  - id: a2-usp-008
+    difficulty: 3
+    prompt: Which state has the most shoreline on the Great Lakes?
+    answer: Michigan
+    distractors: [Wisconsin, Ohio, Minnesota]
+    fact: It touches four of the five and has more freshwater coast than any other state. Nowhere in it is more than about eighty-five miles from a Great Lake.
+
+  - id: a2-usp-009
+    difficulty: 3
+    prompt: In which state is Mount Rushmore?
+    answer: South Dakota
+    distractors: [Wyoming, Montana, Nebraska]
+    fact: The carving took fourteen years and most of the rock was removed with dynamite. It was promoted as a tourist attraction to bring visitors to the state, and it worked.
+
+  - id: a2-usp-010
+    difficulty: 3
+    prompt: Which state contains Crater Lake National Park?
+    answer: Oregon
+    distractors: [Washington, Idaho, Nevada]
+    fact: The lake sits in a collapsed volcano, is nearly two thousand feet deep, and has no rivers in or out. The water is snowmelt and about as clear as fresh water gets.
+
+  - id: a2-usp-011
+    difficulty: 3
+    prompt: Which state grows the most potatoes?
+    answer: Idaho
+    distractors: [Maine, Wisconsin, North Dakota]
+    fact: Volcanic soil, cool nights and irrigation from the Snake River. A third of the national crop comes from one state's southern plain.
+
+  - id: a2-usp-012
+    difficulty: 3
+    prompt: Which state's panhandle is a strip about one hundred and sixty miles long and thirty-four miles wide?
+    answer: Oklahoma
+    distractors: [Nebraska, Arkansas, Missouri]
+    fact: It was left unassigned for decades as No Man's Land, outside any state or territory, and settlers there wrote their own law until 1890.
+
+  - id: a2-usp-013
+    difficulty: 3
+    prompt: Which is the largest estuary in the United States?
+    answer: Chesapeake Bay
+    distractors: [San Francisco Bay, Puget Sound, Mobile Bay]
+    fact: It is a drowned river valley, two hundred miles long and mostly under thirty feet deep. Its oyster harvest is a small fraction of what it was in 1880.
+
+  - id: a2-usp-014
+    difficulty: 3
+    prompt: Which is the only state bordering both the Gulf of Mexico and the Atlantic?
+    answer: Florida
+    distractors: [Alabama, Georgia, Louisiana]
+    fact: It has over eight thousand miles of tidal shoreline and its highest point is about three hundred and forty feet, the lowest high point of any state.
+
+  - id: a2-usp-015
+    difficulty: 3
+    prompt: Which is the smallest state capital by population?
+    answer: Montpelier, Vermont
+    distractors: ["Pierre, South Dakota", "Augusta, Maine", "Juneau, Alaska"]
+    fact: Under eight thousand people. It is also the only state capital with no national fast food franchise within city limits.
+
+  - id: a2-usp-016
+    difficulty: 3
+    prompt: Which American territory lies furthest west, across the international date line?
+    answer: Guam
+    distractors: [American Samoa, Puerto Rico, The US Virgin Islands]
+    fact: Its slogan is that America's day begins there. It was Spanish for three centuries, then taken in 1898, and held by Japan for two and a half years.
+
+  - id: a2-usp-017
+    difficulty: 3
+    prompt: Which fault runs about eight hundred miles through California?
+    answer: The San Andreas
+    distractors: [The Hayward Fault, The Wasatch Fault, The New Madrid Fault]
+    fact: The two sides slide past each other rather than one going under the other, which is why the quakes are shallow and the damage is severe.
+
+  - id: a2-usp-018
+    difficulty: 3
+    prompt: Which state's capital is Carson City?
+    answer: Nevada
+    distractors: [Utah, Idaho, Montana]
+    fact: It was named for a scout and grew on the back of the silver strike over the hill. The federal government owns about eighty percent of the state.
+
+  - id: a2-usp-019
+    difficulty: 3
+    prompt: Which is the most visited national park in the United States?
+    answer: Great Smoky Mountains
+    distractors: [Grand Canyon, Yosemite, Zion]
+    fact: Over twelve million visitors a year, roughly twice the next park, helped by having no entrance fee and a highway running through the middle of it.
+
+  - id: a2-usp-020
+    difficulty: 3
+    prompt: Which city's Fremont Street was its original casino row, before the Strip?
+    answer: Las Vegas
+    distractors: [Reno, Atlantic City, Laughlin]
+    fact: Gambling was legalized in 1931 to bring in money during the Depression, and the dam being built nearby supplied both the workers and the power.
+
+  - id: a2-usp-021
+    difficulty: 3
+    prompt: Which river forms the entire northern border of Kentucky?
+    answer: The Ohio
+    distractors: [The Tennessee, The Cumberland, The Wabash]
+    fact: The border runs at the river's low-water mark as it stood in 1792, so some land now on the Ohio side is legally Kentucky.
+
+  - id: a2-usp-022
+    difficulty: 3
+    prompt: Which city is known as the Motor City?
+    answer: Detroit
+    distractors: [Cleveland, Flint, Toledo]
+    fact: It had the fourth largest population in the country in 1950 and about a third of that now. Cheap land, river shipping and a carriage industry put the car business there.
+
+  - id: a2-usp-023
+    difficulty: 3
+    prompt: Which state has the highest mountain east of the Mississippi?
+    answer: North Carolina
+    distractors: [Tennessee, West Virginia, New Hampshire]
+    fact: Mount Mitchell, about sixty-six hundred feet, named for a professor who died surveying it. The spruce and fir at the top belong to a Canadian forest left behind by the ice.
+
+  - id: a2-usp-024
+    difficulty: 3
+    prompt: Which state holds the geographic center of the contiguous United States?
+    answer: Kansas
+    distractors: [Nebraska, Missouri, Iowa]
+    fact: A marker near Lebanon, Kansas, claims it, worked out in 1918 by balancing a cardboard cutout of the country on a pin.
+
+  - id: a2-usp-025
+    difficulty: 3
+    prompt: Which city sits where the Allegheny and Monongahela rivers join?
+    answer: Pittsburgh
+    distractors: [Cincinnati, Wheeling, Louisville]
+    fact: The junction makes the Ohio. The city has more bridges than any other in the world, something like four hundred and forty of them.
+
+  - id: a2-usp-026
+    difficulty: 4
+    prompt: Which four states are officially commonwealths rather than states?
+    answer: Virginia, Kentucky, Pennsylvania and Massachusetts
+    distractors: ["Virginia, Maryland, Delaware and Maine", "Kentucky, Tennessee, Georgia and Alabama", "Pennsylvania, New Jersey, New York and Connecticut"]
+    fact: The word carries no legal difference at all. It was an eighteenth-century way of saying a state governed for the common good rather than by a crown.
+
+  - id: a2-usp-027
+    difficulty: 4
+    prompt: Which is the lowest point in North America?
+    answer: Death Valley
+    distractors: [The Salton Sink, The Imperial Valley, Great Salt Lake Desert]
+    fact: Two hundred and eighty-two feet below sea level, and about eighty-five miles from the highest point in the lower forty-eight.
+
+  - id: a2-usp-028
+    difficulty: 4
+    prompt: Which is the deepest river gorge in the United States?
+    answer: Hells Canyon
+    distractors: [The Grand Canyon, The Royal Gorge, Kings Canyon]
+    fact: Nearly eight thousand feet from rim to river on the Snake, between Idaho and Oregon, and deeper than the better-known canyon to the south.
+
+  - id: a2-usp-029
+    difficulty: 4
+    prompt: Which island held a federal penitentiary from 1934 to 1963?
+    answer: Alcatraz
+    distractors: [Ellis Island, Governors Island, Terminal Island]
+    fact: Running water had to be shipped in, which is what finally closed it. Thirty-six men tried to escape and five are still unaccounted for.
+
+  - id: a2-usp-030
+    difficulty: 4
+    prompt: Where does the Appalachian Trail begin at its southern end?
+    answer: Springer Mountain, Georgia
+    distractors: ["Clingmans Dome, Tennessee", "Mount Oglethorpe, Alabama", "Roan Mountain, North Carolina"]
+    fact: It runs about twenty-two hundred miles to Maine. Most through-hikers start in spring and walk north to stay ahead of the weather at both ends.
+
+  - id: a2-usp-031
+    difficulty: 4
+    prompt: Which state has the largest share of its land owned by the federal government?
+    answer: Utah
+    distractors: [Idaho, Oregon, New Mexico]
+    fact: Around two thirds of it, mostly desert and canyon country held by the Bureau of Land Management, which is the running argument of state politics there.
+
+  - id: a2-usp-032
+    difficulty: 4
+    prompt: Which city burned over three square miles in an October 1871 fire?
+    answer: Chicago
+    distractors: [Baltimore, San Francisco, Boston]
+    fact: Three hundred died and a third of the city was homeless. The cow blamed for it was exonerated by the reporter who admitted making the story up.
+
+  - id: a2-usp-033
+    difficulty: 4
+    prompt: Which is the only state with a single-chamber legislature?
+    answer: Nebraska
+    distractors: [Vermont, Alaska, Delaware]
+    fact: It merged its two houses in 1937 to save money, and the members are elected without party labels on the ballot.
+
+  - id: a2-usp-034
+    difficulty: 4
+    prompt: Which city has the largest natural harbor on the American Pacific coast?
+    answer: San Diego
+    distractors: [Long Beach, Portland, Tacoma]
+    fact: It was found by a Spanish expedition in 1542 and then more or less ignored for two centuries. The Navy's Pacific presence is built around it.
+
+  - id: a2-usp-035
+    difficulty: 4
+    prompt: Which is the largest national park in the United States?
+    answer: Wrangell-St. Elias
+    distractors: [Denali, Yellowstone, Everglades]
+    fact: Over thirteen million acres in Alaska, larger than Switzerland, with two roads into it and no services on either.

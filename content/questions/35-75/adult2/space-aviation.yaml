@@ -83,7 +83,7 @@ questions:
 
   - id: a2-spa-012
     difficulty: 3
-    prompt: From which Florida site did the Apollo launches lift off?
+    prompt: From which coastal site did the Apollo launches lift off?
     answer: Cape Canaveral
     distractors: [Cape Hatteras, Vandenberg, Wallops Island]
     fact: It was picked because rockets could fail over open water and because launching eastward near the equator borrows a few hundred miles an hour from the earth's spin.
