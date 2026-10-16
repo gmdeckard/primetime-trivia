@@ -1,0 +1,254 @@
+category: world-history
+pack:
+  id: adult2
+  name: Adult set 2
+
+# Everything outside America, up to about 1900, which is where The Twentieth
+# Century takes over. Adult set 1 has the headline events; this fills in
+# around them and reaches further outside Europe.
+
+questions:
+  - id: a2-wld-001
+    difficulty: 2
+    prompt: Which Roman general was assassinated on the Ides of March in 44 BC?
+    answer: Julius Caesar
+    distractors: [Pompey, Mark Antony, Crassus]
+    fact: The warning about the Ides is Shakespeare's. What the sources record is that he was handed a written note on the way in and did not read it.
+
+  - id: a2-wld-002
+    difficulty: 2
+    prompt: Which city was buried by the eruption of Vesuvius in AD 79?
+    answer: Pompeii
+    distractors: [Ostia, Ravenna, Syracuse]
+    fact: The bodies are plaster casts. Excavators found voids where the ash had set around a body that then decayed, and poured plaster in.
+
+  - id: a2-wld-003
+    difficulty: 2
+    prompt: Which Mongol leader united the tribes and began the conquests in 1206?
+    answer: Genghis Khan
+    distractors: [Kublai Khan, Tamerlane, Batu Khan]
+    fact: Nobody knows where he is buried. The funeral party is said to have killed everyone it met on the way and then been killed in turn.
+
+  - id: a2-wld-004
+    difficulty: 2
+    prompt: Which Greek city-state raised its boys from the age of seven in military barracks?
+    answer: Sparta
+    distractors: [Athens, Corinth, Thebes]
+    fact: Its citizen population shrank steadily for two centuries because land and status could only be inherited, and a Spartan who could not pay his mess dues lost both.
+
+  - id: a2-wld-005
+    difficulty: 2
+    prompt: Which Egyptian ruler was the last pharaoh of an independent Egypt?
+    answer: Cleopatra
+    distractors: [Nefertiti, Hatshepsut, Berenice]
+    fact: Her family was Macedonian Greek and had ruled Egypt for nearly three hundred years. She is said to be the first of them who bothered to learn Egyptian.
+
+  - id: a2-wld-006
+    difficulty: 2
+    prompt: Which French peasant girl led an army at Orléans and was burned in 1431?
+    answer: Joan of Arc
+    distractors: [Eleanor of Aquitaine, Isabella of France, Blanche of Castile]
+    fact: The trial record survives in full. Twenty-five years later the verdict was overturned by a second inquiry, which did her no good at all.
+
+  - id: a2-wld-007
+    difficulty: 2
+    prompt: Which Carthaginian general crossed the Alps with elephants to invade Italy?
+    answer: Hannibal
+    distractors: [Hasdrubal, Scipio, Hamilcar]
+    fact: He won every major battle in Italy for fifteen years and never took Rome, because he had no siege train and Rome would not negotiate.
+
+  - id: a2-wld-008
+    difficulty: 3
+    prompt: Which 1494 treaty divided the newly found world between Spain and Portugal?
+    answer: The Treaty of Tordesillas
+    distractors: [The Treaty of Zaragoza, The Treaty of Alcáçovas, The Treaty of Madrid]
+    fact: The line was drawn before anyone knew what was on either side of it, which is how Portugal ended up with Brazil and Spain with everything west of it.
+
+  - id: a2-wld-009
+    difficulty: 3
+    prompt: Which 1534 act made the English monarch supreme head of the church?
+    answer: The Act of Supremacy
+    distractors: [The Act of Union, The Act of Settlement, The Statute of Praemunire]
+    fact: The argument began over an annulment and ended with the crown taking the monasteries, which held about a sixth of the land in England.
+
+  - id: a2-wld-010
+    difficulty: 3
+    prompt: Which German monk published ninety-five objections to the sale of indulgences in 1517?
+    answer: Martin Luther
+    distractors: [Jan Hus, Huldrych Zwingli, Philipp Melanchthon]
+    fact: Whether he nailed them to the church door is uncertain and was first mentioned after his death. What is certain is that he posted them to his archbishop.
+
+  - id: a2-wld-011
+    difficulty: 3
+    prompt: Which Italian city did the Medici family dominate?
+    answer: Florence
+    distractors: [Milan, Venice, Genoa]
+    fact: They were bankers first. Four of them became pope, and two became queens of France.
+
+  - id: a2-wld-012
+    difficulty: 3
+    prompt: Which Russian city did Napoleon occupy in 1812 and find burning around him?
+    answer: Moscow
+    distractors: [St Petersburg, Smolensk, Kiev]
+    fact: Whether the Russians set the fires or the looting soldiers did is still argued. He waited five weeks for a surrender that never came and then started back too late.
+
+  - id: a2-wld-013
+    difficulty: 3
+    prompt: Which queen was on the English throne when the Spanish Armada was scattered in 1588?
+    answer: Elizabeth I
+    distractors: [Mary I, Anne, Victoria]
+    fact: The storms did more damage than the fighting. Her sailors went unpaid afterward and many died of disease in the ports they returned to.
+
+  - id: a2-wld-014
+    difficulty: 3
+    prompt: Which 1857 uprising nearly ended the East India Company's rule?
+    answer: The Indian Rebellion
+    distractors: [The Boxer Rebellion, The Taiping Rebellion, The Tay Son Rebellion]
+    fact: The company was abolished the following year and the crown took over directly, which is the point at which India became a possession of a government rather than a firm.
+
+  - id: a2-wld-015
+    difficulty: 3
+    prompt: Which Roman emperor made Christianity legal across the empire?
+    answer: Constantine
+    distractors: [Diocletian, Theodosius, Julian]
+    fact: Legal is not the same as official; that came decades later under a successor. He was baptized on his deathbed, which was a common enough choice at the time.
+
+  - id: a2-wld-016
+    difficulty: 3
+    prompt: Which congress redrew the map of Europe after Napoleon's defeat?
+    answer: The Congress of Vienna
+    distractors: [The Congress of Berlin, The Congress of Verona, The Diet of Worms]
+    fact: It was interrupted when Napoleon escaped from Elba and the delegates carried on negotiating while the armies marched.
+
+  - id: a2-wld-017
+    difficulty: 3
+    prompt: Which 1840s catastrophe cut Ireland's population by about a quarter through death and emigration?
+    answer: The Great Famine
+    distractors: [The Highland Clearances, The Swing Riots, The Land War]
+    fact: The potato blight hit the whole of Europe. The deaths were concentrated in Ireland because so many held plots too small to grow anything else, and food went on being exported throughout.
+
+  - id: a2-wld-018
+    difficulty: 3
+    prompt: Which Scottish queen was executed on her cousin's order in 1587?
+    answer: Mary, Queen of Scots
+    distractors: [Margaret Tudor, Anne of Denmark, Madeleine of Valois]
+    fact: Her son inherited the English throne anyway, sixteen years later, uniting the two crowns in the person of the man whose mother had been beheaded for threatening them.
+
+  - id: a2-wld-019
+    difficulty: 3
+    prompt: Which French king was known as the Sun King and reigned for seventy-two years?
+    answer: Louis XIV
+    distractors: [Louis XIII, Louis XV, Francis I]
+    fact: He took the throne at four. Moving the court to Versailles kept the nobility where he could see them and ruinously occupied with who handed him his shirt.
+
+  - id: a2-wld-020
+    difficulty: 3
+    prompt: Which trade route carried goods between China and the Mediterranean for centuries?
+    answer: The Silk Road
+    distractors: [The Amber Road, The Incense Route, The Royal Road]
+    fact: The name was coined by a German geographer in 1877, long after the route mattered. Almost nobody travelled the whole length of it; goods changed hands many times.
+
+  - id: a2-wld-021
+    difficulty: 3
+    prompt: Which Japanese title meant, literally, barbarian-subduing great general?
+    answer: Shogun
+    distractors: [Daimyo, Samurai, Mikado]
+    fact: The emperor remained the formal sovereign throughout and the shogun did the governing, an arrangement that lasted nearly seven hundred years.
+
+  - id: a2-wld-022
+    difficulty: 3
+    prompt: On which island did Napoleon die in 1821?
+    answer: Saint Helena
+    distractors: [Elba, Corsica, Malta]
+    fact: It is about twelve hundred miles from the nearest mainland, which was the point. He had already escaped from the first island they sent him to.
+
+  - id: a2-wld-023
+    difficulty: 3
+    prompt: Which 1572 massacre of French Protestants began in Paris and spread to the provinces?
+    answer: The St Bartholomew's Day Massacre
+    distractors: [The Sicilian Vespers, The Harrying of the North, The Peterloo Massacre]
+    fact: It followed a royal wedding meant to reconcile the two sides. Estimates of the dead across France run from five thousand to thirty thousand.
+
+  - id: a2-wld-024
+    difficulty: 3
+    prompt: Which pope called for the First Crusade in 1095?
+    answer: Urban II
+    distractors: [Gregory VII, Innocent III, Leo IX]
+    fact: He was answering a request from the eastern emperor for mercenaries, and what went east instead was an armed migration he could not control.
+
+  - id: a2-wld-025
+    difficulty: 4
+    prompt: Which Indian emperor renounced war after the conquest of Kalinga and spread Buddhism?
+    answer: Ashoka
+    distractors: [Chandragupta, Harsha, Kanishka]
+    fact: He had his edicts carved on pillars and rock faces across the subcontinent. They were unreadable for centuries until the script was deciphered in the 1830s.
+
+  - id: a2-wld-026
+    difficulty: 4
+    prompt: Which Byzantine weapon could not be put out with water?
+    answer: Greek fire
+    distractors: [Naphtha pitch, Quicklime shot, The fire lance]
+    fact: The recipe was a state secret kept so well that it was lost entirely, and nobody has reconstructed it with confidence since.
+
+  - id: a2-wld-027
+    difficulty: 4
+    prompt: Which 1688 change of monarch is called the Glorious Revolution?
+    answer: James II replaced by William and Mary
+    distractors: [Charles II restored after Cromwell, Anne succeeding William, George I succeeding Anne]
+    fact: Glorious mostly means bloodless in England. It was neither in Ireland or Scotland, where the fighting ran for years.
+
+  - id: a2-wld-028
+    difficulty: 4
+    prompt: Which Persian king's invasion was defeated at Marathon in 490 BC?
+    answer: Darius I
+    distractors: [Xerxes I, Cyrus the Great, Artaxerxes I]
+    fact: His son came back ten years later with a far larger force. The story of the runner carrying the news to Athens appears only centuries afterward.
+
+  - id: a2-wld-029
+    difficulty: 4
+    prompt: Which 1543 book argued that the earth moves around the sun?
+    answer: Copernicus's De revolutionibus
+    distractors: [Ptolemy's Almagest, Galileo's Dialogue, Kepler's Astronomia nova]
+    fact: He delayed publishing for decades and is said to have been handed the first copy on the day he died. An unauthorized preface described it as merely a calculating device.
+
+  - id: a2-wld-030
+    difficulty: 4
+    prompt: Which African kingdom's bronze plaques were taken by a British expedition in 1897?
+    answer: Benin
+    distractors: [Ashanti, Dahomey, Kongo]
+    fact: They are brass rather than bronze and were cast from the fifteenth century onward. Their quality upended European assumptions about West African art, which is partly why they were so widely sold.
+
+  - id: a2-wld-031
+    difficulty: 4
+    prompt: Which system selected Chinese officials by written examination for over a thousand years?
+    answer: The imperial examinations
+    distractors: [The mandarin levy, The eight banners, The censorate]
+    fact: Candidates were sealed into individual cells for days. The syllabus was the classics, on the argument that a man who had mastered them could be trusted with anything.
+
+  - id: a2-wld-032
+    difficulty: 4
+    prompt: Which 1883 eruption was heard thousands of miles away and cooled the whole planet?
+    answer: Krakatoa
+    distractors: [Tambora, Mount Pelée, Laki]
+    fact: The sound was reported nearly three thousand miles off, which is the loudest noise in the modern record. Sunsets were discolored worldwide for years afterward.
+
+  - id: a2-wld-033
+    difficulty: 4
+    prompt: Which 1713 treaty ended the War of the Spanish Succession?
+    answer: The Treaty of Utrecht
+    distractors: [The Treaty of Ryswick, The Treaty of Aix-la-Chapelle, The Treaty of Nystad]
+    fact: It handed Britain Gibraltar and the contract to supply slaves to Spanish America, and both turned out to matter for a very long time.
+
+  - id: a2-wld-034
+    difficulty: 4
+    prompt: Which dynasty did the Mongols establish to rule China from 1271?
+    answer: The Yuan
+    distractors: [The Qing, The Song, The Tang]
+    fact: Kublai took a Chinese dynastic name and governed as an emperor rather than a khan. It lasted under a century, the shortest of the major dynasties.
+
+  - id: a2-wld-035
+    difficulty: 4
+    prompt: Which 1839 agreement, imposed on China, opened five ports and set a pattern for the century?
+    answer: The Treaty of Nanking
+    distractors: [The Treaty of Kanagawa, The Convention of Peking, The Treaty of Tientsin]
+    fact: It was signed in 1842 after three years of fighting, and the Chinese histories call this and what followed the unequal treaties, which is a fair description of the terms.
