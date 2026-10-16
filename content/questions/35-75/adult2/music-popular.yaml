@@ -1,0 +1,250 @@
+category: music-popular
+pack:
+  id: adult2
+  name: Adult set 2
+
+questions:
+  - id: a2-mus-001
+    difficulty: 2
+    prompt: Which Swedish group recorded Dancing Queen?
+    answer: ABBA
+    distractors: [Roxette, Ace of Base, The Cardigans]
+    fact: The name is the four members' initials. They won a European song contest in 1974 with a song about a Napoleonic defeat.
+
+  - id: a2-mus-002
+    difficulty: 2
+    prompt: Which Jamaican singer carried reggae to a worldwide audience?
+    answer: Bob Marley
+    distractors: [Jimmy Cliff, Peter Tosh, Toots Hibbert]
+    fact: He was shot two days before a 1976 concert and played it anyway. He died of melanoma at thirty-six.
+
+  - id: a2-mus-003
+    difficulty: 2
+    prompt: Which band recorded Stairway to Heaven?
+    answer: Led Zeppelin
+    distractors: [Deep Purple, Black Sabbath, Free]
+    fact: It was never released as a single, which did not stop it becoming the most requested song on American radio for a decade.
+
+  - id: a2-mus-004
+    difficulty: 2
+    prompt: Which band's singer was Freddie Mercury?
+    answer: Queen
+    distractors: [Slade, T. Rex, Mott the Hoople]
+    fact: He was born in Zanzibar and trained as a graphic designer, and drew the band's crest himself using all four members' star signs.
+
+  - id: a2-mus-005
+    difficulty: 2
+    prompt: Which singer was billed as the hardest working man in show business?
+    answer: James Brown
+    distractors: [Otis Redding, Wilson Pickett, Sam Cooke]
+    fact: He fined his own band members for missed notes and played over three hundred shows a year for decades. His catalog is the most sampled in popular music.
+
+  - id: a2-mus-006
+    difficulty: 2
+    prompt: Which dance craze did Chubby Checker set off in 1960?
+    answer: The Twist
+    distractors: [The Mashed Potato, The Jerk, The Watusi]
+    fact: It is the only single to reach number one twice in separate runs. The appeal was that it needed no partner and no steps anyone had to learn.
+
+  - id: a2-mus-007
+    difficulty: 2
+    prompt: Which instrument did Jerry Lee Lewis and Little Richard both attack on stage?
+    answer: The piano
+    distractors: [The organ, The saxophone, The double bass]
+    fact: One played standing up and kicked the stool away, the other played with a heel on the keys. Both came out of church playing before either made a record.
+
+  - id: a2-mus-008
+    difficulty: 3
+    prompt: Which singer, blind from infancy, was signed to a Detroit label at eleven?
+    answer: Stevie Wonder
+    distractors: [Smokey Robinson, Jackie Wilson, Lionel Richie]
+    fact: He renegotiated his contract at twenty-one for complete creative control, which almost nobody had then, and made five albums in six years on the back of it.
+
+  - id: a2-mus-009
+    difficulty: 3
+    prompt: Which 1967 album cover carried a banana for the buyer to peel?
+    answer: The Velvet Underground and Nico
+    distractors: [Freak Out!, Forever Changes, Safe as Milk]
+    fact: It sold almost nothing at the time. The line about it is that everyone who bought a copy went off and started a band.
+
+  - id: a2-mus-010
+    difficulty: 3
+    prompt: Which band did Jim Morrison front?
+    answer: The Doors
+    distractors: [Love, The Byrds, Buffalo Springfield]
+    fact: They had no bass player on stage, the organist covering the part with his left hand. The name came from a line about the doors of perception.
+
+  - id: a2-mus-011
+    difficulty: 3
+    prompt: Who wrote and recorded Johnny B. Goode?
+    answer: Chuck Berry
+    distractors: [Bo Diddley, Fats Domino, Carl Perkins]
+    fact: The song is on the gold record aboard both Voyager probes. He played with pickup bands in every town rather than tour with his own.
+
+  - id: a2-mus-012
+    difficulty: 3
+    prompt: Which Memphis label was the southern rival to Detroit's soul sound?
+    answer: Stax
+    distractors: [Chess, Vee-Jay, King]
+    fact: Its house band was integrated at a time when that was dangerous in Memphis, and it recorded in a converted movie theater with a sloping floor.
+
+  - id: a2-mus-013
+    difficulty: 3
+    prompt: Which genre filled the dance floors and the charts in the late 1970s?
+    answer: Disco
+    distractors: [Funk, New wave, Soft rock]
+    fact: A Chicago baseball promotion in 1979 blew up a crate of records between games and started a riot. Within a year radio had dropped the word entirely.
+
+  - id: a2-mus-014
+    difficulty: 3
+    prompt: Which singer died in a 1959 Iowa plane crash alongside Ritchie Valens?
+    answer: Buddy Holly
+    distractors: [Eddie Cochran, Gene Vincent, Sam Cooke]
+    fact: He was twenty-two and had chartered the plane to avoid a freezing tour bus. His band had just been renamed and the two men who stayed behind kept the name going.
+
+  - id: a2-mus-015
+    difficulty: 3
+    prompt: Which 1972 double album was recorded largely in the basement of a French villa?
+    answer: Exile on Main St.
+    distractors: [Beggars Banquet, Goats Head Soup, Some Girls]
+    fact: The band had left Britain over tax and worked in a humid cellar with a mobile studio parked outside. The reviews were cool and have warmed every decade since.
+
+  - id: a2-mus-016
+    difficulty: 3
+    prompt: Which faster Jamaican style came before rocksteady and reggae?
+    answer: Ska
+    distractors: [Calypso, Mento, Dub]
+    fact: The accent is on the upbeat, which is the opposite of American rhythm and blues. British bands revived it with a black and white checkerboard look in 1979.
+
+  - id: a2-mus-017
+    difficulty: 3
+    prompt: Which 1979 rock double album was staged with an actual wall built across the stage?
+    answer: The Wall
+    distractors: [Tommy, Quadrophenia, 2112]
+    fact: The tour played only four cities because the production could not be moved economically. The band that made it was barely speaking by the end.
+
+  - id: a2-mus-018
+    difficulty: 3
+    prompt: Which company introduced the solid-body Telecaster electric guitar in 1950?
+    answer: Fender
+    distractors: [Gibson, Rickenbacker, Gretsch]
+    fact: Players called it a canoe paddle at first. It was designed to be built from flat pieces on a production line, which is why it is still made the same way.
+
+  - id: a2-mus-019
+    difficulty: 3
+    prompt: Who built the first commercially successful music synthesizer?
+    answer: Robert Moog
+    distractors: [Don Buchla, Dave Smith, Alan Pearlman]
+    fact: He was making theremin kits by mail order before this. A 1968 album of Bach played on his machine sold a million copies and put it in every studio.
+
+  - id: a2-mus-020
+    difficulty: 3
+    prompt: Which group recorded Papa Was a Rollin' Stone and My Girl?
+    answer: The Temptations
+    distractors: [The Four Tops, The Miracles, The Spinners]
+    fact: Five voices with five lead singers, which is why the arrangements pass the melody around. Their choreography was drilled by a staff coach at the label.
+
+  - id: a2-mus-021
+    difficulty: 3
+    prompt: Which blind singer blended country and gospel into Georgia on My Mind?
+    answer: Ray Charles
+    distractors: [Al Green, Solomon Burke, Joe Cocker]
+    fact: He lost his sight at seven and his mother made him keep doing chores. His 1962 album of country songs was considered commercial suicide and sold enormously.
+
+  - id: a2-mus-022
+    difficulty: 3
+    prompt: Which 1965 folk rock hit took its lyrics almost entirely from Ecclesiastes?
+    answer: Turn! Turn! Turn!
+    distractors: [Eve of Destruction, For What It's Worth, Get Together]
+    fact: Pete Seeger wrote the music and added six words of his own. He assigned part of the royalties to a charity in Israel because the rest was not his to keep.
+
+  - id: a2-mus-023
+    difficulty: 3
+    prompt: Which record format replaced the 78 for single songs?
+    answer: The 45
+    distractors: [The 33, The 16, The eight-track]
+    fact: It was vinyl rather than shellac, so it did not shatter, and the big center hole suited jukebox mechanisms and automatic changers.
+
+  - id: a2-mus-024
+    difficulty: 3
+    prompt: Which British duo recorded Wake Me Up Before You Go-Go?
+    answer: Wham!
+    distractors: [Tears for Fears, Pet Shop Boys, Hall and Oates]
+    fact: They were the first Western pop act to tour China, in 1985. The partner who wrote the songs went on to a much larger solo career.
+
+  - id: a2-mus-025
+    difficulty: 3
+    prompt: Which group's 1982 record The Message turned rap toward social commentary?
+    answer: Grandmaster Flash and the Furious Five
+    distractors: [The Sugarhill Gang, Kurtis Blow, Run-DMC]
+    fact: The group hated it and thought nobody would dance to it. It became the first rap record added to the Library of Congress registry.
+
+  - id: a2-mus-026
+    difficulty: 4
+    prompt: Which producer, a trained classical arranger, shaped the records of the biggest band of the 1960s?
+    answer: George Martin
+    distractors: [Glyn Johns, Norman Smith, Joe Meek]
+    fact: He had been making comedy records before this and signed them after other labels turned them down. He wrote the string arrangements they could not read.
+
+  - id: a2-mus-027
+    difficulty: 4
+    prompt: Who wrote Me and Bobby McGee?
+    answer: Kris Kristofferson
+    distractors: [Townes Van Zandt, Mickey Newbury, Guy Clark]
+    fact: He was a Rhodes scholar and an army helicopter pilot who took a janitor's job sweeping a recording studio to get near the business. The best-known recording of it was released after the singer's death.
+
+  - id: a2-mus-028
+    difficulty: 4
+    prompt: Which 1969 free concert at a California speedway ended in a killing in front of the stage?
+    answer: Altamont
+    distractors: [Monterey, Isle of Wight, Watkins Glen]
+    fact: A motorcycle club was hired for security and paid in beer. The film of it is usually taken as the moment the decade's mood turned.
+
+  - id: a2-mus-029
+    difficulty: 4
+    prompt: Which Canadian singer wrote and recorded the 1971 album Blue?
+    answer: Joni Mitchell
+    distractors: [Buffy Sainte-Marie, Judy Collins, Laura Nyro]
+    fact: She used open tunings of her own invention because polio had weakened her left hand. She has said she had no personal defenses left while making it.
+
+  - id: a2-mus-030
+    difficulty: 4
+    prompt: Which uncredited bassist played on most of the Detroit label's hits of the 1960s?
+    answer: James Jamerson
+    distractors: [Carol Kaye, Duck Dunn, Chuck Rainey]
+    fact: He played with one finger and a flatwound string set, often lying on the studio floor. He died at forty-five with his name on almost none of the records.
+
+  - id: a2-mus-031
+    difficulty: 4
+    prompt: Which German group's 1974 album Autobahn opened electronic music to the pop charts?
+    answer: Kraftwerk
+    distractors: [Can, Neu!, Tangerine Dream]
+    fact: They built much of their own equipment and toured with a replica of themselves as mannequins. Hip hop and house both trace a direct line back to them.
+
+  - id: a2-mus-032
+    difficulty: 4
+    prompt: Which Memphis label did Sam Phillips run?
+    answer: Sun Records
+    distractors: [Hi Records, Goldwax, Ardent]
+    fact: He recorded blues players nobody else would and then sold his most valuable contract for thirty-five thousand dollars to keep the lights on.
+
+  - id: a2-mus-033
+    difficulty: 4
+    prompt: Which 1984 concert film by Talking Heads built the band up one member at a time?
+    answer: Stop Making Sense
+    distractors: [The Last Waltz, Gimme Shelter, Rust Never Sleeps]
+    fact: It opens with one man, a guitar and a cassette player on a bare stage. The oversized suit came from Japanese theater, where everything on stage is made larger.
+
+  - id: a2-mus-034
+    difficulty: 4
+    prompt: Which band's 1977 single was kept off the official number one spot during the Queen's jubilee?
+    answer: The Sex Pistols
+    distractors: [The Clash, The Damned, The Stranglers]
+    fact: Shops refused to stock it and the BBC would not play it. Chart compilers are widely believed to have adjusted the count to avoid the embarrassment.
+
+  - id: a2-mus-035
+    difficulty: 4
+    prompt: Which guitarist played in Cream, the Yardbirds and Derek and the Dominos?
+    answer: Eric Clapton
+    distractors: [Jeff Beck, Peter Green, Alvin Lee]
+    fact: Graffiti in London in 1965 said he was God, which embarrassed him into leaving a band for a bluesier one. Cream lasted twenty-nine months.

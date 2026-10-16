@@ -117,11 +117,14 @@ for (const q of choice) {
   // a verbatim match stops being a coincidence.
   if (answer.length < 6 || ORDINARY.has(answer)) continue;
 
+  const said = new RegExp(`\\b${answer.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`);
   const sayers = choice.filter((other) => {
     if (other.id === q.id || !canMeet(q, other) || !inPack(q, other)) return false;
     // Only what is read out counts. A distractor naming another answer is a
     // milder and different problem.
-    return `${plain(other.prompt)} ${plain(other.funFact)}`.includes(answer);
+    // Whole words only. Substring matching reported "Fender" inside
+    // "defenders" and "Herring" inside "herringbone".
+    return said.test(`${plain(other.prompt)} ${plain(other.funFact)}`);
   });
 
   // A term the bank mentions constantly is not a leak. "France" is the answer

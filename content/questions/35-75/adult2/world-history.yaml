@@ -62,7 +62,7 @@ questions:
     prompt: Which 1494 treaty divided the newly found world between Spain and Portugal?
     answer: The Treaty of Tordesillas
     distractors: [The Treaty of Zaragoza, The Treaty of Alcáçovas, The Treaty of Madrid]
-    fact: The line was drawn before anyone knew what was on either side of it, which is how Portugal ended up with Brazil and Spain with everything west of it.
+    fact: The line was drawn before anyone knew what was on either side of it, which is how one of them ended up with Brazil and the other with everything west of it.
 
   - id: a2-wld-009
     difficulty: 3

@@ -237,10 +237,10 @@ questions:
 
   - id: a2-spa-034
     difficulty: 4
-    prompt: Which 1967 accident killed three astronauts during a ground test?
-    answer: Apollo 1
-    distractors: [Gemini 6, Apollo 4, Mercury-Redstone 1]
-    fact: Pure oxygen at high pressure, a hatch that opened inward and miles of worn wiring. The redesign that followed is one reason the later flights worked.
+    prompt: What did the Apollo command module's hatch have to be changed to after the 1967 pad fire?
+    answer: One that opened outward in seconds
+    distractors: [One with a double seal, One operated from outside only, One with an explosive bolt ring]
+    fact: The original took at least ninety seconds and two men to remove from inside. Nothing else about the spacecraft was left untouched either.
 
   - id: a2-spa-035
     difficulty: 4

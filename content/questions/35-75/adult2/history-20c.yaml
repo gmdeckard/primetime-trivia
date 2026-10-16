@@ -65,7 +65,7 @@ questions:
     prompt: How did Adolf Hitler become chancellor of Germany in January 1933?
     answer: He was appointed by the president
     distractors: [He won an outright majority at an election, He seized power in a coup, He was named by the army]
-    fact: His party had just lost seats. Conservatives around Hindenburg thought a chancellor they could manage was better than another election, and gave him the job.
+    fact: His party had just lost seats. Conservatives around the aging president thought a chancellor they could manage was better than another election, and gave him the job.
 
   - id: a2-h20-010
     difficulty: 3
@@ -114,7 +114,7 @@ questions:
     prompt: In which city were the 1936 Summer Olympics held?
     answer: Berlin
     distractors: [Munich, Vienna, Amsterdam]
-    fact: The anti-Jewish signs came down for the duration and went straight back up. Jesse Owens won four golds in front of the men staging it as a racial showcase.
+    fact: The anti-Jewish signs came down for the duration and went straight back up. A black American sprinter won four golds in front of the men staging it as a racial showcase.
 
   - id: a2-h20-017
     difficulty: 3
