@@ -1,0 +1,250 @@
+category: literature
+pack:
+  id: adult2
+  name: Adult set 2
+
+questions:
+  - id: a2-lit-001
+    difficulty: 2
+    prompt: Who created the detective Sherlock Holmes?
+    answer: Arthur Conan Doyle
+    distractors: [Wilkie Collins, G.K. Chesterton, Edgar Wallace]
+    fact: He killed the character off in 1893 and brought him back eight years later after public complaint and a large American offer.
+
+  - id: a2-lit-002
+    difficulty: 2
+    prompt: Who wrote The Cat in the Hat?
+    answer: Dr. Seuss
+    distractors: [Maurice Sendak, Shel Silverstein, Roald Dahl]
+    fact: A publisher gave him a list of about two hundred words a first grader should know and dared him to write a book with them. He used two hundred and thirty-six.
+
+  - id: a2-lit-003
+    difficulty: 2
+    prompt: Which Belgian detective investigates Murder on the Orient Express?
+    answer: Hercule Poirot
+    distractors: [Inspector Maigret, Lord Peter Wimsey, Albert Campion]
+    fact: His creator grew tired of him within ten years and described him as insufferable, then wrote about him for another forty.
+
+  - id: a2-lit-004
+    difficulty: 2
+    prompt: Who wrote The Lord of the Rings?
+    answer: J.R.R. Tolkien
+    distractors: [C.S. Lewis, T.H. White, Lord Dunsany]
+    fact: He was a professor of Anglo-Saxon and invented the languages first. The story grew out of a sequel his publisher asked for.
+
+  - id: a2-lit-005
+    difficulty: 2
+    prompt: In which Dickens story does Ebenezer Scrooge appear?
+    answer: A Christmas Carol
+    distractors: [Bleak House, The Pickwick Papers, Dombey and Son]
+    fact: He wrote it in six weeks to pay off debts, published it himself and made almost nothing, because he insisted on gilt edges and colored plates at a low price.
+
+  - id: a2-lit-006
+    difficulty: 2
+    prompt: Who wrote The Three Musketeers?
+    answer: Alexandre Dumas
+    distractors: [Victor Hugo, Jules Verne, Honore de Balzac]
+    fact: He worked with a stable of collaborators and was paid by the line, which is why his characters say so much in so few words.
+
+  - id: a2-lit-007
+    difficulty: 2
+    prompt: Which Defoe novel strands its narrator on an island with a companion he names Friday?
+    answer: Robinson Crusoe
+    distractors: [Gulliver's Travels, The Swiss Family Robinson, The Coral Island]
+    fact: It drew on the real marooning of a Scottish sailor on an island off Chile. It is often called the first English novel.
+
+  - id: a2-lit-008
+    difficulty: 3
+    prompt: Who wrote Crime and Punishment?
+    answer: Fyodor Dostoevsky
+    distractors: [Ivan Goncharov, Nikolai Leskov, Alexander Herzen]
+    fact: He had been sentenced to death, reprieved at the last moment in front of the firing squad, and sent to Siberia for four years. He wrote this a decade after getting out.
+
+  - id: a2-lit-009
+    difficulty: 3
+    prompt: Which Tolstoy novel opens with a line about happy families all being alike?
+    answer: Anna Karenina
+    distractors: [Resurrection, The Cossacks, Hadji Murat]
+    fact: He wrote it after a decade away from novels and considered abandoning it. He later dismissed most of his own fiction as a distraction.
+
+  - id: a2-lit-010
+    difficulty: 3
+    prompt: Which Bradbury novel takes its title from the temperature at which paper is said to ignite?
+    answer: Fahrenheit 451
+    distractors: [The Martian Chronicles, Something Wicked This Way Comes, Dandelion Wine]
+    fact: He wrote it in nine days in a university basement on a rented typewriter that cost ten cents a half hour.
+
+  - id: a2-lit-011
+    difficulty: 3
+    prompt: Who wrote Lolita and Pale Fire?
+    answer: Vladimir Nabokov
+    distractors: [Arthur Koestler, Isaac Bashevis Singer, Joseph Brodsky]
+    fact: He wrote his early work in Russian and switched to English in his forties, and called the loss of his first language a private tragedy. He also named a butterfly genus.
+
+  - id: a2-lit-012
+    difficulty: 3
+    prompt: Which Conrad novella takes a steamboat captain up an African river to find Kurtz?
+    answer: Heart of Darkness
+    distractors: [Lord Jim, Nostromo, The Secret Agent]
+    fact: He had made the journey himself as a steamer captain in the Congo and came back with dysentery and gout and a lasting horror of the trade.
+
+  - id: a2-lit-013
+    difficulty: 3
+    prompt: Who wrote The Canterbury Tales?
+    answer: Geoffrey Chaucer
+    distractors: [William Langland, John Gower, Thomas Malory]
+    fact: He was a customs official and diplomat who wrote in the evenings. Only about a quarter of the planned tales were finished.
+
+  - id: a2-lit-014
+    difficulty: 3
+    prompt: Which Milton epic opens with Satan and his rebels thrown into hell?
+    answer: Paradise Lost
+    distractors: [The Faerie Queene, Samson Agonistes, Comus]
+    fact: He was completely blind by then and dictated it to his daughters and anyone else who called. He sold it for ten pounds.
+
+  - id: a2-lit-015
+    difficulty: 3
+    prompt: Who wrote The Scarlet Letter?
+    answer: Nathaniel Hawthorne
+    distractors: [Washington Irving, James Fenimore Cooper, Oliver Wendell Holmes]
+    fact: His own great-great-grandfather had been a judge at the Salem witch trials, and he added the w to the family name partly to put distance between them.
+
+  - id: a2-lit-016
+    difficulty: 3
+    prompt: Which Faulkner novel tells the Compson family's story in four narrating voices?
+    answer: The Sound and the Fury
+    distractors: [As I Lay Dying, Light in August, Absalom Absalom!]
+    fact: The first section is told by a man who cannot follow time, so the prose jumps decades without warning. Faulkner wanted it printed in different colored inks.
+
+  - id: a2-lit-017
+    difficulty: 3
+    prompt: Who wrote On the Road?
+    answer: Jack Kerouac
+    distractors: [Allen Ginsberg, William Burroughs, Neal Cassady]
+    fact: The famous scroll draft was typed in three weeks on taped-together paper with no paragraph breaks. Publishers took another six years to accept it.
+
+  - id: a2-lit-018
+    difficulty: 3
+    prompt: Which Ralph Ellison novel won the 1953 National Book Award with an unnamed narrator?
+    answer: Invisible Man
+    distractors: [Go Tell It on the Mountain, The Street, Cane]
+    fact: He spent the rest of his life on a second novel, lost part of the manuscript in a house fire, and never published it. It ran past two thousand pages.
+
+  - id: a2-lit-019
+    difficulty: 3
+    prompt: Who wrote Native Son, published in 1940?
+    answer: Richard Wright
+    distractors: [Langston Hughes, Countee Cullen, Claude McKay]
+    fact: A book club took it only after cuts, which were restored fifty years later. He left for Paris in 1946 and stayed.
+
+  - id: a2-lit-020
+    difficulty: 3
+    prompt: Who wrote The Handmaid's Tale?
+    answer: Margaret Atwood
+    distractors: [Alice Munro, Doris Lessing, Angela Carter]
+    fact: She has said she put nothing in it that some society had not already done. She wrote much of it in West Berlin while the wall was still up.
+
+  - id: a2-lit-021
+    difficulty: 3
+    prompt: Which American poet wrote "Because I could not stop for Death"?
+    answer: Emily Dickinson
+    distractors: [Elizabeth Bishop, Marianne Moore, Edna St. Vincent Millay]
+    fact: Fewer than a dozen of her roughly eighteen hundred poems were printed while she lived. Her sister found the rest in a chest after her death.
+
+  - id: a2-lit-022
+    difficulty: 3
+    prompt: Who wrote the poetry collection Leaves of Grass, revising it for nearly forty years?
+    answer: Walt Whitman
+    distractors: [Henry Wadsworth Longfellow, John Greenleaf Whittier, Sidney Lanier]
+    fact: He set some of the type himself for the first edition and reviewed the book anonymously, favorably, in three different papers.
+
+  - id: a2-lit-023
+    difficulty: 3
+    prompt: Who wrote Frankenstein?
+    answer: Mary Shelley
+    distractors: [Ann Radcliffe, Charlotte Dacre, Fanny Burney]
+    fact: She was eighteen, kept awake by a ghost-story contest during a summer without sun caused by a volcanic eruption on the far side of the world.
+
+  - id: a2-lit-024
+    difficulty: 3
+    prompt: Who wrote The Catcher in the Rye?
+    answer: J.D. Salinger
+    distractors: [John Updike, John Cheever, Philip Roth]
+    fact: He published nothing after 1965 and lived another forty-five years in New Hampshire, writing every day by his neighbors' account.
+
+  - id: a2-lit-025
+    difficulty: 3
+    prompt: Which Kafka story opens with a salesman waking as an enormous insect?
+    answer: The Metamorphosis
+    distractors: [The Trial, The Castle, In the Penal Colony]
+    fact: He asked his publisher not to put the creature on the cover, since it must not be shown. He also asked a friend to burn everything unpublished, and the friend did not.
+
+  - id: a2-lit-026
+    difficulty: 4
+    prompt: Which English novelist published Middlemarch under a man's name?
+    answer: George Eliot
+    distractors: [Elizabeth Gaskell, Anthony Trollope, Margaret Oliphant]
+    fact: Mary Ann Evans used the name to keep her fiction clear of her reviewing and of the scandal of living with a married man for twenty-four years.
+
+  - id: a2-lit-027
+    difficulty: 4
+    prompt: Who wrote The Master and Margarita, suppressed for a quarter century after his death?
+    answer: Mikhail Bulgakov
+    distractors: [Andrei Platonov, Yevgeny Zamyatin, Isaac Babel]
+    fact: He burned an early draft and started again. A censored version appeared in a magazine in 1966, and the cuts circulated separately in typescript.
+
+  - id: a2-lit-028
+    difficulty: 4
+    prompt: Which Thomas Mann novel traces four generations of a merchant family's decline?
+    answer: Buddenbrooks
+    distractors: [The Magic Mountain, Doctor Faustus, Death in Venice]
+    fact: He was twenty-five and based it on his own family in Lubeck, so closely that a local bookseller sold a key naming who was who.
+
+  - id: a2-lit-029
+    difficulty: 4
+    prompt: Who wrote The Tin Drum?
+    answer: Gunter Grass
+    distractors: [Heinrich Boll, Siegfried Lenz, Uwe Johnson]
+    fact: Its narrator refuses to grow past the age of three and shatters glass with his voice. The author revealed only in 2006 that he had been drafted into the Waffen-SS at seventeen.
+
+  - id: a2-lit-030
+    difficulty: 4
+    prompt: Who wrote Invisible Cities, in which Marco Polo describes cities to Kublai Khan?
+    answer: Italo Calvino
+    distractors: [Umberto Eco, Primo Levi, Cesare Pavese]
+    fact: There are fifty-five cities and all of them, Polo eventually admits, are Venice. The structure follows a pattern he worked out on index cards.
+
+  - id: a2-lit-031
+    difficulty: 4
+    prompt: Who wrote Blood Meridian and The Road?
+    answer: Cormac McCarthy
+    distractors: [Don DeLillo, Richard Ford, Larry McMurtry]
+    fact: He used almost no quotation marks or semicolons and spent years living in motels on grant money. He kept a desk at a physics institute in New Mexico.
+
+  - id: a2-lit-032
+    difficulty: 4
+    prompt: Which Sicilian prince wrote The Leopard, published after his death in 1958?
+    answer: Giuseppe Tomasi di Lampedusa
+    distractors: [Elio Vittorini, Carlo Levi, Leonardo Sciascia]
+    fact: It was rejected twice while he lived and became the best-selling Italian novel of its century. He wrote almost nothing else.
+
+  - id: a2-lit-033
+    difficulty: 4
+    prompt: Who wrote Gravity's Rainbow?
+    answer: Thomas Pynchon
+    distractors: [John Barth, Robert Coover, William Gaddis]
+    fact: It shared the 1974 National Book Award and the author sent a comedian to accept it in his place. No clear photograph of him has circulated since 1955.
+
+  - id: a2-lit-034
+    difficulty: 4
+    prompt: Which Irish poet wrote "The Second Coming" and its rough beast slouching toward Bethlehem?
+    answer: W.B. Yeats
+    distractors: [Patrick Kavanagh, Louis MacNeice, Seamus Heaney]
+    fact: He wrote it in 1919, with Europe wrecked and Ireland at war with itself. Journalists have quarried the poem for headlines ever since.
+
+  - id: a2-lit-035
+    difficulty: 4
+    prompt: Whose novel A Confederacy of Dunces won a Pulitzer eleven years after his suicide?
+    answer: John Kennedy Toole
+    distractors: [Walker Percy, James Agee, Harper Crane]
+    fact: His mother carried the smudged carbon copy to a novelist at a Louisiana university until he agreed to read it. He had died at thirty-one, unpublished.
