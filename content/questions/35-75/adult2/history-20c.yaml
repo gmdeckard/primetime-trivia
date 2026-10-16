@@ -97,10 +97,10 @@ questions:
 
   - id: a2-h20-014
     difficulty: 3
-    prompt: Which 1944 conference set up the postwar system of fixed exchange rates?
-    answer: Bretton Woods
-    distractors: [Dumbarton Oaks, Lake Success, Geneva]
-    fact: Forty-four countries met at a hotel in the White Mountains. The dollar was pegged to gold and everything else to the dollar, and the arrangement held until 1971.
+    prompt: Which New Deal agency paid artists, writers and laborers for public work?
+    answer: The WPA
+    distractors: [The NRA, The AAA, The RFC]
+    fact: It built or improved tens of thousands of schools, bridges and post offices, and sent writers out to record state guidebooks and interview former slaves.
 
   - id: a2-h20-015
     difficulty: 3

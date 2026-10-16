@@ -1,0 +1,250 @@
+category: business-economics
+pack:
+  id: adult2
+  name: Adult set 2
+
+questions:
+  - id: a2-biz-001
+    difficulty: 2
+    prompt: What does ATM stand for?
+    answer: Automated teller machine
+    distractors: [Automatic transfer module, Account transaction machine, Authorized teller module]
+    fact: The first was installed in London in 1967 and paid out against paper vouchers coated in a mildly radioactive compound, because plastic cards did not yet exist.
+
+  - id: a2-biz-002
+    difficulty: 2
+    prompt: What does CEO stand for?
+    answer: Chief executive officer
+    distractors: [Corporate executive owner, Chief equity officer, Chair of executive operations]
+    fact: The title barely existed before the 1970s. Companies had a president and a chairman, and the newer label was imported to separate running the firm from owning it.
+
+  - id: a2-biz-003
+    difficulty: 2
+    prompt: What is a bull market?
+    answer: A long stretch of rising prices
+    distractors: [A market with more sellers than buyers, A market closed to small investors, A market with falling interest rates]
+    fact: 'The animals may come from how each attacks: a bull tosses upward, a bear swipes down. The bear sense is older and comes from selling a skin before catching the animal.'
+
+  - id: a2-biz-004
+    difficulty: 2
+    prompt: What is a company's market capitalization?
+    answer: Its share price times the number of shares
+    distractors: [Its annual profit times ten, The cash it holds in reserve, The book value of its buildings and equipment]
+    fact: It measures what the market thinks the whole firm is worth, which is not what it owns. A company can be worth more than every asset on its books and occasionally less than its cash.
+
+  - id: a2-biz-005
+    difficulty: 2
+    prompt: What does VAT stand for?
+    answer: Value-added tax
+    distractors: [Variable asset tax, Value assessment tariff, Volume and turnover tax]
+    fact: It is charged at every stage of production with credit for what was paid earlier, so it falls on the final buyer. Over a hundred and seventy countries use it and the United States does not.
+
+  - id: a2-biz-006
+    difficulty: 2
+    prompt: Which company makes Tide, Pampers and Crest?
+    answer: Procter & Gamble
+    distractors: [Unilever, Colgate-Palmolive, Johnson & Johnson]
+    fact: It started as a candle and soap partnership between two brothers-in-law in Cincinnati in 1837. It invented the radio soap opera to sell detergent.
+
+  - id: a2-biz-007
+    difficulty: 2
+    prompt: Which country's currency is the yen?
+    answer: Japan
+    distractors: [China, South Korea, Thailand]
+    fact: The name means round object, for the shape of the coin. It replaced a system of silver and gold units in 1871 as part of a wholesale modernization.
+
+  - id: a2-biz-008
+    difficulty: 3
+    prompt: Which economist set out the theory of comparative advantage?
+    answer: David Ricardo
+    distractors: [Thomas Malthus, John Stuart Mill, Jean-Baptiste Say]
+    fact: He made a fortune as a stockbroker and then sat in Parliament. His argument is that trade pays even when one country is worse at making everything.
+
+  - id: a2-biz-009
+    difficulty: 3
+    prompt: Which economist argued that controlling the money supply controls inflation?
+    answer: Milton Friedman
+    distractors: [Paul Samuelson, James Tobin, Robert Solow]
+    fact: He said inflation is always and everywhere a monetary phenomenon. He also presented a ten-part television series making the case to a general audience.
+
+  - id: a2-biz-010
+    difficulty: 3
+    prompt: What is the price at which supply and demand match called?
+    answer: The equilibrium price
+    distractors: [The marginal price, The reserve price, The nominal price]
+    fact: Above it there is a glut and below it a shortage. The whole argument about price controls is about what happens when a law holds the price away from it.
+
+  - id: a2-biz-011
+    difficulty: 3
+    prompt: What is an oligopoly?
+    answer: A market dominated by a few sellers
+    distractors: [A market with one seller, A market with one buyer, A market with no regulation]
+    fact: Airlines, cell carriers and breakfast cereal all qualify. The firms watch each other rather than the customer, which is why prices move in step without anyone meeting.
+
+  - id: a2-biz-012
+    difficulty: 3
+    prompt: Which 1602 company was the first to sell tradable shares to the public?
+    answer: The Dutch East India Company
+    distractors: [The Hudson's Bay Company, The Muscovy Company, The South Sea Company]
+    fact: It also had its own army, coined money and signed treaties. At its height it was worth more, adjusted for inflation, than any modern company.
+
+  - id: a2-biz-013
+    difficulty: 3
+    prompt: Which razor maker built its business by selling the handle cheap and the blades dear?
+    answer: Gillette
+    distractors: [Schick, Wilkinson Sword, Remington]
+    fact: The model is now named after him and used for printers, game consoles and coffee pods. His patent on the disposable blade ran out in 1921 and the business survived anyway.
+
+  - id: a2-biz-014
+    difficulty: 3
+    prompt: Which American retailer sold houses, cars and tombstones by mail order catalog?
+    answer: Sears
+    distractors: [Montgomery Ward, JCPenney, Woolworth]
+    fact: The catalog ran to over a thousand pages and the company shipped about seventy thousand kit houses. Rural free delivery is what made the business possible.
+
+  - id: a2-biz-015
+    difficulty: 3
+    prompt: What is the common rule of thumb for declaring a recession?
+    answer: Two consecutive quarters of falling output
+    distractors: [A year of rising unemployment, Any quarter with falling share prices, Three months of falling retail sales]
+    fact: The official American arbiter is a private committee of economists that ignores the rule and looks at a spread of data, often announcing the start a year after the fact.
+
+  - id: a2-biz-016
+    difficulty: 3
+    prompt: What is a central bank trying to do when it raises interest rates?
+    answer: Slow borrowing and spending to cool inflation
+    distractors: [Increase the money supply, Weaken the currency, Raise government revenue]
+    fact: The effect takes a year or more to arrive, so the decision is always made on a forecast. Overshooting causes the recession it was trying to avoid.
+
+  - id: a2-biz-017
+    difficulty: 3
+    prompt: Which American company grew from a Chicago mail-order watch business into a department store chain?
+    answer: Montgomery Ward
+    distractors: [Marshall Field's, Carson Pirie Scott, Spiegel]
+    fact: It published the first general mail-order catalog in 1872, a single sheet of goods and prices. It also invented a reindeer to sell Christmas stock.
+
+  - id: a2-biz-018
+    difficulty: 3
+    prompt: Which 1890 law first made restraint of trade illegal in the United States?
+    answer: The Sherman Antitrust Act
+    distractors: [The Clayton Act, The Interstate Commerce Act, The Robinson-Patman Act]
+    fact: Its first heavy use was against labor unions rather than corporations. It runs to two short sections and courts have been working out what they mean ever since.
+
+  - id: a2-biz-019
+    difficulty: 3
+    prompt: What is arbitrage?
+    answer: Buying in one market and selling in another at a higher price
+    distractors: [Betting that a price will fall, Lending shares to a short seller, Buying a company to break it up]
+    fact: Done at speed with borrowed money, it is where a great deal of trading profit comes from. In theory each trade erases the gap it exploits.
+
+  - id: a2-biz-020
+    difficulty: 3
+    prompt: What is the difference between a stock and a bond?
+    answer: A stock is ownership, a bond is a loan
+    distractors: ["A stock pays interest, a bond pays dividends", "A stock is tradable, a bond is not", "A stock matures, a bond does not"]
+    fact: Bondholders get paid first and get nothing extra if the company does well. Shareholders are last in line and own everything left over.
+
+  - id: a2-biz-021
+    difficulty: 3
+    prompt: Which commodity was at the center of a Dutch speculative mania that collapsed in 1637?
+    answer: Tulip bulbs
+    distractors: [Pepper, Whale oil, Silver]
+    fact: A single rare bulb was reportedly priced at several years' wages. Modern research suggests the crash ruined far fewer people than the legend says.
+
+  - id: a2-biz-022
+    difficulty: 3
+    prompt: Which investor has run Berkshire Hathaway since 1965?
+    answer: Warren Buffett
+    distractors: [Peter Lynch, John Bogle, Carl Icahn]
+    fact: It was a failing textile mill when he bought it, which he later called his worst investment. He writes the annual shareholder letter himself.
+
+  - id: a2-biz-023
+    difficulty: 3
+    prompt: Which American union leader disappeared from a Detroit restaurant parking lot in 1975?
+    answer: Jimmy Hoffa
+    distractors: [Walter Reuther, George Meany, John L. Lewis]
+    fact: He had run the Teamsters, gone to prison for jury tampering and been pardoned. He was declared legally dead in 1982 and the search has never really stopped.
+
+  - id: a2-biz-024
+    difficulty: 3
+    prompt: What makes a takeover hostile?
+    answer: The target's board opposes it
+    distractors: [It is paid for with borrowed money, It is done in secret, It is blocked by regulators]
+    fact: The bidder goes around the board to the shareholders. The defenses have names like the poison pill and the golden parachute, invented mostly in the 1980s.
+
+  - id: a2-biz-025
+    difficulty: 3
+    prompt: What is a trade deficit?
+    answer: Importing more in value than you export
+    distractors: [Spending more than the government collects, Owing more abroad than you own, Holding less gold than your currency requires]
+    fact: It has to be paid for with foreign investment or borrowing, which is the half of the accounting that rarely makes the news.
+
+  - id: a2-biz-026
+    difficulty: 4
+    prompt: Whose curve argues that tax revenue falls once rates pass a certain point?
+    answer: Arthur Laffer
+    distractors: [Robert Mundell, Jude Wanniski, George Gilder]
+    fact: He is said to have drawn it on a napkin in a Washington restaurant in 1974. Almost nobody disputes the shape and everybody disputes where on it any country sits.
+
+  - id: a2-biz-027
+    difficulty: 4
+    prompt: What did the Hawthorne studies of the 1920s find about factory workers?
+    answer: That being observed changed how they worked
+    distractors: [That piece rates beat hourly pay, That shorter shifts cut output, That lighting had no effect on accidents]
+    fact: Output rose whatever the researchers changed, including when they changed it back. The effect is now a standing warning in the design of any experiment on people.
+
+  - id: a2-biz-028
+    difficulty: 4
+    prompt: Which was the first company in the world valued at over a billion dollars?
+    answer: US Steel
+    distractors: [Standard Oil of New Jersey, The Pennsylvania Railroad, General Motors]
+    fact: It was assembled in 1901 by buying Carnegie's mills and most of their rivals, and at the start it made about two thirds of American steel.
+
+  - id: a2-biz-029
+    difficulty: 4
+    prompt: Which 1988 takeover battle produced the book Barbarians at the Gate?
+    answer: RJR Nabisco
+    distractors: [Beatrice Foods, Gulf Oil, TWA]
+    fact: Twenty-five billion dollars, almost all of it borrowed, and the management team that started it lost. It stood as the largest buyout for seventeen years.
+
+  - id: a2-biz-030
+    difficulty: 4
+    prompt: What does Gresham's law say?
+    answer: Bad money drives out good
+    distractors: [Prices rise to meet available credit, Work expands to fill the time available, Debt grows faster than output]
+    fact: Given two coins of the same face value, people spend the debased one and hoard the sound one. It is why silver coins vanished from circulation in the 1960s.
+
+  - id: a2-biz-031
+    difficulty: 4
+    prompt: What relationship does the Phillips curve describe?
+    answer: The tradeoff between inflation and unemployment
+    distractors: [The link between wages and productivity, The link between taxes and growth, The link between savings and investment]
+    fact: The 1970s broke it by delivering both at once, which is where the word stagflation came from and why the theory behind it had to be rebuilt.
+
+  - id: a2-biz-032
+    difficulty: 4
+    prompt: Which company's 1984 court-ordered breakup created the regional Baby Bells?
+    answer: AT&T
+    distractors: [Western Union, GTE, ITT]
+    fact: It had been a legal monopoly for seventy years and was the largest employer in the country. Long distance rates fell by about half in the decade afterward.
+
+  - id: a2-biz-033
+    difficulty: 4
+    prompt: Whose fortune, made from explosives, funds the prizes awarded each December?
+    answer: Alfred Nobel
+    distractors: [Joseph Pulitzer, Andrew Mellon, Cecil Rhodes]
+    fact: A premature obituary called him the merchant of death, and he rewrote his will the following year, leaving almost everything to the prizes.
+
+  - id: a2-biz-034
+    difficulty: 4
+    prompt: Which 1720 speculative collapse ruined investors across Britain?
+    answer: The South Sea Bubble
+    distractors: [The Mississippi Scheme, The Darien Scheme, The Panic of 1696]
+    fact: The company's actual business was a trading monopoly it barely used. Isaac Newton lost a fortune in it and said he could calculate the motion of bodies but not the madness of people.
+
+  - id: a2-biz-035
+    difficulty: 4
+    prompt: What is quantitative easing?
+    answer: A central bank creating money to buy bonds
+    distractors: [Cutting interest rates below zero, Printing notes to pay government wages, Devaluing a currency against gold]
+    fact: It is the tool used when rates are already at zero. Japan tried it first in 2001 and everyone else followed after 2008.
