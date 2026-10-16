@@ -135,7 +135,7 @@ questions:
     prompt: Which wartime vehicle, nicknamed the duck, could drive off a landing craft and swim?
     answer: The DUKW
     distractors: [The Weasel, The Buffalo, The Terrapin]
-    fact: The letters were a factory model code, not an acronym for anything. Twenty thousand were built and they ran supplies over the Normandy beaches for months.
+    fact: 'The letters are GMC''s model code rather than a name, each one standing for something: the 1942 design year, amphibian body, front-wheel drive and tandem rear axles. Twenty thousand were built and they ran supplies over the Normandy beaches for months.'
 
   - id: a2-mil-020
     difficulty: 3

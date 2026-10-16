@@ -130,10 +130,10 @@ questions:
 
   - id: a2-rad-018
     difficulty: 3
-    prompt: Which radio drama series, narrated by its own ghostly host, ran under the name Inner Sanctum?
-    answer: A horror anthology opened by a creaking door
-    distractors: [A detective serial set in Chicago, A western anthology, A courtroom drama]
-    fact: The door was an actual studio door with a rusted hinge, and when it was finally oiled by mistake the show received complaints.
+    prompt: What sound opened every episode of the horror anthology Inner Sanctum Mystery?
+    answer: A creaking door
+    distractors: [A tolling bell, A scream, A clock striking midnight]
+    fact: It was an actual studio door with a rusted hinge, and when a janitor finally oiled it the show got letters of complaint.
 
   - id: a2-rad-019
     difficulty: 3
@@ -249,7 +249,7 @@ questions:
 
   - id: a2-rad-035
     difficulty: 4
-    prompt: Which comedian's estate successfully argued that his act was a copyrightable work rather than just jokes?
-    answer: The principle that a comedian's material is protected like any writing
-    distractors: [That a joke cannot be copyrighted at all, That only recorded performances are protected, That a catchphrase can be trademarked]
-    fact: Comedians policed stealing among themselves long before the courts took an interest, and being known as a thief closed more doors than any lawsuit.
+    prompt: Which satirist followed a number one record parodying Dragnet with a long career writing radio commercials?
+    answer: Stan Freberg
+    distractors: [Spike Jones, Allan Sherman, Tom Lehrer]
+    fact: He argued that radio beat television because the pictures were bigger, and once demonstrated it by draining a ten-thousand-gallon lake of hot chocolate on air. Comedians policed joke stealing among themselves long before the courts took an interest.

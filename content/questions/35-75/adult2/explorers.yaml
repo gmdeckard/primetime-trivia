@@ -59,7 +59,7 @@ questions:
 
   - id: a2-exp-008
     difficulty: 3
-    prompt: Which African lake did John Hanning Speke identify in 1858 as the source of the Nile?
+    prompt: Which African lake did John Hanning Speke identify in 1858 as the source of the White Nile?
     answer: Lake Victoria
     distractors: [Lake Tanganyika, Lake Albert, Lake Malawi]
     fact: His travelling companion Richard Burton disputed it for the rest of his life. Speke turned out to be right and did not live to be told so.
@@ -94,10 +94,10 @@ questions:
 
   - id: a2-exp-013
     difficulty: 3
-    prompt: Which desert did Burke and Wills die trying to cross Australia through in 1861?
-    answer: The interior, on the Stony and Sturt deserts
-    distractors: [The Simpson Desert only, The Nullarbor Plain, The Tanami Desert]
-    fact: They reached the north coast's tidal channels and turned back. They missed the relief party at the agreed camp by about nine hours.
+    prompt: Beside which creek did Burke and Wills die in 1861, having missed their relief party by hours?
+    answer: Cooper Creek
+    distractors: [Sturt Creek, Diamantina Creek, Barcoo Creek]
+    fact: They had crossed the continent to the tidal channels of the north coast and turned back. The relief party had waited four months at the agreed camp and left that same day.
 
   - id: a2-exp-014
     difficulty: 3
@@ -158,9 +158,9 @@ questions:
   - id: a2-exp-022
     difficulty: 3
     prompt: Which part of a ship's rigging gave the crow's nest its name?
-    answer: A barrel at the masthead, originally holding ravens
+    answer: A barrel at the masthead where the lookout stood
     distractors: [The highest spar, The rope ladder up the mast, The lookout's harness]
-    fact: Birds released when land was out of sight would fly toward the nearest shore, which told the navigator where to steer before instruments could.
+    fact: The story goes that it held ravens, released when land was out of sight to show the navigator which way the nearest shore lay. Whether any crew really sailed that way is doubtful, but the name stuck.
 
   - id: a2-exp-023
     difficulty: 3
@@ -178,7 +178,7 @@ questions:
 
   - id: a2-exp-025
     difficulty: 4
-    prompt: What did the Challenger expedition of 1872 to 1876 largely invent?
+    prompt: Which science did the Challenger expedition of 1872 to 1876 establish as a discipline?
     answer: Oceanography
     distractors: [Marine archaeology, Weather forecasting, Submarine navigation]
     fact: It sounded the deepest trench then known, catalogued four thousand new species and filled fifty volumes. The deepest point in the ocean is named after the ship.

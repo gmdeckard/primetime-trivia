@@ -107,7 +107,7 @@ questions:
     prompt: Which is the smallest state capital by population?
     answer: Montpelier, Vermont
     distractors: ["Pierre, South Dakota", "Augusta, Maine", "Juneau, Alaska"]
-    fact: Under eight thousand people. It is also the only state capital with no national fast food franchise within city limits.
+    fact: Under eight thousand people, which is fewer than plenty of towns in the same state. The gold leaf on the statehouse dome is real and gets redone every few decades.
 
   - id: a2-usp-016
     difficulty: 3
@@ -205,7 +205,7 @@ questions:
     prompt: Which island held a federal penitentiary from 1934 to 1963?
     answer: Alcatraz
     distractors: [Ellis Island, Governors Island, Terminal Island]
-    fact: Running water had to be shipped in, which is what finally closed it. Thirty-six men tried to escape and five are still unaccounted for.
+    fact: Fresh water had to be shipped in, one reason it cost three times what a mainland prison did, and by the end the salt air had eaten the buildings. Thirty-six men tried to escape and five are still unaccounted for.
 
   - id: a2-usp-030
     difficulty: 4
@@ -216,10 +216,10 @@ questions:
 
   - id: a2-usp-031
     difficulty: 4
-    prompt: Which state has the largest share of its land owned by the federal government?
+    prompt: Which state holds five national parks, all of them in red rock country?
     answer: Utah
-    distractors: [Idaho, Oregon, New Mexico]
-    fact: Around two thirds of it, mostly desert and canyon country held by the Bureau of Land Management, which is the running argument of state politics there.
+    distractors: [Arizona, New Mexico, Colorado]
+    fact: Arches, Bryce Canyon, Canyonlands, Capitol Reef and Zion, all within a day's drive of each other. Only California and Alaska have more.
 
   - id: a2-usp-032
     difficulty: 4
@@ -237,9 +237,9 @@ questions:
 
   - id: a2-usp-034
     difficulty: 4
-    prompt: Which city has the largest natural harbor on the American Pacific coast?
+    prompt: Which city has the largest natural harbor in southern California?
     answer: San Diego
-    distractors: [Long Beach, Portland, Tacoma]
+    distractors: [Long Beach, Santa Barbara, Oxnard]
     fact: It was found by a Spanish expedition in 1542 and then more or less ignored for two centuries. The Navy's Pacific presence is built around it.
 
   - id: a2-usp-035

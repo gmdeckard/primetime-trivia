@@ -64,7 +64,7 @@ questions:
     difficulty: 3
     prompt: Which baseball team plays at Wrigley Field?
     answer: The Chicago Cubs
-    distractors: [The Chicago White Sox, The Detroit Tigers, The Cleveland Indians]
+    distractors: [The Chicago White Sox, The Detroit Tigers, The Milwaukee Brewers]
     fact: Lights were not installed until 1988, the last park in the majors to get them. The outfield wall is covered in ivy planted in 1937.
 
   - id: a2-spo-010
@@ -100,7 +100,7 @@ questions:
     prompt: Which rival league merged with the NFL in 1970?
     answer: The AFL
     distractors: [The USFL, The XFL, The All-America Football Conference]
-    fact: It brought ten teams, the two-point conversion, names on jerseys and a television contract that forced the merger. The championship game between them became the Super Bowl.
+    fact: It brought ten teams, names on jerseys and a television contract that forced the merger. Its two-point conversion took the NFL until 1994 to adopt. The championship game between them became the Super Bowl.
 
   - id: a2-spo-015
     difficulty: 3

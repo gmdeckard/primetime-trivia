@@ -63,7 +63,7 @@ questions:
     prompt: What does the half-life of a radioactive substance measure?
     answer: The time for half of it to decay
     distractors: [How long it stays dangerous, The time until it stops emitting entirely, Half the time it takes to decay completely]
-    fact: Because it halves rather than subtracts, a sample never quite reaches nothing, and a substance with a short half-life is the more intensely radioactive of two.
+    fact: Because it halves rather than subtracts, a sample never quite reaches nothing. Of two samples holding the same number of atoms, the one with the shorter half-life is the more intensely radioactive.
 
   - id: a2-phy-009
     difficulty: 3
@@ -215,9 +215,9 @@ questions:
   - id: a2-phy-030
     difficulty: 4
     prompt: Why did the Tacoma Narrows bridge twist itself apart in 1940?
-    answer: The wind drove it at a frequency it wanted to move at
+    answer: The wind and the twisting deck fed energy into each other
     distractors: [The cables corroded in the salt air, A ship struck a pier, The roadway was loaded unevenly]
-    fact: Engineering courses showed the film for decades as an example of resonance. The deck was a solid plate rather than an open truss, and the wind could not get through it.
+    fact: 'Engineering courses showed the film for decades and called it resonance. The better explanation is aeroelastic flutter: each twist changed how the wind met the deck, which drove the next twist harder. The deck was a solid plate rather than an open truss, so the wind could not get through it.'
 
   - id: a2-phy-031
     difficulty: 4

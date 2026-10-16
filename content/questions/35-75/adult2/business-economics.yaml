@@ -191,7 +191,7 @@ questions:
     prompt: What did the Hawthorne studies of the 1920s find about factory workers?
     answer: That being observed changed how they worked
     distractors: [That piece rates beat hourly pay, That shorter shifts cut output, That lighting had no effect on accidents]
-    fact: Output rose whatever the researchers changed, including when they changed it back. The effect is now a standing warning in the design of any experiment on people.
+    fact: Output rose whatever the researchers changed, including when they changed it back. Reanalysis of the original data has found the effect far weaker than the story, but the warning it left in the design of experiments on people has stuck.
 
   - id: a2-biz-028
     difficulty: 4

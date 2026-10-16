@@ -9,7 +9,7 @@ questions:
     prompt: Which organ filters waste from the blood to make urine?
     answer: The kidneys
     distractors: [The liver, The spleen, The bladder]
-    fact: They process about fifty gallons of blood a day to produce under two pints of urine. A person can live normally on one.
+    fact: They process about fifty gallons of blood a day to produce around two quarts of urine. A person can live normally on one.
 
   - id: a2-med-002
     difficulty: 2
@@ -107,7 +107,7 @@ questions:
     prompt: Which is the largest organ of the human body?
     answer: The skin
     distractors: [The liver, The small intestine, The lungs]
-    fact: It runs to about twenty square feet on an adult and replaces itself roughly every month. It is also the body's first barrier against infection.
+    fact: It runs to about twenty square feet on an adult, and its outer layer, the epidermis, replaces itself roughly every month. It is also the body's first barrier against infection.
 
   - id: a2-med-016
     difficulty: 3
@@ -226,14 +226,14 @@ questions:
     prompt: What is a placebo?
     answer: A treatment with no active ingredient
     distractors: [A drug given at a reduced dose, A treatment for a symptom rather than a cause, An untested compound]
-    fact: It is the comparison a trial is measured against, because people improve for all sorts of reasons. The effect is strongest for pain and weakest for anything measurable.
+    fact: It is the comparison a trial is measured against, because people improve for all sorts of reasons. It shows up most in reported symptoms like pain and nausea, and barely at all in objective measures of disease.
 
   - id: a2-med-033
     difficulty: 4
-    prompt: Which blood protein's absence causes hemophilia?
+    prompt: The absence of which kind of blood protein causes hemophilia?
     answer: A clotting factor
     distractors: [Hemoglobin, Albumin, An immunoglobulin]
-    fact: It passed through European royalty from Queen Victoria, who carried it, into the Spanish, German and Russian courts.
+    fact: Factor VIII is missing in hemophilia A and factor IX in hemophilia B. It passed through European royalty from Queen Victoria, who carried it, into the Spanish, German and Russian courts.
 
   - id: a2-med-034
     difficulty: 4

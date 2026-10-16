@@ -93,7 +93,7 @@ questions:
     prompt: Which genre filled the dance floors and the charts in the late 1970s?
     answer: Disco
     distractors: [Funk, New wave, Soft rock]
-    fact: A Chicago baseball promotion in 1979 blew up a crate of records between games and started a riot. Within a year radio had dropped the word entirely.
+    fact: A Chicago baseball promotion in 1979 blew up a crate of records between games and the crowd tore up the field. The backlash was already building; within a couple of years radio had quietly dropped the word.
 
   - id: a2-mus-014
     difficulty: 3

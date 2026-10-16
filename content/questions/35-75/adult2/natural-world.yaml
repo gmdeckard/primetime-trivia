@@ -114,7 +114,7 @@ questions:
     prompt: Which group of living things has no nucleus in its cells?
     answer: Bacteria
     distractors: [Fungi, Algae, Protozoa]
-    fact: Their DNA floats loose in the cell. There are more of them in one person's gut than there are human cells in the whole body.
+    fact: Their DNA floats loose in the cell. One person's gut holds about as many of them as there are human cells in the entire body, a shade more by the best current count.
 
   - id: a2-nat-017
     difficulty: 3
@@ -202,7 +202,7 @@ questions:
 
   - id: a2-nat-029
     difficulty: 4
-    prompt: What kind of organism is the largest single living thing yet found?
+    prompt: What kind of organism covers more ground than any other single living thing yet found?
     answer: A fungus
     distractors: [A tree, A coral, A seagrass]
     fact: One honey fungus in Oregon spreads over three and a half square miles of forest floor and may be thousands of years old. Almost all of it is underground.
@@ -212,7 +212,7 @@ questions:
     prompt: Which ocean current carries warm water from the Gulf of Mexico toward Europe?
     answer: The Gulf Stream
     distractors: [The Canary Current, The Labrador Current, The North Equatorial Current]
-    fact: Benjamin Franklin had it charted to speed up the mail packets. It is why Britain is mild at the latitude of Labrador.
+    fact: Benjamin Franklin had it charted to speed up the mail packets. Its warmth, carried the last stretch by the prevailing westerly winds, is a good part of why Britain is mild at the latitude of Labrador.
 
   - id: a2-nat-031
     difficulty: 4
@@ -265,10 +265,10 @@ questions:
 
   - id: a2-nat-038
     difficulty: 2
-    prompt: Which gas do plants release during photosynthesis?
-    answer: Oxygen
-    distractors: [Nitrogen, Methane, Hydrogen]
-    fact: Almost all of the oxygen in the air was put there by living things. For the first two billion years of life on earth there was next to none of it.
+    prompt: Which is the largest species of bear?
+    answer: The polar bear
+    distractors: [The grizzly, The black bear, The giant panda]
+    fact: A big male stands ten feet on its hind legs. Its skin underneath is black, and the hairs are hollow and colorless rather than white.
 
   - id: a2-nat-039
     difficulty: 2
@@ -293,17 +293,17 @@ questions:
 
   - id: a2-nat-042
     difficulty: 3
-    prompt: Which animal has the most powerful bite measured in the wild?
-    answer: The saltwater crocodile
-    distractors: [The hippopotamus, The great white shark, The polar bear]
-    fact: The muscles that close the jaw are enormous and those that open it are weak enough that a strap around the snout holds it shut.
+    prompt: Which material forms the shells of insects and crabs?
+    answer: Chitin
+    distractors: [Collagen, Silica, Cellulose]
+    fact: The same stuff stiffens the cell walls of fungi, which is one of the odder things insects and mushrooms have in common. Growing means shedding the whole casing and making a new one underneath.
 
   - id: a2-nat-043
     difficulty: 3
     prompt: What is the term for an animal that is active at night?
     answer: Nocturnal
     distractors: [Diurnal, Hibernal, Vespertine]
-    fact: Our own ancestors kept to the dark for a hundred million years while the dinosaurs had the daylight, which is why so many of us see color poorly.
+    fact: One explanation for the poor color vision of most mammals is that our ancestors kept to the dark for a hundred million years while the dinosaurs had the daylight.
 
   - id: a2-nat-044
     difficulty: 3
@@ -352,7 +352,7 @@ questions:
     prompt: Which bird is the heaviest able to fly?
     answer: The great bustard
     distractors: [The swan, The condor, The pelican]
-    fact: Males reach over forty pounds, which is close to the limit of what wings and muscle can lift. They have to run to take off.
+    fact: Males reach over forty pounds, close to the limit of what wings and muscle can lift. Africa's kori bustard is its only serious rival for the title, depending on whose records you take. They have to run to take off.
 
   - id: a2-nat-051
     difficulty: 3

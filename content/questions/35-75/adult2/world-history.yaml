@@ -111,7 +111,7 @@ questions:
     prompt: Which Roman emperor made Christianity legal across the empire?
     answer: Constantine
     distractors: [Diocletian, Theodosius, Julian]
-    fact: Legal is not the same as official; that came decades later under a successor. He was baptized on his deathbed, which was a common enough choice at the time.
+    fact: He issued the edict jointly with Licinius, his co-emperor in the east, who is rarely remembered for it. Legal is not the same as official; that came decades later under a successor.
 
   - id: a2-wld-016
     difficulty: 3
@@ -195,7 +195,7 @@ questions:
     prompt: Which 1688 change of monarch is called the Glorious Revolution?
     answer: James II replaced by William and Mary
     distractors: [Charles II restored after Cromwell, Anne succeeding William, George I succeeding Anne]
-    fact: Glorious mostly means bloodless in England. It was neither in Ireland or Scotland, where the fighting ran for years.
+    fact: Glorious mostly means bloodless, and it was bloodless in England. It was nothing of the kind in Ireland or Scotland, where the fighting ran for years.
 
   - id: a2-wld-028
     difficulty: 4

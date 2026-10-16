@@ -177,7 +177,7 @@ questions:
     prompt: Which 1946 film about a small-town banker failed at the box office and became a Christmas fixture?
     answer: It's a Wonderful Life
     distractors: [Miracle on 34th Street, The Bishop's Wife, Holiday Inn]
-    fact: A lapsed copyright let television stations run it free in the 1970s, which is the only reason anyone remembers it. The FBI thought it was communist propaganda.
+    fact: A lapsed copyright let television stations run it free in the 1970s, which is how it found the audience it never had in cinemas. The FBI thought it was communist propaganda.
 
   - id: a2-ftv-026
     difficulty: 4

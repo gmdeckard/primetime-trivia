@@ -300,10 +300,10 @@ questions:
 
   - id: a2-h20-043
     difficulty: 3
-    prompt: Which 1917 document promised Russians peace, land and bread?
-    answer: The Bolshevik program
-    distractors: [The Petrograd Charter, The Duma Manifesto, The Brest Declaration]
-    fact: It was a slogan rather than a document and it won the argument. The peace came within months at a brutal price and the land was taken back within fifteen years.
+    prompt: Which three things did Lenin's party promise Russians in 1917?
+    answer: Peace, land and bread
+    distractors: ["Liberty, equality and fraternity", "Work, family and country", "Land, bread and the tsar"]
+    fact: It was a slogan rather than a program and it won the argument. The peace came within months at a brutal price and the land was taken back within fifteen years.
 
   - id: a2-h20-044
     difficulty: 3
@@ -314,7 +314,7 @@ questions:
 
   - id: a2-h20-045
     difficulty: 3
-    prompt: Which 1942 conference planned the extermination of Europe's Jews?
+    prompt: Which 1942 conference coordinated the extermination of Europe's Jews?
     answer: Wannsee
     distractors: [Nuremberg, Munich, Posen]
     fact: It lasted about ninety minutes over lunch at a lakeside villa. Killing was already underway; the meeting was about coordinating departments.
@@ -412,10 +412,10 @@ questions:
 
   - id: a2-h20-059
     difficulty: 4
-    prompt: Which 1961 trial of Nazi doctors' records was not held, because the main trials had ended when?
+    prompt: In which year did the last of the twelve follow-up trials of Nazi doctors, judges and industrialists end?
     answer: Nineteen forty-nine
     distractors: [Nineteen forty-six, Nineteen fifty-three, Nineteen fifty-eight]
-    fact: Twelve further American-run trials followed the famous one, of doctors, judges, industrialists and generals, and ran until 1949.
+    fact: They were run by the Americans alone, in the same courthouse as the famous trial of the major leaders, and went on for three years after it finished.
 
   - id: a2-h20-060
     difficulty: 4

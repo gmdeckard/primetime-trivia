@@ -37,7 +37,7 @@ questions:
     prompt: Which 1935 work, set in a Charleston tenement, features the song Summertime?
     answer: Porgy and Bess
     distractors: [Showboat Serenade, Street Scene, Four Saints in Three Acts]
-    fact: Its authors insisted on a classically trained black cast at a time when that cost them bookings. It took sixty years to reach the Metropolitan Opera.
+    fact: Its authors insisted on a classically trained black cast at a time when that cost them bookings. It took fifty years to reach the Metropolitan Opera.
 
   - id: a2-stg-006
     difficulty: 2
@@ -181,10 +181,10 @@ questions:
 
   - id: a2-stg-026
     difficulty: 4
-    prompt: Which play has run continuously in London's West End since 1952?
+    prompt: Which play has been running in London's West End since 1952?
     answer: The Mousetrap
     distractors: ["No Sex Please, We're British", The Woman in Black, Blithe Spirit]
-    fact: Agatha Christie expected eight months. Audiences are asked at the final curtain not to reveal the ending.
+    fact: Agatha Christie expected eight months. The pandemic shutdown in 2020 was its first break in sixty-eight years. Audiences are asked at the final curtain not to reveal the ending.
 
   - id: a2-stg-027
     difficulty: 4

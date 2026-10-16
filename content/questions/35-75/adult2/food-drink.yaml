@@ -6,8 +6,8 @@ pack:
 questions:
   - id: a2-fnd-001
     difficulty: 2
-    prompt: Which vegetable is the base of a classic French onion soup besides onions?
-    answer: Nothing but stock, bread and cheese
+    prompt: Besides onions, which vegetable belongs in a classic French onion soup?
+    answer: None, just stock, bread and cheese
     distractors: [Celery, Leek, Carrot]
     fact: The onions are cooked down for the better part of an hour until the sugars brown. Rushing that step is the only way to get the dish wrong.
 

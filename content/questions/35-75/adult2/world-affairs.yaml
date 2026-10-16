@@ -9,7 +9,7 @@ questions:
     prompt: In which city is the United Nations headquarters?
     answer: New York
     distractors: [Geneva, Brussels, Vienna]
-    fact: The site is international territory with its own post office and stamps. The land was bought with a gift from John D. Rockefeller Jr. after an earlier plan to build in Pennsylvania fell through.
+    fact: The site is American soil, but an agreement with the United States gives it its own post office and stamps and keeps local authorities out without permission. The land was bought with a gift from John D. Rockefeller Jr. after an earlier plan to build in Pennsylvania fell through.
 
   - id: a2-wor-002
     difficulty: 2
@@ -51,7 +51,7 @@ questions:
     prompt: Which 1948 document set out the rights the UN says every person holds?
     answer: The Universal Declaration of Human Rights
     distractors: [The Geneva Conventions, The Atlantic Charter, The Helsinki Final Act]
-    fact: Eight countries abstained and none voted against. It binds nobody by itself, and almost every human rights treaty since quotes it.
+    fact: Eight countries abstained and none voted against. It is a declaration rather than a treaty, so it binds nobody on its own, and almost every human rights treaty since quotes it.
 
   - id: a2-wor-008
     difficulty: 3
@@ -107,7 +107,7 @@ questions:
     prompt: Which Beijing square was cleared of protesters by the army in June 1989?
     answer: Tiananmen Square
     distractors: [Tiantan Square, The Forbidden Square, Zhongnanhai]
-    fact: The protests had run for seven weeks and spread to dozens of cities. The photograph of one man in front of a column of tanks was taken from a hotel balcony.
+    fact: The protests had run for seven weeks and spread to dozens of cities. Most of the killing happened on the approach avenues rather than in the square itself. The photograph of one man in front of a column of tanks was taken from a hotel balcony.
 
   - id: a2-wor-016
     difficulty: 3
@@ -188,10 +188,10 @@ questions:
 
   - id: a2-wor-027
     difficulty: 4
-    prompt: Which UN agency is responsible for refugees?
+    prompt: Which UN agency holds the worldwide mandate to protect refugees?
     answer: The UNHCR
     distractors: [UNICEF, UNRWA, The IOM]
-    fact: It was set up in 1950 for a three-year job resettling Europeans and has been renewed ever since. It has won the Nobel Peace Prize twice.
+    fact: It was set up in 1950 for a three-year job resettling Europeans and has been renewed ever since. One of the wrong answers runs a separate operation for Palestine refugees only. It has won the Nobel Peace Prize twice.
 
   - id: a2-wor-028
     difficulty: 4
@@ -237,7 +237,7 @@ questions:
 
   - id: a2-wor-034
     difficulty: 4
-    prompt: Which 1959 treaty reserved a whole continent for science and banned weapons there?
+    prompt: Which 1959 treaty reserved a whole continent for science and barred military activity there?
     answer: The Antarctic Treaty
     distractors: [The Law of the Sea Convention, The Svalbard Treaty, The Montreux Convention]
     fact: Twelve countries signed, including both superpowers at the worst of the Cold War. Territorial claims were not settled, just set aside.

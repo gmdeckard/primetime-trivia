@@ -14,7 +14,7 @@ questions:
     prompt: How many colonies declared independence in 1776?
     answer: Thirteen
     distractors: [Eleven, Fifteen, Twenty]
-    fact: The stripes on the flag still record them. The stars were added for new states until somebody realized the flag would not survive fifty stripes.
+    fact: The stripes on the flag still record them. They briefly went to fifteen, then Congress put them back to thirteen for good and ruled that new states would get a star instead.
 
   - id: a2-amh-002
     difficulty: 2
@@ -144,7 +144,7 @@ questions:
 
   - id: a2-amh-020
     difficulty: 3
-    prompt: Which president was the only one to serve two terms that did not run back to back?
+    prompt: Which president was the first to serve two terms that did not run back to back?
     answer: Grover Cleveland
     distractors: [Benjamin Harrison, Rutherford Hayes, Chester Arthur]
     fact: He is counted twice in the numbering, which is why the list of presidents runs higher than the number of men who have held the office.
@@ -228,14 +228,14 @@ questions:
 
   - id: a2-amh-032
     difficulty: 4
-    prompt: Which 1807 law closed American ports to foreign trade in an attempt to punish Britain and France?
+    prompt: Which 1807 law banned American exports in an attempt to punish Britain and France?
     answer: The Embargo Act
     distractors: [The Navigation Act, The Tariff of Abominations, The Force Bill]
     fact: It hurt New England shipping far more than it hurt Europe, and smuggling across the Canadian border became an industry. It was repealed within fifteen months.
 
   - id: a2-amh-033
     difficulty: 4
-    prompt: Which 1820s political faction formed around opposition to Andrew Jackson?
+    prompt: Which 1830s political party formed around opposition to Andrew Jackson?
     answer: The Whigs
     distractors: [The Free Soilers, The Anti-Masons, The Copperheads]
     fact: They took the name from the British party that had opposed royal power, because they said Jackson was behaving like a king.

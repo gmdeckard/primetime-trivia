@@ -129,7 +129,7 @@ questions:
     prompt: What is the term for a flaw that lets an attacker into a system before anyone has had a chance to fix it?
     answer: A zero-day
     distractors: [A back door, A rootkit, A honeypot]
-    fact: The name counts the days the defenders have had. A back door is deliberate, which is the difference.
+    fact: The name counts the days the defenders have had to patch it, which is none, because the vendor does not yet know it exists. A back door is deliberate, which is the difference.
 
   - id: a2-cmp-018
     difficulty: 3
@@ -224,7 +224,7 @@ questions:
 
   - id: a2-cmp-031
     difficulty: 4
-    prompt: What was unusual about the way internet addresses, exhausted in 2011, were originally assigned?
+    prompt: What was unusual about the way internet addresses, whose central pool ran dry in 2011, were originally assigned?
     answer: It used 32-bit numbers, about four billion in total
     distractors: [It assigned them by country, It reused them every ninety days, It gave each machine two]
     fact: Four billion looked inexhaustible when the number was chosen in 1981. The replacement has enough for every grain of sand many times over.

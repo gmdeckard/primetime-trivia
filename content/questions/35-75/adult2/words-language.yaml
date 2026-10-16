@@ -37,7 +37,7 @@ questions:
     prompt: What does the AM in clock time stand for?
     answer: Ante meridiem
     distractors: [After morning, Anno medius, At morning]
-    fact: Before midday, from Latin. Which makes twelve AM and twelve PM both nonsense, and why timetables say noon and midnight.
+    fact: Before midday, from Latin. Noon is the midday the other two are measured from, which is why twelve AM and twelve PM are ambiguous and why timetables say noon and midnight instead.
 
   - id: a2-wrd-006
     difficulty: 2
@@ -62,10 +62,10 @@ questions:
 
   - id: a2-wrd-009
     difficulty: 3
-    prompt: What does the longest word in most English dictionaries name?
+    prompt: What does the forty-five-letter word usually called the longest in English name?
     answer: A lung disease from inhaling dust
     distractors: [A fear of long words, A system of classifying minerals, A branch of microscopy]
-    fact: Forty-five letters, and it was coined partly to be long. Working doctors call it silicosis.
+    fact: Pneumonoultramicroscopicsilicovolcanoconiosis, coined partly to be long and carried by some dictionaries but not others. Working doctors call it silicosis.
 
   - id: a2-wrd-010
     difficulty: 3
@@ -107,7 +107,7 @@ questions:
     prompt: What is the subjunctive mood used for?
     answer: Wishes, demands and things contrary to fact
     distractors: [Actions completed in the past, Questions expecting a yes, Commands given directly]
-    fact: 'It is nearly gone from English but survives in fixed phrases: if I were you, be that as it may, God save the queen.'
+    fact: 'Its range has narrowed rather than gone: it survives in fixed phrases and after verbs of demand, as in if I were you, be that as it may, and I suggest that he leave.'
 
   - id: a2-wrd-016
     difficulty: 3
@@ -149,7 +149,7 @@ questions:
     prompt: Finnish and Hungarian belong to which language family?
     answer: Uralic
     distractors: [Indo-European, Altaic, Caucasian]
-    fact: They are related to each other about as closely as English is to Persian, which is to say barely. Neither is related to the languages that surround them.
+    fact: They sit in separate branches of the family, Finnic and Ugric, and are related about as closely as English is to Persian. Finnish has Estonian and Sami for company; Hungarian has no relative anywhere near it.
 
   - id: a2-wrd-022
     difficulty: 3

@@ -58,7 +58,7 @@ questions:
     prompt: Which is the highest capital city in the world?
     answer: La Paz
     distractors: [Quito, Bogota, Kathmandu]
-    fact: Over eleven thousand feet, high enough that visitors are told to do nothing for a day. Fires burn poorly and the city's airport has one of the longest runways anywhere.
+    fact: Over eleven thousand feet, high enough that visitors are told to do nothing for a day. It is Bolivia's seat of government rather than its constitutional capital, which is Sucre. Fires burn poorly and the airport has one of the longest runways anywhere.
 
   - id: a2-geo-009
     difficulty: 3
@@ -202,10 +202,10 @@ questions:
 
   - id: a2-geo-029
     difficulty: 4
-    prompt: Which river carries the water over Iguazu Falls on the Brazil-Argentina border?
+    prompt: Iguazu Falls pour into which far larger river a few miles downstream?
     answer: The Parana
     distractors: [The Uruguay, The Paraguay, The Negro]
-    fact: The falls are nearly two miles of cliff in two hundred and seventy separate drops. A dam downstream was for years the largest producer of hydroelectricity on earth.
+    fact: The falls themselves are on the Iguazu, a tributary. They run nearly two miles of cliff in two hundred and seventy separate drops, and a dam below the junction was for years the largest producer of hydroelectricity on earth.
 
   - id: a2-geo-030
     difficulty: 4
@@ -237,17 +237,17 @@ questions:
 
   - id: a2-geo-034
     difficulty: 4
-    prompt: Which strait is the busiest shipping channel in the world?
+    prompt: Which strait carries more cargo tonnage than any other in the world?
     answer: The Strait of Malacca
     distractors: [The Strait of Hormuz, The English Channel, The Bab-el-Mandeb]
     fact: About a quarter of all traded goods pass through it, and at its narrowest it is under two miles wide, which has kept piracy in business there for centuries.
 
   - id: a2-geo-035
     difficulty: 4
-    prompt: Which is the northernmost capital city in the world?
+    prompt: Which is the northernmost capital of a sovereign country?
     answer: Reykjavik
     distractors: [Helsinki, Oslo, Nuuk]
-    fact: It sits just under the Arctic Circle and is heated almost entirely by geothermal water piped from the ground, which is why the city has no smoke.
+    fact: It sits just under the Arctic Circle and is heated almost entirely by geothermal water piped from the ground, which is why the city has no smoke. Nuuk lies further north but governs a territory rather than a country.
 
   - id: a2-geo-036
     difficulty: 2
@@ -321,10 +321,10 @@ questions:
 
   - id: a2-geo-046
     difficulty: 3
-    prompt: Which river flows through Cairo and Khartoum?
-    answer: The Nile
-    distractors: [The Niger, The Limpopo, The Orange]
-    fact: Its two branches meet in the Sudanese capital, one coming from the Ethiopian highlands and carrying most of the flood water.
+    prompt: Which country spans eleven time zones?
+    answer: Russia
+    distractors: [The United States, China, Kazakhstan]
+    fact: They run from the Baltic to the Bering Strait. China is wide enough for five and keeps every clock in the country on Beijing time anyway.
 
   - id: a2-geo-047
     difficulty: 3

@@ -46,10 +46,10 @@ questions:
 
   - id: a2-inv-006
     difficulty: 2
-    prompt: Who devised the code of dots and dashes used on the telegraph?
+    prompt: Whose name is on the code of dots and dashes used on the telegraph?
     answer: Samuel Morse
     distractors: [Charles Wheatstone, Joseph Henry, Alfred Vail]
-    fact: His assistant Alfred Vail did much of the work on the code itself, including counting the letters in a printer's type case to decide which should be shortest.
+    fact: His assistant Alfred Vail did much of the work on the code itself, including counting the letters in a printer's type case to decide which should be shortest, and got none of the billing.
 
   - id: a2-inv-007
     difficulty: 2
@@ -189,7 +189,7 @@ questions:
     prompt: Which inventor's alternating current system beat Edison's direct current for distributing power?
     answer: Nikola Tesla's
     distractors: [Michael Faraday's, Charles Steinmetz's, Lord Kelvin's]
-    fact: Alternating current can be stepped up for long distances and back down for use, which is the whole argument. Edison spent years staging demonstrations of how dangerous the rival was.
+    fact: Alternating current can be stepped up for long distances and back down for use, which is the whole argument. He sold the patents to George Westinghouse, who had the factories and the nerve to build it out. Edison spent years staging demonstrations of how dangerous the rival was.
 
   - id: a2-inv-027
     difficulty: 4

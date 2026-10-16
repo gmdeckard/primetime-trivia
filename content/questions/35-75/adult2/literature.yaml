@@ -244,7 +244,7 @@ questions:
 
   - id: a2-lit-035
     difficulty: 4
-    prompt: Whose novel A Confederacy of Dunces won a Pulitzer eleven years after his suicide?
+    prompt: Whose novel A Confederacy of Dunces won a Pulitzer twelve years after his suicide?
     answer: John Kennedy Toole
     distractors: [Walker Percy, James Agee, Harper Crane]
     fact: His mother carried the smudged carbon copy to a novelist at a Louisiana university until he agreed to read it. He had died at thirty-one, unpublished.
