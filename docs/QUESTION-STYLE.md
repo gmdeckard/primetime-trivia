@@ -76,17 +76,20 @@ memorised it, drop the question.
 ```
 content/questions/
   35-75/          the adult room, and the bulk of the bank
-    geography.yaml
-    sports.yaml
-    ...
+    adult1/
+      geography.yaml
+      sports.yaml
+      ...
+    adult2/       the same categories, a second night's worth
   8-12/
   shared/         in play whichever group the MC picks
     tiebreakers.yaml
 ```
 
-**The folder is the age group.** `content/questions/8-12/geography.yaml` is
-geography written for children; `content/questions/35-75/geography.yaml` is
-geography for the adult room. The loader tags every question in a folder with
+**The outermost folder is the age group.** `content/questions/8-12/geography.yaml`
+is geography written for children; `content/questions/35-75/adult1/geography.yaml`
+is geography for the adult room. A folder inside it keeps the age group above
+it, which is how a pack gets its own directory without changing who it is for. The loader tags every question in a folder with
 that folder's name, so a file never has to say its own `audience:` — and the
 two sets of geography questions are now a directory apart instead of being
 told apart by reading them.

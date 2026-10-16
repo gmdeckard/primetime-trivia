@@ -163,15 +163,19 @@ debugging a night wants to open it and read it.
 
 ```
 content/questions/
-  35-75/         geography.yaml, sports.yaml, …
+  35-75/
+    adult1/      geography.yaml, sports.yaml, …
+    adult2/      the same categories again
   8-12/
   shared/        tiebreakers.yaml
 ```
 
-**The folder names the age group**, and `loadBank` tags every question in it
+**The outermost folder names the age group**, and `loadBank` tags every question in it
 accordingly (`audienceFromPath` in `src/server/content.ts`). A file may still
 name its own `audience:` and that wins, because explicit beats implicit, but
-nothing in the bank needs to any more.
+nothing in the bank needs to any more. A deeper folder keeps the top one, so
+everything under `35-75/adult2/` is still 35-75; the pack a question belongs
+to comes from the `pack:` header inside the file, not from the folder name.
 
 `shared/` names no group: what is in it is untagged, and an untagged question
 is in play whoever is playing. The numeric tiebreakers live there because a

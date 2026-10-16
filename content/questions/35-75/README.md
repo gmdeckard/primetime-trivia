@@ -25,3 +25,12 @@ What that means for writing:
 Questions carrying an `a35-` id prefix came from the old 35-55 set. The prefix
 no longer names a category or a group and is kept only so the ids stay stable;
 everything else is prefixed by its category.
+
+## Packs
+
+The questions sit one folder down, in a folder per pack: `adult1/` is the
+original bank and `adult2/` the thousand written next to it. The folder name
+is for a person reading the directory — what actually tags a question is the
+`pack:` header at the top of each file, and the age group comes from this
+folder rather than the one below it. The MC picks which packs are in play for
+a night in Setup.

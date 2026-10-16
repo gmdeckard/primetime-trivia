@@ -272,9 +272,10 @@ entries.
 one file per category inside it:
 
 ```
-content/questions/35-75/geography.yaml     the adult room, 824 questions
-content/questions/8-12/…                   80
-content/questions/shared/tiebreakers.yaml  in play on every night
+content/questions/35-75/adult1/geography.yaml  the adult room, 824 questions
+content/questions/35-75/adult2/geography.yaml  a second adult pack, 1000
+content/questions/8-12/…                       80
+content/questions/shared/tiebreakers.yaml      in play on every night
 ```
 
 **The folder is the age group.** Picking one in Setup swaps the night's

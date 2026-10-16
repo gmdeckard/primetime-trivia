@@ -10,9 +10,10 @@ season without repeats.
    plausible distractors and the required `fact` field are what keep the game
    worth playing for this audience — they are not formalities.
 2. Find the age group your questions are for — `content/questions/35-75/` is
-   the adult room and most of the bank — and add to the file for your category
-   inside it, or create one named after the category. **The folder sets the
-   age group**, so the file does not need to say so. Anything that genuinely
+   the adult room and most of the bank — then the pack inside it, and add to
+   the file for your category, or create one named after the category.
+   **The outer folder sets the age group**, so the file does not need to say
+   so; the `pack:` header at the top of the file sets the pack. Anything that genuinely
    suits every age equally goes in `content/questions/shared/`, which is a
    short list: today it is the numeric tiebreakers.
 3. Run the checks:
