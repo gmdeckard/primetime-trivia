@@ -1,0 +1,255 @@
+category: invention-tech
+pack:
+  id: adult2
+  name: Adult set 2
+
+# Thinned to 22 when computing and consumer electronics were split out of it,
+# which left the category closer to what its blurb always promised: what got
+# built, and who got the credit instead. Plenty here was patented by someone
+# whose name did not end up on the thing.
+
+questions:
+  - id: a2-inv-001
+    difficulty: 2
+    prompt: Which fastener was inspired by burrs sticking to a dog's coat?
+    answer: Velcro
+    distractors: [The zipper, The snap fastener, The safety pin]
+    fact: George de Mestral looked at the burrs under a microscope in 1941 and spent eight years working out how to make hooks and loops by machine.
+
+  - id: a2-inv-002
+    difficulty: 2
+    prompt: What did Levi Strauss and Jacob Davis patent in 1873?
+    answer: Riveted work pants
+    distractors: [The sewing machine needle, Canvas tents, The cotton duck jacket]
+    fact: The tailor had the idea and could not afford the patent fee, so he wrote to his cloth supplier proposing they file together.
+
+  - id: a2-inv-003
+    difficulty: 2
+    prompt: What is Kevlar best known for stopping?
+    answer: Bullets
+    distractors: [Fire, Water, Radiation]
+    fact: It is five times stronger than steel by weight. The chemist who found it thought at first that the cloudy liquid she had made was a mistake and should be thrown out.
+
+  - id: a2-inv-004
+    difficulty: 2
+    prompt: What does a patent give its holder?
+    answer: The right to stop others using the invention for a limited term
+    distractors: [Ownership of the idea forever, A guarantee the invention works, A government subsidy to develop it]
+    fact: The bargain is publication in exchange for protection. The description has to be good enough for someone else to build it once the term runs out.
+
+  - id: a2-inv-005
+    difficulty: 2
+    prompt: Which Swedish chemist invented dynamite and left his fortune to a set of prizes?
+    answer: Alfred Nobel
+    distractors: [Alfred Krupp, Carl Zeiss, Anders Celsius]
+    fact: A French paper printed his obituary by mistake and called him a merchant of death. He rewrote his will the following year.
+
+  - id: a2-inv-006
+    difficulty: 2
+    prompt: Who devised the code of dots and dashes used on the telegraph?
+    answer: Samuel Morse
+    distractors: [Charles Wheatstone, Joseph Henry, Alfred Vail]
+    fact: His assistant Alfred Vail did much of the work on the code itself, including counting the letters in a printer's type case to decide which should be shortest.
+
+  - id: a2-inv-007
+    difficulty: 2
+    prompt: What did the zipper replace on most clothing and bags?
+    answer: Buttons and hooks
+    distractors: [Laces only, Pins, Buckles]
+    fact: It was sold for twenty years as a boot fastener before the clothing trade would touch it, and the name came from a rubber company that liked the sound it made.
+
+  - id: a2-inv-008
+    difficulty: 3
+    prompt: Which American's safety brake made the passenger elevator possible?
+    answer: Elisha Otis
+    distractors: [George Pullman, George Westinghouse, Peter Cooper]
+    fact: He demonstrated it at a New York fair in 1854 by having the rope cut while he stood on the platform. Elevators existed before; what he sold was the confidence to ride one.
+
+  - id: a2-inv-009
+    difficulty: 3
+    prompt: What did Josephine Cochrane patent in 1886 after breaking too much china?
+    answer: The dishwasher
+    distractors: [The washing machine, The carpet sweeper, The icebox]
+    fact: She built it because her servants chipped the heirloom plates. Hotels and restaurants bought it for decades before households did.
+
+  - id: a2-inv-010
+    difficulty: 3
+    prompt: What did Garrett Morgan's 1923 patent add to the traffic signal?
+    answer: A third position warning that it was about to change
+    distractors: [The color yellow, An electric timer, A pedestrian button]
+    fact: Before it, signals went straight from stop to go and drivers had no warning at all. He sold the patent to General Electric for forty thousand dollars.
+
+  - id: a2-inv-011
+    difficulty: 3
+    prompt: What was the first product scanned at a supermarket checkout using a bar code, in 1974?
+    answer: A pack of chewing gum
+    distractors: [A carton of milk, A loaf of bread, A can of soup]
+    fact: It was chosen to prove the scanner could read a code on something small. The pack is in a museum.
+
+  - id: a2-inv-012
+    difficulty: 3
+    prompt: Which safety device did Volvo patent in 1959 and then let every other maker use free?
+    answer: The three-point seat belt
+    distractors: [The crumple zone, The airbag, The anti-lock brake]
+    fact: The company decided the invention was worth more as a standard than as an advantage, and the engineer who designed it is credited with more saved lives than almost anyone.
+
+  - id: a2-inv-013
+    difficulty: 3
+    prompt: What did Percy Shaw invent in 1934 after driving a foggy road at night?
+    answer: Reflecting road studs
+    distractors: [The fog lamp, The white center line, The reflective road sign]
+    fact: The usual story is that he saw a cat's eyes in his headlights. His design pushed the reflectors down into a rubber pad when a wheel passed over, which wiped them clean.
+
+  - id: a2-inv-014
+    difficulty: 3
+    prompt: Which French mathematician built a working mechanical calculator in 1642, aged nineteen?
+    answer: Blaise Pascal
+    distractors: [René Descartes, Gottfried Leibniz, Pierre de Fermat]
+    fact: He built it for his father, a tax official drowning in sums. About twenty were made and almost nobody could afford one.
+
+  - id: a2-inv-015
+    difficulty: 3
+    prompt: What did Chester Greenwood patent in 1877, at the age of fifteen?
+    answer: Earmuffs
+    distractors: [The snow shovel, The thermos, Ice skates]
+    fact: His ears hurt while skating and he bent wire into loops and had his grandmother sew fur onto them. He manufactured them in Maine for the next sixty years.
+
+  - id: a2-inv-016
+    difficulty: 3
+    prompt: What does a Fresnel lens use instead of a thick curved piece of glass?
+    answer: Concentric rings that bend light the same way
+    distractors: [A stack of thin flat sheets, A mirror behind the lamp, A rotating prism]
+    fact: It made lighthouse lenses light enough to float on mercury and turn with a clockwork weight, and the same idea is now moulded into plastic on the back window of a van.
+
+  - id: a2-inv-017
+    difficulty: 3
+    prompt: Which 1869 invention let one brakeman stop a whole train from the locomotive?
+    answer: The air brake
+    distractors: [The coupler, The steam governor, The block signal]
+    fact: 'Before it, brakemen ran along the roofs of moving cars turning wheels by hand. Westinghouse''s design also fails safe: losing pressure applies the brakes rather than releasing them.'
+
+  - id: a2-inv-018
+    difficulty: 3
+    prompt: Which everyday object did Walter Hunt invent in 1849 in three hours, to pay off a debt?
+    answer: The safety pin
+    distractors: [The paper clip, The stapler, The clothes peg]
+    fact: He sold the rights for four hundred dollars, which covered what he owed. He had also built an early sewing machine and declined to patent it, fearing it would put seamstresses out of work.
+
+  - id: a2-inv-019
+    difficulty: 3
+    prompt: What did Margaret Knight's 1871 machine produce, after she fought a court case to prove she had designed it?
+    answer: Flat-bottomed paper bags
+    distractors: [Cardboard boxes, Envelopes, Paper cups]
+    fact: A man who had seen her machine being built filed first, arguing a woman could not have designed it. She produced her drawings and won.
+
+  - id: a2-inv-020
+    difficulty: 3
+    prompt: What did the Wright brothers build in 1901 to solve the problem their gliders kept revealing?
+    answer: A wind tunnel
+    distractors: [A catapult launcher, A larger workshop, A lightweight engine]
+    fact: The published lift tables everyone relied on turned out to be wrong. They tested two hundred wing shapes themselves and trusted their own numbers instead.
+
+  - id: a2-inv-021
+    difficulty: 3
+    prompt: Which lubricant's name records that the fortieth attempt at the formula was the one that worked?
+    answer: WD-40
+    distractors: [3-IN-ONE, Loctite, Liquid Wrench]
+    fact: It stands for water displacement, fortieth formula. It was developed to stop a missile skin from rusting and workers started smuggling cans home.
+
+  - id: a2-inv-022
+    difficulty: 3
+    prompt: What did an accidental pocketful of melted chocolate lead Percy Spencer to realize?
+    answer: That magnetron waves could cook food
+    distractors: [That the waves were dangerous to stand near, That the chocolate was improperly stored, That the equipment was overheating]
+    fact: The second thing he tried was popcorn and the third was an egg, which exploded in a colleague's face.
+
+  - id: a2-inv-023
+    difficulty: 3
+    prompt: What was the first synthetic dye, discovered by accident in 1856 by an eighteen-year-old trying to make quinine?
+    answer: Mauveine
+    distractors: [Indigo, Prussian blue, Alizarin]
+    fact: 'William Perkin''s purple made him rich and made the modern chemical industry: it showed that coal tar was worth something, and the German dye firms that followed became the pharmaceutical giants.'
+
+  - id: a2-inv-024
+    difficulty: 3
+    prompt: Which machine did Joseph Marie Jacquard control with punched cards in 1804?
+    answer: A loom
+    distractors: [A printing press, A clock, A spinning wheel]
+    fact: The cards stored the pattern rather than the cloth, which is the idea that reached computing a century and a half later by way of a census.
+
+  - id: a2-inv-025
+    difficulty: 4
+    prompt: What did the Phoebus cartel agree in 1925 to limit?
+    answer: How long a light bulb would last
+    distractors: [The price of copper wire, The voltage of domestic supply, The export of tungsten]
+    fact: Member firms were fined if their bulbs lasted beyond a thousand hours. It is the clearest documented case of planned obsolescence there is.
+
+  - id: a2-inv-026
+    difficulty: 4
+    prompt: Which inventor's alternating current system beat Edison's direct current for distributing power?
+    answer: Nikola Tesla's
+    distractors: [Michael Faraday's, Charles Steinmetz's, Lord Kelvin's]
+    fact: Alternating current can be stepped up for long distances and back down for use, which is the whole argument. Edison spent years staging demonstrations of how dangerous the rival was.
+
+  - id: a2-inv-027
+    difficulty: 4
+    prompt: What did Thomas Midgley add to gasoline in 1921, and to refrigerators a decade later?
+    answer: Tetraethyl lead, then chlorofluorocarbons
+    distractors: ["Benzene, then ammonia", "Ethanol, then propane", "Toluene, then methyl bromide"]
+    fact: Both solved the problem in front of him and both turned out to be catastrophic. One historian wrote that he had more impact on the atmosphere than any other single organism.
+
+  - id: a2-inv-028
+    difficulty: 4
+    prompt: Which typewriter layout was sold to Remington in 1873 and never displaced?
+    answer: QWERTY
+    distractors: [Dvorak, Blickensderfer, Hammond]
+    fact: The usual story that it was designed to slow typists down is doubtful. Spacing common pairs across the machine to stop the typebars clashing explains it better.
+
+  - id: a2-inv-029
+    difficulty: 4
+    prompt: Which 1938 material did a DuPont chemist find after a pressurized cylinder of gas came out empty but heavy?
+    answer: Teflon
+    distractors: [Polystyrene, Perspex, Polyethylene]
+    fact: The gas had polymerized against the walls. It was classified during the war because it was one of the few things that would hold uranium hexafluoride without being eaten.
+
+  - id: a2-inv-030
+    difficulty: 4
+    prompt: What does a Jacquard card, a player piano roll and a Hollerith card have in common?
+    answer: They store instructions as holes
+    distractors: [They are all made of brass, They were all patented in Britain, They all drive a motor directly]
+    fact: Each one separates the machine from the job it is doing, which is the step that made a general-purpose machine conceivable.
+
+  - id: a2-inv-031
+    difficulty: 4
+    prompt: Which 1931 invention by Harold Edgerton froze a drop of milk in mid-splash?
+    answer: The electronic flash
+    distractors: [The light meter, The telephoto lens, The motor drive]
+    fact: Flash powder had existed for decades and could not be repeated quickly or timed precisely. A strobe firing in a millionth of a second could do both.
+
+  - id: a2-inv-032
+    difficulty: 4
+    prompt: What did Ruth Wakefield run out of in 1938, producing a result she had not intended?
+    answer: Baker's chocolate, so she chopped up a bar instead
+    distractors: ["Flour, so she used oats", "Butter, so she used lard", "Sugar, so she used molasses"]
+    fact: She expected the pieces to melt through the dough and they held their shape. She sold the recipe to Nestlé, reportedly for a dollar and a lifetime supply of chocolate.
+
+  - id: a2-inv-033
+    difficulty: 4
+    prompt: Which 1839 accident on a hot stove gave Charles Goodyear the process he had spent years hunting?
+    answer: Rubber mixed with sulfur was dropped on it
+    distractors: [A rubber sheet was left in brine, A batch was cooled too quickly, Rubber was mixed with lime by mistake]
+    fact: He died about two hundred thousand dollars in debt, having spent everything defending patents. The tire company took his name sixty years later and never paid his family.
+
+  - id: a2-inv-034
+    difficulty: 4
+    prompt: What did Wallace Carothers' team at DuPont produce in 1930, four years before nylon?
+    answer: Neoprene
+    distractors: [Rayon, Polyester, Acrylic]
+    fact: It was the first commercially successful synthetic rubber, and it mattered enormously when the Pacific war cut the United States off from natural rubber.
+
+  - id: a2-inv-035
+    difficulty: 4
+    prompt: Which 1946 container borrowed its airtight seal from the lid of a paint can?
+    answer: Tupperware
+    distractors: [The Thermos, Saran Wrap, The pressure cooker]
+    fact: It sold badly in shops because nobody could work out how the seal was supposed to burp, and well at parties where somebody could show them. The party became the entire business.
