@@ -1,0 +1,250 @@
+category: words-language
+pack:
+  id: adult2
+  name: Adult set 2
+
+questions:
+  - id: a2-wrd-001
+    difficulty: 2
+    prompt: What does RSVP stand for?
+    answer: A French phrase meaning please reply
+    distractors: [A Latin phrase meaning kindly confirm, An English abbreviation for reply soon via post, An Italian phrase meaning answer at once]
+    fact: Repondez s'il vous plait. It survives in English because eighteenth-century polite society conducted its invitations in French.
+
+  - id: a2-wrd-002
+    difficulty: 2
+    prompt: What is a synonym?
+    answer: A word with nearly the same meaning as another
+    distractors: [A word with the opposite meaning, A word spelled the same but pronounced differently, A word borrowed from another language]
+    fact: True synonyms barely exist. English kept both the Anglo-Saxon and the French word for many things, and the pair almost never means exactly the same thing.
+
+  - id: a2-wrd-003
+    difficulty: 2
+    prompt: What does the prefix bi- mean?
+    answer: Two
+    distractors: [Three, Half, Against]
+    fact: Which is why biannual and biennial are so confusing that careful writers avoid both and say twice a year or every two years.
+
+  - id: a2-wrd-004
+    difficulty: 2
+    prompt: Which language gave English the word kindergarten?
+    answer: German
+    distractors: [Dutch, Swedish, Yiddish]
+    fact: It means children's garden, and it was a deliberate choice by the man who invented the idea in the 1830s, who thought of children as plants to be tended.
+
+  - id: a2-wrd-005
+    difficulty: 2
+    prompt: What does the AM in clock time stand for?
+    answer: Ante meridiem
+    distractors: [After morning, Anno medius, At morning]
+    fact: Before midday, from Latin. Which makes twelve AM and twelve PM both nonsense, and why timetables say noon and midnight.
+
+  - id: a2-wrd-006
+    difficulty: 2
+    prompt: What is a homograph?
+    answer: A word spelled like another but with a different meaning
+    distractors: [A word that sounds like another, A word with no rhyme, A word borrowed unchanged from Greek]
+    fact: Bow, lead and wind all qualify. Some are also pronounced differently, which is how a sentence can need reading twice.
+
+  - id: a2-wrd-007
+    difficulty: 2
+    prompt: What does vice versa mean?
+    answer: The other way around
+    distractors: [In place of, By the same token, Against the grain]
+    fact: Literally the position having been turned, from Latin. The first word has nothing to do with vice and everything to do with substitution, as in vice president.
+
+  - id: a2-wrd-008
+    difficulty: 3
+    prompt: What does the German loanword schadenfreude mean?
+    answer: Pleasure at another's misfortune
+    distractors: [Regret at one's own success, Sorrow shared between friends, Satisfaction at a job finished]
+    fact: Damage-joy, literally. English has no native word for it, which is why the German one was taken in whole in the nineteenth century.
+
+  - id: a2-wrd-009
+    difficulty: 3
+    prompt: What does the longest word in most English dictionaries name?
+    answer: A lung disease from inhaling dust
+    distractors: [A fear of long words, A system of classifying minerals, A branch of microscopy]
+    fact: Forty-five letters, and it was coined partly to be long. Working doctors call it silicosis.
+
+  - id: a2-wrd-010
+    difficulty: 3
+    prompt: What is a spoonerism?
+    answer: Swapped initial sounds between words
+    distractors: [A word invented for a single occasion, A deliberately mixed metaphor, A phrase repeated for emphasis]
+    fact: Named for an Oxford warden who was said to produce them constantly, though only one or two are reliably his. A well-oiled bicycle becomes a well-boiled icicle.
+
+  - id: a2-wrd-011
+    difficulty: 3
+    prompt: Which two words were blended to make smog?
+    answer: Smoke and fog
+    distractors: [Smoke and grog, Smut and fog, Steam and fog]
+    fact: Coined by a London doctor in 1905 for the city's winter air. The word crossed to Los Angeles, where the cause turned out to be sunlight acting on car exhaust.
+
+  - id: a2-wrd-012
+    difficulty: 3
+    prompt: What did the French word behind sabotage originally mean?
+    answer: A wooden shoe
+    distractors: [A broken tool, A night watchman, A short fuse]
+    fact: The story about workers throwing clogs into machinery is almost certainly invented. The verb first meant to work clumsily, as if walking in heavy shoes.
+
+  - id: a2-wrd-013
+    difficulty: 3
+    prompt: What does per se mean?
+    answer: By itself
+    distractors: [In order, As follows, For each one]
+    fact: From Latin, and used to separate a thing from its circumstances. It is not an intensifier, though it is often dropped into a sentence as one.
+
+  - id: a2-wrd-014
+    difficulty: 3
+    prompt: What is a malapropism?
+    answer: Using a similar-sounding wrong word
+    distractors: [Using a word in the wrong tense, Inventing a word to fill a gap, Repeating a word for effect]
+    fact: Named for a character in a 1775 play who was the pineapple of politeness. The device is older than the name by at least two centuries.
+
+  - id: a2-wrd-015
+    difficulty: 3
+    prompt: What is the subjunctive mood used for?
+    answer: Wishes, demands and things contrary to fact
+    distractors: [Actions completed in the past, Questions expecting a yes, Commands given directly]
+    fact: 'It is nearly gone from English but survives in fixed phrases: if I were you, be that as it may, God save the queen.'
+
+  - id: a2-wrd-016
+    difficulty: 3
+    prompt: Which alphabet is used to write Russian?
+    answer: Cyrillic
+    distractors: [Glagolitic, Greek, Runic]
+    fact: It is named for a ninth-century missionary who actually devised an earlier, stranger-looking alphabet. His students simplified it using Greek letters.
+
+  - id: a2-wrd-017
+    difficulty: 3
+    prompt: What does ad hoc mean?
+    answer: For this particular purpose
+    distractors: [In addition, Beforehand, Without authority]
+    fact: An ad hoc committee is formed for one job and dissolved after. The sense of improvised and flimsy came later and in English only.
+
+  - id: a2-wrd-018
+    difficulty: 3
+    prompt: What is a dangling modifier?
+    answer: A descriptive phrase with nothing sensible to describe
+    distractors: [A clause with no main verb, An adjective placed after its noun, A pronoun with two possible referents]
+    fact: Walking down the street, the buildings seemed taller. The buildings were not walking, but the sentence says they were.
+
+  - id: a2-wrd-019
+    difficulty: 3
+    prompt: What did the word nice mean when it entered English?
+    answer: Foolish or ignorant
+    distractors: [Precise and clean, Wealthy, Newly made]
+    fact: From the Latin for not knowing. It then meant fussy, then precise, which survives in a nice distinction, and only lately meant pleasant.
+
+  - id: a2-wrd-020
+    difficulty: 3
+    prompt: What is an eponym?
+    answer: A word taken from someone's name
+    distractors: [A word that imitates a sound, A word with a hidden meaning, A name given after death]
+    fact: Sandwich, boycott, diesel, leotard and guillotine all qualify. The man the last one is named for argued against the death penalty and wanted it to be painless.
+
+  - id: a2-wrd-021
+    difficulty: 3
+    prompt: Finnish and Hungarian belong to which language family?
+    answer: Uralic
+    distractors: [Indo-European, Altaic, Caucasian]
+    fact: They are related to each other about as closely as English is to Persian, which is to say barely. Neither is related to the languages that surround them.
+
+  - id: a2-wrd-022
+    difficulty: 3
+    prompt: What was a deadline before it meant a time limit?
+    answer: A line prisoners were shot for crossing
+    distractors: [The lowest level on a river gauge, A mark on a printing plate, A rope marking the edge of a mine shaft]
+    fact: The word is first recorded at a Civil War prison camp. The newspaper sense, a time after which copy would not be set, came decades later.
+
+  - id: a2-wrd-023
+    difficulty: 3
+    prompt: What does lingua franca literally mean?
+    answer: Frankish tongue
+    distractors: [Free speech, Common language, French tongue]
+    fact: It was a real pidgin of Italian, Arabic, Greek and Spanish spoken around the Mediterranean for trade. To Arabic speakers all western Europeans were Franks.
+
+  - id: a2-wrd-024
+    difficulty: 3
+    prompt: What is a reader being told by the abbreviation cf. in a footnote?
+    answer: Compare this with that
+    distractors: [See the earlier citation, The source could not be checked, The quotation continues]
+    fact: Short for the Latin confer, meaning bring together. It points at something worth setting beside the claim rather than something that proves it.
+
+  - id: a2-wrd-025
+    difficulty: 3
+    prompt: What is a gerund?
+    answer: A verb form used as a noun
+    distractors: [A verb used as an adjective, A noun used as a verb, A verb with no subject]
+    fact: Swimming is good for you uses one. The old rule against splitting it from its possessive is what makes people argue over my leaving versus me leaving.
+
+  - id: a2-wrd-026
+    difficulty: 4
+    prompt: What does the Sapir-Whorf hypothesis claim?
+    answer: That the language you speak shapes how you think
+    distractors: [That all languages share one deep grammar, That children learn grammar by imitation, That writing changes a language faster than speech]
+    fact: The strong version, that language limits thought, has not held up. The weak version, that it nudges attention, keeps turning up in experiments on color and direction.
+
+  - id: a2-wrd-027
+    difficulty: 4
+    prompt: How long did the first edition of the Oxford English Dictionary take to complete?
+    answer: Forty-nine years
+    distractors: [Twelve years, Twenty-five years, Seventy years]
+    fact: It was planned for ten. Volunteers mailed in millions of quotation slips, and one of the most prolific contributors was writing from an asylum for the criminally insane.
+
+  - id: a2-wrd-028
+    difficulty: 4
+    prompt: Who compiled the thesaurus published in 1852?
+    answer: Peter Mark Roget
+    distractors: [Samuel Johnson, James Murray, Henry Fowler]
+    fact: He was a doctor who made lists as a lifelong habit, apparently to hold off the mental illness that ran in his family. He was seventy-three when he published it.
+
+  - id: a2-wrd-029
+    difficulty: 4
+    prompt: What does hoi polloi mean?
+    answer: The common people
+    distractors: [The ruling few, The idle rich, The crowd at a market]
+    fact: It is Greek for the many, so "the hoi polloi" repeats the article. It is often misused to mean the opposite, the elite, by people who have heard hoity-toity.
+
+  - id: a2-wrd-030
+    difficulty: 4
+    prompt: What language did the Linear B tablets turn out to record?
+    answer: An early form of Greek
+    distractors: [An early form of Phoenician, A lost language of Crete, An early form of Hittite]
+    fact: An English architect cracked it in 1952 after a decade of spare-time work, proving the Mycenaeans spoke Greek five centuries earlier than anyone had allowed.
+
+  - id: a2-wrd-031
+    difficulty: 4
+    prompt: What is a shibboleth?
+    answer: A word whose pronunciation gives away where you are from
+    distractors: [A phrase repeated in ritual, A proverb with a hidden warning, A name too sacred to speak]
+    fact: The original was a Hebrew word used at a river crossing to pick out enemies who could not make the sh sound. They were killed on the spot.
+
+  - id: a2-wrd-032
+    difficulty: 4
+    prompt: What is the difference between to flaunt and to flout?
+    answer: Flaunt is to show off, flout is to defy
+    distractors: ["Flaunt is to defy, flout is to show off", "Flaunt is deliberate, flout is accidental", "They mean the same thing in American usage"]
+    fact: You flaunt your wealth and flout the law. The swap has been common for so long that some dictionaries now record it, which infuriates people.
+
+  - id: a2-wrd-033
+    difficulty: 4
+    prompt: What are the two branches of the surviving Celtic languages?
+    answer: Goidelic and Brythonic
+    distractors: [Gaulish and Pictish, Insular and Iberian, Manx and Cornish]
+    fact: Irish, Scottish Gaelic and Manx on one side; Welsh, Cornish and Breton on the other. A Welsh speaker and an Irish speaker share almost nothing.
+
+  - id: a2-wrd-034
+    difficulty: 4
+    prompt: In which ancient language are the Hindu scriptures written?
+    answer: Sanskrit
+    distractors: [Pali, Avestan, Tamil]
+    fact: A European's discovery in the 1780s that it was clearly related to Latin and Greek is where the whole study of language families began.
+
+  - id: a2-wrd-035
+    difficulty: 4
+    prompt: What is a calque?
+    answer: A phrase translated word for word from another language
+    distractors: [A word borrowed with its spelling intact, A word invented to replace a loanword, A phrase whose meaning has reversed]
+    fact: Skyscraper, flea market and brainwashing are all translations of foreign phrases or were translated into them. The word is French for a tracing.
