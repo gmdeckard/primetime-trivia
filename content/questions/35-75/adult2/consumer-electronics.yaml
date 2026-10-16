@@ -130,10 +130,10 @@ questions:
 
   - id: a2-cel-018
     difficulty: 3
-    prompt: Which Japanese company sold the first portable CD player, in 1984?
-    answer: Sony
-    distractors: [Panasonic, Sharp, Aiwa]
-    fact: It was barely thicker than the disc it played and skipped if you breathed on it. Anti-skip memory did not arrive for another decade.
+    prompt: What was the drawback of the first portable CD players, in 1984?
+    answer: They skipped at the slightest knock
+    distractors: [They could not play a full album, They needed mains power, They played only one side of the disc]
+    fact: Anti-skip memory, which reads ahead and holds a few seconds in reserve, did not arrive for about another decade.
 
   - id: a2-cel-019
     difficulty: 3
@@ -144,10 +144,10 @@ questions:
 
   - id: a2-cel-020
     difficulty: 3
-    prompt: Which company's Trinitron picture tube gave it a reputation for television pictures through the 1970s and 1980s?
-    answer: Sony
-    distractors: [Zenith, RCA, Magnavox]
-    fact: It used a single electron gun and a grille of vertical wires instead of a shadow mask, and the two faint horizontal lines across the screen are where those wires were braced.
+    prompt: What did the Trinitron picture tube use instead of a perforated shadow mask?
+    answer: A grille of fine vertical wires
+    distractors: [A curved glass filter, Three separate screens, A rotating color wheel]
+    fact: It let more of the beam through, so the picture was brighter. The two faint horizontal lines across those screens are where the wires were braced against vibration.
 
   - id: a2-cel-021
     difficulty: 3

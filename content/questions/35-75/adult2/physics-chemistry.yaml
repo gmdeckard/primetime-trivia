@@ -32,10 +32,10 @@ questions:
 
   - id: a2-phy-004
     difficulty: 2
-    prompt: Which part of an atom orbits the nucleus?
-    answer: The electron
-    distractors: [The proton, The neutron, The quark]
-    fact: Orbit is a convenient lie; the electron is better described as a cloud of probability. The picture of tidy rings comes from an early model nobody has believed for a century.
+    prompt: What is at the center of an atom?
+    answer: The nucleus
+    distractors: [The electron shell, The valence band, The ion]
+    fact: It holds nearly all the mass in about a hundred-thousandth of the width. If an atom were a sports stadium, the nucleus would be a pea on the center spot.
 
   - id: a2-phy-005
     difficulty: 2
@@ -95,10 +95,10 @@ questions:
 
   - id: a2-phy-013
     difficulty: 3
-    prompt: Which element is the most abundant in the universe?
-    answer: Hydrogen
-    distractors: [Oxygen, Carbon, Iron]
-    fact: About three quarters of ordinary matter by mass. Almost all the rest is helium, and everything else put together is a rounding error.
+    prompt: Which two elements make up about 98 percent of the ordinary matter in the universe?
+    answer: Hydrogen and helium
+    distractors: [Hydrogen and oxygen, Carbon and oxygen, Helium and neon]
+    fact: Everything heavier was made inside stars. The carbon, oxygen and iron that people are built from is a rounding error on the cosmic scale.
 
   - id: a2-phy-014
     difficulty: 3

@@ -1,0 +1,255 @@
+category: radio-comedy
+pack:
+  id: adult2
+  name: Adult set 2
+
+# The golden age of radio, and the joke in every form it took after. Adult set
+# 1 has the headline names; this covers the sponsors, the sound effects, the
+# writers nobody credited, and the stand-ups who changed what a set could be
+# about.
+
+questions:
+  - id: a2-rad-001
+    difficulty: 2
+    prompt: What is a laugh track?
+    answer: Recorded laughter added to a show
+    distractors: [A studio audience microphone, The warm-up comedian, A cue light for the audience]
+    fact: One engineer built a machine holding the only library of recorded laughs and rented himself out with it for thirty years, which is why so many shows laugh in the same voices.
+
+  - id: a2-rad-002
+    difficulty: 2
+    prompt: What did a radio sound effects artist use to imitate a horse's hooves?
+    answer: Coconut shells
+    distractors: [Wooden spoons, A metal drum, Two bricks]
+    fact: The sound crew worked in full view of the studio audience and were often the funniest thing in the room, which the comedians did not always appreciate.
+
+  - id: a2-rad-003
+    difficulty: 2
+    prompt: What is a pratfall?
+    answer: A deliberate fall onto the backside
+    distractors: [A joke that gets no laugh, A heckler's reply, A quick exit from the stage]
+    fact: Done properly it lands on the fleshy part and the noise comes from a slapped hand. Done improperly it ends a career, and several comedians did their own backs in.
+
+  - id: a2-rad-004
+    difficulty: 2
+    prompt: Which daytime drama format took its name from the companies that sponsored it?
+    answer: The soap opera
+    distractors: [The serial, The matinee, The talk show]
+    fact: Detergent makers paid for them because the audience at home was the one buying detergent. The name was a joke by the trade press that stuck.
+
+  - id: a2-rad-005
+    difficulty: 2
+    prompt: What is a "running gag"?
+    answer: A joke repeated through a show, getting funnier each time
+    distractors: [A joke told at speed, An opening monologue, A joke the audience shouts back]
+    fact: The hall closet full of junk that fell on Fibber McGee ran for twenty years and got a laugh every time, which is the whole principle.
+
+  - id: a2-rad-006
+    difficulty: 2
+    prompt: What is "slapstick" named after?
+    answer: A paddle that made a loud crack when it struck
+    distractors: [The slap of a pratfall, A stick used to signal the orchestra, The sound of a stage trapdoor]
+    fact: It was two thin boards hinged to smack together, so a stage blow sounded far worse than it was. It comes from Italian comedy, centuries before film.
+
+  - id: a2-rad-007
+    difficulty: 3
+    prompt: Which 1930s radio series dramatized real criminal cases with police cooperation?
+    answer: Gang Busters
+    distractors: [Calling All Cars, Mr District Attorney, Treasury Agent]
+    fact: It opened with sirens, marching feet and machine gun fire, which is where the phrase about coming on like gangbusters comes from.
+
+  - id: a2-rad-008
+    difficulty: 3
+    prompt: What was the obvious objection to a ventriloquist act on the radio?
+    answer: Nobody could see whether his lips moved
+    distractors: [The dummy needed its own microphone, The voices sounded identical on air, The jokes all depended on sight gags]
+    fact: The most popular ventriloquist on radio was widely said to have poor lip control, and it made no difference whatever to the ratings.
+
+  - id: a2-rad-009
+    difficulty: 3
+    prompt: Which comedy team's films included "Duck Soup" and "A Night at the Opera"?
+    answer: The Marx Brothers
+    distractors: [The Three Stooges, Laurel and Hardy, The Ritz Brothers]
+    fact: Duck Soup lost money on release and is now the one most often named as their best, which happened to a good deal of comedy from that decade.
+
+  - id: a2-rad-010
+    difficulty: 3
+    prompt: Which British comedy team's film work began with a BBC series in 1969?
+    answer: Monty Python
+    distractors: [The Goodies, Beyond the Fringe, The Two Ronnies]
+    fact: The BBC wiped a great deal of television from that era to reuse the tape. These survive because somebody in the team bought copies.
+
+  - id: a2-rad-011
+    difficulty: 3
+    prompt: Which comedian's 1960s albums were recorded in nightclubs and sold in their millions?
+    answer: Bill Cosby
+    distractors: [Shelley Berman, Jonathan Winters, Flip Wilson]
+    fact: The comedy album was briefly a major format, and a performer could reach more people with a record than with any television slot available to them.
+
+  - id: a2-rad-012
+    difficulty: 3
+    prompt: What was the Red Scare's effect on broadcasting in the early 1950s?
+    answer: Performers named in a pamphlet were quietly dropped
+    distractors: [Live comedy was banned outright, Scripts needed federal approval, Networks lost their licenses]
+    fact: The pamphlet was published by a private group and the networks treated it as binding. Some of those listed did not work again for a decade.
+
+  - id: a2-rad-013
+    difficulty: 3
+    prompt: Which piece of classical music became the theme of The Lone Ranger?
+    answer: Rossini's William Tell Overture
+    distractors: [Grieg's In the Hall of the Mountain King, Suppé's Light Cavalry Overture, Wagner's Ride of the Valkyries]
+    fact: Radio leaned on classical music because it was out of copyright and cost nothing to broadcast, which is how a generation learned the overtures without being told what they were.
+
+  - id: a2-rad-014
+    difficulty: 3
+    prompt: Which comedian was the first to host the Tonight Show, in 1954?
+    answer: Steve Allen
+    distractors: [Jack Paar, Johnny Carson, Ernie Kovacs]
+    fact: He invented a good deal of what the format still does, including taking the camera out into the street to talk to strangers.
+
+  - id: a2-rad-015
+    difficulty: 3
+    prompt: Which experimental comedian's 1950s television work used the camera itself as the joke?
+    answer: Ernie Kovacs
+    distractors: [Sid Caesar, Red Skelton, Garry Moore]
+    fact: He tilted an entire set three degrees and let a ball roll uphill. He died at forty-two and the networks wiped much of his work.
+
+  - id: a2-rad-016
+    difficulty: 3
+    prompt: Which comedian's variety show featured a tramp character called Freddie the Freeloader?
+    answer: Red Skelton
+    distractors: [Jackie Gleason, Danny Thomas, Dean Martin]
+    fact: He signed off every broadcast wishing the audience good night and God's blessing, and painted clowns in his own time, earning more from the canvases than from television.
+
+  - id: a2-rad-017
+    difficulty: 3
+    prompt: What was a "catchphrase" worth to a radio comedian?
+    answer: An audience that applauded before the joke
+    distractors: [A fee from the sponsor, A spot in the opening credits, A shorter script]
+    fact: Audiences would wait for the line and then cheer it. Performers complained about being trapped by them and kept using them anyway.
+
+  - id: a2-rad-018
+    difficulty: 3
+    prompt: Which radio drama series, narrated by its own ghostly host, ran under the name Inner Sanctum?
+    answer: A horror anthology opened by a creaking door
+    distractors: [A detective serial set in Chicago, A western anthology, A courtroom drama]
+    fact: The door was an actual studio door with a rusted hinge, and when it was finally oiled by mistake the show received complaints.
+
+  - id: a2-rad-019
+    difficulty: 3
+    prompt: Which insult comedian was billed, entirely against the evidence, as Mr Warmth?
+    answer: Don Rickles
+    distractors: [Buddy Hackett, Shecky Greene, Jack Carter]
+    fact: The act only worked because a room could tell he meant none of it. Performers queued up to be abused by him and took it as a compliment.
+
+  - id: a2-rad-020
+    difficulty: 3
+    prompt: Which British radio program has run a panel of comedians playing deliberately silly games since 1972?
+    answer: I'm Sorry I Haven't a Clue
+    distractors: [Just a Minute, The News Quiz, Round the Horne]
+    fact: It describes itself as the antidote to panel games. One of its rounds involves singing one song to the tune of another, which has no scoring system at all.
+
+  - id: a2-rad-021
+    difficulty: 3
+    prompt: What did the 1948 arrival of television do to network radio comedy?
+    answer: The stars and their sponsors moved across within a few years
+    distractors: ["Radio comedy grew, since sets were cheaper", "Networks banned simultaneous broadcast", "Radio switched entirely to music that year"]
+    fact: Several shows ran on both at once for a season, with the same cast performing twice. By the late 1950s the network radio schedule was mostly gone.
+
+  - id: a2-rad-022
+    difficulty: 3
+    prompt: What do comedians mean by crowd work?
+    answer: Talking with the audience instead of performing prepared material
+    distractors: [Warming up a room before the headliner, Writing jokes about that day's news, Performing with the audience on all sides]
+    fact: It is the part of a set that cannot be rehearsed, which is exactly why it is used to prove to a room that the performer is really there with them.
+
+  - id: a2-rad-023
+    difficulty: 4
+    prompt: Which 1930s radio serial was performed by two white actors playing Black characters, and drew audiences of forty million?
+    answer: Amos 'n' Andy
+    distractors: [The Goldbergs, Life with Luigi, Beulah]
+    fact: Cinemas stopped films to pipe it in so audiences would not stay home. Its television version used Black actors and was pulled after protests over the writing.
+
+  - id: a2-rad-024
+    difficulty: 4
+    prompt: Which comedian was Johnny Carson's permanent guest host before taking a rival late-night show in 1986?
+    answer: Joan Rivers
+    distractors: [Phyllis Diller, Totie Fields, Moms Mabley]
+    fact: He never spoke to her again. Her show was cancelled within the year and she spent a decade working her way back.
+
+  - id: a2-rad-025
+    difficulty: 4
+    prompt: Which comedian delivered his act holding a newspaper and talking about the day's news?
+    answer: Mort Sahl
+    distractors: [Shelley Berman, Bob Newhart, Dick Cavett]
+    fact: Before him a stand-up told jokes that could have been told any year. He is usually credited with making the form about what had happened that morning.
+
+  - id: a2-rad-026
+    difficulty: 4
+    prompt: What was a "blackout" sketch?
+    answer: A sketch ending on a single line and an instant cut to dark
+    distractors: [A sketch performed in silhouette, A sketch about a power cut, A sketch with the audience lights off]
+    fact: The form comes straight from vaudeville, where the stage lights really did go out, and it survives wherever a show needs to get off a joke fast.
+
+  - id: a2-rad-027
+    difficulty: 4
+    prompt: Which 1960s BBC radio comedy featured two characters speaking the slang called Polari?
+    answer: Round the Horne
+    distractors: [Beyond Our Ken, The Navy Lark, Hancock's Half Hour]
+    fact: Polari was used by gay men at a time when homosexuality was still a crime, and a great deal got past the censors because nobody upstairs understood a word of it.
+
+  - id: a2-rad-028
+    difficulty: 4
+    prompt: What did the Federal Communications Commission's 1978 ruling on a comedy monologue establish?
+    answer: That broadcasters could be regulated for indecency at hours children might listen
+    distractors: [That comedy was fully protected speech, That recordings needed warning labels, That live broadcast was exempt]
+    fact: The court accepted that broadcasting reaches the home uninvited, which is the argument that separates it from a record or a nightclub.
+
+  - id: a2-rad-029
+    difficulty: 4
+    prompt: Which long-running American radio variety show was broadcast from a theater in Minnesota?
+    answer: A Prairie Home Companion
+    distractors: [The National Barn Dance, Riders in the Sky, The Midnight Special]
+    fact: It invented a town, a lake, a hardware store and a brand of ketchup, and listeners wrote in asking how to visit.
+
+  - id: a2-rad-030
+    difficulty: 4
+    prompt: What did a radio "transcription disc" allow a network to do?
+    answer: Record a show and broadcast it later in another time zone
+    distractors: [Send a script by wire, Sell a program to a sponsor, Rehearse without the orchestra]
+    fact: Networks resisted them for years because they wanted everything live. Performers pushed for them because performing the same show twice in one night was exhausting.
+
+  - id: a2-rad-031
+    difficulty: 4
+    prompt: Which comedy writer was credited as the author of the line "I don't want to belong to any club that would accept me as a member"?
+    answer: Groucho Marx, in his own resignation letter
+    distractors: [S. J. Perelman, George S. Kaufman, Robert Benchley]
+    fact: He told the story himself and the club in question has never been identified with confidence, which is true of a good many lines attributed to him.
+
+  - id: a2-rad-032
+    difficulty: 4
+    prompt: Which 1950s television comedy was the first to be filmed before a live audience with three cameras at once?
+    answer: I Love Lucy
+    distractors: [The Honeymooners, The Jack Benny Program, Our Miss Brooks]
+    fact: Filming rather than broadcasting live is the reason the episodes survive in good quality, and the reason reruns became an industry.
+
+  - id: a2-rad-033
+    difficulty: 4
+    prompt: What was the "borscht belt"?
+    answer: Catskills resorts where generations of comedians learned the job
+    distractors: [A Chicago nightclub circuit, A radio network in the Midwest, A touring vaudeville route]
+    fact: A young comic might do three shows a night to audiences who had nowhere else to be. A striking share of American stand-up for forty years came through it.
+
+  - id: a2-rad-034
+    difficulty: 4
+    prompt: Which radio quiz show scandal of 1958 concerned television contestants being fed answers?
+    answer: The quiz show scandals, centered on Twenty-One
+    distractors: [The payola hearings, The Hiss hearings, The Kefauver inquiry]
+    fact: A congressional inquiry followed and the networks moved away from big-money quizzes for years. It is why game shows now carry a line about independent supervision.
+
+  - id: a2-rad-035
+    difficulty: 4
+    prompt: Which comedian's estate successfully argued that his act was a copyrightable work rather than just jokes?
+    answer: The principle that a comedian's material is protected like any writing
+    distractors: [That a joke cannot be copyrighted at all, That only recorded performances are protected, That a catchphrase can be trademarked]
+    fact: Comedians policed stealing among themselves long before the courts took an interest, and being known as a thief closed more doors than any lawsuit.

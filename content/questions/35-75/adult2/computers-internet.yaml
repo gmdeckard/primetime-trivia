@@ -52,7 +52,7 @@ questions:
     prompt: What is unsolicited bulk email commonly called?
     answer: Spam
     distractors: [Chaff, Static, Junk mail]
-    fact: The name comes from a Monty Python sketch in which a cafe menu is overrun by one item, drowning out everything else.
+    fact: The name comes from a television sketch in which a cafe menu is overrun by one item until it drowns out everything else on it.
 
   - id: a2-cmp-007
     difficulty: 2

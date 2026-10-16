@@ -178,5 +178,43 @@ if (twins.length) {
   console.log('  No two questions share an answer and most of their wording.');
 }
 
+// ------------------------------------------------- answer reused in category
+
+/**
+ * The same answer twice in one category, however differently it is worded.
+ *
+ * The pass above only reports a pair that shares an answer AND most of its
+ * wording, which misses the fault that actually keeps happening when a new
+ * batch is written next to an old one: reaching for the same obvious answer
+ * in completely different words. A category with Jack Benny as the answer to
+ * two questions will ask about him twice in a night sooner or later, and the
+ * deck cannot help because both are legitimately due.
+ */
+const inCategory = new Map<string, Question[]>();
+for (const q of choice) {
+  const k = `${q.audience ?? ''}::${q.category}::${norm(answerOf(q))}`;
+  (inCategory.get(k) ?? inCategory.set(k, []).get(k)!).push(q);
+}
+
+const reused: string[] = [];
+for (const group of inCategory.values()) {
+  if (group.length < 2) continue;
+  if (onlyPack && !group.some((q) => q.pack === onlyPack)) continue;
+  reused.push(
+    `  "${answerOf(group[0]!)}" in ${group[0]!.category}\n` +
+      group.map((q) => `    ${q.id} [${q.pack ?? 'core'}] ${q.prompt}`).join('\n'),
+  );
+}
+
+console.log('');
+if (reused.length) {
+  console.log(`  SAME ANSWER TWICE IN ONE CATEGORY  (${reused.length})`);
+  console.log('  ' + '─'.repeat(70));
+  for (const line of reused) console.log(line);
+  found += reused.length;
+} else {
+  console.log('  No answer is used twice within a single category.');
+}
+
 console.log(`\n  ${found} to look at. Nothing was changed.\n`);
 if (strict && found) process.exit(1);
