@@ -1,0 +1,258 @@
+category: computers-internet
+pack:
+  id: adult2
+  name: Adult set 2
+
+# Batch two. Ids carry an a2- prefix so a question's set is readable from its
+# id alone; the first batch kept the historical prefixes it was written with.
+#
+# Written for 35 to 75, which means the machines this room actually met: the
+# office PC, the dial-up modem, the browser wars. Nothing here needs you to
+# have been a programmer, and the handful that do go deeper are marked
+# difficulty 4 and sit alongside plenty that do not.
+
+questions:
+  - id: a2-cmp-001
+    difficulty: 2
+    prompt: How many bits make up one byte?
+    answer: Eight
+    distractors: [Four, Twelve, Sixteen]
+    fact: Eight bits give 256 possible values, which was enough for the alphabet, the digits and the punctuation, and the size stuck.
+
+  - id: a2-cmp-002
+    difficulty: 2
+    prompt: What does the "PC" in IBM PC stand for?
+    answer: Personal computer
+    distractors: [Program controller, Processing core, Portable console]
+    fact: IBM expected to sell a quarter of a million over five years. It passed that in the first year and the clones outsold the original within a decade.
+
+  - id: a2-cmp-003
+    difficulty: 2
+    prompt: Which key combination was the standard way to restart an early IBM PC?
+    answer: Control-Alt-Delete
+    distractors: [Control-Shift-Escape, Alt-F4, Control-Break]
+    fact: David Bradley put it on three keys far enough apart that nobody would hit all three by accident. He said he invented it but Bill Gates made it famous.
+
+  - id: a2-cmp-004
+    difficulty: 2
+    prompt: In an email address, what does the "@" sign separate?
+    answer: The user name from the host
+    distractors: [The first name from the surname, The password from the account, The country from the provider]
+    fact: Ray Tomlinson picked it in 1971 because it was on the keyboard and could not appear in anyone's name.
+
+  - id: a2-cmp-005
+    difficulty: 2
+    prompt: What did a modem do that made dial-up internet possible?
+    answer: Turned data into sound and back again
+    distractors: [Stored pages for reading offline, Split one line into several, Encrypted the connection]
+    fact: The noise it made on connecting was two modems agreeing on a speed. The name is short for modulator-demodulator.
+
+  - id: a2-cmp-006
+    difficulty: 2
+    prompt: What is unsolicited bulk email commonly called?
+    answer: Spam
+    distractors: [Chaff, Static, Junk mail]
+    fact: The name comes from a Monty Python sketch in which a cafe menu is overrun by one item, drowning out everything else.
+
+  - id: a2-cmp-007
+    difficulty: 2
+    prompt: What does "RAM" stand for in a computer specification?
+    answer: Random access memory
+    distractors: [Rapid array memory, Readable active memory, Runtime allocation module]
+    fact: Random access means any location can be reached as quickly as any other, which is what separates it from a tape.
+
+  - id: a2-cmp-008
+    difficulty: 3
+    prompt: Which admiral and mathematician popularized the term "debugging" and led the team behind COBOL?
+    answer: Grace Hopper
+    distractors: [Ada Lovelace, Jean Bartik, Katherine Johnson]
+    fact: Her team taped a moth found in a relay into the logbook in 1947. She also handed out lengths of wire cut to the distance light travels in a nanosecond.
+
+  - id: a2-cmp-009
+    difficulty: 3
+    prompt: Which programming language did IBM introduce in 1957 for scientific work?
+    answer: FORTRAN
+    distractors: [ALGOL, LISP, PL/I]
+    fact: The name is short for formula translation. It is still in use for weather and physics codes written decades ago and too valuable to rewrite.
+
+  - id: a2-cmp-010
+    difficulty: 3
+    prompt: Which web browser dominated the early commercial internet after its 1994 launch?
+    answer: Netscape Navigator
+    distractors: [Mosaic, Opera, Lynx]
+    fact: Mosaic came first and Netscape was built by several of the same people. Microsoft bundling its own browser with Windows ended Netscape's lead.
+
+  - id: a2-cmp-011
+    difficulty: 3
+    prompt: What is the name for the observation that the number of transistors on a chip doubles about every two years?
+    answer: Moore's Law
+    distractors: [Metcalfe's Law, Amdahl's Law, Shannon's Law]
+    fact: Gordon Moore wrote it as an industry observation in 1965, not a law of nature. It held for about fifty years because the industry planned around it.
+
+  - id: a2-cmp-012
+    difficulty: 3
+    prompt: Which machine did Charles Babbage design in the 1830s but never finish building?
+    answer: The Analytical Engine
+    distractors: [The Jacquard Loom, The Arithmometer, The Hollerith Tabulator]
+    fact: It had a store, a mill and punched-card input, which is a processor and memory by another name. A working one was not built in his lifetime or for long after.
+
+  - id: a2-cmp-013
+    difficulty: 3
+    prompt: What does "GUI" stand for, the thing that replaced typing commands?
+    answer: Graphical user interface
+    distractors: [General utility interpreter, Guided user input, Graphic unit indexer]
+    fact: Pronounced "gooey". The idea reached the public through the Macintosh in 1984, having been demonstrated at a research center years earlier.
+
+  - id: a2-cmp-014
+    difficulty: 3
+    prompt: What was the Y2K problem?
+    answer: Dates stored with two digits would roll over to 1900
+    distractors: [Clocks would lose a second each year, Networks would run out of addresses, Chips would overheat at the turn of the year]
+    fact: Several hundred billion dollars went on fixing it worldwide, and almost nothing failed, which left people arguing ever since about whether it was overblown.
+
+  - id: a2-cmp-015
+    difficulty: 3
+    prompt: Which social network launched at Harvard in 2004 before opening to everyone?
+    answer: Facebook
+    distractors: [MySpace, Friendster, LinkedIn]
+    fact: It required a harvard.edu address for its first months, then spread college by college before dropping the requirement in 2006.
+
+  - id: a2-cmp-016
+    difficulty: 3
+    prompt: Which operating system kernel did Linus Torvalds release in 1991 as a hobby project?
+    answer: Linux
+    distractors: [FreeBSD, Minix, Solaris]
+    fact: He announced it saying it was "just a hobby, won't be big and professional". It now runs most of the servers the internet is built on.
+
+  - id: a2-cmp-017
+    difficulty: 3
+    prompt: What is the term for a flaw that lets an attacker into a system before anyone has had a chance to fix it?
+    answer: A zero-day
+    distractors: [A back door, A rootkit, A honeypot]
+    fact: The name counts the days the defenders have had. A back door is deliberate, which is the difference.
+
+  - id: a2-cmp-018
+    difficulty: 3
+    prompt: Which online auction site opened in 1995, reportedly after a broken laser pointer sold for fourteen dollars?
+    answer: eBay
+    distractors: [Craigslist, QVC, Overstock]
+    fact: The founder emailed the buyer to check he understood it was broken. The buyer replied that he collected broken laser pointers.
+
+  - id: a2-cmp-019
+    difficulty: 3
+    prompt: What does a firewall do?
+    answer: Blocks network traffic that does not meet its rules
+    distractors: [Scans files for known viruses, Backs up data to another machine, Hides a computer's location]
+    fact: The name is borrowed from the wall between an engine and a passenger compartment, which is there to stop a fire spreading rather than to put it out.
+
+  - id: a2-cmp-020
+    difficulty: 3
+    prompt: Which company's research center produced the mouse-and-windows interface that the Macintosh later made famous?
+    answer: Xerox PARC
+    distractors: [Bell Labs, IBM Research, RAND]
+    fact: Its Alto had a mouse, overlapping windows and ethernet in 1973. Xerox sold copiers and never worked out how to sell any of it.
+
+  - id: a2-cmp-021
+    difficulty: 3
+    prompt: What is a "cookie" in a web browser?
+    answer: A small file a site stores to recognize you later
+    distractors: [A cached copy of a page, A small program a site runs on your machine, A record of your search history]
+    fact: Lou Montulli wrote them at Netscape in 1994 so a shopping basket would survive moving between pages.
+
+  - id: a2-cmp-022
+    difficulty: 3
+    prompt: What does "HTTP" stand for?
+    answer: Hypertext transfer protocol
+    distractors: [High throughput transfer process, Hosted text transmission protocol, Hyperlink tracking protocol]
+    fact: The S added on the end means the connection is encrypted, which is what the padlock in the address bar is reporting.
+
+  - id: a2-cmp-023
+    difficulty: 3
+    prompt: Which 1984 advertisement, directed by Ridley Scott, introduced the Macintosh during the Super Bowl?
+    answer: "1984"
+    distractors: ["Think Different", "Crazy Ones", "Here's to the Rebels"]
+    fact: It ran nationally once. The board had hated it and tried to sell the airtime back.
+
+  - id: a2-cmp-024
+    difficulty: 3
+    prompt: What is the common name for software that demands payment to unlock a victim's own files?
+    answer: Ransomware
+    distractors: [Adware, Spyware, Scareware]
+    fact: 'Encrypting the files rather than stealing them is what makes it work: the attacker never has to move the data anywhere.'
+
+  - id: a2-cmp-025
+    difficulty: 3
+    prompt: Which company shipped the Altair 8800 kit in 1975, the machine Gates and Allen wrote their first product for?
+    answer: MITS
+    distractors: [Commodore, Tandy, Osborne]
+    fact: It was sold as a kit in a magazine advertisement with no screen and no keyboard, and the orders overwhelmed the company.
+
+  - id: a2-cmp-026
+    difficulty: 4
+    prompt: Who designed the C programming language at Bell Labs in the early 1970s?
+    answer: Dennis Ritchie
+    distractors: [Niklaus Wirth, John McCarthy, Bjarne Stroustrup]
+    fact: He wrote it to rewrite an operating system in, which had never been practical in a high-level language before. Almost everything written since descends from it.
+
+  - id: a2-cmp-027
+    difficulty: 4
+    prompt: Which 1988 program was the first internet worm to make the front pages?
+    answer: The Morris worm
+    distractors: [Code Red, Melissa, SQL Slammer]
+    fact: It was meant to count the machines on the network and a flaw made it reinfect them until they seized up. Its author was the first person convicted under the US computer fraud act.
+
+  - id: a2-cmp-028
+    difficulty: 4
+    prompt: Which Cambridge machine of 1949 was among the first to run programs held in its own memory?
+    answer: EDSAC
+    distractors: [ENIAC, UNIVAC, Harvard Mark I]
+    fact: ENIAC came first but was rewired for each new job. Holding the program in memory alongside the data is what made a computer general-purpose.
+
+  - id: a2-cmp-029
+    difficulty: 4
+    prompt: What does the "RSA" in RSA encryption stand for?
+    answer: The surnames of its three inventors
+    distractors: [Rapid secure algorithm, Random seed authentication, Rivest standard arithmetic]
+    fact: Rivest, Shamir and Adleman published it in 1977. British cryptographers had found the same idea earlier but it stayed classified for decades.
+
+  - id: a2-cmp-030
+    difficulty: 4
+    prompt: What is the name of the electromechanical machine Alan Turing designed to attack Enigma settings?
+    answer: The Bombe
+    distractors: [The Robinson, The Differential Analyser, The Enigma Mark II]
+    fact: It tested thousands of rotor settings by ruling out the impossible rather than trying every one, which is what made the problem tractable.
+
+  - id: a2-cmp-031
+    difficulty: 4
+    prompt: What was unusual about the way ARPANET's successor assigned addresses, exhausted in 2011?
+    answer: It used 32-bit numbers, about four billion in total
+    distractors: [It assigned them by country, It reused them every ninety days, It gave each machine two]
+    fact: Four billion looked inexhaustible when the number was chosen in 1981. The replacement has enough for every grain of sand many times over.
+
+  - id: a2-cmp-032
+    difficulty: 4
+    prompt: Which company made the chips at the heart of the original Apple II, Commodore 64 and Atari 2600?
+    answer: MOS Technology
+    distractors: [Zilog, Motorola, Fairchild]
+    fact: Its 6502 cost a quarter of what rival chips did when it launched in 1975, which is why it ended up in so many machines at once.
+
+  - id: a2-cmp-033
+    difficulty: 4
+    prompt: What does "open source" mean about a piece of software?
+    answer: Anyone may read, change and redistribute its source code
+    distractors: [It is free of charge, It runs on any operating system, It was written by volunteers]
+    fact: Free of charge usually follows but is not the point, and plenty of open source is written by people being paid to do it.
+
+  - id: a2-cmp-034
+    difficulty: 4
+    prompt: Which protocol translates a name like example.com into the number a machine actually connects to?
+    answer: DNS
+    distractors: [FTP, SMTP, SSH]
+    fact: Before it, every machine kept a single file listing every host on the network, and somebody had to mail out the updates.
+
+  - id: a2-cmp-035
+    difficulty: 4
+    prompt: Which word describes a computer error traced, in 1947, to an actual insect?
+    answer: Bug
+    distractors: [Glitch, Crash, Fault]
+    fact: Engineers had used the word for faults since at least Edison. The moth in the relay is remembered because somebody taped it into the logbook.
