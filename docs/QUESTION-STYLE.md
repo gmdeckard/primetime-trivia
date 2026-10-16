@@ -82,11 +82,12 @@ content/questions/
       ...
     adult2/       the same categories, a second night's worth
   8-12/
+    kids1/
   shared/         in play whichever group the MC picks
     tiebreakers.yaml
 ```
 
-**The outermost folder is the age group.** `content/questions/8-12/geography.yaml`
+**The outermost folder is the age group.** `content/questions/8-12/kids1/geography.yaml`
 is geography written for children; `content/questions/35-75/adult1/geography.yaml`
 is geography for the adult room. A folder inside it keeps the age group above
 it, which is how a pack gets its own directory without changing who it is for. The loader tags every question in a folder with

@@ -89,7 +89,7 @@ export interface Question {
   license?: string;
   /** Who the question is pitched at. Absent means it suits any audience. */
   audience?: string;
-  /** Pack this question came from. Absent means the curated core bank. */
+  /** Pack this question came from. Absent means untagged, like the tiebreakers. */
   pack?: string;
 }
 
@@ -175,7 +175,7 @@ export interface GameConfig {
   revealDelaySeconds: number;
   /** How long the answer and its fact stay up before the next question. */
   nextQuestionDelaySeconds: number;
-  /** Pack ids switched on for tonight. The core bank is always available. */
+  /** Pack ids switched on for tonight. Untagged questions need no pack. */
   packs: string[];
   /** Restrict to questions for this audience. Empty means no restriction. */
   audience: string;
@@ -279,11 +279,14 @@ export const DEFAULT_CONFIG: GameConfig = {
   revealDelaySeconds: 4,
   // Long enough to read the fun fact aloud and let the room react.
   nextQuestionDelaySeconds: 10,
-  // The adult bank is pack `adult1`, so it has to be switched on by default:
-  // with nothing enabled a night would draw from the tiebreakers alone. Later
-  // batches arrive as adult2, adult3 and so on, and the MC can run one on its
-  // own for a themed night or switch several on at once for a deeper pool.
-  packs: ['adult1'],
+  // Every pack that ships, because with nothing enabled a night draws from the
+  // tiebreakers alone. This listed `adult1` only, which quietly left the
+  // thousand questions of adult2 out of every fresh night: the screen said
+  // "the core bank is always in play" and the core bank, for the adult room,
+  // is exactly nothing. The MC can still run one pack on its own for a themed
+  // night. A pack added later is off until it is switched on, which is the
+  // point of the list being explicit.
+  packs: ['adult1', 'adult2', 'kids1'],
   // Not empty. Empty means no filter, which would let a set written for
   // another age group into a normal night the moment one existed. 35-75 is
   // the adult bank: someone at the older end of that range was in their

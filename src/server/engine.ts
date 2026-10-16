@@ -224,7 +224,18 @@ export class Engine {
       // back with every adult question filtered out and nothing to ask. If the
       // enabled packs cannot produce a single question, fall back to the
       // defaults rather than resume into an empty bank.
-      if (!this.bank.questions.some((q) => q.kind === 'choice' && (!q.pack || this.state.config.packs.includes(q.pack)))) {
+      //
+      // Counted for the night's own age group, not for the bank. Counting the
+      // bank was enough while the kids' questions carried no pack and so
+      // survived any pack selection; now that they are `kids1`, a kids night
+      // saved with `packs: ['adult1']` passes a bank-wide check on the adult
+      // questions it can never ask and resumes with nothing.
+      const { packs, audience } = this.state.config;
+      const askable = this.bank.questions.some((q) =>
+        q.kind === 'choice' &&
+        (!q.pack || packs.includes(q.pack)) &&
+        (!audience || !q.audience || q.audience === audience));
+      if (!askable) {
         this.state.config.packs = [...DEFAULT_CONFIG.packs];
       }
       // Parking the question above is right, but nothing was left to restart

@@ -202,6 +202,15 @@ function Setup({ state, send }: { state: ControlState; send: ReturnType<typeof u
   const [open, setOpen] = useState<string | null>('shape');
   const only = (id: string) => setOpen(open === id ? null : id);
 
+  // A pack only reaches a night whose age group matches it, so these are the
+  // sets the selected group can actually draw from. `any` means a pack that
+  // declared no group and suits whichever one is picked, and an empty age
+  // group means no filter at all, so every pack is live and every pack shows.
+  const packsFor = c.audience
+    ? state.packs.filter((p) => p.audience === c.audience || p.audience === 'any')
+    : state.packs;
+  const packsOn = packsFor.some((p) => c.packs.includes(p.id));
+
   // Structural settings are refused once a game is running, because a round
   // half-built one shape and half another is worse than a shape you cannot
   // change until the break. The panel says so rather than silently ignoring
@@ -539,40 +548,82 @@ function Setup({ state, send }: { state: ControlState; send: ReturnType<typeof u
               // and is one and a bit nights at this shape, which is the
               // difference between the no-repeat promise holding for a
               // season and breaking next week.
-              hint:
-                `${group.available} questions in ${group.categories} ${
-                  group.categories === 1 ? 'category' : 'categories'
-                } · ${nightsOf(group.available)}`,
+              hint: group.available
+                ? `${group.available} questions in ${group.categories} ${
+                    group.categories === 1 ? 'category' : 'categories'
+                  } · ${nightsOf(group.available)}`
+                : 'no question set switched on',
             }))}
-            onChange={(audience) => set({ audience })}
+            onChange={(audience) => {
+              // Switching group can land on one whose sets are all off — pick
+              // Kids after a night of running adult1 alone and there is
+              // nothing to ask. Switch that group's sets on when none of them
+              // are, which repairs the dead selection without overriding a
+              // deliberate one: if the MC has already chosen among a group's
+              // sets, that choice is left exactly as it is.
+              const mine = state.packs.filter((p) => p.audience === audience || p.audience === 'any');
+              const anyOn = mine.some((p) => c.packs.includes(p.id));
+              set({
+                audience,
+                ...(anyOn || !mine.length
+                  ? {}
+                  : { packs: [...c.packs, ...mine.map((p) => p.id)] }),
+              });
+            }}
           />
         </div>
 
-        {state.packs.length > 0 && (
+        {/*
+          The packs for the chosen age group, and only those.
+
+          This used to list every pack on disk under the heading "Extra packs"
+          and the hint "the core bank is always in play". Both were wrong. The
+          adult room has no core bank — all 1824 of its questions are in
+          adult1 and adult2 — so switching the packs off leaves the fifteen
+          shared tiebreakers and a night that cannot fill a round. And the one
+          set that really was always in play, because it was the only material
+          carrying no pack at all, was the kids' bank: the MC could see no
+          switch for it and the screen implied there was nothing to switch.
+          Every question now belongs to a pack, so the switches below are the
+          whole of what is in play.
+
+          Packs for other age groups are not shown because they can do nothing
+          — a question is excluded unless its group is the one selected — and a
+          switch that cannot change anything is worse than no switch.
+        */}
+        {packsFor.length > 0 && (
           <div class="field">
             <span class="field-label">
-              <span>Extra packs</span>
-              <span class="field-hint">the core bank is always in play</span>
+              <span>Question sets</span>
+              <span class="field-hint">one switch each</span>
             </span>
-            {state.packs.map((pack) => (
+            {packsFor.map((pack) => (
               <Toggle
                 key={pack.id}
                 label={pack.name}
-                hint={`${pack.questionCount} questions · ${pack.audience}`}
+                hint={`${pack.questionCount} questions`}
                 on={c.packs.includes(pack.id)}
                 onChange={(on) =>
                   set({ packs: on ? [...c.packs, pack.id] : c.packs.filter((p) => p !== pack.id) })
                 }
               />
             ))}
+            {!packsOn && (
+              <p class="warn" style={{ marginTop: '8px' }}>
+                Nothing is switched on for{' '}
+                {state.audiences.find((g) => g.id === c.audience)?.name ?? 'this group'}. A night
+                needs at least one set.
+              </p>
+            )}
           </div>
         )}
 
         <p class="faint">
           {state.bank.total} questions loaded · {state.bank.availableInSelection} unused for{' '}
-          {state.audiences.find((g) => g.id === c.audience)?.name ?? 'this group'}. No question comes
-          back until this group has been through that category's whole set, and each group keeps its
-          own place in the deck.
+          {state.audiences.find((g) => g.id === c.audience)?.name ?? 'this group'}. The numeric
+          tiebreakers sit outside the sets and play on every night. No question comes back until
+          this group has been through that category's whole set, and each group keeps its own place
+          in the deck.
         </p>
       </Section>
     </div>

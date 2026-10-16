@@ -191,10 +191,31 @@ try {
     ['Timing', '20-control-setup-timing'],
     ['Scoring', '21-control-setup-scoring'],
     ['Sound and speech', '22-control-setup-sound'],
+    ['Questions', '23-control-setup-questions'],
   ]) {
-    await mc.locator('.section-head', { hasText: name }).first().click();
+    // Match the title, not the head: the head carries a summary too, and
+    // "Shape of the night · 3 games x 2 rounds x 10 questions" answers to
+    // hasText 'Questions', so every later section screenshotted the shape.
+    const head = mc
+      .locator('.section-head')
+      .filter({ has: mc.locator('.section-title', { hasText: new RegExp(`^${name}$`) }) })
+      .first();
+    await head.click();
     await pause(mc, 350);
+    // Without this the shot is the top of the page every time, and the
+    // section the file is named after is somewhere below the fold.
+    await head.scrollIntoViewIfNeeded();
+    await pause(mc, 250);
     await shoot(mc, shot);
+  }
+
+  // The question sets sit below the age groups and are the part of that
+  // section an MC actually has to decide about, so they get their own shot.
+  const sets = mc.locator('.field-label', { hasText: 'Question sets' }).first();
+  if (await sets.count()) {
+    await sets.scrollIntoViewIfNeeded();
+    await pause(mc, 250);
+    await shoot(mc, '24-control-setup-sets');
   }
 
   console.log('CONSOLE_ERRORS=' + JSON.stringify(errors, null, 1));

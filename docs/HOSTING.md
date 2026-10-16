@@ -140,7 +140,7 @@ spoken run-up, and reading questions aloud. All off by default. Sound only ever
 comes out of the big screen, and that screen needs one click on **Turn sound
 on** before a browser will play anything.
 
-**Questions.** The age group, and any extra packs.
+**Questions.** The age group, and the question sets switched on for it.
 
 Each age group is a folder of questions — `content/questions/8-12/` is the
 kids' night — and picking one swaps the night's material wholesale rather than
@@ -148,8 +148,15 @@ mixing it. The list shows what each group actually has behind it, so a group
 with eight categories written for it says so, and the warning at the top of
 the screen tells you a round of ten will ask two of them twice.
 
+Under it are that group's question sets, one switch each: **Adult set 1** and
+**Adult set 2** for the main room, **Kids set 1** for the children's night.
+Every multiple-choice question belongs to one of them, so at least one has to
+be on — switch them all off and the night has nothing to ask, and the screen
+says so. Sets for the other age groups are not listed, because a question is
+excluded unless its group is the one selected and the switch could do nothing.
+
 Only `shared/` crosses over, and today that is just the numeric tiebreakers,
-so a tie at the top is breakable whoever is playing.
+so a tie at the top is breakable whoever is playing and whichever sets are on.
 
 ## During the night
 

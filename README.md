@@ -268,24 +268,26 @@ entries.
 
 ## The question bank
 
-919 questions as YAML in `content/questions/`, one folder per age group and
-one file per category inside it:
+1919 questions as YAML in `content/questions/`, one folder per age group, a
+folder per question set inside that, and one file per category inside that:
 
 ```
 content/questions/35-75/adult1/geography.yaml  the adult room, 824 questions
 content/questions/35-75/adult2/geography.yaml  a second adult pack, 1000
-content/questions/8-12/…                       80
+content/questions/8-12/kids1/…                 80
 content/questions/shared/tiebreakers.yaml      in play on every night
 ```
 
-**The folder is the age group.** Picking one in Setup swaps the night's
+**The outer folder is the age group.** Picking one in Setup swaps the night's
 material wholesale, and the MC's screen lists the groups the bank actually
 holds something for, with live counts — adding `content/questions/18-35/` is
-all it takes to add a group.
+all it takes to add a group. **The folder inside it is a question set**, which
+the MC switches on and off for the night; every multiple-choice question
+belongs to one, and only the tiebreakers sit outside them.
 
-At two rounds of ten a game, the adult bank is about thirteen full nights with
-no repeats — a good season, but not the "thousands" a venue running weekly for
-years will eventually want. `npm run validate` prints what each age group can
+At two rounds of ten a game, the adult bank is about twenty-seven full nights with
+no repeats, which is most of a year of weekly play. The kids' bank is one
+night and a bit, and is the part that needs writing next. `npm run validate` prints what each age group can
 support. The bank is designed to grow by pull request, and `content/` is the
 easiest place to contribute.
 

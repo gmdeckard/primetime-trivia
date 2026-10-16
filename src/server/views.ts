@@ -281,13 +281,36 @@ export function controlState(engine: Engine): ControlState {
   const audiences = [...groupIds]
     .sort((a, b) => startsAt(a) - startsAt(b) || a.localeCompare(b))
     .map((id) => countFor(id))
-    // A group with nothing left in the current packs is not worth offering.
-    .filter((group) => group.available > 0 || group.id === s.config.audience)
+    // Every group the bank holds questions for is offered, even one whose
+    // count is currently zero. This used to drop a group with nothing left in
+    // the selected packs, which was fine while the kids' bank carried no pack
+    // and could not be switched off. Now that it can, dropping it made the
+    // group disappear from the picker the moment its pack went off, and the
+    // only switch that could bring it back was the one inside the group you
+    // could no longer select. The count tells the MC it is empty; the list
+    // keeps the way back.
     .concat(countFor(''));
 
   const warnings: string[] = [];
   const needed = s.config.roundsPerGame * s.config.questionsPerRound;
-  if (availableInSelection < needed) {
+  // Every multiple-choice question belongs to a pack, so a group with all of
+  // its packs switched off has nothing but the shared tiebreakers. That used
+  // to be reachable in two taps and the only hint was the question count
+  // dropping to fifteen.
+  //
+  // Asked against the whole bank rather than `availableInSelection`, which
+  // also reaches zero when a long night has used everything up. That is a
+  // different problem and telling the MC to switch a set on would not fix it.
+  const anySet = bank.questions.some((q) =>
+    q.kind === 'choice' &&
+    (!q.pack || s.config.packs.includes(q.pack)) &&
+    (!s.config.audience || !q.audience || q.audience === s.config.audience));
+  if (!anySet) {
+    warnings.push(
+      `No question set is switched on for ${audienceName(s.config.audience)}, so a night has ` +
+        `nothing to ask. Switch one on under Questions.`,
+    );
+  } else if (availableInSelection < needed) {
     warnings.push(`Only ${availableInSelection} unused questions in the selected categories — a full game needs ${needed}.`);
   }
   if (s.config.roundCategoryMode === 'mixed') {
@@ -407,7 +430,7 @@ export function audienceName(id: string): string {
  * else is shown with its hyphens opened out.
  */
 export function packName(id: string): string {
-  const batch = /^adult(\d+)$/.exec(id);
-  if (batch) return `Adult set ${batch[1]}`;
+  const batch = /^(adult|kids)(\d+)$/.exec(id);
+  if (batch) return `${batch[1] === 'kids' ? 'Kids' : 'Adult'} set ${batch[2]}`;
   return id.charAt(0).toUpperCase() + id.slice(1).replace(/-/g, ' ');
 }

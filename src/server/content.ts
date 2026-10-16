@@ -54,7 +54,7 @@ const MAX_PROMPT = 240;
 /**
  * The folder a question file sits in names the age group it was written for.
  *
- * `content/questions/8-12/geography.yaml` is geography for children, and
+ * `content/questions/8-12/kids1/geography.yaml` is geography for children, and
  * `content/questions/35-75/adult1/geography.yaml` is geography for the main
  * room.
  * Before this, both lived in one flat folder and the age group was a key

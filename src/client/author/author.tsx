@@ -30,7 +30,7 @@ interface Context {
 }
 
 const DIFFICULTY_PRESETS: Array<{ label: string; mix: Array<1 | 2 | 3 | 4>; blurb: string }> = [
-  { label: 'Balanced', mix: [2, 2, 3, 3, 4, 3, 3, 4], blurb: 'Matches the core bank' },
+  { label: 'Balanced', mix: [2, 2, 3, 3, 4, 3, 3, 4], blurb: 'Matches the shipped packs' },
   { label: 'Gentler', mix: [1, 2, 2, 3, 2, 3], blurb: 'Mixed or new crowd' },
   { label: 'Hard', mix: [3, 3, 4, 4, 3, 4], blurb: 'Regulars who want a fight' },
 ];
@@ -552,7 +552,8 @@ function App() {
               </div>
             ))}
             <p class="faint">
-              Switch packs on for a night in the MC controls. The core bank is always available.
+              Switch packs on for a night in the MC controls, under Questions. A night needs at
+              least one pack for the age group it is set to.
             </p>
           </div>
         </>

@@ -47,8 +47,8 @@ Without a key the screen loads and says so rather than failing obscurely.
 
 Pick an audience, a category, how many, and a difficulty shape.
 
-**Audience** sets the era the questions are pitched at. The core bank is built
-for 35-75, whose formative years span roughly 1961-2010. Choosing another
+**Audience** sets the era the questions are pitched at. The adult packs are
+built for 35-75, whose formative years span roughly 1961-2010. Choosing another
 audience shifts that window; `All ages` drops era weighting entirely.
 
 **Model.** Opus 5.5 by default — it is the most accurate, and accuracy is the
@@ -94,9 +94,11 @@ typo, run `npm run validate`. Nothing about it is special at game time.
 
 ## Using a pack
 
-In the MC controls, under Setup, each pack appears as a toggle. The core bank
-is always in play; packs are additive. Questions tagged for a different
-audience are filtered out when an audience is selected.
+In the MC controls, under Setup, the packs written for the selected age group
+appear as toggles, and at least one has to be on: every multiple-choice
+question belongs to a pack, so switching them all off leaves the shared
+tiebreakers and nothing to ask. Questions tagged for a different age group are
+filtered out, which is why packs for the other groups are not shown.
 
 ## Costs
 

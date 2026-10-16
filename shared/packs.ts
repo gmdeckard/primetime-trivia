@@ -1,10 +1,11 @@
 /**
- * Question packs: optional bundles of questions the MC can switch on for a
- * night, alongside the curated core bank.
+ * Question packs: the bundles of questions the MC switches on for a night.
  *
- * Packs exist because the core bank is aimed squarely at one audience. A pack
- * lets a venue add "1970s Television" or a set pitched at a younger crowd
- * without anyone editing the questions that ship with the project.
+ * Every multiple-choice question belongs to one. The adult room has adult1 and
+ * adult2, the kids' room has kids1, and only the shared tiebreakers carry no
+ * pack at all. Packs let a venue add "1970s Television" or a set pitched at a
+ * younger crowd without anyone editing the questions that ship with the
+ * project.
  *
  * A generated pack is just a file. Nothing about it is special at game time —
  * by the time the engine sees a question it has already been through human
@@ -77,7 +78,7 @@ export interface GenerateRequest {
   category: string;
   /** How many to ask for. Capped server-side. */
   count: number;
-  /** Difficulty spread, same 1-4 scale as the core bank. */
+  /** Difficulty spread, same 1-4 scale as the shipped packs. */
   difficulties: Array<1 | 2 | 3 | 4>;
   /** Free-text steer, e.g. "focus on the Apollo programme". Optional. */
   guidance?: string;

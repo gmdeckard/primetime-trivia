@@ -1,4 +1,7 @@
 category: natural-world
+pack:
+  id: kids1
+  name: Kids set 1
 
 questions:
   - id: kid-001
