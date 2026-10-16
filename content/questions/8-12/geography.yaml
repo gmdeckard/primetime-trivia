@@ -26,8 +26,8 @@ questions:
     difficulty: 3
     prompt: Which river is traditionally listed as the world's longest?
     answer: The Nile
-    distractors: [The Amazon, The Mississippi, The Yangtze]
-    fact: The Amazon carries far more water, so which river is biggest depends on whether you measure length or volume.
+    distractors: [The Danube, The Mississippi, The Yangtze]
+    fact: The Nile runs about 4,100 miles. The Amazon is so close behind that some surveys put it first, which is why this one says "traditionally".
 
   - id: kid-015
     difficulty: 3
