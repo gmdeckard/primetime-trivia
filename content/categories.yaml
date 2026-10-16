@@ -129,6 +129,16 @@
   blurb: What got built, and who got the credit instead.
   sample: Patents, firsts, happy accidents
 
+- id: computers-internet
+  name: Computers & The Internet
+  blurb: The machines that got smaller and the network that joined them up.
+  sample: Protocols, chips, the web
+
+- id: consumer-electronics
+  name: Consumer Electronics
+  blurb: What ended up in the living room, the car and the pocket.
+  sample: Formats, gadgets, the ones that lost
+
 - id: transportation
   name: Transportation
   blurb: Road, rail and sea, and the people who laid them out.

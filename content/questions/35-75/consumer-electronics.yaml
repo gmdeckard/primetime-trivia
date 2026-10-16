@@ -1,0 +1,51 @@
+category: consumer-electronics
+pack:
+  id: adult1
+  name: Adult set 1
+
+# The other half of the old Invention & Technology file: what ended up in the
+# living room rather than in a patent office. Formats that won, formats that
+# lost, and the gadgets people queued for.
+
+questions:
+  - id: inv-027
+    difficulty: 3
+    prompt: Which format beat Betamax to become the home video standard?
+    answer: VHS
+    distractors: [LaserDisc, Video 2000, U-matic]
+    fact: Betamax had the better picture. VHS had the longer tape, and two hours was what a film needed.
+
+  - id: inv-030
+    difficulty: 3
+    prompt: Which company made the Walkman?
+    answer: Sony
+    distractors: [Panasonic, Toshiba, Sharp]
+    fact: The co-founder wanted something to play opera on long flights. It had no recording function, which salespeople thought would kill it.
+
+  - id: inv-032
+    difficulty: 4
+    prompt: What did the first commercially available cell phone cost in 1983, roughly?
+    answer: 'About 4,000 dollars'
+    distractors: ['About 400 dollars', 'About 1,000 dollars', 'About 10,000 dollars']
+    fact: The Motorola DynaTAC weighed close to two pounds and gave about half an hour of talk time per ten-hour charge.
+
+  - id: a35-021
+    difficulty: 2
+    prompt: Which company released the first iPod, in 2001?
+    answer: Apple
+    distractors: [Sony, Creative, Microsoft]
+    fact: Creative had shipped a hard-drive music player two years earlier and later won a patent settlement over the interface.
+
+  - id: a35-025
+    difficulty: 3
+    prompt: Which console did Sony launch in 1994 to compete with Nintendo and Sega?
+    answer: The PlayStation
+    distractors: [The Dreamcast, The Saturn, The Jaguar]
+    fact: It began as a CD add-on for the Super Nintendo. The deal collapsed publicly and Sony built the whole machine itself.
+
+  - id: a35-029
+    difficulty: 4
+    prompt: Which company made the first camera phone widely sold, in 2000?
+    answer: Sharp
+    distractors: [Nokia, Motorola, Samsung]
+    fact: The J-SH04 sold only in Japan and took pictures at 0.1 megapixels, which is smaller than a modern thumbnail.

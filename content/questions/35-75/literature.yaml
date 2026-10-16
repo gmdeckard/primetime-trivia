@@ -1,4 +1,7 @@
 category: literature
+pack:
+  id: adult1
+  name: Adult set 1
 
 questions:
   - id: lit-001

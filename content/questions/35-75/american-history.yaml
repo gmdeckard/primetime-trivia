@@ -1,4 +1,7 @@
 category: american-history
+pack:
+  id: adult1
+  name: Adult set 1
 
 # The founding through to about 1900. The Twentieth Century picks it up from
 # there, and Military History has the campaigns.

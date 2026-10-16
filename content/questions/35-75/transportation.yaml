@@ -1,4 +1,7 @@
 category: transportation
+pack:
+  id: adult1
+  name: Adult set 1
 
 # Road, rail and sea. Space & Aviation has anything that leaves the ground,
 # and Explorers & Voyages has the voyages of discovery.

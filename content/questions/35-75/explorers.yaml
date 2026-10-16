@@ -1,4 +1,7 @@
 category: explorers
+pack:
+  id: adult1
+  name: Adult set 1
 
 # Voyages, expeditions and the people who did not come back. World Geography
 # has the places; this is the getting there.

@@ -279,7 +279,11 @@ export const DEFAULT_CONFIG: GameConfig = {
   revealDelaySeconds: 4,
   // Long enough to read the fun fact aloud and let the room react.
   nextQuestionDelaySeconds: 10,
-  packs: [],
+  // The adult bank is pack `adult1`, so it has to be switched on by default:
+  // with nothing enabled a night would draw from the tiebreakers alone. Later
+  // batches arrive as adult2, adult3 and so on, and the MC can run one on its
+  // own for a themed night or switch several on at once for a deeper pool.
+  packs: ['adult1'],
   // Not empty. Empty means no filter, which would let a set written for
   // another age group into a normal night the moment one existed. 35-75 is
   // the adult bank: someone at the older end of that range was in their

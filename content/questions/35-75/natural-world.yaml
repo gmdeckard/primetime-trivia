@@ -1,4 +1,7 @@
 category: natural-world
+pack:
+  id: adult1
+  name: Adult set 1
 
 # Animals, plants, the earth itself and the weather over it, plus how life
 # turned out the way it did.

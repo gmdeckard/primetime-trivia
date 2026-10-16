@@ -1,0 +1,107 @@
+category: computers-internet
+pack:
+  id: adult1
+  name: Adult set 1
+
+# Split out of Invention & Technology, which ran from Gutenberg in 1440 to
+# Wikipedia in 2001 and was really two subjects wearing one hat. This is the
+# half about machines that compute and the network that joined them up.
+
+questions:
+  - id: inv-011
+    difficulty: 3
+    prompt: Which wartime British machine was built to break the Lorenz cipher?
+    answer: Colossus
+    distractors: [The Bombe, Enigma, Ultra]
+    fact: Enigma was the German machine and the Bombe attacked it. Colossus has a good claim to being the first programmable electronic computer, and was broken up in secret.
+
+  - id: inv-016
+    difficulty: 3
+    prompt: Which network was the direct ancestor of the internet?
+    answer: ARPANET
+    distractors: [Usenet, Ethernet, Telenet]
+    fact: The first message was meant to be the word LOGIN. The system crashed after two letters, so the first word ever sent was LO.
+
+  - id: inv-019
+    difficulty: 4
+    prompt: Which company produced the first commercial microprocessor, in 1971?
+    answer: Intel
+    distractors: [Texas Instruments, Fairchild Semiconductor, Motorola]
+    fact: The 4004 was designed to order for a Japanese calculator firm. Intel's founders had come from Fairchild a few years before.
+
+  - id: inv-022
+    difficulty: 4
+    prompt: Who built a punched-card machine to count the 1890 US census?
+    answer: Herman Hollerith
+    distractors: [Charles Babbage, Vannevar Bush, Howard Aiken]
+    fact: The 1880 census had taken most of a decade to tabulate. His company was one of those later merged into IBM.
+
+  - id: inv-026
+    difficulty: 2
+    prompt: What does the acronym WWW stand for?
+    answer: World Wide Web
+    distractors: [World Wide Wire, Web Wide World, Wide World Web]
+    fact: Tim Berners-Lee wrote the first browser and the first server at CERN, originally to organize physics papers.
+
+  - id: inv-028
+    difficulty: 3
+    prompt: Which operating system did Microsoft release in 1995 with a Start button?
+    answer: Windows 95
+    distractors: [Windows 3.1, Windows NT, Windows 98]
+    fact: Microsoft licensed a Rolling Stones song for the launch. It shipped on thirteen floppy disks for anyone without a CD drive.
+
+  - id: inv-031
+    difficulty: 4
+    prompt: Which protocol family underlies the internet and was adopted in 1983?
+    answer: TCP/IP
+    distractors: [HTTP, FTP, SMTP]
+    fact: The others all run on top of it. The switchover date was known in advance and is sometimes called the internet's birthday.
+
+  - id: a35-022
+    difficulty: 2
+    prompt: What does the SMS in a text message stand for?
+    answer: Short Message Service
+    distractors: [Simple Message System, Standard Mobile Signal, Short Mobile Send]
+    fact: The 160-character limit was picked because a researcher reckoned most postcards and telex messages fitted inside it.
+
+  - id: a35-023
+    difficulty: 3
+    prompt: Which search engine was founded in 1998 by two Stanford graduate students?
+    answer: Google
+    distractors: [Yahoo, AltaVista, Lycos]
+    fact: The ranking idea came from counting citations between academic papers, which is how libraries had judged importance for decades.
+
+  - id: a35-024
+    difficulty: 3
+    prompt: Which file format compressed music enough to make it practical to share in the late 1990s?
+    answer: MP3
+    distractors: [WAV, AIFF, FLAC]
+    fact: It throws away sound the ear is unlikely to notice. The others keep everything, which is why they were far too large to send.
+
+  - id: a35-026
+    difficulty: 3
+    prompt: What does USB stand for?
+    answer: Universal Serial Bus
+    distractors: [United Service Bus, Universal System Buffer, Unified Signal Bridge]
+    fact: Introduced in 1996 to replace a back panel that had a different shaped socket for every single device.
+
+  - id: a35-027
+    difficulty: 3
+    prompt: Which encyclopedia launched in 2001 and was written by its readers?
+    answer: Wikipedia
+    distractors: [Encarta, Britannica Online, Everything2]
+    fact: It began as a side project to feed a conventional expert-written encyclopedia that never got finished.
+
+  - id: a35-028
+    difficulty: 4
+    prompt: Which handheld popularized the stylus and handwriting recognition in the 1990s?
+    answer: The PalmPilot
+    distractors: [The Apple Newton, The Psion Organiser, The Nokia Communicator]
+    fact: The Newton came first and its handwriting recognition was mocked so widely it became a running joke in Doonesbury.
+
+  - id: a35-030
+    difficulty: 4
+    prompt: Which standard did Bluetooth take its name from?
+    answer: A tenth-century Danish king
+    distractors: [A radio frequency band, A Swedish engineering firm, An early naval signalling code]
+    fact: Harald Bluetooth united Denmark and Norway, and the logo is his initials in runes.

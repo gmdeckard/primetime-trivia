@@ -15,6 +15,7 @@
     "build": "npm run build:server && npm run build:client",
     "build:client": "vite build",
     "build:server": "tsc -p tsconfig.server.json",
+    "collide": "tsx scripts/collisions.ts",
     "dev": "concurrently -n server,client -c cyan,magenta \"tsx watch src/server/index.ts\" \"vite\"",
     "fact-check": "tsx scripts/fact-check.ts",
     "fix:content": "tsx scripts/normalize-content.ts",

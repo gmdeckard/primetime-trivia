@@ -1,4 +1,7 @@
 category: sports
+pack:
+  id: adult1
+  name: Adult set 1
 
 questions:
   - id: spo-001

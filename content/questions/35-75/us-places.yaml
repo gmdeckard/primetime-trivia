@@ -1,4 +1,7 @@
 category: us-places
+pack:
+  id: adult1
+  name: Adult set 1
 
 # States, capitals, borders and landmarks. Weighted a little toward the
 # Southwest, because that is where the room is sitting.

@@ -219,6 +219,14 @@ export class Engine {
       // block underneath a live round is the one thing worse than stale
       // pacing, which is why only absent keys are filled in here.
       this.state.config = { ...DEFAULT_CONFIG, ...this.state.config };
+      // A night written before the bank became a pack has `packs: []` on disk,
+      // and the merge above only fills keys that are absent — so it would come
+      // back with every adult question filtered out and nothing to ask. If the
+      // enabled packs cannot produce a single question, fall back to the
+      // defaults rather than resume into an empty bank.
+      if (!this.bank.questions.some((q) => q.kind === 'choice' && (!q.pack || this.state.config.packs.includes(q.pack)))) {
+        this.state.config.packs = [...DEFAULT_CONFIG.packs];
+      }
       // Parking the question above is right, but nothing was left to restart
       // the clock, so the night stopped dead and waited for a thumb. Pick the
       // countdown back up exactly as releasing a hold does.

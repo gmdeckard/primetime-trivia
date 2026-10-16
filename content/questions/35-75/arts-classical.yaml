@@ -1,4 +1,7 @@
 category: arts-classical
+pack:
+  id: adult1
+  name: Adult set 1
 
 questions:
   - id: art-001

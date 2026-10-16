@@ -1,4 +1,7 @@
 category: stage-musicals
+pack:
+  id: adult1
+  name: Adult set 1
 
 # Broadway, the West End and the straight play. Arts & Classical Music has the
 # concert hall; this is the stage.

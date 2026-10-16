@@ -322,7 +322,7 @@ export function controlState(engine: Engine): ControlState {
     if (existing) existing.questionCount += 1;
     else packs.set(question.pack, {
       id: question.pack,
-      name: question.pack,
+      name: packName(question.pack),
       audience: question.audience ?? 'any',
       questionCount: 1,
       origin: 'pack',
@@ -397,4 +397,17 @@ export function audienceName(id: string): string {
   // as a difficulty band rather than an age group on a screen full of other
   // numbers.
   return Number(to) <= 17 ? `Kids ${from} to ${to}` : `${from} to ${to}`;
+}
+
+/**
+ * A pack id as something to put on a toggle.
+ *
+ * The ids are file-safe slugs and the screen was showing them raw, so the MC
+ * read "adult1". The batches are numbered, so they get named as sets; anything
+ * else is shown with its hyphens opened out.
+ */
+export function packName(id: string): string {
+  const batch = /^adult(\d+)$/.exec(id);
+  if (batch) return `Adult set ${batch[1]}`;
+  return id.charAt(0).toUpperCase() + id.slice(1).replace(/-/g, ' ');
 }

@@ -1,4 +1,7 @@
 category: world-history
+pack:
+  id: adult1
+  name: Adult set 1
 
 # Everything outside the United States, up to about 1900. The Twentieth
 # Century takes it from there and American History has the colonies on.

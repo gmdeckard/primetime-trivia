@@ -1,4 +1,7 @@
 category: medicine
+pack:
+  id: adult1
+  name: Adult set 1
 
 # Medicine, the human body and the people who worked it out. History and
 # anatomy, never symptoms — a room of seventy-year-olds did not come out
