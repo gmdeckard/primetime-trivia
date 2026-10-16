@@ -1,0 +1,254 @@
+category: explorers
+pack:
+  id: adult2
+  name: Adult set 2
+
+# Expeditions, voyages, and the people who did not come back. Adult set 1 has
+# the names everyone knows; this goes at the ones who got there first and were
+# forgotten, the ones who were wrong about where they were, and the ships.
+
+questions:
+  - id: a2-exp-001
+    difficulty: 2
+    prompt: Which animals did Amundsen rely on to reach the South Pole?
+    answer: Dogs
+    distractors: [Ponies, Reindeer, Mules]
+    fact: Scott took ponies and motor sledges, and his men ended up hauling the sledges themselves. Dogs could be fed on the weaker dogs, which ponies could not.
+
+  - id: a2-exp-002
+    difficulty: 2
+    prompt: Which sea did Thor Heyerdahl's balsa raft cross in 1947?
+    answer: The Pacific
+    distractors: [The Atlantic, The Indian, The Arctic]
+    fact: He wanted to show the voyage was possible, not that it happened. The drift took 101 days and ended on a reef.
+
+  - id: a2-exp-003
+    difficulty: 2
+    prompt: Which Italian city did Christopher Columbus come from?
+    answer: Genoa
+    distractors: [Venice, Naples, Florence]
+    fact: He sailed for Spain because Portugal turned him down, correctly believing his estimate of the distance to Asia was far too short.
+
+  - id: a2-exp-004
+    difficulty: 2
+    prompt: What did sailors mean by the doldrums?
+    answer: A belt near the equator where the wind dies away
+    distractors: [The hurricane season in the Caribbean, The fog bank off Newfoundland, The current running south off West Africa]
+    fact: A sailing ship could sit in it for weeks with the crew rationing water. The word came to mean low spirits because of what being becalmed did to everyone aboard.
+
+  - id: a2-exp-005
+    difficulty: 2
+    prompt: What is a Sherpa?
+    answer: A member of a Himalayan people, many of whom guide and carry on expeditions
+    distractors: [A kind of sledge, A high-altitude tent, A mountain pass]
+    fact: The word is now used for the job rather than the people, which members of that community have mixed feelings about.
+
+  - id: a2-exp-006
+    difficulty: 2
+    prompt: What were the three ships of Columbus's first crossing?
+    answer: The Niña, the Pinta and the Santa María
+    distractors: ["The Trinidad, the Victoria and the Concepción", "The Discovery, the Godspeed and the Susan Constant", "The Matthew, the Grace and the Jesus"]
+    fact: Niña and Pinta were nicknames; both had saints' names on the paperwork. The Santa María ran aground on Christmas Day and was broken up to build a fort.
+
+  - id: a2-exp-007
+    difficulty: 3
+    prompt: Which Norwegian deliberately froze his ship into the Arctic ice in 1893 to drift with the current?
+    answer: Fridtjof Nansen
+    distractors: [Otto Sverdrup, Carsten Borchgrevink, Salomon Andrée]
+    fact: The hull was built round so the ice would squeeze it upward instead of staving it in. The drift did not pass the pole, so he left the ship and went on by sledge.
+
+  - id: a2-exp-008
+    difficulty: 3
+    prompt: Which African lake did John Hanning Speke identify in 1858 as the source of the Nile?
+    answer: Lake Victoria
+    distractors: [Lake Tanganyika, Lake Albert, Lake Malawi]
+    fact: His travelling companion Richard Burton disputed it for the rest of his life. Speke turned out to be right and did not live to be told so.
+
+  - id: a2-exp-009
+    difficulty: 3
+    prompt: Which Spaniard crossed Mexico and overthrew the Aztec empire in 1521?
+    answer: Hernán Cortés
+    distractors: [Hernando de Soto, Juan Ponce de León, Álvar Núñez Cabeza de Vaca]
+    fact: Smallpox arriving ahead of him did more than his soldiers did, and he was reinforced by tens of thousands of local troops with their own reasons to want the Aztecs gone.
+
+  - id: a2-exp-010
+    difficulty: 3
+    prompt: Which Portuguese prince funded the voyages down the African coast that opened the sea route south?
+    answer: Henry the Navigator
+    distractors: [John the Perfect, Manuel the Fortunate, Sebastian the Desired]
+    fact: He is said never to have made a long voyage himself. What he supplied was money, charts and a reason to go a little further than the last captain had.
+
+  - id: a2-exp-011
+    difficulty: 3
+    prompt: Which Englishman first sailed right around Australia and pressed for that name to be used?
+    answer: Matthew Flinders
+    distractors: [George Bass, William Dampier, Philip Parker King]
+    fact: He was detained by the French on Mauritius for six years on the way home. His cat Trim went with him and has a statue in Sydney.
+
+  - id: a2-exp-012
+    difficulty: 3
+    prompt: Which Englishman became the second man to sail around the world, returning in 1580?
+    answer: Francis Drake
+    distractors: [Walter Raleigh, Martin Frobisher, John Hawkins]
+    fact: He was knighted on the deck of his own ship by a queen who took a large share of what he had taken from the Spanish on the way.
+
+  - id: a2-exp-013
+    difficulty: 3
+    prompt: Which desert did Burke and Wills die trying to cross Australia through in 1861?
+    answer: The interior, on the Stony and Sturt deserts
+    distractors: [The Simpson Desert only, The Nullarbor Plain, The Tanami Desert]
+    fact: They reached the north coast's tidal channels and turned back. They missed the relief party at the agreed camp by about nine hours.
+
+  - id: a2-exp-014
+    difficulty: 3
+    prompt: Which Scot crossed Canada to the Pacific in 1793, twelve years before Lewis and Clark reached it?
+    answer: Alexander Mackenzie
+    distractors: [Simon Fraser, David Thompson, Samuel Hearne]
+    fact: He painted a note on a rock recording the date and that he had come overland from Canada. The river now named after him he had followed the wrong way, to the Arctic.
+
+  - id: a2-exp-015
+    difficulty: 3
+    prompt: What was the Terra Nova?
+    answer: Scott's ship on his last Antarctic expedition
+    distractors: [Shackleton's ship, Amundsen's ship, Cook's ship]
+    fact: She was a whaler, built for ice, and twenty years old when she sailed south. She sank off Greenland in 1943.
+
+  - id: a2-exp-016
+    difficulty: 3
+    prompt: Which Dutch navigator reached Tasmania and New Zealand in 1642?
+    answer: Abel Tasman
+    distractors: [Willem Janszoon, Dirk Hartog, Jacob Roggeveen]
+    fact: He sailed right round Australia without seeing it, which is why his employers judged the voyage a disappointment.
+
+  - id: a2-exp-017
+    difficulty: 3
+    prompt: Which strait did Vitus Bering sail through in 1728, giving it his name?
+    answer: The strait between Asia and North America
+    distractors: [The strait between Greenland and Canada, The strait south of Africa, The strait between Japan and Korea]
+    fact: Fog meant he never saw the American side and could not prove the two continents were separate. He died of scurvy on an island on the second expedition.
+
+  - id: a2-exp-018
+    difficulty: 3
+    prompt: Which American reporter travelled around the world in 72 days in 1889?
+    answer: Nellie Bly
+    distractors: [Ida Tarbell, Elizabeth Bisland, Annie Londonderry]
+    fact: A rival magazine sent its own writer the opposite way round on the same day. Bly won by four days and had stopped off to meet Jules Verne.
+
+  - id: a2-exp-019
+    difficulty: 3
+    prompt: Which Frenchman reached the mouth of the Mississippi in 1682 and claimed the whole basin?
+    answer: La Salle
+    distractors: [Marquette, Joliet, Champlain]
+    fact: He named it for his king. He was murdered by his own men four years later, having failed to find the river mouth again from the sea.
+
+  - id: a2-exp-020
+    difficulty: 3
+    prompt: Which Pacific islands did Captain Cook die on in 1779?
+    answer: Hawaii
+    distractors: [Tahiti, Tonga, New Caledonia]
+    fact: He had been received as a returning figure of ceremony, left, and was forced back by a broken mast. The second arrival did not fit the pattern and the welcome did not survive it.
+
+  - id: a2-exp-021
+    difficulty: 3
+    prompt: What did the Vikings call the place Leif Erikson reached around the year 1000?
+    answer: Vinland
+    distractors: [Thule, Greenland, Helluland]
+    fact: A Norse site at L'Anse aux Meadows in Newfoundland was excavated in the 1960s, which settled that they had been there five centuries before Columbus.
+
+  - id: a2-exp-022
+    difficulty: 3
+    prompt: Which part of a ship's rigging gave the crow's nest its name?
+    answer: A barrel at the masthead, originally holding ravens
+    distractors: [The highest spar, The rope ladder up the mast, The lookout's harness]
+    fact: Birds released when land was out of sight would fly toward the nearest shore, which told the navigator where to steer before instruments could.
+
+  - id: a2-exp-023
+    difficulty: 3
+    prompt: Which Spaniard made the first descent of the Amazon, in 1542?
+    answer: Francisco de Orellana
+    distractors: [Gonzalo Pizarro, Lope de Aguirre, Pedro de Ursúa]
+    fact: He had set out to find cinnamon, lost the main party and could not sail back upstream. The river is named for women his chronicler said attacked them.
+
+  - id: a2-exp-024
+    difficulty: 4
+    prompt: Which fourteenth-century Moroccan travelled further than Marco Polo and is far less known for it?
+    answer: Ibn Battuta
+    distractors: [Al-Idrisi, Ibn Khaldun, Al-Masudi]
+    fact: He covered perhaps seventy-five thousand miles over thirty years, from West Africa to China, and dictated the account on his return.
+
+  - id: a2-exp-025
+    difficulty: 4
+    prompt: What did the Challenger expedition of 1872 to 1876 largely invent?
+    answer: Oceanography
+    distractors: [Marine archaeology, Weather forecasting, Submarine navigation]
+    fact: It sounded the deepest trench then known, catalogued four thousand new species and filled fifty volumes. The deepest point in the ocean is named after the ship.
+
+  - id: a2-exp-026
+    difficulty: 4
+    prompt: Which Englishwoman travelled West Africa alone in the 1890s, in full Victorian dress, collecting fish?
+    answer: Mary Kingsley
+    distractors: [Isabella Bird, Marianne North, Alexandrine Tinné]
+    fact: Three species she brought back were new to science. She credited her skirt with saving her when she fell into a game pit lined with spikes.
+
+  - id: a2-exp-027
+    difficulty: 4
+    prompt: Which Spanish expedition of 1804 carried smallpox vaccine around the world in a chain of orphaned boys?
+    answer: The Balmis Expedition
+    distractors: [The Malaspina Expedition, The Jenner Mission, The Cádiz Voyage]
+    fact: There was no way to keep the vaccine alive at sea, so it was passed arm to arm between twenty-two children in sequence, each infected as the last one's blisters formed.
+
+  - id: a2-exp-028
+    difficulty: 4
+    prompt: Who commanded the one ship of Magellan's fleet that made it home?
+    answer: Juan Sebastián Elcano
+    distractors: [Antonio Pigafetta, Duarte Barbosa, Gonzalo de Espinosa]
+    fact: He had taken part in a mutiny against Magellan early in the voyage and was pardoned. The emperor gave him a coat of arms showing a globe.
+
+  - id: a2-exp-029
+    difficulty: 4
+    prompt: Which Frenchwoman reached the closed city of Lhasa in 1924, disguised as a beggar?
+    answer: Alexandra David-Néel
+    distractors: [Isabelle Eberhardt, Ella Maillart, Gertrude Benham]
+    fact: She was fifty-five, had learned Tibetan, and blackened her face with soot. She lived to a hundred and renewed her passport at a hundred and one.
+
+  - id: a2-exp-030
+    difficulty: 4
+    prompt: Which Englishman crossed the Empty Quarter of Arabia twice in the 1940s?
+    answer: Wilfred Thesiger
+    distractors: [Harry St John Philby, Charles Doughty, Bertram Thomas]
+    fact: He travelled with Bedu companions and on their terms, and spent the rest of his life regretting that the oil money arrived behind him.
+
+  - id: a2-exp-031
+    difficulty: 4
+    prompt: What did Matthew Henson do on Peary's expeditions that the records of the time largely omitted?
+    answer: He was the most experienced member and drove the lead sledge
+    distractors: [He paid for the ships, He navigated by sextant alone, He mapped the route the year before]
+    fact: He spoke the language, built the sledges and trained the dog teams. Recognition took until he was in his eighties, and he was reburied at Arlington in 1988.
+
+  - id: a2-exp-032
+    difficulty: 4
+    prompt: Which American flew over the South Pole in 1929?
+    answer: Richard Byrd
+    distractors: [Lincoln Ellsworth, Hubert Wilkins, Bernt Balchen]
+    fact: The aircraft could not climb over the glacier with its load, so they threw out the emergency food rather than the fuel and gambled on the weather holding.
+
+  - id: a2-exp-033
+    difficulty: 4
+    prompt: What was a "nao" or carrack carrying when Magellan's expedition finally came home?
+    answer: Cloves, which paid for the entire voyage
+    distractors: [Silver from the Philippines, Silk from China, Slaves from the Moluccas]
+    fact: One ship of five returned with eighteen men. The twenty-six tons of spice in her hold covered the cost of all five and left a profit.
+
+  - id: a2-exp-034
+    difficulty: 4
+    prompt: Which 1897 attempt to reach the North Pole ended with its crew's remains found thirty-three years later?
+    answer: Andrée's balloon flight
+    distractors: [Greely's Lady Franklin Bay expedition, De Long's Jeannette voyage, Nares's sledge party]
+    fact: The balloon came down after two days. Their camera film was developed in 1930 and most of the exposures came out.
+
+  - id: a2-exp-035
+    difficulty: 4
+    prompt: Who was the first woman known to have sailed around the world, doing it disguised as a man?
+    answer: Jeanne Baret
+    distractors: [Mary Read, Hannah Snell, Marie-Louise Girardin]
+    fact: She was the botanist's assistant on a French expedition of 1766, and had probably collected most of the specimens herself. A plant was finally named after her in 2012.
