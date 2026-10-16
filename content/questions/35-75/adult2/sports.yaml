@@ -1,0 +1,250 @@
+category: sports
+pack:
+  id: adult2
+  name: Adult set 2
+
+questions:
+  - id: a2-spo-001
+    difficulty: 2
+    prompt: How many players does a basketball team have on the court?
+    answer: Five
+    distractors: [Six, Seven, Four]
+    fact: The original 1891 game was played with nine a side because that is how many were in the class. Peach baskets kept the ball until someone climbed up for it.
+
+  - id: a2-spo-002
+    difficulty: 2
+    prompt: In which sport is the Ryder Cup contested?
+    answer: Golf
+    distractors: [Tennis, Sailing, Polo]
+    fact: It is played every two years between the United States and Europe, and nobody is paid. It began in 1927 as the United States against Britain alone.
+
+  - id: a2-spo-003
+    difficulty: 2
+    prompt: How many innings are in a regulation baseball game?
+    answer: Nine
+    distractors: [Seven, Ten, Twelve]
+    fact: The number was settled in 1857 to replace a rule where the first team to twenty-one runs won, which made games unpredictably long.
+
+  - id: a2-spo-004
+    difficulty: 2
+    prompt: In which sport do crews compete for the America's Cup?
+    answer: Sailing
+    distractors: [Rowing, Powerboat racing, Swimming]
+    fact: It is the oldest trophy in international sport, older than the modern Olympics by forty-five years. One club held it for a hundred and thirty-two years.
+
+  - id: a2-spo-005
+    difficulty: 2
+    prompt: How long is an Olympic swimming pool?
+    answer: Fifty meters
+    distractors: [Twenty-five meters, Seventy-five meters, One hundred meters]
+    fact: Depth matters as much as length. A shallow pool bounces the swimmers' own waves back at them, which is why record pools are built deep.
+
+  - id: a2-spo-006
+    difficulty: 2
+    prompt: Which sport is played with a shuttlecock?
+    answer: Badminton
+    distractors: [Squash, Table tennis, Lacrosse]
+    fact: A smashed shuttle leaves the racket faster than anything else in sport, over two hundred miles an hour, and then slows down faster than anything else too.
+
+  - id: a2-spo-007
+    difficulty: 2
+    prompt: In which sport do racers run a slalom?
+    answer: Skiing
+    distractors: [Cycling, Rowing, Speed skating]
+    fact: The word is Norwegian for a sloping track. The course is set with alternating pairs of gates and a skier who misses one is out.
+
+  - id: a2-spo-008
+    difficulty: 3
+    prompt: Which French town hosted the first Winter Olympics in 1924?
+    answer: Chamonix
+    distractors: [Grenoble, Albertville, St. Moritz]
+    fact: It was billed as an international winter sports week and only named an Olympics in hindsight. Sixteen nations came and Norway and Finland took most of the medals.
+
+  - id: a2-spo-009
+    difficulty: 3
+    prompt: Which baseball team plays at Wrigley Field?
+    answer: The Chicago Cubs
+    distractors: [The Chicago White Sox, The Detroit Tigers, The Cleveland Indians]
+    fact: Lights were not installed until 1988, the last park in the majors to get them. The outfield wall is covered in ivy planted in 1937.
+
+  - id: a2-spo-010
+    difficulty: 3
+    prompt: Which NBA team won eight championships in a row from 1959?
+    answer: The Boston Celtics
+    distractors: [The Los Angeles Lakers, The Philadelphia 76ers, The New York Knicks]
+    fact: Eleven titles in thirteen years. Their coach then handed the job to his own center, who ran the team as a player-coach and won two more.
+
+  - id: a2-spo-011
+    difficulty: 3
+    prompt: Which Triple Crown race is run at Pimlico?
+    answer: The Preakness Stakes
+    distractors: [The Belmont Stakes, The Travers Stakes, The Breeders' Cup Classic]
+    fact: It is the middle leg, two weeks after the first. The winner's colors are painted onto a weather vane on the infield clubhouse within minutes of the finish.
+
+  - id: a2-spo-012
+    difficulty: 3
+    prompt: Which country won the 1966 soccer World Cup on home soil?
+    answer: England
+    distractors: [West Germany, Italy, Portugal]
+    fact: The trophy had been stolen from an exhibition four months earlier and found under a hedge by a dog called Pickles. The third goal in the final is still disputed.
+
+  - id: a2-spo-013
+    difficulty: 3
+    prompt: Who is the Super Bowl trophy named after?
+    answer: Vince Lombardi
+    distractors: [George Halas, Paul Brown, Pete Rozelle]
+    fact: He coached Green Bay to the first two and died of cancer in 1970, when the trophy was renamed. His teams ran the same sweep play everyone knew was coming.
+
+  - id: a2-spo-014
+    difficulty: 3
+    prompt: Which rival league merged with the NFL in 1970?
+    answer: The AFL
+    distractors: [The USFL, The XFL, The All-America Football Conference]
+    fact: It brought ten teams, the two-point conversion, names on jerseys and a television contract that forced the merger. The championship game between them became the Super Bowl.
+
+  - id: a2-spo-015
+    difficulty: 3
+    prompt: Which gymnast scored the first perfect ten in Olympic competition, in 1976?
+    answer: Nadia Comaneci
+    distractors: [Olga Korbut, Vera Caslavska, Ludmilla Tourischeva]
+    fact: The scoreboard could not show it and displayed 1.00 instead, because nobody had thought four digits would be needed. She was fourteen.
+
+  - id: a2-spo-016
+    difficulty: 3
+    prompt: Which baseball record did Cal Ripken Jr. break in 1995?
+    answer: Consecutive games played
+    distractors: [Career doubles, Games at shortstop, Career hits by an infielder]
+    fact: He passed a mark set in 1939 that was thought untouchable, and then played another five hundred games before sitting one out by choice.
+
+  - id: a2-spo-017
+    difficulty: 3
+    prompt: How many events make up a decathlon?
+    answer: Ten
+    distractors: [Seven, Eight, Twelve]
+    fact: Two days, five events each, and the winner is traditionally called the world's greatest athlete. The scoring tables are recalculated every few decades.
+
+  - id: a2-spo-018
+    difficulty: 3
+    prompt: Which team has won the most Stanley Cups?
+    answer: The Montreal Canadiens
+    distractors: [The Toronto Maple Leafs, The Detroit Red Wings, The Boston Bruins]
+    fact: Twenty-four of them, including five in a row in the 1950s. The club is older than the league it plays in.
+
+  - id: a2-spo-019
+    difficulty: 3
+    prompt: Which tennis player completed a calendar Grand Slam and won Olympic gold in 1988?
+    answer: Steffi Graf
+    distractors: [Chris Evert, Monica Seles, Gabriela Sabatini]
+    fact: Four majors and a gold medal in one year, which nobody else has done. She was nineteen.
+
+  - id: a2-spo-020
+    difficulty: 3
+    prompt: Which endurance race is run every June in western France?
+    answer: The 24 Hours of Le Mans
+    distractors: [The Monaco Grand Prix, The Targa Florio, The Mille Miglia]
+    fact: Cars cover more distance in a day than a Formula One season. A 1955 crash there killed more than eighty spectators and ended motor racing in Switzerland for decades.
+
+  - id: a2-spo-021
+    difficulty: 3
+    prompt: Which soccer position may handle the ball within the penalty area?
+    answer: The goalkeeper
+    distractors: [The sweeper, The center back, Any player taking a throw-in]
+    fact: Until 1912 the keeper could handle it anywhere in his own half. The rule stopping him picking up a deliberate pass back came only in 1992, after a dull World Cup.
+
+  - id: a2-spo-022
+    difficulty: 3
+    prompt: Which basketball player was known as Dr. J?
+    answer: Julius Erving
+    distractors: [Elgin Baylor, George Gervin, Connie Hawkins]
+    fact: He made his name in the rival ABA, whose red white and blue ball and three-point line were folded into the NBA when four of its teams were absorbed.
+
+  - id: a2-spo-023
+    difficulty: 3
+    prompt: Which pitcher threw seven no-hitters?
+    answer: Nolan Ryan
+    distractors: [Sandy Koufax, Bob Feller, Randy Johnson]
+    fact: He pitched until he was forty-six and struck out more batters and walked more batters than anyone else. The next most no-hitters by one pitcher is four.
+
+  - id: a2-spo-024
+    difficulty: 3
+    prompt: Which heavyweight champion retired undefeated after forty-nine fights?
+    answer: Rocky Marciano
+    distractors: [Gene Tunney, Jack Dempsey, Larry Holmes]
+    fact: He was five foot ten with the shortest reach of any heavyweight champion and simply kept coming. He died in a light plane crash the day before his forty-sixth birthday.
+
+  - id: a2-spo-025
+    difficulty: 3
+    prompt: Which martial art is Korea's national sport and an Olympic event?
+    answer: Taekwondo
+    distractors: [Karate, Aikido, Wushu]
+    fact: It was assembled in the 1950s from older Korean and Japanese schools and is now practiced by more people than any other martial art.
+
+  - id: a2-spo-026
+    difficulty: 4
+    prompt: What did Tommie Smith and John Carlos do on the medal podium in 1968?
+    answer: Raised black-gloved fists during the anthem
+    distractors: [Turned their backs on the flag, Refused their medals, Left the podium before the anthem]
+    fact: The Australian who finished second wore the same protest badge in support. All three paid for it, and the three men stayed friends for life.
+
+  - id: a2-spo-027
+    difficulty: 4
+    prompt: Which NFL team lost four consecutive Super Bowls?
+    answer: The Buffalo Bills
+    distractors: [The Minnesota Vikings, The Denver Broncos, The Cincinnati Bengals]
+    fact: From 1991 to 1994, with the first lost by one point on a missed kick. No other team has even reached four in a row.
+
+  - id: a2-spo-028
+    difficulty: 4
+    prompt: Which horse won the Triple Crown in 1948, starting a twenty-five-year gap?
+    answer: Citation
+    distractors: [Whirlaway, Assault, Count Fleet]
+    fact: He won sixteen races in a row and was the first horse to earn a million dollars. The next Triple Crown did not come until 1973.
+
+  - id: a2-spo-029
+    difficulty: 4
+    prompt: Which amateur golfer won all four major titles of his era in one year, in 1930?
+    answer: Bobby Jones
+    distractors: [Walter Hagen, Gene Sarazen, Byron Nelson]
+    fact: He retired at twenty-eight, practiced law, and later built a course in Georgia and started the tournament played on it.
+
+  - id: a2-spo-030
+    difficulty: 4
+    prompt: Which baseball commissioner banned eight players for life after the 1919 World Series?
+    answer: Kenesaw Mountain Landis
+    distractors: [Ban Johnson, Happy Chandler, Ford Frick]
+    fact: A jury had acquitted them the day before. He was a federal judge hired to clean the game up and he also kept it segregated for the next twenty-four years.
+
+  - id: a2-spo-031
+    difficulty: 4
+    prompt: Which Ethiopian ran barefoot to Olympic gold through the streets of Rome in 1960?
+    answer: Abebe Bikila
+    distractors: [Mamo Wolde, Kip Keino, Emil Zatopek]
+    fact: No shoes fitted him on the day, so he ran without. He won again four years later in shoes, six weeks after having his appendix out.
+
+  - id: a2-spo-032
+    difficulty: 4
+    prompt: Which club has won the most European Cup and Champions League titles?
+    answer: Real Madrid
+    distractors: [AC Milan, Bayern Munich, Liverpool]
+    fact: It won the first five, from 1956. The competition was created by a French newspaper editor after an English paper called a domestic champion the best in the world.
+
+  - id: a2-spo-033
+    difficulty: 4
+    prompt: Which athlete won the 1912 Olympic decathlon and pentathlon and was stripped of both?
+    answer: Jim Thorpe
+    distractors: [Paavo Nurmi, Hannes Kolehmainen, Charley Paddock]
+    fact: The reason was two summers of semi-professional baseball at two dollars a game. The medals were restored thirty years after his death.
+
+  - id: a2-spo-034
+    difficulty: 4
+    prompt: Who beat Bobby Riggs in the 1973 match billed as the Battle of the Sexes?
+    answer: Billie Jean King
+    distractors: [Margaret Court, Evonne Goolagong, Virginia Wade]
+    fact: Ninety million people watched worldwide. She had threatened to boycott the US Open the year before unless the prize money was made equal, and it was.
+
+  - id: a2-spo-035
+    difficulty: 4
+    prompt: Which record did Bill Russell set with eleven of them in thirteen seasons?
+    answer: NBA championships
+    distractors: [Most rebounds in a game, Most seasons as an all-star, Most blocked shots]
+    fact: He also became the first black head coach in any major American league, taking the job while still playing.

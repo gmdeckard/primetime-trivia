@@ -27,7 +27,7 @@ questions:
 
   - id: a2-usp-004
     difficulty: 2
-    prompt: Which city hosts the Kentucky Derby?
+    prompt: Which city hosts the horse race run at Churchill Downs?
     answer: Louisville
     distractors: [Lexington, Frankfort, Bowling Green]
     fact: The race is a mile and a quarter and takes about two minutes. The track's twin spires have stood since 1895.

@@ -199,10 +199,10 @@ questions:
 
   - id: a2-wld-028
     difficulty: 4
-    prompt: Which Persian king's invasion was defeated at Marathon in 490 BC?
+    prompt: Which Persian king's first invasion of Greece was thrown back in 490 BC?
     answer: Darius I
     distractors: [Xerxes I, Cyrus the Great, Artaxerxes I]
-    fact: His son came back ten years later with a far larger force. The story of the runner carrying the news to Athens appears only centuries afterward.
+    fact: His son came back ten years later with a far larger force. The Athenians had sent to Sparta for help and fought the battle without it.
 
   - id: a2-wld-029
     difficulty: 4
