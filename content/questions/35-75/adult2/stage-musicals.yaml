@@ -1,0 +1,250 @@
+category: stage-musicals
+pack:
+  id: adult2
+  name: Adult set 2
+
+questions:
+  - id: a2-stg-001
+    difficulty: 2
+    prompt: Which musical features the song Tomorrow?
+    answer: Annie
+    distractors: [Gigi, Mame, Carnival]
+    fact: It came from a comic strip that had run since 1924. The 1977 show ran nearly six years on Broadway.
+
+  - id: a2-stg-002
+    difficulty: 2
+    prompt: Which musical is set in and under the Paris Opera House?
+    answer: The Phantom of the Opera
+    distractors: [Aspects of Love, Grand Hotel, The Red Shoes]
+    fact: The chandelier that falls at the end of the first act was the single most expensive prop in the original production.
+
+  - id: a2-stg-003
+    difficulty: 2
+    prompt: Which musical features the song Seventy-Six Trombones?
+    answer: The Music Man
+    distractors: [State Fair, Bye Bye Birdie, Bells Are Ringing]
+    fact: Meredith Willson wrote the book, music and lyrics, and set it in the Iowa he grew up in. It took the best musical Tony over a far more celebrated rival.
+
+  - id: a2-stg-004
+    difficulty: 2
+    prompt: Which musical is based on Victor Hugo's novel of 1862?
+    answer: Les Miserables
+    distractors: [Martin Guerre, The Scarlet Pimpernel, Notre-Dame de Paris]
+    fact: London critics savaged the opening in 1985. It ran there for thirty-four years anyway.
+
+  - id: a2-stg-005
+    difficulty: 2
+    prompt: Which 1935 work, set in a Charleston tenement, features the song Summertime?
+    answer: Porgy and Bess
+    distractors: [Showboat Serenade, Street Scene, Four Saints in Three Acts]
+    fact: Its authors insisted on a classically trained black cast at a time when that cost them bookings. It took sixty years to reach the Metropolitan Opera.
+
+  - id: a2-stg-006
+    difficulty: 2
+    prompt: Which Shakespeare play opens with three witches on a heath?
+    answer: Macbeth
+    distractors: [King Lear, Richard III, Julius Caesar]
+    fact: Actors will not say its name in a theater, calling it the Scottish play instead. It is also his shortest tragedy.
+
+  - id: a2-stg-007
+    difficulty: 2
+    prompt: Which awards are the London theater's equivalent of Broadway's top honor?
+    answer: The Olivier Awards
+    distractors: [The Evening Standard Awards, The Garrick Awards, The West End Prizes]
+    fact: They were called the Society of West End Theatre Awards until 1984, when Laurence Olivier agreed to lend his name.
+
+  - id: a2-stg-008
+    difficulty: 3
+    prompt: Which lyricist's partnership with Richard Rodgers began in 1943 and produced nine shows?
+    answer: Oscar Hammerstein II
+    distractors: [Alan Jay Lerner, Otto Harbach, Howard Dietz]
+    fact: He took his grandfather's name and the numeral. He had written for twenty-five years before the partnership that made him famous.
+
+  - id: a2-stg-009
+    difficulty: 3
+    prompt: Who wrote the score for Annie Get Your Gun?
+    answer: Irving Berlin
+    distractors: [Jerome Kern, Cole Porter, Vincent Youmans]
+    fact: He took the job after Jerome Kern died, and wrote There's No Business Like Show Business in a day, then thought it was no good.
+
+  - id: a2-stg-010
+    difficulty: 3
+    prompt: Who wrote the play Long Day's Journey into Night?
+    answer: Eugene O'Neill
+    distractors: [Clifford Odets, Elmer Rice, William Saroyan]
+    fact: It is openly about his own family and he left instructions that it not be staged until twenty-five years after his death. His widow had it produced in three.
+
+  - id: a2-stg-011
+    difficulty: 3
+    prompt: Who wrote the play Waiting for Godot?
+    answer: Samuel Beckett
+    distractors: [Harold Pinter, Eugene Ionesco, Jean Genet]
+    fact: He wrote it in French first. Asked who Godot was, he said if he knew he would have said so in the play.
+
+  - id: a2-stg-012
+    difficulty: 3
+    prompt: Which 1971 rock musical covered the last week of Christ's life and reached the stage from a record album?
+    answer: Jesus Christ Superstar
+    distractors: [Godspell, Your Arms Too Short to Box with God, Joseph and the Amazing Technicolor Dreamcoat]
+    fact: No producer would stage it, so the writers released the double album first. It sold well enough that Broadway came to them.
+
+  - id: a2-stg-013
+    difficulty: 3
+    prompt: Which musical is set at a Maine clambake and carnival, and ends with You'll Never Walk Alone?
+    answer: Carousel
+    distractors: [Allegro, Me and Juliet, Pipe Dream]
+    fact: Its second act hinges on a robbery and a death, which was unheard of in 1945. The closing song has since been adopted by soccer crowds.
+
+  - id: a2-stg-014
+    difficulty: 3
+    prompt: In which musical does a British governess teach the children of a Siamese court?
+    answer: The King and I
+    distractors: [Flower Drum Song, Sayonara, The Teahouse of the August Moon]
+    fact: Yul Brynner played the king more than four thousand times across thirty-four years and died shortly after his last performance.
+
+  - id: a2-stg-015
+    difficulty: 3
+    prompt: In which musical does Mama Rose drive her daughters into show business?
+    answer: Gypsy
+    distractors: [Funny Girl, Mame, Applause]
+    fact: It is drawn from the memoirs of the stripper Gypsy Rose Lee. The part of Rose is often called the King Lear of musical theater.
+
+  - id: a2-stg-016
+    difficulty: 3
+    prompt: Which Shakespeare play features the moneylender Shylock?
+    answer: The Merchant of Venice
+    distractors: [Timon of Athens, Measure for Measure, The Comedy of Errors]
+    fact: It was written as a comedy and printed as one. For the last century it has been staged mostly as something closer to a tragedy.
+
+  - id: a2-stg-017
+    difficulty: 3
+    prompt: Which Shakespeare play is set on an island ruled by Prospero?
+    answer: The Tempest
+    distractors: [Pericles, Cymbeline, The Winter's Tale]
+    fact: The speech in which he gives up his magic is usually read as the author's own farewell, since it is among the last plays he wrote alone.
+
+  - id: a2-stg-018
+    difficulty: 3
+    prompt: Which Edward Albee play puts a faculty couple called George and Martha through one long night?
+    answer: Who's Afraid of Virginia Woolf?
+    distractors: [A Delicate Balance, The Zoo Story, Tiny Alice]
+    fact: The Pulitzer jury voted for it in 1963 and the board overruled them, apparently over the language. Two trustees resigned.
+
+  - id: a2-stg-019
+    difficulty: 3
+    prompt: What is the apron of a stage?
+    answer: The part of the stage in front of the curtain line
+    distractors: [The cloth that masks the orchestra pit, The space behind the back wall, The strip of lights along the stage edge]
+    fact: Shakespeare's theaters were nearly all apron, with the audience on three sides. The picture-frame arch came much later.
+
+  - id: a2-stg-020
+    difficulty: 3
+    prompt: Which 1996 musical about young artists in New York was based on Puccini's La Boheme?
+    answer: Rent
+    distractors: ["Tick, Tick... Boom!", Avenue Q, Spring Awakening]
+    fact: Its author died of an aortic dissection the night before the first preview, aged thirty-five, and never saw it performed for an audience.
+
+  - id: a2-stg-021
+    difficulty: 3
+    prompt: Which Gilbert and Sullivan operetta takes place entirely aboard a Royal Navy ship?
+    answer: H.M.S. Pinafore
+    distractors: [Ruddigore, Iolanthe, The Gondoliers]
+    fact: With no copyright protection in America, unauthorized productions sprang up everywhere, which is why the pair later premiered their work in New York.
+
+  - id: a2-stg-022
+    difficulty: 3
+    prompt: Who wrote the play The Importance of Being Earnest?
+    answer: Oscar Wilde
+    distractors: [George Bernard Shaw, Arthur Wing Pinero, Richard Brinsley Sheridan]
+    fact: It opened in February 1895 to the best reviews of his career. He was arrested within weeks and his name was taken off the posters while it was still running.
+
+  - id: a2-stg-023
+    difficulty: 3
+    prompt: Which musical features a man-eating plant named Audrey II?
+    answer: Little Shop of Horrors
+    distractors: [The Rocky Horror Show, Bat Boy, Carrie]
+    fact: It came from a Roger Corman film shot in two days. The puppet needed a performer inside it singing live from under the stage.
+
+  - id: a2-stg-024
+    difficulty: 3
+    prompt: Which musical features the number Cell Block Tango?
+    answer: Chicago
+    distractors: [Nine, Sweet Charity, The Pajama Game]
+    fact: Its 1996 revival has outrun the original by decades, helped by a stripped-back staging with the band on stage.
+
+  - id: a2-stg-025
+    difficulty: 3
+    prompt: Which 1962 musical set in ancient Rome opens with the song Comedy Tonight?
+    answer: A Funny Thing Happened on the Way to the Forum
+    distractors: [Ben Franklin in Paris, Kismet, Can-Can]
+    fact: The plot is stitched together from Plautus. The opening number was added in previews after the original opener left audiences expecting a different show.
+
+  - id: a2-stg-026
+    difficulty: 4
+    prompt: Which play has run continuously in London's West End since 1952?
+    answer: The Mousetrap
+    distractors: ["No Sex Please, We're British", The Woman in Black, Blithe Spirit]
+    fact: Agatha Christie expected eight months. Audiences are asked at the final curtain not to reveal the ending.
+
+  - id: a2-stg-027
+    difficulty: 4
+    prompt: Who wrote A Raisin in the Sun, the first play by a black woman staged on Broadway?
+    answer: Lorraine Hansberry
+    distractors: [Alice Childress, Zora Neale Hurston, Adrienne Kennedy]
+    fact: The title comes from a Langston Hughes poem, and the story from her own family's fight over a Chicago house. She died at thirty-four.
+
+  - id: a2-stg-028
+    difficulty: 4
+    prompt: Whose system of actor training lies behind American Method teaching?
+    answer: Konstantin Stanislavski
+    distractors: [Vsevolod Meyerhold, Michel Saint-Denis, Jacques Copeau]
+    fact: The American version leaned hard on personal emotional memory. He himself moved away from that later toward physical action.
+
+  - id: a2-stg-029
+    difficulty: 4
+    prompt: Which German dramatist argued for epic theater and wrote The Threepenny Opera?
+    answer: Bertolt Brecht
+    distractors: [Georg Buchner, Frank Wedekind, Ernst Toller]
+    fact: He wanted the audience thinking rather than absorbed, so songs interrupt the action and signs announce what is about to happen.
+
+  - id: a2-stg-030
+    difficulty: 4
+    prompt: Which 1964 Broadway musical gave Barbra Streisand her first leading role?
+    answer: Funny Girl
+    distractors: ["Hello, Dolly!", I Can Get It for You Wholesale, Do Re Mi]
+    fact: It is the story of Fanny Brice. The opening was postponed five times and the final scene was rewritten more than forty times.
+
+  - id: a2-stg-031
+    difficulty: 4
+    prompt: Which 1987 Sondheim musical sends fairy tale characters into one another's stories?
+    answer: Into the Woods
+    distractors: [Passion, Pacific Overtures, Anyone Can Whistle]
+    fact: The first act ends with everyone's wish granted. The second act is about what that cost.
+
+  - id: a2-stg-032
+    difficulty: 4
+    prompt: Which 1968 musical brought a rock score and a nude scene to Broadway?
+    answer: Hair
+    distractors: ["Promises, Promises", Oh! Calcutta!, Two Gentlemen of Verona]
+    fact: The nudity lasted seconds, in dim light, and was optional for the cast. It still carried the show into court in several cities.
+
+  - id: a2-stg-033
+    difficulty: 4
+    prompt: Which producer staged lavish annual revues in New York from 1907 for a quarter of a century?
+    answer: Florenz Ziegfeld
+    distractors: [Charles Dillingham, Lee Shubert, George White]
+    fact: He hired Fanny Brice, W.C. Fields and Will Rogers, spent without restraint, and died broke after the 1929 crash.
+
+  - id: a2-stg-034
+    difficulty: 4
+    prompt: Which Norwegian playwright wrote A Doll's House?
+    answer: Henrik Ibsen
+    distractors: [August Strindberg, Bjornstjerne Bjornson, Knut Hamsun]
+    fact: The door slamming at the end was so provocative that he was pressed into writing an alternative ending for German theaters, which he called a barbaric outrage.
+
+  - id: a2-stg-035
+    difficulty: 4
+    prompt: Which Russian playwright wrote The Cherry Orchard?
+    answer: Anton Chekhov
+    distractors: [Maxim Gorky, Nikolai Gogol, Ivan Turgenev]
+    fact: He called it a comedy. Stanislavski staged it as a tragedy, and the two argued about it until the author's death a few months later.
