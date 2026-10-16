@@ -1,0 +1,255 @@
+category: physics-chemistry
+pack:
+  id: adult2
+  name: Adult set 2
+
+# Adult set 1 covers the periodic table, the gas laws and the three or four
+# physicists everybody can name. This goes at the parts of the subject a
+# general reader actually meets: why the sky is blue, what half-life means,
+# why a bridge hums in the wind.
+
+questions:
+  - id: a2-phy-001
+    difficulty: 2
+    prompt: Which gas makes up about 21 percent of the air we breathe?
+    answer: Oxygen
+    distractors: [Carbon dioxide, Argon, Hydrogen]
+    fact: Almost all the rest is nitrogen. The carbon dioxide everyone worries about is well under a tenth of one percent of it.
+
+  - id: a2-phy-002
+    difficulty: 2
+    prompt: What is the chemical symbol for iron?
+    answer: Fe
+    distractors: [Ir, In, Fr]
+    fact: It comes from ferrum, the Latin name. Ir is iridium and Fr is francium, which are both real and neither is iron.
+
+  - id: a2-phy-003
+    difficulty: 2
+    prompt: At what temperature does water boil at sea level, in Celsius?
+    answer: 100 degrees
+    distractors: [90 degrees, 110 degrees, 120 degrees]
+    fact: The scale was built around it. Up a mountain it boils cooler, which is why a high-altitude cookbook tells you to allow longer.
+
+  - id: a2-phy-004
+    difficulty: 2
+    prompt: Which part of an atom orbits the nucleus?
+    answer: The electron
+    distractors: [The proton, The neutron, The quark]
+    fact: Orbit is a convenient lie; the electron is better described as a cloud of probability. The picture of tidy rings comes from an early model nobody has believed for a century.
+
+  - id: a2-phy-005
+    difficulty: 2
+    prompt: What is the common name for solid carbon dioxide?
+    answer: Dry ice
+    distractors: [Black ice, Hard water, Quicklime]
+    fact: It goes straight from solid to gas without melting, which is where the dry comes from and why it is used to keep ice cream cold in transit.
+
+  - id: a2-phy-006
+    difficulty: 2
+    prompt: Which force pulls a dropped object toward the ground?
+    answer: Gravity
+    distractors: [Magnetism, Friction, Inertia]
+    fact: It is by far the weakest of the four fundamental forces. A fridge magnet lifting a paperclip is beating the entire planet.
+
+  - id: a2-phy-007
+    difficulty: 3
+    prompt: Why does the sky look blue?
+    answer: Air scatters short wavelengths more than long ones
+    distractors: [It reflects the oceans, Water vapor absorbs red light, The sun emits mostly blue light]
+    fact: 'The same scattering is why a sunset is red: the light is coming through far more air, and the blue has been scattered away before it reaches you.'
+
+  - id: a2-phy-008
+    difficulty: 3
+    prompt: What does the half-life of a radioactive substance measure?
+    answer: The time for half of it to decay
+    distractors: [How long it stays dangerous, The time until it stops emitting entirely, Half the time it takes to decay completely]
+    fact: Because it halves rather than subtracts, a sample never quite reaches nothing, and a substance with a short half-life is the more intensely radioactive of two.
+
+  - id: a2-phy-009
+    difficulty: 3
+    prompt: Which scientist worked out that energy and mass are related by the speed of light squared?
+    answer: Albert Einstein
+    distractors: [Max Planck, Ernest Rutherford, Marie Curie]
+    fact: He published it in 1905 as an afterthought to a longer paper, in three pages, and his Nobel was awarded for something else entirely.
+
+  - id: a2-phy-010
+    difficulty: 3
+    prompt: What is an isotope?
+    answer: An atom of the same element with a different number of neutrons
+    distractors: [An atom that has lost an electron, A molecule of two identical atoms, An element with no stable form]
+    fact: Changing the neutrons changes the weight and the stability but not the chemistry, which is why carbon-14 behaves in a plant exactly as ordinary carbon does.
+
+  - id: a2-phy-011
+    difficulty: 3
+    prompt: Which Polish-born scientist won Nobel Prizes in two different sciences?
+    answer: Marie Curie
+    distractors: [Lise Meitner, Irène Joliot-Curie, Emmy Noether]
+    fact: Physics in 1903 and chemistry in 1911. Her notebooks are still radioactive and are kept in lead-lined boxes.
+
+  - id: a2-phy-012
+    difficulty: 3
+    prompt: What happens to a metal bar as it is heated?
+    answer: It expands
+    distractors: [It contracts, Its mass increases, Its density stays the same]
+    fact: Bridges are built with expansion joints for exactly this reason, and a railway laid without gaps in hot weather can buckle sideways.
+
+  - id: a2-phy-013
+    difficulty: 3
+    prompt: Which element is the most abundant in the universe?
+    answer: Hydrogen
+    distractors: [Oxygen, Carbon, Iron]
+    fact: About three quarters of ordinary matter by mass. Almost all the rest is helium, and everything else put together is a rounding error.
+
+  - id: a2-phy-014
+    difficulty: 3
+    prompt: What does a Geiger counter detect?
+    answer: Ionizing radiation
+    distractors: [Magnetic fields, Carbon monoxide, Seismic tremors]
+    fact: The click is a single particle passing through a tube of gas and knocking an electron loose, which briefly lets a current flow.
+
+  - id: a2-phy-015
+    difficulty: 3
+    prompt: What is the pH of pure water at room temperature?
+    answer: 7
+    distractors: [0, 10, 14]
+    fact: Seven is the point where acid and alkali balance exactly. Lemon juice sits around 2 and household bleach around 13, and each step on the scale is a tenfold change.
+
+  - id: a2-phy-016
+    difficulty: 3
+    prompt: What is the name for a substance that does not conduct electricity?
+    answer: An insulator
+    distractors: [A semiconductor, A dielectric fluid, A resistor]
+    fact: A resistor conducts, just reluctantly. A semiconductor sits between the two and can be persuaded either way, which is the whole basis of the transistor.
+
+  - id: a2-phy-017
+    difficulty: 3
+    prompt: Why does a swimming pool look shallower than it is?
+    answer: Light bends as it leaves the water
+    distractors: [The water absorbs blue light, The surface reflects most of the light, The eye misjudges distance underwater]
+    fact: The same bending is why a straw in a glass looks broken at the surface, and why a spear fisherman aims below the fish.
+
+  - id: a2-phy-018
+    difficulty: 3
+    prompt: Which law says that for every action there is an equal and opposite reaction?
+    answer: Newton's third
+    distractors: [Newton's first, Newton's second, Boyle's]
+    fact: 'It is why a rocket works in a vacuum. There is nothing to push against and nothing needs to be: the exhaust goes one way and the rocket the other.'
+
+  - id: a2-phy-019
+    difficulty: 3
+    prompt: What is distilled water missing that tap water contains?
+    answer: Dissolved minerals
+    distractors: [Oxygen, Hydrogen, Its taste only]
+    fact: It is a poor conductor for the same reason. The electricity in ordinary water is carried by what is dissolved in it rather than by the water.
+
+  - id: a2-phy-020
+    difficulty: 3
+    prompt: Which part of the electromagnetic spectrum sits just beyond the red end of visible light?
+    answer: Infrared
+    distractors: [Ultraviolet, X-rays, Microwaves]
+    fact: William Herschel found it in 1800 by putting a thermometer past the red edge of a spectrum and watching it climb.
+
+  - id: a2-phy-021
+    difficulty: 3
+    prompt: What does a catalyst's "poisoning" mean in industry?
+    answer: Something has coated it and stopped it working
+    distractors: [It has dissolved into the product, It has become radioactive, It has reacted away completely]
+    fact: Lead poisons the catalyst in a car's exhaust, which is the reason unleaded fuel arrived when catalytic converters did.
+
+  - id: a2-phy-022
+    difficulty: 3
+    prompt: What is the state of matter between liquid and gas called when a substance is held above its critical point?
+    answer: A supercritical fluid
+    distractors: [A plasma, A colloid, A superfluid]
+    fact: It flows like a gas and dissolves like a liquid, which is how decaffeinated coffee is made without solvents.
+
+  - id: a2-phy-023
+    difficulty: 3
+    prompt: Which everyday material is an amorphous solid rather than a crystal?
+    answer: Glass
+    distractors: [Salt, Quartz, Ice]
+    fact: Its atoms are arranged like a liquid that stopped moving. The story that old window panes are thicker at the bottom because glass flows is not true; they were made unevenly.
+
+  - id: a2-phy-024
+    difficulty: 4
+    prompt: What did the Michelson-Morley experiment of 1887 fail to find?
+    answer: Any sign of the ether light was thought to travel through
+    distractors: [The mass of the electron, The curvature of space, A difference between gravity and acceleration]
+    fact: It is the most celebrated null result in physics. Finding nothing is what cleared the ground for relativity eighteen years later.
+
+  - id: a2-phy-025
+    difficulty: 4
+    prompt: What is the name for the pressure at which a liquid's vapor is in balance with the liquid itself?
+    answer: Vapor pressure
+    distractors: [Osmotic pressure, Partial pressure, Critical pressure]
+    fact: A liquid boils when this matches the pressure around it, which is why reducing the pressure in a vacuum flask can make water boil at room temperature.
+
+  - id: a2-phy-026
+    difficulty: 4
+    prompt: Which effect explains why the pitch of a siren drops as it passes you?
+    answer: The Doppler effect
+    distractors: [The Coriolis effect, The Venturi effect, The Casimir effect]
+    fact: 'The same shift in light is how the expansion of the universe was found: distant galaxies are reddened because they are receding.'
+
+  - id: a2-phy-027
+    difficulty: 4
+    prompt: What does "entropy" describe in a physical system?
+    answer: How many arrangements of its parts look the same from outside
+    distractors: [How much heat it contains, How fast it is losing energy, How disordered its surface is]
+    fact: Disorder is the usual shorthand and it misleads. A shuffled deck has high entropy because there are so many shuffles that look shuffled, and only one that looks sorted.
+
+  - id: a2-phy-028
+    difficulty: 4
+    prompt: Which bond holds the two hydrogen atoms to the oxygen within a single water molecule?
+    answer: A covalent bond
+    distractors: [A hydrogen bond, An ionic bond, A metallic bond]
+    fact: Hydrogen bonds are the weaker attractions between separate water molecules, and they are what give water its surface tension and its high boiling point.
+
+  - id: a2-phy-029
+    difficulty: 4
+    prompt: What did Rosalind Franklin's Photograph 51 show?
+    answer: That DNA is a helix
+    distractors: [The first image of an atom, The structure of penicillin, That light behaves as a wave]
+    fact: It was an X-ray diffraction image, and the cross pattern in the middle is the signature of a helix. She died four years before the Nobel, which is not awarded posthumously.
+
+  - id: a2-phy-030
+    difficulty: 4
+    prompt: Why did the Tacoma Narrows bridge twist itself apart in 1940?
+    answer: The wind drove it at a frequency it wanted to move at
+    distractors: [The cables corroded in the salt air, A ship struck a pier, The roadway was loaded unevenly]
+    fact: Engineering courses showed the film for decades as an example of resonance. The deck was a solid plate rather than an open truss, and the wind could not get through it.
+
+  - id: a2-phy-031
+    difficulty: 4
+    prompt: What is the name of the apparatus that measures the heat released by a reaction?
+    answer: A calorimeter
+    distractors: [A manometer, A spectrometer, A galvanometer]
+    fact: The food calorie on a label was originally measured by burning the food in one of these and seeing how much the surrounding water warmed.
+
+  - id: a2-phy-032
+    difficulty: 4
+    prompt: Which property of a wave determines the color of light or the pitch of a sound?
+    answer: Its frequency
+    distractors: [Its amplitude, Its speed, Its phase]
+    fact: Amplitude gives brightness and loudness instead. A loud note and a quiet one of the same pitch are the same frequency at different amplitudes.
+
+  - id: a2-phy-033
+    difficulty: 4
+    prompt: What is an alloy?
+    answer: A metal mixed with one or more other elements
+    distractors: [A metal that has been heat-treated, A compound of two metals in fixed proportions, A metal coated with another]
+    fact: Fixed proportions would make it a compound. Steel is iron with a little carbon, and under about two percent of carbon is what separates it from cast iron.
+
+  - id: a2-phy-034
+    difficulty: 4
+    prompt: Which scientist's oil-drop experiment measured the charge on a single electron?
+    answer: Robert Millikan
+    distractors: [J. J. Thomson, Robert Boyle, Henry Moseley]
+    fact: He balanced charged droplets of oil against gravity using an electric field, and the charges always came out as whole multiples of one number.
+
+  - id: a2-phy-035
+    difficulty: 4
+    prompt: What does a mole measure in chemistry?
+    answer: A fixed number of particles, about six hundred thousand billion billion
+    distractors: [A mass of exactly one gram, A volume of one liter at room temperature, The energy in one bond]
+    fact: It is a counting unit, like a dozen, chosen so that the atomic weight on the periodic table is also the weight in grams of that many atoms.

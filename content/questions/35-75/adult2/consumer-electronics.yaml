@@ -1,0 +1,255 @@
+category: consumer-electronics
+pack:
+  id: adult2
+  name: Adult set 2
+
+# The thinnest category in the bank at six questions, because it was carved
+# out of Invention & Technology late. This is the living room, the car and the
+# pocket: formats that won, formats that lost, and the things people queued up
+# for on a Saturday morning.
+
+questions:
+  - id: a2-cel-001
+    difficulty: 2
+    prompt: Which format replaced the vinyl LP as the usual way to buy an album during the late 1980s?
+    answer: The compact disc
+    distractors: [The cassette, The eight-track cartridge, The MiniDisc]
+    fact: Cassettes outsold LPs first, but the CD is what finished the record shop's vinyl racks. Its 74-minute length is said to have been set so a Beethoven symphony would fit.
+
+  - id: a2-cel-002
+    difficulty: 2
+    prompt: What does the "LED" in an LED display stand for?
+    answer: Light-emitting diode
+    distractors: [Low energy display, Layered electronic dot, Linear emission device]
+    fact: The red ones were cheap by the 1970s and turned up on every calculator. A bright blue one took until the 1990s, and the physicists who managed it got a Nobel for it.
+
+  - id: a2-cel-003
+    difficulty: 2
+    prompt: What did a Polaroid camera do that an ordinary camera did not?
+    answer: Developed the picture itself, in about a minute
+    distractors: [Took pictures without film, Printed on ordinary paper, Shot in color before anyone else]
+    fact: Edwin Land built it after his three-year-old daughter asked why she could not see the photograph right away.
+
+  - id: a2-cel-004
+    difficulty: 2
+    prompt: What was a "boom box"?
+    answer: A portable stereo with its speakers built in
+    distractors: [A car amplifier, A studio mixing desk, A theater sound system]
+    fact: It needed eight or ten D cells and ate them. Carrying one on the shoulder is the image that stuck, and it dated almost exactly to the decade of the cassette.
+
+  - id: a2-cel-005
+    difficulty: 2
+    prompt: What does "HD" stand for in HDTV?
+    answer: High definition
+    distractors: [High density, Horizontal display, Home digital]
+    fact: The old American standard was 525 lines, of which about 480 were picture. High definition roughly doubled that and changed the shape of the screen while it was at it.
+
+  - id: a2-cel-006
+    difficulty: 2
+    prompt: Which handheld game system did Nintendo release in 1989, bundled with Tetris?
+    answer: The Game Boy
+    distractors: [The Game Gear, The Lynx, The TurboExpress]
+    fact: Its rivals had color screens and better hardware. It had batteries that lasted thirty hours and a puzzle game nobody could put down.
+
+  - id: a2-cel-007
+    difficulty: 2
+    prompt: What is a "woofer" in a loudspeaker for?
+    answer: The low frequencies
+    distractors: [The high frequencies, The vocals, The echo]
+    fact: The tweeter takes the top end. The names are about as literal as audio engineering gets.
+
+  - id: a2-cel-008
+    difficulty: 3
+    prompt: Which company introduced the compact cassette in 1963?
+    answer: Philips
+    distractors: [Grundig, Telefunken, Ampex]
+    fact: It let the patent go royalty-free, which is why everyone adopted it and why it beat better-sounding rivals.
+
+  - id: a2-cel-009
+    difficulty: 3
+    prompt: What was Dolby noise reduction mainly used to cut on a cassette?
+    answer: Tape hiss
+    distractors: [Motor rumble, Radio interference, Speaker distortion]
+    fact: It boosted the quiet high frequencies on recording and cut them again on playback, taking the hiss down with them.
+
+  - id: a2-cel-010
+    difficulty: 3
+    prompt: Which device did the pocket calculator make obsolete during the 1970s?
+    answer: The slide rule
+    distractors: [The abacus, The adding machine, The ready reckoner]
+    fact: Engineering schools dropped it from the curriculum within about five years. The ones that went to the moon were slide rules.
+
+  - id: a2-cel-011
+    difficulty: 3
+    prompt: Which company built the first digital camera, a toaster-sized prototype, in 1975?
+    answer: Kodak
+    distractors: [Nikon, Canon, Polaroid]
+    fact: It recorded to cassette tape at 0.01 megapixels and took 23 seconds a shot. The company that built it made its money selling film.
+
+  - id: a2-cel-012
+    difficulty: 3
+    prompt: Which American company released the Atari 2600 home console in 1977?
+    answer: Atari
+    distractors: [Magnavox, Coleco, Mattel]
+    fact: Swapping cartridges rather than building the game into the box is the idea that made a console a platform instead of a toy.
+
+  - id: a2-cel-013
+    difficulty: 3
+    prompt: What did a quadraphonic system try to add to stereo?
+    answer: Two more channels, behind the listener
+    distractors: [A deeper bass response, A second turntable, Digital playback]
+    fact: Three incompatible encoding schemes reached the shops at once and buyers sat the whole thing out. Surround sound arrived properly twenty years later, through film.
+
+  - id: a2-cel-014
+    difficulty: 3
+    prompt: Which film format did Kodak introduce in 1963 to make loading a camera foolproof?
+    answer: The Instamatic cartridge
+    distractors: [35 millimeter, Medium format, The disc film]
+    fact: It dropped in one way round and could not be put in wrong. Kodak sold fifty million cameras for it inside seven years.
+
+  - id: a2-cel-015
+    difficulty: 3
+    prompt: Which rival disc format did Blu-ray defeat in the late 2000s?
+    answer: HD DVD
+    distractors: [LaserDisc, SuperDisc, DVD-Audio]
+    fact: One studio switching sides in January 2008 effectively ended it, and the losing format was discontinued inside two months.
+
+  - id: a2-cel-016
+    difficulty: 3
+    prompt: Which part of a remote control carries the signal to the television?
+    answer: An infrared light
+    distractors: [A radio transmitter, An ultrasonic tone, A magnetic pulse]
+    fact: The earliest ones really did use ultrasound, and a jingling set of keys could change the channel.
+
+  - id: a2-cel-017
+    difficulty: 3
+    prompt: What was the LaserDisc, launched in 1978?
+    answer: A video format on a disc the size of an LP
+    distractors: [An early CD player, A recordable video tape, A projection television]
+    fact: It gave a far better picture than tape and could not record, which is what kept it a niche for collectors while VHS took the market.
+
+  - id: a2-cel-018
+    difficulty: 3
+    prompt: Which Japanese company sold the first portable CD player, in 1984?
+    answer: Sony
+    distractors: [Panasonic, Sharp, Aiwa]
+    fact: It was barely thicker than the disc it played and skipped if you breathed on it. Anti-skip memory did not arrive for another decade.
+
+  - id: a2-cel-019
+    difficulty: 3
+    prompt: What did a car's "eight-track" cartridge hold that a cassette did not?
+    answer: A single loop of tape that never rewound
+    distractors: [Two separate reels, A magnetic disc, A wire recording]
+    fact: It played four stereo programs in an endless loop, which is why an album could cut off mid-song and fade back in after the clunk.
+
+  - id: a2-cel-020
+    difficulty: 3
+    prompt: Which company's Trinitron picture tube gave it a reputation for television pictures through the 1970s and 1980s?
+    answer: Sony
+    distractors: [Zenith, RCA, Magnavox]
+    fact: It used a single electron gun and a grille of vertical wires instead of a shadow mask, and the two faint horizontal lines across the screen are where those wires were braced.
+
+  - id: a2-cel-021
+    difficulty: 3
+    prompt: What does a camcorder combine into one body?
+    answer: A camera and a recorder
+    distractors: [A camera and a projector, A camera and a television, A camera and a telephone]
+    fact: Before it, home video meant a shoulder camera cabled to a separate deck carried in the other hand.
+
+  - id: a2-cel-022
+    difficulty: 3
+    prompt: Which American company dominated the hi-fi receiver through the 1970s before Japanese makers took the market?
+    answer: Marantz
+    distractors: [Bose, Harman Kardon, Fisher]
+    fact: The silver-faced receivers of that decade are collected now, and the arms race over advertised watts per channel got so silly the regulators stepped in.
+
+  - id: a2-cel-023
+    difficulty: 3
+    prompt: What is the "flash" memory in a camera card named after?
+    answer: The way a whole block is erased at once
+    distractors: [The camera flash it was designed for, The speed of the first chips, Its inventor]
+    fact: A colleague of the inventor said erasing a block reminded him of a camera flash, and the name stuck to a technology that has nothing to do with photography.
+
+  - id: a2-cel-024
+    difficulty: 4
+    prompt: Which company sold the first commercial transistor radio, the TR-1, in 1954?
+    answer: Regency
+    distractors: [Zenith, Emerson, Motorola]
+    fact: It cost about fifty dollars, which is several hundred today, and sold on novelty rather than sound. A Japanese company nobody had heard of took the idea seriously.
+
+  - id: a2-cel-025
+    difficulty: 4
+    prompt: What does the "DAT" in a DAT recorder stand for?
+    answer: Digital audio tape
+    distractors: [Direct access tape, Dolby audio track, Dual analog transfer]
+    fact: It put CD-quality sound on a cassette half the size. The record industry's fear of perfect copies kept it out of American shops and it ended up a studio format.
+
+  - id: a2-cel-026
+    difficulty: 4
+    prompt: Which disc format did Sony introduce in 1992 as a recordable rival to the cassette?
+    answer: The MiniDisc
+    distractors: [The Digital Compact Cassette, The DAT tape, The CD-R]
+    fact: It sold well in Japan and almost nowhere else. The compression it used to fit an album on a small disc was an ancestor of the formats that later killed it.
+
+  - id: a2-cel-027
+    difficulty: 4
+    prompt: What does a "shadow mask" do inside a color picture tube?
+    answer: Makes sure each electron beam hits only its own color of phosphor
+    distractors: [Blocks stray light from the room, Shields the viewer from radiation, Holds the glass under vacuum]
+    fact: It is a steel sheet drilled with hundreds of thousands of holes, and it absorbs most of the beam's energy as heat, which is why those televisions ran warm.
+
+  - id: a2-cel-028
+    difficulty: 4
+    prompt: Which 1950s color television system was adopted in the United States and nicknamed "never twice the same color"?
+    answer: NTSC
+    distractors: [PAL, SECAM, VHF]
+    fact: It was designed so existing black-and-white sets would still work, and that compromise is what made its color drift. The European systems that followed had the luxury of learning from it.
+
+  - id: a2-cel-029
+    difficulty: 4
+    prompt: What was unusual about the Sinclair C5, launched in Britain in 1985?
+    answer: It was a one-person battery vehicle you pedaled and steered from below the waist
+    distractors: [It was the first pocket television, It was a watch that played music, It was a computer with no keyboard]
+    fact: It left the driver's head at the height of a truck's exhaust pipe, and about seventeen thousand were built before the company making them collapsed.
+
+  - id: a2-cel-030
+    difficulty: 4
+    prompt: What was unusual about the picture tube in a 1980s pocket television?
+    answer: The electron gun fired sideways across the screen rather than at it
+    distractors: [It needed no vacuum, The screen was lit from behind, The picture was reflected off a mirror]
+    fact: Firing along the face of the screen is the only way the depth could be got down to about an inch, and the picture was two inches across.
+
+  - id: a2-cel-031
+    difficulty: 4
+    prompt: What does the "compact" in compact cassette refer to?
+    answer: That it was small compared with the reel-to-reel tape it replaced
+    distractors: [The tightness of the tape wind, Its compressed audio, The size of the player]
+    fact: It was never meant for music at all. It was sold for dictation, and the sound only became good enough for albums after a decade of refinement.
+
+  - id: a2-cel-032
+    difficulty: 4
+    prompt: Why did the first CD players carry the words "oversampling" on the front panel?
+    answer: It let a gentler filter be used, improving the sound
+    distractors: [It doubled the playing time, It allowed recording, It reduced the laser's power]
+    fact: Reading the disc faster than the music needs moves the unwanted artifacts far above hearing, where a mild filter can remove them. It was a selling point for about five years and then became standard.
+
+  - id: a2-cel-033
+    difficulty: 4
+    prompt: Which company introduced the first television remote control with no wire, in 1955?
+    answer: Zenith
+    distractors: [RCA, Philco, Admiral]
+    fact: The first attempt a year earlier was connected by a cable across the carpet, and people tripped over it. The wireless replacement was called the Flash-Matic and worked by shining light at the corners of the screen.
+
+  - id: a2-cel-034
+    difficulty: 4
+    prompt: What was the drawback of the Flash-Matic, the first wireless television remote?
+    answer: Sunlight through a window could change the channel
+    distractors: [It only worked in the dark, It had to be pointed at the ceiling, It drained the set's valves]
+    fact: Its replacement struck aluminum rods to make ultrasonic tones instead, which is why remote controls were called clickers for a generation after they stopped clicking.
+
+  - id: a2-cel-035
+    difficulty: 4
+    prompt: Which format war did Sony lose in home video, despite its format arriving first?
+    answer: Betamax against VHS
+    distractors: [MiniDisc against DAT, LaserDisc against CED, Memory Stick against SD]
+    fact: The rival allowed a longer tape, which mattered more to buyers than picture quality because a whole film had to fit on one cassette.
