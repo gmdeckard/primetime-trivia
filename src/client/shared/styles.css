@@ -918,3 +918,30 @@ textarea:focus { border-color: var(--brass); outline: none; }
    line on a 375px screen. Without this the position wraps and the answer key
    goes below the fold, which is the one thing that screen exists to show. */
 .nowrap { white-space: nowrap; }
+
+/* A radio reuses the switch's row, with a dot instead of a track: one of
+   these can be on, and a sliding switch that turns itself off when you turn
+   another one on misrepresents what it is. */
+.radio-mark {
+  flex: 0 0 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 2px solid var(--line);
+  background: var(--ink);
+  position: relative;
+}
+.radio.is-on .radio-mark { border-color: var(--brass); }
+.radio.is-on .radio-mark::after {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  border-radius: 50%;
+  background: var(--brass);
+}
+
+/* On a narrow phone a long hint beside a long label squeezes both into
+   two ragged columns. Below 400px the hint takes its own line instead. */
+@media (max-width: 400px) {
+  .field-label { flex-direction: column; align-items: flex-start; gap: 2px; }
+  .field-hint { text-align: left; }
+}

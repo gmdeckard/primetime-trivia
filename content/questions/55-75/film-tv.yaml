@@ -1,0 +1,268 @@
+category: film-tv
+
+questions:
+  - id: ftv-001
+    difficulty: 2
+    prompt: Which 1942 film ends at an airport in Morocco?
+    answer: Casablanca
+    distractors: [To Have and Have Not, The Maltese Falcon, Algiers]
+    fact: The famous closing line was written late in production; the ending was not settled when shooting began.
+
+  - id: ftv-002
+    difficulty: 3
+    prompt: Which film won the first Academy Award for Best Picture?
+    answer: Wings
+    distractors: [The Jazz Singer, Sunrise, The Broadway Melody]
+    fact: Wings, a silent World War I aviation picture, won for 1927-28. It remains the only silent film to win Best Picture until The Artist in 2011.
+
+  - id: ftv-003
+    difficulty: 2
+    prompt: Who directed "Psycho", "Vertigo" and "Rear Window"?
+    answer: Alfred Hitchcock
+    distractors: [Billy Wilder, John Huston, Orson Welles]
+    fact: He was nominated five times for Best Director and never won.
+
+  - id: ftv-004
+    difficulty: 1
+    prompt: Which actor played Michael Corleone in "The Godfather"?
+    answer: Al Pacino
+    distractors: [Robert De Niro, James Caan, John Cazale]
+    fact: De Niro played the young Vito in Part II, winning an Oscar for a role Brando had already won one for.
+
+  - id: ftv-005
+    difficulty: 3
+    prompt: Which television western ran from 1955 to 1975, the longest-running prime-time drama of its era?
+    answer: Gunsmoke
+    distractors: [Bonanza, Wagon Train, The Virginian]
+    fact: Twenty seasons and 635 episodes. James Arness played Matt Dillon in every one.
+
+  - id: ftv-006
+    difficulty: 2
+    prompt: Which 1939 film opens in sepia and switches to color?
+    answer: The Wizard of Oz
+    distractors: [Gone with the Wind, Snow White, Fantasia]
+    fact: The Kansas scenes were shot in black and white and tinted sepia; Technicolor begins when the door opens.
+
+  - id: ftv-007
+    difficulty: 4
+    prompt: Which film is widely credited with inventing the "deep focus" look in 1941?
+    answer: Citizen Kane
+    distractors: [The Grapes of Wrath, How Green Was My Valley, Rebecca]
+    fact: Gregg Toland's cinematography was so central that Welles shared his title card with him.
+
+  - id: ftv-008
+    difficulty: 2
+    prompt: Which actress starred in "Breakfast at Tiffany's"?
+    answer: Audrey Hepburn
+    distractors: [Grace Kelly, Natalie Wood, Leslie Caron]
+    fact: Truman Capote had wanted Marilyn Monroe for the part.
+
+  - id: ftv-009
+    difficulty: 3
+    prompt: Which TV series was set at the 4077th Mobile Army Surgical Hospital?
+    answer: M*A*S*H
+    distractors: [China Beach, Combat!, Hogan's Heroes]
+    fact: The series ran eleven years — more than three times the length of the war it depicted.
+
+  - id: ftv-010
+    difficulty: 2
+    prompt: Who played Atticus Finch in the 1962 film of "To Kill a Mockingbird"?
+    answer: Gregory Peck
+    distractors: [Henry Fonda, James Stewart, Spencer Tracy]
+    fact: Peck won Best Actor for it, and said it was the role he was proudest of.
+
+  - id: ftv-011
+    difficulty: 4
+    prompt: Which Italian director made "La Dolce Vita" and "8½"?
+    answer: Federico Fellini
+    distractors: [Michelangelo Antonioni, Vittorio De Sica, Luchino Visconti]
+    fact: The word "paparazzi" comes from a photographer character in La Dolce Vita named Paparazzo.
+
+  - id: ftv-012
+    difficulty: 2
+    prompt: Which 1960s sitcom featured a Martian anthropologist living with a Los Angeles journalist?
+    answer: My Favorite Martian
+    distractors: [Bewitched, I Dream of Jeannie, Mister Ed]
+    fact: Ray Walston played the Martian, and much later turned up as the judge in Picket Fences.
+
+  - id: ftv-013
+    difficulty: 3
+    prompt: Which film won Best Picture for 1972?
+    answer: The Godfather
+    distractors: [Cabaret, Deliverance, The Sting]
+    fact: Cabaret won eight awards that night, including Best Director for Bob Fosse, but lost the top prize.
+
+  - id: ftv-014
+    difficulty: 2
+    prompt: Who hosted "The Tonight Show" from 1962 to 1992?
+    answer: Johnny Carson
+    distractors: [Jack Paar, Steve Allen, Merv Griffin]
+    fact: Paar preceded him and Allen was the original host in 1954.
+
+  - id: ftv-015
+    difficulty: 3
+    prompt: Which actor played Rick Blaine's rival for Ilsa's affections in "Casablanca"?
+    answer: Paul Henreid
+    distractors: [Claude Rains, Conrad Veidt, Peter Lorre]
+    fact: Rains played the French police captain, Veidt the German major and Lorre the black marketeer.
+
+  - id: ftv-016
+    difficulty: 1
+    prompt: Which 1977 film introduced Luke Skywalker?
+    answer: Star Wars
+    distractors: [Close Encounters of the Third Kind, '2001: A Space Odyssey', Logan's Run]
+    fact: 'It was simply "Star Wars" until the 1981 reissue added "Episode IV: A New Hope".'
+
+  - id: ftv-017
+    difficulty: 4
+    prompt: Which Swedish director made "The Seventh Seal"?
+    answer: Ingmar Bergman
+    distractors: [Victor Sjöström, Bo Widerberg, Carl Theodor Dreyer]
+    fact: Dreyer was Danish. The chess game with Death has been parodied ever since.
+
+  - id: ftv-018
+    difficulty: 2
+    prompt: 'Which television program began with "Space: the final frontier"?'
+    answer: Star Trek
+    distractors: [The Twilight Zone, Lost in Space, The Outer Limits]
+    fact: It ran only three seasons from 1966 and was revived largely because of syndication.
+
+  - id: ftv-019
+    difficulty: 3
+    prompt: Who directed "Lawrence of Arabia" and "The Bridge on the River Kwai"?
+    answer: David Lean
+    distractors: [Carol Reed, Michael Powell, John Schlesinger]
+    fact: Both won Best Picture, and both ran well over three hours.
+
+  - id: ftv-020
+    difficulty: 2
+    prompt: Which actress won Best Actress for "The Lion in Winter" and "On Golden Pond"?
+    answer: Katharine Hepburn
+    distractors: [Bette Davis, Joan Crawford, Ingrid Bergman]
+    fact: She won four Best Actress Oscars, more than any other performer, and attended the ceremony only once.
+
+  - id: ftv-021
+    difficulty: 4
+    prompt: Which 1960 film was shot almost entirely in a single Los Angeles office set and won Best Picture?
+    answer: The Apartment
+    distractors: [Some Like It Hot, Sunset Boulevard, The Odd Couple]
+    fact: Billy Wilder directed all of those except The Odd Couple, which was Gene Saks.
+
+  - id: ftv-022
+    difficulty: 2
+    prompt: Which family did "All in the Family" center on?
+    answer: The Bunkers
+    distractors: [The Jeffersons, The Evanses, The Stivics]
+    fact: The Jeffersons and Maude were both spun off from it, as was Good Times from Maude.
+
+  - id: ftv-023
+    difficulty: 3
+    prompt: Which film features the line "I'm going to make him an offer he can't refuse"?
+    answer: The Godfather
+    distractors: [Goodfellas, Scarface, On the Waterfront]
+    fact: The American Film Institute ranked it among the most memorable lines in American cinema.
+
+  - id: ftv-024
+    difficulty: 2
+    prompt: Which newsman signed off with "And that's the way it is"?
+    answer: Walter Cronkite
+    distractors: [Edward R. Murrow, David Brinkley, Chet Huntley]
+    fact: He anchored the CBS Evening News from 1962 to 1981 and was repeatedly polled as the most trusted man in America.
+
+  - id: ftv-025
+    difficulty: 4
+    prompt: Which Japanese director made "Seven Samurai"?
+    answer: Akira Kurosawa
+    distractors: [Yasujiro Ozu, Kenji Mizoguchi, Nagisa Oshima]
+    fact: It was remade as "The Magnificent Seven" in 1960, and his "Yojimbo" became "A Fistful of Dollars".
+
+  - id: ftv-026
+    difficulty: 2
+    prompt: Which 1975 film was set aboard the fishing boat Orca?
+    answer: Jaws
+    distractors: [The Deep, Moby Dick, The Perfect Storm]
+    fact: The mechanical shark broke down so often that Spielberg shot around it, which is largely why the film works.
+
+  - id: ftv-027
+    difficulty: 3
+    prompt: Which actor played Sheriff Andy Taylor in a long-running 1960s sitcom?
+    answer: Andy Griffith
+    distractors: [Don Knotts, Fred MacMurray, Buddy Ebsen]
+    fact: Don Knotts played Deputy Barney Fife and won five Emmys for it.
+
+  - id: ftv-028
+    difficulty: 2
+    prompt: Which 1965 musical film was set in Austria on the eve of the Anschluss?
+    answer: The Sound of Music
+    distractors: [My Fair Lady, Oliver!, Camelot]
+    fact: It was the highest-grossing film in the world for several years and is credited with saving 20th Century Fox.
+
+  - id: ftv-029
+    difficulty: 4
+    prompt: Which director made "Rear Window", using a single enormous set of a Greenwich Village courtyard?
+    answer: Alfred Hitchcock
+    distractors: [Elia Kazan, Fred Zinnemann, George Stevens]
+    fact: The set filled a Paramount sound stage and required its own drainage system for the rain sequences.
+
+  - id: ftv-030
+    difficulty: 3
+    prompt: Which variety show introduced the Beatles to American television in February 1964?
+    answer: The Ed Sullivan Show
+    distractors: [American Bandstand, The Tonight Show, Hullabaloo]
+    fact: An estimated 73 million people watched — then roughly 40 per cent of the American population.
+
+  - id: ftv-031
+    difficulty: 2
+    prompt: In Back to the Future, what speed must the DeLorean reach to time travel?
+    answer: 88 miles per hour
+    distractors: [77 miles per hour, 99 miles per hour, 100 miles per hour]
+    fact: The car was picked because the designers wanted something a 1955 farmer could plausibly mistake for a spacecraft.
+
+  - id: ftv-032
+    difficulty: 2
+    prompt: Which film features a computer asking whether the user wants to play a game of thermonuclear war?
+    answer: WarGames
+    distractors: [Tron, Sneakers, The Net]
+    fact: It prompted a congressional hearing and is usually credited with shaping the first US computer crime law.
+
+  - id: ftv-033
+    difficulty: 3
+    prompt: Which 1993 film opens with a man being dragged into a crate by an unseen animal?
+    answer: Jurassic Park
+    distractors: [Congo, Anaconda, The Lost World]
+    fact: The raptors in that scene are a puppet. Only about fifteen minutes of the film uses computer animation at all.
+
+  - id: ftv-034
+    difficulty: 3
+    prompt: In The Shawshank Redemption, what does Andy use to hide his tunnel?
+    answer: A poster
+    distractors: [A bookshelf, A loose stone, A wardrobe]
+    fact: The film lost money on release and found its audience on cable and video rental.
+
+  - id: ftv-035
+    difficulty: 3
+    prompt: Which sitcom was set in a Boston bar where everybody knows your name?
+    answer: Cheers
+    distractors: [Taxi, Night Court, Barney Miller]
+    fact: It finished last in the ratings in its first season and was nearly canceled.
+
+  - id: ftv-036
+    difficulty: 3
+    prompt: Which director made Reservoir Dogs and Pulp Fiction?
+    answer: Quentin Tarantino
+    distractors: [Robert Rodriguez, Guy Ritchie, Paul Thomas Anderson]
+    fact: He wrote much of Reservoir Dogs while working in a video rental shop in Manhattan Beach.
+
+  - id: ftv-037
+    difficulty: 3
+    prompt: In The Princess Bride, what is Inigo Montoya's stated purpose?
+    answer: To avenge his father
+    distractors: [To rescue Buttercup, To claim a title, To find a lost sword]
+    fact: The novel presents itself as an abridgement of an older book by a writer who never existed.
+
+  - id: ftv-038
+    difficulty: 4
+    prompt: Which 1982 film was a commercial disappointment before becoming a touchstone of science fiction?
+    answer: Blade Runner
+    distractors: [The Thing, Tron, Dune]
+    fact: It opened against E.T. and lost badly. There are at least seven distinct released cuts of it.

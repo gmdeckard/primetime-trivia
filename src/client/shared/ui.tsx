@@ -464,3 +464,42 @@ export function Choice<T extends string>({
     </div>
   );
 }
+
+/**
+ * Pick one of several, where each option needs a line of its own.
+ *
+ * `Choice` handles two or three short labels side by side. This is for the
+ * list that does not fit that shape — the age groups, each of which wants to
+ * say how many questions it has behind it. It is a radio group and not a
+ * column of switches, because only one can be on and a switch that turns
+ * itself off when you turn another one on is lying about what it is.
+ */
+export function RadioList<T extends string>({
+  value,
+  options,
+  onChange,
+}: {
+  value: T;
+  options: Array<{ value: T; label: string; hint?: string }>;
+  onChange: (next: T) => void;
+}) {
+  return (
+    <div class="stack" style={{ gap: '8px' }} role="radiogroup">
+      {options.map((opt) => (
+        <button
+          key={opt.value}
+          class={`toggle radio${opt.value === value ? ' is-on' : ''}`}
+          role="radio"
+          aria-checked={opt.value === value}
+          onClick={() => onChange(opt.value)}
+        >
+          <span class="toggle-text">
+            <span class="toggle-label">{opt.label}</span>
+            {opt.hint && <span class="toggle-hint">{opt.hint}</span>}
+          </span>
+          <span class="radio-mark" aria-hidden="true" />
+        </button>
+      ))}
+    </div>
+  );
+}

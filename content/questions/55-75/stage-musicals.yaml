@@ -1,0 +1,180 @@
+category: stage-musicals
+
+# Broadway, the West End and the straight play. Arts & Classical Music has the
+# concert hall; this is the stage.
+
+questions:
+  - id: stg-001
+    difficulty: 2
+    prompt: Which musical features the song Climb Ev'ry Mountain?
+    answer: The Sound of Music
+    distractors: [Oklahoma!, Carousel, The King and I]
+    fact: All four are Rodgers and Hammerstein, so narrowing it down to the writers does not help you here.
+
+  - id: stg-002
+    difficulty: 2
+    prompt: In which musical does Professor Henry Higgins appear?
+    answer: My Fair Lady
+    distractors: [Oliver!, Camelot, Brigadoon]
+    fact: Lerner and Loewe adapted it from Shaw's play Pygmalion, and they wrote Camelot and Brigadoon too.
+
+  - id: stg-003
+    difficulty: 2
+    prompt: Which Shakespeare play features the character Puck?
+    answer: A Midsummer Night's Dream
+    distractors: [The Tempest, As You Like It, Twelfth Night]
+    fact: Puck also goes by Robin Goodfellow, a mischief-maker from English folklore that Shakespeare borrowed rather than invented.
+
+  - id: stg-004
+    difficulty: 2
+    prompt: Which musical is based on Sholem Aleichem's stories of Tevye the dairyman?
+    answer: Fiddler on the Roof
+    distractors: [Cabaret, Oliver!, Hello Dolly!]
+    fact: It ran 3,242 performances and was the first Broadway musical to pass three thousand.
+
+  - id: stg-005
+    difficulty: 2
+    prompt: Which awards honor achievement in Broadway theater?
+    answer: The Tony Awards
+    distractors: [The Obie Awards, The Drama Desk Awards, The Olivier Awards]
+    fact: Named for Antoinette Perry. The Obies cover off-Broadway and the Oliviers are the London equivalent, so all three others are real.
+
+  - id: stg-006
+    difficulty: 3
+    prompt: Who composed the music for West Side Story?
+    answer: Leonard Bernstein
+    distractors: [Stephen Sondheim, Richard Rodgers, Jule Styne]
+    fact: Sondheim wrote the lyrics, which is why he is the answer people reach for first.
+
+  - id: stg-007
+    difficulty: 3
+    prompt: Which Stephen Sondheim musical is set in a Victorian barber's shop?
+    answer: Sweeney Todd
+    distractors: [Company, Follies, A Little Night Music]
+    fact: The full title is Sweeney Todd, the Demon Barber of Fleet Street. Sondheim called it a black operetta.
+
+  - id: stg-008
+    difficulty: 3
+    prompt: Which Gilbert and Sullivan work features the Pirate King?
+    answer: The Pirates of Penzance
+    distractors: [HMS Pinafore, The Mikado, Iolanthe]
+    fact: It opened in New York in 1879 rather than London, a deliberate move to protect the American copyright.
+
+  - id: stg-009
+    difficulty: 3
+    prompt: Which musical gave us the song Memory?
+    answer: Cats
+    distractors: [Evita, Starlight Express, The Phantom of the Opera]
+    fact: Andrew Lloyd Webber set T. S. Eliot's light verse about cats to music. The lyric for Memory leans on a separate Eliot poem.
+
+  - id: stg-010
+    difficulty: 3
+    prompt: Which 1943 musical is usually credited with integrating song, dance and plot into one story?
+    answer: Oklahoma!
+    distractors: [Show Boat, Carousel, Annie Get Your Gun]
+    fact: Show Boat had done much of it in 1927, which is why the credit is still argued over by people who care.
+
+  - id: stg-011
+    difficulty: 3
+    prompt: In theater, which direction does an actor move when going upstage?
+    answer: Away from the audience
+    distractors: [Toward the audience, To the actor's left, Into the wings]
+    fact: Older stages were raked, sloping up away from the audience, so going upstage genuinely meant walking uphill.
+
+  - id: stg-012
+    difficulty: 3
+    prompt: In which London playhouse did Shakespeare's company perform from 1599?
+    answer: The Globe
+    distractors: [The Rose, The Swan, The Curtain]
+    fact: All four were real Elizabethan playhouses. The Globe was built partly from the timbers of an earlier theater the company dismantled.
+
+  - id: stg-013
+    difficulty: 3
+    prompt: Which musical is set in a Berlin nightclub as the Nazis come to power?
+    answer: Cabaret
+    distractors: [Chicago, Sweet Charity, The Threepenny Opera]
+    fact: Kander and Ebb wrote Cabaret and also Chicago, so the songwriting team will not separate those two for you.
+
+  - id: stg-014
+    difficulty: 3
+    prompt: Which musical features the song Luck Be a Lady?
+    answer: Guys and Dolls
+    distractors: [Damn Yankees, How to Succeed in Business, The Pajama Game]
+    fact: Frank Loesser wrote it from Damon Runyon's stories of Broadway gamblers. Loesser also wrote How to Succeed.
+
+  - id: stg-015
+    difficulty: 3
+    prompt: Who wrote the play A Streetcar Named Desire?
+    answer: Tennessee Williams
+    distractors: [Arthur Miller, William Inge, Clifford Odets]
+    fact: Marlon Brando made his name as Stanley on stage in 1947, four years before the film.
+
+  - id: stg-016
+    difficulty: 3
+    prompt: Which musical is set in a Scottish village that appears for one day each century?
+    answer: Brigadoon
+    distractors: [Camelot, Paint Your Wagon, Gigi]
+    fact: All four are Lerner and Loewe, so you have to know the story rather than the writers.
+
+  - id: stg-017
+    difficulty: 3
+    prompt: Which musical features the song Don't Cry for Me Argentina?
+    answer: Evita
+    distractors: [Jesus Christ Superstar, Chess, Aspects of Love]
+    fact: Lloyd Webber and Tim Rice released it as a concept album in 1976, two years before it reached the stage.
+
+  - id: stg-018
+    difficulty: 4
+    prompt: Which was the first musical to win the Pulitzer Prize for Drama?
+    answer: Of Thee I Sing
+    distractors: [Show Boat, Oklahoma!, South Pacific]
+    fact: The Gershwins' 1931 political satire took the prize in 1932. South Pacific was the second, eighteen years later.
+
+  - id: stg-019
+    difficulty: 4
+    prompt: Who wrote the music and lyrics for the musical Oliver!?
+    answer: Lionel Bart
+    distractors: [Lionel Monckton, Noel Gay, Anthony Newley]
+    fact: Bart wrote book, music and lyrics himself, which is rare. He could not read or write musical notation.
+
+  - id: stg-020
+    difficulty: 4
+    prompt: Which Stephen Sondheim musical tells its story largely backwards?
+    answer: Merrily We Roll Along
+    distractors: [Company, Assassins, Pacific Overtures]
+    fact: It closed in 1981 after sixteen performances and has been revised and revived repeatedly ever since.
+
+  - id: stg-021
+    difficulty: 4
+    prompt: Which 1927 musical was the first to treat race seriously on the American musical stage?
+    answer: Show Boat
+    distractors: [Porgy and Bess, Hallelujah Baby, Carmen Jones]
+    fact: Kern and Hammerstein adapted Edna Ferber's novel. Ol' Man River was written for Paul Robeson, who sang it in the London production.
+
+  - id: stg-022
+    difficulty: 4
+    prompt: Who was the first actor to be knighted?
+    answer: Henry Irving
+    distractors: [Edmund Kean, Herbert Beerbohm Tree, Charles Kean]
+    fact: Knighted in 1895. His business manager at the Lyceum for 27 years was Bram Stoker, who wrote Dracula in his spare time.
+
+  - id: stg-023
+    difficulty: 4
+    prompt: In The Mikado, what is the name of the Lord High Executioner?
+    answer: Ko-Ko
+    distractors: [Nanki-Poo, Pooh-Bah, Yum-Yum]
+    fact: All four are characters in the same operetta, so knowing the show will not get you there.
+
+  - id: stg-024
+    difficulty: 4
+    prompt: Who composed the music for both Cabaret and Chicago?
+    answer: John Kander
+    distractors: [Fred Ebb, Cy Coleman, Jerry Herman]
+    fact: Kander wrote the music and Ebb the lyrics, and because the pair are always named together the split is easy to get backwards.
+
+  - id: stg-025
+    difficulty: 4
+    prompt: Which 1975 Broadway musical was conceived and choreographed by Michael Bennett?
+    answer: A Chorus Line
+    distractors: [Pippin, Dancin', Sweet Charity]
+    fact: It ran 6,137 performances. Bob Fosse choreographed all three of the others, which is the trap.

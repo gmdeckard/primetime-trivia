@@ -1,0 +1,212 @@
+category: arts-classical
+
+questions:
+  - id: art-001
+    difficulty: 2
+    prompt: Which composer wrote the "Brandenburg Concertos"?
+    answer: Johann Sebastian Bach
+    distractors: [George Frideric Handel, Antonio Vivaldi, Georg Philipp Telemann]
+    fact: Bach presented the six concertos to the Margrave of Brandenburg in 1721. There is no evidence they were ever performed for him.
+
+  - id: art-002
+    difficulty: 3
+    prompt: Which Beethoven symphony incorporates a choral setting of Schiller's "Ode to Joy"?
+    answer: The Ninth
+    distractors: [The Fifth, The Seventh, The Third]
+    fact: He was almost totally deaf by the 1824 premiere, and had to be turned around to see the audience applauding.
+
+  - id: art-003
+    difficulty: 2
+    prompt: Who painted "Guernica"?
+    answer: Pablo Picasso
+    distractors: [Joan Miró, Salvador Dalí, Georges Braque]
+    fact: It responded to the 1937 bombing of the Basque town. Picasso refused to let it go to Spain while Franco lived.
+
+  - id: art-004
+    difficulty: 3
+    prompt: Which architect designed the Guggenheim Museum in New York?
+    answer: Frank Lloyd Wright
+    distractors: [Mies van der Rohe, Le Corbusier, Louis Kahn]
+    fact: It was his last major commission; he died six months before it opened in 1959.
+
+  - id: art-005
+    difficulty: 1
+    prompt: Who painted the ceiling of the Sistine Chapel?
+    answer: Michelangelo
+    distractors: [Raphael, Leonardo da Vinci, Botticelli]
+    fact: He worked on it from 1508 to 1512, standing rather than lying down as popular accounts often claim.
+
+  - id: art-006
+    difficulty: 4
+    prompt: Which Russian composer wrote "The Rite of Spring", whose 1913 premiere caused a riot?
+    answer: Igor Stravinsky
+    distractors: [Sergei Prokofiev, Dmitri Shostakovich, Sergei Rachmaninoff]
+    fact: The disturbance in Paris was partly over Nijinsky's choreography as much as the music.
+
+  - id: art-007
+    difficulty: 2
+    prompt: Which Dutch painter cut off part of his own ear in 1888?
+    answer: Vincent van Gogh
+    distractors: [Rembrandt, Johannes Vermeer, Piet Mondrian]
+    fact: He sold very little in his lifetime, and died at thirty-seven.
+
+  - id: art-008
+    difficulty: 3
+    prompt: '"Nessun dorma" comes from which opera?'
+    answer: Turandot
+    distractors: [Tosca, La Bohème, Madama Butterfly]
+    fact: Puccini died before finishing Turandot; the last scene was completed by Franco Alfano.
+
+  - id: art-009
+    difficulty: 2
+    prompt: Which art movement did Monet, Renoir and Degas belong to?
+    answer: Impressionism
+    distractors: [Cubism, Fauvism, Post-Impressionism]
+    fact: The name came from a hostile review of Monet's "Impression, Sunrise".
+
+  - id: art-010
+    difficulty: 4
+    prompt: Which composer wrote the opera cycle "The Ring of the Nibelung"?
+    answer: Richard Wagner
+    distractors: [Richard Strauss, Giuseppe Verdi, Gustav Mahler]
+    fact: Four operas, about fifteen hours of music, and twenty-six years in the writing.
+
+  - id: art-011
+    difficulty: 3
+    prompt: Who sculpted "The Thinker"?
+    answer: Auguste Rodin
+    distractors: [Antonio Canova, Alberto Giacometti, Constantin Brancusi]
+    fact: It began as part of a larger work, "The Gates of Hell", where the figure represented Dante.
+
+  - id: art-012
+    difficulty: 2
+    prompt: Which Spanish architect designed the Sagrada Família in Barcelona?
+    answer: Antoni Gaudí
+    distractors: [Santiago Calatrava, Rafael Moneo, Josep Puig i Cadafalch]
+    fact: Begun in 1882, it is still unfinished. Gaudí was killed by a tram in 1926.
+
+  - id: art-013
+    difficulty: 3
+    prompt: Which Mozart opera features the characters Figaro and Susanna?
+    answer: The Marriage of Figaro
+    distractors: [Don Giovanni, The Magic Flute, Così fan tutte]
+    fact: Rossini later wrote "The Barber of Seville", which is the earlier story in the same Beaumarchais trilogy.
+
+  - id: art-014
+    difficulty: 4
+    prompt: Which painter is associated with large canvases of dripped and poured paint?
+    answer: Jackson Pollock
+    distractors: [Mark Rothko, Willem de Kooning, Franz Kline]
+    fact: Life magazine asked in 1949 whether he was "the greatest living painter in the United States" — a question that made him famous and miserable.
+
+  - id: art-015
+    difficulty: 2
+    prompt: Which instrument did Pablo Casals famously play?
+    answer: The cello
+    distractors: [The violin, The piano, The viola]
+    fact: His rediscovery of Bach's unaccompanied cello suites, found in a Barcelona shop as a boy, transformed their standing.
+
+  - id: art-016
+    difficulty: 3
+    prompt: Who composed "The Four Seasons"?
+    answer: Antonio Vivaldi
+    distractors: [Arcangelo Corelli, Domenico Scarlatti, Henry Purcell]
+    fact: Each of the four violin concertos was published with an accompanying sonnet, possibly by Vivaldi himself.
+
+  - id: art-017
+    difficulty: 4
+    prompt: Which museum holds the "Venus de Milo"?
+    answer: The Louvre
+    distractors: [The British Museum, The Vatican Museums, The Met]
+    fact: It was found on the island of Melos in 1820 and has been in Paris ever since.
+
+  - id: art-018
+    difficulty: 2
+    prompt: Which American composer wrote "Rhapsody in Blue"?
+    answer: George Gershwin
+    distractors: [Aaron Copland, Leonard Bernstein, Cole Porter]
+    fact: He wrote it in a few weeks in 1924, and the famous opening clarinet glissando was the player's idea in rehearsal.
+
+  - id: art-019
+    difficulty: 3
+    prompt: Which painter produced a series of water lily canvases at Giverny?
+    answer: Claude Monet
+    distractors: [Camille Pissarro, Édouard Manet, Alfred Sisley]
+    fact: He painted some 250 of them over the last thirty years of his life, while his eyesight failed.
+
+  - id: art-020
+    difficulty: 4
+    prompt: Which conductor led the Chicago Symphony Orchestra from 1969 for twenty-two years?
+    answer: Georg Solti
+    distractors: [Arturo Toscanini, Eugene Ormandy, Fritz Reiner]
+    fact: He holds the record for the most Grammy awards won by any individual, and Reiner had the same orchestra before him.
+
+  - id: art-021
+    difficulty: 2
+    prompt: Which Norwegian painter created "The Scream"?
+    answer: Edvard Munch
+    distractors: [Gustav Klimt, Egon Schiele, James Ensor]
+    fact: He made several versions in paint and pastel; two have been stolen and recovered.
+
+  - id: art-022
+    difficulty: 3
+    prompt: Chopin wrote almost exclusively for which instrument?
+    answer: The piano
+    distractors: [The violin, The organ, The harp]
+    fact: Of his roughly 230 surviving works, nearly all involve the piano and most are for it alone.
+
+  - id: art-023
+    difficulty: 4
+    prompt: Which Italian painter's "Birth of Venus" hangs in the Uffizi?
+    answer: Sandro Botticelli
+    distractors: [Titian, Caravaggio, Giotto]
+    fact: Titian also painted a Venus, which is one reason the question is harder than it looks.
+
+  - id: art-024
+    difficulty: 2
+    prompt: Which ballet by Tchaikovsky features the Sugar Plum Fairy?
+    answer: The Nutcracker
+    distractors: [Swan Lake, Sleeping Beauty, Giselle]
+    fact: It was not a success at its 1892 premiere; its Christmas ubiquity is a much later American phenomenon.
+
+  - id: art-025
+    difficulty: 3
+    prompt: Which Mexican painter is known for self-portraits and married Diego Rivera?
+    answer: Frida Kahlo
+    distractors: [Remedios Varo, María Izquierdo, Leonora Carrington]
+    fact: A bus accident at eighteen left her in lifelong pain and largely determined what she painted.
+
+  - id: art-026
+    difficulty: 4
+    prompt: Which architect coined the phrase "less is more"?
+    answer: Ludwig Mies van der Rohe
+    distractors: [Walter Gropius, Louis Sullivan, Philip Johnson]
+    fact: Sullivan gave us "form follows function" — the other phrase people reliably mix it up with.
+
+  - id: art-027
+    difficulty: 2
+    prompt: Which composer became deaf but continued to write, including the "Moonlight Sonata"?
+    answer: Ludwig van Beethoven
+    distractors: [Franz Schubert, Robert Schumann, Johannes Brahms]
+    fact: The nickname was not his; a critic coined it five years after his death.
+
+  - id: art-028
+    difficulty: 3
+    prompt: Which Flemish painter was known for crowded peasant scenes such as "The Hunters in the Snow"?
+    answer: Pieter Bruegel the Elder
+    distractors: [Peter Paul Rubens, Jan van Eyck, Hieronymus Bosch]
+    fact: His sons Pieter the Younger and Jan were also painters, which keeps art historians busy.
+
+  - id: art-029
+    difficulty: 4
+    prompt: Which opera by Verdi is set in ancient Egypt?
+    answer: Aida
+    distractors: [Rigoletto, La Traviata, Nabucco]
+    fact: It was commissioned for Cairo and premiered there in 1871, though not, as legend has it, for the opening of the Suez Canal.
+
+  - id: art-030
+    difficulty: 2
+    prompt: Which American artist painted large, close-up flowers and New Mexico landscapes?
+    answer: Georgia O'Keeffe
+    distractors: [Mary Cassatt, Helen Frankenthaler, Grandma Moses]
+    fact: She lived to ninety-eight and worked in New Mexico for the last forty years of her life.

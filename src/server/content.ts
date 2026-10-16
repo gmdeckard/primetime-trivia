@@ -51,6 +51,34 @@ interface RawQuestion {
 
 const MAX_PROMPT = 240;
 
+/**
+ * The folder a question file sits in names the age group it was written for.
+ *
+ * `content/questions/8-12/geography.yaml` is geography for children, and
+ * `content/questions/55-75/geography.yaml` is geography for the main room.
+ * Before this, both lived in one flat folder and the age group was a key
+ * inside the file, which meant the kids' geography and the adults' geography
+ * were the same file name apart and told apart only by reading them. Worse,
+ * the two age sets were each one enormous file spanning eight categories,
+ * so the only way to find the kids' sports questions was to scroll.
+ *
+ * `shared/` is the exception and names no age group: what is in it is
+ * untagged and therefore in play whichever group the MC picks. The numeric
+ * tiebreakers live there, because a tie has to be breakable on any night.
+ *
+ * A file deeper than one folder keeps the top one, so `55-75/history/wars.yaml`
+ * is still 55-75. A file directly in `questions/` is untagged unless it says
+ * otherwise, which is what packs and any legacy layout rely on.
+ */
+const SHARED_FOLDER = 'shared';
+
+export function audienceFromPath(relPath: string): string | undefined {
+  const parts = relPath.split('/');
+  if (parts[0] !== 'questions' || parts.length < 3) return undefined;
+  const folder = parts[1]!;
+  return folder === SHARED_FOLDER ? undefined : folder;
+}
+
 function walkYaml(dir: string): string[] {
   if (!existsSync(dir)) return [];
   const out: string[] = [];
@@ -149,7 +177,12 @@ export function loadBank(contentDir: string): Bank {
       issues.push({ file: rel, message: '`pack:` block needs an `id`', severity: 'error' });
       continue;
     }
-    const fileAudience = asString(audience) ?? (pack ? asString(pack.audience) : undefined);
+    // The folder wins over nothing, and loses to anything the file says.
+    // Explicit beats implicit: a file that names its own audience is making a
+    // deliberate statement, and silently overruling it from the directory name
+    // would be the kind of magic that costs an hour to find.
+    const fileAudience =
+      asString(audience) ?? (pack ? asString(pack.audience) : undefined) ?? audienceFromPath(rel);
 
     // A file-level category is the default; a pack may span several, so each
     // question may name its own instead.

@@ -9,7 +9,14 @@
  * of them, and the selector quietly substitutes easier questions rather than
  * failing — so a bank that looks healthy plays flat.
  *
+ * Reported for ONE age group at a time, because that is how a night is
+ * drawn. Pooling every group gave a headline capacity nobody could ever play:
+ * a 55-75 night cannot use the questions in content/questions/8-12, so
+ * counting them made the bank look a third healthier than it is.
+ *
  *   npx tsx scripts/content-stats.ts [contentDir] [--games-per-night N]
+ *   npx tsx scripts/content-stats.ts --audience 8-12
+ *   npx tsx scripts/content-stats.ts --audience all     every group, in turn
  */
 import { join } from 'node:path';
 import { DEFAULT_CONFIG, type Difficulty } from '../shared/protocol.js';
@@ -32,8 +39,18 @@ function numFlag(name: string, fallback: number): number {
   return n;
 }
 
+/** Reads `--name value` as a string, and marks both positions as consumed. */
+function strFlag(name: string, fallback: string): string {
+  const i = args.indexOf(name);
+  if (i === -1) return fallback;
+  consumed.add(i);
+  consumed.add(i + 1);
+  return args[i + 1] ?? fallback;
+}
+
 /** Games in a night. Defaults to whatever the config ships with. */
 const gamesPerNight = numFlag('--games-per-night', DEFAULT_CONFIG.gamesPerNight);
+const wantAudience = strFlag('--audience', DEFAULT_CONFIG.audience);
 const targetNights = args.includes('--nights') ? numFlag('--nights', 0) : undefined;
 const contentDir =
   args.find((a, i) => !consumed.has(i) && !a.startsWith('--')) ?? join(process.cwd(), 'content');
@@ -52,9 +69,26 @@ const needPerRound = new Map<Difficulty, number>();
 for (const d of template) needPerRound.set(d, (needPerRound.get(d) ?? 0) + 1);
 
 const bank = loadBank(contentDir);
-const playable = bank.questions.filter((q) => q.kind === 'choice');
 if (!bank.questions.length) {
   console.error(`  No questions found in ${contentDir} — is that the right directory?`);
+  process.exit(1);
+}
+
+/**
+ * The questions one age group can actually be asked.
+ *
+ * Untagged questions (the shared folder) are in play for everybody, which is
+ * the same rule the selector uses.
+ */
+const forAudience = (audience: string) =>
+  bank.questions.filter((q) => !audience || !q.audience || q.audience === audience);
+
+const groupIds = [...new Set(bank.questions.map((q) => q.audience).filter((a): a is string => !!a))].sort(
+  (a, b) => Number(/^(\d+)/.exec(a)?.[1] ?? 0) - Number(/^(\d+)/.exec(b)?.[1] ?? 0),
+);
+const audiences = wantAudience === 'all' ? groupIds : [wantAudience];
+if (wantAudience !== 'all' && wantAudience && !groupIds.includes(wantAudience)) {
+  console.error(`\n  Nothing is written for "${wantAudience}". The bank has: ${groupIds.join(', ')}\n`);
   process.exit(1);
 }
 
@@ -73,11 +107,17 @@ function trueRounds(qs: { difficulty: number; kind: string }[]): { rounds: numbe
   return { rounds: Number.isFinite(rounds) ? rounds : 0, binding };
 }
 
-console.log(`\n  ${playable.length} multiple-choice questions, ${bank.questions.length - playable.length} numeric tiebreakers\n`);
+function report(audience: string) {
+const mine = forAudience(audience);
+const playable = mine.filter((q) => q.kind === 'choice');
+const label = audience || 'every group at once';
+
+console.log(`\n  ${label.toUpperCase()}`);
+console.log(`  ${playable.length} multiple-choice questions, ${mine.length - playable.length} numeric tiebreakers\n`);
 
 const width = Math.max(...bank.categories.map((c) => c.name.length));
 const rows = bank.categories
-  .map((cat) => ({ cat, qs: bank.byCategory.get(cat.id) ?? [] }))
+  .map((cat) => ({ cat, qs: mine.filter((q) => q.category === cat.id) }))
   .map((r) => ({ ...r, ...trueRounds(r.qs) }))
   .sort((a, b) => b.rounds - a.rounds);
 
@@ -114,9 +154,22 @@ for (const [d, need] of [...needPerRound].sort()) {
   console.log(`    difficulty ${d}: ${String(perNight).padStart(2)} per night, pool ${have}${short}`);
 }
 
+// A mixed round wants one question from each of ten different categories,
+// which is a different shape of shortage from "not enough hard ones".
+const withAny = rows.filter((r) => r.qs.some((q) => q.kind === 'choice')).length;
+if (withAny < questionsPerRound) {
+  console.log(
+    `\n  Only ${withAny} categories have anything for ${label}, so a mixed round of ` +
+      `${questionsPerRound} will ask ${questionsPerRound - withAny} of them twice.`,
+  );
+}
+
 const thin = rows.filter((r) => r.qs.some((q) => q.kind === 'choice') && r.rounds < 2);
 if (thin.length) {
   console.log('\n  Thinnest at the real mix — the most useful place to contribute:');
   for (const r of thin) console.log(`    ${r.cat.name.padEnd(width)}  ${r.rounds.toFixed(1)} rounds, short on difficulty ${r.binding}`);
 }
 console.log('');
+}
+
+for (const audience of audiences) report(audience);

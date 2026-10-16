@@ -1,0 +1,72 @@
+category: sports
+
+questions:
+  - id: kid-061
+    difficulty: 2
+    prompt: How many players are on a basketball team on the court at once?
+    answer: Five
+    distractors: [Four, Six, Seven]
+    fact: The hoop is ten feet off the ground, and it has been at that exact height since the game was invented in 1891.
+
+  - id: kid-062
+    difficulty: 2
+    prompt: In which sport do you score a try?
+    answer: Rugby
+    distractors: [Football, Cricket, Hockey]
+    fact: It is called a try because originally it scored nothing. It only gave you a try at a kick at goal.
+
+  - id: kid-063
+    difficulty: 3
+    prompt: How often are the Summer Olympic Games held?
+    answer: Every four years
+    distractors: [Every two years, Every year, Every five years]
+    fact: The Winter Games are also every four years, offset by two, so there is an Olympics of some kind every other year.
+
+  - id: kid-064
+    difficulty: 3
+    prompt: In which sport would you use a racket and a shuttlecock?
+    answer: Badminton
+    distractors: [Tennis, Squash, Table tennis]
+    fact: A shuttlecock leaves the racket faster than a ball in any other racket sport, then slows down almost at once.
+
+  - id: kid-065
+    difficulty: 3
+    prompt: How many rings are on the Olympic flag?
+    answer: Five
+    distractors: [Four, Six, Seven]
+    fact: One for each inhabited continent, and between them the six colors include at least one from every national flag in the world.
+
+  - id: kid-066
+    difficulty: 3
+    prompt: In swimming, which stroke is swum on your back?
+    answer: Backstroke
+    distractors: [Butterfly, Breaststroke, Freestyle]
+    fact: It is the only race that starts in the water rather than from the blocks, because you cannot dive in facing backwards.
+
+  - id: kid-067
+    difficulty: 3
+    prompt: What shape is a soccer field?
+    answer: A rectangle
+    distractors: [A square, An oval, A diamond]
+    fact: A baseball field is a diamond and a cricket ground is usually an oval, so each sport really does have its own shape.
+
+  - id: kid-068
+    difficulty: 4
+    prompt: How many points is a touchdown worth in American football?
+    answer: Six
+    distractors: [Three, Five, Seven]
+    fact: The extra kick afterwards makes seven, which is why seven feels like the right answer and is not.
+
+  - id: kid-069
+    difficulty: 4
+    prompt: In gymnastics, what is the highest score a routine was given under the old system?
+    answer: Ten
+    distractors: [Six, Twenty, One hundred]
+    fact: Nadia Comaneci got the first perfect ten in 1976 and the scoreboard could not show it, so it displayed 1.00 instead.
+
+  - id: kid-070
+    difficulty: 4
+    prompt: Which sport is played at Wimbledon?
+    answer: Tennis
+    distractors: [Golf, Cricket, Rowing]
+    fact: It is the only one of the four big tennis tournaments still played on grass, and the grass is cut to exactly eight millimeters.

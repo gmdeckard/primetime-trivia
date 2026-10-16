@@ -140,8 +140,16 @@ spoken run-up, and reading questions aloud. All off by default. Sound only ever
 comes out of the big screen, and that screen needs one click on **Turn sound
 on** before a browser will play anything.
 
-**Questions.** Age group and any extra packs, with a live count of what is in
-play.
+**Questions.** The age group, and any extra packs.
+
+Each age group is a folder of questions — `content/questions/8-12/` is the
+kids' night — and picking one swaps the night's material wholesale rather than
+mixing it. The list shows what each group actually has behind it, so a group
+with eight categories written for it says so, and the warning at the top of
+the screen tells you a round of ten will ask two of them twice.
+
+Only `shared/` crosses over, and today that is just the numeric tiebreakers,
+so a tie at the top is breakable whoever is playing.
 
 ## During the night
 
@@ -213,12 +221,16 @@ teams play.
 it is the one shape setting you can change mid-night — and the button offers
 another game with the same teams and carried-over scores.
 
-**No question comes back until the bank has been used up.** Each category is a
-deck of cards: deal off the top, reshuffle only when it runs out. That holds
+**No question comes back until the bank has been used up.** Each age group has
+its own deck per category: deal off the top, reshuffle only when that group's
+cards run out. A kids night never spends the adults' questions and the other
+way round, so the two can run in the same room on the same week. It holds
 across restarts, across nights and across **Reset everything**, because the
-people it protects are the regulars who come every week. It lives in
-`data/rotation.json`; delete that file if you ever want to start the whole
-bank over.
+people it protects are the regulars who come every week.
+
+It lives in `data/rotation.json`, one line per group and category, in plain
+text you can open and read. Delete the file if you ever want to start the
+whole bank over.
 
 ## Afterwards
 

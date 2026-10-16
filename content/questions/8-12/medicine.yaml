@@ -1,0 +1,72 @@
+category: medicine
+
+questions:
+  - id: kid-031
+    difficulty: 2
+    prompt: Which organ pumps blood around your body?
+    answer: The heart
+    distractors: [The lungs, The liver, The stomach]
+    fact: It beats about a hundred thousand times a day without you ever asking it to.
+
+  - id: kid-032
+    difficulty: 2
+    prompt: How many teeth does a typical adult have?
+    answer: Thirty-two
+    distractors: [Twenty, Twenty-four, Forty]
+    fact: Children have twenty baby teeth, which is why the number changes so much between you and a grown-up.
+
+  - id: kid-033
+    difficulty: 3
+    prompt: Which organs let you breathe?
+    answer: The lungs
+    distractors: [The kidneys, The heart, The liver]
+    fact: Spread flat, the inside surface of your lungs would cover roughly half a tennis court.
+
+  - id: kid-034
+    difficulty: 3
+    prompt: What is the hardest substance in the human body?
+    answer: Tooth enamel
+    distractors: [Bone, Fingernail, Cartilage]
+    fact: It is harder than bone, and unlike bone it cannot grow back once it is gone.
+
+  - id: kid-035
+    difficulty: 3
+    prompt: Which part of the body controls everything else?
+    answer: The brain
+    distractors: [The heart, The spine, The stomach]
+    fact: It uses about a fifth of all the energy you eat, which is a lot for something the size of two fists.
+
+  - id: kid-036
+    difficulty: 3
+    prompt: What are your bones joined together by?
+    answer: Joints
+    distractors: [Muscles, Nerves, Veins]
+    fact: Your knee and elbow work like hinges, while your shoulder is a ball in a socket and can go all the way round.
+
+  - id: kid-037
+    difficulty: 3
+    prompt: Which sense do your taste buds give you?
+    answer: Taste
+    distractors: [Smell, Touch, Hearing]
+    fact: Most of what you think is taste is actually smell. Hold your nose and an apple and an onion are hard to tell apart.
+
+  - id: kid-038
+    difficulty: 4
+    prompt: How many bones is a baby born with, roughly?
+    answer: About 270
+    distractors: [About 100, About 206, About 400]
+    fact: Adults have about 206. Many of a baby's bones fuse together as it grows, so you end up with fewer than you started.
+
+  - id: kid-039
+    difficulty: 4
+    prompt: What is the largest organ of the human body?
+    answer: The skin
+    distractors: [The liver, The lungs, The brain]
+    fact: You shed it constantly. A good share of household dust is skin that used to be somebody in the house.
+
+  - id: kid-040
+    difficulty: 4
+    prompt: Which liquid carries oxygen around your body?
+    answer: Blood
+    distractors: [Water, Saliva, Sweat]
+    fact: It is red because of iron. Octopus blood uses copper instead, which is why theirs is blue.

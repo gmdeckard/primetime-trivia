@@ -87,7 +87,7 @@ export function difficultyTemplate(config: GameConfig, count: number): Difficult
  */
 export function pickRound(ctx: SelectionContext, categoryId: string, count: number): Question[] {
   const rnd = ctx.rnd ?? Math.random;
-  const pool = (ctx.bank.byCategory.get(categoryId) ?? []).filter((q) => q.kind === 'choice');
+  const pool = (ctx.bank.byCategory.get(categoryId) ?? []).filter((q) => selectable(ctx, q));
   const template = difficultyTemplate(ctx.config, count);
 
   // With a rotation in hand the deck decides the order, and the promise it
@@ -95,7 +95,7 @@ export function pickRound(ctx: SelectionContext, categoryId: string, count: numb
   if (ctx.rotation) {
     const picked: Question[] = [];
     for (const wanted of template) {
-      const q = ctx.rotation.deal(categoryId, pool, wanted, (cand) => dealable(ctx, cand));
+      const q = ctx.rotation.deal(ctx.config.audience, categoryId, pool, wanted, (cand) => dealable(ctx, cand));
       if (!q) break;
       ctx.usedTonight.add(q.id);
       picked.push(q);
@@ -122,9 +122,27 @@ export function pickRound(ctx: SelectionContext, categoryId: string, count: numb
   return picked.slice(0, count);
 }
 
-/** Whether a question can be dealt tonight, ignoring the deck's own order. */
+/**
+ * Whether a question belongs in tonight's deck at all.
+ *
+ * This is the question's own properties against the night's settings — the
+ * age group, the packs, and being a multiple-choice question rather than a
+ * tiebreaker. It says nothing about what has already been asked.
+ *
+ * The distinction matters more than it looks. A deck is built from exactly
+ * this set, so a kids night's geography deck holds the kids' geography
+ * questions and nothing else, and runs out when they do. Building it from
+ * the whole category and filtering at deal time instead left a deck that
+ * could never empty, so it never reshuffled, so an eleventh kids night drew
+ * a round of nothing.
+ */
+function selectable(ctx: SelectionContext, q: Question): boolean {
+  return q.kind === 'choice' && inSelection(ctx, q);
+}
+
+/** ...and has not already been asked this evening. */
 function dealable(ctx: SelectionContext, q: Question): boolean {
-  return q.kind === 'choice' && inSelection(ctx, q) && !ctx.usedTonight.has(q.id);
+  return selectable(ctx, q) && !ctx.usedTonight.has(q.id);
 }
 
 /**
@@ -149,7 +167,7 @@ export function pickMixedRound(ctx: SelectionContext, count: number): Question[]
     ? ctx.config.categories
     : ctx.bank.categories.map((c) => c.id);
 
-  const poolFor = (id: string) => (ctx.bank.byCategory.get(id) ?? []).filter((q) => q.kind === 'choice');
+  const poolFor = (id: string) => (ctx.bank.byCategory.get(id) ?? []).filter((q) => selectable(ctx, q));
   // A category only has to offer one usable question to be worth a slot here,
   // which is the whole reason a mixed round reaches content a single-category
   // round never could: a category with four questions in it was unusable.
@@ -166,7 +184,7 @@ export function pickMixedRound(ctx: SelectionContext, count: number): Question[]
       if (exhausted.has(id)) continue;
       const pool = poolFor(id);
       const q = ctx.rotation
-        ? ctx.rotation.deal(id, pool, wanted, (cand) => dealable(ctx, cand))
+        ? ctx.rotation.deal(ctx.config.audience, id, pool, wanted, (cand) => dealable(ctx, cand))
         : shuffle(pool.filter((cand) => dealable(ctx, cand)), rnd).sort(
             (a, b) => Math.abs(a.difficulty - wanted) - Math.abs(b.difficulty - wanted),
           )[0];

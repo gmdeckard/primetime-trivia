@@ -1,0 +1,73 @@
+category: us-places
+
+questions:
+  - id: a35-041
+    difficulty: 2
+    prompt: Which city is home to the Gateway Arch?
+    answer: St Louis
+    distractors: [Kansas City, Memphis, Louisville]
+    fact: 630 feet tall and exactly as wide at the base as it is high. Trams inside carry visitors up through the curve in little pods.
+
+  - id: a35-042
+    difficulty: 2
+    prompt: Which US city is known as Music City?
+    answer: Nashville
+    distractors: [Memphis, Austin, New Orleans]
+    fact: The nickname predates country radio and is usually traced to a touring choir praised by Queen Victoria in the 1870s.
+
+  - id: a35-043
+    difficulty: 3
+    prompt: Which city hosted the 1996 Summer Olympics?
+    answer: Atlanta
+    distractors: [Los Angeles, Seoul, Barcelona]
+    audience: 35-55   # 1996
+    fact: It beat Athens, which had expected the centenary games and did not take the loss gracefully.
+
+  - id: a35-044
+    difficulty: 3
+    prompt: Which desert city hosts an annual festival that builds and burns a temporary town?
+    answer: Reno
+    distractors: [Tucson, Santa Fe, Boise]
+    fact: Burning Man moved to the Black Rock Desert north of Reno in 1990 after outgrowing a San Francisco beach.
+
+  - id: a35-045
+    difficulty: 3
+    prompt: Which American city rebuilt its downtown around a convention center after the 1984 World's Fair bankrupted it?
+    answer: New Orleans
+    distractors: [Knoxville, Spokane, San Antonio]
+    fact: It is the only World's Fair in history to declare bankruptcy while still open to visitors.
+
+  - id: a35-046
+    difficulty: 3
+    prompt: Which state legalized recreational cannabis first, alongside Washington, in 2012?
+    answer: Colorado
+    distractors: [Oregon, California, Alaska]
+    fact: California had been first for medical use, sixteen years earlier, which is why it is the obvious wrong answer.
+
+  - id: a35-047
+    difficulty: 3
+    prompt: Which city's Pike Place Market is known for fishmongers throwing fish?
+    answer: Seattle
+    distractors: [Portland, San Francisco, Baltimore]
+    fact: It opened in 1907 so farmers could sell directly, after a public outcry about the price of onions.
+
+  - id: a35-048
+    difficulty: 4
+    prompt: Which US city has the largest population of any state capital?
+    answer: Phoenix
+    distractors: [Austin, Denver, Columbus]
+    fact: The only state capital with more than a million people, and it has grown by roughly that much again since 1980.
+
+  - id: a35-049
+    difficulty: 4
+    prompt: Which city was devastated by Hurricane Katrina's levee failures in 2005?
+    answer: New Orleans
+    distractors: [Mobile, Biloxi, Galveston]
+    fact: The storm itself largely missed the city. What flooded it was the collapse of the federal levee system over the following day.
+
+  - id: a35-050
+    difficulty: 4
+    prompt: Which American city built a park on a disused elevated railway line?
+    answer: New York
+    distractors: [Chicago, Philadelphia, Atlanta]
+    fact: The High Line was due for demolition. Chicago and Atlanta both built their own versions after it worked.

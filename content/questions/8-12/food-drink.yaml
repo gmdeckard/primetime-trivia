@@ -1,0 +1,72 @@
+category: food-drink
+
+questions:
+  - id: kid-041
+    difficulty: 2
+    prompt: Which food do bees make?
+    answer: Honey
+    distractors: [Butter, Jam, Syrup]
+    fact: One bee makes about a twelfth of a teaspoon in its whole life, so a jar is the work of a great many bees.
+
+  - id: kid-042
+    difficulty: 2
+    prompt: Which drink comes from a cow?
+    answer: Milk
+    distractors: [Orange juice, Lemonade, Tea]
+    fact: Cheese, butter and yoghurt all start as milk too. One animal is doing a lot of the work in your fridge.
+
+  - id: kid-043
+    difficulty: 3
+    prompt: Which vegetable grows underground and can be mashed or roasted?
+    answer: The potato
+    distractors: [The cabbage, The pea, The tomato]
+    fact: The part you eat is a swollen stem, not a root, which is why it can sprout if you leave it in the cupboard.
+
+  - id: kid-044
+    difficulty: 3
+    prompt: Which fruit is dried to make a raisin?
+    answer: The grape
+    distractors: [The plum, The apricot, The fig]
+    fact: A dried plum is a prune and a dried apricot stays an apricot, so each dried fruit has its own rule.
+
+  - id: kid-045
+    difficulty: 3
+    prompt: Which food is made by baking flour, water and yeast?
+    answer: Bread
+    distractors: [Cheese, Pasta, Rice]
+    fact: The yeast is alive. It eats sugar in the dough and burps out the gas that makes all the holes.
+
+  - id: kid-046
+    difficulty: 3
+    prompt: Which plant are cornflakes made from?
+    answer: Maize
+    distractors: [Wheat, Rice, Oats]
+    fact: Maize is the proper name for sweetcorn. Different cereals give you different flakes in the same shape of box.
+
+  - id: kid-047
+    difficulty: 3
+    prompt: Which country is spaghetti most associated with?
+    answer: Italy
+    distractors: [Greece, France, Mexico]
+    fact: There are hundreds of pasta shapes and most have names that describe them, like little ears or little worms.
+
+  - id: kid-048
+    difficulty: 4
+    prompt: Which part of the cocoa plant is chocolate made from?
+    answer: The beans
+    distractors: [The leaves, The flowers, The roots]
+    fact: The beans grow in pods straight out of the trunk, and raw they taste nothing like chocolate at all.
+
+  - id: kid-049
+    difficulty: 4
+    prompt: What makes a chilli pepper taste hot?
+    answer: A chemical called capsaicin
+    distractors: [Tiny sharp hairs, Natural acid, Trapped heat]
+    fact: It does not burn anything. It switches on the same nerves that report heat, so your mouth reports a fire that is not there.
+
+  - id: kid-050
+    difficulty: 4
+    prompt: Which nut is used to make marzipan?
+    answer: The almond
+    distractors: [The hazelnut, The walnut, The peanut]
+    fact: A peanut is not really a nut at all. It grows underground and belongs with peas and beans.

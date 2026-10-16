@@ -1,0 +1,173 @@
+category: physics-chemistry
+
+# Matter, energy, the elements and the laws they obey.
+
+questions:
+  - id: phy-001
+    difficulty: 2
+    prompt: Which element has the atomic number 1?
+    answer: Hydrogen
+    distractors: [Helium, Lithium, Carbon]
+    fact: It makes up roughly three-quarters of the ordinary matter in the universe by mass.
+  - id: phy-002
+    difficulty: 4
+    prompt: Which physicist formulated the uncertainty principle?
+    answer: Werner Heisenberg
+    distractors: [Niels Bohr, Erwin Schrödinger, Max Planck]
+    fact: Published in 1927, it holds that position and momentum cannot both be known precisely — a limit of nature, not of instruments.
+  - id: phy-003
+    difficulty: 3
+    prompt: What is the hardest naturally occurring substance?
+    answer: Diamond
+    distractors: [Quartz, Corundum, Topaz]
+    fact: It sits at 10 on the Mohs scale; corundum, which includes rubies and sapphires, is 9.
+  - id: phy-004
+    difficulty: 2
+    prompt: What is the speed of light in a vacuum, to the nearest thousand kilometers per second?
+    answer: 300,000 km per second
+    distractors: ['150,000 km per second', '500,000 km per second', '1,000,000 km per second']
+    fact: More precisely 299,792 kilometers per second, a value now used to define the meter.
+  - id: phy-005
+    difficulty: 3
+    prompt: What is the chemical symbol for gold?
+    answer: Au
+    distractors: [Ag, Go, Gd]
+    fact: From the Latin aurum. Ag is silver, from argentum.
+  - id: phy-006
+    difficulty: 4
+    prompt: Which law of thermodynamics states that entropy in a closed system tends to increase?
+    answer: The second
+    distractors: [The first, The third, The zeroth]
+    fact: The first is conservation of energy; the third concerns absolute zero.
+  - id: phy-007
+    difficulty: 2
+    prompt: Which scale measures the acidity or alkalinity of a solution?
+    answer: The pH scale
+    distractors: [The Richter scale, The Mohs scale, The Kelvin scale]
+    fact: It runs from 0 to 14, with 7 neutral, and is logarithmic — so pH 4 is ten times as acidic as pH 5.
+
+  - id: phy-008
+    difficulty: 2
+    prompt: What is the chemical symbol for sodium?
+    answer: Na
+    distractors: [So, Sd, Sn]
+    fact: From the Latin natrium. Sn is a real symbol, but it belongs to tin, from stannum.
+
+  - id: phy-009
+    difficulty: 2
+    prompt: Which subatomic particle carries a negative charge?
+    answer: The electron
+    distractors: [The proton, The neutron, The positron]
+    fact: The positron is the electron's antimatter twin and carries exactly the opposite charge.
+
+  - id: phy-010
+    difficulty: 3
+    prompt: Who formulated the three laws of motion?
+    answer: Isaac Newton
+    distractors: [Galileo Galilei, Johannes Kepler, Robert Hooke]
+    fact: Hooke claimed Newton had taken the inverse-square law from him. The two men feuded for the rest of Hooke's life.
+
+  - id: phy-011
+    difficulty: 3
+    prompt: What is absolute zero on the Celsius scale?
+    answer: About minus 273 degrees
+    distractors: [About minus 100 degrees, About minus 196 degrees, About minus 460 degrees]
+    fact: Minus 196 Celsius is where nitrogen turns liquid. Absolute zero on the Fahrenheit scale is minus 460, which is why that number also looks right.
+
+  - id: phy-012
+    difficulty: 3
+    prompt: Which element was found in the sun before it was found on earth?
+    answer: Helium
+    distractors: [Argon, Neon, Hydrogen]
+    fact: Spotted in the solar spectrum in 1868 and named after Helios. It took another 27 years to find any here.
+
+  - id: phy-013
+    difficulty: 3
+    prompt: Which gas law says pressure and volume are inversely proportional?
+    answer: Boyle's Law
+    distractors: [Charles's Law, Avogadro's Law, Dalton's Law]
+    fact: Charles's law ties volume to temperature instead. Put the two together and you get the combined gas law.
+
+  - id: phy-014
+    difficulty: 3
+    prompt: What does a catalyst do in a chemical reaction?
+    answer: Speeds it up without being used up
+    distractors: [Supplies the energy it needs, Is consumed to drive it, Changes which products form]
+    fact: Catalytic converters use platinum and palladium, which is exactly why they get cut off parked cars.
+
+  - id: phy-015
+    difficulty: 3
+    prompt: Which force holds the nucleus of an atom together?
+    answer: The strong nuclear force
+    distractors: [The weak nuclear force, Electromagnetism, Gravity]
+    fact: Electromagnetism is pushing the protons apart the whole time, and in very heavy elements it eventually wins.
+
+  - id: phy-016
+    difficulty: 3
+    prompt: Who published a periodic table with gaps left for elements not yet found?
+    answer: Dmitri Mendeleev
+    distractors: [Antoine Lavoisier, John Dalton, Henry Moseley]
+    fact: He predicted the properties of the missing ones and was largely right. Moseley later reordered the table by atomic number.
+
+  - id: phy-017
+    difficulty: 3
+    prompt: Which is the most common state of matter in the universe?
+    answer: Plasma
+    distractors: [Gas, Solid, Liquid]
+    fact: Stars are plasma, and there is vastly more star than there is anything else.
+
+  - id: phy-018
+    difficulty: 3
+    prompt: Which type of radiation is stopped by a sheet of paper?
+    answer: Alpha
+    distractors: [Beta, Gamma, X-rays]
+    fact: Beta needs aluminum and gamma needs lead or thick concrete. Alpha is only dangerous if you breathe it in or swallow it.
+
+  - id: phy-019
+    difficulty: 3
+    prompt: Who is credited with the law of conservation of mass?
+    answer: Antoine Lavoisier
+    distractors: [Joseph Priestley, Henry Cavendish, Robert Boyle]
+    fact: Priestley isolated oxygen first but explained it wrongly. Lavoisier named it, and was guillotined in 1794.
+
+  - id: phy-020
+    difficulty: 4
+    prompt: Which particle did James Chadwick discover in 1932?
+    answer: The neutron
+    distractors: [The proton, The electron, The positron]
+    fact: It had been predicted for over a decade. Carrying no charge is what made it so hard to find.
+
+  - id: phy-021
+    difficulty: 4
+    prompt: Which experiment revealed that the atom has a small dense nucleus?
+    answer: The gold foil experiment
+    distractors: [The oil drop experiment, The double slit experiment, The cathode ray experiment]
+    fact: Rutherford compared it to firing a shell at tissue paper and watching it come straight back at you.
+
+  - id: phy-022
+    difficulty: 4
+    prompt: Which law of thermodynamics makes absolute zero unreachable?
+    answer: The third
+    distractors: [The zeroth, The first, The second]
+    fact: The zeroth law was named last, once everyone noticed they had been quietly assuming it all along.
+
+  - id: phy-023
+    difficulty: 4
+    prompt: Which element takes its name from the Greek word for idle?
+    answer: Argon
+    distractors: [Neon, Krypton, Xenon]
+    fact: Argos, idle, because it refuses to react with anything. Neon means new, krypton hidden and xenon stranger.
+
+  - id: phy-024
+    difficulty: 4
+    prompt: Who proposed that electrons occupy fixed energy levels around the nucleus?
+    answer: Niels Bohr
+    distractors: [Max Planck, Erwin Schrodinger, Louis de Broglie]
+    fact: Planck's quantum came first and Schrodinger's wave equation replaced Bohr's neat orbits about a dozen years later.
+
+  - id: phy-025
+    difficulty: 4
+    prompt: Which industrial process pulls nitrogen from the air to make fertiliser?
+    answer: The Haber process
+    distractors: [The contact process, The Solvay process, Electrolysis of brine]
+    fact: It feeds a large share of the world. The same man ran Germany's chemical weapons program in World War I.

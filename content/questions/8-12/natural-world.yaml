@@ -1,0 +1,72 @@
+category: natural-world
+
+questions:
+  - id: kid-001
+    difficulty: 2
+    prompt: How many legs does a spider have?
+    answer: Eight
+    distractors: [Six, Ten, Twelve]
+    fact: Insects have six. That is the difference that makes a spider not an insect at all.
+
+  - id: kid-002
+    difficulty: 2
+    prompt: Which is the largest animal on earth?
+    answer: The blue whale
+    distractors: [The African elephant, The giraffe, The great white shark]
+    fact: Its tongue alone can weigh as much as an elephant, and a baby drinks enough milk a day to fill a bath.
+
+  - id: kid-003
+    difficulty: 3
+    prompt: What do you call an animal that eats only plants?
+    answer: A herbivore
+    distractors: [A carnivore, An omnivore, An insectivore]
+    fact: A carnivore eats meat and an omnivore eats both. People are omnivores, which is why we argue about dinner.
+
+  - id: kid-004
+    difficulty: 3
+    prompt: Which bird cannot fly but can run faster than a person?
+    answer: The ostrich
+    distractors: [The penguin, The chicken, The turkey]
+    fact: It can reach about 40 miles an hour and kick hard enough to bend a fence.
+
+  - id: kid-005
+    difficulty: 3
+    prompt: What do caterpillars turn into?
+    answer: Butterflies or moths
+    distractors: [Beetles, Dragonflies, Grasshoppers]
+    fact: Inside the chrysalis the caterpillar turns almost entirely to liquid before rebuilding itself.
+
+  - id: kid-006
+    difficulty: 3
+    prompt: Which part of a plant takes in water from the soil?
+    answer: The roots
+    distractors: [The leaves, The flower, The stem]
+    fact: The leaves do the opposite, letting water out as vapor, and that is partly what pulls more up the stem.
+
+  - id: kid-007
+    difficulty: 3
+    prompt: What is a young frog called before it grows legs?
+    answer: A tadpole
+    distractors: [A fry, A nymph, A cub]
+    fact: It breathes through gills like a fish at first and grows lungs later, which is why it has to come up for air.
+
+  - id: kid-008
+    difficulty: 4
+    prompt: Which animal has the longest neck relative to its body?
+    answer: The giraffe
+    distractors: [The ostrich, The swan, The camel]
+    fact: It has exactly seven neck bones, the same number as a person. Each one is just enormous.
+
+  - id: kid-009
+    difficulty: 4
+    prompt: Which animal can change color to match its mood?
+    answer: The chameleon
+    distractors: [The gecko, The iguana, The salamander]
+    fact: Everyone thinks it is for hiding. Mostly it is about temperature and mood, and an angry chameleon goes bright on purpose.
+
+  - id: kid-010
+    difficulty: 4
+    prompt: Which sea creature has three hearts?
+    answer: The octopus
+    distractors: [The jellyfish, The starfish, The crab]
+    fact: Two pump blood to the gills and one to the rest of the body. Its blood is blue rather than red.

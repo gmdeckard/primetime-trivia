@@ -10,26 +10,12 @@ import {
   Choice,
   ConnBanner,
   NumberField,
+  RadioList,
   Section,
   Slider,
   Toast,
   Toggle,
 } from '../shared/ui';
-
-/**
- * Not shared/packs.ts AUDIENCES. That list drives generation, where 'any'
- * means no era weighting. Here the config value is a filter, and the value
- * that means no filter is the empty string: setting it to 'any' would match
- * only questions literally tagged 'any' and exclude the entire bank.
- */
-const AGE_GROUPS: Array<{ id: string; name: string }> = [
-  { id: '55-75', name: '55 to 75' },
-  { id: '35-55', name: '35 to 55' },
-  { id: '18-35', name: '18 to 35' },
-  { id: '8-12', name: 'Kids 8 to 12' },
-  { id: 'family', name: 'All ages' },
-  { id: '', name: 'No filter' },
-];
 
 /**
  * The MC's phone.
@@ -210,6 +196,24 @@ function Setup({ state, send }: { state: ControlState; send: ReturnType<typeof u
   // change until the break. The panel says so rather than silently ignoring
   // the tap, which is what it used to do.
   const inLobby = state.phase === 'lobby';
+
+  const perNight = Math.max(1, c.gamesPerNight * c.roundsPerGame * c.questionsPerRound);
+  /**
+   * How long a group's questions last before the deck has to be reshuffled
+   * and the room starts seeing repeats.
+   *
+   * The thing an MC running a weekly night actually wants to know, and it is
+   * not the raw count: eighty questions reads as plenty and is one and a bit
+   * nights at this shape. Below two nights it is said in nights, because that
+   * is the number that should stop you.
+   */
+  const nightsOf = (available: number) => {
+    const nights = available / perNight;
+    if (nights < 1) return 'not even one full night';
+    if (nights < 2) return `${nights.toFixed(1)} nights before repeats`;
+    const weeks = Math.floor(nights);
+    return `about ${weeks} ${weeks === 1 ? 'night' : 'nights'} before repeats`;
+  };
 
   const questionBeat = c.secondsPerQuestion + c.revealDelaySeconds + c.nextQuestionDelaySeconds;
   const roundMinutes = (c.questionsPerRound * questionBeat + c.introSeconds) / 60;
@@ -477,34 +481,41 @@ function Setup({ state, send }: { state: ControlState; send: ReturnType<typeof u
 
       <Section
         title="Questions"
-        summary={`${AGE_GROUPS.find((g) => g.id === c.audience)?.name ?? 'No filter'} · ${state.bank.availableInSelection} in play`}
+        summary={`${state.audiences.find((g) => g.id === c.audience)?.name ?? 'No filter'} · ${state.bank.availableInSelection} in play`}
         open={open === 'content'}
         onToggle={() => only('content')}
       >
         {/*
-          Age group. The core bank is tagged 55-75, so picking another group
-          swaps the night's material wholesale rather than mixing it. An
-          untagged question (the numeric tiebreakers) suits every group and
-          stays in play throughout. The count is live, and views.ts already
-          warns when the selection cannot fill a game, so a group with nothing
-          written for it announces itself here rather than mid-round.
+          Age group. Each one is a folder under content/questions, and picking
+          one swaps the night's material wholesale rather than mixing it: the
+          questions in content/questions/8-12 are the kids' night. Only the
+          shared folder crosses over, which is where the numeric tiebreakers
+          live so a tie is breakable whoever is playing.
+
+          The list and the counts come from the server, so a group nobody has
+          written for is not offered and a folder added this afternoon is.
         */}
         <div class="field">
           <span class="field-label">
             <span>Age group</span>
-            <span class="field-hint">{state.bank.availableInSelection} questions in play</span>
+            <span class="field-hint">one folder each</span>
           </span>
-          <div class="chipgrid">
-            {AGE_GROUPS.map((group) => (
-              <button
-                key={group.id}
-                class={`chipbtn${c.audience === group.id ? ' is-on' : ''}`}
-                onClick={() => set({ audience: group.id })}
-              >
-                {group.name}
-              </button>
-            ))}
-          </div>
+          <RadioList
+            value={c.audience}
+            options={state.audiences.map((group) => ({
+              value: group.id,
+              label: group.name,
+              // Nights, not just a count. "80 questions" sounds like plenty
+              // and is one and a bit nights at this shape, which is the
+              // difference between the no-repeat promise holding for a
+              // season and breaking next week.
+              hint:
+                `${group.available} questions in ${group.categories} ${
+                  group.categories === 1 ? 'category' : 'categories'
+                } · ${nightsOf(group.available)}`,
+            }))}
+            onChange={(audience) => set({ audience })}
+          />
         </div>
 
         {state.packs.length > 0 && (
@@ -528,8 +539,10 @@ function Setup({ state, send }: { state: ControlState; send: ReturnType<typeof u
         )}
 
         <p class="faint">
-          {state.bank.total} questions loaded · {state.bank.availableInSelection} unused in the current selection.
-          No question comes back until its category has been all the way through.
+          {state.bank.total} questions loaded · {state.bank.availableInSelection} unused for{' '}
+          {state.audiences.find((g) => g.id === c.audience)?.name ?? 'this group'}. No question comes
+          back until this group has been through that category's whole set, and each group keeps its
+          own place in the deck.
         </p>
       </Section>
     </div>

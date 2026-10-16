@@ -129,13 +129,66 @@ most of the room. `single` is still there for a themed round, and it is what
 makes the round intro card worth showing.
 
 **Which question comes out of a category.** `src/server/rotation.ts` keeps a
-deck of cards per category in `data/rotation.json`: deal off the top, and when
-a deck runs out reshuffle the whole category. That gives the property a
-question bank actually needs — every question gets asked once before any
-question gets asked twice — and it survives a server restart, a new night, and
-Reset everything, because the regulars it protects come back every week.
-`avoidRecentNights` only ever looked at the last eight nights, which let a
-question repeat in a season while a hundred others had never been asked.
+deck of cards in `data/rotation.json`: deal off the top, and when a deck runs
+out reshuffle it. That gives the property a question bank actually needs —
+every question gets asked once before any question gets asked twice — and it
+survives a server restart, a new night, and Reset everything, because the
+regulars it protects come back every week. `avoidRecentNights` only ever
+looked at the last eight nights, which let a question repeat in a season while
+a hundred others had never been asked.
+
+A deck is keyed by **age group and category together**, filed as
+`8-12::geography`, and is built from only the questions that group can be
+asked. Both halves of that are load-bearing. Keyed on the category alone, one
+deck held every group's questions, so a kids night dealt from a `geography`
+deck that was mostly 55-75 cards: they were filtered out correctly, and left
+in the deck correctly, which meant the deck could never empty, so it never
+reshuffled — and once the eighty kids' questions were gone, that category
+yielded nothing. Measured: the eleventh kids night drew a round of zero
+questions. The file stays flat and greppable on purpose, because somebody
+debugging a night wants to open it and read it.
+
+## Where questions live
+
+```
+content/questions/
+  55-75/         geography.yaml, sports.yaml, …
+  35-55/
+  8-12/
+  shared/        tiebreakers.yaml
+```
+
+**The folder names the age group**, and `loadBank` tags every question in it
+accordingly (`audienceFromPath` in `src/server/content.ts`). A file may still
+name its own `audience:` and that wins, because explicit beats implicit, but
+nothing in the bank needs to any more.
+
+`shared/` names no group: what is in it is untagged, and an untagged question
+is in play whoever is playing. The numeric tiebreakers live there because a
+tie at the top has to be breakable on a kids night too. That used to be
+achieved by being the one file in the bank with no `audience:` key, which
+worked and explained itself to nobody.
+
+Before this, every category was one flat file and the two age sets were each
+one enormous file spanning eight categories, so the kids' sports questions
+were somewhere in the middle of `age-8-12.yaml`. Adding an age group is now
+adding a folder: the server reports the groups it finds, with live counts, and
+the MC's setup screen lists them without a code change.
+
+**How much material each group has is the number that matters**, and it is not
+the headline count. A default night asks 60 questions, so:
+
+| group  | questions | nights before anything repeats |
+|--------|-----------|--------------------------------|
+| 55-75  | 744       | about 12 — a weekly night runs a season |
+| 35-55  | 80        | 1.3 — the second night repeats |
+| 8-12   | 80        | 1.3 — the second night repeats |
+
+The no-repeat machinery works for all three; two of the folders are simply too
+thin to have anything to promise. `npm run validate` and `npm run stats
+--audience all` both report this per group, and the MC's setup screen says it
+on the age-group button, because "80 questions" reads as plenty and is one and
+a bit nights.
 
 ## Security model
 

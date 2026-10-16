@@ -227,13 +227,48 @@ export function controlState(engine: Engine): ControlState {
   }
 
   const allowed = s.config.categories.length ? s.config.categories : bank.categories.map((c) => c.id);
-  const availableInSelection = bank.questions.filter((question) => {
-    if (!allowed.includes(question.category)) return false;
-    if (s.askedQuestionIds.includes(question.id)) return false;
-    if (question.pack && !s.config.packs.includes(question.pack)) return false;
-    if (s.config.audience && question.audience && question.audience !== s.config.audience) return false;
-    return true;
-  }).length;
+
+  /** Everything a given age group could still be asked tonight. */
+  const usableFor = (audience: string) =>
+    bank.questions.filter((question) => {
+      if (question.kind !== 'choice') return false;
+      if (!allowed.includes(question.category)) return false;
+      if (s.askedQuestionIds.includes(question.id)) return false;
+      if (question.pack && !s.config.packs.includes(question.pack)) return false;
+      if (audience && question.audience && question.audience !== audience) return false;
+      return true;
+    });
+
+  const countFor = (id: string) => {
+    const usable = usableFor(id);
+    return {
+      id,
+      name: audienceName(id),
+      available: usable.length,
+      categories: new Set(usable.map((q) => q.category)).size,
+    };
+  };
+
+  const availableInSelection = usableFor(s.config.audience).length;
+
+  /**
+   * The age groups the bank holds something for, plus the one that means no
+   * filter at all. Counted against the night's current selection so the MC
+   * sees what switching would actually give them, not what the folder holds
+   * in principle.
+   */
+  const groupIds = new Set<string>();
+  for (const question of bank.questions) if (question.audience) groupIds.add(question.audience);
+  // Sorted by the age they start at, not as strings: a plain sort puts
+  // "8-12" after "55-75", so the kids came last in a list of numbers that
+  // otherwise climbs.
+  const startsAt = (id: string) => Number(/^(\d+)/.exec(id)?.[1] ?? Number.MAX_SAFE_INTEGER);
+  const audiences = [...groupIds]
+    .sort((a, b) => startsAt(a) - startsAt(b) || a.localeCompare(b))
+    .map((id) => countFor(id))
+    // A group with nothing left in the current packs is not worth offering.
+    .filter((group) => group.available > 0 || group.id === s.config.audience)
+    .concat(countFor(''));
 
   const warnings: string[] = [];
   const needed = s.config.roundsPerGame * s.config.questionsPerRound;
@@ -245,10 +280,15 @@ export function controlState(engine: Engine): ControlState {
     // different categories, so a night cut down to four categories cannot
     // make a round of ten distinct subjects. It still plays — it comes round
     // again and takes a second from each — but the MC should know why.
-    const usable = allowed.filter((id) => (bank.byCategory.get(id) ?? []).some((q) => q.kind === 'choice')).length;
+    //
+    // Counted for the chosen age group, not for the bank. Counting the bank
+    // meant a kids night, which has eight categories written for it, reported
+    // the adults' twenty-four and never warned about anything.
+    const usable = new Set(usableFor(s.config.audience).map((q) => q.category)).size;
     if (usable < s.config.questionsPerRound) {
       warnings.push(
-        `Only ${usable} categories in play, so a round of ${s.config.questionsPerRound} will ask some of them twice.`,
+        `${audienceName(s.config.audience)} has ${usable} categories in play, so a round of ` +
+          `${s.config.questionsPerRound} will ask some of them twice.`,
       );
     }
   }
@@ -279,6 +319,7 @@ export function controlState(engine: Engine): ControlState {
     role: 'control',
     answerKey,
     packs: [...packs.values()].sort((a, b) => a.name.localeCompare(b.name)),
+    audiences,
     upNext,
     roster: s.teamOrder.map((teamId) => ({
       teamId,
@@ -323,4 +364,22 @@ export function playerState(engine: Engine, playerId: string): PlayerState {
       maxWager: team ? Math.max(team.score, s.config.questionPoints) : 0,
     },
   };
+}
+
+/**
+ * An age group's id as something to put on a button.
+ *
+ * The ids are folder names, and a folder name is a range: `8-12`, `55-75`.
+ * Anything that is not a range is shown as written, so a group called
+ * `family` arrives as "Family" rather than being mangled into a number.
+ */
+export function audienceName(id: string): string {
+  if (!id) return 'No filter';
+  const range = /^(\d+)-(\d+)$/.exec(id);
+  if (!range) return id.charAt(0).toUpperCase() + id.slice(1).replace(/-/g, ' ');
+  const [, from, to] = range;
+  // Anybody under about eighteen is a child, and "8 to 12" on its own reads
+  // as a difficulty band rather than an age group on a screen full of other
+  // numbers.
+  return Number(to) <= 17 ? `Kids ${from} to ${to}` : `${from} to ${to}`;
 }

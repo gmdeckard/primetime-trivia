@@ -425,6 +425,24 @@ export interface ControlState extends BaseState {
   bank: { total: number; availableInSelection: number; usedTonight: number };
   /** Packs found on disk, so the MC can switch them on for the night. */
   packs: Array<{ id: string; name: string; audience: string; questionCount: number; origin: string }>;
+  /**
+   * The age groups the bank actually holds questions for, read off the
+   * folders under content/questions.
+   *
+   * It used to be a hardcoded list in the control screen, which offered two
+   * groups nobody had written a question for and would have gone on offering
+   * them after somebody did. A folder is now the whole act of adding a group:
+   * drop `content/questions/18-35/` in, and it appears here with its real
+   * counts and no code change.
+   */
+  audiences: Array<{
+    id: string;
+    name: string;
+    /** Unused questions this group can still draw on, in the current selection. */
+    available: number;
+    /** Categories it can fill a mixed round from. */
+    categories: number;
+  }>;
   warnings: string[];
 }
 

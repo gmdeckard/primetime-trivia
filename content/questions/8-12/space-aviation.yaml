@@ -1,0 +1,72 @@
+category: space-aviation
+
+questions:
+  - id: kid-021
+    difficulty: 2
+    prompt: Which planet do we live on?
+    answer: Earth
+    distractors: [Mars, Venus, Jupiter]
+    fact: It is the only planet not named after a Greek or Roman god, and the only one we know of with liquid water on the surface.
+
+  - id: kid-022
+    difficulty: 2
+    prompt: What is the closest star to earth?
+    answer: The sun
+    distractors: [The North Star, Sirius, Alpha Centauri]
+    fact: Its light takes about eight minutes to reach us, so you always see it as it was eight minutes ago.
+
+  - id: kid-023
+    difficulty: 3
+    prompt: Which planet is known as the red planet?
+    answer: Mars
+    distractors: [Venus, Mercury, Saturn]
+    fact: The red is rust. The soil is full of iron that has been slowly rusting for billions of years.
+
+  - id: kid-024
+    difficulty: 3
+    prompt: Which planet has rings that are easy to see through a telescope?
+    answer: Saturn
+    distractors: [Jupiter, Uranus, Neptune]
+    fact: All four of these have rings. Saturn's are simply far brighter, and they are made mostly of ice.
+
+  - id: kid-025
+    difficulty: 3
+    prompt: What did Neil Armstrong become the first person to do in 1969?
+    answer: Walk on the moon
+    distractors: [Orbit the earth, Fly faster than sound, Reach the South Pole]
+    fact: The footprints he left have no wind or rain to wash them away, so they are still there.
+
+  - id: kid-026
+    difficulty: 3
+    prompt: How long does the earth take to travel once around the sun?
+    answer: A year
+    distractors: [A day, A month, A week]
+    fact: It takes about a quarter of a day longer than 365, which is what leap years are for.
+
+  - id: kid-027
+    difficulty: 3
+    prompt: Which is the largest planet in our solar system?
+    answer: Jupiter
+    distractors: [Saturn, Neptune, Earth]
+    fact: You could fit every other planet inside it and still have room left over.
+
+  - id: kid-028
+    difficulty: 4
+    prompt: What do you call a rock from space that lands on earth?
+    answer: A meteorite
+    distractors: [A meteor, A meteoroid, A comet]
+    fact: All three are the same rock at different stages. It is a meteoroid in space, a meteor while it burns, a meteorite once it lands.
+
+  - id: kid-029
+    difficulty: 4
+    prompt: Why does the moon seem to change shape through the month?
+    answer: We see different amounts of its sunlit side
+    distractors: [The earth's shadow covers it, It really does change shape, Clouds hide part of it]
+    fact: The same side always faces us, so the shape of the moon never changes at all. Only the lighting does.
+
+  - id: kid-030
+    difficulty: 4
+    prompt: Which force keeps the planets going round the sun?
+    answer: Gravity
+    distractors: [Magnetism, Wind, Electricity]
+    fact: The same force that makes a dropped apple fall is the one holding the whole solar system together.

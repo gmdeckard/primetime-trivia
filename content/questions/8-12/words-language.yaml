@@ -1,0 +1,72 @@
+category: words-language
+
+questions:
+  - id: kid-051
+    difficulty: 2
+    prompt: How many letters are in the English alphabet?
+    answer: Twenty-six
+    distractors: [Twenty-four, Twenty-eight, Thirty]
+    fact: Five of them are vowels, and almost every word needs at least one.
+
+  - id: kid-052
+    difficulty: 2
+    prompt: What do you call a word that means the same as another?
+    answer: A synonym
+    distractors: [An antonym, A homonym, An acronym]
+    fact: Big and large are synonyms. Big and small are antonyms, which is the opposite idea.
+
+  - id: kid-053
+    difficulty: 3
+    prompt: What is a naming word for a person, place or thing called?
+    answer: A noun
+    distractors: [A verb, An adjective, An adverb]
+    fact: A verb is a doing word and an adjective describes. Between them they build almost every sentence you say.
+
+  - id: kid-054
+    difficulty: 3
+    prompt: Which punctuation mark ends a question?
+    answer: A question mark
+    distractors: [A full stop, An exclamation mark, A comma]
+    fact: It may have started as the Latin word for question written above the line and squashed down over the centuries.
+
+  - id: kid-055
+    difficulty: 3
+    prompt: What do you call words that sound the same but are spelled differently?
+    answer: Homophones
+    distractors: [Synonyms, Antonyms, Adjectives]
+    fact: There, their and they're are the three that cause the most trouble in the whole language.
+
+  - id: kid-056
+    difficulty: 3
+    prompt: What is a group of words that tells a complete idea called?
+    answer: A sentence
+    distractors: [A syllable, A paragraph, A chapter]
+    fact: A paragraph is a group of sentences, so they stack up like boxes inside bigger boxes.
+
+  - id: kid-057
+    difficulty: 3
+    prompt: Which word describes something, like the word shiny?
+    answer: An adjective
+    distractors: [A noun, A verb, A pronoun]
+    fact: Pile up too many and a sentence slows right down, which is why good writers use fewer than you would expect.
+
+  - id: kid-058
+    difficulty: 4
+    prompt: What do you call a phrase where every word starts with the same sound?
+    answer: Alliteration
+    distractors: [Rhyme, Onomatopoeia, Simile]
+    fact: Tongue twisters run on it. Peter Piper picked a peck of pickled peppers is the most famous one in English.
+
+  - id: kid-059
+    difficulty: 4
+    prompt: What is a comparison using the word like or as called?
+    answer: A simile
+    distractors: [A metaphor, A rhyme, A proverb]
+    fact: As quiet as a mouse is a simile. Calling someone a mouse outright is a metaphor, which skips the comparison.
+
+  - id: kid-060
+    difficulty: 4
+    prompt: How many syllables are in the word butterfly?
+    answer: Three
+    distractors: [Two, Four, Five]
+    fact: Clap as you say it and the claps are the syllables. But-ter-fly.

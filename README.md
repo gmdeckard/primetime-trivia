@@ -196,9 +196,9 @@ away.
 
 The MC can adjust pacing live and fix things as they go: extend the clock,
 swap a question the room has clearly seen, adjust a score, rename or remove a
-team. **No question comes back until the bank has been used up** — each
-category is a deck that is only reshuffled when it runs out, and that survives
-restarts, new nights and Reset everything.
+team. **No question comes back until the bank has been used up** — each age
+group has its own deck per category, only reshuffled when it runs out, and
+that survives restarts, new nights and Reset everything.
 
 Ties at the top are broken with a numeric sudden-death question where the
 closest guess wins.
@@ -268,12 +268,26 @@ entries.
 
 ## The question bank
 
-920 questions across 27 categories, as YAML in `content/`. At two rounds of
-ten a game that is about twelve full nights with no repeats — a good season,
-but not the "thousands" a venue running weekly for years will eventually want.
-`npm run stats` prints the real number for your bank and settings. The bank is
-designed to grow by pull request, and `content/` is the easiest place to
-contribute.
+919 questions as YAML in `content/questions/`, one folder per age group and
+one file per category inside it:
+
+```
+content/questions/55-75/geography.yaml     the main room, 744 questions
+content/questions/35-55/…                  80
+content/questions/8-12/…                   80
+content/questions/shared/tiebreakers.yaml  in play on every night
+```
+
+**The folder is the age group.** Picking one in Setup swaps the night's
+material wholesale, and the MC's screen lists the groups the bank actually
+holds something for, with live counts — adding `content/questions/18-35/` is
+all it takes to add a group.
+
+At two rounds of ten a game, the 55-75 bank is about twelve full nights with
+no repeats — a good season, but not the "thousands" a venue running weekly for
+years will eventually want. `npm run validate` prints what each age group can
+support. The bank is designed to grow by pull request, and `content/` is the
+easiest place to contribute.
 
 ```yaml
 category: military-history

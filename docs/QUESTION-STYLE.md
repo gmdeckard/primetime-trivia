@@ -71,11 +71,47 @@ out. "What was the serial number of the lead aircraft" is not hard, it is
 trivia in the pejorative sense. If the only route to the answer is having
 memorised it, drop the question.
 
+## Where a question lives
+
+```
+content/questions/
+  55-75/          the main room, and the bulk of the bank
+    geography.yaml
+    sports.yaml
+    ...
+  35-55/
+  8-12/
+  shared/         in play whichever group the MC picks
+    tiebreakers.yaml
+```
+
+**The folder is the age group.** `content/questions/8-12/geography.yaml` is
+geography written for children; `content/questions/55-75/geography.yaml` is
+geography for the main room. The loader tags every question in a folder with
+that folder's name, so a file never has to say its own `audience:` — and the
+two sets of geography questions are now a directory apart instead of being
+told apart by reading them.
+
+`shared/` is the exception: it names no age group, so what is in it is in play
+on every night. Put something there only when it genuinely suits an
+eight-year-old and a seventy-five-year-old equally. The numeric tiebreakers
+qualify; almost nothing else does.
+
+Adding an age group is adding a folder. Drop `content/questions/18-35/` in
+with a category file or two and it appears in the MC's setup screen with its
+real counts, no code change.
+
+A mixed round draws one question from each of ten different categories, so an
+age group wants **at least ten categories** with something in them. Below that
+the round comes round again and asks some categories twice; `npm run validate`
+prints the count per group and says so.
+
 ## Format
 
-One file per category under `content/questions/`, named after the category.
+One file per category inside its age-group folder, named after the category.
 Files can be split further if they get long — the loader reads every `.yaml`
-under `content/` and only cares about the `category:` key inside.
+under `content/` and only cares about the `category:` key inside, plus the
+folder it sits in.
 
 ```yaml
 category: geography
@@ -94,7 +130,8 @@ questions:
 ```
 
 Numeric tiebreakers use a different shape and live in
-`content/questions/tiebreakers.yaml`:
+`content/questions/shared/tiebreakers.yaml`, untagged so a tie is breakable on
+any night:
 
 ```yaml
   - id: tie-001

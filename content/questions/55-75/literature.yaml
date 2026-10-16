@@ -1,0 +1,212 @@
+category: literature
+
+questions:
+  - id: lit-001
+    difficulty: 2
+    prompt: Which novel opens "It was the best of times, it was the worst of times"?
+    answer: A Tale of Two Cities
+    distractors: [Great Expectations, Bleak House, Hard Times]
+    fact: Dickens set it against the French Revolution; it is among the best-selling novels ever written.
+
+  - id: lit-002
+    difficulty: 3
+    prompt: Who wrote "One Hundred Years of Solitude"?
+    answer: Gabriel García Márquez
+    distractors: [Jorge Luis Borges, Mario Vargas Llosa, Pablo Neruda]
+    fact: The Colombian author won the Nobel Prize in 1982. Vargas Llosa won his in 2010.
+
+  - id: lit-003
+    difficulty: 2
+    prompt: Which American author wrote "The Old Man and the Sea"?
+    answer: Ernest Hemingway
+    distractors: [John Steinbeck, William Faulkner, F. Scott Fitzgerald]
+    fact: Published in 1952, it was the last major work he saw into print and helped win him the Nobel two years later.
+
+  - id: lit-004
+    difficulty: 4
+    prompt: '"Mrs Dalloway said she would buy the flowers herself" opens which novel?'
+    answer: Mrs Dalloway
+    distractors: [To the Lighthouse, Howards End, The Waves]
+    fact: Woolf's 1925 novel covers a single June day in London.
+
+  - id: lit-005
+    difficulty: 1
+    prompt: Who wrote "Pride and Prejudice"?
+    answer: Jane Austen
+    distractors: [Charlotte Brontë, Emily Brontë, George Eliot]
+    fact: It appeared in 1813, credited only to "the author of Sense and Sensibility" — Austen published anonymously throughout her life.
+
+  - id: lit-006
+    difficulty: 3
+    prompt: Which Russian novel follows Pierre Bezukhov and Natasha Rostova?
+    answer: War and Peace
+    distractors: [Anna Karenina, Crime and Punishment, Fathers and Sons]
+    fact: Tolstoy himself denied it was a novel at all, calling it simply a book.
+
+  - id: lit-007
+    difficulty: 2
+    prompt: Who wrote "Things Fall Apart", published in 1958?
+    answer: Chinua Achebe
+    distractors: [Wole Soyinka, Ngugi wa Thiong'o, Nadine Gordimer]
+    fact: Its title comes from Yeats's poem "The Second Coming". It has sold over twenty million copies.
+
+  - id: lit-008
+    difficulty: 3
+    prompt: In which novel does the character Jay Gatsby appear?
+    answer: The Great Gatsby
+    distractors: [Tender Is the Night, This Side of Paradise, The Beautiful and Damned]
+    fact: All four are Fitzgerald's. The Great Gatsby sold poorly in his lifetime and was nearly out of print when he died.
+
+  - id: lit-009
+    difficulty: 4
+    prompt: Which poet wrote "The Waste Land"?
+    answer: T. S. Eliot
+    distractors: [Ezra Pound, W. H. Auden, Wallace Stevens]
+    fact: Pound edited it heavily, cutting it roughly in half. Eliot dedicated it to him as "il miglior fabbro" — the better craftsman.
+
+  - id: lit-010
+    difficulty: 2
+    prompt: Which Steinbeck novel follows the Joad family to California?
+    answer: The Grapes of Wrath
+    distractors: [Of Mice and Men, East of Eden, Cannery Row]
+    fact: It won the Pulitzer in 1940 and was burned publicly in parts of Oklahoma and California.
+
+  - id: lit-011
+    difficulty: 3
+    prompt: Who wrote the dystopian novel "Brave New World"?
+    answer: Aldous Huxley
+    distractors: [George Orwell, H. G. Wells, Yevgeny Zamyatin]
+    fact: It appeared in 1932, seventeen years before Nineteen Eighty-Four. Zamyatin's "We" preceded both.
+
+  - id: lit-012
+    difficulty: 2
+    prompt: Which Harper Lee novel is narrated by a child called Scout?
+    answer: To Kill a Mockingbird
+    distractors: [Go Set a Watchman, The Member of the Wedding, A Death in the Family]
+    fact: Go Set a Watchman, published in 2015, was an earlier draft featuring the same characters as adults.
+
+  - id: lit-013
+    difficulty: 4
+    prompt: Which novel's first line is "Call me Ishmael"?
+    answer: Moby-Dick
+    distractors: [Billy Budd, Typee, The Sea-Wolf]
+    fact: Melville's 1851 novel was a commercial failure and was largely forgotten until a revival in the 1920s.
+
+  - id: lit-014
+    difficulty: 3
+    prompt: Who wrote "The Second Sex", published in 1949?
+    answer: Simone de Beauvoir
+    distractors: [Hannah Arendt, Betty Friedan, Germaine Greer]
+    fact: Its claim that "one is not born, but rather becomes, a woman" shaped a generation of feminist thought.
+
+  - id: lit-015
+    difficulty: 2
+    prompt: Which Shakespeare play features the characters Rosencrantz and Guildenstern?
+    answer: Hamlet
+    distractors: [Macbeth, King Lear, Othello]
+    fact: Tom Stoppard's 1966 play retells the story from their point of view.
+
+  - id: lit-016
+    difficulty: 3
+    prompt: Who wrote "The Remains of the Day"?
+    answer: Kazuo Ishiguro
+    distractors: [Ian McEwan, Julian Barnes, Salman Rushdie]
+    fact: It won the Booker Prize in 1989; Ishiguro won the Nobel in 2017.
+
+  - id: lit-017
+    difficulty: 4
+    prompt: Which Greek epic recounts Odysseus's journey home from Troy?
+    answer: The Odyssey
+    distractors: [The Iliad, The Aeneid, The Argonautica]
+    fact: The Iliad covers a few weeks of the war itself; the Aeneid is Virgil's Roman answer to both.
+
+  - id: lit-018
+    difficulty: 2
+    prompt: Which novel by Charlotte Brontë is narrated by a governess?
+    answer: Jane Eyre
+    distractors: [Wuthering Heights, Villette, Agnes Grey]
+    fact: Villette is also hers; Wuthering Heights is Emily's and Agnes Grey is Anne's.
+
+  - id: lit-019
+    difficulty: 3
+    prompt: Who wrote "Catch-22"?
+    answer: Joseph Heller
+    distractors: [Kurt Vonnegut, Norman Mailer, James Jones]
+    fact: The phrase entered the language from the novel, not the other way round.
+
+  - id: lit-020
+    difficulty: 4
+    prompt: Which Irish writer wrote "Ulysses"?
+    answer: James Joyce
+    distractors: [Samuel Beckett, W. B. Yeats, Flann O'Brien]
+    fact: Its action takes place on a single day, 16 June 1904, now marked annually as Bloomsday.
+
+  - id: lit-021
+    difficulty: 2
+    prompt: Which Orwell novel features the slogan "All animals are equal, but some animals are more equal than others"?
+    answer: Animal Farm
+    distractors: [Nineteen Eighty-Four, Homage to Catalonia, Burmese Days]
+    fact: Several publishers turned it down in 1944 for fear of offending the Soviet ally.
+
+  - id: lit-022
+    difficulty: 3
+    prompt: Who wrote "Beloved", which won the 1988 Pulitzer Prize for Fiction?
+    answer: Toni Morrison
+    distractors: [Alice Walker, Maya Angelou, Zora Neale Hurston]
+    fact: Morrison became the first Black woman to win the Nobel Prize in Literature, in 1993.
+
+  - id: lit-023
+    difficulty: 4
+    prompt: Which long novel by Marcel Proust begins with "Swann's Way"?
+    answer: In Search of Lost Time
+    distractors: [The Human Comedy, Les Misérables, The Thibaults]
+    fact: Earlier English editions called it "Remembrance of Things Past", a phrase borrowed from Shakespeare.
+
+  - id: lit-024
+    difficulty: 2
+    prompt: Which Mark Twain character travels down the Mississippi with a runaway slave named Jim?
+    answer: Huckleberry Finn
+    distractors: [Tom Sawyer, Hank Morgan, David Wilson]
+    fact: Hemingway claimed all modern American literature came from that one book.
+
+  - id: lit-025
+    difficulty: 3
+    prompt: Who wrote the play "Death of a Salesman"?
+    answer: Arthur Miller
+    distractors: [Tennessee Williams, Eugene O'Neill, Edward Albee]
+    fact: It won the Pulitzer in 1949. Willy Loman has been played by Lee J. Cobb, Dustin Hoffman and Brian Dennehy, among many others.
+
+  - id: lit-026
+    difficulty: 4
+    prompt: '"Last night I dreamt I went to Manderley again" opens which novel?'
+    answer: Rebecca
+    distractors: [Jamaica Inn, Jane Eyre, The Turn of the Screw]
+    fact: Daphne du Maurier's 1938 novel was filmed by Hitchcock two years later and won the Academy Award for Best Picture.
+
+  - id: lit-027
+    difficulty: 2
+    prompt: Which Cervantes character tilts at windmills?
+    answer: Don Quixote
+    distractors: [Sancho Panza, Lazarillo de Tormes, Figaro]
+    fact: Sancho Panza is his squire, the one who points out that they are windmills.
+
+  - id: lit-028
+    difficulty: 3
+    prompt: Who wrote "Slaughterhouse-Five", drawing on his own experience of the bombing of Dresden?
+    answer: Kurt Vonnegut
+    distractors: [Joseph Heller, Thomas Pynchon, John Hersey]
+    fact: Vonnegut survived the raid as a prisoner of war, sheltering in a meat locker beneath a slaughterhouse.
+
+  - id: lit-029
+    difficulty: 4
+    prompt: Which poet wrote "Do not go gentle into that good night"?
+    answer: Dylan Thomas
+    distractors: [Seamus Heaney, Philip Larkin, Robert Frost]
+    fact: The poem is a villanelle, written as his father was dying.
+
+  - id: lit-030
+    difficulty: 3
+    prompt: Which novel by Boris Pasternak was banned in the Soviet Union but won him the Nobel Prize?
+    answer: Doctor Zhivago
+    distractors: [And Quiet Flows the Don, One Day in the Life of Ivan Denisovich, The Master and Margarita]
+    fact: Pasternak was forced to decline the 1958 prize. The manuscript had been smuggled out and published first in Italy.

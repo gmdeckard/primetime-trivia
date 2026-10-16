@@ -1,0 +1,282 @@
+category: food-drink
+
+questions:
+  - id: fnd-001
+    difficulty: 2
+    prompt: Which grape is the dominant variety in red Burgundy?
+    answer: Pinot Noir
+    distractors: [Cabernet Sauvignon, Merlot, Syrah]
+    fact: White Burgundy is almost always Chardonnay. Bordeaux is the home of Cabernet and Merlot.
+
+  - id: fnd-002
+    difficulty: 3
+    prompt: Which country produces Rioja wine?
+    answer: Spain
+    distractors: [Italy, Portugal, Argentina]
+    fact: The dominant grape is Tempranillo, and the wine is traditionally aged in American oak.
+
+  - id: fnd-003
+    difficulty: 2
+    prompt: Which cut of beef is used for a classic Chateaubriand?
+    answer: Tenderloin
+    distractors: [Sirloin, Ribeye, Brisket]
+    fact: It is cut from the thick center of the fillet and traditionally served for two.
+
+  - id: fnd-004
+    difficulty: 4
+    prompt: Which of these is NOT one of the five French mother sauces?
+    answer: Béarnaise
+    distractors: [Béchamel, Velouté, Espagnole]
+    fact: The five are béchamel, velouté, espagnole, hollandaise and tomato. Béarnaise is a derivative of hollandaise.
+
+  - id: fnd-005
+    difficulty: 2
+    prompt: Which spice is the most expensive by weight?
+    answer: Saffron
+    distractors: [Vanilla, Cardamom, Cinnamon]
+    fact: It is the stigma of a crocus, and each flower yields three. A pound takes something like 75,000 flowers.
+
+  - id: fnd-006
+    difficulty: 3
+    prompt: Champagne must be made in which French region?
+    answer: Champagne
+    distractors: [Burgundy, The Loire, Alsace]
+    fact: Sparkling wine made the same way elsewhere in France is labeled crémant.
+
+  - id: fnd-007
+    difficulty: 2
+    prompt: Which country is the origin of the dish paella?
+    answer: Spain
+    distractors: [Portugal, Mexico, Italy]
+    fact: It comes specifically from Valencia, and the traditional version uses rabbit and chicken rather than seafood.
+
+  - id: fnd-008
+    difficulty: 4
+    prompt: What does "brut" mean on a Champagne label?
+    answer: Dry
+    distractors: [Sweet, Aged, Unblended]
+    fact: The scale runs from brut nature through extra brut, brut, extra dry, sec, demi-sec to doux. Confusingly, "extra dry" is sweeter than "brut".
+
+  - id: fnd-009
+    difficulty: 2
+    prompt: Which cheese is traditionally used on a Margherita pizza?
+    answer: Mozzarella
+    distractors: [Parmesan, Provolone, Pecorino]
+    fact: The colors of the dish — red, white and green — are said to represent the Italian flag.
+
+  - id: fnd-010
+    difficulty: 3
+    prompt: Which American state produces the most wine?
+    answer: California
+    distractors: [Oregon, Washington, New York]
+    fact: California accounts for the large majority of US production. Washington is a distant second.
+
+  - id: fnd-011
+    difficulty: 2
+    prompt: What is the main ingredient of traditional hummus?
+    answer: Chickpeas
+    distractors: [Lentils, Fava beans, White beans]
+    fact: The word is simply Arabic for chickpeas. Tahini, lemon and garlic complete it.
+
+  - id: fnd-012
+    difficulty: 4
+    prompt: Which whisky must be made in Scotland from malted barley in a single distillery?
+    answer: Single malt Scotch
+    distractors: [Blended Scotch, Irish pot still whiskey, Bourbon]
+    fact: '"Single" refers to the distillery, not the barrel — a single malt is usually a blend of casks from one place.'
+
+  - id: fnd-013
+    difficulty: 2
+    prompt: Which vegetable is the main ingredient of borscht?
+    answer: Beetroot
+    distractors: [Cabbage, Turnip, Carrot]
+    fact: The soup is Ukrainian in origin and is eaten hot or cold across Eastern Europe.
+
+  - id: fnd-014
+    difficulty: 3
+    prompt: By law, bourbon must be made from a grain mixture containing at least what proportion of corn?
+    answer: 51 per cent
+    distractors: [25 per cent, 75 per cent, 100 per cent]
+    fact: It must also be aged in new charred oak containers, which is why bourbon barrels get sold on to Scotch distillers.
+
+  - id: fnd-015
+    difficulty: 2
+    prompt: Which country is the origin of the pastry called a croissant?
+    answer: Austria
+    distractors: [France, Belgium, Switzerland]
+    fact: It descends from the Viennese kipferl. French bakers adopted and refined it in the nineteenth century.
+
+  - id: fnd-016
+    difficulty: 4
+    prompt: What is the difference between a Dutch oven and a stockpot?
+    answer: A Dutch oven is heavy with a tight lid, for braising in the oven
+    distractors: [A Dutch oven is taller and narrower, A Dutch oven has no lid, A stockpot is made of cast iron]
+    fact: 'The weight and the seal are the point: they hold heat steadily and keep moisture in over hours.'
+
+  - id: fnd-017
+    difficulty: 2
+    prompt: Which fish is traditionally used in Scottish smoked "kippers"?
+    answer: Herring
+    distractors: [Cod, Mackerel, Haddock]
+    fact: Smoked haddock makes finnan haddie, which is a different thing entirely.
+
+  - id: fnd-018
+    difficulty: 3
+    prompt: What is the main flavoring in a traditional gin?
+    answer: Juniper
+    distractors: [Coriander, Angelica, Anise]
+    fact: The word gin comes from genever, itself from the Latin for juniper. Coriander and angelica are common supporting botanicals.
+
+  - id: fnd-019
+    difficulty: 2
+    prompt: Which Italian region is Parmigiano-Reggiano from?
+    answer: Emilia-Romagna
+    distractors: [Tuscany, Piedmont, Lombardy]
+    fact: Production is restricted to a defined zone around Parma, Reggio Emilia, Modena and parts of Bologna and Mantua.
+
+  - id: fnd-020
+    difficulty: 4
+    prompt: What does the French term "mise en place" refer to?
+    answer: Preparing and arranging ingredients before cooking
+    distractors: [Plating a finished dish, The order of courses, Seasoning to taste]
+    fact: Literally "putting in place". Professional kitchens live or die by it.
+
+  - id: fnd-021
+    difficulty: 2
+    prompt: Which nut is used to make traditional marzipan?
+    answer: Almond
+    distractors: [Hazelnut, Walnut, Pistachio]
+    fact: Ground almonds and sugar, in roughly equal measure. Hazelnut gives you praline instead.
+
+  - id: fnd-022
+    difficulty: 3
+    prompt: Which country consumes the most coffee per person?
+    answer: Finland
+    distractors: [Italy, Brazil, The United States]
+    fact: The Nordic countries dominate the per-capita rankings; Brazil leads on production rather than consumption.
+
+  - id: fnd-023
+    difficulty: 2
+    prompt: What is prosciutto?
+    answer: Dry-cured ham
+    distractors: [Smoked sausage, Cured beef, Pork belly]
+    fact: Prosciutto crudo is the raw cured kind; prosciutto cotto is cooked.
+
+  - id: fnd-024
+    difficulty: 4
+    prompt: Which wine region is classified by the 1855 Bordeaux ranking into five "growths"?
+    answer: The Médoc
+    distractors: [Saint-Émilion, Pomerol, Graves]
+    fact: The classification was drawn up for the Paris Exposition and has been altered only once, when Mouton Rothschild was promoted in 1973.
+
+  - id: fnd-025
+    difficulty: 2
+    prompt: Which herb is the principal flavor in classic pesto alla genovese?
+    answer: Basil
+    distractors: [Parsley, Oregano, Mint]
+    fact: With pine nuts, garlic, Parmesan, pecorino and olive oil, pounded rather than blended in the traditional method.
+
+  - id: fnd-026
+    difficulty: 3
+    prompt: What makes a wine "vintage" as opposed to non-vintage?
+    answer: It is made from grapes of a single year
+    distractors: [It is at least ten years old, It is aged in oak, It comes from a single vineyard]
+    fact: Non-vintage Champagne blends years deliberately, to keep a consistent house style.
+
+  - id: fnd-027
+    difficulty: 2
+    prompt: Which country invented the sandwich's namesake?
+    answer: England
+    distractors: [France, Germany, The Netherlands]
+    fact: It is named for the 4th Earl of Sandwich, who reputedly asked for meat between bread so he could keep playing cards.
+
+  - id: fnd-028
+    difficulty: 4
+    prompt: What is the term for the sediment left in a wine bottle after long aging?
+    answer: Lees
+    distractors: [Must, Tannin, Pomace]
+    fact: Must is unfermented juice and pomace the pressed skins and seeds. Some wines are deliberately aged "sur lie".
+
+  - id: fnd-029
+    difficulty: 2
+    prompt: Which grain is used to make traditional Japanese sake?
+    answer: Rice
+    distractors: [Barley, Millet, Wheat]
+    fact: It is brewed rather than distilled, which makes it closer in process to beer than to spirits.
+
+  - id: fnd-030
+    difficulty: 3
+    prompt: Which American region is the home of gumbo and jambalaya?
+    answer: Louisiana
+    distractors: [The Carolinas, Texas, Tennessee]
+    fact: Both dishes reflect French, Spanish, West African and Native American influence in Creole and Cajun cooking.
+
+  - id: fnd-031
+    difficulty: 2
+    prompt: Which country did sushi originate in?
+    answer: Japan
+    distractors: [China, Korea, Thailand]
+    fact: It began as a way of preserving fish in fermented rice, and the rice was thrown away.
+
+  - id: fnd-032
+    difficulty: 2
+    prompt: Which bean is coffee made from?
+    answer: The coffee cherry's seed
+    distractors: [The cocoa bean, The vanilla pod, The soy bean]
+    fact: It is not botanically a bean at all, but the stone of a fruit.
+
+  - id: fnd-033
+    difficulty: 3
+    prompt: Which spirit is the base of a mojito?
+    answer: Rum
+    distractors: [Vodka, Gin, Tequila]
+    fact: The mint is meant to be pressed, not crushed. Shredding it releases bitterness from the stems.
+
+  - id: fnd-034
+    difficulty: 3
+    prompt: Which country produces the most coffee?
+    answer: Brazil
+    distractors: [Colombia, Vietnam, Ethiopia]
+    fact: Brazil has led for over 150 years. Vietnam is second and grows mostly robusta for instant coffee.
+
+  - id: fnd-035
+    difficulty: 3
+    prompt: What makes bread rise?
+    answer: Carbon dioxide from yeast
+    distractors: [Steam alone, Oxygen from kneading, Gluten expanding]
+    fact: The gluten is what traps the gas. Without it the bubbles escape and the loaf stays flat.
+
+  - id: fnd-036
+    difficulty: 3
+    prompt: Which fish is in a traditional Caesar salad dressing?
+    answer: Anchovy
+    distractors: [Sardine, Mackerel, Tuna]
+    fact: The salad was invented in Tijuana and the original had no anchovies at all. The savoury note came from Worcestershire sauce.
+
+  - id: fnd-037
+    difficulty: 3
+    prompt: Which part of the plant is cinnamon?
+    answer: The bark
+    distractors: [The root, The seed, The flower]
+    fact: It is stripped from young shoots and curls into quills as it dries.
+
+  - id: fnd-038
+    difficulty: 4
+    prompt: Which wine grape is the most planted in the world?
+    answer: Cabernet Sauvignon
+    distractors: [Merlot, Chardonnay, Airen]
+    fact: It is a natural cross of Cabernet Franc and Sauvignon Blanc, discovered by DNA testing only in 1996.
+
+  - id: fnd-039
+    difficulty: 4
+    prompt: What distinguishes bourbon from other whiskeys?
+    answer: A mash of at least 51 percent corn
+    distractors: [Ageing for at least twelve years, Distillation in Kentucky only, A mash of at least 51 percent rye]
+    fact: It must also go into new charred oak barrels, which is why so many used ones end up in Scotland.
+
+  - id: fnd-040
+    difficulty: 4
+    prompt: Which acid gives sourdough bread its tang?
+    answer: Lactic acid
+    distractors: [Citric acid, Acetic acid, Malic acid]
+    fact: Bacteria in the starter make both lactic and acetic acid. The ratio is what separates a mild loaf from a sharp one.

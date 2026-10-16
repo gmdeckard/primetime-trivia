@@ -22,6 +22,37 @@ for (const issue of [...errors, ...warnings]) {
 console.log('');
 console.log(`  ${bank.questions.length} questions across ${bank.categories.length} categories`);
 
+/**
+ * Per age group, because that is the unit a night is actually drawn from.
+ *
+ * A bank-wide total hides the thing that matters: a mixed round wants one
+ * question from each of ten different categories, so a group with six
+ * categories written for it will ask some of them twice however healthy the
+ * headline count looks. That used to be invisible until a night was running.
+ */
+const groups = new Map<string, typeof bank.questions>();
+for (const q of bank.questions) {
+  const key = q.audience ?? '(every group)';
+  const list = groups.get(key) ?? [];
+  list.push(q);
+  groups.set(key, list);
+}
+
+console.log('');
+for (const [group, list] of [...groups].sort()) {
+  const choice = list.filter((q) => q.kind === 'choice');
+  const cats = new Set(choice.map((q) => q.category));
+  if (!choice.length) {
+    // The shared folder today is tiebreakers only, and "0 categories" reads
+    // like something is missing rather than like it is doing its job.
+    console.log(`  ${group.padEnd(14)} ${String(list.length).padStart(4)} numeric tiebreakers, in play on every night`);
+    continue;
+  }
+  const thin = cats.size < 10 ? `  — a round of 10 repeats ${10 - cats.size} categories` : '';
+  console.log(`  ${group.padEnd(14)} ${String(list.length).padStart(4)} questions · ${cats.size} categories${thin}`);
+}
+
+console.log('');
 const counts = bank.categories
   .map((c) => ({ name: c.name, n: (bank.byCategory.get(c.id) ?? []).length }))
   .sort((a, b) => b.n - a.n);

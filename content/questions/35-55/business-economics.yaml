@@ -1,0 +1,77 @@
+category: business-economics
+
+questions:
+  - id: a35-031
+    difficulty: 2
+    prompt: Which coffee chain grew from a single Seattle shop to tens of thousands worldwide?
+    answer: Starbucks
+    distractors: [Peet's, Caribou Coffee, Costa]
+    fact: The original shop sold beans and equipment, not drinks. The cafe idea was borrowed from Milan after a buying trip.
+
+  - id: a35-032
+    difficulty: 2
+    prompt: Which Swedish retailer sells flat-pack furniture with Scandinavian names?
+    answer: IKEA
+    distractors: [Habitat, MFI, Jysk]
+    fact: Flat packing began when an employee took the legs off a table to fit it in a car, and the firm realized shipping air was the cost.
+
+  - id: a35-033
+    difficulty: 3
+    prompt: Which retailer began selling books online in 1995?
+    answer: Amazon
+    distractors: [eBay, Barnes and Noble, Borders]
+    audience: 35-55   # 1995 and mostly after
+    fact: Books were chosen because there were more titles than any shop could stock, so a catalog was the entire advantage.
+
+  - id: a35-034
+    difficulty: 3
+    prompt: Which energy company collapsed in 2001 in an accounting scandal?
+    answer: Enron
+    distractors: [WorldCom, Tyco, Global Crossing]
+    audience: 35-55   # 2001
+    fact: It took its auditor, Arthur Andersen, down with it, ending one of the five largest accounting firms in the world.
+
+  - id: a35-035
+    difficulty: 3
+    prompt: Which video rental chain declined to buy a mail-order DVD service in 2000?
+    answer: Blockbuster
+    distractors: [Hollywood Video, Movie Gallery, Family Video]
+    audience: 35-55   # 2000
+    fact: Netflix is said to have offered itself for fifty million dollars and been laughed out of the meeting.
+
+  - id: a35-036
+    difficulty: 3
+    prompt: What burst in 2000, wiping out a generation of internet companies?
+    answer: The dot-com bubble
+    distractors: [The housing bubble, The junk bond market, The Asian currency peg]
+    fact: Pets.com ran a Super Bowl advert and liquidated nine months after going public.
+
+  - id: a35-037
+    difficulty: 3
+    prompt: Which Finnish company dominated cell phones through the late 1990s?
+    answer: Nokia
+    distractors: [Ericsson, Siemens, Alcatel]
+    fact: It had previously made rubber boots, cables and paper. The name comes from a river in the town where the paper mill stood.
+
+  - id: a35-038
+    difficulty: 4
+    prompt: Which bank's collapse in 2008 was the largest bankruptcy in US history?
+    answer: Lehman Brothers
+    distractors: [Bear Stearns, Merrill Lynch, Washington Mutual]
+    audience: 35-55   # 2008
+    fact: The firm had survived the Civil War, the Depression and two world wars. Bear Stearns had been rescued six months earlier.
+
+  - id: a35-039
+    difficulty: 4
+    prompt: Which currency entered circulation as notes and coins in 2002?
+    answer: The euro
+    distractors: [The Swiss franc, The pound sterling, The Norwegian krone]
+    audience: 35-55   # 2002
+    fact: It had existed since 1999 for accounting and transfers. The physical changeover across twelve countries took about two months.
+
+  - id: a35-040
+    difficulty: 4
+    prompt: Which company's 1997 near-bankruptcy ended with a 150 million dollar investment from Microsoft?
+    answer: Apple
+    distractors: [Silicon Graphics, Compaq, Gateway]
+    fact: The announcement was booed by the audience at Macworld. Microsoft also agreed to keep making Office for the Mac for five years.

@@ -1,0 +1,72 @@
+category: geography
+
+questions:
+  - id: kid-011
+    difficulty: 2
+    prompt: How many continents are there?
+    answer: Seven
+    distractors: [Five, Six, Eight]
+    fact: Some countries teach six, counting Europe and Asia as one. Both answers are defensible, which is why the count is argued about.
+
+  - id: kid-012
+    difficulty: 2
+    prompt: Which is the largest ocean?
+    answer: The Pacific
+    distractors: [The Atlantic, The Indian, The Arctic]
+    fact: It is bigger than all the land on earth put together.
+
+  - id: kid-013
+    difficulty: 3
+    prompt: Which continent is the coldest?
+    answer: Antarctica
+    distractors: [Europe, Asia, South America]
+    fact: It is also the driest. Parts of it have had no rain or snow for around two million years.
+
+  - id: kid-014
+    difficulty: 3
+    prompt: Which river is traditionally listed as the world's longest?
+    answer: The Nile
+    distractors: [The Amazon, The Mississippi, The Yangtze]
+    fact: The Amazon carries far more water, so which river is biggest depends on whether you measure length or volume.
+
+  - id: kid-015
+    difficulty: 3
+    prompt: Which country is shaped like a boot?
+    answer: Italy
+    distractors: [Spain, Greece, Portugal]
+    fact: The island of Sicily sits right where the toe would be kicking it.
+
+  - id: kid-016
+    difficulty: 3
+    prompt: What is the tallest mountain on earth above sea level?
+    answer: Mount Everest
+    distractors: [Mount Kilimanjaro, Mount Fuji, Denali]
+    fact: It grows by a few millimeters every year, because the plates underneath are still pushing together.
+
+  - id: kid-017
+    difficulty: 3
+    prompt: Which country has the most people?
+    answer: India
+    distractors: [China, The United States, Indonesia]
+    fact: India passed China in 2023 after China had held the top spot for as long as anyone had been counting.
+
+  - id: kid-018
+    difficulty: 4
+    prompt: Which is the smallest country in the world?
+    answer: Vatican City
+    distractors: [Monaco, San Marino, Liechtenstein]
+    fact: You can walk all the way around it in under an hour, and fewer people live there than in most primary schools' catchments.
+
+  - id: kid-019
+    difficulty: 4
+    prompt: Which imaginary line runs around the middle of the earth?
+    answer: The equator
+    distractors: [The prime meridian, The tropic of Cancer, The international date line]
+    fact: Stand on it and you are spinning at about a thousand miles an hour without noticing a thing.
+
+  - id: kid-020
+    difficulty: 4
+    prompt: Which country is home to the kangaroo?
+    answer: Australia
+    distractors: [New Zealand, South Africa, Argentina]
+    fact: A baby kangaroo is about the size of a jellybean when it is born and climbs into the pouch by itself.

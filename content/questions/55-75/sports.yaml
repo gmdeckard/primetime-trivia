@@ -1,0 +1,275 @@
+category: sports
+
+questions:
+  - id: spo-001
+    difficulty: 2
+    prompt: Who broke Babe Ruth's career home run record in 1974?
+    answer: Hank Aaron
+    distractors: [Willie Mays, Roger Maris, Mickey Mantle]
+    fact: Maris broke Ruth's single-season record in 1961; Aaron broke the career mark with his 715th.
+
+  - id: spo-002
+    difficulty: 3
+    prompt: Which boxer refused induction into the US Army in 1967 and was stripped of his title?
+    answer: Muhammad Ali
+    distractors: [Joe Frazier, Sonny Liston, George Foreman]
+    fact: The Supreme Court unanimously overturned his conviction in 1971, by which time he had lost three and a half years of his career.
+
+  - id: spo-003
+    difficulty: 2
+    prompt: Which country won the first FIFA World Cup, in 1930?
+    answer: Uruguay
+    distractors: [Brazil, Argentina, Italy]
+    fact: They hosted it as well, beating Argentina in the final in Montevideo.
+
+  - id: spo-004
+    difficulty: 3
+    prompt: Which jockey rode Secretariat to the Triple Crown in 1973?
+    answer: Ron Turcotte
+    distractors: [Willie Shoemaker, Eddie Arcaro, Angel Cordero]
+    fact: Secretariat's Belmont margin of 31 lengths and his track record there both still stand.
+
+  - id: spo-005
+    difficulty: 2
+    prompt: Which team did Joe Namath lead to victory in Super Bowl III?
+    answer: The New York Jets
+    distractors: [The New York Giants, The Kansas City Chiefs, The Baltimore Colts]
+    fact: He guaranteed the win beforehand against a Colts team favored by eighteen points.
+
+  - id: spo-006
+    difficulty: 4
+    prompt: Which golfer won the Masters six times?
+    answer: Jack Nicklaus
+    distractors: [Arnold Palmer, Gary Player, Sam Snead]
+    fact: His sixth came in 1986, at forty-six, making him the oldest Masters champion.
+
+  - id: spo-007
+    difficulty: 2
+    prompt: In which sport would you find a Fosbury Flop?
+    answer: The high jump
+    distractors: [Pole vault, Gymnastics, Diving]
+    fact: Dick Fosbury won the 1968 Olympic gold with it, and within a decade almost nobody jumped any other way.
+
+  - id: spo-008
+    difficulty: 3
+    prompt: Which tennis player won nine Wimbledon singles titles between 1978 and 1990?
+    answer: Martina Navratilova
+    distractors: [Chris Evert, Steffi Graf, Billie Jean King]
+    fact: Six of them were consecutive, from 1982 to 1987.
+
+  - id: spo-009
+    difficulty: 2
+    prompt: Which hockey player is nicknamed "The Great One"?
+    answer: Wayne Gretzky
+    distractors: [Gordie Howe, Bobby Orr, Mario Lemieux]
+    fact: He holds more NHL records than anyone, and would still lead career scoring on assists alone.
+
+  - id: spo-010
+    difficulty: 4
+    prompt: Which American won four gold medals at the 1936 Berlin Olympics?
+    answer: Jesse Owens
+    distractors: [Ralph Metcalfe, Eddie Tolan, Carl Lewis]
+    fact: Carl Lewis matched the feat in 1984. Owens did it in Hitler's stadium, which is why it is remembered differently.
+
+  - id: spo-011
+    difficulty: 2
+    prompt: Which baseball player broke the color barrier in the major leagues in 1947?
+    answer: Jackie Robinson
+    distractors: [Larry Doby, Satchel Paige, Roy Campanella]
+    fact: Doby followed him into the American League eleven weeks later.
+
+  - id: spo-012
+    difficulty: 3
+    prompt: Which boxing match was billed as the "Thrilla in Manila"?
+    answer: Ali versus Frazier, 1975
+    distractors: ['Ali versus Foreman, 1974', 'Ali versus Liston, 1964', 'Frazier versus Foreman, 1973']
+    fact: Ali-Foreman in Zaire was the "Rumble in the Jungle" the year before.
+
+  - id: spo-013
+    difficulty: 2
+    prompt: How many players are on the field for one team in American football?
+    answer: Eleven
+    distractors: [Nine, Ten, Twelve]
+    fact: Canadian football uses twelve, which is why the fields and rules differ as well.
+
+  - id: spo-014
+    difficulty: 4
+    prompt: Which driver won five Formula One world championships in the 1950s?
+    answer: Juan Manuel Fangio
+    distractors: [Stirling Moss, Alberto Ascari, Jack Brabham]
+    fact: Moss finished runner-up four times and never won the title — the best driver never to be champion, by general agreement.
+
+  - id: spo-015
+    difficulty: 3
+    prompt: Which college basketball coach won ten NCAA titles at UCLA?
+    answer: John Wooden
+    distractors: [Dean Smith, Adolph Rupp, Bob Knight]
+    fact: Seven of them were consecutive, from 1967 to 1973.
+
+  - id: spo-016
+    difficulty: 2
+    prompt: Which event is contested over 26 miles and 385 yards?
+    answer: The marathon
+    distractors: [The decathlon, The steeplechase, The triathlon]
+    fact: The odd distance was fixed at the 1908 London Olympics to finish in front of the royal box.
+
+  - id: spo-017
+    difficulty: 3
+    prompt: Which team won the 1980 Olympic ice hockey gold medal after beating the Soviet Union?
+    answer: The United States
+    distractors: [Sweden, Finland, Czechoslovakia]
+    fact: The win over the Soviets was the semi-final; they still had to beat Finland for the gold.
+
+  - id: spo-018
+    difficulty: 4
+    prompt: Which cricketer scored 99.94 as a career Test batting average?
+    answer: Donald Bradman
+    distractors: [Jack Hobbs, Wally Hammond, Garfield Sobers]
+    fact: He needed four runs in his final innings to average 100, and was dismissed for nought.
+
+  - id: spo-019
+    difficulty: 2
+    prompt: Which American swimmer won seven gold medals at the 1972 Munich Olympics?
+    answer: Mark Spitz
+    distractors: [Don Schollander, Matt Biondi, John Naber]
+    fact: All seven were in world record time, a record that stood until Michael Phelps won eight in 2008.
+
+  - id: spo-020
+    difficulty: 3
+    prompt: Which football team won four Super Bowls in the 1970s?
+    answer: The Pittsburgh Steelers
+    distractors: [The Dallas Cowboys, The Miami Dolphins, The Oakland Raiders]
+    fact: Their defense of that era is still called the Steel Curtain.
+
+  - id: spo-021
+    difficulty: 2
+    prompt: Which tennis tournament is played on clay?
+    answer: The French Open
+    distractors: [Wimbledon, The US Open, The Australian Open]
+    fact: Wimbledon is grass; the other two are hard courts.
+
+  - id: spo-022
+    difficulty: 4
+    prompt: Which NFL team completed a perfect season in 1972?
+    answer: The Miami Dolphins
+    distractors: [The Pittsburgh Steelers, The Chicago Bears, The San Francisco 49ers]
+    fact: Seventeen and zero including the Super Bowl. No team has matched it.
+
+  - id: spo-023
+    difficulty: 3
+    prompt: Which boxer was known as the "Brown Bomber"?
+    answer: Joe Louis
+    distractors: [Jack Johnson, Rocky Marciano, Sugar Ray Robinson]
+    fact: He held the heavyweight title for nearly twelve years, longer than anyone since.
+
+  - id: spo-024
+    difficulty: 2
+    prompt: Which basketball player scored 100 points in a single NBA game?
+    answer: Wilt Chamberlain
+    distractors: [Bill Russell, Elgin Baylor, Oscar Robertson]
+    fact: He did it in 1962 against the Knicks. There is no film of the game.
+
+  - id: spo-025
+    difficulty: 3
+    prompt: Which country has won the most Olympic gold medals in field hockey?
+    answer: India
+    distractors: [The Netherlands, Pakistan, Australia]
+    fact: India won six in a row between 1928 and 1956.
+
+  - id: spo-026
+    difficulty: 4
+    prompt: Which horse race is run at Churchill Downs?
+    answer: The Kentucky Derby
+    distractors: [The Preakness Stakes, The Belmont Stakes, The Breeders' Cup Classic]
+    fact: The Preakness is at Pimlico in Baltimore and the Belmont at Belmont Park in New York.
+
+  - id: spo-027
+    difficulty: 2
+    prompt: Which golfer won the 1997 Masters by twelve strokes at the age of 21?
+    answer: Tiger Woods
+    distractors: [Phil Mickelson, Ernie Els, Nick Faldo]
+    fact: It was his first major, and the widest winning margin in Masters history.
+
+  - id: spo-028
+    difficulty: 3
+    prompt: Which Olympic Games were boycotted by the United States?
+    answer: Moscow 1980
+    distractors: [Montreal 1976, Los Angeles 1984, Seoul 1988]
+    fact: The Soviet bloc returned the favor at Los Angeles in 1984.
+
+  - id: spo-029
+    difficulty: 2
+    prompt: Which baseball team was known as the Bronx Bombers?
+    answer: The New York Yankees
+    distractors: [The Brooklyn Dodgers, The New York Giants, The Boston Red Sox]
+    fact: Yankee Stadium is in the Bronx; the Dodgers were in Brooklyn and the Giants in Manhattan.
+
+  - id: spo-030
+    difficulty: 4
+    prompt: Who was the first man to run a mile in under four minutes?
+    answer: Roger Bannister
+    distractors: [John Landy, Herb Elliott, Jim Ryun]
+    fact: He ran 3:59.4 at Oxford in May 1954. Landy broke the record again six weeks later.
+
+  - id: spo-031
+    difficulty: 2
+    prompt: How many players are on the field per team in a soccer match?
+    answer: Eleven
+    distractors: [Nine, Ten, Twelve]
+    fact: The goalkeeper is the only one permitted to handle the ball, and only inside the penalty area.
+
+  - id: spo-032
+    difficulty: 2
+    prompt: Which basketball player wore number 23 for the Chicago Bulls?
+    answer: Michael Jordan
+    distractors: [Scottie Pippen, Dennis Rodman, Charles Barkley]
+    fact: He briefly wore 45 after returning from baseball, then switched back.
+
+  - id: spo-033
+    difficulty: 3
+    prompt: Which country has won the most FIFA World Cups?
+    answer: Brazil
+    distractors: [Germany, Italy, Argentina]
+    fact: Five. Brazil is also the only country to have played in every tournament.
+
+  - id: spo-034
+    difficulty: 3
+    prompt: In tennis, what is a score of zero called?
+    answer: Love
+    distractors: [Nil, Duck, Blank]
+    fact: The usual explanation is the French l'oeuf, the egg, for the shape of a nought. Nobody has proved it.
+
+  - id: spo-035
+    difficulty: 3
+    prompt: Which trophy goes to the winner of the NHL playoffs?
+    answer: The Stanley Cup
+    distractors: [The Vezina Trophy, The Art Ross Trophy, The Hart Trophy]
+    fact: The oldest trophy competed for by professional athletes in North America, and every winning player's name is engraved on it.
+
+  - id: spo-036
+    difficulty: 3
+    prompt: How many holes are played in a standard round of golf?
+    answer: Eighteen
+    distractors: [Twelve, Fifteen, Twenty-one]
+    fact: St Andrews settled on eighteen in 1764 and the rest of the sport copied it.
+
+  - id: spo-037
+    difficulty: 4
+    prompt: Which country hosted the first modern Olympic Games, in 1896?
+    answer: Greece
+    distractors: [France, Britain, The United States]
+    fact: A Frenchman, Pierre de Coubertin, organized the revival, which is why France is the tempting answer.
+
+  - id: spo-038
+    difficulty: 4
+    prompt: In cricket, what is a score of zero by a batsman called?
+    answer: A duck
+    distractors: [A love, A blank, A nought]
+    fact: From duck's egg, the same joke as tennis making an egg out of a nought, arrived at separately.
+
+  - id: spo-039
+    difficulty: 4
+    prompt: Which NFL team completed a perfect season including the Super Bowl?
+    answer: The 1972 Miami Dolphins
+    distractors: [The 1985 Chicago Bears, The 2007 New England Patriots, The 1976 Oakland Raiders]
+    fact: New England went 16-0 in the regular season in 2007 and then lost the Super Bowl, which is what keeps the record alone.

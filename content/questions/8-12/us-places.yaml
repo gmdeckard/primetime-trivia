@@ -1,0 +1,72 @@
+category: us-places
+
+questions:
+  - id: kid-071
+    difficulty: 2
+    prompt: What is the capital of the United States?
+    answer: Washington DC
+    distractors: [New York, Los Angeles, Boston]
+    fact: It is not in any state at all. That is what the DC stands for, the District of Columbia.
+
+  - id: kid-072
+    difficulty: 2
+    prompt: How many stars are on the United States flag?
+    answer: Fifty
+    distractors: [Thirteen, Forty-eight, Fifty-two]
+    fact: One per state, and thirteen stripes for the thirteen colonies that started it. A schoolboy designed the fifty-star version for a class project.
+
+  - id: kid-073
+    difficulty: 3
+    prompt: Which statue stands on an island in New York harbor?
+    answer: The Statue of Liberty
+    distractors: [Christ the Redeemer, The Colossus of Rhodes, The Little Mermaid]
+    fact: It was a gift from France and arrived in 214 crates, in pieces, to be put together on site.
+
+  - id: kid-074
+    difficulty: 3
+    prompt: Which US state is made up only of islands?
+    answer: Hawaii
+    distractors: [Alaska, Florida, Rhode Island]
+    fact: It is also the only state that grows coffee, and the newest, having joined in 1959.
+
+  - id: kid-075
+    difficulty: 3
+    prompt: Which monument has four presidents' faces carved into a mountain?
+    answer: Mount Rushmore
+    distractors: [The Lincoln Memorial, Stone Mountain, The Washington Monument]
+    fact: Each face is about sixty feet from chin to forehead, which is taller than a five-storey house.
+
+  - id: kid-076
+    difficulty: 3
+    prompt: In which state would you find Hollywood?
+    answer: California
+    distractors: [New York, Florida, Texas]
+    fact: The famous sign originally said Hollywoodland and advertised houses for sale.
+
+  - id: kid-077
+    difficulty: 3
+    prompt: Which US state is the largest by area?
+    answer: Alaska
+    distractors: [Texas, California, Montana]
+    fact: It is more than twice the size of Texas, which Texans are reminded of more often than they would like.
+
+  - id: kid-078
+    difficulty: 4
+    prompt: Which American landmark is a canyon carved by a river in Arizona?
+    answer: The Grand Canyon
+    distractors: [Yosemite Valley, Bryce Canyon, Zion Canyon]
+    fact: It is about a mile deep. The rock at the bottom is around two billion years old, roughly half the age of the earth.
+
+  - id: kid-079
+    difficulty: 4
+    prompt: Which city is famous for its cable cars and a bridge painted orange?
+    answer: San Francisco
+    distractors: [Seattle, Portland, San Diego]
+    fact: The color is officially called international orange, chosen so ships could see the bridge through the fog.
+
+  - id: kid-080
+    difficulty: 4
+    prompt: Which desert cactus with arms grows wild only in the American southwest?
+    answer: The saguaro
+    distractors: [The prickly pear, The barrel cactus, The cholla]
+    fact: It can take fifty years to grow its first arm and live for two hundred years, so most of the ones you see are older than you.

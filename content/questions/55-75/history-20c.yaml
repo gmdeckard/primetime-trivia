@@ -1,0 +1,242 @@
+category: history-20c
+
+questions:
+  - id: h20-001
+    difficulty: 2
+    prompt: Which 1919 conference produced the postwar settlement of Europe?
+    answer: The Paris Peace Conference
+    distractors: [The Congress of Vienna, The Yalta Conference, The Hague Convention]
+    fact: Woodrow Wilson, Lloyd George and Clemenceau dominated proceedings as the Council of Four, with Italy's Orlando the fourth member.
+    era: 1910s
+
+  - id: h20-002
+    difficulty: 1
+    prompt: In which year did the Berlin Wall come down?
+    answer: 1989
+    distractors: ['1987', '1990', '1991']
+    fact: The wall opened on the night of 9 November 1989 after an East German spokesman misstated when new travel rules would take effect.
+    era: 1980s
+
+  - id: h20-003
+    difficulty: 2
+    prompt: Which US Supreme Court decision struck down segregation in public schools?
+    answer: Brown v. Board of Education
+    distractors: [Plessy v. Ferguson, Loving v. Virginia, Gideon v. Wainwright]
+    fact: The 1954 ruling explicitly overturned Plessy's "separate but equal" doctrine of 1896.
+    era: 1950s
+
+  - id: h20-004
+    difficulty: 3
+    prompt: Who became the world's first woman prime minister, in 1960?
+    answer: Sirimavo Bandaranaike
+    distractors: [Golda Meir, Indira Gandhi, Margaret Thatcher]
+    fact: She led Ceylon, now Sri Lanka. Indira Gandhi followed in 1966, Meir in 1969 and Thatcher in 1979.
+    era: 1960s
+
+  - id: h20-005
+    difficulty: 2
+    prompt: The Marshall Plan directed American aid to which region?
+    answer: Western Europe
+    distractors: [Japan and Korea, Latin America, The Middle East]
+    fact: Officially the European Recovery Program, it distributed roughly $13 billion between 1948 and 1952.
+    era: 1940s
+
+  - id: h20-006
+    difficulty: 1
+    prompt: Which amendment to the US Constitution gave women the right to vote?
+    answer: The Nineteenth
+    distractors: [The Fifteenth, The Eighteenth, The Twenty-first]
+    fact: The Eighteenth brought in Prohibition and the Twenty-first repealed it.
+    era: 1920s
+
+  - id: h20-007
+    difficulty: 3
+    prompt: What event on 24 October 1929 is remembered as Black Thursday?
+    answer: The start of the Wall Street Crash
+    distractors: [The failure of the Bank of United States, Britain leaving the gold standard, The Smoot-Hawley tariff vote]
+    fact: The worse day came the following Tuesday, 29 October, when the Dow lost roughly 12 per cent.
+    era: 1920s
+
+  - id: h20-008
+    difficulty: 2
+    prompt: Which country was partitioned in 1947 on gaining independence from Britain?
+    answer: India
+    distractors: [Palestine, Ireland, Vietnam]
+    fact: The partition created India and Pakistan and displaced some 15 million people within months.
+    era: 1940s
+
+  - id: h20-009
+    difficulty: 3
+    prompt: Who was the only US president to resign from office?
+    answer: Richard Nixon
+    distractors: [Andrew Johnson, Lyndon Johnson, Warren Harding]
+    fact: Andrew Johnson was impeached but acquitted by one vote in the Senate; Harding died in office.
+    era: 1970s
+
+  - id: h20-010
+    difficulty: 2
+    prompt: The Suez Crisis of 1956 was triggered by which country nationalizing the canal?
+    answer: Egypt
+    distractors: [Israel, Syria, Sudan]
+    fact: American pressure, rather than military failure, forced the British and French withdrawal — a turning point in Britain's standing as a great power.
+    era: 1950s
+
+  - id: h20-011
+    difficulty: 4
+    prompt: Which 1905 treaty ended the Russo-Japanese War?
+    answer: The Treaty of Portsmouth
+    distractors: [The Treaty of Shimonoseki, The Treaty of Tientsin, The Treaty of Kanagawa]
+    fact: Theodore Roosevelt mediated it in New Hampshire and won the Nobel Peace Prize for doing so.
+    era: 1900s
+
+  - id: h20-012
+    difficulty: 2
+    prompt: In which year was President Kennedy assassinated?
+    answer: 1963
+    distractors: ['1961', '1962', '1964']
+    fact: Lyndon Johnson was sworn in aboard Air Force One at Love Field, about two hours later.
+    era: 1960s
+
+  - id: h20-013
+    difficulty: 3
+    prompt: What was the name of the policy of racial separation in South Africa?
+    answer: Apartheid
+    distractors: [Volkstaat, Verwoerdism, Bantustan]
+    fact: Bantustans were the nominally self-governing homelands the apartheid state created; the word means "place of the Bantu".
+    era: 1950s
+
+  - id: h20-014
+    difficulty: 2
+    prompt: The Cuban Missile Crisis took place in which month and year?
+    answer: October 1962
+    distractors: [April 1961, August 1962, November 1963]
+    fact: April 1961 was the Bay of Pigs landing, a separate and earlier failure.
+    era: 1960s
+
+  - id: h20-015
+    difficulty: 3
+    prompt: Which 1965 US law removed national-origin quotas from immigration?
+    answer: The Immigration and Nationality Act
+    distractors: [The Civil Rights Act, The Voting Rights Act, The Hart-Hollings Act]
+    fact: Also called Hart-Celler, it replaced a quota system dating from the 1920s and reshaped American demographics.
+    era: 1960s
+
+  - id: h20-016
+    difficulty: 1
+    prompt: Who led the Soviet Union during the Cuban Missile Crisis?
+    answer: Nikita Khrushchev
+    distractors: [Leonid Brezhnev, Joseph Stalin, Alexei Kosygin]
+    fact: Khrushchev was removed two years later, in part because of how the crisis was judged by his colleagues.
+    era: 1960s
+
+  - id: h20-017
+    difficulty: 4
+    prompt: Which Austrian archduke's assassination in Sarajevo precipitated World War I?
+    answer: Franz Ferdinand
+    distractors: [Franz Joseph, Rudolf, Karl]
+    fact: Franz Joseph was the reigning emperor and Franz Ferdinand his heir; Karl succeeded in 1916.
+    era: 1910s
+
+  - id: h20-018
+    difficulty: 2
+    prompt: The Chernobyl reactor accident occurred in which year?
+    answer: 1986
+    distractors: ['1979', '1984', '1989']
+    fact: 1979 was Three Mile Island. Chernobyl's reactor 4 failed during a late-night safety test on 26 April 1986.
+    era: 1980s
+
+  - id: h20-019
+    difficulty: 3
+    prompt: Who was the British prime minister at the outbreak of World War II?
+    answer: Neville Chamberlain
+    distractors: [Winston Churchill, Stanley Baldwin, Clement Attlee]
+    fact: Churchill replaced him in May 1940, after the Norwegian campaign went badly.
+    era: 1930s
+
+  - id: h20-020
+    difficulty: 2
+    prompt: The Dust Bowl of the 1930s most severely affected which part of the United States?
+    answer: The southern Great Plains
+    distractors: [The Mississippi Delta, The Pacific Northwest, Appalachia]
+    fact: Oklahoma, Texas, Kansas and Colorado bore the worst of it, driving some 2.5 million people off the land.
+    era: 1930s
+
+  - id: h20-021
+    difficulty: 4
+    prompt: Which 1900 uprising in China was directed against foreign influence?
+    answer: The Boxer Rebellion
+    distractors: [The Taiping Rebellion, The Xinhai Revolution, The May Fourth Movement]
+    fact: The Taiping Rebellion was a mid-nineteenth-century civil war; the Xinhai Revolution ended the empire in 1911.
+    era: 1900s
+
+  - id: h20-022
+    difficulty: 2
+    prompt: Who delivered the "I Have a Dream" speech, and in which year?
+    answer: Martin Luther King Jr., 1963
+    distractors: ['Martin Luther King Jr., 1968', 'Malcolm X, 1963', 'Thurgood Marshall, 1964']
+    fact: He spoke at the March on Washington for Jobs and Freedom on 28 August 1963, five years before his assassination.
+    era: 1960s
+
+  - id: h20-023
+    difficulty: 3
+    prompt: Which European country remained neutral throughout both world wars?
+    answer: Switzerland
+    distractors: [Belgium, Norway, Italy]
+    fact: Sweden, Spain and Portugal were also neutral in the second war, but not in both; Italy fought in both, on different sides.
+    era: 1940s
+
+  - id: h20-024
+    difficulty: 2
+    prompt: The Prague Spring of 1968 was ended by the invasion of which alliance?
+    answer: The Warsaw Pact
+    distractors: [NATO, The Soviet Union acting alone, The Comecon states]
+    fact: Soviet, Polish, Hungarian and Bulgarian troops took part; Romania pointedly refused.
+    era: 1960s
+
+  - id: h20-025
+    difficulty: 3
+    prompt: Which 1973 event caused oil prices to quadruple?
+    answer: The OPEC oil embargo
+    distractors: [The Iranian Revolution, The nationalization of Aramco, The closure of the Suez Canal]
+    fact: The embargo followed the Yom Kippur War. The Iranian Revolution produced a second shock in 1979.
+    era: 1970s
+
+  - id: h20-026
+    difficulty: 1
+    prompt: How many countries were the original members of the United Nations in 1945?
+    answer: Fifty-one
+    distractors: [Twenty-six, Forty-four, Sixty-three]
+    fact: Membership now stands at 193. Poland signed after the San Francisco conference but is still counted among the original fifty-one.
+    era: 1940s
+
+  - id: h20-027
+    difficulty: 4
+    prompt: The Scopes Trial of 1925 concerned the teaching of what?
+    answer: Evolution
+    distractors: [Birth control, Prohibition enforcement, Racial segregation]
+    fact: Clarence Darrow defended; William Jennings Bryan prosecuted and died five days after the verdict.
+    era: 1920s
+
+  - id: h20-028
+    difficulty: 3
+    prompt: Which country's 1979 revolution deposed a shah?
+    answer: Iran
+    distractors: [Iraq, Afghanistan, Egypt]
+    fact: Mohammad Reza Pahlavi left in January 1979; Ayatollah Khomeini returned from exile two weeks later.
+    era: 1970s
+
+  - id: h20-029
+    difficulty: 2
+    prompt: The Spanish Civil War ended in which year?
+    answer: 1939
+    distractors: ['1936', '1937', '1941']
+    fact: It began in 1936. Franco then ruled Spain until his death in 1975.
+    era: 1930s
+
+  - id: h20-030
+    difficulty: 4
+    prompt: Which US general was recalled from Korea in 1951 after a public dispute with the president?
+    answer: Douglas MacArthur
+    distractors: [Omar Bradley, Walton Walker, Mark Clark]
+    fact: His address to Congress — "old soldiers never die; they just fade away" — drew an enormous public response.
+    era: 1950s

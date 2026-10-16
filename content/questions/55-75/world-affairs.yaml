@@ -1,0 +1,212 @@
+category: world-affairs
+
+questions:
+  - id: wor-001
+    difficulty: 2
+    prompt: How many permanent members does the UN Security Council have?
+    answer: Five
+    distractors: [Four, Six, Ten]
+    fact: Britain, China, France, Russia and the United States, each with a veto. Ten non-permanent members serve two-year terms.
+
+  - id: wor-002
+    difficulty: 3
+    prompt: Which 1978 agreement led to a peace treaty between Egypt and Israel?
+    answer: The Camp David Accords
+    distractors: [The Oslo Accords, The Madrid Conference, The Taba Summit]
+    fact: Sadat and Begin shared the Nobel Peace Prize for it; Carter brokered it and received his much later.
+
+  - id: wor-003
+    difficulty: 2
+    prompt: Who was British prime minister from 1979 to 1990?
+    answer: Margaret Thatcher
+    distractors: [John Major, James Callaghan, Edward Heath]
+    fact: She was the longest continuously serving British prime minister of the twentieth century.
+
+  - id: wor-004
+    difficulty: 3
+    prompt: Which organization was dissolved in 1991 along with the Soviet Union?
+    answer: The Warsaw Pact
+    distractors: [NATO, The Comintern, The Non-Aligned Movement]
+    fact: The pact was formally dissolved in July 1991; the Soviet Union followed in December.
+
+  - id: wor-005
+    difficulty: 2
+    prompt: Which country did Iraq invade in August 1990?
+    answer: Kuwait
+    distractors: [Iran, Saudi Arabia, Jordan]
+    fact: The invasion prompted UN resolutions and the coalition that fought Desert Storm the following January.
+
+  - id: wor-006
+    difficulty: 4
+    prompt: Which Secretary-General of the United Nations died in a plane crash in 1961?
+    answer: Dag Hammarskjöld
+    distractors: [U Thant, Trygve Lie, Kurt Waldheim]
+    fact: He died over what is now Zambia while trying to negotiate in the Congo crisis, and was awarded the Nobel Peace Prize posthumously.
+
+  - id: wor-007
+    difficulty: 2
+    prompt: Which wall divided a European city from 1961 to 1989?
+    answer: The Berlin Wall
+    distractors: [The Iron Curtain, The Peace Lines, The Maginot Line]
+    fact: The "Iron Curtain" was Churchill's metaphor for the whole division of Europe, not a structure.
+
+  - id: wor-008
+    difficulty: 3
+    prompt: Which South African leader was imprisoned for 27 years and later became president?
+    answer: Nelson Mandela
+    distractors: [Desmond Tutu, Steve Biko, Oliver Tambo]
+    fact: He spent eighteen of those years on Robben Island, and was elected president in 1994.
+
+  - id: wor-009
+    difficulty: 4
+    prompt: Which treaty established the European Economic Community in 1957?
+    answer: The Treaty of Rome
+    distractors: [The Treaty of Maastricht, The Treaty of Paris, The Single European Act]
+    fact: Maastricht created the European Union in 1992. The 1951 Treaty of Paris set up the earlier Coal and Steel Community.
+
+  - id: wor-010
+    difficulty: 2
+    prompt: Which country was divided at the 38th parallel in 1945?
+    answer: Korea
+    distractors: [Vietnam, Germany, Ireland]
+    fact: Vietnam was divided at the 17th parallel, in 1954.
+
+  - id: wor-011
+    difficulty: 3
+    prompt: Who was the Soviet leader who introduced glasnost and perestroika?
+    answer: Mikhail Gorbachev
+    distractors: [Yuri Andropov, Konstantin Chernenko, Boris Yeltsin]
+    fact: Glasnost meant openness and perestroika restructuring. He won the Nobel Peace Prize in 1990.
+
+  - id: wor-012
+    difficulty: 2
+    prompt: Which canal was nationalized by Egypt in 1956?
+    answer: The Suez Canal
+    distractors: [The Panama Canal, The Corinth Canal, The Kiel Canal]
+    fact: It had been run by an Anglo-French company since its opening in 1869.
+
+  - id: wor-013
+    difficulty: 4
+    prompt: Which 1975 agreement committed European states, the US and Canada to respect human rights and existing borders?
+    answer: The Helsinki Accords
+    distractors: [The Paris Charter, The Rome Statute, The Geneva Conventions]
+    fact: The human rights provisions gave dissidents in the Eastern bloc something concrete to appeal to, which was not the Soviet intention.
+
+  - id: wor-014
+    difficulty: 2
+    prompt: Who was the first Catholic president of the United States?
+    answer: John F. Kennedy
+    distractors: [Al Smith, Lyndon Johnson, Joe Biden]
+    fact: Al Smith was the first Catholic nominee of a major party, in 1928, and lost heavily.
+
+  - id: wor-015
+    difficulty: 3
+    prompt: Which country left the Commonwealth in 1961 over apartheid and rejoined in 1994?
+    answer: South Africa
+    distractors: [Rhodesia, Pakistan, Ireland]
+    fact: Ireland left in 1949 and has never rejoined; Pakistan left in 1972 and returned in 1989.
+
+  - id: wor-016
+    difficulty: 2
+    prompt: Which US president resigned in the wake of the Watergate scandal?
+    answer: Richard Nixon
+    distractors: [Gerald Ford, Lyndon Johnson, Jimmy Carter]
+    fact: Ford succeeded him and pardoned him a month later, a decision that probably cost Ford the 1976 election.
+
+  - id: wor-017
+    difficulty: 4
+    prompt: Which international body was the predecessor of the United Nations?
+    answer: The League of Nations
+    distractors: [The Concert of Europe, The Hague Tribunal, The International Court of Justice]
+    fact: The United States never joined, despite Woodrow Wilson having championed its creation.
+
+  - id: wor-018
+    difficulty: 3
+    prompt: Which Indian leader led the Salt March of 1930?
+    answer: Mahatma Gandhi
+    distractors: [Jawaharlal Nehru, Subhas Chandra Bose, Sardar Patel]
+    fact: He walked some 240 miles to the sea to make salt in defiance of the British monopoly on it.
+
+  - id: wor-019
+    difficulty: 2
+    prompt: Which two countries fought the Falklands War in 1982?
+    answer: Britain and Argentina
+    distractors: [Britain and Spain, Chile and Argentina, Britain and Chile]
+    fact: It lasted ten weeks. The Argentine junta collapsed within eighteen months of the defeat.
+
+  - id: wor-020
+    difficulty: 3
+    prompt: Which Chinese leader launched the economic reforms of the late 1970s?
+    answer: Deng Xiaoping
+    distractors: [Mao Zedong, Zhou Enlai, Hua Guofeng]
+    fact: He never held the title of head of state or party leader, governing instead through other offices.
+
+  - id: wor-021
+    difficulty: 4
+    prompt: What was the Iran-Contra affair about?
+    answer: Selling arms to Iran to fund Nicaraguan rebels
+    distractors: [Arming Iraq during the Iran-Iraq war, A hostage swap with Lebanon, Oil sanctions evasion in the Gulf]
+    fact: The sales were meant to secure the release of hostages in Lebanon, and the proceeds were diverted to the Contras in defiance of a congressional ban.
+
+  - id: wor-022
+    difficulty: 2
+    prompt: Which European country was divided into zones of occupation after 1945?
+    answer: Germany
+    distractors: [Poland, Austria only, Italy]
+    fact: Austria was also divided into four zones, but regained full independence and neutrality in 1955.
+
+  - id: wor-023
+    difficulty: 3
+    prompt: Which Polish trade union movement, founded in 1980, helped bring down communist rule?
+    answer: Solidarity
+    distractors: [Charter 77, The Workers' Defence Committee, Civic Forum]
+    fact: Charter 77 was Czechoslovak and Civic Forum emerged there in 1989. Lech Walesa led Solidarity and later became president.
+
+  - id: wor-024
+    difficulty: 2
+    prompt: Who was US president during the Cuban Missile Crisis?
+    answer: John F. Kennedy
+    distractors: [Dwight Eisenhower, Lyndon Johnson, Harry Truman]
+    fact: The crisis led directly to the installation of the Moscow-Washington hotline the following year.
+
+  - id: wor-025
+    difficulty: 4
+    prompt: Which 1968 treaty sought to limit the spread of nuclear weapons?
+    answer: The Nuclear Non-Proliferation Treaty
+    distractors: [SALT I, The Partial Test Ban Treaty, The ABM Treaty]
+    fact: The Partial Test Ban came in 1963 and SALT I in 1972.
+
+  - id: wor-026
+    difficulty: 2
+    prompt: Which city hosts the International Court of Justice?
+    answer: The Hague
+    distractors: [Geneva, Brussels, Strasbourg]
+    fact: It sits in the Peace Palace. The European Court of Human Rights is the one in Strasbourg.
+
+  - id: wor-027
+    difficulty: 3
+    prompt: Which country's 1989 Velvet Revolution ended communist rule without significant violence?
+    answer: Czechoslovakia
+    distractors: [Hungary, Poland, Romania]
+    fact: Romania's transition the same year was the violent exception in the region.
+
+  - id: wor-028
+    difficulty: 4
+    prompt: Who was the UN Secretary-General during most of the Vietnam War?
+    answer: U Thant
+    distractors: [Dag Hammarskjöld, Kurt Waldheim, Javier Pérez de Cuéllar]
+    fact: The Burmese diplomat served from 1961 to 1971 and repeatedly pressed for negotiations.
+
+  - id: wor-029
+    difficulty: 2
+    prompt: Which 1945 conference, attended by Roosevelt, Churchill and Stalin, shaped postwar Europe?
+    answer: Yalta
+    distractors: [Potsdam, Tehran, Casablanca]
+    fact: Potsdam followed in July, by which time Roosevelt had died and Churchill was replaced mid-conference by Attlee.
+
+  - id: wor-030
+    difficulty: 3
+    prompt: Which organization did Egypt, Syria and others form in 1945 to coordinate Arab policy?
+    answer: The Arab League
+    distractors: [The Gulf Cooperation Council, The Organisation of Islamic Cooperation, The United Arab Republic]
+    fact: The United Arab Republic was the short-lived 1958-61 union of Egypt and Syria, a different thing entirely.

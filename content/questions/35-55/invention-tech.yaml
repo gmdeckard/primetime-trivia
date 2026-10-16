@@ -1,0 +1,75 @@
+category: invention-tech
+
+questions:
+  - id: a35-021
+    difficulty: 2
+    prompt: Which company released the first iPod, in 2001?
+    answer: Apple
+    distractors: [Sony, Creative, Microsoft]
+    audience: 35-55   # 2001
+    fact: Creative had shipped a hard-drive music player two years earlier and later won a patent settlement over the interface.
+
+  - id: a35-022
+    difficulty: 2
+    prompt: What does the SMS in a text message stand for?
+    answer: Short Message Service
+    distractors: [Simple Message System, Standard Mobile Signal, Short Mobile Send]
+    fact: The 160-character limit was picked because a researcher reckoned most postcards and telex messages fitted inside it.
+
+  - id: a35-023
+    difficulty: 3
+    prompt: Which search engine was founded in 1998 by two Stanford graduate students?
+    answer: Google
+    distractors: [Yahoo, AltaVista, Lycos]
+    audience: 35-55   # 1998
+    fact: The ranking idea came from counting citations between academic papers, which is how libraries had judged importance for decades.
+
+  - id: a35-024
+    difficulty: 3
+    prompt: Which file format compressed music enough to make it practical to share in the late 1990s?
+    answer: MP3
+    distractors: [WAV, AIFF, FLAC]
+    fact: It throws away sound the ear is unlikely to notice. The others keep everything, which is why they were far too large to send.
+
+  - id: a35-025
+    difficulty: 3
+    prompt: Which console did Sony launch in 1994 to compete with Nintendo and Sega?
+    answer: The PlayStation
+    distractors: [The Dreamcast, The Saturn, The Jaguar]
+    fact: It began as a CD add-on for the Super Nintendo. The deal collapsed publicly and Sony built the whole machine itself.
+
+  - id: a35-026
+    difficulty: 3
+    prompt: What does USB stand for?
+    answer: Universal Serial Bus
+    distractors: [United Service Bus, Universal System Buffer, Unified Signal Bridge]
+    fact: Introduced in 1996 to replace a back panel that had a different shaped socket for every single device.
+
+  - id: a35-027
+    difficulty: 3
+    prompt: Which encyclopedia launched in 2001 and was written by its readers?
+    answer: Wikipedia
+    distractors: [Encarta, Britannica Online, Everything2]
+    fact: It began as a side project to feed a conventional expert-written encyclopedia that never got finished.
+
+  - id: a35-028
+    difficulty: 4
+    prompt: Which handheld popularized the stylus and handwriting recognition in the 1990s?
+    answer: The PalmPilot
+    distractors: [The Apple Newton, The Psion Organiser, The Nokia Communicator]
+    audience: 35-55   # 1996
+    fact: The Newton came first and its handwriting recognition was mocked so widely it became a running joke in Doonesbury.
+
+  - id: a35-029
+    difficulty: 4
+    prompt: Which company made the first camera phone widely sold, in 2000?
+    answer: Sharp
+    distractors: [Nokia, Motorola, Samsung]
+    fact: The J-SH04 sold only in Japan and took pictures at 0.1 megapixels, which is smaller than a modern thumbnail.
+
+  - id: a35-030
+    difficulty: 4
+    prompt: Which standard did Bluetooth take its name from?
+    answer: A tenth-century Danish king
+    distractors: [A radio frequency band, A Swedish engineering firm, An early naval signalling code]
+    fact: Harald Bluetooth united Denmark and Norway, and the logo is his initials in runes.

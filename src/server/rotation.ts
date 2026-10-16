@@ -21,6 +21,17 @@ import { shuffle } from './selector.js';
  * whatever came next regardless of subject, which is the same as not shuffling
  * by category at all.
  *
+ * And per AGE GROUP as well as per category, which is not an optimisation —
+ * it is the difference between the kids' bank working and not working. The
+ * same category holds questions for several groups, so one deck per category
+ * mixed them: deal from `geography` on a kids night and most cards are 55-75
+ * ones the filter rejects. They stay in the deck, correctly, because they
+ * were not used. But then the deck is never empty, so it never reshuffles,
+ * and once the eighty kids' questions are gone that category yields nothing
+ * at all — measured, on the eleventh kids night, as a round of zero
+ * questions. A deck per (group, category) empties when that group's cards
+ * run out, which is exactly when it should start again.
+ *
  * It lives in `data/rotation.json`, outside the night, because that is the
  * whole point: it has to survive resetting the night, restarting the server and
  * next Tuesday.
@@ -43,6 +54,20 @@ export interface RotationFile {
 }
 
 export const EMPTY_ROTATION: RotationFile = { decks: {}, dealt: {}, cycles: {} };
+
+/**
+ * The key a deck is filed under: the age group and the category together.
+ *
+ * Written as `8-12::geography` rather than nested maps so the file stays flat
+ * and greppable — somebody debugging a night wants to open rotation.json and
+ * read it. `*` is the group with no filter, which is its own deck: a night
+ * run with every age group in play is genuinely a different sequence from a
+ * 55-75 night, and giving it its own deck keeps either from spending the
+ * other's cards.
+ */
+export function deckKey(audience: string, categoryId: string): string {
+  return `${audience || '*'}::${categoryId}`;
+}
 
 export class Rotation {
   private file: RotationFile;
@@ -76,14 +101,16 @@ export class Rotation {
    * asked in the first few weeks.
    */
   deal(
+    audience: string,
     categoryId: string,
     pool: Question[],
     wanted: number | undefined,
     eligible: (q: Question) => boolean,
   ): Question | undefined {
     if (!pool.length) return undefined;
+    const key = deckKey(audience, categoryId);
     const byId = new Map(pool.map((q) => [q.id, q]));
-    let deck = this.ensureDeck(categoryId, pool);
+    let deck = this.ensureDeck(key, pool);
 
     // Two passes at most: the current deck, then one freshly reshuffled. A
     // third would mean the filter rejects everything in the category, and
@@ -102,8 +129,8 @@ export class Rotation {
                 Math.abs(a.q.difficulty - wanted) - Math.abs(b.q.difficulty - wanted) ||
                 a.position - b.position,
             )[0]!;
-        this.file.decks[categoryId] = deck.filter((id) => id !== best.id);
-        this.file.dealt[categoryId] = [...(this.file.dealt[categoryId] ?? []), best.id];
+        this.file.decks[key] = deck.filter((id) => id !== best.id);
+        this.file.dealt[key] = [...(this.file.dealt[key] ?? []), best.id];
         this.dirty = true;
         return best.q;
       }
@@ -112,19 +139,19 @@ export class Rotation {
       // are all filtered out, so a reshuffle changes nothing; only an empty
       // deck is worth refilling.
       if (deck.length) return undefined;
-      deck = this.reshuffle(categoryId, pool);
+      deck = this.reshuffle(key, pool);
     }
     return undefined;
   }
 
-  /** Cards left in a category's deck, for the MC's "how much is left" line. */
-  remaining(categoryId: string, pool: Question[]): number {
-    return this.ensureDeck(categoryId, pool).length;
+  /** Cards left in a deck, for the MC's "how much is left" line. */
+  remaining(audience: string, categoryId: string, pool: Question[]): number {
+    return this.ensureDeck(deckKey(audience, categoryId), pool).length;
   }
 
-  /** Times this category has been through its whole set. */
-  cycles(categoryId: string): number {
-    return this.file.cycles[categoryId] ?? 0;
+  /** Times this group's cards in this category have been through once. */
+  cycles(audience: string, categoryId: string): number {
+    return this.file.cycles[deckKey(audience, categoryId)] ?? 0;
   }
 
   /** Persist. Called from the engine's commit, so a crash costs one question. */
@@ -150,30 +177,30 @@ export class Rotation {
    * question, which is the one thing this file exists to prevent. Ids that
    * have left the bank are dropped.
    */
-  private ensureDeck(categoryId: string, pool: Question[]): string[] {
+  private ensureDeck(key: string, pool: Question[]): string[] {
     const live = new Set(pool.map((q) => q.id));
-    const existing = this.file.decks[categoryId];
-    if (!existing) return this.reshuffle(categoryId, pool);
+    const existing = this.file.decks[key];
+    if (!existing) return this.reshuffle(key, pool);
 
     const kept = existing.filter((id) => live.has(id));
     const inDeck = new Set(kept);
-    const alreadyDealt = new Set(this.file.dealt[categoryId] ?? []);
+    const alreadyDealt = new Set(this.file.dealt[key] ?? []);
     const fresh = pool.filter((q) => !inDeck.has(q.id) && !alreadyDealt.has(q.id)).map((q) => q.id);
 
     if (kept.length !== existing.length || fresh.length) {
       // New questions join the part of the deck still to be dealt, not the
       // front of it, so they are not all asked the week they are written.
-      this.file.decks[categoryId] = shuffle([...kept, ...fresh], this.rnd);
+      this.file.decks[key] = shuffle([...kept, ...fresh], this.rnd);
       this.dirty = true;
     }
-    return this.file.decks[categoryId]!;
+    return this.file.decks[key]!;
   }
 
-  private reshuffle(categoryId: string, pool: Question[]): string[] {
+  private reshuffle(key: string, pool: Question[]): string[] {
     const deck = shuffle(pool.map((q) => q.id), this.rnd);
-    this.file.decks[categoryId] = deck;
-    this.file.dealt[categoryId] = [];
-    this.file.cycles[categoryId] = (this.file.cycles[categoryId] ?? 0) + 1;
+    this.file.decks[key] = deck;
+    this.file.dealt[key] = [];
+    this.file.cycles[key] = (this.file.cycles[key] ?? 0) + 1;
     this.dirty = true;
     return deck;
   }

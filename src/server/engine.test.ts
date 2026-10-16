@@ -1211,3 +1211,100 @@ test('swapping a question in a mixed round finds one anywhere in the selection',
   assert.notEqual(now, was, 'the question on screen must actually change');
   assert.equal(engine.snapshot().phase, 'question');
 });
+
+
+// ------------------------------------------------- age groups and the deck
+
+/** Play `nights` separate nights for one age group on the same box. */
+function playNights(store: Store, audience: string, nights: number, perRound = 8) {
+  const drawn: string[] = [];
+  for (let n = 0; n < nights; n++) {
+    const engine = new Engine(bank, store, {
+      audience,
+      roundCategoryMode: 'mixed',
+      questionsPerRound: perRound,
+      roundsPerGame: 1,
+      finalWager: false,
+    });
+    engines.push(engine);
+    const device = engine.identify();
+    engine.join(device.id, 'Entry', 'solo');
+    engine.startGame();
+    drawn.push(...engine.snapshot().rounds[0]!.questionIds);
+  }
+  return drawn;
+}
+
+test('a kids night never repeats until the kids bank is spent, then starts over', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'primetime-kids-'));
+  dirs.push(dir);
+  const store = new Store(dir);
+
+  // 80 questions are written for 8-12; ten nights of eight uses every one.
+  const first = playNights(store, '8-12', 10);
+  assert.equal(first.length, 80, 'every kids night should fill its round');
+  assert.equal(new Set(first).size, 80, 'a question came back before the bank was spent');
+
+  // The eleventh night is the one that used to break. The deck was keyed on
+  // the category alone, so it still held hundreds of 55-75 cards the filter
+  // rejected: never empty, so never reshuffled, so the round came back with
+  // nothing in it at all.
+  const eleventh = playNights(store, '8-12', 1);
+  assert.equal(eleventh.length, 8, 'the night after the bank is spent must still fill');
+});
+
+test('one age group does not spend another age group\'s questions', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'primetime-groups-'));
+  dirs.push(dir);
+  const store = new Store(dir);
+
+  const kids = new Set(playNights(store, '8-12', 5));
+  playNights(store, '55-75', 5);
+  const teens = new Set(playNights(store, '35-55', 5));
+
+  const audienceOf = (id: string) => bank.questions.find((q) => q.id === id)?.audience;
+  for (const id of kids) assert.equal(audienceOf(id), '8-12', `a kids night drew ${id}`);
+  for (const id of teens) assert.equal(audienceOf(id), '35-55', `a 35-55 night drew ${id}`);
+
+  // And the adults' nights in between must not have dealt from the kids' deck.
+  const kidsAgain = playNights(store, '8-12', 5);
+  const overlap = kidsAgain.filter((id) => kids.has(id));
+  assert.deepEqual(overlap, [], `another group's night spent the kids' deck: ${overlap.join(', ')}`);
+});
+
+test('the shared folder stays in play whichever age group is picked', () => {
+  // The numeric tiebreakers are the reason that folder exists: a tie at the
+  // top has to be breakable on a kids night too.
+  const untagged = bank.questions.filter((q) => !q.audience);
+  assert.ok(untagged.length > 0, 'something should be written for every group');
+  assert.ok(
+    untagged.every((q) => q.kind === 'number'),
+    'only the tiebreakers are age-neutral today; anything else here deserves a second look',
+  );
+
+  for (const audience of ['8-12', '35-55', '55-75']) {
+    const dir = mkdtempSync(join(tmpdir(), 'primetime-tie-'));
+    dirs.push(dir);
+    const engine = new Engine(bank, new Store(dir), { audience, questionsPerRound: 2, roundsPerGame: 1 });
+    engines.push(engine);
+    const a = engine.identify();
+    const b = engine.identify();
+    engine.join(a.id, 'Ann', 'solo');
+    engine.join(b.id, 'Bob', 'solo');
+    engine.startGame();
+    engine.startTiebreak();
+    assert.equal(engine.snapshot().phase, 'tiebreak', `no tiebreaker available on a ${audience} night`);
+  }
+});
+
+test('the folder a question file sits in names its age group', () => {
+  const kidsGeography = bank.questions.filter((q) => q.category === 'geography' && q.audience === '8-12');
+  const adultGeography = bank.questions.filter((q) => q.category === 'geography' && q.audience === '55-75');
+  assert.ok(kidsGeography.length > 0, 'content/questions/8-12/geography.yaml should load as 8-12');
+  assert.ok(adultGeography.length > 0, 'content/questions/55-75/geography.yaml should load as 55-75');
+  assert.equal(
+    bank.questions.filter((q) => q.category === 'geography' && q.audience === undefined).length,
+    0,
+    'no geography question should be untagged now that the folders carry the group',
+  );
+});
