@@ -3,7 +3,7 @@ import { useEffect, useState } from 'preact/hooks';
 import type { EntryKind, PlayerState } from '../../shared/protocol';
 import './shared/styles.css';
 import { nextUpWindowMs, useCountdown, useGame, useNow, useWakeLock } from './shared/useGame';
-import { pointsAt } from '../../shared/protocol';
+import { inRunUpToQuestion, pointsAt } from '../../shared/protocol';
 import { AutoAdvance, Badge, Board, BreakClock, ConnBanner, Keypad, NextUp, Toast } from './shared/ui';
 
 /**
@@ -396,11 +396,12 @@ function App() {
   // The screen must not sleep mid-round on a shared tablet.
   useWakeLock();
 
+  // The clock may run while the screen still shows the answer, so `counting`
+  // is the wider condition and the run-up is the narrower one inside it.
   const counting = !!state?.autoAdvanceAt && !state?.held && state?.phase === 'reveal';
   const gapNow = useNow(counting);
   const nextUp =
-    counting &&
-    state!.moreInRound !== false &&
+    inRunUpToQuestion(state) &&
     state!.autoAdvanceAt! - gapNow <= nextUpWindowMs(state!.config.nextQuestionDelaySeconds);
 
   if (!state) {

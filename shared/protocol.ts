@@ -199,6 +199,34 @@ export interface GameConfig {
  * mechanic: the handsets show the number falling, and it has to be the same
  * number the scoring uses. Rounded to ten so it steps rather than flickers.
  */
+/**
+ * True when the game is sitting on a reveal that leads to another question.
+ *
+ * The run-up — the clock, the standings swap, the three ticks, "Get ready,
+ * Set, Go" — is all built on this one idea, and it was written out separately
+ * at each of those places. The last reveal of a round carries an
+ * autoAdvanceAt exactly like every other one, so anything that checks only
+ * for the timer counts the room in towards a scoreboard. Two of the three
+ * call sites remembered to check `moreInRound`; the sound did not, and the
+ * room got "Get ready, Set, Go" on its way into the break and again at the
+ * end of the night. One predicate so they cannot drift apart again.
+ *
+ * `moreInRound` is optional on the wire, and absent is treated as "more to
+ * come" to match what the screens already did.
+ */
+export function inRunUpToQuestion(state: {
+  phase?: string;
+  autoAdvanceAt?: number;
+  held?: boolean;
+  moreInRound?: boolean;
+} | null | undefined): boolean {
+  if (!state) return false;
+  if (state.phase !== 'reveal') return false;
+  if (!state.autoAdvanceAt) return false;
+  if (state.held) return false;
+  return state.moreInRound !== false;
+}
+
 export function pointsAt(elapsedMs: number, windowMs: number, config: GameConfig): number {
   const max = config.questionPoints;
   const min = Math.min(config.minQuestionPoints, max);

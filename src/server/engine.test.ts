@@ -3,7 +3,7 @@ import { mkdtempSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { after, test } from 'node:test';
-import { DEFAULT_CONFIG } from '../../shared/protocol.js';
+import { DEFAULT_CONFIG, inRunUpToQuestion } from '../../shared/protocol.js';
 import { loadBank } from './content.js';
 import {
   hasNoReachableAddress,
@@ -15,7 +15,7 @@ import {
 } from './lan.js';
 import { Engine } from './engine.js';
 import { Store } from './store.js';
-import { controlState, playerState } from './views.js';
+import { controlState, hostState, playerState } from './views.js';
 
 /**
  * These tests play actual games. The engine is a state machine with a lot of
@@ -724,6 +724,59 @@ test('a reveal says what actually comes next', () => {
     false,
     'the run-up must not promise a question that is really a scoreboard',
   );
+});
+
+test('the run-up never counts the room in towards a break or the end of the night', () => {
+  // The bug this pins: "Get ready, Set, Go" played on the way into the break
+  // and again at the end of the night. The last reveal of a round carries an
+  // autoAdvanceAt exactly like every other one, so anything keyed only on the
+  // timer promises a question that is really a scoreboard.
+  const engine = freshEngine({ questionsPerRound: 2, roundsPerGame: 2, finalWager: false });
+  const teams = toFirstQuestion(engine);
+
+  const toReveal = () => {
+    for (const team of teams) engine.answer(team.players[0]!, 0);
+    engine.lockNow('host');
+    engine.advance();
+    assert.equal(engine.snapshot().phase, 'reveal');
+    return hostState(engine, { url: 'http://x', qrSvg: '' });
+  };
+
+  // Mid-round: a question really is next, so the run-up is honest.
+  assert.equal(inRunUpToQuestion(toReveal()), true, 'mid-round the count-in belongs');
+
+  // Last question of round 1. Next is the scoreboard and the break.
+  engine.advance();
+  assert.equal(
+    inRunUpToQuestion(toReveal()),
+    false,
+    'no count-in on the way into the break',
+  );
+
+  // Through the break and into round 2.
+  while (engine.snapshot().phase !== 'question') engine.advance();
+  assert.equal(inRunUpToQuestion(toReveal()), true, 'round 2 counts in again');
+
+  // Last question of the last round: the end of the night.
+  engine.advance();
+  const last = toReveal();
+  assert.equal(last.moreInRound, false);
+  assert.equal(inRunUpToQuestion(last), false, 'no count-in at the end of the night');
+});
+
+test('the run-up predicate holds back on a pause and off a reveal', () => {
+  // A held game is silent on purpose: the pause exists because something
+  // interrupted the night.
+  const base = { phase: 'reveal', autoAdvanceAt: 1, held: false, moreInRound: true };
+  assert.equal(inRunUpToQuestion(base), true);
+  assert.equal(inRunUpToQuestion({ ...base, held: true }), false, 'paused is silent');
+  assert.equal(inRunUpToQuestion({ ...base, autoAdvanceAt: undefined }), false, 'no timer, no run-up');
+  assert.equal(inRunUpToQuestion({ ...base, phase: 'round_scores' }), false);
+  assert.equal(inRunUpToQuestion({ ...base, phase: 'wager_reveal' }), false, 'the wager has its own beat');
+  assert.equal(inRunUpToQuestion(undefined), false, 'before the first state arrives');
+  // Absent on the wire means "more to come", matching what the screens did
+  // before this was one predicate.
+  assert.equal(inRunUpToQuestion({ ...base, moreInRound: undefined }), true);
 });
 
 test('hold parks auto-advance, releasing picks it back up', async () => {

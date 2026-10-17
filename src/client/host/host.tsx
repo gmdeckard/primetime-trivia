@@ -4,7 +4,7 @@ import type { HostState } from '../../../shared/protocol';
 import '../shared/styles.css';
 import { nextUpWindowMs, useCountdown, useGame, useNow, useSpeech, useWakeLock } from '../shared/useGame';
 import { createHostAudio, type Bed, type HostAudio } from './audio';
-import { pointsAt } from '../../../shared/protocol';
+import { inRunUpToQuestion, pointsAt } from '../../../shared/protocol';
 import { AutoAdvance, Badge, Board, BreakClock, NextUp, Toast } from '../shared/ui';
 
 /**
@@ -215,9 +215,14 @@ function App() {
   // The run-up fires once as the next question approaches, and only once: the
   // effect keys on the autoAdvanceAt it belongs to.
   useEffect(() => {
-    if (!armed || !music || !state?.autoAdvanceAt || state.held) return;
-    if (state.phase !== 'reveal') return;
-    const target = state.autoAdvanceAt;
+    if (!armed || !music || !state) return;
+    // Counting the room in is only honest when a question is actually coming.
+    // The last reveal of a round carries an autoAdvanceAt like every other
+    // one, and it advances into the scoreboard and the break, or into the end
+    // of the night; the clock beside it already reads "Round ends in".
+    if (!inRunUpToQuestion(state)) return;
+    // Non-null because inRunUpToQuestion only returns true with a timer set.
+    const target = state.autoAdvanceAt!;
     const lead = nextUpWindowMs(state.config.nextQuestionDelaySeconds);
     const ids: number[] = [];
     const after = (ms: number, fn: () => void) => {
@@ -237,7 +242,7 @@ function App() {
       after(target - 700 - Date.now(), () => speak('Go!', true));
     }
     return () => ids.forEach(clearTimeout);
-  }, [armed, music, state?.autoAdvanceAt, state?.held, state?.phase]);
+  }, [armed, music, state?.autoAdvanceAt, state?.held, state?.phase, state?.moreInRound]);
 
   useEffect(() => {
     if (!state) return;
@@ -284,14 +289,8 @@ function App() {
   // which meant that on a single-entry night — and on every solo test — the big
   // screen never left the question and the run-up clock never appeared at all.
   const showStandings =
-    state.phase === 'reveal' &&
-    !!state.autoAdvanceAt &&
-    !state.held &&
-    // Only when a question actually follows. At the end of a round the
-    // scoreboard is where we are going anyway, so handing the screen over to
-    // a run-up clock first would be a countdown to the thing already on it.
-    state.moreInRound !== false &&
-    state.autoAdvanceAt - tick <= standingsWindowMs;
+    inRunUpToQuestion(state) &&
+    state.autoAdvanceAt! - tick <= standingsWindowMs;
 
   // No point showing the rail next to a full scoreboard.
   const showRail =
