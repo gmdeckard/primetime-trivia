@@ -151,7 +151,7 @@ function Podium({ state, title, children }: { state: HostState; title: string; c
   const rows = state.scoreboard;
   const winner = rows[0];
   return (
-    <div class="host-body">
+    <div class="host-body host-scores">
       <div class="center stack">
         <div class="eyebrow">{title}</div>
         {winner && (
@@ -165,8 +165,8 @@ function Podium({ state, title, children }: { state: HostState; title: string; c
         )}
       </div>
       {children}
-      <div style={{ maxWidth: '900px', margin: '0 auto', width: '100%' }}>
-        <Board rows={rows} limit={10} />
+      <div class="board-fit">
+        <Board rows={rows} limit={10} split fit />
       </div>
     </div>
   );
@@ -411,8 +411,8 @@ function App() {
         {showStandings ? (
           <div class="host-body">
             <NextUp at={state.autoAdvanceAt} held={state.held} big />
-            <div style={{ maxWidth: '1000px', margin: '0 auto', width: '100%' }}>
-              <Board rows={state.scoreboard} limit={10} />
+            <div class="board-fit">
+              <Board rows={state.scoreboard} limit={10} split fit />
             </div>
           </div>
         ) : (
@@ -492,10 +492,12 @@ function App() {
       )}
 
       {state.phase === 'round_scores' && (
-        <div class="host-body">
+        <div class="host-body host-scores">
           {/* The room needs two things at a break: that the round is over, and
               how long they have. Both go above the board, in the size the back
-              of the hall can read. */}
+              of the hall can read - but not at the size they would take on a
+              screen with nothing else on it, because twelve rows of standings
+              underneath have to be readable too. */}
           <div class="center stack">
             <h1 class="host-display">End of Round {state.round?.index ?? 1}</h1>
             {state.breakEndsAt ? (
@@ -517,8 +519,8 @@ function App() {
               {state.game.ofTotal ?? 1}
             </div>
           </div>
-          <div style={{ maxWidth: '900px', margin: '0 auto', width: '100%' }}>
-            <Board rows={state.scoreboard} limit={12} />
+          <div class="board-fit">
+            <Board rows={state.scoreboard} limit={12} split fit />
           </div>
         </div>
       )}

@@ -61,18 +61,54 @@ export function AutoAdvance({
   );
 }
 
+/**
+ * The standings.
+ *
+ * `split` and `fit` are opt-in and only the big screen passes them. A handset
+ * is narrow and scrolls by hand, so two columns there would be worse than one
+ * and a height budget would be meaningless.
+ *
+ * `split` lays the rows out in two columns, 1-6 down the left and 7-12 down
+ * the right. A twelve-row board needs about 1250px of height at the big
+ * screen's row size, which is more than a 1080p TV has even with no heading
+ * above it; two columns halves that at the same font size, using width the
+ * board was leaving empty inside its 900px cap.
+ *
+ * `fit` makes the board claim the height its container has left and divide it
+ * between the rows it is showing, so it cannot run off the bottom of a panel.
+ * That is the part that actually matters: the big screen has no mouse, so a
+ * scoreboard that overflows is unreachable until someone walks over to the
+ * laptop.
+ */
 export function Board({
   rows,
   showDelta = true,
   limit,
+  split = false,
+  fit = false,
 }: {
   rows: Array<{ teamId: string; name: string; score: number; delta: number; rank: number }>;
   showDelta?: boolean;
   limit?: number;
+  split?: boolean;
+  fit?: boolean;
 }) {
   const shown = limit ? rows.slice(0, limit) : rows;
+  // Below five rows a split reads as two stubby lists rather than a
+  // scoreboard, and the height was never the problem at that size.
+  const perCol = split && shown.length >= 5 ? Math.ceil(shown.length / 2) : shown.length;
+  const isSplit = perCol < shown.length;
   return (
-    <div class="board">
+    <div
+      class={`board${isSplit ? ' is-split' : ''}${fit ? ' is-fit' : ''}`}
+      style={{
+        // Written out rather than passed as a custom property so there is no
+        // question of repeat() accepting a var() in any given browser.
+        ...(isSplit ? { gridTemplateRows: `repeat(${perCol}, minmax(0, 1fr))` } : {}),
+        // How the fit rules work out each row's share of the container.
+        ...(fit ? { ['--board-rows' as string]: String(perCol) } : {}),
+      }}
+    >
       {shown.map((row) => (
         <div key={row.teamId} class={`board-row${row.rank === 1 && row.score > 0 ? ' is-lead' : ''}`}>
           <div class="board-rank">{row.rank}</div>

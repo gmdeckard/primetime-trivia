@@ -349,6 +349,15 @@ input:focus { border-color: var(--brass); outline: none; }
   gap: clamp(6px, 0.9vh, 12px);
   justify-content: center;
   min-width: 0;
+  /* The rail shows up to ten rows plus a head and a foot. At 1366x768 that
+     came to about 591px inside a 579px cell, and with nothing stopping it the
+     rail pushed the whole stage taller and the big screen scrolled - 22px of
+     overflow on the reveal, which is the screen the room is reading. It now
+     lives inside its cell. The padding trim for short panels below means
+     nothing is actually cut at the sizes measured; if an unexpected panel
+     ever does cut something it is the bottom of the rail, not the answer. */
+  min-height: 0;
+  overflow: hidden;
 }
 .rail-head {
   font-size: .75rem;
@@ -390,6 +399,14 @@ input:focus { border-color: var(--brass); outline: none; }
 
 .host {
   min-height: 100dvh;
+  /* Definite, not just a minimum. The board below budgets itself with `cqh`,
+     a percentage of its own container's height, and a container only has a
+     height to offer if the flex chain above it has one. With min-height alone
+     every box in the chain sized to its content, cqh resolved to zero and the
+     row text computed to 0px - invisible. Overflow is deliberately left
+     visible so the other host phases keep scrolling as they do today; only
+     the board itself clips. */
+  height: 100dvh;
   display: flex;
   flex-direction: column;
   padding: clamp(20px, 2.5vw, 44px);
@@ -456,6 +473,113 @@ input:focus { border-color: var(--brass); outline: none; }
 .host .board-name { font-size: clamp(1.2rem, 2.1vw, 2.4rem); }
 .host .board-score { font-size: clamp(1.4rem, 2.3vw, 2.6rem); }
 .host .board-delta { font-size: clamp(1rem, 1.4vw, 1.5rem); }
+
+/* ------------------------------------------------ the board has to fit
+
+   Everything above was sized in vw, which is the wrong axis: the board is
+   laid out down the screen and runs out of height, not width. On a 1366x768
+   panel the heading and break clock took 515px of 768 and a twelve-row board
+   needed 1250px more, so the big screen scrolled - and the big screen has no
+   mouse, so a scoreboard that overflows is unreachable from the room.
+
+   Three rules, in the order they matter:
+
+   1. `.board-fit` claims the height the screen has left and clips, so the
+      page can never grow past the panel.
+   2. `.is-split` puts the rows in two columns, which halves the height they
+      need at the same font size. The board was capped at 900px inside a 1920
+      screen, so the width was there already.
+   3. The rows divide the container's height between them, and their text and
+      padding are a share of the row they land in. `cqh` is a percentage of
+      `.board-fit`'s own height, so this holds at any panel size instead of
+      being tuned for one. The vw terms stay as the upper bound, so a row
+      never grows past the size it has today.
+
+   Measured, twelve teams at the round break, before and after:
+
+      1920x1080   4 of 12 visible, 1023px overflow   ->  12 of 12, no overflow
+      1600x900    3 of 12 visible,  923px overflow   ->  12 of 12, no overflow
+      1366x768    3 of 12 visible,  858px overflow   ->  12 of 12, no overflow
+      1280x720    3 of 12 visible,  833px overflow   ->  12 of 12, no overflow
+
+   The name font pays for it: 40px to 33px at 1080p, 29px to 22px at 768.
+   Three times the teams for a fifth off the type is the trade, and the floor
+   under each size below is what stops that going further than it should. */
+.board-fit {
+  width: 100%;
+  margin-inline: auto;
+  max-width: 900px;
+}
+.host .board-fit {
+  flex: 1;
+  min-height: 0;
+  max-width: 1500px;
+  container-type: size;
+  overflow: hidden;
+  display: flex;
+}
+.host .board-fit > .board.is-fit {
+  flex: 1;
+  min-height: 0;
+  /* The share of the container one row gets, gaps taken off first. */
+  --row-h: calc((100cqh - (var(--board-rows) - 1) * clamp(8px, 1.1vh, 16px)) / var(--board-rows));
+}
+.host .board.is-split {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: 1fr 1fr;
+  column-gap: clamp(16px, 1.8vw, 34px);
+}
+/* Unsplit and fitting: the rows are flex children, so they share the height
+   the same way the grid rows do. */
+.host .board.is-fit:not(.is-split) > .board-row { flex: 1 1 0; min-height: 0; }
+.host .board.is-fit > .board-row {
+  padding-block: min(clamp(14px, 1.7vh, 26px), calc(var(--row-h) * 0.14));
+  /* A row never gets taller than its share, so a long name cannot push the
+     column past the bottom of the screen. */
+  overflow: hidden;
+}
+.host .board.is-fit .board-rank { font-size: max(1.05rem, min(clamp(1.5rem, 2.4vw, 2.6rem), calc(var(--row-h) * 0.44))); }
+.host .board.is-fit .board-name { font-size: max(1.05rem, min(clamp(1.2rem, 2.1vw, 2.4rem), calc(var(--row-h) * 0.42))); }
+.host .board.is-fit .board-score { font-size: max(1.05rem, min(clamp(1.4rem, 2.3vw, 2.6rem), calc(var(--row-h) * 0.44))); }
+.host .board.is-fit .board-delta { font-size: max(.8rem, min(clamp(1rem, 1.4vw, 1.5rem), calc(var(--row-h) * 0.3))); }
+/* Two columns halve the width each row gets, so the rank and delta gutters
+   that were comfortable across 1500px have to give some of it back. */
+.host .board.is-split > .board-row {
+  grid-template-columns: 2.6rem 1fr auto 4.2rem;
+  gap: clamp(10px, 1vw, 20px);
+  padding-inline: clamp(14px, 1.3vw, 24px);
+}
+
+/* ------------------------------------------------ short panels
+
+   Padding and gaps, keyed on height rather than width, because a wide but
+   short panel has plenty of the one and none of the other. 920px catches 768
+   and 720 and the common 900-tall panel; it also catches a 1080p TV at 125%
+   or 150% Windows scaling, which reports a CSS viewport of 864 or 720. The
+   type on those screens is handled below, per screen, not here. */
+@media (max-height: 920px) {
+  .host-body { gap: clamp(12px, 2vh, 24px); }
+  .host { gap: clamp(10px, 1.4vh, 20px); padding: clamp(14px, 1.6vw, 28px); }
+  /* Ten rail rows have to fit the stage they sit beside. */
+  .rail { gap: clamp(4px, 0.7vh, 10px); }
+  .rail-row { padding: clamp(5px, 0.8vh, 12px) clamp(8px, 0.9vw, 14px); }
+}
+
+/* ------------------------------------------------ screens carrying a board
+
+   The question and the answer get the full display size: they are one line
+   the whole room reads at once, and nothing competes with them for height.
+   The scoreboard screens are the opposite - the heading shares the panel with
+   twelve rows that each have to be readable too.
+
+   Measured at 1920x1080: "End of Round 1" at 171px was 16% of the screen, and
+   the board left under it could only give each row 57px, which is a 24px
+   name. Taking the heading to ~105px puts the name back at ~36px. The `vh`
+   term is what makes it hold on a short panel instead of only on this one. */
+.host-scores .host-display { font-size: clamp(1.8rem, min(6vw, 9vh), 5.6rem); }
+.host-scores .breakclock-big .breakclock-time { font-size: clamp(2.2rem, min(7vw, 11vh), 6.4rem); }
+.host-scores .eyebrow { font-size: clamp(.7rem, 1.1vh, 1rem); }
 
 /* A hundred names has to read as a crowd, not a list. */
 .namewall {
