@@ -327,7 +327,7 @@ questions:
     fact: The actors were given directions left in milk crates in the woods and improvised the rest, which is why they look genuinely irritated.
 
   - id: a35-009
-    difficulty: 4
+    difficulty: 3
     prompt: Which actor starred in both Twelve Monkeys and Fight Club?
     answer: Brad Pitt
     distractors: [Edward Norton, Bruce Willis, Matt Damon]

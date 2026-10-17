@@ -185,7 +185,7 @@ questions:
     fact: A liquid boils when this matches the pressure around it, which is why reducing the pressure in a vacuum flask can make water boil at room temperature.
 
   - id: a2-phy-026
-    difficulty: 4
+    difficulty: 2
     prompt: Which effect explains why the pitch of a siren drops as it passes you?
     answer: The Doppler effect
     distractors: [The Coriolis effect, The Venturi effect, The Casimir effect]
@@ -234,7 +234,7 @@ questions:
     fact: Amplitude gives brightness and loudness instead. A loud note and a quiet one of the same pitch are the same frequency at different amplitudes.
 
   - id: a2-phy-033
-    difficulty: 4
+    difficulty: 3
     prompt: What is an alloy?
     answer: A metal mixed with one or more other elements
     distractors: [A metal that has been heat-treated, A compound of two metals in fixed proportions, A metal coated with another]

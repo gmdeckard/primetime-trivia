@@ -159,7 +159,7 @@ questions:
     fact: It killed thousands across the American South, where a diet of corn, molasses and fat pork left it out. Joseph Goldberger proved it was diet rather than infection by feeding it to volunteers.
 
   - id: a2-med-023
-    difficulty: 4
+    difficulty: 3
     prompt: Which Austrian neurologist's work on the unconscious reshaped psychiatry from the 1890s?
     answer: Sigmund Freud
     distractors: [Carl Jung, Alfred Adler, Jean-Martin Charcot]
@@ -194,7 +194,7 @@ questions:
     fact: That phrase comes from a different Hippocratic text. The oath does swear by Apollo and does hand the business of cutting for stones to specialists.
 
   - id: a2-med-028
-    difficulty: 4
+    difficulty: 2
     prompt: Which structure did Rosalind Franklin, James Watson and Francis Crick's work describe in 1953?
     answer: The double helix of DNA
     distractors: [The folding of a protein, The structure of insulin, The shape of hemoglobin]
@@ -222,7 +222,7 @@ questions:
     fact: Hundreds of thousands were taken out annually in the 1950s. Studies comparing children who had the operation with those who did not found very little difference.
 
   - id: a2-med-032
-    difficulty: 4
+    difficulty: 2
     prompt: What is a placebo?
     answer: A treatment with no active ingredient
     distractors: [A drug given at a reduced dose, A treatment for a symptom rather than a cause, An untested compound]

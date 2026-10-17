@@ -117,7 +117,7 @@ questions:
     fact: Each of the four violin concertos was published with an accompanying sonnet, possibly by Vivaldi himself.
 
   - id: art-017
-    difficulty: 4
+    difficulty: 2
     prompt: Which museum holds the "Venus de Milo"?
     answer: The Louvre
     distractors: [The British Museum, The Vatican Museums, The Met]

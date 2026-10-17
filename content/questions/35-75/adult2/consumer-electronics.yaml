@@ -248,7 +248,7 @@ questions:
     fact: Its replacement struck aluminum rods to make ultrasonic tones instead, which is why remote controls were called clickers for a generation after they stopped clicking.
 
   - id: a2-cel-035
-    difficulty: 4
+    difficulty: 3
     prompt: Which format war did Sony lose in home video, despite its format arriving first?
     answer: Betamax against VHS
     distractors: [MiniDisc against DAT, LaserDisc against CED, Memory Stick against SD]

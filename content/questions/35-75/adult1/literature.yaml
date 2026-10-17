@@ -110,7 +110,7 @@ questions:
     fact: It won the Booker Prize in 1989; Ishiguro won the Nobel in 2017.
 
   - id: lit-017
-    difficulty: 4
+    difficulty: 2
     prompt: Which Greek epic recounts Odysseus's journey home from Troy?
     answer: The Odyssey
     distractors: [The Iliad, The Aeneid, The Argonautica]

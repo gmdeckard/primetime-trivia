@@ -133,7 +133,7 @@ questions:
     era: 1960s
 
   - id: h20-017
-    difficulty: 4
+    difficulty: 3
     prompt: Which Austrian archduke's assassination in Sarajevo precipitated World War I?
     answer: Franz Ferdinand
     distractors: [Franz Joseph, Rudolf, Karl]

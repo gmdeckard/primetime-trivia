@@ -432,7 +432,7 @@ questions:
     fact: British codebreakers read it and had to disguise how. Publication did more than any battle to bring American opinion round to war.
 
   - id: a2-h20-062
-    difficulty: 4
+    difficulty: 3
     prompt: Which 1973 Supreme Court decision did the Senate's confirmation fights revolve around for decades?
     answer: Roe v. Wade
     distractors: [Griswold v. Connecticut, Miranda v. Arizona, Bakke]

@@ -27,7 +27,7 @@ questions:
     distractors: [Vitamin C, Vitamin A, Vitamin B12]
     fact: Deficiency causes rickets in children, which is why milk has been fortified since the 1930s.
   - id: med-004
-    difficulty: 4
+    difficulty: 2
     prompt: Which bone is the longest in the human body?
     answer: The femur
     distractors: [The tibia, The humerus, The fibula]

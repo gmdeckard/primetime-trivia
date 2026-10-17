@@ -180,7 +180,7 @@ questions:
     fact: The plot is stitched together from Plautus. The opening number was added in previews after the original opener left audiences expecting a different show.
 
   - id: a2-stg-026
-    difficulty: 4
+    difficulty: 3
     prompt: Which play has been running in London's West End since 1952?
     answer: The Mousetrap
     distractors: ["No Sex Please, We're British", The Woman in Black, Blithe Spirit]
@@ -236,14 +236,14 @@ questions:
     fact: He hired Fanny Brice, W.C. Fields and Eddie Cantor, spent without restraint, and died broke after the 1929 crash.
 
   - id: a2-stg-034
-    difficulty: 4
+    difficulty: 3
     prompt: Which Norwegian playwright wrote A Doll's House?
     answer: Henrik Ibsen
     distractors: [August Strindberg, Bjornstjerne Bjornson, Knut Hamsun]
     fact: The door slamming at the end was so provocative that he was pressed into writing an alternative ending for German theaters, which he called a barbaric outrage.
 
   - id: a2-stg-035
-    difficulty: 4
+    difficulty: 3
     prompt: Which Russian playwright wrote The Cherry Orchard?
     answer: Anton Chekhov
     distractors: [Maxim Gorky, Nikolai Gogol, Ivan Turgenev]

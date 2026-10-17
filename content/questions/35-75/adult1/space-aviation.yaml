@@ -96,7 +96,7 @@ questions:
     fact: Pan Am put it into service on the New York to London route in January 1970.
 
   - id: spa-014
-    difficulty: 4
+    difficulty: 2
     prompt: Which American aviator disappeared over the Pacific in 1937?
     answer: Amelia Earhart
     distractors: [Beryl Markham, Jacqueline Cochran, Harriet Quimby]

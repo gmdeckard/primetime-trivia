@@ -103,7 +103,7 @@ questions:
     fact: Ireland left in 1949 and has never rejoined; Pakistan left in 1972 and returned in 1989.
 
   - id: wor-017
-    difficulty: 4
+    difficulty: 2
     prompt: Which international body was the predecessor of the United Nations?
     answer: The League of Nations
     distractors: [The Concert of Europe, The Hague Tribunal, The International Court of Justice]

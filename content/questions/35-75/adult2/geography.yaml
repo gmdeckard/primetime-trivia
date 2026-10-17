@@ -446,7 +446,7 @@ questions:
     fact: Soviet planners diverted both feeder rivers to cotton in the 1960s knowing this would happen, and judged the cotton worth more.
 
   - id: a2-geo-064
-    difficulty: 4
+    difficulty: 3
     prompt: Which country is the only one to border both Haiti and no other state?
     answer: The Dominican Republic
     distractors: [Cuba, Jamaica, The Bahamas]

@@ -68,7 +68,7 @@ questions:
     fact: He holds more NHL records than anyone, and would still lead career scoring on assists alone.
 
   - id: spo-010
-    difficulty: 4
+    difficulty: 2
     prompt: Which American won four gold medals at the 1936 Berlin Olympics?
     answer: Jesse Owens
     distractors: [Ralph Metcalfe, Eddie Tolan, Carl Lewis]
@@ -180,7 +180,7 @@ questions:
     fact: India won six in a row between 1928 and 1956.
 
   - id: spo-026
-    difficulty: 4
+    difficulty: 3
     prompt: Which horse race is run at Churchill Downs?
     answer: The Kentucky Derby
     distractors: [The Preakness Stakes, The Belmont Stakes, The Breeders' Cup Classic]
@@ -257,7 +257,7 @@ questions:
     fact: St Andrews settled on eighteen in 1764 and the rest of the sport copied it.
 
   - id: spo-037
-    difficulty: 4
+    difficulty: 3
     prompt: Which country hosted the first modern Olympic Games, in 1896?
     answer: Greece
     distractors: [France, Britain, The United States]
@@ -334,7 +334,7 @@ questions:
     fact: Five of them came consecutively with Ferrari, who had not won a drivers' title for twenty-one years before he arrived.
 
   - id: a35-020
-    difficulty: 4
+    difficulty: 2
     prompt: Which swimmer won eight gold medals at a single Olympic Games?
     answer: Michael Phelps
     distractors: [Mark Spitz, Ian Thorpe, Matt Biondi]

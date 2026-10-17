@@ -199,7 +199,7 @@ questions:
     fact: Both solved the problem in front of him and both turned out to be catastrophic. One historian wrote that he had more impact on the atmosphere than any other single organism.
 
   - id: a2-inv-028
-    difficulty: 4
+    difficulty: 2
     prompt: Which typewriter layout was sold to Remington in 1873 and never displaced?
     answer: QWERTY
     distractors: [Dvorak, Blickensderfer, Hammond]

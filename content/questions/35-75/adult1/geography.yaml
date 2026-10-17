@@ -75,7 +75,7 @@ questions:
     fact: It sits just inside the Tanzanian border, though the classic view of it is from Kenya's Amboseli park.
 
   - id: geo-012
-    difficulty: 4
+    difficulty: 2
     prompt: Which strait separates Spain from Morocco?
     answer: The Strait of Gibraltar
     distractors: [The Strait of Messina, The Strait of Hormuz, The Dardanelles]

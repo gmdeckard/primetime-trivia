@@ -162,7 +162,7 @@ questions:
     fact: It was signed in December 1814. News crossed the Atlantic too slowly to stop the Battle of New Orleans the following January.
 
   - id: amh-023
-    difficulty: 4
+    difficulty: 3
     prompt: Which policy of forced removal sent the Cherokee west in 1838?
     answer: The Trail of Tears
     distractors: [The Dawes Allotment, The Long Walk, The Sand Creek Removal]
