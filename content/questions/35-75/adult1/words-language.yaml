@@ -146,7 +146,7 @@ questions:
 
   - id: wrd-022
     difficulty: 3
-    prompt: Which word originally meant a small shield, and now means a protective barrier?
+    prompt: In heraldry, what is the shield that bears a coat of arms called?
     answer: Escutcheon
     distractors: [Bulwark, Rampart, Aegis]
     fact: An escutcheon is the shield shape on a coat of arms; "a blot on the escutcheon" means a stain on one's honor.

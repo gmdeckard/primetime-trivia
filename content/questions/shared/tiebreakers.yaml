@@ -74,9 +74,9 @@ questions:
   - id: tie-010
     kind: number
     difficulty: 3
-    prompt: How many feet high is Niagara Falls on the Canadian side, to the nearest ten feet?
-    answerNumber: 170
-    fact: The Horseshoe Falls drop about 170 feet, carrying the great majority of the river's flow.
+    prompt: How many feet does the water drop at the Horseshoe Falls, the Canadian side of Niagara Falls?
+    answerNumber: 188
+    fact: Niagara Parks gives the average drop as 57 metres, or 188 feet, and the Horseshoe carries the great majority of the river's flow.
 
   - id: tie-011
     kind: number
