@@ -112,11 +112,28 @@ from a phone before the room arrives, not at seven o'clock.
 and if the lid will be closed while it drives the TV, set the lid-close action
 to do nothing.
 
-**The address it advertises.** A workstation with Hyper-V, WSL or VirtualBox
-installed has several private addresses and only one the room can reach.
-Host-only networks (`192.168.56.x`) and Mobile Hotspot (`192.168.137.x`) are
-ranked below the real one, but if the banner ever shows an address a phone
-cannot reach, pin it:
+**The address it advertises.** A workstation with Hyper-V, WSL, Docker or
+VirtualBox installed has several private addresses and only one the room can
+reach. Both start scripts now ask which one to use when there is more than one
+candidate, listing each with the adapter it sits on and a warning on the ones
+phones cannot reach:
+
+```
+  Which address will the phones use?
+    1) 172.16.0.42      wlp0s20f3
+    2) 172.17.0.1       docker0          virtual adapter (container/VM/VPN) — phones cannot reach it
+    o) something else — type an address
+
+  Pick 1-2, o, or Enter for 1:
+```
+
+Enter takes the top-ranked guess. The list comes from the server itself, so it
+is the same ranking the banner and the QR code use.
+
+The prompt only appears with a terminal attached: the systemd service, cron and
+any scripted start take the automatic pick silently. To skip it when you are
+there, set `PRIMETIME_NO_PICK=1`, or pin the address outright and the prompt
+does not appear:
 
 ```powershell
 $env:PRIMETIME_HOST_IP = '192.168.1.40'
@@ -124,6 +141,11 @@ $env:PRIMETIME_HOST_IP = '192.168.1.40'
 
 Give the laptop a DHCP reservation on the router so that address survives
 between nights.
+
+**Why a prompt and not just better ranking.** Ranking can only guess. A venue
+on `172.16.0.x` shares its address band with Docker's bridges, so no scoring
+rule can be sure which of them the phones are on. The operator is standing in
+the room and knows.
 
 **One difference from Linux.** `data/control-password` is written with mode
 0600, which on Windows only toggles the read-only bit — the file is not

@@ -5,7 +5,14 @@ import { join } from 'node:path';
 import { after, test } from 'node:test';
 import { DEFAULT_CONFIG } from '../../shared/protocol.js';
 import { loadBank } from './content.js';
-import { hasNoReachableAddress, rankLanAddresses } from './lan.js';
+import {
+  hasNoReachableAddress,
+  rankLanAddresses,
+  rankLanCandidates,
+  isVirtualInterface,
+  candidateNote,
+  isWsl,
+} from './lan.js';
 import { Engine } from './engine.js';
 import { Store } from './store.js';
 import { controlState, playerState } from './views.js';
@@ -874,6 +881,73 @@ test('the USB rescue address never becomes the advertised join address', () => {
   // 172.x the VM actually uses, so it led the list and the banner advertised
   // the one address in the room that could never work.
   assert.equal(rankLanAddresses(['10.255.255.254', '192.168.12.109'])[0], '192.168.12.109');
+});
+
+test('the venue wifi beats a container bridge sharing its address band', () => {
+  // The clubhouse hands out 172.16.0.x. Docker's default bridge is 172.17.0.1
+  // and its user networks run up through 172.31, so band alone scores all
+  // three the same and the winner is whatever order the OS listed adapters in.
+  const picked = rankLanCandidates([
+    { address: '172.17.0.1', iface: 'docker0' },
+    { address: '172.18.0.1', iface: 'br-07a2c8b518df' },
+    { address: '172.16.0.42', iface: 'wlp0s20f3' },
+  ]);
+  assert.equal(picked[0]?.address, '172.16.0.42', 'the adapter the room is on wins');
+  // The bridges stay in the list as a last resort, as the USB rescue link does.
+  assert.equal(picked.length, 3);
+
+  // And the penalty clears the whole address scale, so a virtual adapter in a
+  // better-looking band cannot rank its way back to the front.
+  assert.equal(
+    rankLanCandidates([
+      { address: '192.168.1.5', iface: 'docker0' },
+      { address: '172.16.0.42', iface: 'wlp0s20f3' },
+    ])[0]?.address,
+    '172.16.0.42',
+  );
+});
+
+test('virtual adapters are told apart by name, and a real bridge is not', () => {
+  for (const name of ['docker0', 'br-07a2c8b518df', 'veth1a7768f', 'virbr0', 'vboxnet0', 'tun0', 'wg0']) {
+    assert.equal(isVirtualInterface(name), true, `${name} is virtual`);
+  }
+  // br0 is how a genuinely bridged LAN is named, and eth0 is the venue wifi
+  // inside WSL. Matching either would discard the only usable address.
+  for (const name of ['br0', 'eth0', 'wlp0s20f3', 'en0', 'Wi-Fi']) {
+    assert.equal(isVirtualInterface(name), false, `${name} is real`);
+  }
+});
+
+test('a venue genuinely on 172.16 is never labelled unreachable', () => {
+  // The trap: 172.16-31 is both WSL's NAT range and a range real routers use.
+  // Labelling the clubhouse's own address as WSL NAT would send the operator
+  // picking around the one address that works.
+  const venue = { address: '172.16.0.42', iface: 'eth0' };
+  assert.equal(candidateNote(venue, [venue]), '', 'no warning without the NAT gateway present');
+
+  // With the gateway alongside it, it really is WSL's private network.
+  const gateway = { address: '10.255.255.254', iface: 'eth0' };
+  const note = candidateNote(venue, [venue, gateway]);
+  if (isWsl()) {
+    assert.match(note, /WSL/, 'flagged when the NAT gateway is there too');
+  } else {
+    assert.equal(note, '', 'off WSL there is nothing to warn about');
+  }
+
+  // The notes that do not depend on the platform.
+  assert.match(
+    candidateNote({ address: '172.17.0.1', iface: 'docker0' }, []),
+    /virtual adapter/,
+  );
+  assert.match(
+    candidateNote({ address: '169.254.3.9', iface: 'wlp0s20f3' }, []),
+    /no DHCP reply/,
+  );
+  assert.match(
+    candidateNote({ address: '192.168.55.1', iface: 'l4tbr0' }, []),
+    /USB rescue link/,
+  );
+  assert.equal(candidateNote({ address: '192.168.12.109', iface: 'wlp0s20f3' }, []), '');
 });
 
 test('a server nothing can reach says so instead of printing a join URL', () => {

@@ -78,6 +78,73 @@ if (-not $rule) {
   Write-Host "      -Action Allow -Protocol TCP -LocalPort $env:PORT -Profile Private" -ForegroundColor Yellow
 }
 
+# ------------------------------------------------- which address the room uses
+# The companion to choose_host_ip in start-server.sh, and the same reasoning:
+# the wrong address on the QR code is the failure that looks healthy here and
+# stops every phone in the room. The candidate list comes from the server
+# (dist\src\server\interfaces.js) so there is one implementation of "which
+# address can the room reach", not two that disagree.
+#
+# Skipped when input is redirected, so a scripted start is never left waiting
+# on a prompt nobody is there to answer.
+function Select-HostIp {
+  if ($env:PRIMETIME_HOST_IP) {
+    Write-Host "  Using PRIMETIME_HOST_IP=$($env:PRIMETIME_HOST_IP) (already set)."
+    return
+  }
+  if ($env:PRIMETIME_NO_PICK) { return }
+  if ([Console]::IsInputRedirected) { return }
+
+  $raw = @(& node 'dist\src\server\interfaces.js' 2>$null | Where-Object { $_ -match '\S' })
+  # One candidate is not a choice worth stopping for.
+  if ($raw.Count -le 1) { return }
+
+  $candidates = $raw | ForEach-Object {
+    $parts = $_ -split "`t", 3
+    [pscustomobject]@{ Address = $parts[0]; Iface = $parts[1]; Note = $parts[2] }
+  }
+
+  Write-Host ""
+  Write-Host "  Which address will the phones use?"
+  for ($i = 0; $i -lt $candidates.Count; $i++) {
+    $c = $candidates[$i]
+    $line = "    {0}) {1,-15} {2,-16}" -f ($i + 1), $c.Address, $c.Iface
+    if ($c.Note) { $line += " $($c.Note)" }
+    # A flagged adapter is the trap; colour it so it is not read past at speed.
+    if ($c.Note) { Write-Host $line -ForegroundColor DarkYellow } else { Write-Host $line }
+  }
+  Write-Host "    o) something else - type an address"
+  Write-Host ""
+
+  foreach ($attempt in 1..3) {
+    $reply = (Read-Host "  Pick 1-$($candidates.Count), o, or Enter for 1").Trim()
+    if (-not $reply) { $reply = '1' }
+    if ($reply -eq 'o' -or $reply -eq 'O') {
+      $typed = (Read-Host "  Address").Trim()
+      # No validation beyond non-empty: an operator overriding our guess on
+      # purpose may know something we do not.
+      if ($typed) {
+        $env:PRIMETIME_HOST_IP = $typed
+        Write-Host "  Using $typed."
+        return
+      }
+      Write-Host "  Nothing typed."
+      continue
+    }
+    if ($reply -notmatch '^\d+$') { Write-Host "  Not a number."; continue }
+    $n = [int]$reply
+    if ($n -lt 1 -or $n -gt $candidates.Count) { Write-Host "  Out of range."; continue }
+    $env:PRIMETIME_HOST_IP = $candidates[$n - 1].Address
+    Write-Host "  Using $($env:PRIMETIME_HOST_IP)."
+    return
+  }
+  # Three bad answers in a row: fall through to the server's ranking rather
+  # than block a night on a prompt.
+  Write-Host "  Falling back to the automatic pick."
+}
+
+Select-HostIp
+
 Write-Host ""
 Write-Host "Starting on port $($env:PORT). Leave this window open - closing it ends the night."
 Write-Host "Open the big screen at http://localhost:$($env:PORT)/host so it can keep itself awake."

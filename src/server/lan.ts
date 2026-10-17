@@ -38,31 +38,41 @@ export function hasNoReachableAddress(addresses: string[]): boolean {
   return addresses.every((ip) => isWslNatAddress(ip) || /^169\.254\./.test(ip));
 }
 
+/** An address the room might be able to reach, with the adapter it sits on. */
+export interface LanCandidate {
+  address: string;
+  iface: string;
+}
+
 /**
  * Work out the address players should type in. With no internet there is no
  * DNS, so the LAN IP is the real join path and everything else (mDNS, a
  * printed QR) is built on top of it.
  */
-export function lanAddresses(): string[] {
+export function lanCandidates(): LanCandidate[] {
   // The operator's override wins over any guess. On a workstation with
   // virtualisation installed there can be several plausible-looking private
   // addresses and only one the room can reach; this is the way to say which.
   const pinned = process.env.PRIMETIME_HOST_IP?.trim();
-  if (pinned) return [pinned];
+  if (pinned) return [{ address: pinned, iface: 'PRIMETIME_HOST_IP' }];
 
-  const out: string[] = [];
-  for (const addrs of Object.values(networkInterfaces())) {
+  const out: LanCandidate[] = [];
+  for (const [iface, addrs] of Object.entries(networkInterfaces())) {
     for (const addr of addrs ?? []) {
       if (addr.family !== 'IPv4' || addr.internal) continue;
-      out.push(addr.address);
+      out.push({ address: addr.address, iface });
     }
   }
-  return rankLanAddresses(out);
+  return rankLanCandidates(out);
+}
+
+export function lanAddresses(): string[] {
+  return lanCandidates().map((c) => c.address);
 }
 
 // Prefer the ranges a consumer or travel router actually hands out, so we
 // don't advertise a Docker bridge or a VPN tunnel as the join address.
-const rank = (ip: string) => {
+const addressRank = (ip: string) => {
   // 192.168.55.x is the Jetson's USB gadget bridge. It is a real address on
   // a real interface, it sorts into the same 192.168 band as the wifi, and
   // it is reachable only by something plugged into the USB port. Advertise
@@ -87,9 +97,64 @@ const rank = (ip: string) => {
   return 3;
 };
 
+/**
+ * Interfaces that exist for containers, virtual machines and VPN tunnels
+ * rather than for the room.
+ *
+ * Address band alone cannot tell these apart from the venue wifi. Docker's
+ * default bridge is 172.17.0.1 and its user networks run up through 172.31,
+ * which is the same band a venue router hands out: at a venue on 172.16.0.x
+ * the wifi address and two Docker bridges all score the same, and the winner
+ * is whatever order the OS listed the adapters in. The name is the fact the
+ * band only guesses at.
+ *
+ * `br-` with the hyphen is Docker's own naming for a user network. A plain
+ * `br0` is deliberately not matched: that is how a real bridged LAN is named.
+ */
+export function isVirtualInterface(name: string): boolean {
+  return /^(docker\d|br-|virbr|veth|vmnet|vboxnet|tun\d|tap\d|wg\d|utun|zt)/i.test(name);
+}
+
+// A virtual adapter loses to every physical one whatever the bands say, and
+// the penalty clears the whole address scale so it cannot be ranked back up.
+const candidateRank = (c: LanCandidate) =>
+  (isVirtualInterface(c.iface) ? 100 : 0) + addressRank(c.address);
+
+/**
+ * A short warning for a candidate the operator is about to pick, or '' when
+ * there is nothing to say.
+ *
+ * Advisory only: the operator chooses, so a missing note costs a little
+ * confidence and a WRONG note costs the night. That asymmetry decides the WSL
+ * case below.
+ */
+export function candidateNote(c: LanCandidate, siblings?: LanCandidate[]): string {
+  if (c.iface === 'PRIMETIME_HOST_IP') return 'pinned by PRIMETIME_HOST_IP';
+  if (/^169\.254\./.test(c.address)) return 'no DHCP reply on this adapter — not a usable address';
+  if (isVirtualInterface(c.iface)) return 'virtual adapter (container/VM/VPN) — phones cannot reach it';
+  if (c.address.startsWith('192.168.55.')) return 'USB rescue link — only a cable reaches this';
+  if (c.address.startsWith('192.168.56.')) return 'VirtualBox host-only — phones cannot reach it';
+  if (c.address.startsWith('192.168.137.')) return 'Windows hotspot/ICS — only devices on that hotspot';
+  if (c.address === '10.255.255.254') return "WSL's own gateway — phones cannot reach it";
+  // A 172.16-31 address under WSL may be the VM's private NAT network, or may
+  // be a venue router that genuinely uses that range. Telling them apart needs
+  // the NAT gateway to be present too. Without that check this flags a real
+  // venue address as unreachable and the operator picks around the only one
+  // that works.
+  if (isWsl() && isWslNatAddress(c.address) && (siblings ?? []).some((s) => s.address === '10.255.255.254')) {
+    return "likely WSL's private NAT network — phones cannot reach it";
+  }
+  return '';
+}
+
+/** Exported so the ordering itself can be tested without real interfaces. */
+export function rankLanCandidates(candidates: LanCandidate[]): LanCandidate[] {
+  return candidates.slice().sort((a, b) => candidateRank(a) - candidateRank(b));
+}
+
 /** Exported so the ordering itself can be tested without real interfaces. */
 export function rankLanAddresses(addresses: string[]): string[] {
-  return addresses.slice().sort((a, b) => rank(a) - rank(b));
+  return addresses.slice().sort((a, b) => addressRank(a) - addressRank(b));
 }
 
 export function primaryLanAddress(): string | undefined {

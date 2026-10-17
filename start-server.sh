@@ -107,10 +107,95 @@ if needs_build; then
   npm run build || { echo "Build failed. The old build is still in place; fix the error above and run this again."; exit 1; }
 fi
 
+# ------------------------------------------------- which address the room uses
+# The one failure that silently ruins a night: everything looks healthy here
+# and no phone can join. The server ranks the candidates and is usually right,
+# but a venue can hand out an address in the same band as a container bridge or
+# a VM adapter, and then the ranking is a coin toss. The operator is standing
+# in the room and knows which network the phones are on, so they get the last
+# word.
+#
+# The list comes from the server (dist/src/server/interfaces.js), not from `ip`
+# here. Recomputing it in shell is the bug this script already fixed once.
+#
+# Asks only with a terminal attached, so the service path, cron and any
+# scripted start fall through to the server's own ranking untouched.
+choose_host_ip() {
+  if [ -n "${PRIMETIME_HOST_IP:-}" ]; then
+    echo "Using PRIMETIME_HOST_IP=${PRIMETIME_HOST_IP} (already set)."
+    return
+  fi
+  [ -t 0 ] || return
+  [ -z "${PRIMETIME_NO_PICK:-}" ] || return
+
+  local list count
+  list="$(node dist/src/server/interfaces.js 2>/dev/null)" || return
+  [ -n "$list" ] || return
+  count="$(printf '%s\n' "$list" | wc -l | tr -d ' ')"
+  # One candidate is not a choice worth stopping for.
+  [ "$count" -gt 1 ] || return
+
+  local tab i addr iface note reply attempt
+  tab="$(printf '\t')"
+  echo
+  echo "  Which address will the phones use?"
+  i=0
+  while IFS="$tab" read -r addr iface note; do
+    i=$((i + 1))
+    if [ -n "$note" ]; then
+      printf '    %d) %-15s %-16s %s\n' "$i" "$addr" "$iface" "$note"
+    else
+      printf '    %d) %-15s %-16s\n' "$i" "$addr" "$iface"
+    fi
+  done <<EOF
+$list
+EOF
+  echo "    o) something else — type an address"
+  echo
+
+  for attempt in 1 2 3; do
+    printf '  Pick 1-%d, o, or Enter for 1: ' "$count"
+    read -r reply || reply=""
+    case "$reply" in
+      "") reply=1 ;;
+      o|O)
+        printf '  Address: '
+        read -r reply || reply=""
+        # No validation beyond non-empty: an operator typing an address here is
+        # overriding our guess on purpose and may know something we do not.
+        if [ -n "$reply" ]; then
+          PRIMETIME_HOST_IP="$reply"
+          export PRIMETIME_HOST_IP
+          echo "  Using ${PRIMETIME_HOST_IP}."
+          return
+        fi
+        echo "  Nothing typed."
+        continue
+        ;;
+    esac
+    case "$reply" in
+      *[!0-9]*|"") echo "  Not a number." ; continue ;;
+    esac
+    if [ "$reply" -lt 1 ] || [ "$reply" -gt "$count" ]; then
+      echo "  Out of range."
+      continue
+    fi
+    PRIMETIME_HOST_IP="$(printf '%s\n' "$list" | sed -n "${reply}p" | cut -d"$tab" -f1)"
+    export PRIMETIME_HOST_IP
+    echo "  Using ${PRIMETIME_HOST_IP}."
+    return
+  done
+  # Three bad answers in a row: fall through to the server's ranking rather
+  # than block a night on a prompt.
+  echo "  Falling back to the automatic pick."
+}
+
 # 80 needs privileges we do not have here; the service handles that properly.
 PORT="${PORT:-8080}"
 export PORT
 export PRIMETIME_VENUE="${PRIMETIME_VENUE:-PrimeTime Trivia}"
+
+choose_host_ip
 
 echo "Starting in the background on port ${PORT}..."
 # The banner can carry a freshly generated password, and this file outlives the
