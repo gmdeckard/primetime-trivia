@@ -15,3 +15,16 @@ data/
 # local run artifacts
 server.log
 .server.pid
+
+# Screenshots. `npm run screenshots` renders every screen as a smoke test, but
+# only the ones the README embeds are worth carrying in git: the rest were 3.8MB
+# that nothing linked to and that every host CSS change rewrote. The capture
+# still produces all of them locally; git just ignores the ones no page shows.
+docs/screenshots/*
+!docs/screenshots/02-player-solo-or-team.png
+!docs/screenshots/07-host-question.png
+!docs/screenshots/08-player-question.png
+!docs/screenshots/09-control-question.png
+!docs/screenshots/13-host-reveal.png
+!docs/screenshots/15-host-standings-gap.png
+!docs/screenshots/author-generate.png

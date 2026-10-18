@@ -53,8 +53,6 @@ export interface RotationFile {
   cycles: Record<string, number>;
 }
 
-export const EMPTY_ROTATION: RotationFile = { decks: {}, dealt: {}, cycles: {} };
-
 /**
  * The key a deck is filed under: the age group and the category together.
  *

@@ -146,10 +146,6 @@ export function Toast({ message, onDismiss }: { message: string | null; onDismis
   );
 }
 
-export function Card({ children, class: cls }: { children: ComponentChildren; class?: string }) {
-  return <div class={`card ${cls ?? ''}`}>{children}</div>;
-}
-
 /** Numeric entry without summoning the OS keyboard, which covers half an iPad. */
 export function Keypad({
   value,
