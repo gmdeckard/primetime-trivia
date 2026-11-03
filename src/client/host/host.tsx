@@ -4,6 +4,7 @@ import type { HostState } from '../../../shared/protocol';
 import '../shared/styles.css';
 import { nextUpWindowMs, useCountdown, useGame, useNow, useSpeech, useWakeLock } from '../shared/useGame';
 import { createHostAudio, type Bed, type HostAudio } from './audio';
+import { pickBedVariant } from './beds';
 import { inRunUpToQuestion, pointsAt } from '../../../shared/protocol';
 import { AutoAdvance, Badge, Board, BreakClock, NextUp, Toast } from '../shared/ui';
 
@@ -209,7 +210,20 @@ function App() {
         ? 'lobby'
         : null;
 
-  useEffect(() => { audioRef.current?.setBed(wantBed); }, [wantBed]);
+  // Which of the four question grooves this question gets. Derived from the
+  // state rather than counted locally, so the bed survives a reload of the big
+  // screen mid-question: a counter would restart and a random pick would
+  // change the music under a room that is already answering.
+  const bedVariantKey = pickBedVariant({
+    game: state?.game.index ?? 1,
+    round: state?.round?.index ?? 1,
+    position: state?.question?.position ?? 0,
+    roundsPerGame: state?.config.roundsPerGame ?? 2,
+    questionsPerRound: state?.config.questionsPerRound ?? 10,
+    wager: phase === 'wager_question',
+  }).key;
+
+  useEffect(() => { audioRef.current?.setBed(wantBed, bedVariantKey); }, [wantBed, bedVariantKey]);
   useEffect(() => { audioRef.current?.setVolume(state?.config.musicVolume ?? 0.35); }, [state?.config.musicVolume]);
 
   // The run-up fires once as the next question approaches, and only once: the

@@ -13,14 +13,28 @@
  * Host only, always. Twenty handsets playing the same loop over wifi would be
  * hundreds of milliseconds apart, which is not music. The same call was already
  * made for read-aloud in useGame.ts.
+ *
+ * The question bed has four variants and rotates through them, one per
+ * question. Their grooves live as data in beds.ts; the scheduling, and every
+ * formula that ties the crescendo to the clock, lives here and is the same for
+ * all four.
  */
+
+import { bedVariantByKey, DEFAULT_BED_VARIANT, type BedVariant } from './beds';
+// One beat of a question bed. Shared with scripts/render-beds.mjs, which
+// renders the beds to mp3 — the recordings are this code, not a copy of it.
+import { bpmAt as bedBpmAt, hit, scheduleBeat } from './bedengine';
 
 export type Bed = 'lobby' | 'question' | null;
 
 export interface HostAudio {
   /** Must be called from a real click: browsers refuse audio before one. */
   resume(): Promise<void>;
-  setBed(bed: Bed): void;
+  /**
+   * `variantKey` names the question groove (see beds.ts). It is adopted on the
+   * next bar line, so switching beds never clips a bar in half.
+   */
+  setBed(bed: Bed, variantKey?: string): void;
   /** 0..1 intensity for the question bed, driven by the falling value. */
   setIntensity(v: number): void;
   setVolume(v: number): void;
@@ -31,11 +45,11 @@ export interface HostAudio {
   countIn(msUntilQuestion: number): void;
   /** Current output level, 0..1. For checking the thing is actually audible. */
   meter(): number;
+  /** Which question bed is playing. For checking the rotation from the console. */
+  variant(): string;
   running(): boolean;
   dispose(): void;
 }
-
-type Ctx = AudioContext;
 
 // An octave up from where this started. A TV soundbar and a laptop speaker
 // both roll off hard below about 200Hz, so a pad voiced at A3 measured fine and
@@ -43,67 +57,15 @@ type Ctx = AudioContext;
 // Four chords rather than one. A single sustained chord is a drone, and a
 // drone is what "boring" means: nothing ever arrives. These move slowly enough
 // to sit under conversation and often enough that the room notices change.
+//
+// The lobby and the breaks only. A question's chords come from its variant,
+// which is why this one never had to change when the rotation arrived.
 const PROGRESSION = [
   [440, 523.25, 659.25, 783.99], // Am7
   [349.23, 440, 523.25, 698.46], // F
   [392, 493.88, 587.33, 783.99], // G
   [329.63, 440, 523.25, 659.25], // Am/C
 ];
-/** Two bars of bass, so the figure answers itself instead of repeating. */
-const BASS_STEPS = [
-  55, 55, 82.41, 55, 65.41, 55, 82.41, 98,
-  55, 55, 82.41, 110, 65.41, 98, 82.41, 73.42,
-];
-
-/** One short percussive hit. Used for the kick, the hats and the ticks. */
-function hit(
-  ctx: Ctx,
-  out: GainNode,
-  at: number,
-  kind: 'kick' | 'hat' | 'tick',
-  gain: number,
-  freq = 880,
-) {
-  if (kind === 'hat') {
-    // Filtered noise. A sine would read as a beep, not a hat.
-    const len = Math.floor(ctx.sampleRate * 0.04);
-    const buf = ctx.createBuffer(1, len, ctx.sampleRate);
-    const data = buf.getChannelData(0);
-    for (let i = 0; i < len; i++) data[i] = (Math.random() * 2 - 1) * (1 - i / len);
-    const src = ctx.createBufferSource();
-    src.buffer = buf;
-    const hp = ctx.createBiquadFilter();
-    hp.type = 'highpass';
-    hp.frequency.value = 7000;
-    const g = ctx.createGain();
-    g.gain.value = gain;
-    src.connect(hp).connect(g).connect(out);
-    src.start(at);
-    src.stop(at + 0.05);
-    return;
-  }
-
-  const osc = ctx.createOscillator();
-  const g = ctx.createGain();
-  osc.type = kind === 'kick' ? 'sine' : 'triangle';
-  const start = kind === 'kick' ? 160 : freq;
-  const end = kind === 'kick' ? 55 : freq;
-  const dur = kind === 'kick' ? 0.22 : 0.12;
-  osc.frequency.setValueAtTime(start, at);
-  if (kind === 'kick') {
-    osc.frequency.exponentialRampToValueAtTime(end, at + dur);
-    // A click on top of the thump. The body of a kick lives below what these
-    // speakers can produce; the click is what makes it register as a beat.
-    hit(ctx, out, at, 'tick', gain * 0.5, 1800);
-  }
-  g.gain.setValueAtTime(0.0001, at);
-  g.gain.exponentialRampToValueAtTime(gain, at + 0.005);
-  g.gain.exponentialRampToValueAtTime(0.0001, at + dur);
-  osc.connect(g).connect(out);
-  osc.start(at);
-  osc.stop(at + dur + 0.02);
-}
-
 export function createHostAudio(): HostAudio {
   const Ctor: typeof AudioContext | undefined =
     typeof window !== 'undefined'
@@ -119,6 +81,7 @@ export function createHostAudio(): HostAudio {
       setVolume: () => {},
       countIn: () => {},
       meter: () => 0,
+      variant: () => DEFAULT_BED_VARIANT.key,
       running: () => false,
       dispose: () => {},
     };
@@ -147,6 +110,8 @@ export function createHostAudio(): HostAudio {
   cueGain.connect(master);
 
   let bed: Bed = null;
+  let variant: BedVariant = DEFAULT_BED_VARIANT;
+  let pendingVariant: BedVariant | null = null;
   let intensity = 0;
   let timer: number | undefined;
   let nextBeat = 0;
@@ -199,36 +164,11 @@ export function createHostAudio(): HostAudio {
     chordTimer = setTimeout(moveChord, 7000) as unknown as number;
   }
 
-  // Tempo is not fixed. It climbs with the clock, which is most of why the
-  // last five seconds of a question feel different from the first five.
-  const bpmAt = (i: number) => 116 + i * 20;
-
-  /** A short chord stab. Arrives late in a question and is most of the lift. */
-  function stab(at: number, gain: number) {
-    const notes = PROGRESSION[(beat >> 4) % PROGRESSION.length]!;
-    for (const f of notes.slice(0, 3)) {
-      const osc = ctx.createOscillator();
-      const g = ctx.createGain();
-      osc.type = 'sawtooth';
-      osc.frequency.value = f;
-      g.gain.setValueAtTime(0.0001, at);
-      g.gain.exponentialRampToValueAtTime(gain, at + 0.008);
-      g.gain.exponentialRampToValueAtTime(0.0001, at + 0.18);
-      osc.connect(g).connect(questionGain);
-      osc.start(at);
-      osc.stop(at + 0.2);
-    }
-  }
+  const bpmAt = (i: number) => bedBpmAt(variant, i);
 
   /**
-   * Schedules a little ahead of the clock so timing does not depend on the tab.
-   *
-   * The pattern is sixteen beats, not eight, and almost everything in it is a
-   * function of `intensity`, which the host drives from the falling value. At
-   * the start of a question this is a kick, an offbeat hat and a bass figure;
-   * by the end it is faster, busier, brighter and louder, with claps and chord
-   * stabs that were not there before. That climb is the crescendo — it is tied
-   * to the clock rather than to a loop, so it lands with the buzzer.
+   * Schedules a little ahead of the clock so timing does not depend on the
+   * tab. What one beat sounds like is bedengine.ts; this is only when.
    */
   function pump() {
     if (disposed) return;
@@ -237,38 +177,15 @@ export function createHostAudio(): HostAudio {
       const at = Math.max(nextBeat, ctx.currentTime + 0.01);
       const beatDur = 60 / bpmAt(bed === 'question' ? intensity : 0);
       if (bed === 'question') {
-        const step = beat % BASS_STEPS.length;
-        const inBar = beat % 4;
-
-        hit(ctx, questionGain, at, 'kick', 0.42 + intensity * 0.16);
-        // Backbeat clap: the first thing that makes it a groove rather than a
-        // pulse. Present from the start, louder as it goes.
-        if (inBar === 1 || inBar === 3) {
-          hit(ctx, questionGain, at, 'hat', 0.1 + intensity * 0.1);
-          hit(ctx, questionGain, at + 0.012, 'hat', 0.08 + intensity * 0.08);
+        // A pending bed is adopted on the bar line, never mid-bar: a groove
+        // that changes on beat three sounds like a mistake rather than a
+        // change. beat is reset to 0 by setBed, so the first bar is already a
+        // bar line and a new question starts on its own bed immediately.
+        if (pendingVariant && beat % 4 === 0) {
+          variant = pendingVariant;
+          pendingVariant = null;
         }
-        hit(ctx, questionGain, at + beatDur / 2, 'hat', 0.1 + intensity * 0.14);
-        if (intensity > 0.4) hit(ctx, questionGain, at + beatDur / 4, 'hat', 0.04 + intensity * 0.05);
-        if (intensity > 0.7) hit(ctx, questionGain, at + (beatDur * 3) / 4, 'hat', 0.04 + intensity * 0.05);
-        // An open hat on the last eighth of each bar, to turn it over.
-        if (intensity > 0.25 && inBar === 3) hit(ctx, questionGain, at + beatDur / 2, 'hat', 0.16);
-        if (intensity > 0.55 && inBar === 2) stab(at + beatDur / 2, 0.07 + intensity * 0.06);
-
-        const bass = ctx.createOscillator();
-        const bg = ctx.createGain();
-        const filter = ctx.createBiquadFilter();
-        bass.type = 'sawtooth';
-        bass.frequency.value = BASS_STEPS[step] ?? 55;
-        filter.type = 'lowpass';
-        // Opens up as the clock runs down: the room hears the pressure.
-        filter.frequency.value = 260 + intensity * 2600;
-        filter.Q.value = 7;
-        bg.gain.setValueAtTime(0.0001, at);
-        bg.gain.exponentialRampToValueAtTime(0.15 + intensity * 0.07, at + 0.01);
-        bg.gain.exponentialRampToValueAtTime(0.0001, at + beatDur * 0.7);
-        bass.connect(filter).connect(bg).connect(questionGain);
-        bass.start(at);
-        bass.stop(at + beatDur);
+        scheduleBeat(ctx, questionGain, { variant, beat, at, beatDur, intensity });
       }
       nextBeat += beatDur;
       beat++;
@@ -292,7 +209,15 @@ export function createHostAudio(): HostAudio {
         pump();
       }
     },
-    setBed(next) {
+    setBed(next, variantKey) {
+      // The bed a question asks for can change while the bed itself does not:
+      // the question phase is re-entered for every question, but a reconnect
+      // can also re-assert the same phase. Both end up here, so the groove is
+      // recorded either way and the early return only skips the cross-fade.
+      if (variantKey !== undefined) {
+        const want = bedVariantByKey(variantKey);
+        pendingVariant = want === variant && next === bed ? null : want;
+      }
       if (next === bed) return;
       bed = next;
       // Long fades: a bed appearing or vanishing abruptly is more noticeable
@@ -320,6 +245,13 @@ export function createHostAudio(): HostAudio {
       for (const f of [1046.5, 1318.5, 1568]) {
         hit(ctx, cueGain, at(0.03), 'tick', 0.16, f);
       }
+    },
+    variant() {
+      // The bed that is sounding, not the one queued for the next question.
+      // The queued one is set the moment a reveal starts fading the current
+      // bed out, and reporting that during the fade sends you looking for a
+      // rotation bug in a bed you are still hearing.
+      return variant.key;
     },
     meter() {
       analyser.getFloatTimeDomainData(meterBuf);

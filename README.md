@@ -346,6 +346,7 @@ npm run dev       # server on 8080, client with hot reload on 5173
 npm test          # content validation, engine tests, integration tests
 npm run flow      # play a whole night in a browser, with nobody touching it
 npm run jitter    # fail if any live clock changes size as it counts down
+npm run beds      # render the big screen's question music to mp3, in docs/beds
 npm run build     # production bundles
 ```
 

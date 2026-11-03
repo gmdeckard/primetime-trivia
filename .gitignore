@@ -28,3 +28,9 @@ docs/screenshots/*
 !docs/screenshots/13-host-reveal.png
 !docs/screenshots/15-host-standings-gap.png
 !docs/screenshots/author-generate.png
+
+# Bed previews. `npm run beds` renders the question beds to mp3 so they can be
+# judged on real speakers instead of in a room with ninety people in it. Two
+# megabytes of binaries that regenerate in thirty seconds, and binaries in
+# history are what put .git at 64MB — so they stay local.
+docs/beds/
