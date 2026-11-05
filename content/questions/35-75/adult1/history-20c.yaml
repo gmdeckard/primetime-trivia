@@ -73,7 +73,7 @@ questions:
     prompt: Who was the only US president to resign from office?
     answer: Richard Nixon
     distractors: [Andrew Johnson, Lyndon Johnson, Warren Harding]
-    fact: Andrew Johnson was impeached but acquitted by one vote in the Senate; Harding died in office.
+    fact: He went in August 1974, two years after the Watergate break-in; Harding died in office.
     era: 1970s
 
   - id: h20-010

@@ -160,7 +160,7 @@ questions:
 
   - id: ftv-023
     difficulty: 2
-    prompt: Who says "I'm going to make him an offer he can't refuse" in "The Godfather"?
+    prompt: Who says "I'm going to make him an offer he can't refuse"?
     answer: Vito Corleone
     distractors: [Michael Corleone, Sonny Corleone, Tom Hagen]
     fact: Marlon Brando says it early on, explaining to his godson how a bandleader came to release him from a contract.

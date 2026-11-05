@@ -145,7 +145,7 @@ questions:
     prompt: Which Supreme Court ruling held that no Black person could be a US citizen?
     answer: Dred Scott v. Sandford
     distractors: [Plessy v. Ferguson, Prigg v. Pennsylvania, Ableman v. Booth]
-    fact: The 1857 decision also struck down the Missouri Compromise. It is usually named as a cause of the war rather than a consequence.
+    fact: The 1857 decision also voided the federal ban on slavery in the northern territories. It is usually named as a cause of the war rather than a consequence.
 
   - id: amh-021
     difficulty: 4

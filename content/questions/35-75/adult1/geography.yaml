@@ -51,7 +51,7 @@ questions:
     prompt: The Bosphorus strait separates which two continents?
     answer: Europe and Asia
     distractors: [Europe and Africa, Asia and Africa, Europe and the Middle East]
-    fact: It runs through Istanbul, making it the only major city on two continents.
+    fact: It is about nineteen miles long and, at its narrowest, barely half a mile across.
 
   - id: geo-009
     difficulty: 2
@@ -205,7 +205,7 @@ questions:
     prompt: Which sea separates Europe from Africa at its narrowest point?
     answer: The Mediterranean
     distractors: [The Red Sea, The Adriatic, The Black Sea]
-    fact: At the Strait of Gibraltar the gap is about nine miles.
+    fact: At the narrowest point the two continents are about nine miles apart.
 
   - id: geo-033
     difficulty: 3
@@ -226,7 +226,7 @@ questions:
     prompt: Which city is split between two continents?
     answer: Istanbul
     distractors: [Cairo, Suez, Vladivostok]
-    fact: The Bosphorus runs through it, so a commuter can cross from Europe to Asia on the way to work.
+    fact: A strait runs right through it, so a commuter can start the day on one continent and work on the other.
 
   - id: geo-037
     difficulty: 4
