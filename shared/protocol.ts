@@ -314,7 +314,7 @@ export const DEFAULT_CONFIG: GameConfig = {
   // is exactly nothing. The MC can still run one pack on its own for a themed
   // night. A pack added later is off until it is switched on, which is the
   // point of the list being explicit.
-  packs: ['adult1', 'adult2', 'kids1'],
+  packs: ['adult1', 'adult2', 'kids1', 'easy1'],
   // Not empty. Empty means no filter, which would let a set written for
   // another age group into a normal night the moment one existed. 35-75 is
   // the adult bank: someone at the older end of that range was in their
