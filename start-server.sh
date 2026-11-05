@@ -125,15 +125,24 @@ choose_host_ip() {
     echo "Using PRIMETIME_HOST_IP=${PRIMETIME_HOST_IP} (already set)."
     return
   fi
-  [ -t 0 ] || return
-  [ -z "${PRIMETIME_NO_PICK:-}" ] || return
+  # Every early exit here says `return 0`, never a bare `return`, and the
+  # difference is the whole night. A bare `return` hands back the status of the
+  # last command run, which on all five of these lines is the test that just
+  # failed. Under `set -e` that non-zero return kills the script at the call
+  # site below, before the server is ever launched: no error, no output past
+  # this function. It shipped that way and broke exactly the machines that take
+  # a shortcut — one network adapter, no terminal, or PRIMETIME_NO_PICK set —
+  # while a dev box with a docker bridge has two candidates, skips every
+  # shortcut, and looks perfectly healthy.
+  [ -t 0 ] || return 0
+  [ -z "${PRIMETIME_NO_PICK:-}" ] || return 0
 
   local list count
-  list="$(node dist/src/server/interfaces.js 2>/dev/null)" || return
-  [ -n "$list" ] || return
+  list="$(node dist/src/server/interfaces.js 2>/dev/null)" || return 0
+  [ -n "$list" ] || return 0
   count="$(printf '%s\n' "$list" | wc -l | tr -d ' ')"
   # One candidate is not a choice worth stopping for.
-  [ "$count" -gt 1 ] || return
+  [ "$count" -gt 1 ] || return 0
 
   local tab i addr iface note reply attempt
   tab="$(printf '\t')"
