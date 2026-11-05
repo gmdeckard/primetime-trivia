@@ -160,3 +160,110 @@ questions:
     answer: Global Positioning System
     distractors: [General Positioning Service, Geographic Point System, Global Position Signal]
     fact: Built by the US military, it was opened to civilians at full accuracy only in 2000.
+
+# The questions from here down came from the Easy Set One batch, folded into
+# this deck on 2026-11-05 so the easy end of the bank is reachable without the
+# MC switching a second pack on. Generated with claude-opus-5, fact-checked by
+# GPT-5 via Codex and by Claude Sonnet in a clean context, no human review.
+# Some were seeded by topic from OpenTDB (opentdb.com, CC BY-SA 4.0) and then
+# rewritten with new distractors and new fact lines. Old ids are mapped in
+# docs/EASY-SET-ONE.md.
+
+  - id: inv-033
+    difficulty: 2
+    prompt: What did a Linotype machine let a newspaper do?
+    answer: Set a whole line of type in one piece
+    distractors: [Print in two colours at once, Fold and cut the papers automatically, Send type down a telegraph wire]
+    fact: Before it, a compositor placed every letter by hand. It is most of why a paper could grow from eight pages to forty and still reach the doorstep by morning.
+    tags: [printing]
+
+  - id: inv-034
+    difficulty: 1
+    prompt: What did the household refrigerator replace in the American kitchen?
+    answer: The icebox, cooled by delivered blocks of ice
+    distractors: [The root cellar, The salt barrel, The spring house]
+    fact: The ice was cut from northern lakes in winter, packed in insulated stores and shipped south. It employed tens of thousands and was gone within a generation.
+    tags: [audio]
+
+  - id: inv-035
+    difficulty: 1
+    prompt: Which American invented bifocal spectacles, the lightning rod and a cast-iron stove?
+    answer: Benjamin Franklin
+    distractors: [Thomas Jefferson, Eli Whitney, Robert Fulton]
+    fact: He patented none of them. He wrote that since he had benefited from others' inventions, he should let his own be used freely.
+    tags: [inventors]
+
+  - id: inv-036
+    difficulty: 2
+    prompt: Who patented the revolver in 1836?
+    answer: Samuel Colt
+    distractors: [Oliver Winchester, Horace Smith, Eliphalet Remington]
+    fact: His first company failed. The second was saved by a US government order for a thousand revolvers, negotiated by Samuel Walker, a former Texas Ranger who knew what they were worth on horseback.
+    tags: [inventors]
+
+  - id: inv-037
+    difficulty: 2
+    prompt: What did George Eastman sell that took photography away from professionals?
+    answer: Film in a roll, and a simple camera to hold it
+    distractors: [The glass photographic plate, The flash bulb, The darkroom enlarger]
+    fact: His slogan was "You press the button, we do the rest" — the whole camera went back to Rochester and returned to you loaded, with your prints.
+    tags: [cameras]
+
+  - id: inv-038
+    difficulty: 2
+    prompt: Whose steel plow of 1837 made the prairie farmable?
+    answer: John Deere
+    distractors: [Cyrus McCormick, Jerome Case, Daniel Massey]
+    fact: Cast-iron plows clogged with the thick midwestern soil and had to be scraped clean every few feet. Polished steel shed it by itself.
+    tags: [agriculture]
+
+  - id: inv-039
+    difficulty: 2
+    prompt: What did Mary Anderson patent in 1903, years before carmakers fitted it as standard?
+    answer: The windshield wiper
+    distractors: [The rear-view mirror, The turn signal, The seat belt]
+    fact: She was turned down by manufacturers who told her it had no commercial value, and she never made money from it.
+    tags: [cars, inventors]
+
+  - id: inv-040
+    difficulty: 2
+    prompt: What did Earle Dickson invent in 1920 for his wife, who kept cutting herself in the kitchen?
+    answer: The Band-Aid
+    distractors: [Rubber kitchen gloves, The first antiseptic cream, The safety peeler]
+    fact: He worked for Johnson & Johnson as a cotton buyer. He stuck gauze to surgical tape so she could dress a cut one-handed.
+    tags: [medicine, inventors]
+
+  - id: inv-041
+    difficulty: 2
+    prompt: What did Charles Strite devise in 1919 to stop restaurant kitchens burning breakfast?
+    answer: The pop-up toaster
+    distractors: [The electric griddle, The coffee percolator, The waffle iron]
+    fact: He filed that year and the patent was granted in 1921. What his design added was the timer and the spring, so the kitchen could leave it alone.
+    tags: [appliances]
+
+  - id: inv-042
+    difficulty: 2
+    prompt: Which company's chemists produced the weak glue that became the Post-it Note?
+    answer: 3M
+    distractors: [DuPont, Dow, Avery]
+    fact: The adhesive sat unused for years because nobody could name a problem it solved. A colleague who kept losing his hymnal bookmark supplied one.
+    tags: [companies]
+
+  - id: inv-043
+    difficulty: 2
+    prompt: What was sent as the first message on America's first long-distance telegraph line, in 1844?
+    answer: '"What hath God wrought"'
+    distractors:
+      - '"Come at once"'
+      - '"The eagle has landed"'
+      - '"Mr. Vail, are you there"'
+    fact: Washington to Baltimore, a line paid for by Congress. The phrase was chosen by the daughter of a friend and comes from the Book of Numbers.
+    tags: [communications]
+
+  - id: inv-044
+    difficulty: 2
+    prompt: Who built the giant wheel that was the centerpiece of the 1893 Chicago World's Fair?
+    answer: George Ferris
+    distractors: [Gustave Eiffel, Daniel Burnham, Frederick Law Olmsted]
+    fact: The fair wanted an answer to the Eiffel Tower. His wheel stood two hundred and sixty-four feet and carried more than two thousand people at a time.
+    tags: [engineering]

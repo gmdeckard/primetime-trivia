@@ -346,3 +346,51 @@ questions:
     answer: The Green Bay Packers
     distractors: [The Chicago Bears, The Detroit Lions, The Minnesota Vikings]
     fact: The team is owned by its supporters rather than a proprietor, and has been since a share issue in 1923 saved it from folding.
+
+# The questions from here down came from the Easy Set One batch, folded into
+# this deck on 2026-11-05 so the easy end of the bank is reachable without the
+# MC switching a second pack on. Generated with claude-opus-5, fact-checked by
+# GPT-5 via Codex and by Claude Sonnet in a clean context, no human review.
+# Some were seeded by topic from OpenTDB (opentdb.com, CC BY-SA 4.0) and then
+# rewritten with new distractors and new fact lines. Old ids are mapped in
+# docs/EASY-SET-ONE.md.
+
+  - id: spo-041
+    difficulty: 1
+    prompt: How many yards must a team gain to earn a first down?
+    answer: Ten
+    distractors: [Five, Fifteen, Twenty]
+    fact: Four downs to make ten yards, a rule that has stood unchanged since 1912.
+    tags: [football, rules]
+
+  - id: spo-042
+    difficulty: 1
+    prompt: How many balls does it take to walk a batter in baseball?
+    answer: Four
+    distractors: [Three, Five, Six]
+    fact: It was nine balls when the National League began in 1876, and came down almost every few seasons until it settled at four in 1889.
+    tags: [baseball, rules, opentdb]
+
+  - id: spo-043
+    difficulty: 1
+    prompt: In golf, what is a score of one under par on a hole called?
+    answer: A birdie
+    distractors: [An eagle, A bogey, An albatross]
+    fact: 'From American slang around 1900, where a "bird" was anything excellent. The better scores kept the theme: eagle for two under, albatross for three.'
+    tags: [golf]
+
+  - id: spo-044
+    difficulty: 2
+    prompt: Which boxer bit Evander Holyfield's ear in their 1997 rematch?
+    answer: Mike Tyson
+    distractors: [Lennox Lewis, Riddick Bowe, Michael Moorer]
+    fact: He bit both ears, was disqualified in the third round, and had his license revoked for fifteen months.
+    tags: [boxing, opentdb]
+
+  - id: spo-045
+    difficulty: 1
+    prompt: How many players does a baseball team have in the field at once?
+    answer: Nine
+    distractors: [Eight, Ten, Eleven]
+    fact: The positions have been numbered the same way for well over a century — pitcher one, catcher two, round to right field nine — which is why an old scorecard still reads.
+    tags: [baseball, rules]

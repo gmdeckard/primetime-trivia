@@ -105,3 +105,118 @@ questions:
     answer: A tenth-century Danish king
     distractors: [A radio frequency band, A Swedish engineering firm, An early naval signalling code]
     fact: Harald Bluetooth united Denmark and Norway, and the logo is his initials in runes.
+
+# The questions from here down came from the Easy Set One batch, folded into
+# this deck on 2026-11-05 so the easy end of the bank is reachable without the
+# MC switching a second pack on. Generated with claude-opus-5, fact-checked by
+# GPT-5 via Codex and by Claude Sonnet in a clean context, no human review.
+# Some were seeded by topic from OpenTDB (opentdb.com, CC BY-SA 4.0) and then
+# rewritten with new distractors and new fact lines. Old ids are mapped in
+# docs/EASY-SET-ONE.md.
+
+  - id: inv-059
+    difficulty: 1
+    prompt: What does CPU stand for?
+    answer: Central processing unit
+    distractors: [Computer processing unit, Central program unit, Core processing unit]
+    fact: The part that executes the instructions. A modern one is divided into several cores, each able to work on something different at the same time.
+    tags: [hardware, acronyms, opentdb]
+
+  - id: inv-060
+    difficulty: 2
+    prompt: What does LAN stand for?
+    answer: Local area network
+    distractors: [Linked access node, Line adapter network, Logical array network]
+    fact: Ethernet, the usual way of wiring one, dates from 1973 and still carries most wired office traffic half a century later.
+    tags: [networking, acronyms, opentdb]
+
+  - id: inv-061
+    difficulty: 1
+    prompt: On a Windows keyboard, which key combination copies what you have selected?
+    answer: Control-C
+    distractors: [Control-X, Control-V, Control-P]
+    fact: Control-X cuts and Control-V pastes. All three sit together at the bottom left of the keyboard, within reach of one hand.
+    tags: [software, opentdb]
+
+  - id: inv-062
+    difficulty: 2
+    prompt: What does SSD stand for in a computer specification?
+    answer: Solid state drive
+    distractors: [Static storage device, Serial storage drive, Secondary system disk]
+    fact: Solid state because nothing moves. The drive it replaced spun a magnetic platter under a head on an arm, so a knock while it was running could damage both.
+    tags: [hardware, acronyms, opentdb]
+
+  - id: inv-063
+    difficulty: 2
+    prompt: What does the IBM in IBM stand for?
+    answer: International Business Machines
+    distractors: [Integrated Business Methods, International Binary Machines, Industrial Business Manufacturing]
+    fact: It was the Computing-Tabulating-Recording Company until 1924. The business machines in question were scales, clocks and card punches.
+    tags: [companies, acronyms]
+
+  - id: inv-064
+    difficulty: 2
+    prompt: How much free storage did Gmail offer at launch, when rivals gave a few megabytes?
+    answer: One gigabyte
+    distractors: [One hundred megabytes, Ten gigabytes, Unlimited]
+    fact: It launched on April 1st, 2004, and the number was so far beyond the competition that much of the press assumed it was the joke.
+    tags: [internet, opentdb]
+
+  - id: inv-065
+    difficulty: 2
+    prompt: What was the original character limit for a message on Twitter?
+    answer: 140
+    distractors: [100, 160, 200]
+    fact: A text message held 160 characters, and twenty were reserved for the user name, which is the whole reason the limit was that particular number.
+    tags: [internet, opentdb]
+
+  - id: inv-066
+    difficulty: 2
+    prompt: What does HTML stand for?
+    answer: Hypertext markup language
+    distractors: [Hyperlink text management language, High-level text markup language, Hypertext machine language]
+    fact: Written by Tim Berners-Lee around 1990 at CERN, as one piece of the original web along with the first browser and the first server.
+    tags: [internet, acronyms]
+
+  - id: inv-067
+    difficulty: 2
+    prompt: What does a computer's clock speed in gigahertz measure?
+    answer: How many cycles it runs each second
+    distractors: [How much data it can store, How fast it reads a disk, How many programs it can run at once]
+    fact: One gigahertz is a billion cycles a second. Clock speeds levelled off around 2005, having climbed steeply for the twenty years before that.
+    tags: [hardware, opentdb]
+
+  - id: inv-068
+    difficulty: 1
+    prompt: What does a web browser do?
+    answer: Fetches pages from the internet and displays them
+    distractors: [Stores your files on the internet, Protects a computer from viruses, Connects a computer to a phone line]
+    fact: Mosaic, released in 1993, popularised pictures sitting inline with the text, and the team behind it went on to build Netscape.
+    tags: [internet]
+
+  - id: inv-069
+    difficulty: 2
+    prompt: What is a computer virus?
+    answer: A program that attaches itself to another program in order to spread
+    distractors: [A fault in a chip that spreads heat, An advertisement that cannot be closed, A file too large to delete]
+    fact: 'The name is borrowed deliberately: like the biological kind it cannot reproduce alone and needs a host. A worm, by contrast, travels between machines by itself.'
+    tags: [security]
+
+  - id: inv-070
+    difficulty: 2
+    prompt: What does it mean to say a company keeps your files "in the cloud"?
+    answer: They sit on someone else's computers, reached over the internet
+    distractors:
+      - They are broadcast over radio
+      - They are stored only in memory, never on a disk
+      - They are spread across your own devices
+    fact: The cloud in the name comes from network diagrams, where the part nobody wanted to draw in detail was sketched as a cloud.
+    tags: [internet]
+
+  - id: inv-071
+    difficulty: 2
+    prompt: Which Texas company sold computers built to order by telephone from a university dorm room in 1984?
+    answer: Dell
+    distractors: [Compaq, Gateway, Packard Bell]
+    fact: Michael Dell started it at nineteen, in Austin, and the idea was not the hardware but skipping the store and building only what was already sold.
+    tags: [companies]

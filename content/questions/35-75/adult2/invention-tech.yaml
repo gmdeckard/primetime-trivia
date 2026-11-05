@@ -253,3 +253,78 @@ questions:
     answer: Tupperware
     distractors: [The Thermos, Saran Wrap, The pressure cooker]
     fact: It sold badly in shops because nobody could work out how the seal was supposed to burp, and well at parties where somebody could show them. The party became the entire business.
+
+# The questions from here down came from the Easy Set One batch, folded into
+# this deck on 2026-11-05 so the easy end of the bank is reachable without the
+# MC switching a second pack on. Generated with claude-opus-5, fact-checked by
+# GPT-5 via Codex and by Claude Sonnet in a clean context, no human review.
+# Some were seeded by topic from OpenTDB (opentdb.com, CC BY-SA 4.0) and then
+# rewritten with new distractors and new fact lines. Old ids are mapped in
+# docs/EASY-SET-ONE.md.
+
+  - id: a2-inv-036
+    difficulty: 1
+    prompt: What did the cotton gin do?
+    answer: Separated cotton fibre from its seeds
+    distractors: [Spun cotton into thread, Wove cotton into cloth, Baled cotton for shipping]
+    fact: Doing it by hand took a day per pound. Making short-staple cotton profitable across the South expanded slavery rather than reducing the need for labour.
+    tags: [agriculture]
+
+  - id: a2-inv-037
+    difficulty: 1
+    prompt: Who brought the moving assembly line to car manufacturing?
+    answer: Henry Ford
+    distractors: [Ransom Olds, Walter Chrysler, William Durant]
+    fact: The moving line cut chassis assembly from about twelve hours to roughly ninety minutes, and he more than doubled the daily wage to stop workers walking out over the monotony.
+    tags: [manufacturing]
+
+  - id: a2-inv-038
+    difficulty: 2
+    prompt: What did interchangeable parts change about manufacturing?
+    answer: A part could be swapped in without being filed to fit
+    distractors: [Parts could be made from cheaper metals, Parts could be cast rather than forged, Parts no longer needed lubrication]
+    fact: It meant a broken rifle could be mended from a bin of spares instead of by a gunsmith cutting a new piece, which is why the armories pushed the idea hardest.
+    tags: [manufacturing]
+
+  - id: a2-inv-039
+    difficulty: 2
+    prompt: What did Robert Fulton run up the Hudson River in 1807?
+    answer: The first commercially successful steamboat
+    distractors: [The first iron-hulled ship, The first steam locomotive, The first canal barge]
+    fact: Steamboats had been built before his. His was the one that turned a route into a business, cutting a sail of several days to Albany down to about thirty hours.
+    tags: [transport]
+
+  - id: a2-inv-040
+    difficulty: 2
+    prompt: Which 1874 patent by Joseph Glidden changed how the American West was divided up?
+    answer: Barbed wire
+    distractors: [The windmill pump, The cattle brand, The steel fence post]
+    fact: Timber for fencing was scarce on the plains, and cheap wire let land be enclosed where it could not be fenced before. The range wars followed.
+    tags: [agriculture]
+
+  - id: a2-inv-041
+    difficulty: 2
+    prompt: What did Clarence Birdseye work out how to do commercially in the 1920s?
+    answer: Freeze food fast enough to keep its texture
+    distractors: [Can vegetables without boiling them, Pasteurize milk in the bottle, Dry fruit without sunlight]
+    fact: He got the idea watching Inuit fishermen in Labrador, where fish froze so quickly in the air that it tasted fresh when thawed months later.
+    tags: [food, inventors]
+
+  - id: a2-inv-042
+    difficulty: 2
+    prompt: What was the Slinky's inventor originally trying to build?
+    answer: A spring to steady instruments on a ship
+    distractors: [A toy for a trade fair, A door closer, A spring for a rifle]
+    fact: Richard James knocked a sample off a shelf in 1943 and watched it walk down a stack of books instead of falling.
+    tags: [toys]
+
+  - id: a2-inv-043
+    difficulty: 2
+    prompt: What were the first words reportedly spoken over a telephone, in 1876?
+    answer: '"Mr. Watson, come here, I want to see you"'
+    distractors:
+      - '"Can you hear me now"'
+      - '"Watson, the machine works"'
+      - '"Hello, hello, is anyone there"'
+    fact: Watson was in the next room, and it was a shout down a wire rather than a conversation. The words were written into a notebook the same evening.
+    tags: [communications]

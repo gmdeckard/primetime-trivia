@@ -248,3 +248,134 @@ questions:
     answer: NBA championships
     distractors: [Most rebounds in a game, Most seasons as an all-star, Most blocked shots]
     fact: He also became the first black head coach in any major American league, taking the job while still playing.
+
+# The questions from here down came from the Easy Set One batch, folded into
+# this deck on 2026-11-05 so the easy end of the bank is reachable without the
+# MC switching a second pack on. Generated with claude-opus-5, fact-checked by
+# GPT-5 via Codex and by Claude Sonnet in a clean context, no human review.
+# Some were seeded by topic from OpenTDB (opentdb.com, CC BY-SA 4.0) and then
+# rewritten with new distractors and new fact lines. Old ids are mapped in
+# docs/EASY-SET-ONE.md.
+
+  - id: a2-spo-036
+    difficulty: 1
+    prompt: How many points is a touchdown worth in American football?
+    answer: Six
+    distractors: [Seven, Three, Five]
+    fact: Six for the touchdown, then either a one-point kick or a two-point play from close range, so a scoring drive is worth six, seven or eight.
+    tags: [football, rules]
+
+  - id: a2-spo-037
+    difficulty: 1
+    prompt: How many strikes put a baseball batter out?
+    answer: Three
+    distractors: [Two, Four, Five]
+    fact: Three strikes and four balls were both settled by the late 1880s, and neither number has changed since — unusual among American sports rules.
+    tags: [baseball, rules]
+
+  - id: a2-spo-038
+    difficulty: 1
+    prompt: In bowling, what is three strikes in a row called?
+    answer: A turkey
+    distractors: [A hat trick, A split, A spare]
+    fact: The usual explanation is that tournaments in the 1800s handed out a live turkey for three in a row, though nobody has pinned the origin down for certain.
+    tags: [bowling, opentdb]
+
+  - id: a2-spo-039
+    difficulty: 2
+    prompt: In golf, what is a score of two under par on a hole called?
+    answer: An eagle
+    distractors: [A birdie, An albatross, A condor]
+    fact: Two under par on a hole is an eagle and three under is an albatross. The names climb as the score gets rarer.
+    tags: [golf, opentdb]
+
+  - id: a2-spo-040
+    difficulty: 1
+    prompt: Which sport is played on a diamond?
+    answer: Baseball
+    distractors: [Basketball, Hockey, Lacrosse]
+    fact: The bases sit ninety feet apart, a figure dating from 1857 — though the larger bases brought in for 2023 shaved a few inches off the gap between them.
+    tags: [baseball]
+
+  - id: a2-spo-041
+    difficulty: 2
+    prompt: In baseball, what does a pitcher throw when he deliberately throws wide of the plate four times?
+    answer: An intentional walk
+    distractors: [A balk, A wild pitch, A squeeze play]
+    fact: Since 2017 the manager can simply signal for it and no pitches are thrown at all, which removed the small chance of a wild throw getting away.
+    tags: [baseball, rules]
+
+  - id: a2-spo-042
+    difficulty: 2
+    prompt: Which ballpark is home to the Boston Red Sox?
+    answer: Fenway Park
+    distractors: [Yankee Stadium, Comiskey Park, Ebbets Field]
+    fact: Opened in 1912 and the oldest ballpark in Major League Baseball. Left field is barely 310 feet from the plate, and the wall there today is about thirty-seven feet of it.
+    tags: [baseball, stadiums]
+
+  - id: a2-spo-043
+    difficulty: 2
+    prompt: Which NFL team plays as New England?
+    answer: The Patriots
+    distractors: [The Bills, The Jets, The Dolphins]
+    fact: They were the Boston Patriots until 1971, when they moved to Foxborough — roughly halfway between Boston and Providence, which is why neither city is in the name.
+    tags: [football, opentdb]
+
+  - id: a2-spo-044
+    difficulty: 2
+    prompt: Which NFL team is nicknamed "America's Team"?
+    answer: The Dallas Cowboys
+    distractors: [The Green Bay Packers, The Chicago Bears, The New York Giants]
+    fact: The name is the title of their 1978 NFL Films highlight reel, and it has followed the franchise ever since.
+    tags: [football]
+
+  - id: a2-spo-045
+    difficulty: 2
+    prompt: In which sport is the Heisman Trophy awarded each year?
+    answer: College football
+    distractors: [College basketball, Major league baseball, Professional hockey]
+    fact: Awarded to the outstanding player in college football since 1935, and named the following year for John Heisman, a coach who had campaigned to make the forward pass legal.
+    tags: [football]
+
+  - id: a2-spo-046
+    difficulty: 2
+    prompt: Which race is billed as "The Greatest Spectacle in Racing"?
+    answer: The Indianapolis 500
+    distractors: [The Daytona 500, The Kentucky Derby, The Belmont Stakes]
+    fact: Two hundred laps of a two-and-a-half-mile oval, first run in 1911 and held every year since apart from the two world wars. The winner drinks milk because Louis Meyer did in 1936.
+    tags: [motorsport]
+
+  - id: a2-spo-047
+    difficulty: 2
+    prompt: Which NASCAR race opens the season each February?
+    answer: The Daytona 500
+    distractors: [The Coca-Cola 600, The Southern 500, The Brickyard 400]
+    fact: It has opened the Cup season since 1982. Before that the season began elsewhere and Daytona ran later in February.
+    tags: [motorsport]
+
+  - id: a2-spo-048
+    difficulty: 2
+    prompt: Which golf course hosts the Masters every April?
+    answer: Augusta National
+    distractors: [Pebble Beach, Pinehurst No. 2, Oakmont]
+    fact: The only one of the men’s majors played on the same course every year, which is why the room can picture the twelfth green without being told what it looks like.
+    tags: [golf]
+
+  - id: a2-spo-049
+    difficulty: 2
+    prompt: Which trophy does the winner of the Super Bowl receive?
+    answer: The Vince Lombardi Trophy
+    distractors:
+      - The Larry O'Brien Trophy
+      - The Commissioner's Trophy
+      - The Walter Payton Award
+    fact: Sterling silver, made by Tiffany, and a new one each year, so the winning team keeps the actual trophy rather than handing it back.
+    tags: [football, trophies]
+
+  - id: a2-spo-050
+    difficulty: 2
+    prompt: Who holds the NHL record for career points, with 2,857?
+    answer: Wayne Gretzky
+    distractors: [Gordie Howe, Mario Lemieux, Mark Messier]
+    fact: His assists alone would still lead the all-time points list, which is the statistic that best explains the gap between him and everyone else.
+    tags: [hockey, records, opentdb]

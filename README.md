@@ -269,12 +269,12 @@ entries.
 
 ## The question bank
 
-1919 questions as YAML in `content/questions/`, one folder per age group, a
+1998 questions as YAML in `content/questions/`, one folder per age group, a
 folder per question set inside that, and one file per category inside that:
 
 ```
-content/questions/35-75/adult1/geography.yaml  the adult room, 824 questions
-content/questions/35-75/adult2/geography.yaml  a second adult pack, 1000
+content/questions/35-75/adult1/geography.yaml  the adult room, 868 questions
+content/questions/35-75/adult2/geography.yaml  a second adult pack, 1035
 content/questions/8-12/kids1/…                 80
 content/questions/shared/tiebreakers.yaml      in play on every night
 ```

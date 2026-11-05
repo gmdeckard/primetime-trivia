@@ -256,3 +256,59 @@ questions:
     answer: Bug
     distractors: [Glitch, Crash, Fault]
     fact: Engineers had used the word for faults since at least Edison. The moth in the relay is remembered because somebody taped it into the logbook.
+
+# The questions from here down came from the Easy Set One batch, folded into
+# this deck on 2026-11-05 so the easy end of the bank is reachable without the
+# MC switching a second pack on. Generated with claude-opus-5, fact-checked by
+# GPT-5 via Codex and by Claude Sonnet in a clean context, no human review.
+# Some were seeded by topic from OpenTDB (opentdb.com, CC BY-SA 4.0) and then
+# rewritten with new distractors and new fact lines. Old ids are mapped in
+# docs/EASY-SET-ONE.md.
+
+  - id: a2-cmp-036
+    difficulty: 2
+    prompt: Which Apple founder designed the Apple I and Apple II computers?
+    answer: Steve Wozniak
+    distractors: [Steve Jobs, Ronald Wayne, Mike Markkula]
+    fact: Jobs sold them and Wozniak built them. A third founder, Ronald Wayne, sold his ten percent back twelve days in for eight hundred dollars.
+    tags: [companies, founders, opentdb]
+
+  - id: a2-cmp-037
+    difficulty: 1
+    prompt: Which company makes the Windows operating system?
+    answer: Microsoft
+    distractors: [IBM, Intel, Hewlett-Packard]
+    fact: Windows 1.0 shipped in 1985 as a graphical shell sitting on top of MS-DOS, and it was years before it became an operating system in its own right.
+    tags: [companies, software, opentdb]
+
+  - id: a2-cmp-038
+    difficulty: 2
+    prompt: What does Wi-Fi let a device do?
+    answer: Join a network without a cable
+    distractors: [Charge without a cable, Store its files on the internet, Make calls over a phone line]
+    fact: The name is a trademark coined by a branding firm and stands for nothing at all. It was chosen to sound like hi-fi.
+    tags: [companies, internet]
+
+  - id: a2-cmp-039
+    difficulty: 2
+    prompt: What does URL stand for in a web address?
+    answer: Uniform resource locator
+    distractors: [Universal reference link, Uniform retrieval language, Universal resource label]
+    fact: Uniform because the same form of address covers a web page, a file on a server and a good deal besides.
+    tags: [internet, acronyms]
+
+  - id: a2-cmp-040
+    difficulty: 2
+    prompt: Which company bought YouTube in 2006?
+    answer: Google
+    distractors: [Yahoo, Microsoft, AOL]
+    fact: One point six five billion dollars in stock, widely written up at the time as overpayment for a site that had barely begun to sell advertising.
+    tags: [internet, companies]
+
+  - id: a2-cmp-041
+    difficulty: 2
+    prompt: Which company produced the Macintosh, launched in 1984?
+    answer: Apple
+    distractors: [Commodore, Atari, Tandy]
+    fact: It was named after the McIntosh apple, with the spelling altered to stay clear of the audio company McIntosh Laboratory.
+    tags: [companies, hardware]

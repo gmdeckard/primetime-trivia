@@ -49,3 +49,123 @@ questions:
     answer: Sharp
     distractors: [Nokia, Motorola, Samsung]
     fact: The J-SH04 sold only in Japan and took pictures at 0.1 megapixels, which is smaller than a modern thumbnail.
+
+# The questions from here down came from the Easy Set One batch, folded into
+# this deck on 2026-11-05 so the easy end of the bank is reachable without the
+# MC switching a second pack on. Generated with claude-opus-5, fact-checked by
+# GPT-5 via Codex and by Claude Sonnet in a clean context, no human review.
+# Some were seeded by topic from OpenTDB (opentdb.com, CC BY-SA 4.0) and then
+# rewritten with new distractors and new fact lines. Old ids are mapped in
+# docs/EASY-SET-ONE.md.
+
+  - id: inv-045
+    difficulty: 2
+    prompt: In which year did the first iPhone go on sale?
+    answer: 2007
+    distractors: [2005, 2009, 2004]
+    fact: Announced in January and sold in June. It could not record video or send a picture message, and there was no App Store — outside apps arrived a year later.
+    tags: [phones, opentdb]
+
+  - id: inv-046
+    difficulty: 1
+    prompt: Which company's voice assistant answers to the name Alexa?
+    answer: Amazon
+    distractors: [Google, Apple, Microsoft]
+    fact: Amazon picked a name with a hard X in it because that consonant is easier to pick out reliably. It will also answer to Echo, Computer or Ziggy if you change the setting.
+    tags: [opentdb]
+
+  - id: inv-047
+    difficulty: 2
+    prompt: What did the RCA in RCA Victor stand for?
+    answer: Radio Corporation of America
+    distractors: [Recording Company of America, Radio Communications Associates, Radio Components of America]
+    fact: Founded in 1919 to keep American radio patents out of foreign hands, and for decades it owned both the records and the players.
+    tags: [audio, acronyms]
+
+  - id: inv-048
+    difficulty: 2
+    prompt: What does the "hi-fi" in a hi-fi system stand for?
+    answer: High fidelity
+    distractors: [High frequency, High filtration, High finish]
+    fact: Fidelity to the original performance. It was a marketing claim before it was a measurement, and the industry spent the 1950s arguing over what it meant.
+    tags: [audio]
+
+  - id: inv-049
+    difficulty: 2
+    prompt: What does the AM on a radio dial stand for?
+    answer: Amplitude modulation
+    distractors: [Audio modulation, Analog modulation, Ambient modulation]
+    fact: FM is frequency modulation, invented by the American engineer Edwin Armstrong, and it resists the static that lightning puts into an AM signal.
+    tags: [radio, acronyms]
+
+  - id: inv-050
+    difficulty: 2
+    prompt: Which game put Atari on the map in 1972, in bars before it reached living rooms?
+    answer: Pong
+    distractors: [Space Invaders, Breakout, Asteroids]
+    fact: Atari tested the prototype in a Sunnyvale tavern in 1972 with a milk carton catching the quarters, and the story goes that it jammed once the carton overflowed.
+    tags: [games]
+
+  - id: inv-051
+    difficulty: 1
+    prompt: What does a turntable spin?
+    answer: A record
+    distractors: [A tape reel, A compact disc, A film reel]
+    fact: An LP turns at thirty-three and a third revolutions a minute, a speed already used for radio transcription discs before Columbia adopted it for the LP in 1948.
+    tags: [audio]
+
+  - id: inv-052
+    difficulty: 1
+    prompt: What was an answering machine for?
+    answer: Recording calls that came in while you were out
+    distractors: [Dialing numbers automatically, Screening calls from a list, Letting two people call at once]
+    fact: Before the phone company offered voicemail, the machine sat by the door and you came home to a blinking light and a count of what you had missed.
+    tags: [phones]
+
+  - id: inv-053
+    difficulty: 2
+    prompt: What were "rabbit ears" on top of a television set?
+    answer: An indoor antenna
+    distractors: [A pair of speakers, A channel selector, An early remote sensor]
+    fact: Two telescoping rods you angled by hand, and the reason a generation of Americans learned that standing in a particular spot improved the picture.
+    tags: [television]
+
+  - id: inv-054
+    difficulty: 2
+    prompt: What did Apple promise the first iPod would put in your pocket?
+    answer: A thousand songs
+    distractors: [Ten thousand songs, A hundred albums, Your whole record collection]
+    fact: 'Five gigabytes in 2001. The line worked because it was concrete: it said what the thing would do rather than what was inside it.'
+    tags: [audio]
+
+  - id: inv-055
+    difficulty: 2
+    prompt: In which year did DVD players first reach American stores?
+    answer: 1997
+    distractors: [1993, 2000, 1995]
+    fact: Players arrived in March, in seven test cities only, and the studios held most films back until they were satisfied the discs could be protected.
+    tags: [video]
+
+  - id: inv-056
+    difficulty: 2
+    prompt: What did a digital video recorder such as TiVo add that a VCR could not manage?
+    answer: Pausing and rewinding a live broadcast
+    distractors: [Record onto a tape you could keep, Record in color, Play rental tapes]
+    fact: It records continuously to a hard disk, so pausing live television really means playing back from that disk a few seconds behind the broadcast.
+    tags: [video]
+
+  - id: inv-057
+    difficulty: 1
+    prompt: What does a stereo system use two channels to do?
+    answer: Place sounds between the left and right speakers
+    distractors: [Play twice as loud, Play two records at once, Separate music from speech]
+    fact: Stereo records reached American shops in 1958, and for several years labels pressed both versions because most people still owned one speaker.
+    tags: [audio]
+
+  - id: inv-058
+    difficulty: 2
+    prompt: What was a Victrola?
+    answer: A record player in a wooden cabinet
+    distractors: [An early television, A home radio transmitter, A coin-operated piano]
+    fact: Sold from 1906 with the horn folded away inside the cabinet, so it could sit in a parlour as furniture rather than as equipment.
+    tags: [audio]

@@ -253,3 +253,62 @@ questions:
     answer: Betamax against VHS
     distractors: [MiniDisc against DAT, LaserDisc against CED, Memory Stick against SD]
     fact: The rival allowed a longer tape, which mattered more to buyers than picture quality because a whole film had to fit on one cassette.
+
+# The questions from here down came from the Easy Set One batch, folded into
+# this deck on 2026-11-05 so the easy end of the bank is reachable without the
+# MC switching a second pack on. Generated with claude-opus-5, fact-checked by
+# GPT-5 via Codex and by Claude Sonnet in a clean context, no human review.
+# Some were seeded by topic from OpenTDB (opentdb.com, CC BY-SA 4.0) and then
+# rewritten with new distractors and new fact lines. Old ids are mapped in
+# docs/EASY-SET-ONE.md.
+
+  - id: a2-cel-036
+    difficulty: 1
+    prompt: What did a VCR let a household do with a television programme?
+    answer: Record television off the air to watch later
+    distractors: [Receive more channels, Play music through the television, Pause a live broadcast]
+    fact: Betamax reached America in 1975 and VHS in 1977, and neither machine could play the other’s tapes — which is what made the choice matter.
+    tags: [video]
+
+  - id: a2-cel-037
+    difficulty: 2
+    prompt: Which one word did Apple use to describe removing the headphone jack from the iPhone?
+    answer: Courage
+    distractors: [Vision, Simplicity, Progress]
+    fact: Said on stage by Phil Schiller in 2016 alongside the iPhone 7, and quoted back at the company ever since.
+    tags: [phones, opentdb]
+
+  - id: a2-cel-038
+    difficulty: 2
+    prompt: Which 1972 machine was the first home video game console sold in America?
+    answer: The Magnavox Odyssey
+    distractors: [The Atari 2600, The Coleco Telstar, The Fairchild Channel F]
+    fact: It had no sound and could not keep score, so it shipped with dice, play money and plastic overlays that clung to the television screen by static.
+    tags: [games]
+
+  - id: a2-cel-039
+    difficulty: 2
+    prompt: Which company sold the Brownie, the camera that made snapshots ordinary?
+    answer: Kodak
+    distractors: [Polaroid, Bell & Howell, Agfa]
+    fact: It went on sale in 1900 for one dollar and was marketed at children, which put a camera into households that had never owned one.
+    tags: [cameras]
+
+  - id: a2-cel-040
+    difficulty: 1
+    prompt: What did a jukebox do when you put a coin in it?
+    answer: Played a record you chose
+    distractors:
+      - Printed a song's words
+      - Recorded your voice
+      - Tuned a radio to a station
+    fact: At its 1940s peak there were hundreds of thousands of them in American bars and diners, and they were a large part of what a label counted as sales.
+    tags: [audio]
+
+  - id: a2-cel-041
+    difficulty: 2
+    prompt: Why was a television remote control nicknamed the clicker?
+    answer: The early ones made an audible click
+    distractors: [It clicked through channels in order, The buttons were unusually stiff, It was named after its inventor]
+    fact: The early wireless models struck small metal rods to make an ultrasonic tone, and the strike itself was loud enough to hear across the room.
+    tags: [television]

@@ -163,8 +163,9 @@ question's answer outright.
 
 ## Not yet done
 
-- **No second-model fact-check.** `easy1` was checked by GPT-5 via Codex and by
-  Claude Sonnet in a clean context. This deck has not been. The answers are the
+- **No second-model fact-check.** The Easy Set One batch was checked by GPT-5
+  via Codex and by Claude Sonnet in a clean context (it has since been folded
+  into adult1 and adult2; see `docs/EASY-SET-ONE.md`). This deck has not been. The answers are the
   card's; the distractors and every `fact` line were written here and have had
   one pass by one model. `npm run fact-check` is the existing route.
 - **The difficulty numbers are a first guess.** The deck skews hard: a lot of
