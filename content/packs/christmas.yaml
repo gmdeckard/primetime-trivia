@@ -1,0 +1,1266 @@
+# The Christmas Deck
+#
+# Transcribed from a physical card game: 'Tis The Season Christmas Trivia,
+# sixteen cards scanned front and back (christmas/c1.pdf, c2.pdf, c3.pdf).
+# Six questions a card, one per category, and the six categories are the ones
+# printed on the box — the star, candy cane, tree, log, candle and ornament
+# that run down the left edge of every card, in that order.
+#
+# The cards were written for a human reading them aloud and judging the
+# answer. This is four buttons on a phone, so the deck is not a literal
+# transcription: every binary card ("six or eighteen?") gained two more
+# options, every answer gained three distractors, and a handful of prompts
+# were rewritten to stand on their own. Eight cards were cut outright.
+# Every rewrite and every cut is listed in docs/CHRISTMAS-DECK.md against the
+# original card text, so any of them can be put back.
+#
+# Switch it on under Questions for a December theme night and switch the
+# other sets off. Six categories, so set questions per round to 6: a round is
+# then exactly one card.
+pack:
+  id: christmas
+  name: The Christmas Deck
+  audience: 35-75
+  created: 2026-11-05
+  origin: transcribed
+  model: claude-opus-5 (Claude Code session)
+  reviewedBy: transcribed from the printed cards; distractors written fresh — no second-model fact-check yet
+  notes: >-
+    88 questions from 96 printed cards, taken from 'Tis The Season Christmas
+    Trivia, a boxed card game. Answers are the ones printed on the back of each
+    card except where docs/CHRISTMAS-DECK.md records otherwise.
+
+questions:
+  # ---- Card 1 ----
+  - id: xmas-001
+    category: xmas-history
+    difficulty: 3
+    prompt: What city merged with New York City on New Year's Day 1898 to form the City of New York?
+    answer: Brooklyn
+    distractors:
+      - Yonkers
+      - Jersey City
+      - Newark
+    fact: Brooklyn was the fourth-largest city in the country on its last day as a city. The same merger took in Queens, Staten Island and the Bronx.
+    tags:
+      - new-york
+      - new-year
+
+  - id: xmas-002
+    category: xmas-traditions
+    difficulty: 2
+    prompt: In what Iberian country is the Urn of Fate a seasonal matchmaking tradition?
+    answer: Spain
+    distractors:
+      - Portugal
+      - Andorra
+      - Gibraltar
+    fact: Names go into a bowl and are drawn out in pairs. Italy keeps a version of the same custom, which is why the card asks for the Iberian one.
+    tags:
+      - spain
+      - customs
+
+  - id: xmas-003
+    category: xmas-animation
+    difficulty: 2
+    prompt: What monster did everyone fear in Rudolph the Red-Nosed Reindeer?
+    answer: The Abominable Snow Monster
+    distractors:
+      - The Ice Troll
+      - The Frost Giant
+      - The Snow Queen
+    fact: Bumble, to his friends. He turns harmless once Hermey pulls his teeth, and ends the special putting the star on the tree.
+    tags:
+      - rudolph
+      - rankin-bass
+
+  - id: xmas-004
+    category: xmas-carols
+    difficulty: 3
+    prompt: What acronym carol did Eddy Arnold record, spelling the holiday out one letter at a time?
+    answer: C-H-R-I-S-T-M-A-S
+    distractors:
+      - N-O-E-L
+      - S-A-N-T-A
+      - M-I-S-T-L-E-T-O-E
+    fact: A 1949 country hit. Each letter gets its own line, which is the whole trick of the song.
+    tags:
+      - country
+      - 1940s
+
+  - id: xmas-005
+    category: xmas-movies
+    difficulty: 3
+    prompt: Who portrayed the young daughter with a poor outlook on life in Tenth Avenue Angel?
+    answer: Margaret O'Brien
+    distractors:
+      - Shirley Temple
+      - Natalie Wood
+      - Elizabeth Taylor
+    fact: O'Brien was MGM's child star of the 1940s and had already played opposite Judy Garland in Meet Me in St. Louis.
+    tags:
+      - 1940s
+      - mgm
+
+  - id: xmas-006
+    category: xmas-stage
+    difficulty: 3
+    prompt: What Christmas treat yearly awaits children at the Metropolitan Opera House?
+    answer: Hansel und Gretel
+    distractors:
+      - The Nutcracker
+      - Amahl and the Night Visitors
+      - A Christmas Carol
+    fact: Humperdinck's opera, first staged in 1893 and a holiday fixture in New York ever since.
+    tags:
+      - opera
+      - new-york
+
+  # ---- Card 2 ----
+  - id: xmas-007
+    category: xmas-history
+    difficulty: 2
+    prompt: What was Dr. Joel Roberts Poinsett's contribution to U.S. Christmas tradition?
+    answer: The poinsettia
+    distractors:
+      - The Christmas card
+      - The electric tree light
+      - The candy cane
+    fact: Poinsett was the first American minister to Mexico and sent the plant home in the 1820s. The flower took his name, not the other way round.
+    tags:
+      - plants
+      - mexico
+
+  - id: xmas-008
+    category: xmas-traditions
+    difficulty: 2
+    prompt: Do French children find their presents in stockings or shoes?
+    answer: Their shoes
+    distractors:
+      - Their stockings
+      - Under the tree
+      - On the windowsill
+    fact: Shoes go by the fireplace for Pere Noel. The custom runs through much of continental Europe; the hung stocking is the English-speaking version.
+    tags:
+      - france
+      - customs
+
+  - id: xmas-009
+    category: xmas-animation
+    difficulty: 4
+    prompt: What Shirley Jones spouse provided the voice of Bob Cratchit in Mr. Magoo's Christmas Carol?
+    answer: Jack Cassidy
+    distractors:
+      - David Cassidy
+      - Jim Backus
+      - Gene Kelly
+    fact: Jim Backus was Magoo himself, and so Scrooge. Cassidy sang the clerk's numbers in what was the first animated Christmas special made for television.
+    tags:
+      - magoo
+      - 1962
+
+  - id: xmas-010
+    category: xmas-carols
+    difficulty: 2
+    prompt: What carol contains the line "Westward leading, still proceeding"?
+    answer: We Three Kings of Orient Are
+    distractors:
+      - O Little Town of Bethlehem
+      - The First Noel
+      - Angels We Have Heard on High
+    fact: Written by an American clergyman in 1857 for a seminary pageant, and one of the few standard carols written on this side of the Atlantic.
+    tags:
+      - magi
+      - lyrics
+
+  - id: xmas-011
+    category: xmas-movies
+    difficulty: 3
+    prompt: How many days was the sailor adrift in Christmas in Connecticut?
+    answer: Eighteen
+    distractors:
+      - Six
+      - Twelve
+      - Thirty
+    fact: The 1945 comedy opens with his rescue, which is what sets up the whole fraud about the farmhouse and the cooking.
+    tags:
+      - 1940s
+      - comedy
+
+  - id: xmas-012
+    category: xmas-stage
+    difficulty: 2
+    prompt: What Wonderland creator wrote "Christmas Greetings from a Fairy to a Child"?
+    answer: Lewis Carroll
+    distractors:
+      - J.M. Barrie
+      - L. Frank Baum
+      - Hans Christian Andersen
+    fact: Carroll had the verse printed and tucked into copies of his own books as a seasonal gift to young readers.
+    tags:
+      - poetry
+      - victorian
+
+  # ---- Card 3 ----
+  - id: xmas-013
+    category: xmas-history
+    difficulty: 1
+    prompt: According to the Gospels, what did the Wise Men bring?
+    answer: Gold, frankincense and myrrh
+    distractors:
+      - Gold, silver and spices
+      - Frankincense, myrrh and oil
+      - Gold, myrrh and salt
+    fact: Matthew names the three gifts but never says how many men carried them. The count of three comes from the gifts.
+    tags:
+      - nativity
+      - magi
+
+  - id: xmas-014
+    category: xmas-animation
+    difficulty: 2
+    prompt: In the animated story The Tiny Tree, what does the tree finally become?
+    answer: A beautiful Christmas tree
+    distractors:
+      - Firewood
+      - A ship's mast
+      - A bird's nest
+    fact: A 1975 special narrated by Buddy Ebsen, about a small tree and a girl who cannot walk.
+    tags:
+      - 1970s
+      - specials
+
+  - id: xmas-015
+    category: xmas-carols
+    difficulty: 2
+    prompt: Which Christmas novelty song has the singer confessing "I ain't been nuttin' but bad"?
+    answer: Nuttin' for Christmas
+    distractors:
+      - I Saw Mommy Kissing Santa Claus
+      - Grandma Got Run Over by a Reindeer
+      - All I Want for Christmas Is My Two Front Teeth
+    fact: A 1955 hit sung by six-year-old Barry Gordon, whose list of offences includes putting a tack on teacher's chair.
+    tags:
+      - novelty
+      - 1950s
+
+  - id: xmas-016
+    category: xmas-movies
+    difficulty: 3
+    prompt: In The Santa Clause, what overnight package company delivers the lists of good and bad boys and girls?
+    answer: Federal Express
+    distractors:
+      - UPS
+      - DHL
+      - The U.S. Postal Service
+    fact: The joke is that the North Pole outsources its logistics. The 1994 film was Tim Allen's first lead.
+    tags:
+      - 1990s
+      - comedy
+
+  - id: xmas-017
+    category: xmas-stage
+    difficulty: 2
+    prompt: In "The Night Before Christmas," the narrator springs from his bed to see what?
+    answer: What was the matter
+    distractors:
+      - Whether the children were asleep
+      - Who was at the door
+      - If the fire had gone out
+    fact: The line is "I sprang from the bed to see what was the matter." He opens the shutters and throws up the sash in the next couplet.
+    tags:
+      - poetry
+      - moore
+
+  # ---- Card 4 ----
+  - id: xmas-018
+    category: xmas-history
+    difficulty: 3
+    prompt: On what day of the week was it once considered lucky for Christmas to fall?
+    answer: Sunday
+    distractors:
+      - Monday
+      - Friday
+      - Saturday
+    fact: Medieval almanacs read fortunes for the whole year off the day Christmas landed on, and Sunday was the best of them.
+    tags:
+      - folklore
+      - calendar
+
+  - id: xmas-019
+    category: xmas-traditions
+    difficulty: 2
+    prompt: The Grotto of the Nativity is considered the location of what event?
+    answer: The birth of Jesus Christ
+    distractors:
+      - The visit of the Magi
+      - The flight into Egypt
+      - The Annunciation
+    fact: It sits beneath the Church of the Nativity in Bethlehem, and a silver star on the floor marks the spot.
+    tags:
+      - bethlehem
+      - nativity
+
+  - id: xmas-020
+    category: xmas-animation
+    difficulty: 4
+    prompt: Home for the Holidays marked the final screen appearance of what Real McCoys grandpa?
+    answer: Walter Brennan
+    distractors:
+      - Buddy Ebsen
+      - Andy Devine
+      - Edgar Buchanan
+    fact: Brennan won three supporting-actor Oscars before television made him Grandpa Amos. The 1972 TV movie was his last.
+    tags:
+      - television
+      - 1970s
+
+  - id: xmas-021
+    category: xmas-carols
+    difficulty: 3
+    prompt: In "The Most Wonderful Day of the Year," what does a packful of toys mean?
+    answer: A sackful of joys
+    distractors:
+      - A houseful of boys
+      - A world full of noise
+      - A night full of stars
+    fact: The song is the misfit toys' number from Rudolph the Red-Nosed Reindeer, sung as they wait on the island for somebody to want them.
+    tags:
+      - rudolph
+      - lyrics
+
+  - id: xmas-022
+    category: xmas-movies
+    difficulty: 1
+    prompt: In It's A Wonderful Life, who starred as George Bailey?
+    answer: Jimmy Stewart
+    distractors:
+      - Henry Fonda
+      - Gary Cooper
+      - Joseph Cotten
+    fact: Stewart's first film after the war, and he had genuine doubts about whether he could still act when he took it.
+    tags:
+      - capra
+      - 1946
+
+  - id: xmas-023
+    category: xmas-stage
+    difficulty: 3
+    prompt: In Little House in the Big Woods, were the Christmas breakfast pancakes shaped as trees or men?
+    answer: Men
+    distractors:
+      - Trees
+      - Stars
+      - Bells
+    fact: Ma made one for each child. The Christmas chapter is the one most readers remember out of the whole book.
+    tags:
+      - wilder
+      - books
+
+  # ---- Card 5 ----
+  - id: xmas-024
+    category: xmas-history
+    difficulty: 2
+    prompt: Louis Prang is generally credited with popularizing what Christmas tradition in America?
+    answer: The Christmas card
+    distractors:
+      - The gift tag
+      - The Advent calendar
+      - The ribbon bow
+    fact: A Boston lithographer who was printing them by the million from the 1870s, decades before Hallmark existed.
+    tags:
+      - printing
+      - 1870s
+
+  - id: xmas-025
+    category: xmas-traditions
+    difficulty: 2
+    prompt: In which Nordic country does a mayor publicly announce the start of Christmas each year?
+    answer: Finland
+    distractors:
+      - Sweden
+      - Norway
+      - Denmark
+    fact: The declaration of Christmas Peace is read out at midday on Christmas Eve and broadcast nationally. It has been read in Turku since the Middle Ages.
+    tags:
+      - finland
+      - customs
+
+  - id: xmas-026
+    category: xmas-animation
+    difficulty: 3
+    prompt: What elegant dancer starred in the television film The Man in the Santa Claus Suit?
+    answer: Fred Astaire
+    distractors:
+      - Gene Kelly
+      - Donald O'Connor
+      - Ray Bolger
+    fact: Astaire plays several parts in the 1979 film, all of them the same man in the same rented suit.
+    tags:
+      - television
+      - 1979
+
+  - id: xmas-027
+    category: xmas-carols
+    difficulty: 2
+    prompt: What street does Santa Claus come down?
+    answer: Santa Claus Lane
+    distractors:
+      - Candy Cane Lane
+      - Christmas Tree Lane
+      - Jingle Bell Road
+    fact: From Gene Autry's "Here Comes Santa Claus," which he wrote after riding in a Los Angeles parade and hearing children shout the line at him.
+    tags:
+      - autry
+      - lyrics
+
+  - id: xmas-028
+    category: xmas-movies
+    difficulty: 4
+    prompt: In Meet John Doe, from what city building was John Doe going to jump?
+    answer: City Hall
+    distractors:
+      - The courthouse
+      - The train station
+      - The cathedral
+    fact: On Christmas Eve, in front of the people who believed in him. Capra shot several endings and was unhappy with all of them.
+    tags:
+      - capra
+      - 1941
+
+  - id: xmas-029
+    category: xmas-stage
+    difficulty: 3
+    prompt: In Little Women, who gets slippers, handkerchiefs, cologne, and gloves for Christmas?
+    answer: Marmee
+    distractors:
+      - Jo
+      - Beth
+      - Aunt March
+    fact: The girls spend their own money on their mother, having already given away the Christmas breakfast to a hungry family down the road.
+    tags:
+      - alcott
+      - books
+
+  # ---- Card 6 ----
+  - id: xmas-030
+    category: xmas-animation
+    difficulty: 2
+    prompt: Which song did Burl Ives sing as the snowman narrator of Rudolph the Red-Nosed Reindeer?
+    answer: A Holly Jolly Christmas
+    distractors:
+      - Frosty the Snowman
+      - Here Comes Santa Claus
+      - Winter Wonderland
+    fact: Ives sang three in the special. This is the one that became a standing hit on its own.
+    tags:
+      - rudolph
+      - burl-ives
+
+  - id: xmas-031
+    category: xmas-carols
+    difficulty: 2
+    prompt: '"Jingle bells chime in jingle bell time" is a line from what song?'
+    answer: Jingle-Bell Rock
+    distractors:
+      - Jingle Bells
+      - Sleigh Ride
+      - Rockin' Around the Christmas Tree
+    fact: Bobby Helms recorded it in 1957, and it has charted somewhere almost every December since.
+    tags:
+      - 1950s
+      - lyrics
+
+  - id: xmas-032
+    category: xmas-movies
+    difficulty: 2
+    prompt: In the movie Prancer, which reindeer fell and broke on the road pavement?
+    answer: Prancer
+    distractors:
+      - Dancer
+      - Vixen
+      - Donner
+    fact: A wooden reindeer from a street display, knocked loose and left in the road, which is how the girl gets the idea in the first place.
+    tags:
+      - 1989
+      - family
+
+  - id: xmas-033
+    category: xmas-stage
+    difficulty: 2
+    prompt: Who is late for work on December 26, Scrooge or Cratchit?
+    answer: Bob Cratchit
+    distractors:
+      - Ebenezer Scrooge
+      - Fred
+      - Tiny Tim
+    fact: Eighteen and a half minutes late, and braced for the sack. Scrooge raises his salary instead.
+    tags:
+      - dickens
+      - carol
+
+  # ---- Card 7 ----
+  - id: xmas-034
+    category: xmas-history
+    difficulty: 1
+    prompt: What popular Christmas toy was named after Theodore Roosevelt?
+    answer: The teddy bear
+    distractors:
+      - The rocking horse
+      - The jack-in-the-box
+      - The Lincoln Log
+    fact: Named after a 1902 hunting trip on which Roosevelt refused to shoot a bear that had been tied to a tree for him.
+    tags:
+      - toys
+      - roosevelt
+
+  - id: xmas-035
+    category: xmas-traditions
+    difficulty: 3
+    prompt: Admired by the Swedes, what nationality was St. Lucia?
+    answer: Italian
+    distractors:
+      - Swedish
+      - Norwegian
+      - Greek
+    fact: A Sicilian martyr of the fourth century, kept as a festival of light in a country that barely sees the sun in December.
+    tags:
+      - sweden
+      - saints
+
+  - id: xmas-036
+    category: xmas-animation
+    difficulty: 1
+    prompt: In A Charlie Brown Christmas, does Charlie Brown or Snoopy direct the Christmas play?
+    answer: Charlie Brown
+    distractors:
+      - Snoopy
+      - Linus
+      - Lucy
+    fact: Lucy hands him the job to cheer him up. It does not work, and the tree does not help either.
+    tags:
+      - peanuts
+      - 1965
+
+  - id: xmas-037
+    category: xmas-carols
+    difficulty: 2
+    prompt: In "Winter Wonderland" the lovestruck couple pretends a snowman is who?
+    answer: Parson Brown
+    distractors:
+      - Farmer Gray
+      - Preacher Jones
+      - Sheriff White
+    fact: He asks whether they are married, and they say they will say yes when they are in town. Later versions swapped the verse for a circus clown.
+    tags:
+      - lyrics
+      - 1934
+
+  - id: xmas-038
+    category: xmas-movies
+    difficulty: 4
+    prompt: What was the quasi-sequel to Going My Way?
+    answer: The Bells of St. Mary's
+    distractors:
+      - Holiday Inn
+      - The Song of Bernadette
+      - Boys Town
+    fact: Bing Crosby plays the same priest, Father O'Malley, moved to a new parish and up against Ingrid Bergman.
+    tags:
+      - crosby
+      - 1945
+
+  - id: xmas-039
+    category: xmas-stage
+    difficulty: 4
+    prompt: In the Miracle on 34th Street novel, what do the reindeer in Central Park do when Kris Kringle visits?
+    answer: They eat out of his hand
+    distractors:
+      - They bow their heads
+      - They fly away
+      - They follow him home
+    fact: Valentine Davies wrote the book and the screen story together, and the novel came out the same year as the film.
+    tags:
+      - books
+      - 1947
+
+  # ---- Card 8 ----
+  - id: xmas-040
+    category: xmas-history
+    difficulty: 2
+    prompt: Who was president during Christmas 1958?
+    answer: Dwight Eisenhower
+    distractors:
+      - Harry Truman
+      - John F. Kennedy
+      - Lyndon Johnson
+    fact: Eisenhower's second term. That same month he had a satellite broadcast his Christmas greeting from orbit, the first human voice relayed from space.
+    tags:
+      - presidents
+      - 1950s
+
+  - id: xmas-041
+    category: xmas-traditions
+    difficulty: 3
+    prompt: In Bulgaria, what is Nova Godina?
+    answer: New Year's Day
+    distractors:
+      - Christmas Eve
+      - The Feast of St. Nicholas
+      - Epiphany
+    fact: Children go door to door tapping their elders on the back with a decorated stick and wishing them health for the year.
+    tags:
+      - bulgaria
+      - new-year
+
+  - id: xmas-042
+    category: xmas-animation
+    difficulty: 1
+    prompt: In How the Grinch Stole Christmas, who was the littlest Who?
+    answer: Cindy Lou
+    distractors:
+      - Betty Lou
+      - Sally Lou
+      - Mary Lou
+    fact: No more than two, as the book puts it. She catches the Grinch at the tree and he talks his way out of it.
+    tags:
+      - seuss
+      - 1966
+
+  - id: xmas-043
+    category: xmas-carols
+    difficulty: 3
+    prompt: Who yelled "Stop" to Frosty?
+    answer: The traffic cop
+    distractors:
+      - The schoolteacher
+      - Professor Hinkle
+      - The stationmaster
+    fact: He ran down to the village with a broomstick in his hand, running here and there all around the square, until the law caught up with him.
+    tags:
+      - frosty
+      - lyrics
+
+  - id: xmas-044
+    category: xmas-movies
+    difficulty: 3
+    prompt: Who portrayed the angel in It's A Wonderful Life?
+    answer: Henry Travers
+    distractors:
+      - Thomas Mitchell
+      - Lionel Barrymore
+      - Ward Bond
+    fact: Clarence Odbody, angel second class, still waiting on his wings after two hundred years.
+    tags:
+      - capra
+      - 1946
+
+  - id: xmas-045
+    category: xmas-stage
+    difficulty: 4
+    prompt: Amahl's mother stole gold or myrrh from Melchior?
+    answer: The gold
+    distractors:
+      - The myrrh
+      - The frankincense
+      - The crown
+    fact: She takes it for her crippled son, and the Kings forgive her. Menotti wrote the opera for television in 1951, the first ever commissioned for it.
+    tags:
+      - opera
+      - menotti
+
+  # ---- Card 9 ----
+  - id: xmas-046
+    category: xmas-history
+    difficulty: 2
+    prompt: What margarita-loving singer was born on Christmas Day, 1946?
+    answer: Jimmy Buffett
+    distractors:
+      - Jimmy Dean
+      - Kenny Chesney
+      - Alan Jackson
+    fact: Born in Pascagoula, Mississippi. "Margaritaville" came nearly thirty years later and paid for everything after it.
+    tags:
+      - birthdays
+      - music
+
+  - id: xmas-047
+    category: xmas-traditions
+    difficulty: 2
+    prompt: On what December date are gifts exchanged in Holland?
+    answer: December 5
+    distractors:
+      - December 6
+      - December 8
+      - December 24
+    fact: Sinterklaas eve. Sinterklaas arrives by steamboat from Spain weeks earlier, which is the part Dutch children watch on television.
+    tags:
+      - netherlands
+      - customs
+
+  - id: xmas-048
+    category: xmas-animation
+    difficulty: 4
+    prompt: Who, in a 1982 special featuring his own name, portrayed all the characters in A Christmas Carol?
+    answer: Rich Little
+    distractors:
+      - Mel Blanc
+      - Jonathan Winters
+      - Danny Kaye
+    fact: 'Little played every part as a different celebrity impression: his Scrooge is W.C. Fields.'
+    tags:
+      - impressions
+      - 1982
+
+  - id: xmas-049
+    category: xmas-carols
+    difficulty: 2
+    prompt: What carol contains the line "Come and behold Him, born the King of Angels"?
+    answer: O Come, All Ye Faithful
+    distractors:
+      - Hark! The Herald Angels Sing
+      - Angels We Have Heard on High
+      - Joy to the World
+    fact: It began as the Latin hymn Adeste Fideles, and the English words most churches sing date from the 1840s.
+    tags:
+      - lyrics
+      - hymns
+
+  - id: xmas-050
+    category: xmas-movies
+    difficulty: 3
+    prompt: Who portrayed John Doe in Meet John Doe?
+    answer: Gary Cooper
+    distractors:
+      - James Stewart
+      - Henry Fonda
+      - Spencer Tracy
+    fact: Cooper plays a broke ballplayer hired to be the face of a letter nobody actually wrote.
+    tags:
+      - capra
+      - 1941
+
+  - id: xmas-051
+    category: xmas-stage
+    difficulty: 4
+    prompt: How many Christmases are described in Margaret Mitchell's Gone With the Wind?
+    answer: Two
+    distractors:
+      - One
+      - Three
+      - Five
+    fact: Both fall in wartime, and the second is the furlough Christmas at Tara.
+    tags:
+      - books
+      - mitchell
+
+  # ---- Card 10 ----
+  - id: xmas-052
+    category: xmas-history
+    difficulty: 2
+    prompt: What tough guy star of The Big Sleep and Sahara was born December 25, 1899?
+    answer: Humphrey Bogart
+    distractors:
+      - James Cagney
+      - Edward G. Robinson
+      - George Raft
+    fact: The studio made much of the Christmas birthday. A few biographers have argued for January instead, and the dispute has never quite been settled.
+    tags:
+      - birthdays
+      - hollywood
+
+  - id: xmas-053
+    category: xmas-traditions
+    difficulty: 3
+    prompt: In Yugoslavian Christmas tradition, which way must the oak tree fall when it is cut down?
+    answer: East
+    distractors:
+      - West
+      - North
+      - South
+    fact: The badnjak is cut before dawn on Christmas Eve and must fall toward the sunrise. It is then burned on the hearth.
+    tags:
+      - balkans
+      - customs
+
+  - id: xmas-054
+    category: xmas-animation
+    difficulty: 4
+    prompt: In The Christmas Gift, what type of residence did John Denver want to build in the peaceful town?
+    answer: Condominiums
+    distractors:
+      - A castle
+      - A ski lodge
+      - A hotel
+    fact: Denver plays an architect sent to a Colorado town to plan the development, and spends the film changing his mind about it.
+    tags:
+      - television
+      - 1986
+
+  - id: xmas-055
+    category: xmas-movies
+    difficulty: 4
+    prompt: What were the names of the male entertaining team in White Christmas?
+    answer: Wallace and Davis
+    distractors:
+      - Haynes and Haynes
+      - Wallace and Kaye
+      - Davis and Crosby
+    fact: Bob Wallace and Phil Davis, played by Bing Crosby and Danny Kaye. The sisters they follow to Vermont are the Haynes sisters.
+    tags:
+      - 1954
+      - musicals
+
+  - id: xmas-056
+    category: xmas-stage
+    difficulty: 3
+    prompt: Who wrote the Christmas mystery A Holiday for Murder?
+    answer: Agatha Christie
+    distractors:
+      - Dorothy L. Sayers
+      - Ngaio Marsh
+      - Josephine Tey
+    fact: Published in Britain as Hercule Poirot's Christmas. A family gathers for the holiday and the patriarch is dead by the second act.
+    tags:
+      - mystery
+      - books
+
+  # ---- Card 11 ----
+  - id: xmas-057
+    category: xmas-history
+    difficulty: 2
+    prompt: Who was president during Christmas 1972?
+    answer: Richard Nixon
+    distractors:
+      - Gerald Ford
+      - Lyndon Johnson
+      - Jimmy Carter
+    fact: Nixon had just been reelected. The bombing of Hanoi that December ran through the holiday and is still known as the Christmas bombing.
+    tags:
+      - presidents
+      - 1970s
+
+  - id: xmas-058
+    category: xmas-traditions
+    difficulty: 3
+    prompt: What tree decoration gives the illusion of shimmering cobwebs?
+    answer: Angel hair
+    distractors:
+      - Tinsel
+      - Flocking
+      - Icicle lights
+    fact: Spun glass, and it itches. The look comes from a central European legend in which spiders web a poor family's tree overnight and the webs turn to silver.
+    tags:
+      - decorations
+      - folklore
+
+  - id: xmas-059
+    category: xmas-animation
+    difficulty: 3
+    prompt: On what network did A Charlie Brown Christmas debut?
+    answer: CBS
+    distractors:
+      - NBC
+      - ABC
+      - PBS
+    fact: 'The sponsors hated it: no laugh track, real children''s voices, and a reading from Luke. It drew half the country anyway.'
+    tags:
+      - peanuts
+      - 1965
+
+  - id: xmas-060
+    category: xmas-movies
+    difficulty: 3
+    prompt: Who portrayed Kris Kringle in Miracle on 34th Street?
+    answer: Edmund Gwenn
+    distractors:
+      - Charles Coburn
+      - Monty Woolley
+      - Cecil Kellaway
+    fact: Gwenn won the supporting-actor Oscar for it, and played Santa in the Macy's parade in costume while the cameras rolled on the real crowd.
+    tags:
+      - 1947
+      - oscars
+
+  - id: xmas-061
+    category: xmas-stage
+    difficulty: 4
+    prompt: What event in Jesus Christ's life does T.S. Eliot foreshadow in his poem "Journey of the Magi"?
+    answer: The Crucifixion
+    distractors:
+      - The Baptism
+      - The Resurrection
+      - The Last Supper
+    fact: Three trees on a low sky, and hands dicing for silver. The narrator is a Wise Man looking back, unsure whether he saw a birth or a death.
+    tags:
+      - poetry
+      - eliot
+
+  # ---- Card 12 ----
+  - id: xmas-062
+    category: xmas-history
+    difficulty: 3
+    prompt: In what decade did flashing Christmas lights debut?
+    answer: The 1930s
+    distractors:
+      - The 1920s
+      - The 1950s
+      - The 1960s
+    fact: Strings of electric lights had been sold for home use since the turn of the century, but the blinker bulb is a Depression-era idea.
+    tags:
+      - decorations
+      - invention
+
+  - id: xmas-063
+    category: xmas-traditions
+    difficulty: 3
+    prompt: Who is the gift bringer in Hungary?
+    answer: Mikulas
+    distractors:
+      - The Three Wise Men
+      - Father Frost
+      - The Christkind
+    fact: St. Nicholas by another name, and he comes well before Christmas Eve rather than on it. Boots go in the window the night before.
+    tags:
+      - hungary
+      - customs
+
+  - id: xmas-064
+    category: xmas-animation
+    difficulty: 2
+    prompt: What ski-nosed comedian hosted an annual Christmas special on NBC?
+    answer: Bob Hope
+    distractors:
+      - Jack Benny
+      - Red Skelton
+      - Danny Thomas
+    fact: Hope took the show to the troops for decades, and the Christmas special came back from wherever American soldiers happened to be that year.
+    tags:
+      - television
+      - comedy
+
+  - id: xmas-065
+    category: xmas-movies
+    difficulty: 3
+    prompt: What did George Bailey's father die of in It's A Wonderful Life?
+    answer: A stroke
+    distractors:
+      - A heart attack
+      - An accident
+      - Pneumonia
+    fact: It happens the night George is to leave for his trip, and it is the first of the things that keep him in Bedford Falls.
+    tags:
+      - capra
+      - 1946
+
+  - id: xmas-066
+    category: xmas-stage
+    difficulty: 3
+    prompt: Where is the Fir Tree thrown on the day after Christmas in the Andersen story?
+    answer: The attic
+    distractors:
+      - The cellar
+      - The yard
+      - The fire
+    fact: It lies there through the winter telling its story to the mice, and is chopped up in the spring. Andersen did not write comforting endings.
+    tags:
+      - andersen
+      - books
+
+  # ---- Card 13 ----
+  - id: xmas-067
+    category: xmas-history
+    difficulty: 2
+    prompt: What garden-themed doll was the must-have toy of the early 1980s?
+    answer: Cabbage Patch Kids
+    distractors:
+      - Strawberry Shortcake
+      - Rainbow Brite
+      - My Little Pony
+    fact: The 1983 shortage produced fist fights in toy departments and made the evening news. Each doll came with adoption papers and its own name.
+    tags:
+      - toys
+      - 1980s
+
+  - id: xmas-068
+    category: xmas-traditions
+    difficulty: 2
+    prompt: What Christmas song is the best-selling single of all time?
+    answer: White Christmas
+    distractors:
+      - Silent Night
+      - Jingle Bells
+      - All I Want for Christmas Is You
+    fact: Bing Crosby's 1942 recording, written by Irving Berlin. Estimates run past fifty million copies and no other single has come near it.
+    tags:
+      - crosby
+      - records
+
+  - id: xmas-070
+    category: xmas-movies
+    difficulty: 3
+    prompt: In the movie Babe, what gets stolen from Farmer Hoggett on Christmas Day?
+    answer: Sheep
+    distractors:
+      - A goose
+      - The tractor
+      - A sheepdog puppy
+    fact: Rustlers take them in the night, and it is the pig raising the alarm that first shows Hoggett what Babe can do.
+    tags:
+      - 1995
+      - family
+
+  # ---- Card 14 ----
+  - id: xmas-071
+    category: xmas-history
+    difficulty: 2
+    prompt: What candies danced in the children's heads in "The Night Before Christmas"?
+    answer: Sugarplums
+    distractors:
+      - Bonbons
+      - Humbugs
+      - Candied oranges
+    fact: A sugarplum was a comfit, a seed or scrap of spice built up in layer after layer of hard sugar. Nothing to do with plums.
+    tags:
+      - sweets
+      - moore
+
+  - id: xmas-072
+    category: xmas-traditions
+    difficulty: 3
+    prompt: On Christmas Eve, Rumanian husbands threaten to do what to fruitless trees?
+    answer: Cut them down
+    distractors:
+      - Paint them
+      - Tie bells to them
+      - Bury coins under them
+    fact: The wife pleads for the tree and promises it will bear next year. The threat is the ritual; nobody expects the axe to fall.
+    tags:
+      - romania
+      - customs
+
+  - id: xmas-073
+    category: xmas-animation
+    difficulty: 4
+    prompt: In The Homecoming, what did Elizabeth want for Christmas?
+    answer: A doll
+    distractors:
+      - Peace
+      - A bicycle
+      - A dress
+    fact: The 1971 film introduced the family that became The Waltons, set in the Depression with the father missing on the road.
+    tags:
+      - waltons
+      - 1971
+
+  - id: xmas-074
+    category: xmas-carols
+    difficulty: 3
+    prompt: What carol shares a title with a hit song by the rock group Three Dog Night?
+    answer: Joy to the World
+    distractors:
+      - Silent Night
+      - Angels We Have Heard on High
+      - O Holy Night
+    fact: The 1971 rock song opens with a bullfrog named Jeremiah and has nothing whatever to do with the carol.
+    tags:
+      - rock
+      - titles
+
+  - id: xmas-075
+    category: xmas-movies
+    difficulty: 4
+    prompt: In It's A Wonderful Life, what affectionate muleish sound did George and his friends make?
+    answer: Hee haw
+    distractors:
+      - Yee haw
+      - Ho ho
+      - Hot dog
+    fact: Sam Wainwright's greeting, and the running joke George is least glad to hear when the man turns up rich.
+    tags:
+      - capra
+      - 1946
+
+  - id: xmas-076
+    category: xmas-stage
+    difficulty: 4
+    prompt: In Miracle on 34th Street, what does Kris' doctor want for Christmas?
+    answer: An X-ray machine
+    distractors:
+      - A new hospital
+      - A new car
+      - A set of golf clubs
+    fact: For the old people's home where he works. Kris passes the request along, and it is one of the small favours that end up proving his case.
+    tags:
+      - 1947
+      - film
+
+  # ---- Card 15 ----
+  - id: xmas-077
+    category: xmas-history
+    difficulty: 2
+    prompt: What singer, actor and half of a famous comedy team died on Christmas Day 1995?
+    answer: Dean Martin
+    distractors:
+      - Bing Crosby
+      - Bob Hope
+      - Jerry Lewis
+    fact: Martin and Lewis had split in 1956 and barely spoke for twenty years. Martin was 78.
+    tags:
+      - obituaries
+      - 1990s
+
+  - id: xmas-078
+    category: xmas-traditions
+    difficulty: 2
+    prompt: On what December date are presents delivered in Belgium?
+    answer: December 6
+    distractors:
+      - December 24
+      - December 25
+      - January 6
+    fact: St. Nicholas Day. Belgian children put out a shoe with a carrot in it for the saint's horse.
+    tags:
+      - belgium
+      - customs
+
+  - id: xmas-079
+    category: xmas-animation
+    difficulty: 3
+    prompt: What illness prevents Santa from his annual trip in The Year Without a Santa Claus?
+    answer: A cold
+    distractors:
+      - The flu
+      - A sore throat
+      - A fever
+    fact: The doctor tells him nobody believes in him any more, so he may as well stay in bed. The Miser Brothers are the reason anyone remembers it.
+    tags:
+      - rankin-bass
+      - 1974
+
+  - id: xmas-080
+    category: xmas-carols
+    difficulty: 2
+    prompt: What carol contains the line "Glory to the newborn King"?
+    answer: Hark! The Herald Angels Sing
+    distractors:
+      - O Holy Night
+      - Silent Night
+      - It Came Upon the Midnight Clear
+    fact: Charles Wesley wrote the words; the tune is Mendelssohn's, written for something else entirely and fitted to the hymn a century later.
+    tags:
+      - hymns
+      - lyrics
+
+  - id: xmas-081
+    category: xmas-movies
+    difficulty: 3
+    prompt: In It's A Wonderful Life, who starred as Mary Bailey?
+    answer: Donna Reed
+    distractors:
+      - Jean Arthur
+      - Teresa Wright
+      - Olivia de Havilland
+    fact: Reed was on loan from MGM and went on to her own television series a decade later.
+    tags:
+      - capra
+      - 1946
+
+  - id: xmas-082
+    category: xmas-stage
+    difficulty: 4
+    prompt: What piece of clothing does Jim lack in "The Gift of the Magi"?
+    answer: An overcoat
+    distractors:
+      - Gloves
+      - A scarf
+      - Boots
+    fact: 'O. Henry notes it in passing: no gloves either. He sells his watch for her combs while she sells her hair for his watch chain.'
+    tags:
+      - o-henry
+      - books
+
+  # ---- Card 16 ----
+  - id: xmas-083
+    category: xmas-history
+    difficulty: 2
+    prompt: Whose last Christmas hosting The Tonight Show was Christmas 1991?
+    answer: Johnny Carson
+    distractors:
+      - Jay Leno
+      - Jack Paar
+      - Steve Allen
+    fact: He announced his retirement that spring and left in May 1992, after thirty years.
+    tags:
+      - television
+      - carson
+
+  - id: xmas-084
+    category: xmas-traditions
+    difficulty: 3
+    prompt: What exotic hothouse flower is the popular flower during Christmas in Costa Rica?
+    answer: Orchids
+    distractors:
+      - Poinsettias
+      - Birds of paradise
+      - Hibiscus
+    fact: It is the dry season and the warm end of the year there, so the Christmas flower is one that grows wild in the cloud forest.
+    tags:
+      - costa-rica
+      - flowers
+
+  - id: xmas-085
+    category: xmas-animation
+    difficulty: 2
+    prompt: What TV special included the characters Herbie, Yukon Cornelius, and Sam the Snowman?
+    answer: Rudolph the Red-Nosed Reindeer
+    distractors:
+      - Frosty the Snowman
+      - Santa Claus Is Comin' to Town
+      - The Year Without a Santa Claus
+    fact: Herbie is the elf who would rather be a dentist. The 1964 special has run every year since, longer than any other Christmas program.
+    tags:
+      - rudolph
+      - rankin-bass
+
+  - id: xmas-086
+    category: xmas-carols
+    difficulty: 3
+    prompt: In the carol "Good King Wenceslas" what was the King's actual title?
+    answer: Duke
+    distractors:
+      - Earl
+      - King
+      - Prince
+    fact: Duke of Bohemia in the tenth century, made a king posthumously by an emperor who admired him. The carol's tune is a spring song about flowers.
+    tags:
+      - history
+      - hymns
+
+  - id: xmas-087
+    category: xmas-movies
+    difficulty: 4
+    prompt: In Holiday Inn, at what club did Jim Hardy and Linda Mason meet?
+    answer: Club Pierre
+    distractors:
+      - Le Plaza
+      - The Stork Club
+      - The Copacabana
+    fact: The 1942 picture is set in an inn that opens only on holidays. Irving Berlin wrote the score and took the Oscar for best song.
+    tags:
+      - crosby
+      - 1942
+
+  - id: xmas-088
+    category: xmas-stage
+    difficulty: 1
+    prompt: What one reindeer is never mentioned in "The Night Before Christmas"?
+    answer: Rudolph
+    distractors:
+      - Donner
+      - Blitzen
+      - Cupid
+    fact: The poem is from 1823 and names eight. Rudolph was invented in 1939 for a Montgomery Ward giveaway booklet.
+    tags:
+      - poetry
+      - rudolph

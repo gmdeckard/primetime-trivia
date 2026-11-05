@@ -144,3 +144,42 @@
   blurb: Road, rail and sea, and the people who laid them out.
   sample: Cars, locomotives, liners
 
+# The Christmas theme deck's own six, taken from the back of the
+# 'Tis The Season box so the host screen names a round the way the card game
+# named it. They hold questions only while the `christmas` pack is switched
+# on; on an ordinary night the pack filter empties them and a mixed round
+# never reaches them.
+#
+# Six, not ten, so a mixed round of ten will ask four of them twice. A
+# Christmas night wants `questionsPerRound: 6`, which makes a round exactly
+# one card: one question from each category, in the order the icons run.
+
+- id: xmas-history
+  name: Christmas History, Facts & Figures
+  blurb: Dates, firsts, presidents and the people behind the customs.
+  sample: Who, when and how it started
+
+- id: xmas-traditions
+  name: Christmas Traditions Around the World
+  blurb: What the rest of the world does, and on which day it does it.
+  sample: Feast days, gift bringers, customs
+
+- id: xmas-animation
+  name: Christmas Cartoons & TV Specials
+  blurb: The animated specials and made-for-television films.
+  sample: Rudolph, the Grinch, the Peanuts gang
+
+- id: xmas-carols
+  name: Christmas Carols & Songs
+  blurb: Carols, novelty records and the lines everyone half remembers.
+  sample: Lyrics, writers, the song it came from
+
+- id: xmas-movies
+  name: Christmas at the Movies
+  blurb: The pictures that play every December, and the ones that used to.
+  sample: Casts, plots, studios
+
+- id: xmas-stage
+  name: Christmas in Literature & the Arts
+  blurb: Dickens, Andersen, the poems, the opera and the ballet.
+  sample: Books, poems, performances
