@@ -170,26 +170,63 @@ To leave it running permanently on a Raspberry Pi, Jetson or mini PC — startin
 on boot, restarting if it crashes, serving on port 80 so the join address has no
 `:8080` on the end — see [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md).
 
-### The network the game brings with it
+### Telling the room which wifi to join
 
-The host screen tells people which wifi to join before it gives them the
-address, because the address is useless until they are on the right network.
-It ships pointed at the game's own router: SSID **primetime-trivia** (or
-**primetime-trivia-5G** on the 5GHz radio), password **delpueblo**. That is
-deliberate rather than a leftover default — the venue's own guest wifi isolates
-clients from each other, so a phone on it can reach the internet and not this
-server, and the fix is a router that gets carried in and switched on for the
-night.
-
-Override it for a venue whose network does work:
+The host screen can name a wifi network above the join address, because the
+address is useless until people are on the right network. Nothing is shown
+unless you set it:
 
 ```bash
-PRIMETIME_SSID="Clubhouse-Guest" PRIMETIME_VENUE="Thursday Trivia" npm start
+PRIMETIME_SSID="primetime-trivia" PRIMETIME_WIFI_PASSWORD="delpueblo" npm start
 ```
 
-Setting `PRIMETIME_SSID` to anything else drops the built-in password with it —
-a different network is not this network, so `PRIMETIME_WIFI_PASSWORD` is how you
-state the new one. Set `PRIMETIME_SSID=` empty to say nothing about wifi at all.
+Set `PRIMETIME_SSID_ALT` as well when the same router broadcasts a second name
+for its 5GHz radio. With nothing set the host screen leaves the step out and
+renumbers, so the QR code becomes step 1.
+
+This used to default to the SSID of the travel router the game was carried in
+with. That was right for exactly one deployment and wrong everywhere else: a
+big screen naming a network that is not being broadcast sends the room hunting
+through phone settings for it.
+
+### Serving it from a public domain
+
+The server works the join address out from the machine's own network
+interfaces, which is the only thing that can work in a room with no internet
+and no DNS. Behind a public domain that detection is actively wrong: the box's
+address is a private one and nothing in the room can reach it. Pin the real one:
+
+```bash
+PRIMETIME_PUBLIC_URL="trivia.example.com" PRIMETIME_BIND=127.0.0.1 npm start
+```
+
+`PRIMETIME_PUBLIC_URL` becomes the only address on the big screen, in the QR
+code and in the start-up banner. A bare host is taken as `https`.
+
+`PRIMETIME_BIND=127.0.0.1` matters as much. Without it the plain-HTTP port
+stays reachable from outside alongside whatever TLS you put in front, and the
+control password crosses the internet in the clear on that path. The server
+says so in its banner if you forget.
+
+Put TLS in front with a proxy that passes websockets through, or the pages load
+and the live connection never does:
+
+```nginx
+location / {
+    proxy_pass http://127.0.0.1:8080;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "upgrade";
+    proxy_set_header Host $host;
+}
+```
+
+Use a subdomain rather than a path. Every route and every asset hangs off the
+root, so a path prefix needs a build change as well as a rewrite.
+
+Note that joining is not gated: anyone who can reach the server gets a seat.
+On a LAN that is the design. On a public domain it means anyone who finds the
+URL can join your night.
 
 ## Running a night
 
@@ -265,10 +302,12 @@ Environment variables:
 | Variable | Default | Meaning |
 |---|---|---|
 | `PORT` | `8080` | HTTP port |
+| `PRIMETIME_BIND` | every interface | Address to listen on; set `127.0.0.1` behind a TLS proxy |
+| `PRIMETIME_PUBLIC_URL` | — | Public address to advertise instead of the detected LAN one; a bare host is taken as `https` |
 | `PRIMETIME_VENUE` | `Trivia Night` | Event name on the big screen |
-| `PRIMETIME_SSID` | `primetime-trivia` | Wifi network name, shown on the join screen; empty to show none |
-| `PRIMETIME_SSID_ALT` | `primetime-trivia-5G` | Second SSID of the same router; cleared when `PRIMETIME_SSID` is overridden |
-| `PRIMETIME_WIFI_PASSWORD` | `delpueblo` | Wifi password, shown on the join screen; cleared when `PRIMETIME_SSID` is overridden |
+| `PRIMETIME_SSID` | — | Wifi network name, shown on the join screen; unset shows no wifi step |
+| `PRIMETIME_SSID_ALT` | — | Second SSID of the same router; needs `PRIMETIME_SSID` |
+| `PRIMETIME_WIFI_PASSWORD` | — | Wifi password, shown on the join screen; needs `PRIMETIME_SSID` |
 | `PRIMETIME_PASSWORD` | generated once, saved to `data/control-password` | Password for `/control` and `/author` |
 | `PRIMETIME_PIN` | — | Deprecated name for the above; still honoured |
 | `PRIMETIME_HOST_IP` | auto-detected | Pin the address shown on the join screen; skips the startup prompt |

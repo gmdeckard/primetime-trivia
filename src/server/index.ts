@@ -11,7 +11,8 @@ import { loadBank } from './content.js';
 import { DraftStore } from './drafts.js';
 import { Engine, type NightState } from './engine.js';
 import { ControlAuth, createRequestHandler } from './http.js';
-import { primaryLanAddress, lanAddresses, isWsl, hasNoReachableAddress, hasOnlyUnusableAddresses } from './lan.js';
+import { lanAddresses, isWsl, hasNoReachableAddress, hasOnlyUnusableAddresses } from './lan.js';
+import { joinTargets, normalizePublicUrl, wifiInfo } from './join.js';
 import { Store } from './store.js';
 import { controlState, hostState, playerState } from './views.js';
 
@@ -37,6 +38,12 @@ function findRoot(from: string): string {
 const root = findRoot(here);
 
 const PORT = Number(process.env.PORT ?? 8080);
+// Unset means every interface, which is what a laptop on the venue LAN needs.
+// Behind a TLS proxy set this to 127.0.0.1, or the plain-HTTP port stays
+// reachable from outside alongside the HTTPS one and the control password
+// crosses the internet in the clear on that path.
+const BIND = process.env.PRIMETIME_BIND?.trim() || undefined;
+const PUBLIC_URL = normalizePublicUrl(process.env.PRIMETIME_PUBLIC_URL);
 const CONTENT_DIR = process.env.PRIMETIME_CONTENT ?? join(root, 'content');
 const DATA_DIR = process.env.PRIMETIME_DATA ?? join(root, 'data');
 const CLIENT_DIR = join(root, 'dist', 'client');
@@ -95,36 +102,12 @@ interface Client {
 
 const clients = new Set<Client>();
 
-/**
- * The network the game brings with it.
- *
- * The Rec Center's own wifi isolates clients from each other, so a phone on it
- * can reach the internet and nothing else on the LAN — including this server.
- * The fix is a router of our own that gets carried in and switched on for the
- * night, so these are the defaults rather than something to remember to set.
- * `PRIMETIME_SSID` still overrides, and when it does the baked-in password is
- * dropped with it: a different network is not this network.
- */
-const HOUSE_SSID = 'primetime-trivia';
-const HOUSE_SSID_ALT = 'primetime-trivia-5G';
-const HOUSE_WIFI_PASSWORD = 'delpueblo';
-
-function wifiInfo() {
-  const ssid = process.env.PRIMETIME_SSID ?? HOUSE_SSID;
-  const house = ssid === HOUSE_SSID;
-  return {
-    ssid,
-    ssidAlt: process.env.PRIMETIME_SSID_ALT ?? (house ? HOUSE_SSID_ALT : undefined),
-    wifiPassword: process.env.PRIMETIME_WIFI_PASSWORD ?? (house ? HOUSE_WIFI_PASSWORD : undefined),
-  };
-}
-
 function joinInfo() {
-  const ip = primaryLanAddress();
-  const urls = lanAddresses().map((addr) => `http://${addr}:${PORT}`);
+  const targets = joinTargets({ publicUrl: PUBLIC_URL.url, lan: lanAddresses(), port: PORT });
   return {
-    url: ip ? `http://${ip}:${PORT}` : `http://localhost:${PORT}`,
-    urls,
+    url: targets.url,
+    urls: targets.urls,
+    isPublic: targets.isPublic,
     ...wifiInfo(),
     roomCode: engine.snapshot().roomCode,
     venueName: engine.snapshot().config.venueName,
@@ -323,7 +306,7 @@ function hostsFromUrls(urls: string[]): string[] {
   return urls.map((u) => u.replace(/^https?:\/\//, '').split(':')[0] ?? '');
 }
 
-server.listen(PORT, () => {
+server.listen(PORT, BIND, () => {
   const info = joinInfo();
   const line = '─'.repeat(52);
   console.log(`\n  ${engine.snapshot().config.venueName}`);
@@ -376,7 +359,24 @@ server.listen(PORT, () => {
   if (!process.env.ANTHROPIC_API_KEY && !process.env.ANTHROPIC_AUTH_TOKEN) {
     console.log('  (set ANTHROPIC_API_KEY to generate new questions from /author)');
   }
-  if (!info.urls.length) {
+  if (PUBLIC_URL.error) {
+    // Said loudly, because the fallback is the LAN address and on a public box
+    // that is an address nobody in the room can reach.
+    console.log(`\n  ! ${PUBLIC_URL.error}`);
+    console.log('  Falling back to the detected local address, which is almost');
+    console.log('  certainly not what players should type.');
+  }
+  // Every warning below is about LAN detection. With a public URL configured
+  // the detected addresses are not what anyone is being told to type, so a
+  // warning about them is noise at best and sends the operator chasing a
+  // problem that is not there.
+  if (PUBLIC_URL.url) {
+    console.log(`\n  Serving behind ${PUBLIC_URL.url}. Local detection is not in use.`);
+    if (!BIND) {
+      console.log(`  Port ${PORT} is open on every interface. Behind a TLS proxy set`);
+      console.log('  PRIMETIME_BIND=127.0.0.1 so the plain-HTTP port is not reachable.');
+    }
+  } else if (!info.urls.length) {
     console.log('\n  No local network address found. Connect the laptop to the venue wifi');
     console.log('  (or your own travel router) before players try to join.');
   } else if (hasOnlyUnusableAddresses(hostsFromUrls(info.urls)) && !(isWsl() && hasNoReachableAddress(hostsFromUrls(info.urls)))) {

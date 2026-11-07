@@ -44,6 +44,11 @@
       "src/server/integration.test.ts"
     ],
     "src/server/lan.ts": [
+      "src/server/engine.test.ts",
+      "src/server/integration.test.ts"
+    ],
+    "src/server/join.ts": [
+      "src/server/join.test.ts",
       "src/server/integration.test.ts"
     ],
     "shared/protocol.ts": [
@@ -62,7 +67,9 @@
     "LICENSE": [],
     "src/client/**": [],
     "scripts/**": [],
-    "*.sh": [],
+    "*.sh": [
+      "src/server/start-script.test.ts"
+    ],
     "*.json": [],
     "vite.config.ts": [],
     "tsconfig*.json": [],
