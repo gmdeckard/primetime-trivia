@@ -121,52 +121,107 @@ fi
 # Asks only with a terminal attached, so the service path, cron and any
 # scripted start fall through to the server's own ranking untouched.
 choose_host_ip() {
+  local tab; tab="$(printf '\t')"
+
+  # PRIMETIME_SERVER_IP is not a name this project ever used, but it is the one
+  # people reach for, and an override that is silently ignored is worse than no
+  # override at all: the operator believes the address is pinned and stops
+  # looking, while the server goes on advertising its own pick.
+  if [ -z "${PRIMETIME_HOST_IP:-}" ] && [ -n "${PRIMETIME_SERVER_IP:-}" ]; then
+    PRIMETIME_HOST_IP="$PRIMETIME_SERVER_IP"
+    export PRIMETIME_HOST_IP
+    echo "  Note: the variable is PRIMETIME_HOST_IP, not PRIMETIME_SERVER_IP."
+    echo "  Taking PRIMETIME_SERVER_IP=${PRIMETIME_SERVER_IP} as the address anyway."
+  fi
   if [ -n "${PRIMETIME_HOST_IP:-}" ]; then
     echo "Using PRIMETIME_HOST_IP=${PRIMETIME_HOST_IP} (already set)."
-    return
+    return 0
   fi
   # Every early exit here says `return 0`, never a bare `return`, and the
   # difference is the whole night. A bare `return` hands back the status of the
-  # last command run, which on all five of these lines is the test that just
-  # failed. Under `set -e` that non-zero return kills the script at the call
-  # site below, before the server is ever launched: no error, no output past
-  # this function. It shipped that way and broke exactly the machines that take
-  # a shortcut — one network adapter, no terminal, or PRIMETIME_NO_PICK set —
-  # while a dev box with a docker bridge has two candidates, skips every
-  # shortcut, and looks perfectly healthy.
+  # last command run, which on these lines is the test that just failed. Under
+  # `set -e` that non-zero return kills the script at the call site below,
+  # before the server is ever launched: no error, no output past this function.
+  # It shipped that way and broke exactly the machines that take a shortcut.
   [ -t 0 ] || return 0
   [ -z "${PRIMETIME_NO_PICK:-}" ] || return 0
 
   local list count
-  list="$(node dist/src/server/interfaces.js 2>/dev/null)" || return 0
-  [ -n "$list" ] || return 0
-  count="$(printf '%s\n' "$list" | wc -l | tr -d ' ')"
-  # One candidate is not a choice worth stopping for.
-  [ "$count" -gt 1 ] || return 0
+  list="$(node dist/src/server/interfaces.js 2>/dev/null)" || list=""
+  count=0
+  [ -z "$list" ] || count="$(printf '%s\n' "$list" | wc -l | tr -d ' ')"
 
-  local tab i addr iface note reply attempt
-  tab="$(printf '\t')"
-  echo
-  echo "  Which address will the phones use?"
+  # The default is the best candidate the server can see that carries no
+  # warning. A candidate with a note is one we already know a phone may not
+  # reach, so it is never what Enter means.
+  local default_idx i addr iface note
+  default_idx=""
   i=0
-  while IFS="$tab" read -r addr iface note; do
-    i=$((i + 1))
-    if [ -n "$note" ]; then
-      printf '    %d) %-15s %-16s %s\n' "$i" "$addr" "$iface" "$note"
-    else
-      printf '    %d) %-15s %-16s\n' "$i" "$addr" "$iface"
-    fi
-  done <<EOF
+  # Guarded: a heredoc of an empty string still feeds one blank line, which
+  # would read back as a candidate with no note and make it the default.
+  if [ -n "$list" ]; then
+    while IFS="$tab" read -r addr iface note; do
+      i=$((i + 1))
+      if [ -z "$default_idx" ] && [ -z "$(printf '%s' "$note" | tr -d '[:space:]')" ]; then
+        default_idx="$i"
+      fi
+    done <<EOF
 $list
 EOF
-  echo "    o) something else — type an address"
+  fi
+
+  # One clean candidate is not a choice worth stopping for. One candidate that
+  # is already flagged is the opposite case: that is the night where everything
+  # looks healthy here and no phone can join, and typing the real address is
+  # the only way out. Same when the box can see no address at all.
+  # Written as an if, not an `&&` chain: a chain whose last test fails is the
+  # shape of the bare-`return` bug above, and this function has paid for that
+  # lesson once already.
+  if [ "$count" -eq 1 ] && [ -n "$default_idx" ]; then
+    return 0
+  fi
+
+  local reply attempt
+  echo
+  if [ "$count" -eq 0 ]; then
+    echo "  No network address found on this machine."
+    echo "  Connect to the venue wifi or router, or type the address to advertise."
+  else
+    echo "  Which address will the phones use?"
+    i=0
+    while IFS="$tab" read -r addr iface note; do
+      i=$((i + 1))
+      if [ -n "$note" ]; then
+        printf '    %d) %-15s %-16s %s\n' "$i" "$addr" "$iface" "$note"
+      else
+        printf '    %d) %-15s %-16s\n' "$i" "$addr" "$iface"
+      fi
+    done <<EOF
+$list
+EOF
+    if [ -z "$default_idx" ]; then
+      echo "    (every address above is flagged — none of them is a safe default)"
+    fi
+    echo "    o) something else — type an address"
+  fi
   echo
 
   for attempt in 1 2 3; do
-    printf '  Pick 1-%d, o, or Enter for 1: ' "$count"
-    read -r reply || reply=""
+    if [ "$count" -eq 0 ]; then
+      reply="o"
+    elif [ -n "$default_idx" ]; then
+      printf '  Pick 1-%d, o, or Enter for %d: ' "$count" "$default_idx"
+      read -r reply || reply=""
+      [ -n "$reply" ] || reply="$default_idx"
+    else
+      printf '  Pick 1-%d, or o to type an address: ' "$count"
+      read -r reply || reply=""
+      if [ -z "$reply" ]; then
+        echo "  Nothing above is safe to default to — pick a number or type an address."
+        continue
+      fi
+    fi
     case "$reply" in
-      "") reply=1 ;;
       o|O)
         printf '  Address: '
         read -r reply || reply=""
@@ -176,7 +231,7 @@ EOF
           PRIMETIME_HOST_IP="$reply"
           export PRIMETIME_HOST_IP
           echo "  Using ${PRIMETIME_HOST_IP}."
-          return
+          return 0
         fi
         echo "  Nothing typed."
         continue
@@ -192,11 +247,12 @@ EOF
     PRIMETIME_HOST_IP="$(printf '%s\n' "$list" | sed -n "${reply}p" | cut -d"$tab" -f1)"
     export PRIMETIME_HOST_IP
     echo "  Using ${PRIMETIME_HOST_IP}."
-    return
+    return 0
   done
   # Three bad answers in a row: fall through to the server's ranking rather
   # than block a night on a prompt.
   echo "  Falling back to the automatic pick."
+  return 0
 }
 
 # 80 needs privileges we do not have here; the service handles that properly.

@@ -272,6 +272,7 @@ Environment variables:
 | `PRIMETIME_PASSWORD` | generated once, saved to `data/control-password` | Password for `/control` and `/author` |
 | `PRIMETIME_PIN` | — | Deprecated name for the above; still honoured |
 | `PRIMETIME_HOST_IP` | auto-detected | Pin the address shown on the join screen; skips the startup prompt |
+| `PRIMETIME_SERVER_IP` | — | Alias for `PRIMETIME_HOST_IP`, accepted by `start-server.sh` because it is the name people reach for |
 | `PRIMETIME_NO_PICK` | — | Set to skip the startup address prompt and take the automatic pick |
 | `PRIMETIME_CONTENT` | `./content` | Question bank directory |
 | `PRIMETIME_DATA` | `./data` | Saved game state and history |

@@ -25,6 +25,30 @@ export function isWslNatAddress(ip: string): boolean {
 }
 
 /**
+ * A 169.254 address. The adapter asked for a DHCP lease and never got one, so
+ * the OS made an address up. It is a real address on a real interface and it
+ * routes nowhere: two machines that both failed DHCP on the same segment can
+ * sometimes reach each other, and nothing else can.
+ */
+export function isLinkLocalAddress(ip: string): boolean {
+  return /^169\.254\./.test(ip);
+}
+
+/**
+ * True when nothing we can see is worth advertising: every address is a
+ * failed-DHCP link-local, or WSL's own NAT.
+ *
+ * Separate from `hasNoReachableAddress` because the cause and the fix are
+ * different. That one is a WSL networking mode and the fix is `.wslconfig`.
+ * This one is a laptop that never got a lease, and the fix is in the room:
+ * the wrong SSID, a router still booting, or a cable in the wrong port.
+ */
+export function hasOnlyUnusableAddresses(addresses: string[]): boolean {
+  if (!addresses.length) return false;
+  return addresses.every((ip) => isLinkLocalAddress(ip) || isWslNatAddress(ip));
+}
+
+/**
  * True when every address we can see is one only this machine can use, so the
  * banner is about to advertise a join URL that cannot work.
  *
@@ -35,7 +59,7 @@ export function isWslNatAddress(ip: string): boolean {
  */
 export function hasNoReachableAddress(addresses: string[]): boolean {
   if (!addresses.some((ip) => ip === '10.255.255.254')) return false;
-  return addresses.every((ip) => isWslNatAddress(ip) || /^169\.254\./.test(ip));
+  return addresses.every((ip) => isWslNatAddress(ip) || isLinkLocalAddress(ip));
 }
 
 /** An address the room might be able to reach, with the adapter it sits on. */
@@ -90,7 +114,7 @@ const addressRank = (ip: string) => {
   // WSL's NAT gateway. A real address on a real interface, and the one thing
   // in the list a phone on the venue wifi can never reach.
   if (ip === '10.255.255.254') return 7;
-  if (/^169\.254\./.test(ip)) return 9;
+  if (isLinkLocalAddress(ip)) return 9;
   if (ip.startsWith('192.168.')) return 0;
   if (ip.startsWith('10.')) return 1;
   if (/^172\.(1[6-9]|2\d|3[01])\./.test(ip)) return 2;
@@ -130,7 +154,7 @@ const candidateRank = (c: LanCandidate) =>
  */
 export function candidateNote(c: LanCandidate, siblings?: LanCandidate[]): string {
   if (c.iface === 'PRIMETIME_HOST_IP') return 'pinned by PRIMETIME_HOST_IP';
-  if (/^169\.254\./.test(c.address)) return 'no DHCP reply on this adapter — not a usable address';
+  if (isLinkLocalAddress(c.address)) return 'no DHCP reply on this adapter — not a usable address';
   if (isVirtualInterface(c.iface)) return 'virtual adapter (container/VM/VPN) — phones cannot reach it';
   if (c.address.startsWith('192.168.55.')) return 'USB rescue link — only a cable reaches this';
   if (c.address.startsWith('192.168.56.')) return 'VirtualBox host-only — phones cannot reach it';

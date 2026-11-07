@@ -7,6 +7,8 @@ import { DEFAULT_CONFIG, inRunUpToQuestion } from '../../shared/protocol.js';
 import { loadBank } from './content.js';
 import {
   hasNoReachableAddress,
+  hasOnlyUnusableAddresses,
+  isLinkLocalAddress,
   rankLanAddresses,
   rankLanCandidates,
   isVirtualInterface,
@@ -1014,6 +1016,28 @@ test('a server nothing can reach says so instead of printing a join URL', () => 
   // And a venue genuinely running on 172.16-31 must not be told its own
   // network is unreachable. Without the gateway present this is a real LAN.
   assert.equal(hasNoReachableAddress(['172.20.4.8']), false);
+});
+
+test('a laptop that never got a DHCP lease is told so, not handed a join URL', () => {
+  // The Netgear night: the adapter asked for a lease, got nothing, and the OS
+  // invented a 169.254 address. It is real, it is the only one, and it routes
+  // nowhere. Advertise it and twenty phones scan a QR code that times out.
+  assert.equal(isLinkLocalAddress('169.254.183.44'), true);
+  assert.equal(isLinkLocalAddress('169.253.1.1'), false);
+  assert.equal(isLinkLocalAddress('192.168.1.50'), false);
+
+  assert.equal(hasOnlyUnusableAddresses(['169.254.183.44']), true);
+  assert.equal(hasOnlyUnusableAddresses(['169.254.183.44', '169.254.9.9']), true);
+
+  // One real address alongside it is a working night, not a broken one.
+  assert.equal(hasOnlyUnusableAddresses(['169.254.183.44', '192.168.1.50']), false);
+
+  // No addresses at all is a different message, already handled upstream.
+  assert.equal(hasOnlyUnusableAddresses([]), false);
+
+  // WSL NAT counts as unusable too, so the check covers both shapes; which
+  // message gets printed is decided at the call site, because the fixes differ.
+  assert.equal(hasOnlyUnusableAddresses(['10.255.255.254', '172.28.80.1']), true);
 });
 
 // ------------------------------------------------- mixed rounds and rotation

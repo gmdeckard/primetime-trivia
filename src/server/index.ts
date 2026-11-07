@@ -11,7 +11,7 @@ import { loadBank } from './content.js';
 import { DraftStore } from './drafts.js';
 import { Engine, type NightState } from './engine.js';
 import { ControlAuth, createRequestHandler } from './http.js';
-import { primaryLanAddress, lanAddresses, isWsl, hasNoReachableAddress } from './lan.js';
+import { primaryLanAddress, lanAddresses, isWsl, hasNoReachableAddress, hasOnlyUnusableAddresses } from './lan.js';
 import { Store } from './store.js';
 import { controlState, hostState, playerState } from './views.js';
 
@@ -318,6 +318,11 @@ const heartbeat = setInterval(() => {
   }
 }, 20_000);
 
+/** The bare hosts out of the join URLs, for the reachability checks below. */
+function hostsFromUrls(urls: string[]): string[] {
+  return urls.map((u) => u.replace(/^https?:\/\//, '').split(':')[0] ?? '');
+}
+
 server.listen(PORT, () => {
   const info = joinInfo();
   const line = '─'.repeat(52);
@@ -374,7 +379,19 @@ server.listen(PORT, () => {
   if (!info.urls.length) {
     console.log('\n  No local network address found. Connect the laptop to the venue wifi');
     console.log('  (or your own travel router) before players try to join.');
-  } else if (isWsl() && hasNoReachableAddress(info.urls.map((u) => u.replace(/^https?:\/\//, '').split(':')[0] ?? ''))) {
+  } else if (hasOnlyUnusableAddresses(hostsFromUrls(info.urls)) && !(isWsl() && hasNoReachableAddress(hostsFromUrls(info.urls)))) {
+    // Everything looks healthy here and no phone can join: the adapter never
+    // got a DHCP lease, so the OS invented a 169.254 address that routes
+    // nowhere. Said now, in the room, rather than discovered by twenty people
+    // scanning a QR code that times out.
+    console.log('\n  The only address this machine has is a 169.254 one, which means');
+    console.log('  the network never gave it a lease. Nothing can reach the server');
+    console.log('  at that address, including the phones.');
+    console.log('');
+    console.log('  Check the laptop is on the right wifi and the router is up, then');
+    console.log('  start again. If the address is right and the detection is wrong,');
+    console.log('  pin it:  PRIMETIME_HOST_IP=192.168.1.40 ./start-server.sh');
+  } else if (isWsl() && hasNoReachableAddress(hostsFromUrls(info.urls))) {
     // The worst kind of failure: everything looks fine here and no phone can
     // join. Say so now rather than letting the room discover it.
     console.log('\n  WSL networking is NAT, so the address above exists only inside WSL.');
