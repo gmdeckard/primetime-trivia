@@ -203,6 +203,14 @@ function baseState(engine: Engine, role: 'host' | 'control' | 'player', teamId?:
 export interface JoinInfo {
   url: string;
   ssid?: string;
+  /** Second radio of the same access point, when it broadcasts under its own name. */
+  ssidAlt?: string;
+  /**
+   * Shown in the clear on the big screen on purpose. It is a trivia night on a
+   * router that carries nothing but this game, and a room of a hundred people
+   * cannot be told a password one at a time.
+   */
+  wifiPassword?: string;
   qrSvg: string;
 }
 

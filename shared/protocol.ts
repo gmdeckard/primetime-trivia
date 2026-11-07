@@ -464,7 +464,7 @@ export interface BaseState {
 
 export interface HostState extends BaseState {
   role: 'host';
-  join: { url: string; ssid?: string; qrSvg: string };
+  join: { url: string; ssid?: string; ssidAlt?: string; wifiPassword?: string; qrSvg: string };
 }
 
 export interface ControlState extends BaseState {

@@ -244,7 +244,15 @@ export interface HttpDeps {
   clientDir: string;
   imagesDir: string;
   auth: ControlAuth;
-  joinInfo: () => { url: string; urls: string[]; ssid?: string; roomCode: string; venueName: string };
+  joinInfo: () => {
+    url: string;
+    urls: string[];
+    ssid?: string;
+    ssidAlt?: string;
+    wifiPassword?: string;
+    roomCode: string;
+    venueName: string;
+  };
   /** Handles /api/author/*; returns true when it took the request. */
   handleAuthor?: (req: IncomingMessage, res: ServerResponse, path: string) => Promise<boolean>;
 }

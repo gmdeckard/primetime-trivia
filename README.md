@@ -170,12 +170,26 @@ To leave it running permanently on a Raspberry Pi, Jetson or mini PC — startin
 on boot, restarting if it crashes, serving on port 80 so the join address has no
 `:8080` on the end — see [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md).
 
-Set `PRIMETIME_SSID` and the host screen will tell people which network to join
-before giving them the address:
+### The network the game brings with it
+
+The host screen tells people which wifi to join before it gives them the
+address, because the address is useless until they are on the right network.
+It ships pointed at the game's own router: SSID **primetime-trivia** (or
+**primetime-trivia-5G** on the 5GHz radio), password **delpueblo**. That is
+deliberate rather than a leftover default — the venue's own guest wifi isolates
+clients from each other, so a phone on it can reach the internet and not this
+server, and the fix is a router that gets carried in and switched on for the
+night.
+
+Override it for a venue whose network does work:
 
 ```bash
 PRIMETIME_SSID="Clubhouse-Guest" PRIMETIME_VENUE="Thursday Trivia" npm start
 ```
+
+Setting `PRIMETIME_SSID` to anything else drops the built-in password with it —
+a different network is not this network, so `PRIMETIME_WIFI_PASSWORD` is how you
+state the new one. Set `PRIMETIME_SSID=` empty to say nothing about wifi at all.
 
 ## Running a night
 
@@ -252,7 +266,9 @@ Environment variables:
 |---|---|---|
 | `PORT` | `8080` | HTTP port |
 | `PRIMETIME_VENUE` | `Trivia Night` | Event name on the big screen |
-| `PRIMETIME_SSID` | — | Wifi network name, shown on the join screen |
+| `PRIMETIME_SSID` | `primetime-trivia` | Wifi network name, shown on the join screen; empty to show none |
+| `PRIMETIME_SSID_ALT` | `primetime-trivia-5G` | Second SSID of the same router; cleared when `PRIMETIME_SSID` is overridden |
+| `PRIMETIME_WIFI_PASSWORD` | `delpueblo` | Wifi password, shown on the join screen; cleared when `PRIMETIME_SSID` is overridden |
 | `PRIMETIME_PASSWORD` | generated once, saved to `data/control-password` | Password for `/control` and `/author` |
 | `PRIMETIME_PIN` | — | Deprecated name for the above; still honoured |
 | `PRIMETIME_HOST_IP` | auto-detected | Pin the address shown on the join screen; skips the startup prompt |

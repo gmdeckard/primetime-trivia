@@ -40,6 +40,18 @@ function JoinPanel({ state }: { state: HostState }) {
         {state.join.ssid && (
           <p class="muted" style={{ fontSize: '1.3rem' }}>
             First join the wifi network <strong>{state.join.ssid}</strong>
+            {state.join.ssidAlt && (
+              <>
+                {' or '}
+                <strong>{state.join.ssidAlt}</strong>
+              </>
+            )}
+            {state.join.wifiPassword && (
+              <>
+                {' · password '}
+                <strong>{state.join.wifiPassword}</strong>
+              </>
+            )}
           </p>
         )}
         <p class="muted" style={{ fontSize: '1.2rem' }}>

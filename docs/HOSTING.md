@@ -65,12 +65,24 @@ Then:
    not change between games, so this is a once-per-phone step rather than a
    once-per-night one.
 3. Tell the room the join address. The big screen is showing it in large type
-   with a QR code — point at it rather than reading the numbers out.
+   with a QR code — point at it rather than reading the numbers out. Above it,
+   the screen names the wifi to join first: **primetime-trivia** or
+   **primetime-trivia-5G**, password **delpueblo**. That is the game's own
+   router, carried in and switched on for the night, because the Rec Center's
+   wifi stops devices reaching each other and so stops phones reaching this
+   server. Switch the Netgear on before step 1 and put the laptop on it too.
 
 To put the event name on the screen:
 
 ```bash
-PRIMETIME_VENUE="Thursday Trivia" PRIMETIME_SSID="Clubhouse-Guest" npm start
+PRIMETIME_VENUE="Thursday Trivia" npm start
+```
+
+Naming a different wifi, for a venue whose own network lets devices talk to
+each other, also clears the built-in password:
+
+```bash
+PRIMETIME_SSID="Clubhouse-Guest" PRIMETIME_WIFI_PASSWORD="guest2026" npm start
 ```
 
 ## How people join

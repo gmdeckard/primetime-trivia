@@ -95,13 +95,37 @@ interface Client {
 
 const clients = new Set<Client>();
 
+/**
+ * The network the game brings with it.
+ *
+ * The Rec Center's own wifi isolates clients from each other, so a phone on it
+ * can reach the internet and nothing else on the LAN — including this server.
+ * The fix is a router of our own that gets carried in and switched on for the
+ * night, so these are the defaults rather than something to remember to set.
+ * `PRIMETIME_SSID` still overrides, and when it does the baked-in password is
+ * dropped with it: a different network is not this network.
+ */
+const HOUSE_SSID = 'primetime-trivia';
+const HOUSE_SSID_ALT = 'primetime-trivia-5G';
+const HOUSE_WIFI_PASSWORD = 'delpueblo';
+
+function wifiInfo() {
+  const ssid = process.env.PRIMETIME_SSID ?? HOUSE_SSID;
+  const house = ssid === HOUSE_SSID;
+  return {
+    ssid,
+    ssidAlt: process.env.PRIMETIME_SSID_ALT ?? (house ? HOUSE_SSID_ALT : undefined),
+    wifiPassword: process.env.PRIMETIME_WIFI_PASSWORD ?? (house ? HOUSE_WIFI_PASSWORD : undefined),
+  };
+}
+
 function joinInfo() {
   const ip = primaryLanAddress();
   const urls = lanAddresses().map((addr) => `http://${addr}:${PORT}`);
   return {
     url: ip ? `http://${ip}:${PORT}` : `http://localhost:${PORT}`,
     urls,
-    ssid: process.env.PRIMETIME_SSID,
+    ...wifiInfo(),
     roomCode: engine.snapshot().roomCode,
     venueName: engine.snapshot().config.venueName,
   };
@@ -122,7 +146,13 @@ function send(socket: WebSocket, message: ServerMessage) {
 async function stateFor(client: Client) {
   if (client.role === 'host') {
     const info = joinInfo();
-    return hostState(engine, { url: info.url, ssid: info.ssid, qrSvg: await qrForJoinUrl(info.url) });
+    return hostState(engine, {
+      url: info.url,
+      ssid: info.ssid,
+      ssidAlt: info.ssidAlt,
+      wifiPassword: info.wifiPassword,
+      qrSvg: await qrForJoinUrl(info.url),
+    });
   }
   if (client.role === 'control') return controlState(engine);
   return playerState(engine, client.playerId!);
@@ -295,6 +325,13 @@ server.listen(PORT, () => {
   console.log(`  ${line}`);
   console.log(`  Players join at   ${info.url}`);
   for (const alt of info.urls.filter((u) => u !== info.url)) console.log(`                    ${alt}`);
+  // Inside the `Players join at` ... `Question editor` range on purpose: that
+  // is the slice start-server.sh lifts out of the log for its own banner.
+  if (info.ssid) {
+    const alt = info.ssidAlt ? ` or ${info.ssidAlt}` : '';
+    const pw = info.wifiPassword ? ` · password ${info.wifiPassword}` : '';
+    console.log(`  Wifi              ${info.ssid}${alt}${pw}`);
+  }
   console.log(`  Big screen        ${info.url}/host`);
   console.log(`  MC controls       ${info.url}/control`);
   console.log(`  Question editor   ${info.url}/author`);
