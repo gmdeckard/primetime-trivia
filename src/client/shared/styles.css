@@ -437,20 +437,23 @@ input:focus { border-color: var(--brass); outline: none; }
   display: flex;
   flex-direction: column;
   gap: clamp(20px, 3vh, 44px);
-  align-items: center;
+  /* fit-content + stretch: the list is as wide as its widest step and every
+     step fills it, so the numerals form one column instead of each step
+     centring itself and leaving the numbers ragged. */
+  width: fit-content;
+  margin-inline: auto;
+  align-items: stretch;
 }
 .join-step {
   counter-increment: joinstep;
   display: grid;
   grid-template-columns: auto 1fr;
   column-gap: clamp(16px, 2vw, 28px);
-  align-items: start;
+  align-items: center;
   text-align: left;
 }
 .join-step::before {
   content: counter(joinstep);
-  grid-row: 1 / -1;
-  align-self: center;
   font-family: var(--mono);
   font-size: clamp(1.6rem, 2.6vw, 2.6rem);
   line-height: 1;
@@ -463,7 +466,6 @@ input:focus { border-color: var(--brass); outline: none; }
   align-items: center;
   justify-content: center;
 }
-.join-step > * { grid-column: 2; }
 .join-wifi {
   font-family: var(--mono);
   font-size: clamp(2.2rem, 4.6vw, 4.4rem);

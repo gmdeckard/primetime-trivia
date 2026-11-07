@@ -44,32 +44,36 @@ function JoinPanel({ state }: { state: HostState }) {
     <ol class="join-steps">
       {state.join.ssid && (
         <li class="join-step">
-          <div class="eyebrow">Join this wifi network</div>
-          <div class="join-wifi">
-            <strong>{state.join.ssid}</strong>
-            {state.join.ssidAlt && (
-              <>
-                {' or '}
-                <strong>{state.join.ssidAlt}</strong>
-              </>
+          <div class="join-step-body">
+            <div class="eyebrow">Join this wifi network</div>
+            <div class="join-wifi">
+              <strong>{state.join.ssid}</strong>
+              {state.join.ssidAlt && (
+                <>
+                  {' or '}
+                  <strong>{state.join.ssidAlt}</strong>
+                </>
+              )}
+            </div>
+            {state.join.wifiPassword && (
+              <div class="join-wifi-pass">
+                password <strong>{state.join.wifiPassword}</strong>
+              </div>
             )}
           </div>
-          {state.join.wifiPassword && (
-            <div class="join-wifi-pass">
-              password <strong>{state.join.wifiPassword}</strong>
-            </div>
-          )}
         </li>
       )}
       <li class="join-step">
-        <div class="eyebrow">Scan, or type this in any browser</div>
-        <div class="join">
-          <div class="join-qr" dangerouslySetInnerHTML={{ __html: state.join.qrSvg }} />
-          <div class="stack">
-            <div class="join-url">{state.join.url.replace('http://', '')}</div>
-            <p class="muted" style={{ fontSize: '1.2rem' }}>
-              Room <strong>{state.roomCode}</strong> · play solo or share a device
-            </p>
+        <div class="join-step-body">
+          <div class="eyebrow">Scan, or type this in any browser</div>
+          <div class="join">
+            <div class="join-qr" dangerouslySetInnerHTML={{ __html: state.join.qrSvg }} />
+            <div class="stack">
+              <div class="join-url">{state.join.url.replace('http://', '')}</div>
+              <p class="muted" style={{ fontSize: '1.2rem' }}>
+                Room <strong>{state.roomCode}</strong> · play solo or share a device
+              </p>
+            </div>
           </div>
         </div>
       </li>
