@@ -30,35 +30,50 @@ function breakMinutes(state: HostState): number {
   return state.phase === 'game_results' ? state.config.gameBreakMinutes : state.config.roundBreakMinutes;
 }
 
+/**
+ * The two things a player has to do, in the order they have to do them.
+ *
+ * The wifi step leads and is set in the largest type on the panel: a phone that
+ * is still on the pub's own network cannot load the join page at all, and a room
+ * reading the QR code first just gets a browser error and asks the MC about it.
+ * The steps are numbered by a CSS counter, so dropping the wifi step on a
+ * network that needs no instructions renumbers the QR step to 1 on its own.
+ */
 function JoinPanel({ state }: { state: HostState }) {
   return (
-    <div class="join">
-      <div class="join-qr" dangerouslySetInnerHTML={{ __html: state.join.qrSvg }} />
-      <div class="stack">
-        <div class="eyebrow">Scan, or type this in any browser</div>
-        <div class="join-url">{state.join.url.replace('http://', '')}</div>
-        {state.join.ssid && (
-          <p class="muted" style={{ fontSize: '1.3rem' }}>
-            First join the wifi network <strong>{state.join.ssid}</strong>
+    <ol class="join-steps">
+      {state.join.ssid && (
+        <li class="join-step">
+          <div class="eyebrow">Join this wifi network</div>
+          <div class="join-wifi">
+            <strong>{state.join.ssid}</strong>
             {state.join.ssidAlt && (
               <>
                 {' or '}
                 <strong>{state.join.ssidAlt}</strong>
               </>
             )}
-            {state.join.wifiPassword && (
-              <>
-                {' · password '}
-                <strong>{state.join.wifiPassword}</strong>
-              </>
-            )}
-          </p>
-        )}
-        <p class="muted" style={{ fontSize: '1.2rem' }}>
-          Room <strong>{state.roomCode}</strong> · play solo or share a device
-        </p>
-      </div>
-    </div>
+          </div>
+          {state.join.wifiPassword && (
+            <div class="join-wifi-pass">
+              password <strong>{state.join.wifiPassword}</strong>
+            </div>
+          )}
+        </li>
+      )}
+      <li class="join-step">
+        <div class="eyebrow">Scan, or type this in any browser</div>
+        <div class="join">
+          <div class="join-qr" dangerouslySetInnerHTML={{ __html: state.join.qrSvg }} />
+          <div class="stack">
+            <div class="join-url">{state.join.url.replace('http://', '')}</div>
+            <p class="muted" style={{ fontSize: '1.2rem' }}>
+              Room <strong>{state.roomCode}</strong> · play solo or share a device
+            </p>
+          </div>
+        </div>
+      </li>
+    </ol>
   );
 }
 

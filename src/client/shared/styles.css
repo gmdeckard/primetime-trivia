@@ -426,11 +426,60 @@ input:focus { border-color: var(--brass); outline: none; }
 .host .badge { width: clamp(52px, 5vw, 76px); height: clamp(52px, 5vw, 76px); font-size: clamp(1.4rem, 2vw, 2.3rem); }
 .host-display { font-family: var(--serif); font-size: clamp(3rem, 9vw, 9rem); line-height: 1; }
 
+/* The join panel: wifi first in the biggest type, then the QR code and address.
+   Numbers come from a counter so the list renumbers itself when the wifi step
+   is absent. */
+.join-steps {
+  counter-reset: joinstep;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(20px, 3vh, 44px);
+  align-items: center;
+}
+.join-step {
+  counter-increment: joinstep;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: clamp(16px, 2vw, 28px);
+  align-items: start;
+  text-align: left;
+}
+.join-step::before {
+  content: counter(joinstep);
+  grid-row: 1 / -1;
+  align-self: center;
+  font-family: var(--mono);
+  font-size: clamp(1.6rem, 2.6vw, 2.6rem);
+  line-height: 1;
+  color: var(--brass);
+  border: 2px solid var(--brass);
+  border-radius: 999px;
+  width: clamp(2.2em, 3.4vw, 2.6em);
+  height: clamp(2.2em, 3.4vw, 2.6em);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.join-step > * { grid-column: 2; }
+.join-wifi {
+  font-family: var(--mono);
+  font-size: clamp(2.2rem, 4.6vw, 4.4rem);
+  line-height: 1.1;
+  color: var(--brass);
+  word-break: break-word;
+}
+.join-wifi-pass {
+  font-size: clamp(1.4rem, 2.2vw, 2.2rem);
+  color: var(--text-dim);
+}
 .join {
   display: flex;
   align-items: center;
   gap: clamp(24px, 4vw, 60px);
-  justify-content: center;
+  justify-content: flex-start;
   flex-wrap: wrap;
 }
 .join-qr {
