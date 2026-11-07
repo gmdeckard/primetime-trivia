@@ -1,0 +1,839 @@
+# The Beta Night Deck
+#
+# One hundred questions built for the clubhouse beta test, 2026-11-07.
+#
+# Ten categories, ten questions each, so a mixed round of ten is exactly one
+# question from each category and no category is asked twice in a round. Ten
+# rounds of material from one toggle.
+#
+# The difficulty spread copies DEFAULT_CONFIG.difficultyMix exactly: two
+# difficulty 2, five difficulty 3 and three difficulty 4 per category, which is
+# 20/50/30 across the deck. A default night therefore draws this deck at the
+# shape it was written for, which is the point of a beta test.
+#
+# Switch it on alone under Questions and set questions per round to 10.
+pack:
+  id: beta1
+  name: Beta Night
+  audience: 35-75
+  created: 2026-11-07
+  origin: seeded
+  model: claude-opus-5 (Claude Code session)
+  reviewedBy: web-verified against live sources question by question; no human review
+  notes: >-
+    Topics were seeded from OpenTDB (opentdb.com, CC BY-SA 4.0) across eleven
+    of its categories. No OpenTDB text is used: every prompt, answer set and
+    fact line was written here, and seeds that broke the style guide on era or
+    on indefensible distractors were dropped rather than rewritten. Answers and
+    fact lines were checked against live sources; see docs/BETA-DECK.md.
+
+questions:
+  # ---- The Twentieth Century ----
+  - id: beta-001
+    category: history-20c
+    difficulty: 2
+    prompt: In what year was Nelson Mandela released from prison?
+    answer: 1990
+    distractors: [1988, 1992, 1994]
+    fact: He had served 27 years. He was elected president four years after walking out, in 1994.
+
+  - id: beta-002
+    category: history-20c
+    difficulty: 2
+    prompt: Which city was supplied entirely by air for most of a year after the Soviets closed its land routes in 1948?
+    answer: West Berlin
+    distractors: [Vienna, Prague, Trieste]
+    fact: More than a quarter of a million flights, landing day and night. The Soviets reopened the roads in May 1949 and the airlift kept flying for months afterwards to build a stockpile.
+
+  - id: beta-003
+    category: history-20c
+    difficulty: 3
+    prompt: Which ship saw the Titanic's distress rockets from a few miles off and did not come?
+    answer: The Californian
+    distractors: [The Carpathia, The Olympic, The Mount Temple]
+    fact: The Carpathia steamed 58 miles through ice to pick up the survivors. Both British and American inquiries found the Californian could have reached them first.
+
+  - id: beta-004
+    category: history-20c
+    difficulty: 3
+    prompt: Which British prime minister was in office when Britain declared war on Germany in September 1939?
+    answer: Neville Chamberlain
+    distractors: [Winston Churchill, Stanley Baldwin, Clement Attlee]
+    fact: He read the declaration out on the radio himself. Churchill replaced him eight months later, after Norway.
+
+  - id: beta-005
+    category: history-20c
+    difficulty: 3
+    prompt: What was the German offensive launched in October 1941 to take Moscow before winter?
+    answer: Operation Typhoon
+    distractors: [Operation Barbarossa, Operation Citadel, Operation Blue]
+    fact: Mud stopped it first, then frost. The closest troops got within about fifteen miles of the Kremlin and never got closer.
+
+  - id: beta-006
+    category: history-20c
+    difficulty: 3
+    prompt: What is the name given to the Black cultural flowering centred on upper Manhattan in the 1920s?
+    answer: The Harlem Renaissance
+    distractors: [The Great Migration, The Jazz Age, The Chicago Renaissance]
+    fact: Langston Hughes, Zora Neale Hurston and Duke Ellington all worked there in the same few blocks and the same few years.
+
+  - id: beta-007
+    category: history-20c
+    difficulty: 3
+    prompt: Who climbed onto a tank outside the Russian parliament to face down the August 1991 coup?
+    answer: Boris Yeltsin
+    distractors: [Mikhail Gorbachev, Eduard Shevardnadze, Alexander Lebed]
+    fact: Gorbachev was under house arrest in Crimea at the time. The coup collapsed in three days and the Soviet Union was gone by December.
+
+  - id: beta-008
+    category: history-20c
+    difficulty: 4
+    prompt: The Cod Wars were a series of confrontations between Britain and which country?
+    answer: Iceland
+    distractors: [Norway, Denmark, Canada]
+    fact: Three rounds between 1958 and 1976, fought with nets, cutters and hulls rather than guns. Iceland won every one, partly by threatening the NATO base at Keflavik.
+
+  - id: beta-009
+    category: history-20c
+    difficulty: 4
+    prompt: Which Japanese city was the primary target on 9 August 1945, and was passed over because of smoke and cloud?
+    answer: Kokura
+    distractors: [Niigata, Kyoto, Yokohama]
+    fact: The aircraft made three runs over it and could not see the aiming point, so it turned to the secondary target, Nagasaki. Kyoto had been struck off the target list earlier by the Secretary of War.
+
+  - id: beta-010
+    category: history-20c
+    difficulty: 4
+    prompt: Which country formally withdrew from the Warsaw Pact in 1968 over the invasion of Czechoslovakia?
+    answer: Albania
+    distractors: [Romania, Bulgaria, Hungary]
+    fact: Romania refused to take part in the invasion but stayed in the pact. Albania had already stopped attending and used the invasion to leave outright.
+
+  # ---- American History ----
+  - id: beta-011
+    category: american-history
+    difficulty: 2
+    prompt: Who rode through the night of 18 April 1775 to warn the Massachusetts militia that British troops were marching?
+    answer: Paul Revere
+    distractors: [William Dawes, Samuel Prescott, Israel Bissell]
+    fact: All four really rode. Revere and Dawes were stopped outside Lexington and only Prescott got through to Concord; Longfellow's poem settled who got remembered.
+
+  - id: beta-012
+    category: american-history
+    difficulty: 2
+    prompt: Which state was first to ratify the Constitution, in December 1787?
+    answer: Delaware
+    distractors: [Pennsylvania, Virginia, Massachusetts]
+    fact: Unanimously, and five days ahead of Pennsylvania, which is why the plates read The First State.
+
+  - id: beta-013
+    category: american-history
+    difficulty: 3
+    prompt: Kentucky joined the Union in 1792 as the fifteenth state, carved out of which existing state?
+    answer: Virginia
+    distractors: [North Carolina, Pennsylvania, Maryland]
+    fact: Virginia gave up its western claim to make it, and Tennessee was created the same way four years later out of a different state.
+
+  - id: beta-014
+    category: american-history
+    difficulty: 3
+    prompt: In which Washington theatre was Abraham Lincoln shot?
+    answer: Ford's Theatre
+    distractors: [The National Theatre, Grover's Theatre, The Holliday Street Theatre]
+    fact: He was watching a comedy called Our American Cousin. Booth was a well-known actor who knew the building well enough to walk in unchallenged.
+
+  - id: beta-015
+    category: american-history
+    difficulty: 3
+    prompt: Which battle ended with Cornwallis surrendering his army in October 1781?
+    answer: Yorktown
+    distractors: [Saratoga, Camden, Guilford Courthouse]
+    fact: A French fleet held the mouth of the Chesapeake so he could not be taken off by sea. Fighting dragged on for two more years but the outcome was settled there.
+
+  - id: beta-016
+    category: american-history
+    difficulty: 3
+    prompt: Which 1803 Supreme Court decision established that the court could strike down an act of Congress?
+    answer: Marbury v. Madison
+    distractors: [McCulloch v. Maryland, Gibbons v. Ogden, Dred Scott v. Sandford]
+    fact: Marshall declined the power the law gave him in order to claim a much larger one. The court did not strike down another federal statute for 54 years.
+
+  - id: beta-017
+    category: american-history
+    difficulty: 3
+    prompt: Which 1854 act let settlers vote on whether their territory would allow slavery?
+    answer: The Kansas-Nebraska Act
+    distractors: [The Compromise of 1850, The Wilmot Proviso, The Fugitive Slave Act]
+    fact: It repealed the Missouri Compromise line and produced Bleeding Kansas, where both sides shipped in voters and then rifles.
+
+  - id: beta-018
+    category: american-history
+    difficulty: 4
+    prompt: Which Confederate general surrendered Vicksburg to Grant on 4 July 1863?
+    answer: John C. Pemberton
+    distractors: [Braxton Bragg, Joseph E. Johnston, P. G. T. Beauregard]
+    fact: He was a Pennsylvanian who had married a Virginian and chosen the South. Vicksburg fell the day after Gettysburg ended, and within days the Mississippi was Union from source to mouth.
+
+  - id: beta-019
+    category: american-history
+    difficulty: 4
+    prompt: Which 1794 uprising over a federal excise tax brought George Washington out at the head of the militia?
+    answer: The Whiskey Rebellion
+    distractors: [Shays' Rebellion, Fries's Rebellion, The Dorr Rebellion]
+    fact: The only time a sitting president has personally led troops in the field. The rebellion evaporated before the army arrived.
+
+  - id: beta-020
+    category: american-history
+    difficulty: 4
+    prompt: Which president served as both the twenty-second and the twenty-fourth, losing the election in between?
+    answer: Grover Cleveland
+    distractors: [Benjamin Harrison, William McKinley, Chester A. Arthur]
+    fact: Harrison beat him in 1888 on electoral votes while losing the popular vote. Cleveland came back and beat him in 1892.
+
+  # ---- World Geography ----
+  - id: beta-021
+    category: geography
+    difficulty: 2
+    prompt: Which strait connects the Atlantic Ocean to the Mediterranean Sea?
+    answer: The Strait of Gibraltar
+    distractors: [The Dardanelles, The Bosporus, The Strait of Messina]
+    fact: Under nine miles across at the narrowest point, which is eight nautical miles. The other three connect seas too, which is why they all sound right.
+
+  - id: beta-022
+    category: geography
+    difficulty: 2
+    prompt: Which city was called Constantinople before 1930?
+    answer: Istanbul
+    distractors: [Ankara, Izmir, Thessaloniki]
+    fact: Byzantium first, then Constantinople for sixteen centuries. The capital of Turkey had already moved to Ankara in 1923, so the renaming cost it nothing.
+
+  - id: beta-023
+    category: geography
+    difficulty: 3
+    prompt: Which lake holds the most fresh water of any lake on earth?
+    answer: Lake Baikal
+    distractors: [Lake Superior, Lake Tanganyika, Lake Victoria]
+    fact: Over a mile deep and holding roughly a fifth of the world's unfrozen fresh water, more than all five Great Lakes together.
+
+  - id: beta-024
+    category: geography
+    difficulty: 3
+    prompt: The Volga is the longest river in Europe. Which body of water does it empty into?
+    answer: The Caspian Sea
+    distractors: [The Black Sea, The Baltic Sea, The Sea of Azov]
+    fact: The Caspian has no outlet and sits below sea level, so the Volga's water leaves only by evaporating.
+
+  - id: beta-025
+    category: geography
+    difficulty: 3
+    prompt: The Svalbard archipelago is sovereign territory of which country?
+    answer: Norway
+    distractors: [Russia, Denmark, Iceland]
+    fact: A 1920 treaty gives every signatory equal rights to mine there, which is why Russia still runs a coal town at Barentsburg on Norwegian soil.
+
+  - id: beta-026
+    category: geography
+    difficulty: 3
+    prompt: Which country flies the only national flag that is not a rectangle?
+    answer: Nepal
+    distractors: [Switzerland, Vatican City, Qatar]
+    fact: Two stacked pennants, and the constitution specifies the geometry well enough to draw it from scratch. Switzerland and the Vatican are square, not pointed.
+
+  - id: beta-027
+    category: geography
+    difficulty: 3
+    prompt: As of 2020, which country had the largest Muslim population in the world?
+    answer: Indonesia
+    distractors: [Pakistan, India, Bangladesh]
+    fact: About an eighth of all Muslims live there, ahead of Pakistan and India, and none of the three is in the Middle East. Islam arrived there by trade rather than by conquest.
+
+  - id: beta-028
+    category: geography
+    difficulty: 4
+    prompt: Which Canadian station on Ellesmere Island is the northernmost permanently inhabited place on earth?
+    answer: Alert
+    distractors: [Longyearbyen, Qaanaaq, Utqiagvik]
+    fact: About 500 miles from the pole, staffed year round for weather and signals intelligence. Ny-Alesund on Svalbard is the northernmost civilian settlement and Longyearbyen the northernmost place with a real population.
+
+  - id: beta-029
+    category: geography
+    difficulty: 4
+    prompt: Which country spans five geographic time zones but keeps a single official time?
+    answer: China
+    distractors: [Russia, India, Brazil]
+    fact: Everything runs on Beijing time, so in Kashgar in the far west the sun comes up around ten. Xinjiang keeps an unofficial local clock two hours behind.
+
+  - id: beta-030
+    category: geography
+    difficulty: 4
+    prompt: What is the capital of Mauritius?
+    answer: Port Louis
+    distractors: [Victoria, Saint-Denis, Moroni]
+    fact: All four are Indian Ocean island capitals. Victoria is the Seychelles, Saint-Denis is Reunion and Moroni is the Comoros.
+
+  # ---- Sports ----
+  - id: beta-031
+    category: sports
+    difficulty: 2
+    prompt: In tennis, what is a game score of forty-forty called?
+    answer: Deuce
+    distractors: [Advantage, Let, Love]
+    fact: From the French for two, since two straight points are needed from there. Love is thought to come from l'oeuf, the egg a zero looks like.
+
+  - id: beta-032
+    category: sports
+    difficulty: 2
+    prompt: Which sport has long been known as the sport of kings?
+    answer: Horse racing
+    distractors: [Polo, Yacht racing, Fencing]
+    fact: All four were royal pastimes, which is why the other three sound right. The phrase attached itself to racing in England under Charles II, who rode in races himself.
+
+  - id: beta-033
+    category: sports
+    difficulty: 3
+    prompt: How many Wimbledon singles titles did Martina Navratilova win?
+    answer: Nine
+    distractors: [Seven, Eight, Eleven]
+    fact: Six of them in a row, 1982 to 1987. Still the record for the singles event.
+
+  - id: beta-034
+    category: sports
+    difficulty: 3
+    prompt: Edson Arantes do Nascimento is the real name of which footballer?
+    answer: Pele
+    distractors: [Garrincha, Zico, Didi]
+    fact: He never liked the nickname and never settled where it came from. Garrincha and Didi were his teammates in the 1958 and 1962 World Cup sides.
+
+  - id: beta-035
+    category: sports
+    difficulty: 3
+    prompt: Which driver was killed at Imola during the 1994 San Marino Grand Prix?
+    answer: Ayrton Senna
+    distractors: [Roland Ratzenberger, Gilles Villeneuve, Jochen Rindt]
+    fact: Ratzenberger died in qualifying for the same race, the day before. Two deaths in one weekend rebuilt the sport's approach to safety.
+
+  - id: beta-036
+    category: sports
+    difficulty: 3
+    prompt: In which Canadian province was Wayne Gretzky born?
+    answer: Ontario
+    distractors: [Alberta, Manitoba, Saskatchewan]
+    fact: Brantford, on a backyard rink his father flooded every winter. He played his best years for Edmonton in Alberta.
+
+  - id: beta-037
+    category: sports
+    difficulty: 3
+    prompt: Who did Muhammad Ali beat in the 1975 fight billed as the Thrilla in Manila?
+    answer: Joe Frazier
+    distractors: [George Foreman, Ken Norton, Sonny Liston]
+    fact: Their third meeting, and each had won one. Frazier's corner stopped it before the fifteenth round with his eyes almost shut.
+
+  - id: beta-038
+    category: sports
+    difficulty: 4
+    prompt: Which pitcher threw the only perfect game in World Series history?
+    answer: Don Larsen
+    distractors: [Whitey Ford, Sandy Koufax, Bob Gibson]
+    fact: Game five of the 1956 series, Yankees against the Dodgers. He had been knocked out in the second inning of game two.
+
+  - id: beta-039
+    category: sports
+    difficulty: 4
+    prompt: Which British driver took the 1976 Formula One title by a single point after Niki Lauda's crash?
+    answer: James Hunt
+    distractors: [Jackie Stewart, Graham Hill, John Surtees]
+    fact: Lauda came back six weeks after being pulled from a burning car, then withdrew from the last race at Fuji in torrential rain and lost the championship by that point.
+
+  - id: beta-040
+    category: sports
+    difficulty: 4
+    prompt: Which fighter took the heavyweight title from Muhammad Ali in February 1978?
+    answer: Leon Spinks
+    distractors: [Ken Norton, Larry Holmes, Earnie Shavers]
+    fact: Spinks had seven professional fights behind him. Ali won it back seven months later and became the first man to hold the heavyweight title three times.
+
+  # ---- Classic Film & Television ----
+  - id: beta-041
+    category: film-tv
+    difficulty: 2
+    prompt: Which was the first James Bond film to reach cinemas?
+    answer: Dr. No
+    distractors: [From Russia with Love, Goldfinger, Thunderball]
+    fact: 1962, on a budget of about a million dollars. Fleming had wanted a bigger name than Connery and came round after seeing it.
+
+  - id: beta-042
+    category: film-tv
+    difficulty: 2
+    prompt: Which film gave us the line "what we've got here is failure to communicate"?
+    answer: Cool Hand Luke
+    distractors: [The Hustler, On the Waterfront, Hud]
+    fact: Said first by the prison captain, then thrown back by Newman at the end. The actor playing the captain, Strother Martin, had been a swimming instructor.
+
+  - id: beta-043
+    category: film-tv
+    difficulty: 3
+    prompt: In which 1973 film does Yul Brynner play a robot gunslinger that malfunctions?
+    answer: Westworld
+    distractors: [Logan's Run, Soylent Green, The Andromeda Strain]
+    fact: Written and directed by Michael Crichton, who later did the same trick with dinosaurs. Its robot point-of-view shots were the first digitally processed images in a feature film.
+
+  - id: beta-044
+    category: film-tv
+    difficulty: 3
+    prompt: Which Stanley Kubrick film was adapted from a Stephen King novel?
+    answer: The Shining
+    distractors: [Carrie, Christine, The Dead Zone]
+    fact: King disliked it enough to produce his own version for television in 1997. The other three are King adaptations by other directors.
+
+  - id: beta-045
+    category: film-tv
+    difficulty: 3
+    prompt: What did Alfred Hitchcock use for blood in the shower scene in Psycho?
+    answer: Chocolate syrup
+    distractors: [Beet juice, Stage blood, Tomato paste]
+    fact: The film is black and white, and syrup had the right thickness and reflectivity on camera. The knife never touches the body in the finished cut.
+
+  - id: beta-046
+    category: film-tv
+    difficulty: 3
+    prompt: Who played Baron Frankenstein in Hammer's 1957 The Curse of Frankenstein?
+    answer: Peter Cushing
+    distractors: [Christopher Lee, Vincent Price, Boris Karloff]
+    fact: Christopher Lee played the creature in the same film, with almost no lines. The two of them made more than twenty pictures together after it.
+
+  - id: beta-047
+    category: film-tv
+    difficulty: 3
+    prompt: In which 1955 film does Frank Sinatra play the gambler Nathan Detroit?
+    answer: Guys and Dolls
+    distractors: [Pal Joey, High Society, On the Town]
+    fact: Sinatra wanted Sky Masterson, the part that went to Marlon Brando, and never hid his irritation about it on set.
+
+  - id: beta-048
+    category: film-tv
+    difficulty: 4
+    prompt: What was Harrison Ford suffering from while filming the Cairo chase in Raiders of the Lost Ark?
+    answer: Dysentery
+    distractors: [Malaria, Heat exhaustion, A broken rib]
+    fact: The swordsman was scripted as a long whip-against-sword fight. Ford was too ill to do it, so Indiana Jones shoots him instead.
+
+  - id: beta-049
+    category: film-tv
+    difficulty: 4
+    prompt: Which seaside town do the mods ride down to in the 1979 film Quadrophenia?
+    answer: Brighton
+    distractors: [Margate, Blackpool, Hastings]
+    fact: Based on the real 1964 bank holiday fights, which happened at Brighton, Margate and Hastings. Sting plays the Ace Face who turns out to be a bellboy.
+
+  - id: beta-050
+    category: film-tv
+    difficulty: 4
+    prompt: Which of Sergio Leone's three Dollars films came out first?
+    answer: A Fistful of Dollars
+    distractors: [For a Few Dollars More, The Good the Bad and the Ugly, Once Upon a Time in the West]
+    fact: 1964, and an unauthorised remake of Kurosawa's Yojimbo. Kurosawa sued and won a share of the takings, and said he had made more money from it than from his own film.
+
+  # ---- Popular Music 1955-1995 ----
+  - id: beta-051
+    category: music-popular
+    difficulty: 2
+    prompt: Which band was Sting, Stewart Copeland and Andy Summers?
+    answer: The Police
+    distractors: [The Jam, Dire Straits, The Pretenders]
+    fact: Copeland's brother managed them and his father had been an OSS officer. Summers was the old hand, having already played with Eric Burdon.
+
+  - id: beta-052
+    category: music-popular
+    difficulty: 2
+    prompt: Which band had the 1976 hit "(Don't Fear) The Reaper"?
+    answer: Blue Oyster Cult
+    distractors: [Steppenwolf, Blue Cheer, Deep Purple]
+    fact: Buck Dharma wrote it wondering what would happen if he died young. The Romeo and Juliet line made listeners hear a suicide pact in it, which he said appalled him.
+
+  - id: beta-053
+    category: music-popular
+    difficulty: 3
+    prompt: Pink Floyd's "Shine On You Crazy Diamond" is about which former member of the band?
+    answer: Syd Barrett
+    distractors: [Roger Waters, Richard Wright, Bob Klose]
+    fact: He walked into the studio while they were mixing it, overweight and with his head shaved, and nobody recognised him at first.
+
+  - id: beta-054
+    category: music-popular
+    difficulty: 3
+    prompt: Whose "Don't You Want Me" was the Christmas number one in Britain in 1981?
+    answer: The Human League
+    distractors: [Soft Cell, Depeche Mode, Heaven 17]
+    fact: Oakey thought it was the weakest thing on the album and had to be talked into releasing it. Heaven 17 were formed by two members who had walked out of the band.
+
+  - id: beta-055
+    category: music-popular
+    difficulty: 3
+    prompt: What was the Velvet Underground's first album?
+    answer: The Velvet Underground & Nico
+    distractors: [White Light/White Heat, Loaded, Chelsea Girl]
+    fact: Andy Warhol produced it and put the banana on the sleeve. It sold almost nothing, which is the point of the line about everyone who bought it starting a band.
+
+  - id: beta-056
+    category: music-popular
+    difficulty: 3
+    prompt: Which was the first Beatles album, released in 1963?
+    answer: Please Please Me
+    distractors: [With the Beatles, A Hard Day's Night, Beatles for Sale]
+    fact: Ten of its fourteen tracks were cut in a single day. Lennon sang Twist and Shout last, with a cold, because it would wreck his voice.
+
+  - id: beta-057
+    category: music-popular
+    difficulty: 3
+    prompt: Which band took "We Built This City" to number one in 1985?
+    answer: Starship
+    distractors: [Foreigner, Journey, Survivor]
+    fact: The same group had been Jefferson Airplane in the sixties and Jefferson Starship in the seventies, losing a word each decade.
+
+  - id: beta-058
+    category: music-popular
+    difficulty: 4
+    prompt: Which Dutch band had a hit with "Hocus Pocus", built on a flute and a yodel?
+    answer: Focus
+    distractors: [Golden Earring, Shocking Blue, Tee Set]
+    fact: Recorded in 1971 on Moving Waves and an American top ten hit in 1973 on reissue. Thijs van Leer did the yodelling himself between the flute passages, and all four bands here are Dutch acts that charted in America.
+
+  - id: beta-059
+    category: music-popular
+    difficulty: 4
+    prompt: What was Pink Floyd's first album, released in 1967?
+    answer: The Piper at the Gates of Dawn
+    distractors: [A Saucerful of Secrets, More, Ummagumma]
+    fact: The title is chapter seven of The Wind in the Willows. It is the only Floyd album their original frontman wrote almost all of.
+
+  - id: beta-060
+    category: music-popular
+    difficulty: 4
+    prompt: Blondie's 1980 number one "Call Me" was written for which film?
+    answer: American Gigolo
+    distractors: [Urban Cowboy, Fame, Foxes]
+    fact: Giorgio Moroder wrote the music and offered it to Stevie Nicks first. Debbie Harry wrote the words in a few hours after watching a rough cut.
+
+  # ---- The Natural World ----
+  - id: beta-061
+    category: natural-world
+    difficulty: 2
+    prompt: What colour is the skin under a polar bear's fur?
+    answer: Black
+    distractors: [Pink, White, Grey]
+    fact: The hairs are hollow and colourless, so the white is scattered light rather than pigment. The black skin underneath soaks up what gets through.
+
+  - id: beta-062
+    category: natural-world
+    difficulty: 2
+    prompt: Which family of birds can fly backwards?
+    answer: Hummingbirds
+    distractors: [Kingfishers, Swifts, Sunbirds]
+    fact: The wing traces a figure of eight rather than flapping up and down, which is also how they hover. The other three hover briefly but cannot reverse.
+
+  - id: beta-063
+    category: natural-world
+    difficulty: 3
+    prompt: The word "hippopotamus" is Greek for what?
+    answer: River horse
+    distractors: [Water ox, River pig, Mud bull]
+    fact: The name is wrong about the family. Its closest living relatives are whales and dolphins, not horses or pigs.
+
+  - id: beta-064
+    category: natural-world
+    difficulty: 3
+    prompt: Which animal's last known individual died in Hobart Zoo in 1936?
+    answer: The thylacine
+    distractors: [The quagga, The passenger pigeon, The Tasmanian devil]
+    fact: Tasmania granted the species legal protection 59 days before that animal died. The devil is still with us.
+
+  - id: beta-065
+    category: natural-world
+    difficulty: 3
+    prompt: What is the longest venomous snake in the world?
+    answer: The king cobra
+    distractors: [The black mamba, The bushmaster, The coastal taipan]
+    fact: The record is a shade over nineteen feet, and it mostly eats other snakes. It is also the only snake known to build a nest for its eggs and then guard it.
+
+  - id: beta-066
+    category: natural-world
+    difficulty: 3
+    prompt: Cashmere is wool from which animal?
+    answer: A goat
+    distractors: [A sheep, An alpaca, An angora rabbit]
+    fact: It is the soft undercoat of the Kashmir goat, combed out rather than sheared. Mohair comes from a goat as well, a different breed entirely.
+
+  - id: beta-067
+    category: natural-world
+    difficulty: 3
+    prompt: Which large flightless nocturnal parrot is native to New Zealand?
+    answer: The kakapo
+    distractors: [The kea, The takahe, The kiwi]
+    fact: The male inflates himself and booms from a hollow he digs on a ridge, so the sound carries for miles. The kea is a parrot but flies; the takahe is flightless but not a parrot.
+
+  - id: beta-068
+    category: natural-world
+    difficulty: 4
+    prompt: A Portuguese man-of-war is not a jellyfish. What is it?
+    answer: A colony of specialised animals
+    distractors: [A single large jellyfish, A floating sea anemone, A colonial sponge]
+    fact: Four kinds of polyp, each doing one job, and none of them able to survive on its own. The float is one animal, the tentacles are others.
+
+  - id: beta-069
+    category: natural-world
+    difficulty: 4
+    prompt: The Japanese dish fugu is prepared from which family of fish?
+    answer: Pufferfish
+    distractors: [Triggerfish, Boxfish, Ocean sunfish]
+    fact: The poison is tetrodotoxin, concentrated in the liver and ovaries, and there is no antidote. Chefs train for years for the licence.
+
+  - id: beta-070
+    category: natural-world
+    difficulty: 4
+    prompt: Which bird's chicks are born with claws on their wings?
+    answer: The hoatzin
+    distractors: [The hoopoe, The shoebill, The kagu]
+    fact: The chicks drop into the water to escape a predator and climb back up the branches with those claws. The adults ferment leaves in a crop like a cow's rumen.
+
+  # ---- Space & Aviation ----
+  - id: beta-071
+    category: space-aviation
+    difficulty: 2
+    prompt: The asteroid belt lies between the orbits of which two planets?
+    answer: Mars and Jupiter
+    distractors: [Jupiter and Saturn, Earth and Mars, Saturn and Uranus]
+    fact: Everything in it together comes to about three percent of the moon, and Ceres alone is a third of that.
+
+  - id: beta-072
+    category: space-aviation
+    difficulty: 2
+    prompt: Which is the hottest planet in the solar system?
+    answer: Venus
+    distractors: [Mercury, Mars, Jupiter]
+    fact: Around 870 degrees Fahrenheit at the surface, hotter than Mercury despite being further out. The carbon dioxide atmosphere holds the heat in.
+
+  - id: beta-073
+    category: space-aviation
+    difficulty: 3
+    prompt: Which dog was the first animal to orbit the Earth?
+    answer: Laika
+    distractors: [Belka, Strelka, Zvezdochka]
+    fact: Sputnik 2, November 1957, with no way home designed in. She died of heat within hours. Belka and Strelka orbited and came back alive in 1960.
+
+  - id: beta-074
+    category: space-aviation
+    difficulty: 3
+    prompt: Which spacecraft was the first to fly past Jupiter?
+    answer: Pioneer 10
+    distractors: [Voyager 1, Voyager 2, Pioneer 11]
+    fact: December 1973, and it was also the first to cross the asteroid belt. The Voyagers launched four years later and sent back far better pictures.
+
+  - id: beta-075
+    category: space-aviation
+    difficulty: 3
+    prompt: A year on which planet lasts about 84 Earth years?
+    answer: Uranus
+    distractors: [Neptune, Saturn, Pluto]
+    fact: Its axis is tipped almost on its side, so each pole gets about 42 years of daylight and then 42 of dark.
+
+  - id: beta-076
+    category: space-aviation
+    difficulty: 3
+    prompt: In which year did Concorde enter commercial service?
+    answer: 1976
+    distractors: [1969, 1972, 1979]
+    fact: It first flew in 1969 and took seven more years to certify. British Airways and Air France started on the same January day, to Bahrain and to Rio.
+
+  - id: beta-077
+    category: space-aviation
+    difficulty: 3
+    prompt: What nickname was given to the Air Canada 767 that ran out of fuel and glided to a landing in 1983?
+    answer: The Gimli Glider
+    distractors: [The Azores Glider, The Miracle on the Hudson, The Sioux City Seven]
+    fact: A pounds-to-kilograms mix-up during the switch to metric left it half fuelled. It landed on a closed air force runway being used that day for drag racing.
+
+  - id: beta-078
+    category: space-aviation
+    difficulty: 4
+    prompt: What was the first living thing deliberately sent into space?
+    answer: Fruit flies
+    distractors: [A rhesus monkey, A dog, A mouse]
+    fact: On a captured V-2 from White Sands in July 1946. A second batch the following February became the first living things brought back alive. Albert the rhesus monkey went up in 1948 and did not survive.
+
+  - id: beta-079
+    category: space-aviation
+    difficulty: 4
+    prompt: Which Apollo mission was the first to carry the lunar roving vehicle?
+    answer: Apollo 15
+    distractors: [Apollo 14, Apollo 16, Apollo 17]
+    fact: Scott and Irwin drove about seventeen miles in it. Before that the crews walked, pulling a cart, and Apollo 14 never got more than about a mile from the module.
+
+  - id: beta-080
+    category: space-aviation
+    difficulty: 4
+    prompt: Which spacecraft made the first soft landing on the moon?
+    answer: Luna 9
+    distractors: [Surveyor 1, Ranger 7, Luna 2]
+    fact: February 1966, four months ahead of America's Surveyor 1. Luna 2 had hit the moon deliberately in 1959 and Ranger 7 did the same in 1964.
+
+  # ---- Invention & Technology ----
+  - id: beta-081
+    category: invention-tech
+    difficulty: 2
+    prompt: The computer company HP was named after which two men?
+    answer: Hewlett and Packard
+    distractors: [Hughes and Packard, Hewlett and Parker, Hoerni and Packard]
+    fact: A coin toss decided whose name came first. They started in a rented garage in Palo Alto in 1939 and their first product was an audio oscillator.
+
+  - id: beta-082
+    category: invention-tech
+    difficulty: 2
+    prompt: Which carmaker gave away its patent on the three-point seat belt?
+    answer: Volvo
+    distractors: [Saab, Mercedes-Benz, Ford]
+    fact: Nils Bohlin designed the version everyone uses now and Volvo fitted it from 1959, then opened the patent rather than licence it. An American three-point design had been patented four years earlier and went nowhere.
+
+  - id: beta-083
+    category: invention-tech
+    difficulty: 3
+    prompt: Who invented the seed drill in 1701?
+    answer: Jethro Tull
+    distractors: [Cyrus McCormick, John Deere, Eli Whitney]
+    fact: He got the idea from the pipes of a church organ. The rock band took his name in 1968, by which time he had been dead for 227 years.
+
+  - id: beta-084
+    category: invention-tech
+    difficulty: 3
+    prompt: Moore's law, as first stated in 1965, said the transistor count on a chip would double how often?
+    answer: Every year
+    distractors: [Every eighteen months, Every two years, Every five years]
+    fact: Moore revised it to two years in 1975. The eighteen-month version everyone quotes was somebody else's shorthand and he never wrote it.
+
+  - id: beta-085
+    category: invention-tech
+    difficulty: 3
+    prompt: What does MIDI stand for?
+    answer: Musical Instrument Digital Interface
+    distractors: [Musical Instrument Data Input, Multiple Instrument Digital Interface, Modular Instrument Device Interface]
+    fact: Agreed in 1983 between manufacturers who were otherwise at each other's throats. The specification was stable enough that 1983 hardware still talks to the current kind.
+
+  - id: beta-086
+    category: invention-tech
+    difficulty: 3
+    prompt: Who patented the first practical ballpoint pen, in 1938?
+    answer: Laszlo Biro
+    distractors: [Lewis Waterman, George Parker, Milton Reynolds]
+    fact: A Hungarian journalist, tired of smudged newsprint ink. Waterman and Parker had made their names on fountain pens; Reynolds copied the design in America and sold millions before the patents caught up.
+
+  - id: beta-087
+    category: invention-tech
+    difficulty: 3
+    prompt: Which car company, founded in 1902, was named after the French officer who founded Detroit?
+    answer: Cadillac
+    distractors: [Chevrolet, Pontiac, Lincoln]
+    fact: Antoine de la Mothe Cadillac. The crest on the car is a version of a coat of arms he appears to have invented for himself.
+
+  - id: beta-088
+    category: invention-tech
+    difficulty: 4
+    prompt: What did the name Tor originally stand for?
+    answer: The Onion Router
+    distractors: [Total Onion Relay, The Obfuscated Route, Transit Over Relays]
+    fact: It came out of the US Naval Research Laboratory, which needed a way to protect its own traffic and therefore needed everyone else using the same network.
+
+  - id: beta-089
+    category: invention-tech
+    difficulty: 4
+    prompt: Which company sold the first plain-paper office copier, the 914, in 1959?
+    answer: Xerox
+    distractors: [IBM, Kodak, 3M]
+    fact: It was called Haloid until the machine made its name, then took the machine's name instead. Chester Carlson had his process turned down by about twenty companies before Haloid took it on.
+
+  - id: beta-090
+    category: invention-tech
+    difficulty: 4
+    prompt: Which fastener did Whitcomb Judson patent in 1893, decades before it got the name we use?
+    answer: The zipper
+    distractors: [The snap fastener, Velcro, The safety pin]
+    fact: He called it a clasp locker and it kept jamming. B. F. Goodrich coined "zipper" in the 1920s for the sound its galoshes made.
+
+  # ---- Literature ----
+  - id: beta-091
+    category: literature
+    difficulty: 2
+    prompt: What was the name of Captain Nemo's submarine?
+    answer: The Nautilus
+    distractors: [The Argonaut, The Narwhal, The Abraham Lincoln]
+    fact: Verne gives it batteries that pull their sodium out of seawater and a top speed of 50 knots, in a novel published in 1870. The Abraham Lincoln is the frigate sent out to hunt it in the opening chapters.
+
+  - id: beta-092
+    category: literature
+    difficulty: 2
+    prompt: Eric Blair wrote under which name?
+    answer: George Orwell
+    distractors: [Graham Greene, Evelyn Waugh, Anthony Burgess]
+    fact: He took it from the River Orwell in Suffolk. He kept the pen name partly so his family would not be embarrassed by Down and Out in Paris and London.
+
+  - id: beta-093
+    category: literature
+    difficulty: 3
+    prompt: What is the name of Sherlock Holmes's brother?
+    answer: Mycroft
+    distractors: [Mortimer, Sherrinford, Siger]
+    fact: Sherrinford was Conan Doyle's working name for Sherlock himself before he changed it. Mycroft is the cleverer of the two and will not leave his club.
+
+  - id: beta-094
+    category: literature
+    difficulty: 3
+    prompt: Mary Shelley's Frankenstein carries which subtitle?
+    answer: The Modern Prometheus
+    distractors: [A Tale of Terror, The New Prometheus, A Modern Myth]
+    fact: Prometheus stole fire and was punished forever for it. She was eighteen when she started it, after a wet summer at Byron's villa on Lake Geneva.
+
+  - id: beta-095
+    category: literature
+    difficulty: 3
+    prompt: Under what name did Stephen King publish five novels between 1977 and 1984?
+    answer: Richard Bachman
+    distractors: [Richard Stark, John Swithen, Dan Kavanagh]
+    fact: All three wrong answers are real pen names of other writers. A bookshop clerk spotted King's style in the Bachman books, and King said Bachman had died of cancer of the pseudonym.
+
+  - id: beta-096
+    category: literature
+    difficulty: 3
+    prompt: Which Dickens character goes by the nickname the Artful Dodger?
+    answer: Jack Dawkins
+    distractors: [Noah Claypole, Charley Bates, Toby Crackit]
+    fact: The other three are in Oliver Twist too. Dickens has him transported to Australia rather than hanged, which for a pickpocket in 1838 was the likelier end.
+
+  - id: beta-097
+    category: literature
+    difficulty: 3
+    prompt: Who kills the dragon Smaug in The Hobbit?
+    answer: Bard the Bowman
+    distractors: [Bilbo, Thorin, Beorn]
+    fact: A thrush tells him where the missing scale is. Bilbo is not even in the chapter, which is the kind of ending a film cannot use.
+
+  - id: beta-098
+    category: literature
+    difficulty: 4
+    prompt: Which fictional English county did Thomas Hardy set his novels in?
+    answer: Wessex
+    distractors: [Barsetshire, Loamshire, Mercia]
+    fact: He revived a long-dead Anglo-Saxon name and mapped it onto real Dorset. Barsetshire is Trollope's invention and Loamshire is George Eliot's.
+
+  - id: beta-099
+    category: literature
+    difficulty: 4
+    prompt: Which spy novelist wrote the children's story Chitty-Chitty-Bang-Bang?
+    answer: Ian Fleming
+    distractors: [John le Carre, Len Deighton, Eric Ambler]
+    fact: He wrote it for his son Caspar while convalescing from a heart attack, and it was published two months after his own death. Roald Dahl wrote the screenplay for the film, and a Bond screenplay as well.
+
+  - id: beta-100
+    category: literature
+    difficulty: 4
+    prompt: Which American novelist drove around the country with a poodle called Charley?
+    answer: John Steinbeck
+    distractors: [Ernest Hemingway, William Faulkner, Jack Kerouac]
+    fact: He was 58 and in poor health, in a camper he named Rocinante after Don Quixote's horse. He died eight years later.
