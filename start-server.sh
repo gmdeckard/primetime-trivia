@@ -170,16 +170,17 @@ $list
 EOF
   fi
 
-  # One clean candidate is not a choice worth stopping for. One candidate that
-  # is already flagged is the opposite case: that is the night where everything
-  # looks healthy here and no phone can join, and typing the real address is
-  # the only way out. Same when the box can see no address at all.
-  # Written as an if, not an `&&` chain: a chain whose last test fails is the
-  # shape of the bare-`return` bug above, and this function has paid for that
-  # lesson once already.
-  if [ "$count" -eq 1 ] && [ -n "$default_idx" ]; then
-    return 0
-  fi
+  # Always ask, even when there is exactly one clean candidate. This used to
+  # return early on count==1 and it cost a night at the Netgear: the box came
+  # up with a single good address, the banner printed it, and nothing was
+  # pinned — so when the lease dropped later the server re-ranked live and the
+  # big screen started advertising the 169.254 address the adapter invented,
+  # while the banner scrolled off the top of the terminal still saying the
+  # right thing. Answering the prompt exports PRIMETIME_HOST_IP, and a pinned
+  # address cannot drift out from under the host screen mid-night.
+  #
+  # The early exits that remain are the ones where somebody has already said
+  # what they want: PRIMETIME_HOST_IP, PRIMETIME_NO_PICK, or no terminal.
 
   local reply attempt
   echo

@@ -64,10 +64,16 @@ const CLEAN_ONE = `192.168.1.50${TAB}eth0${TAB}`;
 const LINK_LOCAL_ONE = `169.254.183.44${TAB}eth0${TAB}no DHCP reply on this adapter — not a usable address`;
 const TWO = `192.168.1.50${TAB}eth0${TAB}\n169.254.183.44${TAB}eth1${TAB}no DHCP reply on this adapter — not a usable address`;
 
-test('a single clean candidate is not worth a prompt', () => {
-  const { out, picked } = runChooser({ list: CLEAN_ONE });
-  assert.equal(picked, '', 'should leave the pick to the server');
-  assert.doesNotMatch(out, /Which address/);
+test('a single clean candidate still prompts, and Enter pins it', () => {
+  // It used to return early here, which left nothing pinned: the server went
+  // on re-ranking live interfaces on every host-screen update, so a lease that
+  // dropped mid-night moved the big screen onto a 169.254 address while the
+  // startup banner still read correctly. Enter must export the address, not
+  // just agree with it.
+  const { out, picked } = runChooser({ list: CLEAN_ONE, input: '\n' });
+  assert.match(out, /Which address/);
+  assert.match(out, /Enter for 1/);
+  assert.equal(picked, '192.168.1.50');
 });
 
 test('a single FLAGGED candidate does prompt, and typing an address wins', () => {
