@@ -1,5 +1,6 @@
 import {
   PROTOCOL_VERSION,
+  pointsAt,
   type BaseState,
   type ControlState,
   type HostState,
@@ -397,6 +398,15 @@ export function playerState(engine: Engine, playerId: string): PlayerState {
   const answer = teamId && s.current ? s.current.answers[teamId] : undefined;
   const mine = teamId ? engine.scoreRows().find((r) => r.teamId === teamId) : undefined;
 
+  // Priced off the real window, like the live pill and the award itself, so
+  // time the MC grants stretches the slide instead of repricing an answer
+  // that is already in. The wager has no points to quote: the bet is the
+  // stake, and `me.wager` already says what it is.
+  const pointsIfRight =
+    answer && s.current && (s.phase === 'question' || s.phase === 'locked')
+      ? pointsAt(answer.elapsedMs, s.current.deadline - s.current.startedAt, s.config)
+      : undefined;
+
   return {
     ...base,
     role: 'player',
@@ -410,6 +420,7 @@ export function playerState(engine: Engine, playerId: string): PlayerState {
       score: mine?.score,
       choiceIndex: answer?.choiceIndex,
       numberAnswer: answer?.numberAnswer,
+      pointsIfRight,
       wager: teamId ? s.wagerBets?.[teamId] : undefined,
       maxWager: team ? Math.max(team.score, s.config.questionPoints) : 0,
     },

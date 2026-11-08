@@ -47,11 +47,19 @@ try {
   const errors = [];
   browser = await chromium.launch({ executablePath: process.env.CHROME_PATH, chromiumSandbox: false });
   // The narrowest phone we support, where any wrap will show first.
+  // The big screen comes up first, because a seat costs the room code and the
+  // only place to read it is the host page — exactly as in the room.
+  const big = await browser.newPage({ viewport: { width: 1280, height: 720 } });
+  await big.goto(`${BASE}/host`);
+  const roomCode = (await big.locator('.join-code').innerText()).trim();
+  if (!roomCode) throw new Error('no room code on the host screen — the join gate cannot be driven');
+
   const player = await browser.newPage({ viewport: { width: 375, height: 667 }, deviceScaleFactor: 2 });
   player.on('pageerror', e => errors.push(String(e.message)));
   await player.goto(BASE);
   await player.getByRole('button', { name: 'Just me' }).click();
   await player.locator('input').first().pressSequentially('Sam');
+  await player.locator('input').nth(1).pressSequentially(roomCode);
   await player.getByRole('button', { name: 'Join' }).click();
 
   const mc = await browser.newPage({ viewport: { width: 420, height: 900 } });

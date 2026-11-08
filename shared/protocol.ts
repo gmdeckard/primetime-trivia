@@ -512,6 +512,17 @@ export interface PlayerState extends BaseState {
     /** This team's locked answer for the current question. */
     choiceIndex?: number;
     numberAnswer?: number;
+    /**
+     * What the locked answer pays if it is right.
+     *
+     * Priced from the moment the team landed on this letter, not from now, so
+     * it holds still while the clock keeps falling. Only the server knows that
+     * moment — it stamps the answer on arrival, which is also the only honest
+     * place to absorb the trip over the room's wifi — so the number is sent
+     * rather than computed on the handset. Absent when nothing is locked, and
+     * during the wager, where the bet is the stake and points are not.
+     */
+    pointsIfRight?: number;
     /** Who on the team picked it, so a partner isn't confused. */
     chosenBy?: string;
     wager?: number;

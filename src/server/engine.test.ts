@@ -531,6 +531,41 @@ test('an answer can be changed until the lock', () => {
   assert.equal(playerState(engine, device).me.choiceIndex, 2, 'the later tap should win');
 });
 
+/*
+ * Value: protects=a player seeing what their locked answer is worth, and
+ *   seeing it change when they change their mind;
+ *   fails_when=playerState stops pricing the answer, prices it from now
+ *   instead of from the tap, or keeps quoting a value once nothing is locked;
+ *   why_new=no test reads me.pointsIfRight, and the elapsedMs tests check the
+ *   stamp rather than the number a handset is told; seam=none;
+ *   no_claim=says nothing about the wager, where the bet is the stake.
+ */
+test('a locked answer is priced for the player who locked it', async () => {
+  // readSeconds 0 so the clock starts taking points off immediately, which is
+  // what makes a change of mind visible inside a test's patience.
+  const engine = freshEngine({ questionsPerRound: 3, secondsPerQuestion: 2, readSeconds: 0 });
+  const teams = seatTeams(engine, 2);
+  engine.startGame();
+  engine.advance();
+  engine.advance();
+
+  const device = teams[0]!.players[0]!;
+  assert.equal(playerState(engine, device).me.pointsIfRight, undefined, 'nothing locked, nothing to quote');
+
+  engine.answer(device, 1);
+  const first = playerState(engine, device).me.pointsIfRight!;
+  assert.equal(first, engine.snapshot().config.questionPoints, 'an answer in the first instant is worth full value');
+
+  await wait(400);
+  const held = playerState(engine, device).me.pointsIfRight;
+  assert.equal(held, first, 'the price holds still while the clock falls');
+
+  engine.answer(device, 2);
+  const changed = playerState(engine, device).me.pointsIfRight!;
+  assert.ok(changed < first, `changing your mind costs what it costs (${changed} vs ${first})`);
+  assert.ok(changed >= engine.snapshot().config.minQuestionPoints, 'and never falls below the floor');
+});
+
 test('a player is sent the top of the table plus their own row, not all hundred', () => {
   const engine = freshEngine();
   const teams = seatTeams(engine, 40);

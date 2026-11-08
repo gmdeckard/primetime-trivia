@@ -127,7 +127,15 @@ function Question({ state, send }: { state: PlayerState; send: ReturnType<typeof
   // the real window so time the MC grants stretches the slide rather than
   // skipping it. Once locked, the reveal card reports what was actually won.
   const windowMs = state.deadline && state.startedAt ? state.deadline - state.startedAt : 0;
-  const onOffer = locked ? q.points : pointsAt(now - (state.startedAt ?? now), windowMs, state.config);
+  // Their own answer's price, from the server, which is the only place that
+  // knows when the tap landed. It stops the pill falling, because a number
+  // that keeps dropping after a team is in reads as their score draining
+  // away. The falling number's job is to get the room to answer; once this
+  // team has, the number that matters is theirs. Tapping a different letter
+  // re-times the answer, so this drops when they genuinely change their mind
+  // and holds when they tap the same letter twice.
+  const mine = state.me.pointsIfRight;
+  const onOffer = mine ?? (locked ? q.points : pointsAt(now - (state.startedAt ?? now), windowMs, state.config));
 
   // Widths reserved from the largest value each number can take, so the pill
   // is the same size at 1000 as at 200 and at 19s as at 9s. Read off the
@@ -216,13 +224,20 @@ function Question({ state, send }: { state: PlayerState; send: ReturnType<typeof
           deliberately not repeated here: the timer above already counts, and a
           number inside centred prose reflows the line on every tick. */}
       {chosen !== undefined && !locked && (
-        <p class="center muted">{['A', 'B', 'C', 'D'][chosen]} is in. Tap another to change your mind.</p>
+        <p class="center muted">
+          {['A', 'B', 'C', 'D'][chosen]} is in{mine !== undefined ? `, worth ${mine} if you're right` : ''}. Tap
+          another to change your mind.
+        </p>
       )}
       {state.held && <p class="center muted">The MC paused the round.</p>}
       {chosen === undefined && !locked && !state.held && <p class="center muted">Tap your answer.</p>}
       {locked && !reveal && (
         <p class="center muted">
-          {chosen === undefined ? 'No answer from your team.' : `${['A', 'B', 'C', 'D'][chosen]} is locked in.`}
+          {chosen === undefined
+            ? 'No answer from your team.'
+            : `${['A', 'B', 'C', 'D'][chosen]} is locked in${
+                mine !== undefined ? `, worth ${mine} if you're right` : ''
+              }.`}
         </p>
       )}
     </>
