@@ -148,8 +148,6 @@ export interface GameConfig {
   wagerSeconds: number;
   /** Jeopardy-style wager to close each game. */
   finalWager: boolean;
-  /** Host screen reads the question aloud via the browser's speech engine. */
-  readAloud: boolean;
   /** Per-question difficulty template for a round, cycled if shorter. */
   difficultyMix: Difficulty[];
   /**
@@ -265,15 +263,16 @@ export const DEFAULT_CONFIG: GameConfig = {
   readSeconds: 5,
   // The floor at the buzzer: a fifth of full value, never nothing.
   minQuestionPoints: 200,
-  // Off until a night in the room says otherwise. Sound on the big screen is
-  // the kind of thing that is charming for ten minutes and wearing by the
-  // third round, so it starts silent and the MC turns it on.
-  music: false,
-  // Separate switch, and the more arguable one: a bed under a live question
-  // competes with the MC's microphone in a room where some of the audience
-  // wear hearing aids. Worth trying, not worth defaulting to.
-  musicUnderQuestion: false,
-  musicSpeakCountIn: false,
+  // On. It started silent on the theory that sound wears thin by the third
+  // round, and a night in the room said the opposite: a trivia night with no
+  // sound reads as broken equipment. The MC can still switch it off, and it
+  // only ever comes out of the big screen.
+  music: true,
+  // On with it. The bed under a live question does compete with the MC's
+  // microphone in a room where some of the audience wear hearing aids, so
+  // this is the first thing to turn off if the room cannot hear the question.
+  musicUnderQuestion: true,
+  musicSpeakCountIn: true,
   musicVolume: 0.35,
   // Long enough to get to the bar and back. The engine counts these down for
   // real now, so the number on the big screen is a clock and not a claim.
@@ -290,7 +289,6 @@ export const DEFAULT_CONFIG: GameConfig = {
   // before the screen finishes asking.
   wagerSeconds: 40,
   finalWager: true,
-  readAloud: false,
   // Medium-hard by design: a warm-up, a climb, and three that should make the
   // room argue. Flat-easy rounds are what make educated players stop coming.
   //

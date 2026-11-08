@@ -472,7 +472,7 @@ function Setup({ state, send }: { state: ControlState; send: ReturnType<typeof u
         summary={
           c.music
             ? `on at ${Math.round(c.musicVolume * 100)}%${c.musicUnderQuestion ? ' · under questions' : ''}`
-            : c.readAloud ? 'music off · questions read aloud' : 'off'
+            : 'off'
         }
         open={open === 'sound'}
         onToggle={() => only('sound')}
@@ -509,12 +509,6 @@ function Setup({ state, send }: { state: ControlState; send: ReturnType<typeof u
           on={c.musicSpeakCountIn}
           disabled={!c.music}
           onChange={(musicSpeakCountIn) => set({ musicSpeakCountIn })}
-        />
-        <Toggle
-          label="Read questions aloud"
-          hint="the big screen's own voice reads the prompt and options"
-          on={c.readAloud}
-          onChange={(readAloud) => set({ readAloud })}
         />
       </Section>
 

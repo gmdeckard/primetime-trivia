@@ -217,7 +217,7 @@ function App() {
   // The big screen sits untouched through a ten-minute break.
   useWakeLock();
   const { state, send: _send, toast, dismissToast } = useGame<HostState>('host');
-  const speak = useSpeech(!!state?.config.readAloud || !!state?.config.musicSpeakCountIn);
+  const speak = useSpeech(!!state?.config.musicSpeakCountIn);
 
   // Built once and kept for the night. A browser refuses to make a sound until
   // someone has clicked the page, so `armed` stays false until the MC does —
@@ -297,17 +297,6 @@ function App() {
     }
     return () => ids.forEach(clearTimeout);
   }, [armed, music, state?.autoAdvanceAt, state?.held, state?.phase, state?.moreInRound]);
-
-  useEffect(() => {
-    if (!state) return;
-    if (state.phase !== 'question' && state.phase !== 'wager_question') return;
-    if (!state.config.readAloud) return;
-    const q = state.question;
-    if (!q) return;
-    const letters = ['A', 'B', 'C', 'D'];
-    const spoken = [q.prompt, ...(q.choices ?? []).map((c, i) => `${letters[i]}. ${c}`)].join('. ');
-    speak(spoken);
-  }, [state?.phase, state?.question?.prompt, speak]);
 
   // Hooks run before any early return, so the countdown can't be conditional.
   const { secondsLeft, now } = useCountdown(state?.deadline, state?.config.secondsPerQuestion ?? 1);
