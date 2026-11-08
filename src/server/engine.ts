@@ -125,6 +125,18 @@ function makeRoomCode(): string {
   return `${word}-${randomInt(2, 10)}`;
 }
 
+/**
+ * Fold a typed room code down to what it means.
+ *
+ * Someone reads "FALCON-7" off a screen thirty feet away and types "falcon 7",
+ * "Falcon7" or "falcon_7". None of those is a wrong answer. The code exists to
+ * prove you can see the big screen, not to test punctuation, so everything but
+ * letters and digits comes out and the case goes with it.
+ */
+export function normalizeRoomCode(raw: string): string {
+  return raw.toLowerCase().replace(/[^a-z0-9]/g, '');
+}
+
 /** Phases where a countdown is running and answers are being taken. */
 const LIVE_PHASES: Phase[] = ['question', 'wager_question', 'tiebreak'];
 
@@ -349,15 +361,30 @@ export class Engine {
   }
 
   /**
-   * Take a seat. One device, one entry — no joining someone else's.
+   * Take a seat, if you can name the room. One device, one entry — no joining
+   * someone else's.
    *
    * At a hundred people, picking your partner out of a list is slower and more
    * error-prone than just typing a handle, and a full lobby list is a payload
    * every device has to receive and render for no reason.
    */
-  join(playerId: string, name: string, kind: EntryKind, tableNo?: number): void {
+  join(playerId: string, roomCode: string, name: string, kind: EntryKind, tableNo?: number): void {
     const player = this.state.players[playerId];
     if (!player) throw new Error('unknown player');
+
+    // The gate. Reaching the server no longer means being in the room: it
+    // answers on a public hostname, so a seat goes only to a device that can
+    // read the code off the big screen. A device that already holds a seat is
+    // already past the gate, and this method is also the rename path — asking
+    // for the code again to change a name would be a gate on the wrong thing.
+    if (!player.teamId) {
+      const typed = normalizeRoomCode(roomCode);
+      if (!typed) throw new Error('Enter the room code from the big screen.');
+      if (typed !== normalizeRoomCode(this.state.roomCode)) {
+        throw new Error('That room code is not right — it is on the big screen.');
+      }
+    }
+
     const clean = name.trim().slice(0, 28);
     if (!clean) throw new Error('Pick a name to play under.');
     if (this.state.teamOrder.length >= 200) throw new Error('This night is full.');

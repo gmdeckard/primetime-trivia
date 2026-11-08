@@ -71,10 +71,19 @@ function JoinPanel({ state }: { state: HostState }) {
             <div class="stack">
               <div class="join-url">{state.join.url.replace('http://', '')}</div>
               <p class="muted" style={{ fontSize: '1.2rem' }}>
-                Room <strong>{state.roomCode}</strong> · play solo or share a device
+                Play solo or share a device
               </p>
             </div>
           </div>
+        </div>
+      </li>
+      <li class="join-step">
+        <div class="join-step-body">
+          <div class="eyebrow">Type this room code</div>
+          {/* Big because it is now typed, not just read. The join is gated on
+              it, so a code nobody can make out from the back of the room is a
+              room nobody can get into. */}
+          <div class="join-code">{state.roomCode}</div>
         </div>
       </li>
     </ol>

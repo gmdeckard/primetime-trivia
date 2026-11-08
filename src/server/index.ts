@@ -253,7 +253,7 @@ wss.on('connection', (socket) => {
       if (controlOnly.has(msg.t) && client.role !== 'control') return;
 
       switch (msg.t) {
-        case 'join': engine.join(client.playerId!, msg.name, msg.kind, msg.tableNo); break;
+        case 'join': engine.join(client.playerId!, msg.roomCode, msg.name, msg.kind, msg.tableNo); break;
         case 'leave': engine.leave(client.playerId!); break;
         case 'answer': engine.answer(client.playerId!, msg.choiceIndex); break;
         case 'answer_number': engine.answerNumber(client.playerId!, msg.value); break;

@@ -15,7 +15,7 @@ import {
   candidateNote,
   isWsl,
 } from './lan.js';
-import { Engine } from './engine.js';
+import { Engine, normalizeRoomCode } from './engine.js';
 import { Store } from './store.js';
 import { controlState, hostState, playerState } from './views.js';
 
@@ -52,7 +52,7 @@ function seatTeams(engine: Engine, count: number) {
   const teams: Array<{ teamId: string; players: string[] }> = [];
   for (let i = 0; i < count; i++) {
     const device = engine.identify();
-    engine.join(device.id, `Entry ${i + 1}`, i % 2 === 0 ? 'team' : 'solo');
+    engine.join(device.id, engine.snapshot().roomCode, `Entry ${i + 1}`, i % 2 === 0 ? 'team' : 'solo');
     teams.push({ teamId: engine.snapshot().players[device.id]!.teamId!, players: [device.id] });
   }
   return teams;
@@ -67,8 +67,8 @@ test('one device is one entry — a second device is its own entry', () => {
   const engine = freshEngine();
   const a = engine.identify();
   const b = engine.identify();
-  engine.join(a.id, 'Ace', 'solo');
-  engine.join(b.id, 'Deuce', 'solo');
+  engine.join(a.id, engine.snapshot().roomCode, 'Ace', 'solo');
+  engine.join(b.id, engine.snapshot().roomCode, 'Deuce', 'solo');
   const s = engine.snapshot();
   assert.equal(s.teamOrder.length, 2, 'each device gets its own row');
   assert.notEqual(s.players[a.id]!.teamId, s.players[b.id]!.teamId);
@@ -77,11 +77,11 @@ test('one device is one entry — a second device is its own entry', () => {
 test('rejoining from the same device keeps the entry and its score', () => {
   const engine = freshEngine();
   const device = engine.identify();
-  engine.join(device.id, 'Ace', 'solo');
+  engine.join(device.id, engine.snapshot().roomCode, 'Ace', 'solo');
   const teamId = engine.snapshot().players[device.id]!.teamId!;
   engine.adjustScore(teamId, 40);
 
-  engine.join(device.id, 'Ace of Spades', 'team');
+  engine.join(device.id, engine.snapshot().roomCode, 'Ace of Spades', 'team');
   const s = engine.snapshot();
   assert.equal(s.teamOrder.length, 1, 'renaming must not create a second entry');
   assert.equal(s.teams[teamId]!.score, 40, 'the score must survive');
@@ -93,8 +93,80 @@ test('duplicate names are refused', () => {
   const engine = freshEngine();
   const a = engine.identify();
   const b = engine.identify();
-  engine.join(a.id, 'The Snowbirds', 'team');
-  assert.throws(() => engine.join(b.id, 'the snowbirds', 'solo'), /already using/i);
+  engine.join(a.id, engine.snapshot().roomCode, 'The Snowbirds', 'team');
+  assert.throws(() => engine.join(b.id, engine.snapshot().roomCode, 'the snowbirds', 'solo'), /already using/i);
+});
+
+test('a seat needs the room code', () => {
+  // The whole point. The server answers on a public hostname now, so reaching
+  // it proves nothing; reading the code off the big screen proves you are in
+  // the room. Before this, identify() handed a seat to anyone who asked.
+  const engine = freshEngine();
+  const stranger = engine.identify();
+  assert.throws(
+    () => engine.join(stranger.id, 'falcon-9', 'Gatecrasher', 'solo'),
+    /not right/i,
+  );
+  assert.throws(
+    () => engine.join(stranger.id, '', 'Gatecrasher', 'solo'),
+    /Enter the room code/i,
+  );
+  assert.equal(engine.snapshot().teamOrder.length, 0, 'nobody is seated by a bad code');
+  assert.equal(engine.snapshot().players[stranger.id]!.teamId, undefined);
+});
+
+test('the room code forgives how it was typed', () => {
+  // Someone reads it off a screen across a room. Case, spaces and the hyphen
+  // are not the test; being in the room is.
+  const engine = freshEngine();
+  const real = engine.snapshot().roomCode; // e.g. falcon-7
+  const spelt = [real.toUpperCase(), real.replace('-', ' '), real.replace('-', ''), ` ${real} `];
+  for (const [i, typed] of spelt.entries()) {
+    const device = engine.identify();
+    engine.join(device.id, typed, `Entry ${i}`, 'solo');
+    assert.ok(engine.snapshot().players[device.id]!.teamId, `"${typed}" should be accepted`);
+  }
+  assert.equal(engine.snapshot().teamOrder.length, spelt.length);
+});
+
+test('normalizeRoomCode keeps only what the code means', () => {
+  assert.equal(normalizeRoomCode('FALCON-7'), 'falcon7');
+  assert.equal(normalizeRoomCode(' falcon 7 '), 'falcon7');
+  assert.equal(normalizeRoomCode('falcon_7'), 'falcon7');
+  assert.equal(normalizeRoomCode(''), '');
+  // Not so forgiving that a different code passes.
+  assert.notEqual(normalizeRoomCode('falcon-7'), normalizeRoomCode('falcon-8'));
+});
+
+test('a seated device is past the gate', () => {
+  // join() is also the rename path. Someone who already holds a seat has
+  // already proved they are in the room; asking again would gate the wrong
+  // thing. (The current UI drops the seat first, so this is the guard, not
+  // the happy path.)
+  const engine = freshEngine();
+  const device = engine.identify();
+  engine.join(device.id, engine.snapshot().roomCode, 'Ace', 'solo');
+  engine.join(device.id, 'nonsense', 'Ace of Spades', 'solo');
+  const teamId = engine.snapshot().players[device.id]!.teamId!;
+  assert.equal(engine.snapshot().teams[teamId]!.name, 'Ace of Spades');
+});
+
+test('the room code is withheld from a player who has no seat', () => {
+  // Sending the code to everyone who loads the page and then asking them to
+  // type it back is a gate that opens itself.
+  const engine = freshEngine();
+  const device = engine.identify();
+  const before = playerState(engine, device.id);
+  assert.equal(before.roomCode, '', 'a seatless player must not be told the code');
+
+  engine.join(device.id, engine.snapshot().roomCode, 'Ace', 'solo');
+  const after = playerState(engine, device.id);
+  assert.equal(after.roomCode, engine.snapshot().roomCode, 'a seated player can read it out');
+
+  // The MC and the big screen always need it: one says it, the other shows it.
+  const join = { url: 'http://x', qrSvg: '' };
+  assert.equal(hostState(engine, join).roomCode, engine.snapshot().roomCode);
+  assert.equal(controlState(engine).roomCode, engine.snapshot().roomCode);
 });
 
 test('the correct answer is not always in the same slot', () => {
@@ -1379,7 +1451,7 @@ function playNights(store: Store, audience: string, nights: number, perRound = 8
     });
     engines.push(engine);
     const device = engine.identify();
-    engine.join(device.id, 'Entry', 'solo');
+    engine.join(device.id, engine.snapshot().roomCode, 'Entry', 'solo');
     engine.startGame();
     drawn.push(...engine.snapshot().rounds[0]!.questionIds);
   }
@@ -1439,8 +1511,8 @@ test('the shared folder stays in play whichever age group is picked', () => {
     engines.push(engine);
     const a = engine.identify();
     const b = engine.identify();
-    engine.join(a.id, 'Ann', 'solo');
-    engine.join(b.id, 'Bob', 'solo');
+    engine.join(a.id, engine.snapshot().roomCode, 'Ann', 'solo');
+    engine.join(b.id, engine.snapshot().roomCode, 'Bob', 'solo');
     engine.startGame();
     engine.startTiebreak();
     assert.equal(engine.snapshot().phase, 'tiebreak', `no tiebreaker available on a ${audience} night`);

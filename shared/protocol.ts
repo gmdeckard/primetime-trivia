@@ -526,7 +526,7 @@ export type GameState = HostState | ControlState | PlayerState;
 export type ClientMessage =
   // player
   | { t: 'hello'; role: 'player' | 'host' | 'control'; playerId?: string; token?: string }
-  | { t: 'join'; name: string; kind: EntryKind; tableNo?: number }
+  | { t: 'join'; roomCode: string; name: string; kind: EntryKind; tableNo?: number }
   | { t: 'leave' }
   | { t: 'answer'; choiceIndex: number }
   | { t: 'answer_number'; value: number }

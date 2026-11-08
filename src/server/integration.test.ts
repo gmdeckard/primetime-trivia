@@ -27,6 +27,8 @@ class Client {
   private waiters: Array<{ match: (s: never) => boolean; resolve: (s: never) => void }> = [];
   closed: Promise<number>;
   identity?: { playerId: string; token: string };
+  /** Server-side refusals. A gate that is never seen to refuse is not a gate. */
+  errors: string[] = [];
 
   constructor() {
     this.socket = new WebSocket(`ws://127.0.0.1:${PORT}/ws`);
@@ -34,6 +36,7 @@ class Client {
     this.socket.on('message', (raw) => {
       const msg = JSON.parse(String(raw)) as ServerMessage;
       if (msg.t === 'identity') this.identity = { playerId: msg.playerId, token: msg.token };
+      if (msg.t === 'error') this.errors.push(msg.message);
       if (msg.t !== 'state') return;
       this.states.push(msg.state);
       for (const waiter of this.waiters.slice()) {
@@ -55,6 +58,17 @@ class Client {
 
   send(msg: ClientMessage) {
     this.socket.send(JSON.stringify(msg));
+  }
+
+  /** Resolve on the first error message containing `needle`, past or future. */
+  async nextError(needle: string, timeoutMs = 4000): Promise<string> {
+    const deadline = Date.now() + timeoutMs;
+    for (;;) {
+      const hit = this.errors.find((m) => m.toLowerCase().includes(needle.toLowerCase()));
+      if (hit) return hit;
+      if (Date.now() > deadline) throw new Error(`timed out waiting for error matching ${needle}`);
+      await new Promise((r) => setTimeout(r, 25));
+    }
   }
 
   /** Resolve on the first state — past or future — that matches. */
@@ -181,7 +195,12 @@ test('players join, answer, and the MC drives the night', async () => {
   const mc = new Client();
   await mc.open();
   mc.send({ t: 'hello', role: 'control', token });
-  await mc.next<{ role: string }>((s) => s.role === 'control', 'control state');
+  const mcState = await mc.next<{ role: string; roomCode: string }>(
+    (s) => s.role === 'control',
+    'control state',
+  );
+  const room = mcState.roomCode;
+  assert.ok(room, 'the MC must be told the room code — it is what they read out');
 
   const ann = new Client();
   const bob = new Client();
@@ -193,9 +212,22 @@ test('players join, answer, and the MC drives the night', async () => {
   await bob.next<PlayerState>((s) => !!s.me?.playerId, 'bob identity');
   assert.ok(ann.identity?.token, 'a player should be handed a reconnect token');
 
-  ann.send({ t: 'join', name: 'The Snowbirds', kind: 'team' });
+  // The gate, end to end. A device that has not been seated is not told the
+  // code, and guessing it does not work: this is the only thing standing
+  // between a public hostname and a stranger on the scoreboard.
+  const annLobby = await ann.next<PlayerState>((s) => s.phase === 'lobby', 'ann in the lobby');
+  assert.equal(annLobby.roomCode, '', 'a seatless player must not be handed the room code');
+
+  ann.send({ t: 'join', roomCode: 'not-the-code', name: 'Gatecrasher', kind: 'solo' });
+  const refused = await ann.nextError('room code');
+  assert.match(refused, /not right/i, 'the refusal should point at the big screen');
+  const stillOut = await ann.next<PlayerState>((s) => s.phase === 'lobby', 'ann still seatless');
+  assert.equal(stillOut.me.teamId, undefined, 'a wrong code must not seat anyone');
+
+  ann.send({ t: 'join', roomCode: room, name: 'The Snowbirds', kind: 'team' });
   const seated = await ann.next<PlayerState>((s) => !!s.me.teamId, 'ann seated');
-  bob.send({ t: 'join', name: 'Bob', kind: 'solo' });
+  assert.equal(seated.roomCode, room, 'once seated, a player can read the code to the next table');
+  bob.send({ t: 'join', roomCode: room, name: 'Bob', kind: 'solo' });
   const bobSeated = await bob.next<PlayerState>((s) => !!s.me.teamId, 'bob seated');
   assert.notEqual(bobSeated.me.teamId, seated.me.teamId, 'each device is its own entry');
 

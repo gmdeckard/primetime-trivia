@@ -73,6 +73,12 @@ try {
     await p.locator('input').first().waitFor({ state: 'visible', timeout: 10000 });
     await p.locator('input').first().pressSequentially(text, { delay: 15 });
   };
+  /** Type into the nth input. The join form is a handle plus the room code. */
+  const pressNth = async (p, i, text) => {
+    const input = p.locator('input').nth(i);
+    await input.waitFor({ state: 'visible', timeout: 10000 });
+    await input.pressSequentially(text, { delay: 15 });
+  };
   const tap = async (p, name) => {
     const b = p.getByRole('button', { name });
     try {
@@ -97,6 +103,7 @@ try {
     await tap(page, kind === 'team' ? 'A team on this device' : 'Just me');
     await pause(page, 400);
     await press(page, handle);
+    await pressNth(page, 1, roomCode);
     await tap(page, 'Join');
     await pause(page, 700);
     return page;
@@ -105,12 +112,18 @@ try {
   const host = await open('host', '/host', 1920, 1080, 1);
   await shoot(host, '01-host-lobby');
 
+  // Read the gate off the big screen, exactly as a player in the room does.
+  // Each page gets its own context, so every device types it for itself.
+  const roomCode = (await host.locator('.join-code').innerText()).trim();
+  if (!roomCode) throw new Error('no room code on the host screen — the join gate cannot be driven');
+
   // --- players arrive
   const ann = await open('ann', '/', 420, 900);
   await shoot(ann, '02-player-solo-or-team');
   await tap(ann, 'A team on this device');
   await pause(ann, 400);
   await press(ann, 'The Snowbirds');
+  await pressNth(ann, 1, roomCode);
   await tap(ann, 'Join');
   await pause(ann, 700);
   await shoot(ann, '03-player-seated');

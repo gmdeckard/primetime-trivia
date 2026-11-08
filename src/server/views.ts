@@ -170,7 +170,11 @@ function baseState(engine: Engine, role: 'host' | 'control' | 'player', teamId?:
   return {
     protocol: PROTOCOL_VERSION,
     phase: s.phase,
-    roomCode: s.roomCode,
+    // Withheld from a player who has no seat yet, because the code is what
+    // buys the seat. Sending it to everyone who loads the page and then asking
+    // them to type it back is a gate that opens itself. A seated player keeps
+    // seeing it, so they can read it to the person next to them.
+    roomCode: role === 'player' && !teamId ? '' : s.roomCode,
     venueName: s.config.venueName,
     config: s.config,
     teams: role === 'player' ? [] : teamViews(engine),

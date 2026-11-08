@@ -224,9 +224,16 @@ location / {
 Use a subdomain rather than a path. Every route and every asset hangs off the
 root, so a path prefix needs a build change as well as a rewrite.
 
-Note that joining is not gated: anyone who can reach the server gets a seat.
-On a LAN that is the design. On a public domain it means anyone who finds the
-URL can join your night.
+Joining is gated on the room code. The code is on the big screen, players type
+it once alongside their name, and the server withholds it from anyone who has
+not been seated — so the gate is "you can see the screen", which is what being
+in the room means. It is deliberately forgiving about how the code is typed:
+case, spaces and the hyphen are all ignored, because reading it off a screen
+thirty feet away is the test, not punctuation.
+
+That is enough for a public hostname and no more than that. Anyone you read the
+code out to can join, which is the point, and the code lasts as long as the
+night does.
 
 ## Running a night
 

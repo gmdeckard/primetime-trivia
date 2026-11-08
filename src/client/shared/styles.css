@@ -473,6 +473,16 @@ input:focus { border-color: var(--brass); outline: none; }
   color: var(--brass);
   word-break: break-word;
 }
+/* Same weight as the wifi step: both are things the room has to read off the
+   screen and type into a phone, so neither is allowed to be the small one. */
+.join-code {
+  font-family: var(--mono);
+  font-size: clamp(2.2rem, 4.6vw, 4.4rem);
+  line-height: 1.1;
+  color: var(--brass);
+  letter-spacing: 0.02em;
+  word-break: break-word;
+}
 .join-wifi-pass {
   font-size: clamp(1.4rem, 2.2vw, 2.2rem);
   color: var(--text-dim);

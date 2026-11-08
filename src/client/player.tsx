@@ -17,6 +17,10 @@ import { AutoAdvance, Badge, Board, BreakClock, ConnBanner, Keypad, NextUp, Toas
 function Lobby({ state, send }: { state: PlayerState; send: ReturnType<typeof useGame>['send'] }) {
   const [kind, setKind] = useState<EntryKind | null>(null);
   const [handle, setHandle] = useState(() => localStorage.getItem('primetime.handle') ?? '');
+  // Kept on the device once it has been accepted. "Change my name" drops the
+  // seat and comes back through the gate, and making someone re-read a code
+  // they have already proved they can see is friction for nothing.
+  const [code, setCode] = useState(() => localStorage.getItem('primetime.roomCode') ?? '');
 
   // Already in — show who they are and let them wait.
   if (state.me.teamId) {
@@ -59,9 +63,11 @@ function Lobby({ state, send }: { state: PlayerState; send: ReturnType<typeof us
   // Step 2 — the handle. No real names required; anonymity is the default.
   const submit = () => {
     const clean = handle.trim();
-    if (!clean) return;
+    const room = code.trim();
+    if (!clean || !room) return;
     localStorage.setItem('primetime.handle', clean);
-    send({ t: 'join', name: clean, kind });
+    localStorage.setItem('primetime.roomCode', room);
+    send({ t: 'join', roomCode: room, name: clean, kind });
   };
 
   return (
@@ -79,7 +85,26 @@ function Lobby({ state, send }: { state: PlayerState; send: ReturnType<typeof us
         enterkeyhint="go"
         maxLength={28}
       />
-      <button class="btn btn-primary btn-lg btn-block" disabled={!handle.trim()} onClick={submit}>
+      {/* Short on purpose: the eyebrow is uppercase and letterspaced, and
+          anything longer wraps to two lines on a phone. The big screen's own
+          step 3 says where the code comes from. */}
+      <div class="eyebrow">Room code</div>
+      <input
+        value={code}
+        onInput={(e) => setCode((e.target as HTMLInputElement).value)}
+        onKeyDown={(e) => { if (e.key === 'Enter') submit(); }}
+        placeholder="falcon-7"
+        autocapitalize="none"
+        autocomplete="off"
+        spellcheck={false}
+        enterkeyhint="go"
+        maxLength={24}
+      />
+      <button
+        class="btn btn-primary btn-lg btn-block"
+        disabled={!handle.trim() || !code.trim()}
+        onClick={submit}
+      >
         Join
       </button>
       <button class="btn btn-ghost btn-block" onClick={() => setKind(null)}>Back</button>
@@ -505,7 +530,11 @@ function App() {
       {/* The run-up already claims the height; a second flexible gap under it
           would split the screen and leave the clock stranded above centre. */}
       {!nextUp && <div class="spacer" />}
-      {(state.phase === 'lobby' || noTeam) && <p class="faint center">Room {state.roomCode}</p>}
+      {/* Empty for a player with no seat: the server withholds it, because it
+          is the thing that buys the seat. */}
+      {(state.phase === 'lobby' || noTeam) && state.roomCode && (
+        <p class="faint center">Room {state.roomCode}</p>
+      )}
       <Toast message={toast} onDismiss={dismissToast} />
     </div>
   );
