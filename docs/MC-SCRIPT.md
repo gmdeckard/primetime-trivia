@@ -25,6 +25,11 @@ _Five things, all on the big screen or your phone. Two minutes._
 
 1. The big screen is on `/host` and shows the venue name, the QR code and the
    room code. The room code is also in the top-right pill all night.
+   _First time on this laptop, it asks for the host password_ — the same one
+   you use for `/control`, printed in the start-up banner. It is asked once per
+   device and then never again, so the laptop you always use is already past
+   it. If it asks on the night and you do not have the password, the game is
+   on the big screen and nowhere else, so do not leave this until 7pm.
 2. **Click the sound button on the big screen.** You will hear three notes.
    That chord is the whole sound check: it means the browser let the audio
    through and the room can hear it. No chord, no sound all night, so fix it
@@ -77,6 +82,26 @@ so if it tells you the name is taken, somebody beat you to it.
 _If a table is stuck:_ the two most common problems are a typo in the room code
 and being on a different wifi network. Have them read the code back to you off
 the screen.
+
+### If somebody does not want to play
+
+There is a third button under the two, and it says **I just want to watch**. It
+asks for the room code and nothing else — no name, and they never appear on the
+scoreboard. They get the question, the clock, the scoreboard and the answer on
+their own screen, which is this big screen in their hand.
+
+Offer it rather than waiting to be asked. It is for the person who came with
+somebody else, the first-timer who does not want to commit to a team on a night
+they are still working out, and the fourth person at a table of three who would
+rather read the question off their own phone than lean across it.
+
+Say: **If you would rather just watch tonight, there is a button for that, and
+you can join in later.** There is a "Join in" link on their screen all night, so
+somebody who warms up in round two can take a seat for game two.
+
+_One thing to know:_ a watcher is in the room, not at a table. They see what
+this screen shows. They do not see what their own team answered, so a group
+cannot use it as a second screen to check their own work.
 
 ## 3. Groups
 

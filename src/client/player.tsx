@@ -48,7 +48,8 @@ function Lobby({ state, send }: { state: PlayerState; send: ReturnType<typeof us
         <div class="eyebrow">{state.venueName}</div>
         <h1>Welcome</h1>
         <p class="muted">
-          One device per entry. Play on your own, or share this device with the people at your table.
+          One device per entry. Play on your own, share this device with the people at your table, or
+          just follow along.
         </p>
         <button class="btn btn-primary btn-lg btn-block" onClick={() => setKind('solo')}>
           Just me
@@ -56,6 +57,19 @@ function Lobby({ state, send }: { state: PlayerState; send: ReturnType<typeof us
         <button class="btn btn-lg btn-block" onClick={() => setKind('team')}>
           A team on this device
         </button>
+        {/* The third answer to the same question, and the only one that is a
+            link rather than a button: it is a different page, not a different
+            value of `kind`. A watcher takes no seat and has no handle, so it
+            cannot be an EntryKind without putting a value into TeamRec.kind
+            that no team can ever hold.
+
+            Quieter than the other two on purpose. It is the right answer for a
+            first-timer who does not want to commit to a table, and the wrong
+            answer for everybody else in the room, so it should read as the
+            third thing on the list and not as a way out of a decision. */}
+        <a class="btn btn-ghost btn-lg btn-block" href="/watch">
+          I just want to watch
+        </a>
       </div>
     );
   }
