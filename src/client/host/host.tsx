@@ -1,6 +1,6 @@
 import { render, type ComponentChildren } from 'preact';
 import { useEffect, useRef, useState } from 'preact/hooks';
-import type { HostState } from '../../../shared/protocol';
+import type { HostState, WatchState } from '../../../shared/protocol';
 import '../shared/styles.css';
 import { nextUpWindowMs, useCountdown, useGame, useNow, useSpeech, useWakeLock } from '../shared/useGame';
 import { createHostAudio, type Bed, type HostAudio } from './audio';
@@ -16,7 +16,92 @@ import { AutoAdvance, Badge, Board, BreakClock, NextUp, Toast } from '../shared/
  * players would read it off the screen, but because the MC's own laptop is
  * usually mirroring this, and a reflection in a window has ruined more than
  * one quiz night.
+ *
+ * This file also serves `/watch`, which is this screen on the phone of someone
+ * who is not playing: a first-timer who does not want to commit to a team, or
+ * a teammate who would rather read the question than lean across the table.
+ * Only three things differ, and all three are things that belong to the one
+ * screen at the front of the room — it makes no sound, it does not explain how
+ * to join, and it is laid out for a phone. Everything the watcher is allowed to
+ * see is whatever the big screen is showing, which is why it is the same code.
  */
+
+/** The big screen's state, wherever it is being rendered. */
+type ScreenState = HostState | WatchState;
+
+/**
+ * True when this page is the watch screen rather than the big screen.
+ *
+ * Read off the path once, at module load, because it cannot change without a
+ * navigation. `/watch/` with the trailing slash is the same page: the server
+ * serves both and a phone keyboard will produce either.
+ */
+const WATCHING =
+  typeof location !== 'undefined' && location.pathname.replace(/\/+$/, '') === '/watch';
+
+/**
+ * The room code this device last used to take a seat, if it has one.
+ *
+ * A teammate who played last week, or who is watching after joining on the
+ * same phone, should not have to walk to the back of the room and read the
+ * screen again. It is only ever a prefill: the server still checks it, and
+ * useGame.ts drops it the moment the night is reset, so a stale one cannot
+ * sit in the box looking correct.
+ */
+function savedRoomCode(): string {
+  try {
+    return localStorage.getItem('primetime.roomCode') ?? '';
+  } catch {
+    // Private mode, or storage switched off. Not worth a broken page.
+    return '';
+  }
+}
+
+/**
+ * The room code, asked once, before anything is shown.
+ *
+ * A watcher gives no name and takes no seat, so this is the whole of getting
+ * in, and it is the same question the join form asks — the gate is "can you
+ * read the big screen", and the answer has to be the same at both doors.
+ */
+function WatchGate({ initial, onWatch }: { initial: string; onWatch: (code: string) => void }) {
+  const [code, setCode] = useState(initial);
+  const submit = () => {
+    const clean = code.trim();
+    if (clean) onWatch(clean);
+  };
+  return (
+    <div class="host is-watch center">
+      <div class="stack watch-gate">
+        <div class="center stack">
+          <div class="eyebrow">Just watching</div>
+          <h1 class="serif watch-gate-title">Follow along</h1>
+          <p class="muted">
+            The question, the clock and the scoreboard, on your own screen. You will not be
+            playing and nothing you do here is scored.
+          </p>
+        </div>
+        <div class="eyebrow">Room code</div>
+        <input
+          value={code}
+          onInput={(e) => setCode((e.target as HTMLInputElement).value)}
+          onKeyDown={(e) => { if (e.key === 'Enter') submit(); }}
+          autocapitalize="none"
+          autocomplete="off"
+          spellcheck={false}
+          enterkeyhint="go"
+          maxLength={28}
+        />
+        <button class="btn btn-primary btn-lg btn-block" disabled={!code.trim()} onClick={submit}>
+          Watch
+        </button>
+        <p class="muted center">
+          Changed your mind? <a href="/">Take a seat and play</a>.
+        </p>
+      </div>
+    </div>
+  );
+}
 
 /**
  * Which break the room is on.
@@ -26,7 +111,7 @@ import { AutoAdvance, Badge, Board, BreakClock, NextUp, Toast } from '../shared/
  * beat and not a break — the engine agrees, and only sets a break clock on the
  * ones that are one.
  */
-function breakMinutes(state: HostState): number {
+function breakMinutes(state: ScreenState): number {
   return state.phase === 'game_results' ? state.config.gameBreakMinutes : state.config.roundBreakMinutes;
 }
 
@@ -90,7 +175,7 @@ function JoinPanel({ state }: { state: HostState }) {
   );
 }
 
-function AnswerGrid({ state }: { state: HostState }) {
+function AnswerGrid({ state }: { state: ScreenState }) {
   const q = state.question;
   const reveal = state.reveal;
   if (!q?.choices) return null;
@@ -113,7 +198,7 @@ function AnswerGrid({ state }: { state: HostState }) {
   );
 }
 
-function AnsweredStrip({ state }: { state: HostState }) {
+function AnsweredStrip({ state }: { state: ScreenState }) {
   const total = state.entryCount;
   const answered = state.answeredCount;
   // A dot per entry is a nice touch at eight and unreadable confetti at a
@@ -146,7 +231,7 @@ function AnsweredStrip({ state }: { state: HostState }) {
  * who is still thinking without looking at their phone, and the room can see
  * the race without waiting for the end of the round.
  */
-function StandingsRail({ state }: { state: HostState }) {
+function StandingsRail({ state }: { state: ScreenState }) {
   const rows = state.scoreboard;
   if (rows.length < 2) return null;
   // Past about ten the rows get too small to read across a room; the full
@@ -188,7 +273,7 @@ function WagerCountdown({ at, held }: { at: number; held?: boolean }) {
   );
 }
 
-function Podium({ state, title, children }: { state: HostState; title: string; children?: ComponentChildren }) {
+function Podium({ state, title, children }: { state: ScreenState; title: string; children?: ComponentChildren }) {
   const rows = state.scoreboard;
   const winner = rows[0];
   return (
@@ -214,17 +299,32 @@ function Podium({ state, title, children }: { state: HostState; title: string; c
 }
 
 function App() {
-  // The big screen sits untouched through a ten-minute break.
+  // The big screen sits untouched through a ten-minute break, and so does the
+  // phone of somebody watching a question they are not answering.
   useWakeLock();
-  const { state, send: _send, toast, dismissToast } = useGame<HostState>('host');
-  const speak = useSpeech(!!state?.config.musicSpeakCountIn);
+  // Held here rather than inside the gate so retyping a refused code opens a
+  // new socket: the server pins a watcher's admission to the one it arrived on.
+  const [watchCode, setWatchCode] = useState('');
+  const { state, send: _send, toast, dismissToast } = useGame<ScreenState>(
+    WATCHING ? 'watch' : 'host',
+    { enabled: !WATCHING || !!watchCode, roomCode: watchCode },
+  );
+  // Never on a watch screen. Twenty phones counting the room in half a second
+  // apart is the same mistake as twenty phones playing the bed, and the room
+  // already has a voice doing it.
+  const speak = useSpeech(!WATCHING && !!state?.config.musicSpeakCountIn);
 
   // Built once and kept for the night. A browser refuses to make a sound until
   // someone has clicked the page, so `armed` stays false until the MC does —
   // otherwise the screen is silently doing nothing and looks broken.
+  //
+  // A watch screen never builds it at all. Every bed and cue in this game is
+  // synthesized on the device playing it, so a room of watchers would each
+  // start their own copy a few hundred milliseconds out from the next — see
+  // audio.ts, which has said "host only, always" since the first bed.
   const audioRef = useRef<HostAudio | null>(null);
   const [armed, setArmed] = useState(false);
-  if (audioRef.current === null && typeof window !== 'undefined') {
+  if (audioRef.current === null && typeof window !== 'undefined' && !WATCHING) {
     audioRef.current = createHostAudio();
   }
   useEffect(() => () => audioRef.current?.dispose(), []);
@@ -319,6 +419,19 @@ function App() {
     return () => clearInterval(id);
   }, [state?.autoAdvanceAt, state?.held]);
 
+  // A watch screen shows the gate until the server has accepted the code and
+  // sent a snapshot. That covers both halves of the same moment: nothing typed
+  // yet, and something typed that was wrong — in which case the refusal is
+  // already on screen as a toast and the box is still there to correct.
+  if (WATCHING && !state) {
+    return (
+      <>
+        <WatchGate initial={watchCode || savedRoomCode()} onWatch={setWatchCode} />
+        <Toast message={toast} onDismiss={dismissToast} />
+      </>
+    );
+  }
+
   if (!state) {
     return <div class="host center"><p class="muted">Starting up…</p></div>;
   }
@@ -348,8 +461,8 @@ function App() {
   );
 
   return (
-    <div class="host">
-      {state.config.music && !armed && (
+    <div class={`host${WATCHING ? ' is-watch' : ''}`}>
+      {!WATCHING && state.config.music && !armed && (
         // A browser will not make a sound until the page has been clicked, so
         // this is the click. It is on the big screen rather than the MC's phone
         // because the gesture has to happen on the page that plays the audio.
@@ -394,6 +507,9 @@ function App() {
           )}
           <span class="pill">{state.entryCount} playing</span>
           <span class="pill pill-brass">{state.roomCode}</span>
+          {/* The way back. A first-timer watching a round and deciding they
+              want in should not have to be told a second address. */}
+          {WATCHING && <a class="pill watch-join" href="/">Join in</a>}
         </div>
       </div>
 
@@ -403,9 +519,24 @@ function App() {
         <div class="host-body">
           <div class="center stack">
             <h1 class="host-display">{state.venueName}</h1>
-            <p class="muted" style={{ fontSize: '1.5rem' }}>Play on your own or share a device.</p>
+            {/* The big screen's invitation to the room. Telling a watcher to
+                play on their own or share a device, directly above a line
+                saying they are not playing, is the screen arguing with
+                itself. */}
+            {!WATCHING && (
+              <p class="muted" style={{ fontSize: '1.5rem' }}>Play on your own or share a device.</p>
+            )}
           </div>
-          <JoinPanel state={state} />
+          {/* Instructions for getting in, which is not what this screen is
+              for — and `join` is not in a watch snapshot to render anyway. */}
+          {'join' in state ? (
+            <JoinPanel state={state} />
+          ) : (
+            <p class="muted center">
+              Waiting for the first question. You are watching, not playing — tap{' '}
+              <a href="/">Join in</a> to take a seat.
+            </p>
+          )}
           {state.teams.length > 0 && (
             <>
               <div class="center">
@@ -639,7 +770,13 @@ function App() {
 
       {state.phase !== 'lobby' && (
         <div class="host-bar">
-          <p class="faint">Join at {state.join.url.replace('http://', '')} · room {state.roomCode}</p>
+          {/* The footer that lets a latecomer in mid-round. A watcher is
+              already in, and is holding the address they would be told. */}
+          <p class="faint">
+            {'join' in state
+              ? `Join at ${state.join.url.replace('http://', '')} · room ${state.roomCode}`
+              : 'Watching'}
+          </p>
           <p class="faint">{state.entryCount} playing</p>
         </div>
       )}

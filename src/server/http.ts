@@ -362,10 +362,14 @@ export function createRequestHandler(deps: HttpDeps) {
       return;
     }
 
-    // Three entry points, one per role.
+    // Four entry points, one per role. `/watch` is served the host bundle on
+    // purpose: a watch screen IS the big screen, minus the audio and the join
+    // panel, and the page tells the two apart by its own path. A second bundle
+    // would be the same code shipped twice and a second place to forget.
     const page =
       path === '/' || path === '/play' ? 'index.html'
       : path === '/host' || path === '/host/' ? 'host/index.html'
+      : path === '/watch' || path === '/watch/' ? 'host/index.html'
       : path === '/control' || path === '/control/' ? 'control/index.html'
       : path === '/author' || path === '/author/' ? 'author/index.html'
       : undefined;

@@ -467,6 +467,22 @@ export interface HostState extends BaseState {
   join: { url: string; ssid?: string; ssidAlt?: string; wifiPassword?: string; qrSvg: string };
 }
 
+/**
+ * The big screen on somebody's own phone, for a person who is not playing.
+ *
+ * Everything the room can already see from its chairs — the question, the
+ * clock, the scoreboard, the reveal — and nothing else. It is the host state
+ * without `join`: the QR code and the wifi lines are the big screen's job, and
+ * a watcher is looking at the big screen while holding this.
+ *
+ * A watcher is attached to the room, not to a table. The server does not know
+ * where they are sitting, so this deliberately cannot show what any one team
+ * has locked in; it shows what the TV shows.
+ */
+export interface WatchState extends BaseState {
+  role: 'watch';
+}
+
 export interface ControlState extends BaseState {
   role: 'control';
   /** The control view always sees the answer — that's its whole job. */
@@ -530,13 +546,23 @@ export interface PlayerState extends BaseState {
   };
 }
 
-export type GameState = HostState | ControlState | PlayerState;
+export type GameState = HostState | WatchState | ControlState | PlayerState;
 
 // ---------------------------------------------------------------- messages
 
 export type ClientMessage =
   // player
-  | { t: 'hello'; role: 'player' | 'host' | 'control'; playerId?: string; token?: string }
+  // `roomCode` is the watch role's whole credential: a watcher takes no seat
+  // and gives no name, so the code off the big screen is the only thing asked
+  // of them. It rides on every hello because useGame reconnects forever and
+  // has to re-announce itself each time.
+  | {
+      t: 'hello';
+      role: 'player' | 'host' | 'control' | 'watch';
+      playerId?: string;
+      token?: string;
+      roomCode?: string;
+    }
   | { t: 'join'; roomCode: string; name: string; kind: EntryKind; tableNo?: number }
   | { t: 'leave' }
   | { t: 'answer'; choiceIndex: number }

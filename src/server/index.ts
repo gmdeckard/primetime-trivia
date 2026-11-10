@@ -14,7 +14,7 @@ import { ControlAuth, createRequestHandler } from './http.js';
 import { lanAddresses, isWsl, hasNoReachableAddress, hasOnlyUnusableAddresses } from './lan.js';
 import { joinTargets, normalizePublicUrl, wifiInfo } from './join.js';
 import { Store } from './store.js';
-import { controlState, hostState, playerState } from './views.js';
+import { controlState, hostState, playerState, watchState } from './views.js';
 
 const here = dirname(fileURLToPath(import.meta.url));
 
@@ -90,12 +90,21 @@ if (resumed) console.log(`  Resumed the night already in progress (room ${engine
 
 // ------------------------------------------------------------------ sockets
 
-type Role = 'player' | 'host' | 'control';
+type Role = 'player' | 'host' | 'control' | 'watch';
 
 interface Client {
   socket: WebSocket;
   role: Role;
   playerId?: string;
+  /**
+   * Set once a watcher has given tonight's room code.
+   *
+   * A watch socket exists before it is allowed anything — the page connects
+   * and introduces itself in the same breath — so this is what `flush` checks
+   * before pushing a snapshot, the way it checks `playerId` for a player. A
+   * watcher who typed the wrong code is connected and gets nothing.
+   */
+  admitted?: boolean;
   /** Last payload this client received, so we can skip sending it again. */
   lastSent?: string;
 }
@@ -137,6 +146,7 @@ async function stateFor(client: Client) {
       qrSvg: await qrForJoinUrl(info.url),
     });
   }
+  if (client.role === 'watch') return watchState(engine);
   if (client.role === 'control') return controlState(engine);
   return playerState(engine, client.playerId!);
 }
@@ -163,6 +173,8 @@ async function flush() {
   pending = undefined;
   for (const client of clients) {
     if (client.role === 'player' && !client.playerId) continue;
+    // A watcher who has not given the room code is connected and nothing more.
+    if (client.role === 'watch' && !client.admitted) continue;
     if (client.socket.readyState !== client.socket.OPEN) continue;
     // The night may have been reset out from under this socket, which throws
     // away every player record while the phones stay connected. Such a device
@@ -242,6 +254,18 @@ wss.on('connection', (socket) => {
           socket.close(4001, 'unauthorized');
           return;
         }
+        // Watching costs the room code and nothing else: no seat, no name.
+        // The socket is left open rather than closed on a wrong code, because
+        // the page's own reconnect would then race the person retyping it —
+        // staying open and unadmitted lets them simply try again, and `ready`
+        // below is what keeps the first snapshot from going out meanwhile.
+        if (msg.role === 'watch') {
+          client.admitted = engine.roomCodeMatches(msg.roomCode);
+          if (!client.admitted) {
+            send(socket, { t: 'error', message: 'That room code is not right — it is on the big screen.' });
+            return;
+          }
+        }
         if (msg.role === 'player') {
           const player = engine.identify(msg.playerId, msg.token);
           client.playerId = player.id;
@@ -265,6 +289,17 @@ wss.on('connection', (socket) => {
         'set_round_category', 'start_tiebreak', 'end_night', 'reset_night', 'say', 'hold',
       ]);
       if (controlOnly.has(msg.t) && client.role !== 'control') return;
+
+      // The other half of the same rule, and the reason a watch screen cannot
+      // play: these five all act on a seat, and only a player holds one. They
+      // used to be reachable by any ready socket and were saved from doing
+      // damage by `engine` refusing an unknown player id, which is a guard in
+      // the wrong place — it made "cannot answer" a property of the engine's
+      // bookkeeping rather than something the door says.
+      const playerOnly = new Set<ClientMessage['t']>([
+        'join', 'leave', 'answer', 'answer_number', 'set_wager',
+      ]);
+      if (playerOnly.has(msg.t) && client.role !== 'player') return;
 
       switch (msg.t) {
         case 'join': engine.join(client.playerId!, msg.roomCode, msg.name, msg.kind, msg.tableNo); break;

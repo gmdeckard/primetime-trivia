@@ -364,6 +364,20 @@ export class Engine {
     return !!playerId && !!this.state.players[playerId];
   }
 
+  /**
+   * Whether what somebody typed is tonight's room code.
+   *
+   * The one place that comparison is made. `join()` asks it of a device taking
+   * a seat and the socket handler asks it of a device that only wants to
+   * watch; both mean "this person can read the big screen", so both have to
+   * fold case, spaces and punctuation the same way or the same typing would
+   * pass one door and fail the other.
+   */
+  roomCodeMatches(typed: string | undefined): boolean {
+    const given = normalizeRoomCode(typed ?? '');
+    return !!given && given === normalizeRoomCode(this.state.roomCode);
+  }
+
   setConnected(playerId: string, connected: boolean) {
     const p = this.state.players[playerId];
     if (!p) return;
@@ -390,9 +404,8 @@ export class Engine {
     // already past the gate, and this method is also the rename path — asking
     // for the code again to change a name would be a gate on the wrong thing.
     if (!player.teamId) {
-      const typed = normalizeRoomCode(roomCode);
-      if (!typed) throw new Error('Enter the room code from the big screen.');
-      if (typed !== normalizeRoomCode(this.state.roomCode)) {
+      if (!normalizeRoomCode(roomCode)) throw new Error('Enter the room code from the big screen.');
+      if (!this.roomCodeMatches(roomCode)) {
         throw new Error('That room code is not right — it is on the big screen.');
       }
     }

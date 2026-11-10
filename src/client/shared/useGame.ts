@@ -10,8 +10,12 @@ export type ConnStatus = 'connecting' | 'open' | 'retrying';
  * reload the page. So we reconnect forever with a short backoff, re-announce
  * our identity, and let the server's next snapshot repair our state.
  */
-export function useGame<S extends GameState>(role: S['role'], options: { enabled?: boolean } = {}) {
+export function useGame<S extends GameState>(
+  role: S['role'],
+  options: { enabled?: boolean; roomCode?: string } = {},
+) {
   const enabled = options.enabled ?? true;
+  const roomCode = options.roomCode;
   const [state, setState] = useState<S | null>(null);
   const [status, setStatus] = useState<ConnStatus>('connecting');
   const [toast, setToast] = useState<string | null>(null);
@@ -48,7 +52,11 @@ export function useGame<S extends GameState>(role: S['role'], options: { enabled
               }
             : role === 'control'
               ? { t: 'hello', role: 'control', token: localStorage.getItem('primetime.controlToken') ?? undefined }
-              : { t: 'hello', role: 'host' };
+              : role === 'watch'
+                // Re-sent on every reconnect, because the server holds the
+                // admission on the socket and a reconnect is a new socket.
+                ? { t: 'hello', role: 'watch', roomCode }
+                : { t: 'hello', role: 'host' };
         socket.send(JSON.stringify(hello));
       };
 
@@ -81,7 +89,10 @@ export function useGame<S extends GameState>(role: S['role'], options: { enabled
           // Credentials rejected. Drop the stale token and tell the caller, which
           // shows the login again. Reloading here instead would spin: the
           // fresh page reconnects, gets rejected, and reloads again forever.
-          localStorage.removeItem('primetime.controlToken');
+          // Only the control view's token: these screens share an origin, so
+          // throwing it away for every role would log the MC out of /control
+          // because somebody on the same phone was refused somewhere else.
+          if (role === 'control') localStorage.removeItem('primetime.controlToken');
           closedRef.current = true;
           setUnauthorized(true);
           return;
@@ -97,7 +108,9 @@ export function useGame<S extends GameState>(role: S['role'], options: { enabled
       closedRef.current = true;
       socketRef.current?.close();
     };
-  }, [role, enabled]);
+    // A changed room code reconnects: the admission lives on the socket, so a
+    // watcher who retypes it needs a new one.
+  }, [role, enabled, roomCode]);
 
   useEffect(() => {
     if (!toast) return;

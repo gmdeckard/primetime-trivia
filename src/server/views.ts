@@ -9,6 +9,7 @@ import {
   type RevealView,
   type RoundView,
   type TeamView,
+  type WatchState,
 } from '../../shared/protocol.js';
 import type { Engine } from './engine.js';
 
@@ -138,7 +139,14 @@ function revealView(engine: Engine, onlyTeamId?: string): RevealView | undefined
   };
 }
 
-function baseState(engine: Engine, role: 'host' | 'control' | 'player', teamId?: string): BaseState {
+// `watch` is deliberately not special-cased anywhere below: it falls through
+// every `role === 'player'` branch exactly as `host` does, because a watch
+// screen is the big screen on a phone and shows what the room can already see.
+function baseState(
+  engine: Engine,
+  role: 'host' | 'watch' | 'control' | 'player',
+  teamId?: string,
+): BaseState {
   const s = engine.snapshot();
   const current = s.current;
   const everyone = engine.scoreRows();
@@ -221,6 +229,18 @@ export interface JoinInfo {
 
 export function hostState(engine: Engine, join: JoinInfo): HostState {
   return { ...baseState(engine, 'host'), role: 'host', join };
+}
+
+/**
+ * The host view without the join panel's contents.
+ *
+ * Withholding `join` is not a secret kept from the watcher — they are looking
+ * at the QR code on the big screen as they type the room code. It is that the
+ * panel is instructions for getting in, and this screen is for somebody who
+ * already is.
+ */
+export function watchState(engine: Engine): WatchState {
+  return { ...baseState(engine, 'watch'), role: 'watch' };
 }
 
 export function controlState(engine: Engine): ControlState {

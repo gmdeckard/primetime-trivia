@@ -1157,3 +1157,74 @@ textarea:focus { border-color: var(--brass); outline: none; }
   border-color: var(--correct);
   background: color-mix(in srgb, var(--correct) 14%, var(--surface));
 }
+
+/* ------------------------------------------------------------------ /watch
+
+   The big screen on a phone, for somebody who is not playing.
+
+   The host styles are nearly all `clamp(min, vw, max)`, so most of this screen
+   already shrinks on its own: at 390px wide the display type lands on its rem
+   floor rather than its viewport size. What does NOT survive the trip is
+   anything laid out in two columns for a projector, so that is all this block
+   undoes. Deliberately no font sizes here — duplicating the host's scale would
+   be a second place to change it. */
+.host.is-watch {
+  /* The one rule that matters. The big screen is pinned to exactly one
+     viewport (`height: 100dvh`) because a TV never scrolls and the board
+     budgets itself against that definite height. A phone holding the same
+     content is three screens tall, and pinning it meant everything below the
+     fold drew on top of everything else: the clock landed across the header
+     pills and the footer across the answered strip. A watch screen scrolls. */
+  height: auto;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  padding: clamp(14px, 4vw, 28px);
+  gap: 14px;
+}
+/* Content starts at the top and runs down, rather than being centred in a
+   screenful it no longer fits inside. */
+.host.is-watch .host-body { justify-content: flex-start; }
+/* The board's rows size themselves off `100cqh`, which resolves to zero the
+   moment nothing above offers a definite height - and `height: auto` above is
+   exactly that. So the board keeps one, just a phone-sized one. */
+.host.is-watch .board-fit { height: 60dvh; flex: none; }
+/* Five rows beside five is a TV shape. */
+.host.is-watch .board.is-split { grid-auto-flow: row; grid-template-columns: 1fr; }
+/* Four answers side by side is two columns of three words on a handset. The
+   player's own answer grid is one column for the same reason. */
+.host.is-watch .answers { grid-template-columns: 1fr; }
+.host.is-watch .answer { min-height: 56px; }
+/* The standings rail sits beside the question on a TV. There is no beside. */
+.host.is-watch .host-stage.has-rail { grid-template-columns: minmax(0, 1fr); }
+.host.is-watch .rail { display: none; }
+/* A phone in a hand, not a screen across a room: the header wraps instead of
+   squeezing the room code off the end. */
+.host.is-watch .host-bar { flex-wrap: wrap; gap: 10px; }
+/* The pills live in their own row inside the bar, so wrapping the bar alone
+   left them in one unwrappable line running off the right edge - taking the
+   way back to a seat with it. */
+.host.is-watch .host-bar .row { flex-wrap: wrap; }
+/* `AMBER-3` broken across two lines is the one string on this screen somebody
+   might be reading out to the next table. */
+.host.is-watch .pill { white-space: nowrap; }
+/* Reads as a link, not as one more thing the screen is telling you. */
+.watch-join {
+  text-decoration: none;
+  white-space: nowrap;
+  border-color: var(--brass);
+  color: var(--brass);
+}
+/* This stylesheet styles no anchors at all, because until now no screen had
+   one: everything is a button. These two are real navigation - the way back to
+   a seat - so they are spelled out here rather than left browser-blue. */
+.host.is-watch a:not(.watch-join),
+.watch-gate a {
+  color: var(--brass);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+/* Centred in the screen rather than sitting at the top of it: this is the
+   whole page until a code is typed, and there is nothing below it. */
+.host.is-watch.center { justify-content: center; }
+.watch-gate { width: min(420px, 100%); gap: 14px; }
+.watch-gate-title { font-size: clamp(2rem, 9vw, 2.8rem); line-height: 1.05; }

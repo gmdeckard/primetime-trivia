@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { after, before, test } from 'node:test';
 import { WebSocket } from 'ws';
-import type { ClientMessage, PlayerState, ServerMessage } from '../../shared/protocol.js';
+import type { ClientMessage, PlayerState, ServerMessage, WatchState } from '../../shared/protocol.js';
 
 /**
  * Boots the real server as a child process and drives it over websockets.
@@ -85,6 +85,17 @@ class Client {
         }) as never,
       });
     });
+  }
+
+  /**
+   * How many snapshots this client has been sent.
+   *
+   * For the assertions that are about silence. A gate that refuses in words
+   * and then pushes the game anyway has not refused anything, and the only way
+   * to see that is to count what arrived.
+   */
+  get stateCount(): number {
+    return this.states.length;
   }
 
   close() {
@@ -387,6 +398,88 @@ test('a player still connected through a night reset can rejoin without reloadin
   assert.deepEqual(phone.errors, [], 'no refusal should have been sent to a device that did nothing wrong');
 
   phone.close();
+  mc.close();
+});
+
+/*
+ * Value: protects=the watch door in index.ts — the room-code check on a `watch`
+ *   hello, the `admitted` flag, and the `flush` guard that holds a snapshot
+ *   back until it is set;
+ *   fails_when=either half is dropped. Without the check, anyone who can reach
+ *   the server watches the night; without the flush guard the refusal is words
+ *   only, because the next flush pushes the whole game to a socket that was
+ *   just told no — and a flush happens on every answer, so that window is
+ *   every few seconds all night;
+ *   why_new=no test opens a `watch` socket at all. The engine knows nothing
+ *   about roles, and the existing gate test covers `join`, which is a
+ *   different door with a different refusal path (`join` throws, this one
+ *   answers and stays open on purpose);
+ *   seam=none, this drives the built server over a real websocket;
+ *   no_claim=says nothing about what the watch page renders, which is
+ *   client-side in host.tsx and has no DOM test in this suite, and nothing
+ *   about /api/info, which hands the room code to anyone who asks for it.
+ */
+test('watching costs the room code, and a wrong one is told nothing', async () => {
+  const token = ((await (
+    await fetch(`${BASE}/api/control/login`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ password: PASSWORD }),
+    })
+  ).json()) as { token: string }).token;
+
+  const mc = new Client();
+  await mc.open();
+  mc.send({ t: 'hello', role: 'control', token });
+  const room = (await mc.next<{ role: string; roomCode: string }>((s) => s.role === 'control', 'control state')).roomCode;
+
+  // A stranger on the public hostname, guessing.
+  const guesser = new Client();
+  await guesser.open();
+  guesser.send({ t: 'hello', role: 'watch', roomCode: 'not-the-code' });
+  const refused = await guesser.nextError('room code');
+  assert.match(refused, /not right/i, 'the refusal should point at the big screen');
+
+  // And one that gives no code at all, which must not read as "no check".
+  const silent = new Client();
+  await silent.open();
+  silent.send({ t: 'hello', role: 'watch' });
+  await silent.nextError('room code');
+
+  // Make the server flush to everyone it believes is watching. Without the
+  // guard in flush() this is the moment both of the above receive the night.
+  mc.send({ t: 'say', message: 'Testing the watch door' });
+  await mc.next<{ role: string; message?: string }>((s) => s.message === 'Testing the watch door', 'the MC message');
+  assert.equal(guesser.stateCount, 0, 'a refused watcher must never be sent a snapshot');
+  assert.equal(silent.stateCount, 0, 'nor one that asked without a code');
+
+  // The code off the big screen, typed the way a phone actually produces it.
+  const watcher = new Client();
+  await watcher.open();
+  watcher.send({ t: 'hello', role: 'watch', roomCode: ` ${room.toLowerCase().replace('-', ' ')} ` });
+  const seen = await watcher.next<WatchState>((s) => s.role === 'watch', 'the watch view');
+  assert.equal(seen.roomCode, room, 'a watcher is in the room and can see its code');
+  assert.equal(
+    (seen as WatchState & { join?: unknown }).join,
+    undefined,
+    'the join panel is the big screen\'s job, not a watcher\'s',
+  );
+  assert.ok(Array.isArray(seen.teams), 'a watcher sees the room the way the big screen does');
+  assert.deepEqual(watcher.errors, [], 'the right code, however typed, is not a refusal');
+
+  // A watcher is not a player, and asking nicely does not change that.
+  const before = seen.entryCount;
+  watcher.send({ t: 'join', roomCode: room, name: 'Watching Not Playing', kind: 'team' });
+  watcher.send({ t: 'answer', choiceIndex: 0 });
+  watcher.send({ t: 'set_wager', amount: 1000 });
+  await new Promise((r) => setTimeout(r, 250));
+  mc.send({ t: 'say', message: 'Still nobody new' });
+  const after = await watcher.next<WatchState>((s) => s.message === 'Still nobody new', 'a later snapshot');
+  assert.equal(after.entryCount, before, 'a watch socket must not be able to take a seat');
+
+  watcher.close();
+  guesser.close();
+  silent.close();
   mc.close();
 });
 
