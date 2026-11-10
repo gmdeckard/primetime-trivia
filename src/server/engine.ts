@@ -352,6 +352,18 @@ export class Engine {
     return player;
   }
 
+  /**
+   * Whether this id still names a player on the night currently in progress.
+   *
+   * False is the interesting answer, and it means exactly one thing: the night
+   * was reset under a device that is still connected. `resetNight()` builds a
+   * whole new state, players and all, so every socket open at that moment is
+   * holding an id for a player who no longer exists.
+   */
+  hasPlayer(playerId: string | undefined): boolean {
+    return !!playerId && !!this.state.players[playerId];
+  }
+
   setConnected(playerId: string, connected: boolean) {
     const p = this.state.players[playerId];
     if (!p) return;

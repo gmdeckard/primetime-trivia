@@ -57,6 +57,15 @@ export function useGame<S extends GameState>(role: S['role'], options: { enabled
         if (msg.t === 'state') {
           setState(msg.state as S);
         } else if (msg.t === 'identity') {
+          // A different id than the one we introduced ourselves with means the
+          // server could not place us: the night was reset and this is a new
+          // one. The room code we saved belongs to the night that just ended,
+          // and leaving it in the box is worse than leaving the box empty —
+          // it looks filled in and correct, so the player taps Join without
+          // reading it and is told their code is wrong. The handle stays:
+          // their name is still their name.
+          const had = localStorage.getItem('primetime.playerId');
+          if (had && had !== msg.playerId) localStorage.removeItem('primetime.roomCode');
           // Survives a reload and a tablet restart, so a team keeps its seat.
           localStorage.setItem('primetime.playerId', msg.playerId);
           localStorage.setItem('primetime.token', msg.token);

@@ -164,6 +164,20 @@ async function flush() {
   for (const client of clients) {
     if (client.role === 'player' && !client.playerId) continue;
     if (client.socket.readyState !== client.socket.OPEN) continue;
+    // The night may have been reset out from under this socket, which throws
+    // away every player record while the phones stay connected. Such a device
+    // is handed a new identity here rather than being left holding a dead id:
+    // without this it is shown the join form, types the new room code, and is
+    // told "unknown player" by engine.join — and the only cure a player can
+    // find on their own is reloading the page, which is what they should never
+    // have to be told to do. Re-identifying is also what makes `answer` and
+    // `set_wager` work again, which would otherwise no-op in silence.
+    if (client.role === 'player' && !engine.hasPlayer(client.playerId)) {
+      const player = engine.identify();
+      client.playerId = player.id;
+      client.lastSent = undefined;
+      send(client.socket, { t: 'identity', playerId: player.id, token: player.token });
+    }
     const payload = JSON.stringify({ t: 'state', state: await stateFor(client) });
     if (payload === client.lastSent) continue;
     client.lastSent = payload;

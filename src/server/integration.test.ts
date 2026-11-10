@@ -323,6 +323,74 @@ test('a player reconnecting with their token keeps their seat', async () => {
 });
 
 /*
+ * Value: protects=the re-identify in index.ts flush(), which hands a new player
+ *   record to any device still connected when the MC resets the night;
+ *   fails_when=that block is removed — the phone is shown the join form (phase
+ *   is lobby and it holds no team), types the new room code, and engine.join
+ *   throws "unknown player", so the only way back in is reloading the page.
+ *   That is the bug the first real night hit: every player in the room had to
+ *   be told to refresh before game two;
+ *   why_new=no test resets a night with a socket still open. The engine tests
+ *   call resetNight() on an engine nobody is connected to, which is exactly the
+ *   case that works; seam=none, this drives the built server over a real
+ *   websocket;
+ *   no_claim=says nothing about the host or control views across a reset, and
+ *   nothing about what the browser does with the stale saved room code, which
+ *   is client-side in useGame.ts.
+ */
+test('a player still connected through a night reset can rejoin without reloading', async () => {
+  const token = ((await (
+    await fetch(`${BASE}/api/control/login`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ password: PASSWORD }),
+    })
+  ).json()) as { token: string }).token;
+
+  const mc = new Client();
+  await mc.open();
+  mc.send({ t: 'hello', role: 'control', token });
+  const before = await mc.next<{ role: string; roomCode: string }>((s) => s.role === 'control', 'control state');
+
+  const phone = new Client();
+  await phone.open();
+  phone.send({ t: 'hello', role: 'player' });
+  await phone.next<PlayerState>((s) => !!s.me?.playerId, 'phone identity');
+  const firstIdentity = phone.identity!;
+
+  // Unique across the whole file: these tests share one server, so a name an
+  // earlier test seated is still taken and join() would refuse this one.
+  phone.send({ t: 'join', roomCode: before.roomCode, name: 'Reset Night Crew', kind: 'team' });
+  await phone.next<PlayerState>((s) => !!s.me.teamId, 'seated on the first night');
+
+  // The MC ends the night and starts a fresh one. The phone is in somebody's
+  // pocket: it never reloads, and nobody touches it.
+  mc.send({ t: 'reset_night' });
+  const after = await mc.next<{ role: string; roomCode: string }>(
+    (s) => s.role === 'control' && !!s.roomCode && s.roomCode !== before.roomCode,
+    'a new room code',
+  );
+
+  // The server should have noticed the phone was orphaned and re-issued it.
+  const reseated = await phone.next<PlayerState>((s) => s.phase === 'lobby' && !s.me.teamId, 'back at the join form');
+  assert.equal(reseated.me.teamId, undefined, 'the old seat should not survive the reset');
+  assert.notEqual(
+    phone.identity!.playerId,
+    firstIdentity.playerId,
+    'an orphaned device must be handed a new identity, not left holding a dead one',
+  );
+
+  // Now the thing the room actually did: type the new code and tap Join.
+  phone.send({ t: 'join', roomCode: after.roomCode, name: 'Reset Night Crew', kind: 'team' });
+  const seatedAgain = await phone.next<PlayerState>((s) => !!s.me.teamId, 'seated on the second night');
+  assert.equal(seatedAgain.me.teamName, 'Reset Night Crew', 'and they keep the name they typed');
+  assert.deepEqual(phone.errors, [], 'no refusal should have been sent to a device that did nothing wrong');
+
+  phone.close();
+  mc.close();
+});
+
+/*
  * Value: protects=the wiring in index.ts that gives ControlAuth the data dir,
  *   which is what makes the password stable and the MC's session survive a
  *   restart;
