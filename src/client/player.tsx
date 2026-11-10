@@ -77,23 +77,29 @@ function Lobby({ state, send }: { state: PlayerState; send: ReturnType<typeof us
       <p class="muted">
         This is what shows on the big screen. Use whatever you like — it does not have to be your real name.
       </p>
+      {/* No placeholders on either box. An example handle greyed out inside the
+          field read as a value that was already there: people asked whether
+          they were called "The Snowbirds", typed around it, or tapped Join
+          expecting it to be used. Do not put them back.
+          The labels below do that job instead, and both boxes carry one: with
+          the ghost text gone and only the second box labelled, this was two
+          identical empty rectangles and nothing saying which was which. */}
+      <div class="eyebrow">{kind === 'team' ? 'Team name' : 'Your name'}</div>
       <input
         value={handle}
         onInput={(e) => setHandle((e.target as HTMLInputElement).value)}
         onKeyDown={(e) => { if (e.key === 'Enter') submit(); }}
-        placeholder={kind === 'team' ? 'The Snowbirds' : 'Ace'}
         enterkeyhint="go"
         maxLength={28}
       />
-      {/* Short on purpose: the eyebrow is uppercase and letterspaced, and
-          anything longer wraps to two lines on a phone. The big screen's own
-          step 3 says where the code comes from. */}
+      {/* Short on purpose, like the one above it: the eyebrow is uppercase and
+          letterspaced, and anything longer wraps to two lines on a phone. The
+          big screen's own step 3 says where the code comes from. */}
       <div class="eyebrow">Room code</div>
       <input
         value={code}
         onInput={(e) => setCode((e.target as HTMLInputElement).value)}
         onKeyDown={(e) => { if (e.key === 'Enter') submit(); }}
-        placeholder="falcon-7"
         autocapitalize="none"
         autocomplete="off"
         spellcheck={false}
