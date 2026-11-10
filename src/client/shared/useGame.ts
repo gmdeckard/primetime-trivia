@@ -12,15 +12,24 @@ export type ConnStatus = 'connecting' | 'open' | 'retrying';
  */
 export function useGame<S extends GameState>(
   role: S['role'],
-  options: { enabled?: boolean; roomCode?: string } = {},
+  options: { enabled?: boolean; roomCode?: string; teamCode?: string } = {},
 ) {
   const enabled = options.enabled ?? true;
   const roomCode = options.roomCode;
+  const teamCode = options.teamCode;
   const [state, setState] = useState<S | null>(null);
   const [status, setStatus] = useState<ConnStatus>('connecting');
   const [toast, setToast] = useState<string | null>(null);
   /** Set when the server rejects our credentials; the caller decides what to do. */
   const [unauthorized, setUnauthorized] = useState(false);
+  /**
+   * The answer to a `team_qr` request, once one has been asked for and sent.
+   *
+   * Kept here rather than in the snapshot because it never changes while a
+   * team holds its seat, and the SVG is a kilobyte and a half that would
+   * otherwise be re-sent to every phone on every flush of every question.
+   */
+  const [teamQr, setTeamQr] = useState<{ url: string; qrSvg: string } | null>(null);
   const socketRef = useRef<WebSocket | null>(null);
   const retryRef = useRef(0);
   const closedRef = useRef(false);
@@ -55,7 +64,7 @@ export function useGame<S extends GameState>(
               : role === 'watch'
                 // Re-sent on every reconnect, because the server holds the
                 // admission on the socket and a reconnect is a new socket.
-                ? { t: 'hello', role: 'watch', roomCode }
+                ? { t: 'hello', role: 'watch', roomCode, teamCode }
                 // The same token as the MC's phone. The big screen is the
                 // other half of the operator's equipment, not a seat.
                 : { t: 'hello', role: 'host', token: localStorage.getItem('primetime.controlToken') ?? undefined };
@@ -79,6 +88,8 @@ export function useGame<S extends GameState>(
           // Survives a reload and a tablet restart, so a team keeps its seat.
           localStorage.setItem('primetime.playerId', msg.playerId);
           localStorage.setItem('primetime.token', msg.token);
+        } else if (msg.t === 'team_qr') {
+          setTeamQr({ url: msg.url, qrSvg: msg.qrSvg });
         } else if (msg.t === 'error' || msg.t === 'toast') {
           setToast(msg.message);
         }
@@ -113,9 +124,9 @@ export function useGame<S extends GameState>(
       closedRef.current = true;
       socketRef.current?.close();
     };
-    // A changed room code reconnects: the admission lives on the socket, so a
-    // watcher who retypes it needs a new one.
-  }, [role, enabled, roomCode]);
+    // A changed code reconnects, either kind: the admission lives on the
+    // socket, so a watcher who retypes or rescans needs a new one.
+  }, [role, enabled, roomCode, teamCode]);
 
   useEffect(() => {
     if (!toast) return;
@@ -123,7 +134,7 @@ export function useGame<S extends GameState>(
     return () => clearTimeout(id);
   }, [toast]);
 
-  return { state, status, send, toast, unauthorized, dismissToast: () => setToast(null) };
+  return { state, status, send, toast, teamQr, unauthorized, dismissToast: () => setToast(null) };
 }
 
 /**

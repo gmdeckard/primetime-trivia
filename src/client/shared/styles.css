@@ -502,6 +502,19 @@ input:focus { border-color: var(--brass); outline: none; }
   line-height: 0;
 }
 .join-qr svg { width: 100%; height: auto; display: block; }
+/* The team's own QR, on a phone rather than a projector: narrower than the big
+   screen's, and sized so a second phone can read it across a table. White
+   background for the same reason as the one above - a dark QR code on a dark
+   card is not a QR code. */
+.team-qr {
+  background: #fff;
+  padding: 12px;
+  border-radius: var(--radius-lg);
+  width: min(210px, 62vw);
+  line-height: 0;
+  margin-inline: auto;
+}
+.team-qr svg { width: 100%; height: auto; display: block; }
 .join-url {
   font-family: var(--mono);
   font-size: clamp(1.6rem, 3.4vw, 3.2rem);

@@ -481,6 +481,27 @@ export interface HostState extends BaseState {
  */
 export interface WatchState extends BaseState {
   role: 'watch';
+  /**
+   * The table this screen is following, when it arrived with a team's code.
+   *
+   * Absent for a watcher who only gave the room code: that device is attached
+   * to the room and the server does not know where it is sitting. Present only
+   * for a phone that scanned the QR off its own team's device, which is the
+   * one case where showing a locked answer before the reveal is right — it is
+   * their answer.
+   */
+  team?: {
+    teamId: string;
+    name: string;
+    rank?: number;
+    score?: number;
+    /** What this team has locked for the current question. */
+    choiceIndex?: number;
+    numberAnswer?: number;
+    /** What that locked answer pays if it is right, priced on arrival. */
+    pointsIfRight?: number;
+    wager?: number;
+  };
 }
 
 export interface ControlState extends BaseState {
@@ -556,13 +577,23 @@ export type ClientMessage =
   // and gives no name, so the code off the big screen is the only thing asked
   // of them. It rides on every hello because useGame reconnects forever and
   // has to re-announce itself each time.
+  //
+  // `teamCode` is the other way in to the same role, scanned off a teammate's
+  // device. It stands alone: a phone holding it is not asked for the room code
+  // as well, because the point of the QR is that the person holding it did not
+  // have to read anything off the big screen.
   | {
       t: 'hello';
       role: 'player' | 'host' | 'control' | 'watch';
       playerId?: string;
       token?: string;
       roomCode?: string;
+      teamCode?: string;
     }
+  // Asked for once by a seated device, rather than pushed with every snapshot:
+  // the SVG is a kilobyte and a half, and a hundred phones re-receiving it on
+  // every answer of every question is megabytes to say nothing new.
+  | { t: 'team_qr' }
   | { t: 'join'; roomCode: string; name: string; kind: EntryKind; tableNo?: number }
   | { t: 'leave' }
   | { t: 'answer'; choiceIndex: number }
@@ -590,5 +621,7 @@ export type ClientMessage =
 export type ServerMessage =
   | { t: 'state'; state: GameState }
   | { t: 'identity'; playerId: string; token: string }
+  /** The answer to `team_qr`: where a teammate should point their camera. */
+  | { t: 'team_qr'; url: string; qrSvg: string }
   | { t: 'error'; message: string }
   | { t: 'toast'; message: string };

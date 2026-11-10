@@ -14,13 +14,28 @@ import { AutoAdvance, Badge, Board, BreakClock, ConnBanner, Keypad, NextUp, Toas
  * are and the middle holds the only control that matters.
  */
 
-function Lobby({ state, send }: { state: PlayerState; send: ReturnType<typeof useGame>['send'] }) {
+function Lobby({
+  state,
+  send,
+  teamQr,
+}: {
+  state: PlayerState;
+  send: ReturnType<typeof useGame>['send'];
+  teamQr: ReturnType<typeof useGame>['teamQr'];
+}) {
   const [kind, setKind] = useState<EntryKind | null>(null);
   const [handle, setHandle] = useState(() => localStorage.getItem('primetime.handle') ?? '');
   // Kept on the device once it has been accepted. "Change my name" drops the
   // seat and comes back through the gate, and making someone re-read a code
   // they have already proved they can see is friction for nothing.
   const [code, setCode] = useState(() => localStorage.getItem('primetime.roomCode') ?? '');
+
+  // Asked for once, the moment this device has a seat. The server answers on
+  // the socket rather than in every snapshot, because the SVG never changes
+  // while the team holds its seat and would otherwise be re-sent all night.
+  useEffect(() => {
+    if (state.me.teamId && !teamQr) send({ t: 'team_qr' });
+  }, [state.me.teamId, teamQr]);
 
   // Already in — show who they are and let them wait.
   if (state.me.teamId) {
@@ -34,6 +49,26 @@ function Lobby({ state, send }: { state: PlayerState; send: ReturnType<typeof us
           </p>
           <span class="pill">{state.entryCount} {state.entryCount === 1 ? 'player' : 'players'} so far</span>
         </div>
+        {/* The rest of the table, on their own screens.
+            This is the answer to four people crowding one tablet: everyone
+            else at the table can read the question on their own phone while
+            this device stays the one that answers. Deliberately not a second
+            way to play — a scanned phone can see what this team locked in and
+            cannot touch it, which is enforced at the server's door and not
+            here.
+            Shown in the lobby, where a table is setting up and phones are
+            already out. */}
+        {teamQr && (
+          <div class="card stack center">
+            <div class="eyebrow">For the rest of your table</div>
+            <p class="muted">
+              Anyone else here can scan this to follow along on their own screen. They will see the
+              question, the clock and what you have locked in. Only this device answers.
+            </p>
+            <div class="team-qr" dangerouslySetInnerHTML={{ __html: teamQr.qrSvg }} />
+            <p class="faint">{teamQr.url.replace(/^https?:\/\//, '')}</p>
+          </div>
+        )}
         <button class="btn btn-ghost btn-block" onClick={() => { setKind(null); send({ t: 'leave' }); }}>
           Change my name
         </button>
@@ -452,7 +487,7 @@ function Waiting({ state, title, sub }: { state: PlayerState; title: string; sub
 }
 
 function App() {
-  const { state, status, send, toast, dismissToast } = useGame<PlayerState>('player');
+  const { state, status, send, toast, teamQr, dismissToast } = useGame<PlayerState>('player');
 
   // The screen must not sleep mid-round on a shared tablet.
   useWakeLock();
@@ -481,12 +516,12 @@ function App() {
       <ConnBanner status={status} />
       {state.message && <div class="warn">{state.message}</div>}
 
-      {state.phase === 'lobby' && <Lobby state={state} send={send} />}
+      {state.phase === 'lobby' && <Lobby state={state} send={send} teamQr={teamQr} />}
 
       {noTeam && (
         <>
           <div class="warn center">The night is already underway — you'll start from zero.</div>
-          <Lobby state={state} send={send} />
+          <Lobby state={state} send={send} teamQr={teamQr} />
         </>
       )}
 

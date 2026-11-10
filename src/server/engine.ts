@@ -54,6 +54,19 @@ export interface TeamRec {
   createdAt: number;
   /** The one device that owns this entry. */
   ownerId: string;
+  /**
+   * The code a teammate's phone shows up with to follow this team.
+   *
+   * Minted with the team and never rotated, because it names the team rather
+   * than a session. It dies with the team: `resetNight()` builds new teams, so
+   * last night's codes name nothing, and `removeTeam()` takes it with the row.
+   *
+   * It is a read-only credential and nothing more — a device holding it can
+   * see what this team locked in and cannot answer, because the five messages
+   * that act on a seat are refused by role at the door. Whoever can photograph
+   * a tablet showing the QR could already read the table it is sitting on.
+   */
+  watchCode: string;
 }
 
 export interface AnswerRec extends AnswerRecord {}
@@ -123,6 +136,19 @@ const ROOM_WORDS = ['BLUE', 'GOLD', 'SAGE', 'MESA', 'PALM', 'RUBY', 'JADE', 'OPA
 function makeRoomCode(): string {
   const word = ROOM_WORDS[randomInt(ROOM_WORDS.length)]!;
   return `${word}-${randomInt(2, 10)}`;
+}
+
+/**
+ * A team's watch code: unguessable, and short enough to ride in a QR code.
+ *
+ * Not drawn from ROOM_WORDS. The room code is built to be read off a screen at
+ * thirty feet and typed by a 68-year-old, which is the opposite requirement —
+ * this one is scanned, never typed, so it can afford to be random. 128 bits
+ * from randomUUID with the hyphens taken out, because the whole string ends up
+ * in a URL.
+ */
+function makeWatchCode(): string {
+  return randomUUID().replace(/-/g, '');
 }
 
 /**
@@ -378,6 +404,31 @@ export class Engine {
     return !!given && given === normalizeRoomCode(this.state.roomCode);
   }
 
+  /**
+   * The team a watch code names, if it still names one.
+   *
+   * Compared exactly, unlike the room code: this one is scanned off a QR and
+   * never typed, so folding case would only widen it. A code from a night that
+   * has been reset matches nothing, because `resetNight()` built new teams
+   * with new codes — which is the invalidation, and the reason there is no
+   * list of revoked codes to keep.
+   */
+  teamByWatchCode(code: string | undefined): TeamRec | undefined {
+    if (!code) return undefined;
+    return Object.values(this.state.teams).find((t) => t.watchCode === code);
+  }
+
+  /** Whether this id still names a team on the night in progress. */
+  hasTeam(teamId: string | undefined): boolean {
+    return !!teamId && !!this.state.teams[teamId];
+  }
+
+  /** The watch code for the team this device is seated with, if it is seated. */
+  watchCodeFor(playerId: string | undefined): string | undefined {
+    const teamId = playerId ? this.state.players[playerId]?.teamId : undefined;
+    return teamId ? this.state.teams[teamId]?.watchCode : undefined;
+  }
+
   setConnected(playerId: string, connected: boolean) {
     const p = this.state.players[playerId];
     if (!p) return;
@@ -438,6 +489,7 @@ export class Engine {
       score: 0,
       createdAt: Date.now(),
       ownerId: playerId,
+      watchCode: makeWatchCode(),
     };
     this.state.teams[team.id] = team;
     this.state.teamOrder.push(team.id);

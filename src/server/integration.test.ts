@@ -27,6 +27,7 @@ class Client {
   private waiters: Array<{ match: (s: never) => boolean; resolve: (s: never) => void }> = [];
   closed: Promise<number>;
   identity?: { playerId: string; token: string };
+  teamQr?: { url: string; qrSvg: string };
   /** Server-side refusals. A gate that is never seen to refuse is not a gate. */
   errors: string[] = [];
 
@@ -36,6 +37,7 @@ class Client {
     this.socket.on('message', (raw) => {
       const msg = JSON.parse(String(raw)) as ServerMessage;
       if (msg.t === 'identity') this.identity = { playerId: msg.playerId, token: msg.token };
+      if (msg.t === 'team_qr') this.teamQr = { url: msg.url, qrSvg: msg.qrSvg };
       if (msg.t === 'error') this.errors.push(msg.message);
       if (msg.t !== 'state') return;
       this.states.push(msg.state);
@@ -96,6 +98,16 @@ class Client {
    */
   get stateCount(): number {
     return this.states.length;
+  }
+
+  /** Resolve on the `team_qr` answer, past or future. */
+  async nextTeamQr(timeoutMs = 4000): Promise<{ url: string; qrSvg: string }> {
+    const deadline = Date.now() + timeoutMs;
+    for (;;) {
+      if (this.teamQr) return this.teamQr;
+      if (Date.now() > deadline) throw new Error('timed out waiting for the team QR');
+      await new Promise((r) => setTimeout(r, 25));
+    }
   }
 
   close() {
@@ -559,6 +571,100 @@ test('watching costs the room code, and a wrong one is told nothing', async () =
   watcher.close();
   guesser.close();
   silent.close();
+  mc.close();
+});
+
+/*
+ * Value: protects=the per-team watch code end to end — team_qr answering a
+ *   seated device, the teamCode door in the hello, the team block watchState
+ *   adds, and the flush() guard that drops a follower whose team has stopped
+ *   existing;
+ *   fails_when=any of the four breaks. Without the door a scanned QR shows the
+ *   room but not the table, which is the whole feature; without the guard a
+ *   teammate watches a team that no longer plays, which is the orphaned-player
+ *   bug again one role over, and that one cost a room full of reloads;
+ *   why_new=the watch tests cover the room-code door only, and nothing in the
+ *   suite asks for a team_qr or opens a socket with a teamCode;
+ *   seam=none, a real websocket against the built server;
+ *   no_claim=says nothing about the QR image itself beyond it being an SVG
+ *   carrying the code, nothing about what the player or watch screens render,
+ *   and nothing about a code surviving a server restart.
+ */
+test('a teammate can scan a team code and follow that table', async () => {
+  const token = ((await (
+    await fetch(`${BASE}/api/control/login`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ password: PASSWORD }),
+    })
+  ).json()) as { token: string }).token;
+
+  const mc = new Client();
+  await mc.open();
+  mc.send({ t: 'hello', role: 'control', token });
+  const room = (await mc.next<{ role: string; roomCode: string }>((s) => s.role === 'control', 'control state')).roomCode;
+
+  const phone = new Client();
+  await phone.open();
+  phone.send({ t: 'hello', role: 'player' });
+  await phone.next<PlayerState>((s) => !!s.me?.playerId, 'phone identity');
+
+  // A seat is what the code follows, so asking before there is one is refused.
+  phone.send({ t: 'team_qr' });
+  await phone.nextError('seat');
+
+  phone.send({ t: 'join', roomCode: room, name: 'Table Of Four', kind: 'team' });
+  await phone.next<PlayerState>((s) => !!s.me.teamId, 'seated');
+
+  phone.send({ t: 'team_qr' });
+  const qr = await phone.nextTeamQr();
+  assert.match(qr.qrSvg, /^<svg/, 'a teammate points a camera at this');
+  const code = new URL(qr.url).searchParams.get('team');
+  assert.ok(code && code.length >= 16, 'the code should be long enough not to be guessed');
+  assert.ok(new URL(qr.url).pathname.endsWith('/watch'), 'and it should open the watch screen');
+
+  // The teammate scans it. No room code: not having to read the big screen is
+  // the entire point of the QR.
+  const teammate = new Client();
+  await teammate.open();
+  teammate.send({ t: 'hello', role: 'watch', teamCode: code! });
+  const seen = await teammate.next<WatchState>((s) => s.role === 'watch' && !!s.team, 'the followed table');
+  assert.equal(seen.team?.name, 'Table Of Four', 'they are following their own table');
+  assert.deepEqual(teammate.errors, [], 'a scanned code is not asked for anything else');
+
+  // A plain watcher, by contrast, is in the room and at no table.
+  const stranger = new Client();
+  await stranger.open();
+  stranger.send({ t: 'hello', role: 'watch', roomCode: room });
+  const roomOnly = await stranger.next<WatchState>((s) => s.role === 'watch', 'the room view');
+  assert.equal(roomOnly.team, undefined, 'the room code names no table');
+
+  // A code nobody minted opens nothing.
+  const guesser = new Client();
+  await guesser.open();
+  guesser.send({ t: 'hello', role: 'watch', teamCode: 'deadbeefdeadbeefdeadbeefdeadbeef' });
+  await guesser.nextError('finished');
+  assert.equal(guesser.stateCount, 0, 'an unknown team code must be sent nothing');
+
+  // And the follower cannot play, however it asks.
+  const before = seen.entryCount;
+  teammate.send({ t: 'answer', choiceIndex: 0 });
+  teammate.send({ t: 'join', roomCode: room, name: 'Sneaking In', kind: 'solo' });
+  await new Promise((r) => setTimeout(r, 250));
+  mc.send({ t: 'say', message: 'Team code check' });
+  const after = await teammate.next<WatchState>((s) => s.message === 'Team code check', 'a later snapshot');
+  assert.equal(after.entryCount, before, 'a follower must not be able to take a seat');
+
+  // The night is reset under them: the team they follow stops existing, and
+  // they are dropped back to the door rather than left watching a ghost.
+  mc.send({ t: 'reset_night' });
+  const dropped = await teammate.nextError('finished');
+  assert.match(dropped, /scan the code on your table again/i, 'and told what to do about it');
+
+  teammate.close();
+  stranger.close();
+  guesser.close();
+  phone.close();
   mc.close();
 });
 

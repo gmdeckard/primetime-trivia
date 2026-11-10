@@ -105,6 +105,13 @@ interface Client {
    * watcher who typed the wrong code is connected and gets nothing.
    */
   admitted?: boolean;
+  /**
+   * The team a watch socket is following, when it arrived with a team's code.
+   *
+   * Undefined on a watch socket that gave only the room code: that one is
+   * attached to the room, and the server has no idea which table it is at.
+   */
+  watchTeamId?: string;
   /** Last payload this client received, so we can skip sending it again. */
   lastSent?: string;
 }
@@ -146,7 +153,7 @@ async function stateFor(client: Client) {
       qrSvg: await qrForJoinUrl(info.url),
     });
   }
-  if (client.role === 'watch') return watchState(engine);
+  if (client.role === 'watch') return watchState(engine, client.watchTeamId);
   if (client.role === 'control') return controlState(engine);
   return playerState(engine, client.playerId!);
 }
@@ -175,6 +182,21 @@ async function flush() {
     if (client.role === 'player' && !client.playerId) continue;
     // A watcher who has not given the room code is connected and nothing more.
     if (client.role === 'watch' && !client.admitted) continue;
+    // The same thing that happens to a seated phone when the night is reset,
+    // happening to a teammate's: the team this screen follows no longer
+    // exists. It is dropped back to the door rather than left showing a table
+    // that is not playing — the lesson the orphaned-player fix above paid for,
+    // which is that a dead reference is worse than an empty screen.
+    if (client.role === 'watch' && client.watchTeamId && !engine.hasTeam(client.watchTeamId)) {
+      client.admitted = false;
+      client.watchTeamId = undefined;
+      client.lastSent = undefined;
+      send(client.socket, {
+        t: 'error',
+        message: 'That game has finished. Scan the code on your table again, or watch the room from the big screen.',
+      });
+      continue;
+    }
     if (client.socket.readyState !== client.socket.OPEN) continue;
     // The night may have been reset out from under this socket, which throws
     // away every player record while the phones stay connected. Such a device
@@ -272,7 +294,20 @@ wss.on('connection', (socket) => {
         // staying open and unadmitted lets them simply try again, and `ready`
         // below is what keeps the first snapshot from going out meanwhile.
         if (msg.role === 'watch') {
-          client.admitted = engine.roomCodeMatches(msg.roomCode);
+          // Two doors into the same role. A team's code is scanned off that
+          // team's own device, so it stands on its own: asking for the room
+          // code as well would mean walking to the big screen, which is the
+          // errand the QR exists to remove.
+          const team = engine.teamByWatchCode(msg.teamCode);
+          if (msg.teamCode && !team) {
+            // Almost always last night's QR, still in somebody's camera roll
+            // or on a printed table card: resetNight() built new teams with
+            // new codes, which is what makes the old ones mean nothing.
+            send(socket, { t: 'error', message: 'That code is from a game that has finished. Scan the one on your table now, or join from the big screen.' });
+            return;
+          }
+          client.watchTeamId = team?.id;
+          client.admitted = !!team || engine.roomCodeMatches(msg.roomCode);
           if (!client.admitted) {
             send(socket, { t: 'error', message: 'That room code is not right — it is on the big screen.' });
             return;
@@ -312,6 +347,24 @@ wss.on('connection', (socket) => {
         'join', 'leave', 'answer', 'answer_number', 'set_wager',
       ]);
       if (playerOnly.has(msg.t) && client.role !== 'player') return;
+
+      // Asked for by a seated device, answered once. Deliberately not part of
+      // the state snapshot: the SVG is about a kilobyte and a half, and a
+      // hundred phones re-receiving their own unchanged QR on every flush of
+      // every question is megabytes spent saying nothing new.
+      if (msg.t === 'team_qr') {
+        if (client.role !== 'player') return;
+        const code = engine.watchCodeFor(client.playerId);
+        if (!code) {
+          send(socket, { t: 'error', message: 'Take a seat first — the code follows your team.' });
+          return;
+        }
+        const url = `${joinInfo().url}/watch?team=${code}`;
+        void QRCode.toString(url, { type: 'svg', margin: 4, errorCorrectionLevel: 'Q' }).then((qrSvg) => {
+          send(socket, { t: 'team_qr', url, qrSvg });
+        });
+        return;
+      }
 
       switch (msg.t) {
         case 'join': engine.join(client.playerId!, msg.roomCode, msg.name, msg.kind, msg.tableNo); break;

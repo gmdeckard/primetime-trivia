@@ -41,6 +41,18 @@ const WATCHING =
   typeof location !== 'undefined' && location.pathname.replace(/\/+$/, '') === '/watch';
 
 /**
+ * The team this screen is following, scanned off that team's own device.
+ *
+ * `/watch?team=<code>` is what the QR on a seated player's screen encodes. It
+ * is the whole credential, so this screen never asks for the room code: the
+ * errand the QR removes is walking to the big screen to read one.
+ */
+const WATCH_TEAM =
+  typeof location !== 'undefined'
+    ? new URLSearchParams(location.search).get('team') ?? ''
+    : '';
+
+/**
  * The room code this device last used to take a seat, if it has one.
  *
  * A teammate who played last week, or who is watching after joining on the
@@ -318,7 +330,11 @@ function App() {
   });
   const { state, send: _send, toast, dismissToast, unauthorized } = useGame<ScreenState>(
     WATCHING ? 'watch' : 'host',
-    { enabled: WATCHING ? !!watchCode : !!token, roomCode: watchCode },
+    {
+      enabled: WATCHING ? !!watchCode || !!WATCH_TEAM : !!token,
+      roomCode: watchCode,
+      teamCode: WATCH_TEAM,
+    },
   );
   // A rejected token — the password changed, or this one was revoked — drops
   // the big screen back to the login rather than retrying forever.
@@ -440,6 +456,13 @@ function App() {
   // yet, and something typed that was wrong — in which case the refusal is
   // already on screen as a toast and the box is still there to correct.
   if (WATCHING && !state) {
+    // A scanned code that the server has not refused yet is still connecting,
+    // and the gate would flash the room-code box at somebody who never needed
+    // it. Once it IS refused - last night's QR, most often - the box is the
+    // way back in, so the toast and the gate arrive together.
+    if (WATCH_TEAM && !toast) {
+      return <div class="host is-watch center"><p class="muted">Finding your table…</p></div>;
+    }
     return (
       <>
         <WatchGate initial={watchCode || savedRoomCode()} onWatch={setWatchCode} />
@@ -457,6 +480,9 @@ function App() {
   }
 
   const q = state.question;
+  // The table this screen follows, if it follows one. Narrowed off `role`
+  // rather than tested field by field: the big screen has no such thing.
+  const followed = state.role === 'watch' ? state.team : undefined;
 
   // The answer and its fact get the first part of the gap; the scoreboard takes
   // the last few seconds, so each question ends on where everyone now stands.
@@ -527,11 +553,46 @@ function App() {
           )}
           <span class="pill">{state.entryCount} playing</span>
           <span class="pill pill-brass">{state.roomCode}</span>
-          {/* The way back. A first-timer watching a round and deciding they
-              want in should not have to be told a second address. */}
-          {WATCHING && <a class="pill watch-join" href="/">Join in</a>}
+          {/* The way back, for somebody watching the room and deciding they
+              want in: they should not have to be told a second address.
+              Never for a follower. They are already on a team, and taking a
+              seat here would enter a SECOND one — splitting their table's
+              points between two rows, which is the mistake the MC script
+              spends a whole section warning about. */}
+          {WATCHING && !followed && <a class="pill watch-join" href="/">Join in</a>}
         </div>
       </div>
+
+      {/* What this table has in. The whole reason the QR exists: a plain
+          watcher sees the room, and this is the one thing they cannot see,
+          because the server does not know where they are sitting. The wording
+          matches the team's own handset exactly — same letter, same price off
+          the same stamped arrival — so two screens at one table cannot
+          disagree about what is in and what it is worth. */}
+      {followed && (
+        <div class="watch-team">
+          <span class="eyebrow">{followed.name}</span>
+          {followed.rank !== undefined && (
+            <span class="pill">
+              {followed.rank === 1 ? 'Leading' : `${followed.rank}th`} · {followed.score ?? 0}
+            </span>
+          )}
+          {followed.choiceIndex !== undefined ? (
+            <span class="pill pill-brass">
+              {['A', 'B', 'C', 'D'][followed.choiceIndex]} is in
+              {followed.pointsIfRight !== undefined
+                ? `, worth ${followed.pointsIfRight} if you're right`
+                : ''}
+            </span>
+          ) : followed.numberAnswer !== undefined ? (
+            <span class="pill pill-brass">{followed.numberAnswer} is in</span>
+          ) : followed.wager !== undefined ? (
+            <span class="pill pill-brass">{followed.wager} on the line</span>
+          ) : state.phase === 'question' || state.phase === 'wager_question' ? (
+            <span class="pill">Nothing in yet</span>
+          ) : null}
+        </div>
+      )}
 
       {state.message && <div class="warn center" style={{ fontSize: '1.2rem' }}>{state.message}</div>}
 
@@ -553,8 +614,14 @@ function App() {
             <JoinPanel state={state} />
           ) : (
             <p class="muted center">
-              Waiting for the first question. You are watching, not playing — tap{' '}
-              <a href="/">Join in</a> to take a seat.
+              {followed
+                ? `Waiting for the first question. You are following ${followed.name} — they answer on their own device, not this one.`
+                : 'Waiting for the first question. You are watching, not playing.'}
+              {!followed && (
+                <>
+                  {' '}Tap <a href="/">Join in</a> to take a seat.
+                </>
+              )}
             </p>
           )}
           {state.teams.length > 0 && (

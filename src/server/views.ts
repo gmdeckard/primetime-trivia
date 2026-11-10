@@ -239,8 +239,36 @@ export function hostState(engine: Engine, join: JoinInfo): HostState {
  * panel is instructions for getting in, and this screen is for somebody who
  * already is.
  */
-export function watchState(engine: Engine): WatchState {
-  return { ...baseState(engine, 'watch'), role: 'watch' };
+export function watchState(engine: Engine, teamId?: string): WatchState {
+  const base = baseState(engine, 'watch');
+  if (!teamId) return { ...base, role: 'watch' };
+
+  const s = engine.snapshot();
+  const team = s.teams[teamId];
+  if (!team) return { ...base, role: 'watch' };
+  const answer = s.current ? s.current.answers[teamId] : undefined;
+  const mine = engine.scoreRows().find((r) => r.teamId === teamId);
+
+  return {
+    ...base,
+    role: 'watch',
+    team: {
+      teamId,
+      name: team.name,
+      rank: mine?.rank,
+      score: mine?.score,
+      choiceIndex: answer?.choiceIndex,
+      numberAnswer: answer?.numberAnswer,
+      // Priced the same way the team's own handset prices it, off the same
+      // stamped arrival time, so the two screens at one table cannot disagree
+      // about what the answer in hand is worth.
+      pointsIfRight:
+        answer && s.current && (s.phase === 'question' || s.phase === 'locked')
+          ? pointsAt(answer.elapsedMs, s.current.deadline - s.current.startedAt, s.config)
+          : undefined,
+      wager: s.wagerBets?.[teamId],
+    },
+  };
 }
 
 export function controlState(engine: Engine): ControlState {
