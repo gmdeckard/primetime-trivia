@@ -12,6 +12,7 @@
  * default Playwright location is not where yours lives.
  */
 import { chromium } from 'playwright-core';
+import { seedHostToken } from './host-auth.mjs';
 import { mkdirSync, rmSync } from 'node:fs';
 import { spawn } from 'node:child_process';
 import { randomBytes } from 'node:crypto';
@@ -52,6 +53,8 @@ process.on('exit', () => { try { server.kill('SIGKILL'); } catch {} });
 let browser;
 try {
   const errors = [];
+  // One login shared by every host window this script opens.
+  let hostAuth;
   browser = await chromium.launch({
     executablePath: process.env.CHROME_PATH || undefined,
     // Many Linux distros now block unprivileged user namespaces, which breaks
@@ -63,6 +66,9 @@ try {
     const page = await browser.newPage({ viewport: { width: w, height: h }, deviceScaleFactor: scale });
     page.on('console', (m) => { if (m.type() === 'error') errors.push(`${label}: ${m.text()}`); });
     page.on('pageerror', (e) => errors.push(`${label}: uncaught ${e.message}`));
+    // The big screen asks for the host password now. Seeded only for /host:
+    // /control's own login is one of the screenshots this script takes.
+    if (path.startsWith('/host')) hostAuth = await seedHostToken(page, BASE, PASSWORD, hostAuth);
     await page.goto(BASE + path, { waitUntil: 'domcontentloaded' });
     await page.waitForFunction(() => !/Connecting to tonight|Starting up/.test(document.body.innerText), { timeout: 15000 });
     return page;

@@ -254,6 +254,18 @@ wss.on('connection', (socket) => {
           socket.close(4001, 'unauthorized');
           return;
         }
+        // The big screen is operator equipment, and on a public hostname it
+        // has to prove it. Ungated, this role was the live question, the team
+        // names, the room code and the wifi password handed to anyone who
+        // guessed the address — and the room code is the whole join gate, so
+        // reading one screen remotely was also a seat on the scoreboard.
+        // Same password as the MC's phone: one credential, typed once per
+        // device, and a laptop already set up through /control is past it.
+        if (msg.role === 'host' && !auth.valid(msg.token)) {
+          send(socket, { t: 'error', message: 'The big screen needs the host password.' });
+          socket.close(4001, 'unauthorized');
+          return;
+        }
         // Watching costs the room code and nothing else: no seat, no name.
         // The socket is left open rather than closed on a wrong code, because
         // the page's own reconnect would then race the person retyping it —

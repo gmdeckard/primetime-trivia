@@ -56,7 +56,9 @@ export function useGame<S extends GameState>(
                 // Re-sent on every reconnect, because the server holds the
                 // admission on the socket and a reconnect is a new socket.
                 ? { t: 'hello', role: 'watch', roomCode }
-                : { t: 'hello', role: 'host' };
+                // The same token as the MC's phone. The big screen is the
+                // other half of the operator's equipment, not a seat.
+                : { t: 'hello', role: 'host', token: localStorage.getItem('primetime.controlToken') ?? undefined };
         socket.send(JSON.stringify(hello));
       };
 
@@ -89,10 +91,13 @@ export function useGame<S extends GameState>(
           // Credentials rejected. Drop the stale token and tell the caller, which
           // shows the login again. Reloading here instead would spin: the
           // fresh page reconnects, gets rejected, and reloads again forever.
-          // Only the control view's token: these screens share an origin, so
-          // throwing it away for every role would log the MC out of /control
-          // because somebody on the same phone was refused somewhere else.
-          if (role === 'control') localStorage.removeItem('primetime.controlToken');
+          // Only the roles that carry that token: the MC's phone and the big
+          // screen. These screens share an origin, so throwing it away for
+          // every role would log the MC out because somebody typed a wrong
+          // room code at the watch door on the same device.
+          if (role === 'control' || role === 'host') {
+            localStorage.removeItem('primetime.controlToken');
+          }
           closedRef.current = true;
           setUnauthorized(true);
           return;

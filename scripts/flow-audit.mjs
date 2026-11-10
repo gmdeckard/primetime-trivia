@@ -20,6 +20,7 @@
  * Point CHROME_PATH at one if the default Playwright location is not yours.
  */
 import { chromium } from 'playwright-core';
+import { seedHostToken } from './host-auth.mjs';
 import { spawn } from 'node:child_process';
 import { randomBytes } from 'node:crypto';
 import { tmpdir } from 'node:os';
@@ -76,14 +77,25 @@ try {
   };
 
   const host = watch(await browser.newPage({ viewport: { width: 1920, height: 1080 } }), 'host');
+  // The big screen carries the host password now, like the MC's phone.
+  await seedHostToken(host, BASE, PASSWORD);
   await host.goto(`${BASE}/host`);
+
+  // A seat costs the room code, and the only place to read it is the big
+  // screen - exactly as in the room. Without this the Join button stays
+  // disabled and every player here times out on it, which is how this script
+  // had been failing since the gate landed.
+  const roomCode = (await host.locator('.join-code').innerText()).trim();
+  if (!roomCode) throw new Error('no room code on the host screen - the join gate cannot be driven');
 
   const players = [];
   for (const name of ['The Snowbirds', 'Ace', 'Desert Rats']) {
     const p = watch(await browser.newPage({ viewport: { width: 375, height: 667 } }), name);
     await p.goto(BASE);
     await p.getByRole('button', { name: 'Just me' }).click();
-    await p.locator('input').first().pressSequentially(name);
+    // Two boxes on this form: the handle, then the code off the screen.
+    await p.locator('input').nth(0).pressSequentially(name);
+    await p.locator('input').nth(1).pressSequentially(roomCode);
     await p.getByRole('button', { name: 'Join' }).click();
     players.push(p);
   }

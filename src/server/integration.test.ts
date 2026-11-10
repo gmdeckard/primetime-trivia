@@ -136,11 +136,50 @@ after(() => {
   rmSync(dataDir, { recursive: true, force: true });
 });
 
-test('the join endpoint advertises a reachable URL and a QR code', async () => {
-  const info = (await (await fetch(`${BASE}/api/info`)).json()) as { url: string; qrSvg: string; roomCode: string };
-  assert.match(info.url, /^http:\/\/[\d.]+:\d+$/);
-  assert.match(info.qrSvg, /^<svg/);
-  assert.match(info.roomCode, /^[A-Z]+-\d$/);
+/*
+ * Value: protects=the split answer from /api/info in http.ts — the room code,
+ *   the wifi password and the LAN addresses go only to a caller holding the
+ *   MC's token;
+ *   fails_when=the endpoint goes back to answering everyone in full. That is
+ *   not a subtle leak: the room code is the entire join gate, so one
+ *   unauthenticated GET from anywhere on the internet is a seat on the
+ *   scoreboard, and the same body carries the wifi password off the big
+ *   screen;
+ *   why_new=the old test asserted the opposite — it read roomCode off an
+ *   unauthenticated fetch and called that advertising the join target. It was
+ *   written when this server was a laptop on the room's own wifi;
+ *   seam=none, this is an HTTP request to the built server;
+ *   no_claim=says nothing about what the websocket roles hand out, which is
+ *   where the big screen gets the same fields, and nothing about whether the
+ *   addresses themselves are reachable.
+ */
+test('the join endpoint tells a stranger only that it is up', async () => {
+  const open = (await (await fetch(`${BASE}/api/info`)).json()) as Record<string, unknown>;
+  assert.equal(open.ok, true, 'a start-up probe still gets its 200 and a body');
+  assert.match(String(open.url), /^http:\/\/[\d.]+:\d+$/, 'and the address it already typed');
+  for (const secret of ['roomCode', 'wifiPassword', 'ssid', 'ssidAlt', 'urls', 'qrSvg']) {
+    assert.equal(open[secret], undefined, `/api/info must not hand out ${secret} unauthenticated`);
+  }
+
+  const token = ((await (
+    await fetch(`${BASE}/api/control/login`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ password: PASSWORD }),
+    })
+  ).json()) as { token: string }).token;
+  const full = (await (
+    await fetch(`${BASE}/api/info`, { headers: { authorization: `Bearer ${token}` } })
+  ).json()) as { url: string; qrSvg: string; roomCode: string };
+  assert.match(full.url, /^http:\/\/[\d.]+:\d+$/);
+  assert.match(full.qrSvg, /^<svg/);
+  assert.match(full.roomCode, /^[A-Z]+-\d$/, 'the MC still gets everything');
+
+  // A token that was never issued is not a token.
+  const forged = (await (
+    await fetch(`${BASE}/api/info`, { headers: { authorization: 'Bearer not-a-real-token' } })
+  ).json()) as Record<string, unknown>;
+  assert.equal(forged.roomCode, undefined, 'a made-up bearer token must not open it');
 });
 
 test('a wrong control password is rejected', async () => {
@@ -192,6 +231,46 @@ test('the control socket is closed without a valid token', async () => {
   client.send({ t: 'hello', role: 'control', token: 'not-a-real-token' });
   const code = await client.closed;
   assert.equal(code, 4001, 'an unauthorised control client should be disconnected');
+});
+
+/*
+ * Value: protects=the host-role check in index.ts, which makes the big screen
+ *   prove it is operator equipment;
+ *   fails_when=the role goes back to being accepted bare. That is the live
+ *   question, the team names, the wifi password and the room code served to
+ *   anyone who knows the hostname — and since the room code is the entire join
+ *   gate, reading the screen remotely is also a seat on the scoreboard;
+ *   why_new=the socket gate was only ever tested for `control`. `host` was the
+ *   role with no check at all, which is exactly why nothing covered it;
+ *   seam=none, this opens real websockets against the built server;
+ *   no_claim=says nothing about the /host HTML, which is still served to
+ *   anyone because the login screen has to come from somewhere, and nothing
+ *   about the watch role, whose door is the room code and not this password.
+ */
+test('the big screen is closed without the host password', async () => {
+  const bare = new Client();
+  await bare.open();
+  bare.send({ t: 'hello', role: 'host' });
+  assert.equal(await bare.closed, 4001, 'a host socket with no token should be disconnected');
+
+  const forged = new Client();
+  await forged.open();
+  forged.send({ t: 'hello', role: 'host', token: 'not-a-real-token' });
+  assert.equal(await forged.closed, 4001, 'nor should a made-up one open it');
+
+  const token = ((await (
+    await fetch(`${BASE}/api/control/login`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ password: PASSWORD }),
+    })
+  ).json()) as { token: string }).token;
+  const screen = new Client();
+  await screen.open();
+  screen.send({ t: 'hello', role: 'host', token });
+  const shown = await screen.next<{ role: string; join?: { qrSvg: string } }>((s) => s.role === 'host', 'the big screen');
+  assert.match(shown.join?.qrSvg ?? '', /^<svg/, 'the MC token still opens the big screen in full');
+  screen.close();
 });
 
 test('players join, answer, and the MC drives the night', async () => {

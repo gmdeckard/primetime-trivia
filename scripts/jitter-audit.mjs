@@ -23,6 +23,7 @@
  * Needs playwright-core and a Chromium binary, same as `npm run screenshots`.
  */
 import { chromium } from 'playwright-core';
+import { seedHostToken } from './host-auth.mjs';
 import { spawn } from 'node:child_process';
 import { randomBytes } from 'node:crypto';
 import { tmpdir } from 'node:os';
@@ -43,6 +44,7 @@ const BASE = `http://localhost:${PORT}`;
 for (let i = 0; i < 80; i++) { try { if ((await fetch(`${BASE}/api/info`)).ok) break; } catch {} await new Promise(r => setTimeout(r, 100)); }
 
 let browser, bad = 0;
+let hostAuth;
 try {
   const errors = [];
   browser = await chromium.launch({ executablePath: process.env.CHROME_PATH, chromiumSandbox: false });
@@ -50,6 +52,8 @@ try {
   // The big screen comes up first, because a seat costs the room code and the
   // only place to read it is the host page — exactly as in the room.
   const big = await browser.newPage({ viewport: { width: 1280, height: 720 } });
+  // The big screen carries the host password now, like the MC's phone.
+  hostAuth = await seedHostToken(big, BASE, PASSWORD, hostAuth);
   await big.goto(`${BASE}/host`);
   const roomCode = (await big.locator('.join-code').innerText()).trim();
   if (!roomCode) throw new Error('no room code on the host screen — the join gate cannot be driven');
@@ -105,6 +109,7 @@ try {
 
   const host = await browser.newPage({ viewport: { width: 1920, height: 1080 } });
   host.on('pageerror', e => errors.push('host: ' + String(e.message)));
+  hostAuth = await seedHostToken(host, BASE, PASSWORD, hostAuth);
   await host.goto(`${BASE}/host`);
   await host.waitForTimeout(600);
 

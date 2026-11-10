@@ -2,6 +2,7 @@ import { render } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
 import { MIN_PASSWORD, type ControlState, type GameConfig } from '../../../shared/protocol';
 import '../shared/styles.css';
+import { Login } from '../shared/login';
 import { useCountdown, useGame, useWakeLock } from '../shared/useGame';
 import {
   AutoAdvance,
@@ -27,69 +28,6 @@ import {
  * reason this is a separate view is so the host can run the room while facing
  * it instead of hunching over the laptop.
  */
-
-/**
- * Typed once per device, not once per game.
- *
- * The password is set on the server and does not rotate, and the server keeps
- * issued tokens across a restart, so in practice the MC sees this screen when
- * they pick up a new phone and never again.
- */
-function Login({ onToken }: { onToken: (token: string) => void }) {
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const [busy, setBusy] = useState(false);
-
-  const submit = async () => {
-    setBusy(true);
-    setError('');
-    try {
-      const res = await fetch('/api/control/login', {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ password }),
-      });
-      if (!res.ok) {
-        setError('That password is not right.');
-        return;
-      }
-      const { token } = (await res.json()) as { token: string };
-      localStorage.setItem('primetime.controlToken', token);
-      onToken(token);
-    } catch {
-      setError('Could not reach the server.');
-    } finally {
-      setBusy(false);
-    }
-  };
-
-  return (
-    <div class="shell">
-      <div class="card stack">
-        <div class="eyebrow">MC controls</div>
-        <h1>Host password</h1>
-        <p class="muted">
-          The one set on the server. It is printed in the start-up banner and is the same every night.
-        </p>
-        <input
-          value={password}
-          onInput={(e) => setPassword((e.target as HTMLInputElement).value)}
-          onKeyDown={(e) => {
-            if ((e as KeyboardEvent).key === 'Enter' && password.length >= MIN_PASSWORD) submit();
-          }}
-          type="password"
-          autocomplete="current-password"
-          placeholder="Host password"
-          style={{ fontSize: '1.5rem', textAlign: 'center' }}
-        />
-        {error && <p class="pill pill-bad">{error}</p>}
-        <button class="btn btn-primary btn-lg btn-block" onClick={submit} disabled={busy || password.length < MIN_PASSWORD}>
-          Unlock
-        </button>
-      </div>
-    </div>
-  );
-}
 
 /**
  * The phase, in the room's words.
@@ -751,7 +689,7 @@ function App() {
     if (unauthorized) setToken(null);
   }, [unauthorized]);
 
-  if (!token) return <Login onToken={setToken} />;
+  if (!token) return <Login eyebrow="MC controls" onToken={setToken} />;
 
   if (!state) {
     return (

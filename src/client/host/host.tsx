@@ -2,6 +2,7 @@ import { render, type ComponentChildren } from 'preact';
 import { useEffect, useRef, useState } from 'preact/hooks';
 import type { HostState, WatchState } from '../../../shared/protocol';
 import '../shared/styles.css';
+import { Login } from '../shared/login';
 import { nextUpWindowMs, useCountdown, useGame, useNow, useSpeech, useWakeLock } from '../shared/useGame';
 import { createHostAudio, type Bed, type HostAudio } from './audio';
 import { pickBedVariant } from './beds';
@@ -305,10 +306,25 @@ function App() {
   // Held here rather than inside the gate so retyping a refused code opens a
   // new socket: the server pins a watcher's admission to the one it arrived on.
   const [watchCode, setWatchCode] = useState('');
-  const { state, send: _send, toast, dismissToast } = useGame<ScreenState>(
+  // The big screen's own credential. Not a watcher's: the two doors on this
+  // file are different on purpose — the password says "I am running tonight",
+  // the room code says "I am in the room".
+  const [token, setToken] = useState(() => {
+    try {
+      return WATCHING ? null : localStorage.getItem('primetime.controlToken');
+    } catch {
+      return null;
+    }
+  });
+  const { state, send: _send, toast, dismissToast, unauthorized } = useGame<ScreenState>(
     WATCHING ? 'watch' : 'host',
-    { enabled: !WATCHING || !!watchCode, roomCode: watchCode },
+    { enabled: WATCHING ? !!watchCode : !!token, roomCode: watchCode },
   );
+  // A rejected token — the password changed, or this one was revoked — drops
+  // the big screen back to the login rather than retrying forever.
+  useEffect(() => {
+    if (unauthorized) setToken(null);
+  }, [unauthorized]);
   // Never on a watch screen. Twenty phones counting the room in half a second
   // apart is the same mistake as twenty phones playing the bed, and the room
   // already has a voice doing it.
@@ -430,6 +446,10 @@ function App() {
         <Toast message={toast} onDismiss={dismissToast} />
       </>
     );
+  }
+
+  if (!WATCHING && !token) {
+    return <Login eyebrow="Big screen" onToken={setToken} />;
   }
 
   if (!state) {

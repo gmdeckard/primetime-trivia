@@ -310,6 +310,23 @@ export function createRequestHandler(deps: HttpDeps) {
 
     if (path === '/api/info') {
       const info = deps.joinInfo();
+      // Two answers, because this endpoint was two things at once.
+      //
+      // It was written when the server was a laptop on the room's own wifi,
+      // where "can reach it" and "is in the room" were the same sentence. On a
+      // public hostname they are not, and this was handing the room code to
+      // anyone who asked — which made the join gate decorative, since the code
+      // is the whole of it. The wifi password was going out with it.
+      //
+      // Unauthenticated callers get what a stranger may have: that the server
+      // is up, and the address they already typed. Everything else needs the
+      // MC's token. No browser page fetches this at all — every screen gets
+      // what it needs over its own websocket — so the only unauthenticated
+      // callers left are start-up probes, which want the 200 and nothing more.
+      if (!deps.auth.validRequest(req)) {
+        sendJson(res, 200, { ok: true, url: info.url, venueName: info.venueName });
+        return;
+      }
       const qrSvg = await QRCode.toString(info.url, { type: 'svg', margin: 4, errorCorrectionLevel: 'Q' });
       sendJson(res, 200, { ...info, qrSvg });
       return;
