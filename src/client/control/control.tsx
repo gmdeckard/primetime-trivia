@@ -94,9 +94,9 @@ function primaryAction(state: ControlState): { label: string; hint: string } {
     case 'wager_bet':
       return {
         label: 'Show the final question',
-        hint: `${state.answeredCount} of ${state.entryCount} have bet${
-          state.wagerEndsAt ? '' : ' · waiting on you'
-        }`,
+        hint: `${state.wagerCategoryName ? `${state.wagerCategoryName} · ` : ''}${
+          state.answeredCount
+        } of ${state.entryCount} have bet${state.wagerEndsAt ? '' : ' · waiting on you'}`,
       };
     case 'wager_question':
       return { label: 'Answers in', hint: `${state.answeredCount} of ${state.entryCount} answered` };
@@ -839,6 +839,14 @@ function App() {
       {state.phase === 'wager_bet' && (
         <div class="card stack">
           <div class="eyebrow">Wagers</div>
+          {/* The MC says this out loud while the room decides, so it has to be
+              on the MC's phone and not only on the big screen behind them. */}
+          {state.wagerCategoryName && (
+            <div class="row-between">
+              <span class="muted">Tonight's final subject</span>
+              <strong>{state.wagerCategoryName}</strong>
+            </div>
+          )}
           {state.scoreboard.map((row) => (
             <div key={row.teamId} class="row-between">
               <span>{row.name}</span>

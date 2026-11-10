@@ -1748,3 +1748,44 @@ test('the final answer moves on by itself', async () => {
   await wait(1400);
   assert.equal(engine.snapshot().phase, 'game_results', 'the game closed without a thumb');
 });
+
+/*
+ * Value: protects=the category the room is told before it bets is the category
+ *   of the question it is then asked — the closing question is chosen when the
+ *   betting opens, not when it closes;
+ *   fails_when=the wager_bet branch of advance() goes back to picking a fresh
+ *   question, or wagerQuestionId stops being set when the window opens, either
+ *   of which would let the MC read out one subject and the screen show
+ *   another — the worst version of this bug, because a table that bet its
+ *   whole score on "Sports" has no way to see it happened;
+ *   why_new=no test looks at which question the wager draws; the existing
+ *   wager tests only drive the phases; seam=none;
+ *   no_claim=says nothing about how the question is scored or how the
+ *   category reaches the screens.
+ */
+test('the final wager asks the question whose category was announced', () => {
+  const engine = freshEngine({ roundsPerGame: 1, questionsPerRound: 1, finalWager: true, autoAdvance: false });
+  seatTeams(engine, 2);
+  engine.startGame();
+  engine.advance(); // -> round_intro
+  engine.advance(); // -> question
+  engine.lockNow('host');
+  engine.advance(); // -> reveal
+  engine.advance(); // -> round_scores
+  engine.advance(); // -> wager_bet
+
+  const announced = engine.wagerCategoryName();
+  assert.ok(announced, 'the betting screens have nothing to name without this');
+
+  engine.advance(); // -> wager_question
+  assert.equal(engine.snapshot().phase, 'wager_question');
+  const asked = engine.currentQuestion()!;
+  const askedCategory = engine.getBank().categoryById.get(asked.category)?.name ?? asked.category;
+  assert.equal(askedCategory, announced, 'the room bet on this subject');
+  assert.equal(
+    engine.snapshot().wagerQuestionId,
+    undefined,
+    'and the promise is spent once it is kept',
+  );
+  assert.equal(engine.wagerCategoryName(), undefined, 'so the betting screens stop naming it');
+});

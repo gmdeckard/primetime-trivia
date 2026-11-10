@@ -360,6 +360,12 @@ function Wager({ state, send }: { state: PlayerState; send: ReturnType<typeof us
     return (
       <div class="card center stack">
         <div class="eyebrow">Wager placed</div>
+        {/* Still named after the bet is in. It is the one thing on this screen
+            that would make somebody tap "Change it", so taking it away the
+            moment they bet would be hiding the reason to reconsider. */}
+        {state.wagerCategoryName && (
+          <span class="pill pill-brass">{state.wagerCategoryName}</span>
+        )}
         <div style={{ fontFamily: 'var(--serif)', fontSize: '3.4rem', lineHeight: 1 }}>{placed}</div>
         <p class="muted">Get it right and you gain {placed}. Get it wrong and you lose {placed}.</p>
         {closing && <WagerClock at={closing} held={state.held} placed />}
@@ -373,6 +379,17 @@ function Wager({ state, send }: { state: PlayerState; send: ReturnType<typeof us
   return (
     <div class="card stack">
       <div class="eyebrow">Final question</div>
+      {/* The subject, above the number being typed. A table betting without it
+          is guessing twice: once at the question and once at the amount. It
+          sits between the heading and the clock because the order a table
+          works in is "what is it about" then "how long have we got" then "how
+          much". */}
+      {state.wagerCategoryName && (
+        <div class="wager-cat">
+          <span class="eyebrow">The question is about</span>
+          <strong>{state.wagerCategoryName}</strong>
+        </div>
+      )}
       <h1>Place your wager</h1>
       {closing && <WagerClock at={closing} held={state.held} />}
       <p class="muted">

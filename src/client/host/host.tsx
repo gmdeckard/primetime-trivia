@@ -790,6 +790,15 @@ function App() {
         <div class="host-body center stack">
           <div class="eyebrow">Final question of the game</div>
           <h1 class="host-display">Place your wagers</h1>
+          {/* The subject, in the middle of the screen the whole room is
+              looking at while it argues about how much to bet. This is the
+              screen that tells everybody at once; the handsets repeat it for
+              whoever is looking down. */}
+          {state.wagerCategoryName && (
+            <div class="center">
+              <span class="pill pill-brass wager-subject">{state.wagerCategoryName}</span>
+            </div>
+          )}
           <p class="muted" style={{ fontSize: '1.5rem' }}>
             Bet any part of your score. Right answer wins it, wrong answer loses it.
           </p>

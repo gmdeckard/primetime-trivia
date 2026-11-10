@@ -291,7 +291,11 @@ starts at zero; with it off, the clock still runs and the game waits for your
 button. The big button always skips the rest of it.
 
 **The final wager runs on a clock too.** The room gets 40 seconds to bet,
-counted down on every screen, and then the final question appears. A table
+counted down on every screen, and then the final question appears. **The
+subject is named before anyone bets** — on the big screen, on every handset and
+on your own controls — because a bet placed with no idea what is coming is a
+coin toss rather than a decision. The question itself is chosen when the
+betting opens, so the subject on the screen is the subject they get. A table
 that has not bet when it closes has bet nothing, so they win nothing and lose
 nothing — which is the fair outcome for not deciding. Set **Betting window**
 to 0 in Timing if you would rather close it yourself.

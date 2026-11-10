@@ -452,6 +452,16 @@ export interface BaseState {
   breakEndsAt?: number;
   /** Epoch ms the betting window closes, when one is running. */
   wagerEndsAt?: number;
+  /**
+   * The subject of the closing question, while the betting is open.
+   *
+   * Named before anyone bets, which is the whole point of it: a bet placed
+   * with no idea what is coming is a coin toss, and knowing the category is
+   * what turns the size of a bet into a decision a table can argue about.
+   * Only the name travels — the question itself stays on the server until the
+   * betting closes, so this cannot be read ahead by anyone's dev tools.
+   */
+  wagerCategoryName?: string;
   /** True when the MC has paused auto-advance to talk. */
   held: boolean;
   /** Entry ids that have locked an answer. Host and MC only — see `teams`. */

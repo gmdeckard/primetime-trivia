@@ -154,6 +154,13 @@ already answered. Nobody can rush you by being fast. Use the time.
 
 Each game ends with one final question, and before you see it you place a bet.
 
+_The subject is on the big screen and on every phone before the betting opens,
+and it is on your own screen under "Tonight's final subject". Read it out, and
+read it out again halfway through the window._
+
+Tonight's final question is about **[subject]**. That is all you get, and it is
+all you need: bet like somebody who knows that much.
+
 You can bet anything from nothing at all up to your whole score. If you have
 less than a thousand on the board you can still bet up to a thousand, so nobody
 is ever locked out of the last question.

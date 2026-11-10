@@ -107,6 +107,17 @@ export interface NightState {
   roundIndex: number;
   current?: CurrentQuestion;
   wagerBets?: Record<string, number>;
+  /**
+   * The closing question, chosen when the betting opens rather than when it
+   * closes.
+   *
+   * It has to be known early because the room is told its category before
+   * anyone bets — betting blind on an unknown subject is a coin toss, and the
+   * category is the only information that makes the size of a bet a decision.
+   * Picked once and held here, so the question the room was promised is the
+   * question it gets.
+   */
+  wagerQuestionId?: string;
   players: Record<string, PlayerRec>;
   teams: Record<string, TeamRec>;
   teamOrder: string[];
@@ -1053,6 +1064,7 @@ export class Engine {
     this.state.gameIndex += 1;
     this.buildGame();
     this.state.wagerBets = undefined;
+    this.state.wagerQuestionId = undefined;
     this.state.current = undefined;
     this.state.tiebreakTeamIds = undefined;
     this.state.breakEndsAt = undefined;
@@ -1063,6 +1075,29 @@ export class Engine {
     // of the night runnable without a thumb on it.
     this.scheduleAuto(this.state.config.introSeconds);
     this.commit({ kind: 'game_started', gameIndex: this.state.gameIndex });
+  }
+
+  /**
+   * The closing question of a game: a genuinely hard one from anywhere in the
+   * selected categories, rather than another pull from the round just played.
+   */
+  private pickWagerQuestion(): Question | undefined {
+    const s = this.state;
+    const ctx = this.selectionContext();
+    const allowed = s.config.categories.length ? s.config.categories : this.bank.categories.map((c) => c.id);
+    const pool = this.bank.questions.filter(
+      (q) => q.kind === 'choice' && allowed.includes(q.category) && !ctx.usedTonight.has(q.id) && q.difficulty >= 3,
+    );
+    return pool[randomInt(Math.max(1, pool.length))] ?? pickRound(ctx, allowed[0]!, 1)[0];
+  }
+
+  /** The category of the question the betting window is running for. */
+  wagerCategoryName(): string | undefined {
+    const id = this.state.wagerQuestionId;
+    if (!id) return undefined;
+    const q = this.question(id);
+    if (!q) return undefined;
+    return this.bank.categoryById.get(q.category)?.name ?? q.category;
   }
 
   /** The MC's one big button. Every phase knows what comes next. */
@@ -1137,6 +1172,10 @@ export class Engine {
         }
         if (s.config.finalWager) {
           s.wagerBets = {};
+          // Chosen now, so the betting screens can name its category. A night
+          // whose bank has nothing left to ask leaves this undefined and fails
+          // at the same place it always did, when the betting closes.
+          s.wagerQuestionId = this.pickWagerQuestion()?.id;
           s.phase = 'wager_bet';
           // Betting used to be the one beat that waited for a thumb, on the
           // grounds that a team caught mid-decision loses its whole stake.
@@ -1157,15 +1196,14 @@ export class Engine {
 
       case 'wager_bet': {
         s.wagerEndsAt = undefined;
-        const ctx = this.selectionContext();
-        const allowed = s.config.categories.length ? s.config.categories : this.bank.categories.map((c) => c.id);
-        // The closing question should be a genuinely hard one from anywhere in
-        // the selected categories, not another pull from the last round.
-        const pool = this.bank.questions.filter(
-          (q) => q.kind === 'choice' && allowed.includes(q.category) && !ctx.usedTonight.has(q.id) && q.difficulty >= 3,
-        );
-        const chosen = pool[randomInt(Math.max(1, pool.length))] ?? pickRound(ctx, allowed[0]!, 1)[0];
+        // Normally the one picked when the betting opened, whose category the
+        // room has been looking at for forty seconds. The fallback covers a
+        // night that was already mid-bet when the server restarted into this
+        // version, and a question that has since left the bank.
+        const promised = s.wagerQuestionId ? this.question(s.wagerQuestionId) : undefined;
+        const chosen = promised ?? this.pickWagerQuestion();
         if (!chosen) throw new Error('No question available for the final wager.');
+        s.wagerQuestionId = undefined;
         this.startQuestion(chosen.id, Math.round(s.config.secondsPerQuestion * 1.5), 1, 1);
         s.phase = 'wager_question';
         this.commit({ kind: 'wager_question', questionId: chosen.id });

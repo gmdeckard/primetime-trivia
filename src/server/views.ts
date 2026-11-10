@@ -200,6 +200,9 @@ function baseState(
     moreInRound: engine.moreQuestionsInRound(),
     breakEndsAt: s.breakEndsAt,
     wagerEndsAt: s.wagerEndsAt,
+    // Only while the betting is open. After that the question is on screen and
+    // naming its category twice is the header competing with the middle.
+    wagerCategoryName: s.phase === 'wager_bet' ? engine.wagerCategoryName() : undefined,
     held: !!s.held,
     answeredTeamIds: role === 'player' ? [] : answered,
     // Withheld from players on purpose. "80 of 100 have answered" is pressure
