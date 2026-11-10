@@ -112,10 +112,8 @@ export interface GameConfig {
   readSeconds: number;
   /** What a correct answer is still worth when the window closes. */
   minQuestionPoints: number;
-  /** Big-screen sound: a bed in the lobby and the breaks, and the count-in. */
+  /** Big-screen sound: the bed under a live question, and the count-in. */
   music: boolean;
-  /** A bed under a live question too. Its own switch because it is arguable. */
-  musicUnderQuestion: boolean;
   /** Speak the run-up as well as playing it. */
   musicSpeakCountIn: boolean;
   /** Big-screen master volume, 0 to 1. */
@@ -267,11 +265,15 @@ export const DEFAULT_CONFIG: GameConfig = {
   // round, and a night in the room said the opposite: a trivia night with no
   // sound reads as broken equipment. The MC can still switch it off, and it
   // only ever comes out of the big screen.
+  //
+  // This is now one switch because there is one bed. The lobby and break pad
+  // was removed after the first real night: players with hearing aids could
+  // not follow the MC over it, which is the mechanism you would predict, since
+  // that pad was the only bed that ever played under a speaking voice. The
+  // question bed plays into a silent reading window and the room liked it.
+  // Note which way round that is — the guess recorded here before the night
+  // was the opposite, and named the question bed as the one to kill first.
   music: true,
-  // On with it. The bed under a live question does compete with the MC's
-  // microphone in a room where some of the audience wear hearing aids, so
-  // this is the first thing to turn off if the room cannot hear the question.
-  musicUnderQuestion: true,
   musicSpeakCountIn: true,
   musicVolume: 0.35,
   // Long enough to get to the bar and back. The engine counts these down for

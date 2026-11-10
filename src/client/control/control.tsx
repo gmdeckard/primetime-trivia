@@ -471,7 +471,7 @@ function Setup({ state, send }: { state: ControlState; send: ReturnType<typeof u
         title="Sound and speech"
         summary={
           c.music
-            ? `on at ${Math.round(c.musicVolume * 100)}%${c.musicUnderQuestion ? ' · under questions' : ''}`
+            ? `on at ${Math.round(c.musicVolume * 100)}% · under questions`
             : 'off'
         }
         open={open === 'sound'}
@@ -482,7 +482,7 @@ function Setup({ state, send }: { state: ControlState; send: ReturnType<typeof u
             anything — there is a button on it saying so. */}
         <Toggle
           label="Big-screen sound"
-          hint="synthesized on the big screen, nothing over the wifi"
+          hint="only under a live question, never under the MC"
           on={c.music}
           onChange={(music) => set({ music })}
         />
@@ -496,13 +496,10 @@ function Setup({ state, send }: { state: ControlState; send: ReturnType<typeof u
           disabled={!c.music}
           onChange={(v) => set({ musicVolume: Math.round(v) / 100 })}
         />
-        <Toggle
-          label="Music under the question"
-          hint="competes with the microphone in a room with hearing aids"
-          on={c.musicUnderQuestion}
-          disabled={!c.music}
-          onChange={(musicUnderQuestion) => set({ musicUnderQuestion })}
-        />
+        {/* There used to be a second toggle here for the question bed, back
+            when a pad also ran through the lobby and the breaks. That pad is
+            gone, so the two switches meant the same thing and this one is the
+            master. */}
         <Toggle
           label="Spoken run-up"
           hint="get ready, set, go before each question"

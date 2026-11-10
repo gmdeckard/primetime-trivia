@@ -239,15 +239,15 @@ function App() {
   // A paused round is silent. The pause exists because something interrupted
   // the night, and a bed carrying on underneath that is the opposite of what
   // the MC just asked for.
-  const wantBed: Bed = !armed || !music || state?.held
-    ? null
-    : phase === 'question' || phase === 'wager_question'
-      ? state?.config.musicUnderQuestion
-        ? 'question'
-        : null
-      : phase === 'lobby' || phase === 'round_scores' || phase === 'game_results' ||
-          phase === 'game_intro' || phase === 'round_intro' || phase === 'night_over'
-        ? 'lobby'
+  // One bed, one place: under a live question. Everything else in the night is
+  // silent, including the lobby, both breaks, the intros and the results, which
+  // used to carry a pad. Those are the windows where the MC is talking, and the
+  // first real night said the pad made the MC hard to follow for players with
+  // hearing aids. The question window is the opposite case: the room is reading
+  // and nobody is speaking over it.
+  const wantBed: Bed =
+    !armed || !music || state?.held ? null
+      : phase === 'question' || phase === 'wager_question' ? 'question'
         : null;
 
   // Which of the four question grooves this question gets. Derived from the

@@ -5,10 +5,14 @@
  * the Web Audio graph, for three reasons that all matter on this box:
  *
  *  - No megabytes in git and nothing to pull over clubhouse wifi.
- *  - A loop built from a clock has no seam, so a bed can run for a ten minute
- *    break without the join becoming the thing everyone hears.
+ *  - A loop built from a clock has no seam.
  *  - It can follow the game. The question bed tightens as the value falls,
  *    which a recording cannot do.
+ *
+ * There is one bed, and it plays only under a live question. The pad that used
+ * to run through the lobby and the breaks is gone: it was the only bed that
+ * ever played under a speaking voice, and the room could not follow the MC
+ * over it. Sound during a break is now the absence of sound.
  *
  * Host only, always. Twenty handsets playing the same loop over wifi would be
  * hundreds of milliseconds apart, which is not music. The same call was already
@@ -25,7 +29,7 @@ import { bedVariantByKey, DEFAULT_BED_VARIANT, type BedVariant } from './beds';
 // renders the beds to mp3 — the recordings are this code, not a copy of it.
 import { bpmAt as bedBpmAt, hit, scheduleBeat } from './bedengine';
 
-export type Bed = 'lobby' | 'question' | null;
+export type Bed = 'question' | null;
 
 export interface HostAudio {
   /** Must be called from a real click: browsers refuse audio before one. */
@@ -51,21 +55,6 @@ export interface HostAudio {
   dispose(): void;
 }
 
-// An octave up from where this started. A TV soundbar and a laptop speaker
-// both roll off hard below about 200Hz, so a pad voiced at A3 measured fine and
-// was inaudible in the room. This sits where small speakers actually work.
-// Four chords rather than one. A single sustained chord is a drone, and a
-// drone is what "boring" means: nothing ever arrives. These move slowly enough
-// to sit under conversation and often enough that the room notices change.
-//
-// The lobby and the breaks only. A question's chords come from its variant,
-// which is why this one never had to change when the rotation arrived.
-const PROGRESSION = [
-  [440, 523.25, 659.25, 783.99], // Am7
-  [349.23, 440, 523.25, 698.46], // F
-  [392, 493.88, 587.33, 783.99], // G
-  [329.63, 440, 523.25, 659.25], // Am/C
-];
 export function createHostAudio(): HostAudio {
   const Ctor: typeof AudioContext | undefined =
     typeof window !== 'undefined'
@@ -98,10 +87,8 @@ export function createHostAudio(): HostAudio {
   master.connect(ctx.destination);
   const meterBuf = new Float32Array(analyser.fftSize);
 
-  // Each bed has its own gain so beds can cross-fade instead of cutting.
-  const lobbyGain = ctx.createGain();
-  lobbyGain.gain.value = 0;
-  lobbyGain.connect(master);
+  // The bed and the cues keep separate gains: a cue has to be audible over a
+  // bed that is fading, and the count-in fires while the bed is still going.
   const questionGain = ctx.createGain();
   questionGain.gain.value = 0;
   questionGain.connect(master);
@@ -117,52 +104,6 @@ export function createHostAudio(): HostAudio {
   let nextBeat = 0;
   let beat = 0;
   let disposed = false;
-
-  // Pads for the lobby and the breaks. Two detuned voices per chord tone, and
-  // the chord changes every few seconds — slow enough to talk over, often
-  // enough that it is music rather than a held note.
-  const padVoices: Array<{ osc: OscillatorNode; degree: number }> = [];
-  const padAux: OscillatorNode[] = [];
-  let chord = 0;
-  let chordTimer: number | undefined;
-
-  function moveChord() {
-    chord = (chord + 1) % PROGRESSION.length;
-    const notes = PROGRESSION[chord]!;
-    for (const v of padVoices) {
-      // Glide rather than jump: a pad that steps between chords clicks.
-      v.osc.frequency.setTargetAtTime(notes[v.degree] ?? 440, ctx.currentTime, 0.9);
-    }
-    chordTimer = setTimeout(moveChord, 7000) as unknown as number;
-  }
-
-  function startPads() {
-    if (padVoices.length) return;
-    PROGRESSION[0]!.forEach((f, degree) => {
-      for (const detune of [-5, 5]) {
-        const osc = ctx.createOscillator();
-        const g = ctx.createGain();
-        const lfo = ctx.createOscillator();
-        const lfoGain = ctx.createGain();
-        // Triangle rather than sine: a few harmonics is the difference between
-        // a pad you can hear across a room and one that only shows on a meter.
-        osc.type = 'triangle';
-        osc.frequency.value = f;
-        osc.detune.value = detune;
-        g.gain.value = 0.05;
-        // Slow, prime-ish rates so the voices never pulse together.
-        lfo.frequency.value = 0.03 + Math.random() * 0.05;
-        lfoGain.gain.value = 0.035;
-        lfo.connect(lfoGain).connect(g.gain);
-        osc.connect(g).connect(lobbyGain);
-        osc.start();
-        lfo.start();
-        padVoices.push({ osc, degree });
-        padAux.push(lfo);
-      }
-    });
-    chordTimer = setTimeout(moveChord, 7000) as unknown as number;
-  }
 
   const bpmAt = (i: number) => bedBpmAt(variant, i);
 
@@ -203,11 +144,18 @@ export function createHostAudio(): HostAudio {
   return {
     async resume() {
       if (ctx.state === 'suspended') await ctx.resume();
-      startPads();
       if (timer === undefined) {
         nextBeat = ctx.currentTime + 0.1;
         pump();
       }
+      // One chord, right here, because this click used to answer itself. The
+      // lobby pad started the instant the MC armed the sound, so a working
+      // setup was obvious and a dead soundbar was obvious. With no lobby bed
+      // the next sound is the first question's count-in, which is a bad place
+      // to discover the TV is muted. This proves the whole path: the browser
+      // let the audio through AND the room can hear it.
+      const at = ctx.currentTime + 0.05;
+      for (const f of [523.25, 659.25, 783.99]) hit(ctx, cueGain, at, 'tick', 0.18, f);
     },
     setBed(next, variantKey) {
       // The bed a question asks for can change while the bed itself does not:
@@ -221,8 +169,8 @@ export function createHostAudio(): HostAudio {
       if (next === bed) return;
       bed = next;
       // Long fades: a bed appearing or vanishing abruptly is more noticeable
-      // than the bed itself.
-      fade(lobbyGain, next === 'lobby' ? 1 : 0, 1.6);
+      // than the bed itself. In quicker on a question than out of one, so the
+      // groove is under the room by the time the prompt is readable.
       fade(questionGain, next === 'question' ? 1 : 0, next === 'question' ? 0.4 : 1.0);
       if (next === 'question') beat = 0;
     },
@@ -265,16 +213,9 @@ export function createHostAudio(): HostAudio {
     dispose() {
       disposed = true;
       if (timer !== undefined) clearTimeout(timer);
-      if (chordTimer !== undefined) clearTimeout(chordTimer);
-      for (const n of [...padVoices.map((v) => v.osc), ...padAux]) {
-        try {
-          n.stop();
-        } catch {
-          /* already stopped */
-        }
-      }
-      padVoices.length = 0;
-      padAux.length = 0;
+      // Nothing to stop by hand any more: every voice a question bed makes is
+      // scheduled with its own stop time, so closing the context is the whole
+      // teardown. The pad was the only thing here that ran forever.
       void ctx.close();
     },
   };
