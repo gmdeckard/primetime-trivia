@@ -261,6 +261,10 @@ that survives restarts, new nights and Reset everything.
 Ties at the top are broken with a numeric sudden-death question where the
 closest guess wins.
 
+[docs/HOSTING.md](docs/HOSTING.md) is the operator's guide to all of this —
+what to do before the room arrives, what every Setup panel does, and what to do
+when something goes wrong on the night.
+
 ## Design decisions worth knowing
 
 A few choices are deliberate and will look like omissions otherwise.
