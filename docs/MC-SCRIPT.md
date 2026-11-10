@@ -11,11 +11,10 @@ This is the script for the night. The shape of the game and its numbers live in
 `docs/ARCHITECTURE.md`. If a number here ever disagrees with the Setup panel on
 your phone, the panel is right and this file is stale.
 
-The equipment and the setup live in `docs/HOSTING.md`, which still describes the
-old setup where the game ran off a laptop on the room's own wifi. It has not
-been rewritten for running from the server, so take its hardware advice with
-that in mind: tonight the room needs working internet, and the wifi warnings in
-there no longer apply.
+The equipment and the setup live in [HOSTING.md](HOSTING.md), which now
+describes the night as it actually runs: the game is on the internet, the room
+needs working wifi, and the laptop is only the big screen. Read that once. This
+file is what you say.
 
 ---
 

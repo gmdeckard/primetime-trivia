@@ -1,17 +1,48 @@
 # Running a trivia night
 
-Written for whoever actually runs the evening. No technical knowledge assumed
-past opening a terminal once.
+Written for whoever actually runs the evening. The way it runs now needs no
+terminal at all — the game is already on the internet and the night is three
+steps in a browser. The local-laptop setup is still here as a fallback, and
+assumes no technical knowledge past opening a terminal once.
 
 ## What you need
 
-- A laptop, connected to the TV or projector by HDMI
-- Wifi that the laptop and everyone's tablets are all on. **Internet is not
-  required.**
 - Your own phone, for the controls
+- A TV or projector in the room, and a laptop to drive it by HDMI
 - Players' own phones or tablets, or a stack of venue tablets
 
-### Strongly recommended: your own travel router
+Nothing gets installed on anybody's phone. The game is a web page.
+
+## Two ways to run it
+
+Read this part once and then forget it — it decides where the game lives, not
+what you do on the night.
+
+### The way it runs now: the server is on the internet
+
+A small cloud box runs the game at `trivia.cableplantiq.com` all week. The
+laptop in the room is only a browser pointed at it, and the phones reach it over
+the clubhouse wifi. **This needs working internet in the room**, and nothing
+else: no router to carry in, no address to read out, nothing to start.
+
+The reason it moved there is worth knowing, because it is the thing that breaks
+a local setup. The rec center's wifi has **client isolation** on, which
+silently blocks devices from reaching each other — a server in that room is
+unreachable from the phones no matter how well it is configured, with no error
+message that explains why. A server on the internet is not affected: the phones
+go out to it and come back in, which isolation does not stop. It has a second
+effect worth having, which is that phones stay on the wifi instead of being
+pulled onto mobile data by a network that appears not to work.
+
+Setting that box up is [DEPLOYMENT.md](DEPLOYMENT.md). This file is about the
+night.
+
+### The fallback: a laptop on a local network
+
+Still supported and still fine, and the right answer in a venue with no usable
+internet. It needs a network you control, for the reason above.
+
+#### For the local path: bring your own router
 
 A $30 travel router (GL.iNet and similar) solves three problems at once:
 
@@ -19,24 +50,32 @@ A $30 travel router (GL.iNet and similar) solves three problems at once:
    on the table cards.
 2. You can reserve a fixed address for the laptop, so the join address never
    changes and the printed QR code keeps working forever.
-3. **It avoids client isolation.** Many guest networks block devices from
-   talking to each other. When that is on, players can join the wifi, the
-   laptop is running fine, and nothing works — with no error message that
-   explains why. This is the single most likely thing to ruin a first attempt.
+3. **It avoids client isolation**, which is the single most likely thing to
+   ruin a first attempt.
 
 Plug it into the clubhouse ethernet, or run it with no internet at all. The
 game does not care.
 
-## First time setup
+## Every night
 
-Once, on the laptop:
+### On the hosted box
+
+Nothing to start. The server is already running and has been all week, so the
+night begins at step 1 below with `https://trivia.cableplantiq.com`.
+
+Worth a glance an hour before, not at seven o'clock: open the big screen
+address and check it loads and shows a room code.
+
+### On a laptop
+
+Once, the first time:
 
 ```bash
 npm install
 npm run build
 ```
 
-## Every night
+Then every night:
 
 ```bash
 npm start
@@ -56,34 +95,57 @@ game. Closing it ends the night.
   ────────────────────────────────────────────────────
 ```
 
-Then:
+The password is spelled out in that block only when the server generated one
+for you. One you set yourself reads `(as configured)`, because it is already
+written down wherever you set it.
+
+## Starting the night
+
+Three steps, the same on either setup. The addresses are the ones in the banner
+above, or `https://trivia.cableplantiq.com` on the hosted box.
 
 1. Open the **Big screen** address in a browser on the laptop, and press F11
-   for full screen. Drag it to the TV.
+   for full screen. Drag it to the TV. **It asks for the host password the
+   first time on that device** — the same password as the controls, because the
+   big screen carries the room code and the join code and is operator
+   equipment. The laptop you always use is already past it; a borrowed one is
+   not, so do not leave this until the room is filling up.
 2. Open the **MC controls** address on your phone and type the **Host
    password**. Your phone remembers it after that, and the password itself does
    not change between games, so this is a once-per-phone step rather than a
    once-per-night one.
 3. Tell the room the join address. The big screen is showing it in large type
-   with a QR code — point at it rather than reading the numbers out. Above it,
-   the screen names the wifi to join first: **primetime-trivia** or
-   **primetime-trivia-5G**, password **delpueblo**. That is the game's own
-   router, carried in and switched on for the night, because the Rec Center's
-   wifi stops devices reaching each other and so stops phones reaching this
-   server. Switch the Netgear on before step 1 and put the laptop on it too.
+   with a QR code — point at it rather than reading the address out. Then read
+   the **room code** out, twice, because that is the part people get wrong.
 
-To put the event name on the screen:
+To put the event name on the screen, type it in **Setup** on your phone — it
+is the first field, and it takes effect on the big screen as you leave the box.
+On a laptop you can also set it at start-up:
 
 ```bash
 PRIMETIME_VENUE="Thursday Trivia" npm start
 ```
 
-Naming a different wifi, for a venue whose own network lets devices talk to
-each other, also clears the built-in password:
+The two settings below are start-up ones, so on the hosted box they go in
+`/etc/default/primetime-trivia` and need a restart; see
+[DEPLOYMENT.md](DEPLOYMENT.md).
+
+### Naming the wifi on the big screen
+
+By default the big screen says nothing about wifi, and numbers its steps
+accordingly. That is right for the hosted box, where the room is on the venue's
+own network and a screen naming some other one sends people hunting through
+their phone settings for a network that is not being broadcast.
+
+On the local path, name the network you carried in and the screen adds a step
+telling people to join it first:
 
 ```bash
-PRIMETIME_SSID="Clubhouse-Guest" PRIMETIME_WIFI_PASSWORD="guest2026" npm start
+PRIMETIME_SSID="Thursday-Trivia" PRIMETIME_WIFI_PASSWORD="snowbird2026" npm start
 ```
+
+`PRIMETIME_SSID_ALT` names a second network, for a router broadcasting a 5 GHz
+band under its own name.
 
 ## How people join
 
@@ -98,6 +160,29 @@ often than just typing a name.
 
 A table of four who want to play together simply share one tablet. A couple who
 want to compete against each other use two.
+
+**Somebody can watch instead of playing.** Under the two choices is a third
+button, **I just want to watch**. It asks for the room code and nothing else:
+no name, and they never appear on the scoreboard. They get the question, the
+clock, the standings and the answer on their own phone — the big screen, in
+their hand. A "Join in" link sits on that screen all night, so somebody who
+warms up in round two can take a seat for the next game.
+
+Offer it rather than waiting to be asked. It is for the person who came with
+somebody else and the first-timer who does not want to commit to a team yet.
+
+A watcher who came in that way is in the room rather than at a table: they see
+what the big screen shows, and not what any particular team answered.
+
+**The rest of a table gets a better version.** Each seated team's own screen
+carries a QR code for its table to scan, and that one opens a watch screen
+following **that team**: the question, the clock, and what their device has
+locked in with what it is currently worth. So three people at a table of four
+can read the question off their own phones while one device answers for all of
+them, and nobody has to lean across the table to see what was tapped. Those
+codes are minted per team and stop working the moment the night is reset, so
+last week's QR in somebody's camera roll is harmless — the screen says so and
+tells them to scan the one on the table now.
 
 ## What the words mean
 
@@ -147,10 +232,18 @@ seconds while the room reads, then slides to 200 at the buzzer. All three
 numbers are yours to change. The floor sits well above zero on purpose: a
 correct answer arrived at slowly is still a correct answer.
 
-**Sound and speech.** Big-screen sound, volume, music under the question, the
-spoken run-up, and reading questions aloud. All off by default. Sound only ever
+**Sound and speech.** Three controls: big-screen sound, its volume, and the
+spoken count-in. **All on by default** — a trivia night with no sound reads as
+broken equipment, which is what a night in the room taught. Sound only ever
 comes out of the big screen, and that screen needs one click on **Turn sound
-on** before a browser will play anything.
+on** before a browser will play anything. That click is also your sound check:
+it plays a three-note chord, so no chord means no sound all night.
+
+There is one piece of music and it plays **under the live question only** —
+never under the lobby, the breaks, the intros or the reveal. It used to play
+under those too, and that came out after the first real night: players with
+hearing aids could not follow the MC over it. Under a question nobody is
+talking, and the room liked it there.
 
 **Questions.** The age group, and the question sets switched on for it.
 
@@ -230,10 +323,15 @@ restart needed.
 **A tablet goes to sleep.** They tap to wake and the page reconnects on its
 own, landing on whatever is happening now. Nobody needs to reload anything.
 
-**The laptop sleeps, or you close the lid.** Start it again with `npm start`.
-The night comes back — teams, scores, which questions have been used. The
-question that was live gets parked rather than scored, and the screen tells you
-so. Reveal it and carry on.
+**The laptop sleeps, or you close the lid.** On the hosted box this costs you
+the big screen and nothing else: the game is somewhere else and never stopped,
+so wake the laptop, reload `/host`, and the night is where you left it. Every
+phone in the room carried on without you.
+
+Running locally, the laptop *is* the game. Start it again with `npm start`. The
+night comes back — teams, scores, which questions have been used. The question
+that was live gets parked rather than scored, and the screen tells you so.
+Reveal it and carry on.
 
 **Two teams tie at the top.** The controls offer a tiebreaker: a numeric
 question where the closest guess wins. It is sudden death and only the tied
@@ -256,8 +354,8 @@ whole bank over.
 
 ## Afterwards
 
-Nothing to do. The final standings stay on the screen until you stop the
-server.
+Nothing to do. The final standings stay on the screen — on the hosted box until
+somebody resets the night, and locally until you stop the server.
 
 If you want a completely fresh night — new teams, zero scores — use **Reset
 everything** in the controls, or just restart with an empty `data/` folder.
@@ -269,13 +367,27 @@ a weekly game will not recycle material for about two months.
 
 ## If something goes wrong
 
-**Players get "can't reach this page".** They are on a different wifi network,
-or the network has client isolation on. Check the first; if the laptop is fine
-and several devices all fail, assume the second and use your own router.
+**Players get "can't reach this page", on the hosted box.** Their phone has no
+working internet, or the box is down. Check your own phone on the same wifi
+first: if that loads the join page, it is their device, and the fix is usually
+to turn wifi off and on. If no phone can load it, the game is not reachable and
+the standings are not coming back by themselves — see
+[DEPLOYMENT.md](DEPLOYMENT.md).
+
+**Players get "can't reach this page", on a laptop.** They are on a different
+wifi network, or the network has client isolation on. Check the first; if the
+laptop is fine and several devices all fail, assume the second and use your own
+router.
 
 **The address in the terminal looks wrong** (starts with `172.` or `169.`).
 The laptop picked a virtual adapter. The terminal lists every address it found
-— try the one starting `192.168.`.
+— try the one starting `192.168.`. This cannot happen on the hosted box, which
+prints the domain and does not guess.
+
+**The big screen asks for a password you do not have.** It is the same one as
+the controls, so a phone already running `/control` is past it and can keep
+running the night on its own. Without it there is no big screen, which is why
+step 1 is worth doing early rather than at seven o'clock.
 
 **The big screen is tiny or cut off.** F11 for full screen. The layout scales
 to whatever it is given.
