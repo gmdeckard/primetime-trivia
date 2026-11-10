@@ -515,6 +515,8 @@ input:focus { border-color: var(--brass); outline: none; }
   margin-inline: auto;
 }
 .team-qr svg { width: 100%; height: auto; display: block; }
+/* A URL ending in a 32-character token, under a QR code, on a phone. */
+.team-qr-url { word-break: break-all; max-width: 100%; }
 .join-url {
   font-family: var(--mono);
   font-size: clamp(1.6rem, 3.4vw, 3.2rem);
@@ -1239,5 +1241,78 @@ textarea:focus { border-color: var(--brass); outline: none; }
 /* Centred in the screen rather than sitting at the top of it: this is the
    whole page until a code is typed, and there is nothing below it. */
 .host.is-watch.center { justify-content: center; }
+/* The strip naming the table this screen follows. It had no rules at all and
+   was laid out by the host's default block flow, which put the team name and
+   every pill on a line of its own — four lines of header before the question
+   on the one screen that has the least room for them. */
+.watch-team {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 10px;
+}
+/* The name is the label for the pills beside it, not a heading above them. */
+.watch-team .eyebrow { margin: 0; }
+
+/* A phone held in a hand, rather than a projector seen from across a room.
+   Everything above is about shape: one column instead of two, scrolling
+   instead of pinned. This is about scale, and it is the part the first night
+   on real phones said was wrong — the layout was right and you still could
+   not see a question and its four answers at the same time.
+
+   The host's type is all `clamp(min, vw, max)` and at 390px every one of them
+   is sitting on its `min`, so the viewport term does nothing and the floors
+   are the whole size. They are floors chosen for a TV seen from fifteen feet.
+   This block lowers them for a screen held at arm's length, which is the one
+   thing the shape rules above could never do.
+
+   Measured rather than guessed: a question screen was 1162px of content in an
+   844px viewport, so the answers were always below the fold while the clock
+   ran. The budget below puts the prompt and all four answers on the first
+   screen at 390x844, which is the smallest phone anybody brings. */
+@media (max-width: 560px) {
+  .host.is-watch { padding: 12px; gap: 10px; }
+  /* 165px of header above a question, on a screen with 844 to spend.
+     The `!important`s in this block are all aimed at inline `fontSize` styles
+     in host.tsx, which exist because the big screen tunes a handful of sizes
+     against a 1080p canvas. A stylesheet cannot outrank a style attribute by
+     specificity, and moving a dozen of those into classes to suit the small
+     screen is a bigger change than the bug deserves. */
+  .host.is-watch .host-bar { gap: 6px 10px; }
+  .host.is-watch .host-bar .row { gap: 8px !important; }
+  .host.is-watch .pill { font-size: .8rem !important; padding: 5px 11px; }
+  /* Except the one that is a clock. It is the only thing on the screen that
+     changes every second and the only number anybody is watching. */
+  .host.is-watch .qhead-live { font-size: 1.25rem !important; padding: 6px 16px; }
+  /* The venue name is on the big screen for a room that needs telling where
+     it is. Whoever is holding this phone knows. */
+  .host.is-watch .host-bar > div > .eyebrow { display: none; }
+  .host.is-watch .host-bar .serif { font-size: 1.05rem !important; }
+  .host.is-watch .host-bar .serif .muted { font-size: .9rem !important; }
+  .host.is-watch .host-bar .faint { font-size: .78rem; }
+  .host.is-watch .host-body { gap: 12px; }
+  .host.is-watch .host-stage { gap: 12px; }
+  /* 2rem over 390px is four lines for a seven-word question, and those four
+     lines are what push the answers off the screen. */
+  .host.is-watch h1.prompt { font-size: 1.6rem; line-height: 1.15; }
+  /* 88px each, four of them: a third of the viewport in padding. The text
+     still sets the height when an answer runs to three lines. */
+  .host.is-watch .answer { min-height: 56px; font-size: 1rem; padding: 10px 12px; gap: 10px; }
+  .host.is-watch .answers { gap: 8px; }
+  .host.is-watch .badge { width: 38px; height: 38px; font-size: 1.1rem; }
+  /* The fact under a revealed answer is the one block nobody has to read
+     before a clock runs out, so it gives up its size first. */
+  .host.is-watch .fact { font-size: 1rem; }
+  .host.is-watch .host-display { font-size: 2.2rem; }
+  .host.is-watch .board-fit { height: 50dvh; }
+  .host.is-watch .board-row { padding: 8px 12px; gap: 10px; }
+  .host.is-watch .board-rank { font-size: 1.1rem; }
+  .host.is-watch .board-name { font-size: 1rem; }
+  .host.is-watch .board-score { font-size: 1.1rem; }
+  .host.is-watch .board-delta { font-size: .85rem; }
+  .host.is-watch .autonext { font-size: .9rem !important; }
+  .host.is-watch .namechip { font-size: .9rem; }
+}
+
 .watch-gate { width: min(420px, 100%); gap: 14px; }
 .watch-gate-title { font-size: clamp(2rem, 9vw, 2.8rem); line-height: 1.05; }

@@ -30,12 +30,21 @@ function Lobby({
   // they have already proved they can see is friction for nothing.
   const [code, setCode] = useState(() => localStorage.getItem('primetime.roomCode') ?? '');
 
+  // The code is for the rest of a table, so only a table has one. Somebody
+  // playing on their own has nobody to hand it to: "for the rest of your
+  // table" over a QR code is an instruction to find a table, and the first
+  // thing it did in the room was make solo players think they had joined
+  // wrong. Gated on `kind` rather than on the team having more than one
+  // device, because the server cannot see how many people are sitting there —
+  // what it can see is which of the two buttons they pressed.
+  const wantsTeamQr = !!state.me.teamId && state.me.kind === 'team';
+
   // Asked for once, the moment this device has a seat. The server answers on
   // the socket rather than in every snapshot, because the SVG never changes
   // while the team holds its seat and would otherwise be re-sent all night.
   useEffect(() => {
-    if (state.me.teamId && !teamQr) send({ t: 'team_qr' });
-  }, [state.me.teamId, teamQr]);
+    if (wantsTeamQr && !teamQr) send({ t: 'team_qr' });
+  }, [wantsTeamQr, teamQr]);
 
   // Already in — show who they are and let them wait.
   if (state.me.teamId) {
@@ -58,7 +67,7 @@ function Lobby({
             here.
             Shown in the lobby, where a table is setting up and phones are
             already out. */}
-        {teamQr && (
+        {wantsTeamQr && teamQr && (
           <div class="card stack center">
             <div class="eyebrow">For the rest of your table</div>
             <p class="muted">
@@ -66,7 +75,11 @@ function Lobby({
               question, the clock and what you have locked in. Only this device answers.
             </p>
             <div class="team-qr" dangerouslySetInnerHTML={{ __html: teamQr.qrSvg }} />
-            <p class="faint">{teamQr.url.replace(/^https?:\/\//, '')}</p>
+            {/* The address under the code, for a camera that will not scan.
+                It ends in a 32-character token and so is one unbreakable
+                word: left as plain `.faint` it ran 47px off the right edge of
+                a 390px phone and took the page's horizontal scroll with it. */}
+            <p class="faint team-qr-url">{teamQr.url.replace(/^https?:\/\//, '')}</p>
           </div>
         )}
         <button class="btn btn-ghost btn-block" onClick={() => { setKind(null); send({ t: 'leave' }); }}>

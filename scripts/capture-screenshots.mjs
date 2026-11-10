@@ -74,6 +74,17 @@ try {
     return page;
   }
 
+  /**
+   * The width a watch screen is actually read at.
+   *
+   * The big screen's layout is written against 1920x1080 and `/watch` serves
+   * the same bundle to a phone, so this is the one screen in the game whose
+   * layout nothing else checks. A capture at 390px is what catches it going
+   * back to a TV scale: everything here fit one screenful when it was written,
+   * and a shot that needs scrolling to reach the answers is the regression.
+   */
+  const PHONE = { width: 390, height: 844 };
+
   const pause = (p, ms = 600) => p.waitForTimeout(ms);
   const press = async (p, text) => {
     await p.locator('input').first().waitFor({ state: 'visible', timeout: 10000 });
@@ -157,6 +168,15 @@ try {
   await shoot(host, '07-host-question');
   await shoot(ann, '08-player-question');
   await shoot(mc, '09-control-question');
+
+  // The same question as somebody who is not playing sees it. Opened now
+  // rather than in the lobby because an empty watch screen proves nothing
+  // about the layout — a question with four answers on it is the hard case.
+  const watcher = await open('watch', '/watch', PHONE.width, PHONE.height);
+  await press(watcher, roomCode);
+  await tap(watcher, 'Watch');
+  await pause(watcher, 900);
+  await shoot(watcher, '07b-watch-question');
 
   // --- answers come in
   await ann.locator('.answer').nth(1).click();
