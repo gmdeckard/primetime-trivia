@@ -518,7 +518,7 @@ server.listen(PORT, BIND, () => {
     console.log('  laptop\'s real address and players can join.');
     console.log('');
     console.log('  If your Windows build does not support mirrored mode, run the');
-    console.log('  server on Windows itself with .\\start-server.ps1 instead.');
+    console.log('  server on a Linux or macOS machine on the same wifi instead.');
   }
   console.log('');
 });

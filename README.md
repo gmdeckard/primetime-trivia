@@ -295,7 +295,10 @@ general knowledge that it is not purely nostalgia.
 ## Running it on Windows
 
 The server runs anywhere Node 20 does, including the laptop that drives the TV.
-`.\start-server.ps1` is the Windows equivalent of `./start-server.sh`.
+On Windows that means WSL: clone from inside it and run `./start-server.sh` as
+on any other machine. WSL needs `networkingMode=mirrored` or the phones cannot
+reach it — `docs/DEPLOYMENT.md` has the detail, and the server says so on
+startup when it detects the problem.
 
 Running server and big screen on the same machine has one advantage worth
 knowing: the browser's wake lock only works in a secure context, which

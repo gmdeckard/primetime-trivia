@@ -68,16 +68,18 @@ and staying awake is a Windows display setting. Serve and view on the same
 laptop, open the host screen at `http://localhost:8080/host`, and the page
 keeps itself awake.
 
-```powershell
+Run it from inside WSL, not from Windows itself:
+
+```bash
 git clone https://github.com/gmdeckard/primetime-trivia.git
 cd primetime-trivia
-.\start-server.ps1
+./start-server.sh
 ```
 
-`start-server.ps1` rebuilds when sources are newer than the last build, same
-rule as the bash script, and leaves the previous build in place if the build
-fails. Stop it with Ctrl+C. Players join at the LAN address it prints; the big
-screen uses the localhost one.
+`start-server.sh` rebuilds when sources are newer than the last build and
+leaves the previous build in place if the build fails. Stop it with Ctrl+C.
+Players join at the LAN address it prints; the big screen uses the localhost
+one.
 
 **If you use WSL, clone from inside it.** Cloning with Windows git into
 `/mnt/c/...` and then running the scripts from WSL fails with
