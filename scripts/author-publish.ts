@@ -13,7 +13,7 @@
  *   npx tsx scripts/author-publish.ts --approve <id> --verdict correct
  *   npx tsx scripts/author-publish.ts --reject <id> --ids 2
  *   npx tsx scripts/author-publish.ts --publish --name "Easy set 1" \
- *       --reviewed-by "..." [--append-to easy1] [--notes "..."]
+ *       --reviewed-by "..." [--append-to beta1] [--notes "..."]
  *
  * The verifier has already set anything it doubted to `rejected`, so --verdict
  * correct is not a way of skipping review: it approves the questions that

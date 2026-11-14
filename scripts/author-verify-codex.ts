@@ -11,7 +11,7 @@
  * with no sight of the prompt that generated the questions or the reasoning
  * behind them. It is handed the claims cold and asked to break them.
  *
- *   npx tsx scripts/author-verify-codex.ts --batch easy1-sports-01
+ *   npx tsx scripts/author-verify-codex.ts --batch easy1-computers-internet-05
  *   npx tsx scripts/author-verify-codex.ts --all
  *   npx tsx scripts/author-verify-codex.ts --all --dry-run    print the prompt only
  *
