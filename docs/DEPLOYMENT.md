@@ -5,10 +5,17 @@ runs trivia every week wants a box in a cupboard that just works: starts on
 boot, comes back by itself if it falls over, and nobody has to remember a
 command.
 
-Any Linux machine with systemd does the job. The server idles around 50 MB of
-RAM and has no native dependencies, so the floor is low — a **Raspberry Pi Zero
-2 W** is enough for a room of twenty teams. A Pi 4, Pi 5, Jetson or any mini PC
-is comfortable.
+Any Linux machine with systemd does the job, and there are no native
+dependencies. Measured against the real question bank: the server idles at
+**119 MB** of RAM and peaks at **121 MB** with a hundred players all answering,
+so a hundred players cost under 3 MB over idle. The Node baseline and the
+question bank are the whole footprint, and the number of players barely moves
+it. Wire cost is about 0.9 KB per player per question, so a sixty-question night
+with a hundred phones is roughly 13 MB of traffic in total.
+
+That means a **Raspberry Pi Zero 2 W** (512 MB) still fits with room to spare,
+and a Pi 4, Pi 5, Jetson or any mini PC is comfortable. Size a box for 1 GB and
+stop thinking about it.
 
 **Not an Arduino or ESP32.** Those are microcontrollers with no operating
 system; they can't run Node, a filesystem, or twenty websockets.
@@ -164,6 +171,9 @@ PRIMETIME_VENUE=Thursday Trivia
 PRIMETIME_PASSWORD=brass-lantern-42
 PRIMETIME_DATA=/home/pi/primetime-trivia/data
 #PRIMETIME_SSID=Clubhouse-Guest
+# Only for a box reached from the internet — see the tunnel section below.
+#PRIMETIME_BIND=127.0.0.1
+#PRIMETIME_PUBLIC_URL=https://trivia.example.com
 ```
 
 After editing:
@@ -195,7 +205,13 @@ to get wrong.
 
 The service still runs as an unprivileged user. It binds the low port through
 `AmbientCapabilities=CAP_NET_BIND_SERVICE` rather than running as root. If you'd
-rather use a high port, set `PORT=8080` in the config and restart.
+rather use a high port, set `PORT=8080` in the config and re-run the install
+script, which then grants no port-binding capability at all.
+
+**A box behind a tunnel wants port 8080, not 80.** Nobody reads that address
+aloud — the public hostname is the only address anyone sees — so there is no
+reason to bind a privileged port or hold a capability for it. See the tunnel
+section below.
 
 ## Give it a fixed address
 
@@ -219,6 +235,136 @@ sudo nmcli con up "<name>"
 If you set it statically, make sure the address is **outside the router's DHCP
 pool**, or a tablet will eventually be handed the same address and you'll get a
 conflict that looks like random network failure on trivia night.
+
+## Reaching it from the internet: a Cloudflare Tunnel
+
+Everything above puts the box on the venue's LAN, which is the right answer
+until the venue's wifi has **client isolation** turned on. Then no amount of
+configuration helps: the phones and the box are on the same network and cannot
+see each other, with no error that says so. The fix is to stop asking the phones
+to reach the box locally and put the box on the internet instead, so the phones
+go out and come back in. Isolation does not stop that.
+
+A tunnel is the cheap way to do it. `cloudflared` dials **out** from the box and
+holds the connection open, so:
+
+- No inbound ports are opened at home and no router is reconfigured.
+- It works behind CGNAT, where no port forward would have worked at all.
+- TLS is handled at the edge, so there is no certificate to renew on the box.
+- A changing home IP does not matter.
+- The box can stay home. The venue needs internet and a browser, nothing else.
+
+Websockets ride a tunnel with no extra configuration, which matters here because
+the entire game is websockets.
+
+### Set it up once
+
+Install `cloudflared`. On arm64 (Jetson, Pi) the published `.deb` is the
+reliable route, since Cloudflare's apt repo does not cover every Ubuntu
+codename:
+
+```bash
+curl -fL -o /tmp/cloudflared.deb \
+  https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-arm64.deb
+sudo dpkg -i /tmp/cloudflared.deb
+cloudflared --version
+```
+
+On x86-64 swap `arm64` for `amd64` in that URL.
+
+Authenticate, create the tunnel, and point a hostname at it. The first command
+prints a URL to open in a browser and asks which zone to use:
+
+```bash
+cloudflared tunnel login
+cloudflared tunnel create trivia
+cloudflared tunnel route dns trivia trivia.example.com
+```
+
+`route dns` writes the CNAME itself, so the Cloudflare DNS panel is never
+touched by hand. `tunnel create` prints a UUID and writes a credentials file;
+both are needed next.
+
+Write the config. Keeping the credentials under `/etc/cloudflared` rather than
+in a home directory means the service can read them at boot without depending on
+`/home` being mounted:
+
+```bash
+sudo mkdir -p /etc/cloudflared
+sudo cp ~/.cloudflared/<UUID>.json /etc/cloudflared/
+sudo tee /etc/cloudflared/config.yml >/dev/null <<'EOF'
+tunnel: <UUID>
+credentials-file: /etc/cloudflared/<UUID>.json
+ingress:
+  - hostname: trivia.example.com
+    service: http://127.0.0.1:8080
+  - service: http_status:404
+EOF
+cloudflared --config /etc/cloudflared/config.yml tunnel ingress validate
+```
+
+The trailing `http_status:404` is a catch-all: anything arriving for a hostname
+you did not configure gets a flat 404 instead of reaching the game.
+
+Run it in the foreground once to prove it works, then install it as a service:
+
+```bash
+sudo cloudflared --config /etc/cloudflared/config.yml tunnel run trivia   # Ctrl-C when happy
+sudo cloudflared service install
+```
+
+### Then change three settings on the game side
+
+In `/etc/default/primetime-trivia`:
+
+```bash
+PORT=8080
+PRIMETIME_BIND=127.0.0.1
+PRIMETIME_PUBLIC_URL=https://trivia.example.com
+```
+
+Each one earns its place. `PORT=8080` because no human reads this address, so
+there is no reason to bind a privileged port. `PRIMETIME_BIND=127.0.0.1` closes
+the plain-HTTP port to everything except the tunnel, so the LAN cannot reach an
+unencrypted copy of the game. `PRIMETIME_PUBLIC_URL` is the only address the
+big screen, the QR code and the join panel will show — without it the server
+advertises a private address that no phone at the venue can dial.
+
+Restart and the banner should say `Serving behind https://… Local detection is
+not in use.`
+
+### Check it properly
+
+```bash
+curl -si https://trivia.example.com/ | head -1          # want HTTP/2 200
+curl -s -o /dev/null -w '%{http_code}\n' http://<box-lan-ip>:8080/   # want a refusal
+```
+
+Then the one that actually decides whether the game works:
+
+```bash
+curl -si --http1.1 \
+  -H 'Connection: Upgrade' -H 'Upgrade: websocket' \
+  -H 'Sec-WebSocket-Key: AAAAAAAAAAAAAAAAAAAAAA==' \
+  -H 'Sec-WebSocket-Version: 13' \
+  https://trivia.example.com/ws | head -1
+```
+
+Want `HTTP/1.1 101 Switching Protocols`. **`--http1.1` is not optional**: left
+to itself curl negotiates HTTP/2, which cannot carry a classic websocket upgrade
+and answers 404, which looks exactly like a broken tunnel and is not one.
+Browsers get this right by themselves.
+
+### Two things that bite
+
+**HTTP 530 means no tunnel is connected.** It comes from Cloudflare, not from
+the game, so the box may be perfectly healthy. Check
+`systemctl status cloudflared` first.
+
+**The night now depends on the venue's internet.** That was already true of any
+internet-hosted setup, but it is worth saying plainly: if the rec center's uplink
+is down there is no game, and the fallback is the local-network setup in
+[HOSTING.md](HOSTING.md) with a travel router in the bag.
 
 ## Day to day
 

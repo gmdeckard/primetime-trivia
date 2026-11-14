@@ -7,6 +7,15 @@
 #
 # Safe to re-run: it pulls the latest code, rebuilds, and restarts. Your config
 # and host password are left alone.
+#
+# One caveat before re-running it on a box you have edited by hand: the source
+# step is `git reset --hard origin/main`, which throws away local changes to
+# tracked files. Untracked files and data/ are left alone. Commit anything you
+# want to keep first.
+#
+# Set PORT=8080 when the box is reached through a tunnel or reverse proxy rather
+# than directly: no human reads that address, so it does not need to be port 80,
+# and the unit then asks for no port-binding capability at all.
 set -euo pipefail
 
 APP_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -59,12 +68,33 @@ PRIMETIME_VENUE=PrimeTime Trivia
 PRIMETIME_DATA=${APP_DIR}/data
 # Shown on the join screen so players know which wifi to join first.
 #PRIMETIME_SSID=Clubhouse-Guest
+#
+# Reached from the internet through a tunnel or reverse proxy? Set both of
+# these, and set PORT above to 8080. BIND closes the plain-HTTP port to
+# everything but the proxy on this machine, so the LAN cannot reach an
+# unencrypted copy. PUBLIC_URL is the only address the big screen, the QR code
+# and the join panel will show — without it the server advertises a private
+# address no phone at the venue can dial.
+#PRIMETIME_BIND=127.0.0.1
+#PRIMETIME_PUBLIC_URL=https://trivia.example.com
 EOF
   chmod 600 "$ENV_FILE"
   echo "    wrote $ENV_FILE (the server will generate the password on first boot)"
 fi
 
 echo "==> 5/5  Service"
+# A privileged port needs a capability. A high port does not, so don't hand one
+# out: a box behind a tunnel runs on 8080 and should hold no port-binding
+# capability at all.
+if printf '%s' "$PORT" | grep -qE '^[0-9]+$' && [ "$PORT" -lt 1024 ]; then
+  CAP_BLOCK="# Lets an unprivileged process bind a low port without running as root.
+AmbientCapabilities=CAP_NET_BIND_SERVICE
+CapabilityBoundingSet=CAP_NET_BIND_SERVICE"
+else
+  CAP_BLOCK="# PORT is above 1024, so no port-binding capability is granted.
+CapabilityBoundingSet="
+fi
+
 cat > "$UNIT" <<EOF
 [Unit]
 Description=PrimeTime Trivia
@@ -78,9 +108,7 @@ User=${APP_USER}
 WorkingDirectory=${APP_DIR}
 EnvironmentFile=${ENV_FILE}
 ExecStart=/usr/bin/node dist/src/server/index.js
-# Lets an unprivileged process bind port 80 without running as root.
-AmbientCapabilities=CAP_NET_BIND_SERVICE
-CapabilityBoundingSet=CAP_NET_BIND_SERVICE
+${CAP_BLOCK}
 NoNewPrivileges=true
 PrivateTmp=true
 ProtectSystem=full
@@ -100,13 +128,22 @@ sleep 3
 
 echo
 if systemctl is-active --quiet primetime-trivia; then
-  IP=$(ip -4 -o addr show scope global | awk '{print $4}' | cut -d/ -f1 | head -1)
-  SUFFIX=""; [ "$PORT" = "80" ] || SUFFIX=":${PORT}"
+  # A box behind a tunnel has a public hostname, and that is the only address
+  # anyone will ever type. Printing this machine's LAN address there would be
+  # actively wrong, so PRIMETIME_PUBLIC_URL wins when it is set.
+  PUBLIC_LINE="$(grep -E '^PRIMETIME_PUBLIC_URL=' "$ENV_FILE" 2>/dev/null | head -1)"
+  if [ -n "$PUBLIC_LINE" ]; then
+    BASE="${PUBLIC_LINE#*=}"
+  else
+    IP=$(ip -4 -o addr show scope global | awk '{print $4}' | cut -d/ -f1 | head -1)
+    SUFFIX=""; [ "$PORT" = "80" ] || SUFFIX=":${PORT}"
+    BASE="http://${IP}${SUFFIX}"
+  fi
   echo "────────────────────────────────────────────"
-  echo "  Players join at   http://${IP}${SUFFIX}"
-  echo "  Big screen        http://${IP}${SUFFIX}/host"
-  echo "  MC controls       http://${IP}${SUFFIX}/control"
-  echo "  Question editor   http://${IP}${SUFFIX}/author"
+  echo "  Players join at   ${BASE}"
+  echo "  Big screen        ${BASE}/host"
+  echo "  MC controls       ${BASE}/control"
+  echo "  Question editor   ${BASE}/author"
   PW_LINE="$(grep -E '^(PRIMETIME_PASSWORD|PRIMETIME_PIN)=' "$ENV_FILE" 2>/dev/null | head -1)"
   PW_VALUE="${PW_LINE#*=}"
   case "$PW_LINE" in
