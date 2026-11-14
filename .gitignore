@@ -34,3 +34,9 @@ docs/screenshots/*
 # megabytes of binaries that regenerate in thirty seconds, and binaries in
 # history are what put .git at 64MB — so they stay local.
 docs/beds/
+
+# Personal credentials, never publishable: CVs, academic transcripts, the
+# dissertation and certification PDFs. This repo is PUBLIC
+# (github.com/gmdeckard/primetime-trivia), so an accidental `git add -A` here
+# would push transcripts to the internet. Ignored so it cannot be staged.
+Deckard/
