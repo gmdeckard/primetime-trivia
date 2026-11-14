@@ -70,6 +70,7 @@
     "*.sh": [
       "src/server/start-script.test.ts"
     ],
+    "*.ps1": [],
     "*.json": [],
     "vite.config.ts": [],
     "tsconfig*.json": [],
