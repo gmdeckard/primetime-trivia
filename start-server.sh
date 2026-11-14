@@ -137,6 +137,16 @@ choose_host_ip() {
     echo "Using PRIMETIME_HOST_IP=${PRIMETIME_HOST_IP} (already set)."
     return 0
   fi
+  # A public hostname settles the question outright: PRIMETIME_PUBLIC_URL is the
+  # only address the big screen, the QR and the join panel will show, so which
+  # LAN interface the box happens to have is not a decision anyone needs to
+  # make. Without this, starting from an ssh terminal on the server — a tty, so
+  # the `[ -t 0 ]` guard below does not fire — stops and asks the operator to
+  # pick between private addresses that no phone will ever dial.
+  if [ -n "${PRIMETIME_PUBLIC_URL:-}" ]; then
+    echo "Using PRIMETIME_PUBLIC_URL=${PRIMETIME_PUBLIC_URL}; not picking a LAN address."
+    return 0
+  fi
   # Every early exit here says `return 0`, never a bare `return`, and the
   # difference is the whole night. A bare `return` hands back the status of the
   # last command run, which on these lines is the test that just failed. Under

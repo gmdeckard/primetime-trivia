@@ -140,6 +140,26 @@ test('PRIMETIME_NO_PICK skips the prompt entirely', () => {
   assert.doesNotMatch(out, /Which address/);
 });
 
+test('a public hostname settles the address without asking', () => {
+  // The branch that matters on a hosted box. Over ssh the tty gate does NOT
+  // fire, so before this branch existed the operator was asked to choose
+  // between private addresses no phone would ever dial.
+  const { out, picked } = runChooser({ list: TWO, env: { PRIMETIME_PUBLIC_URL: 'cableplantiq.com' } });
+  assert.equal(picked, '', 'the public URL is advertised by the server, not pinned as a LAN IP');
+  assert.doesNotMatch(out, /Which address/);
+  assert.match(out, /not picking a LAN address/);
+  assert.match(out, /PICKED=/, 'execution must continue past the function');
+});
+
+test('an explicit PRIMETIME_HOST_IP still beats a public hostname', () => {
+  const { out, picked } = runChooser({
+    list: TWO,
+    env: { PRIMETIME_HOST_IP: '10.0.0.5', PRIMETIME_PUBLIC_URL: 'cableplantiq.com' },
+  });
+  assert.equal(picked, '10.0.0.5');
+  assert.doesNotMatch(out, /not picking a LAN address/);
+});
+
 test('no terminal means no prompt, and the function still returns clean', () => {
   // This is the exact shape of the bug that shipped: under `set -e` a bare
   // `return` here killed the script before the server was ever launched.
