@@ -6,7 +6,8 @@
  * On the LAN the server works the address out itself, because there is no DNS
  * in a room with no internet and the LAN IP is the only name anything has.
  * Behind a public domain that detection is worse than useless: the box's own
- * address is a private one inside Azure, and advertising it puts an address on
+ * address is a private one behind the tunnel or proxy, and advertising it puts
+ * an address on
  * the big screen that nothing in the room can reach.
  *
  * So a configured public URL wins outright. These are pure functions on

@@ -6,13 +6,13 @@ import { joinTargets, normalizePublicUrl, wifiInfo } from './join.js';
 // faking interfaces, so these functions were pulled out to be testable plain.
 
 test('a bare host is taken as https, which is what an operator means', () => {
-  assert.equal(normalizePublicUrl('trivia.cableplantiq.com').url, 'https://trivia.cableplantiq.com');
-  assert.equal(normalizePublicUrl('  trivia.cableplantiq.com  ').url, 'https://trivia.cableplantiq.com');
+  assert.equal(normalizePublicUrl('trivia.gmdeckard.com').url, 'https://trivia.gmdeckard.com');
+  assert.equal(normalizePublicUrl('  trivia.gmdeckard.com  ').url, 'https://trivia.gmdeckard.com');
 });
 
 test('an explicit scheme and port are kept', () => {
   assert.equal(normalizePublicUrl('https://trivia.example.com').url, 'https://trivia.example.com');
-  assert.equal(normalizePublicUrl('http://cableplantiq.com:8080').url, 'http://cableplantiq.com:8080');
+  assert.equal(normalizePublicUrl('http://gmdeckard.com:8080').url, 'http://gmdeckard.com:8080');
 });
 
 test('a default port is dropped and a path is discarded', () => {
@@ -27,7 +27,7 @@ test('nothing configured is not an error', () => {
 });
 
 test('an unusable value is reported rather than silently dropped', () => {
-  // Silence here would put the Azure box's private address on the big screen
+  // Silence here would put the server's own private address on the big screen
   // with nothing on it to say why.
   assert.match(normalizePublicUrl('ws://trivia.example.com').error ?? '', /http or https/);
   assert.match(normalizePublicUrl('http://').error ?? '', /not a URL|no host/);
@@ -35,14 +35,14 @@ test('an unusable value is reported rather than silently dropped', () => {
 
 test('a configured public URL is the only thing advertised', () => {
   const t = joinTargets({
-    publicUrl: 'https://trivia.cableplantiq.com',
+    publicUrl: 'https://trivia.gmdeckard.com',
     lan: ['10.1.0.4', '169.254.9.9'],
     port: 8080,
   });
-  assert.equal(t.url, 'https://trivia.cableplantiq.com');
-  // The private Azure address must not ride along: a screen showing a domain
+  assert.equal(t.url, 'https://trivia.gmdeckard.com');
+  // The private LAN address must not ride along: a screen showing a domain
   // and an IP sends half the room to the wrong one.
-  assert.deepEqual(t.urls, ['https://trivia.cableplantiq.com']);
+  assert.deepEqual(t.urls, ['https://trivia.gmdeckard.com']);
   assert.equal(t.isPublic, true);
 });
 

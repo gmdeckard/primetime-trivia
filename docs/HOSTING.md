@@ -20,10 +20,17 @@ what you do on the night.
 
 ### The way it runs now: the server is on the internet
 
-A small cloud box runs the game at `trivia.cableplantiq.com` all week. The
-laptop in the room is only a browser pointed at it, and the phones reach it over
-the clubhouse wifi. **This needs working internet in the room**, and nothing
-else: no router to carry in, no address to read out, nothing to start.
+The game answers at `trivia.gmdeckard.com` all week. The server is a Jetson
+Orin Nano in a cupboard at home, reached from the internet through a Cloudflare
+Tunnel, so there is no rented cloud box and no monthly bill. The laptop in the
+room is only a browser pointed at it, and the phones reach it over the clubhouse
+wifi. **This needs working internet in the room**, and nothing else: no router
+to carry in, no address to read out, nothing to start.
+
+**The box stays home.** It is tempting to carry it to the venue since it is
+small, but there is no reason to: the phones reach it through the tunnel whether
+it is in the next room or across town, and leaving it on ethernet at a fixed
+address means nothing to pack, nothing to plug in, and nothing to leave in a car.
 
 The reason it moved there is worth knowing, because it is the thing that breaks
 a local setup. The rec center's wifi has **client isolation** on, which
@@ -61,7 +68,7 @@ game does not care.
 ### On the hosted box
 
 Nothing to start. The server is already running and has been all week, so the
-night begins at step 1 below with `https://trivia.cableplantiq.com`.
+night begins at step 1 below with `https://trivia.gmdeckard.com`.
 
 Worth a glance an hour before, not at seven o'clock: open the big screen
 address and check it loads and shows a room code.
@@ -102,7 +109,7 @@ written down wherever you set it.
 ## Starting the night
 
 Three steps, the same on either setup. The addresses are the ones in the banner
-above, or `https://trivia.cableplantiq.com` on the hosted box.
+above, or `https://trivia.gmdeckard.com` on the hosted box.
 
 1. Open the **Big screen** address in a browser on the laptop, and press F11
    for full screen. Drag it to the TV. **It asks for the host password the
