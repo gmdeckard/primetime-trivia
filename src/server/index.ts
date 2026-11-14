@@ -259,6 +259,10 @@ wss.on('connection', (socket) => {
   const client: Client = { socket, role: 'player' };
   clients.add(client);
   let ready = false;
+  // Wall-clock is enough here and survives better than a monotonic reading in
+  // a log line a person reads: the number wanted is "how long was this phone
+  // on", not a precise interval.
+  const openedAt = Date.now();
 
   socket.on('message', (raw) => {
     let msg: ClientMessage;
@@ -396,9 +400,18 @@ wss.on('connection', (socket) => {
     }
   });
 
-  socket.on('close', () => {
+  socket.on('close', (code: number, reason: Buffer) => {
     clients.delete(client);
     if (client.playerId) engine.setConnected(client.playerId, false);
+    // One line per close, because the alternative is guessing. A phone that
+    // drops mid-round, a big screen that was never authorized (4001), a tablet
+    // carried out of the building — they all look identical from the room, and
+    // after the night there is nothing to read. Role and duration are what
+    // distinguish "wifi blinked" from "someone closed the tab", and the code
+    // is what distinguishes either from the server shutting down (1001).
+    const seconds = Math.round((Date.now() - openedAt) / 1000);
+    const why = reason.length > 0 ? ` ${reason.toString('utf8')}` : '';
+    console.log(`  socket close ${code}${why} role=${client.role} open=${seconds}s`);
   });
 
   socket.on('error', () => clients.delete(client));
