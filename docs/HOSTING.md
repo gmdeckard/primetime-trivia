@@ -111,6 +111,9 @@ written down wherever you set it.
 Three steps, the same on either setup. The addresses are the ones in the banner
 above, or `https://trivia.gmdeckard.com` on the hosted box.
 
+If you are MCing rather than setting up, [MC-SCRIPT.md](MC-SCRIPT.md) is the
+words to say out loud, in order, written to be read off a phone.
+
 1. Open the **Big screen** address in a browser on the laptop, and press F11
    for full screen. Drag it to the TV. **It asks for the host password the
    first time on that device** — the same password as the controls, because the
