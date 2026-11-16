@@ -155,9 +155,16 @@ function GenerateForm({
   // Rough, and labelled as rough. Input is dominated by the existing-prompts
   // list we send for dedupe; output by the questions themselves. An import
   // writes no questions, so it pays only for the reveal lines and the check.
-  const estIn = importing ? 400 + count * 70 : 2000 + count * 60;
-  const estOut = importing ? count * 120 : count * 220;
-  const estimate = ((estIn / 1e6) * chosen.inPerM + (estOut / 1e6) * chosen.outPerM) * 100 * 2;
+  //
+  // The import figures are calibrated against a measured batch: five questions
+  // on Opus cost 5.36c, where the first guess here said 3c. Reveal lines run
+  // long, and both passes bill for them. The Claude path has never been
+  // measured the same way, so it keeps the wider margin rather than borrowing
+  // a confidence it has not earned.
+  const estIn = importing ? 500 + count * 200 : 2000 + count * 60;
+  const estOut = importing ? count * 400 : count * 220;
+  const margin = importing ? 1.25 : 2;
+  const estimate = ((estIn / 1e6) * chosen.inPerM + (estOut / 1e6) * chosen.outPerM) * 100 * margin;
 
   /**
    * Switching to the import source with an unsupported category selected

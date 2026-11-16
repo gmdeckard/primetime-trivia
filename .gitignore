@@ -40,3 +40,7 @@ docs/beds/
 # (github.com/gmdeckard/primetime-trivia), so an accidental `git add -A` here
 # would push transcripts to the internet. Ignored so it cannot be staged.
 Deckard/
+
+# API keys never live in the working tree of a public repo.
+.anthropic-key
+*.key

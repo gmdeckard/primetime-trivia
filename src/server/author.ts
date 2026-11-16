@@ -334,7 +334,12 @@ const FactResult = z.object({
     'is so implausible that a well-read player eliminates it instantly.',
   ),
   note: z.string().describe('One sentence saying what is weak. Empty when quality is ok.'),
-  era: z.string().describe('Decade the answer belongs to, e.g. "1960s". Empty string if not era-specific.'),
+  fitsCategory: z.boolean().describe(
+    'Whether the question belongs in the target category as described. False for a ' +
+    'perfectly good question about the wrong subject or the wrong period.',
+  ),
+  categoryNote: z.string().describe('One sentence saying why it does not fit. Empty when it fits.'),
+  era: z.string().describe('Decade or century the answer belongs to, e.g. "1960s" or "1860s". Empty string if not era-specific.'),
   tags: z.array(z.string()).describe('A few lowercase topic tags.'),
 });
 
@@ -362,6 +367,15 @@ were written to no particular standard. Your job is two things:
      question whose wrong options are centuries away is the common case. In a
      room of retired professionals that question is dead air.
 
+3. JUDGE WHETHER IT BELONGS IN THE CATEGORY. You are told the category these
+   questions are being filed under, with the description the host sees. Set
+   fitsCategory false when the question is about the wrong subject or the wrong
+   period, however good it is otherwise. The source database files everything
+   under broad headings, so a category named for one century routinely receives
+   questions from another. A round announced as one subject must not open with a
+   question from a different one, so err toward false: a good question in the
+   wrong category is still a wrong question.
+
 Do not rewrite the question, the answer or the options. Judge them and write the
 reveal line. Return one result for every question, using the index given.`;
 
@@ -374,11 +388,19 @@ reveal line. Return one result for every question, using the index given.`;
  * verification, so a question it marked weak cannot be talked back into
  * 'pending' by a verifier that happened to like the answer.
  *
+ * It also decides whether each question belongs in the category it is being
+ * filed under. An internet database files every period under one heading
+ * called History, so importing into a category named for one century quietly
+ * fills it with another: the first real batch put Gettysburg, Antietam and the
+ * Peninsular War into The Twentieth Century. Nothing downstream would have
+ * caught that, because every one of those questions is correct.
+ *
  * Kept separate from `generateQuestions` so the writer behind it can be swapped
  * for a local model later without touching the import path.
  */
 export async function writeFacts(
   drafts: DraftQuestion[],
+  category: { name: string; blurb: string },
   model = DEFAULT_MODEL,
 ): Promise<{ drafts: DraftQuestion[]; flags: Map<string, string>; costCents: number }> {
   const flags = new Map<string, string>();
@@ -399,7 +421,18 @@ export async function writeFacts(
     model,
     max_tokens: 16000,
     system: [{ type: 'text', text: FACT_SYSTEM, cache_control: { type: 'ephemeral' } }],
-    messages: [{ role: 'user', content: `Prepare these ${drafts.length} imported questions:\n\n${listing}` }],
+    messages: [
+      {
+        role: 'user',
+        content: [
+          `Target category: ${category.name} - ${category.blurb}`,
+          '',
+          `Prepare these ${drafts.length} imported questions:`,
+          '',
+          listing,
+        ].join('\n'),
+      },
+    ],
     output_config: {
       format: zodOutputFormat(FactBatch),
       effort: 'high',
@@ -420,11 +453,20 @@ export async function writeFacts(
       return draft;
     }
     const fact = result.fact.trim();
+    // Two independent reasons to reject, and a question can earn both: a weak
+    // question in the wrong category should say so twice rather than pick one.
+    const reasons: string[] = [];
     // No reveal line means it could not stand behind the answer. That is a
     // rejection, not a question to hand a reviewer with a blank to fill in.
     if (!fact || result.quality === 'weak') {
-      flags.set(draft.id, result.note.trim() || 'The fact-writing pass could not verify this answer.');
+      reasons.push(result.note.trim() || 'The fact-writing pass could not verify this answer.');
     }
+    if (!result.fitsCategory) {
+      reasons.push(
+        `Does not belong in ${category.name}: ${result.categoryNote.trim() || 'wrong subject or period.'}`,
+      );
+    }
+    if (reasons.length) flags.set(draft.id, reasons.join(' '));
     return {
       ...draft,
       fact,

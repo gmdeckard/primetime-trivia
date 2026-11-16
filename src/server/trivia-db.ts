@@ -48,7 +48,15 @@ const MAX_PER_REQUEST = 50;
  * `general` is never used as a fallback for the same reason.
  */
 export const OPENTDB_CATEGORIES: Record<string, number[]> = {
-  'history-20c': [23, 24],
+  // Politics only, deliberately. OpenTDB's History category (23) spans every
+  // period, so feeding it to a category named for one century returns the
+  // other nineteen: a measured batch here came back as Marj Dabiq in 1516, the
+  // French Revolution and the Second Mexican Empire, and the category gate
+  // rejected all of it after the MC had paid for the reveal lines. Politics
+  // (24) is where the twentieth century actually lives in this source -
+  // Watergate, Chamberlain, Pinochet. History still feeds world-history below,
+  // which is the category that wants it.
+  'history-20c': [24],
   geography: [22],
   literature: [10],
   'arts-classical': [25],

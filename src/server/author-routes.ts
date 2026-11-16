@@ -128,14 +128,25 @@ export async function handleAuthorRoute(
           );
         }
 
-        const prepared = await writeFacts(questions, model);
+        const category = bank.categoryById.get(body.category);
+        const prepared = await writeFacts(
+          questions,
+          { name: category?.name ?? body.category, blurb: category?.blurb ?? '' },
+          model,
+        );
         questions = prepared.drafts;
         costCents += prepared.costCents;
 
-        if (questions.length) {
-          const verified = await verifyQuestions(questions, model);
-          questions = verified.drafts;
+        // Only verify what still has a chance. A question the fact pass already
+        // flagged is rejected whatever the verifier thinks of it, so checking it
+        // buys nothing and costs output tokens on exactly the batches that went
+        // worst - a category the source cannot fill pays twice for the news.
+        const worthChecking = questions.filter((q) => !prepared.flags.has(q.id));
+        if (worthChecking.length) {
+          const verified = await verifyQuestions(worthChecking, model);
           costCents += verified.costCents;
+          const byId = new Map(verified.drafts.map((d) => [d.id, d]));
+          questions = questions.map((q) => byId.get(q.id) ?? q);
         }
 
         // Applied after verification on purpose. The fact pass is the only

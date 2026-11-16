@@ -104,8 +104,8 @@ export const SOURCES: Array<{ id: SourceId; name: string; blurb: string; cost: s
   {
     id: 'opentdb',
     name: 'Import from Open Trivia DB',
-    blurb: 'Free public question bank. Expect weak distractors and unreliable difficulty labels; every one still needs your review.',
-    cost: 'Free, apart from writing the reveal lines.',
+    blurb: 'Free public question bank. Expect weak distractors, unreliable difficulty labels and the odd question that has quietly gone out of date.',
+    cost: 'Measured on real batches: about 10c per 10, of which roughly 4 survive the checks.',
   },
 ];
 
