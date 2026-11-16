@@ -547,6 +547,27 @@ function Setup({ state, send }: { state: ControlState; send: ReturnType<typeof u
           </div>
         )}
 
+        {/*
+          The way in to the question bank editor.
+ 
+          It opens in a new tab on purpose. The control screen holds a live
+          game, and navigating away from it mid-night to go and write questions
+          would drop the MC out of the room he is running.
+        */}
+        <div class="field">
+          <span class="field-label">
+            <span>Need more questions?</span>
+            <span class="field-hint">new tab</span>
+          </span>
+          <a class="btn btn-sm" href="/author" target="_blank" rel="noopener">
+            Build a new question set
+          </a>
+          <p class="faint" style={{ marginTop: '8px' }}>
+            Write a set with Claude, or import one from a public trivia database. Either way you
+            read and approve every question before it can appear in a game.
+          </p>
+        </div>
+
         <p class="faint">
           {state.bank.total} questions loaded · {state.bank.availableInSelection} unused for{' '}
           {state.audiences.find((g) => g.id === c.audience)?.name ?? 'this group'}. The numeric

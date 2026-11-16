@@ -1,6 +1,6 @@
 import { render } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
-import type { Audience, DraftBatch, DraftQuestion, PackMeta } from '../../../shared/packs';
+import type { Audience, DraftBatch, DraftQuestion, PackMeta, SourceId } from '../../../shared/packs';
 import { MIN_PASSWORD } from '../../../shared/protocol';
 import '../shared/styles.css';
 import { Toast } from '../shared/ui';
@@ -21,7 +21,13 @@ interface Context {
   defaultModel: string;
   audiences: Array<{ id: Audience; name: string; blurb: string }>;
   maxBatch: number;
-  categories: Array<{ id: string; name: string; blurb: string; count: number }>;
+  sources: Array<{ id: SourceId; name: string; blurb: string; cost: string }>;
+  categories: Array<{
+    id: string; name: string; blurb: string; count: number;
+    /** False when the import source has no counterpart for this category. */
+    importable: boolean;
+    importBlockedReason?: string;
+  }>;
   packs: PackMeta[];
   batches: Array<{
     id: string; created: string; category: string; audience: Audience;
@@ -131,6 +137,7 @@ function GenerateForm({
   onGenerated: (batch: DraftBatch) => void;
   setToast: (m: string) => void;
 }) {
+  const [source, setSource] = useState<SourceId>('claude');
   const [audience, setAudience] = useState<Audience>('35-75');
   const [category, setCategory] = useState(context.categories[0]?.id ?? '');
   const [count, setCount] = useState(10);
@@ -140,15 +147,45 @@ function GenerateForm({
   const [busy, setBusy] = useState(false);
 
   const chosen = context.models.find((m) => m.id === model) ?? context.models[0]!;
+  const importing = source === 'opentdb';
+  const categoryInfo = context.categories.find((c) => c.id === category);
+  const categoryBlocked = importing && !!categoryInfo && !categoryInfo.importable;
+  const importableCount = context.categories.filter((c) => c.importable).length;
+
   // Rough, and labelled as rough. Input is dominated by the existing-prompts
-  // list we send for dedupe; output by the questions themselves.
-  const estIn = 2000 + count * 60;
-  const estOut = count * 220;
+  // list we send for dedupe; output by the questions themselves. An import
+  // writes no questions, so it pays only for the reveal lines and the check.
+  const estIn = importing ? 400 + count * 70 : 2000 + count * 60;
+  const estOut = importing ? count * 120 : count * 220;
   const estimate = ((estIn / 1e6) * chosen.inPerM + (estOut / 1e6) * chosen.outPerM) * 100 * 2;
+
+  /**
+   * Switching to the import source with an unsupported category selected
+   * would arm a button that can only fail, so move to one that works and
+   * leave the explanation on the chip the MC just lost.
+   */
+  function pickSource(next: SourceId) {
+    setSource(next);
+    if (next === 'opentdb' && categoryInfo && !categoryInfo.importable) {
+      setCategory(context.categories.find((c) => c.importable)?.id ?? category);
+    }
+  }
 
   return (
     <div class="card stack">
-      <div class="eyebrow">Write a new batch</div>
+      <div class="eyebrow">{importing ? 'Import a new batch' : 'Write a new batch'}</div>
+
+      <div class="field">
+        <span>Where the questions come from</span>
+        <div class="chips">
+          {context.sources.map((src) => (
+            <button key={src.id} class="chip" aria-pressed={source === src.id} onClick={() => pickSource(src.id)}>
+              {src.name}
+            </button>
+          ))}
+        </div>
+        <span class="faint">{context.sources.find((src) => src.id === source)?.blurb}</span>
+      </div>
 
       <div class="field">
         <span>Who is playing</span>
@@ -165,12 +202,28 @@ function GenerateForm({
       <div class="field">
         <span>Category</span>
         <div class="chips">
-          {context.categories.map((c) => (
-            <button key={c.id} class="chip" aria-pressed={category === c.id} onClick={() => setCategory(c.id)}>
-              {c.name} <span class="faint">{c.count}</span>
-            </button>
-          ))}
+          {context.categories.map((c) => {
+            const blocked = importing && !c.importable;
+            return (
+              <button
+                key={c.id}
+                class="chip"
+                aria-pressed={category === c.id}
+                disabled={blocked}
+                title={blocked ? c.importBlockedReason : c.blurb}
+                onClick={() => setCategory(c.id)}
+              >
+                {c.name} <span class="faint">{c.count}</span>
+              </button>
+            );
+          })}
         </div>
+        {importing && (
+          <span class="faint">
+            {importableCount} of {context.categories.length} categories have an Open Trivia DB counterpart.
+            The rest are greyed out; hover one to see why.
+          </span>
+        )}
       </div>
 
       <div class="field">
@@ -196,6 +249,7 @@ function GenerateForm({
         <span class="faint">{DIFFICULTY_PRESETS[preset]!.blurb}</span>
       </div>
 
+      {!importing && (
       <div class="field">
         <span>Anything specific? (optional)</span>
         <textarea
@@ -205,9 +259,10 @@ function GenerateForm({
           maxLength={400}
         />
       </div>
+      )}
 
       <div class="field">
-        <span>Model</span>
+        <span>{importing ? 'Model for the reveal lines' : 'Model'}</span>
         <div class="chips">
           {context.models.map((m) => (
             <button key={m.id} class="chip" aria-pressed={model === m.id} onClick={() => setModel(m.id)}>
@@ -218,13 +273,28 @@ function GenerateForm({
         <span class="faint">{chosen.blurb}</span>
       </div>
 
+      {importing && DIFFICULTY_PRESETS[preset]!.mix.includes(4) && (
+        <p class="faint">
+          Open Trivia DB has no difficulty 4. Slots asking for one will hold its hardest instead.
+        </p>
+      )}
+
       <p class="faint">
-        Roughly {money(estimate)} for this batch — two calls, one to write and one to fact-check.
-        A rough estimate, not a quote.
+        {importing
+          ? `Roughly ${money(estimate)} for this batch. The questions are free; this is the reveal
+             lines and the fact-check, which an import still needs. A rough estimate, not a quote.`
+          : `Roughly ${money(estimate)} for this batch — two calls, one to write and one to
+             fact-check. A rough estimate, not a quote.`}
       </p>
 
-      <button class="btn btn-primary btn-lg btn-block" disabled={busy || !category} onClick={generate}>
-        {busy ? <><span class="spinner" /> Writing and checking…</> : `Write ${count} questions`}
+      <button
+        class="btn btn-primary btn-lg btn-block"
+        disabled={busy || !category || categoryBlocked}
+        onClick={generate}
+      >
+        {busy
+          ? <><span class="spinner" /> {importing ? 'Importing and checking…' : 'Writing and checking…'}</>
+          : importing ? `Import ${count} questions` : `Write ${count} questions`}
       </button>
       {busy && <p class="faint center">This takes a minute or two. Leave the page open.</p>}
     </div>
@@ -239,8 +309,9 @@ function GenerateForm({
         body: JSON.stringify({
           audience, category, count,
           difficulties: DIFFICULTY_PRESETS[preset]!.mix,
-          guidance: guidance.trim() || undefined,
+          guidance: importing ? undefined : guidance.trim() || undefined,
           model,
+          source,
         }),
       });
       onGenerated(batch);
@@ -354,14 +425,29 @@ function Review({
           <div>
             <div class="eyebrow">Review</div>
             <strong>{categoryName}</strong>
-            <span class="faint"> · {draft.questions.length} written · {money(draft.costCents)} spent</span>
+            <span class="faint">
+              {' · '}{draft.questions.length} {draft.source === 'opentdb' ? 'imported' : 'written'}
+              {' · '}{money(draft.costCents)} spent
+            </span>
           </div>
           <button class="btn btn-sm" onClick={onDone}>Back</button>
         </div>
         <p class="muted">
           Anything the fact-check doubted is already rejected. Read each one, then approve what you'd
           be happy reading out loud.
+          {draft.source === 'opentdb' && ' These came from a public database and were not written to ' +
+            'this project\'s standard, so expect to reject more of them than usual — a distractor ' +
+            'nobody would pick is reason enough.'}
         </p>
+        {draft.source === 'opentdb' && (
+          <p class="faint">
+            Imported from the Open Trivia Database (opentdb.com), CC BY-SA 4.0. The source and licence
+            are recorded on every question that gets published.
+          </p>
+        )}
+        {(draft.notes ?? []).map((note) => (
+          <p key={note} class="faint">{note}</p>
+        ))}
         <div class="row" style={{ gap: '10px', flexWrap: 'wrap' }}>
           <span class="pill pill-ok">{approved} approved</span>
           <span class="pill">{pending} undecided</span>

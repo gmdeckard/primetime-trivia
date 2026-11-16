@@ -1,7 +1,16 @@
 import { randomUUID } from 'node:crypto';
 import type { IncomingMessage, ServerResponse } from 'node:http';
-import { AUDIENCES, MAX_BATCH, type DraftBatch, type GenerateRequest } from '../../shared/packs.js';
-import { DEFAULT_MODEL, MODELS, describeError, generateQuestions, hasCredentials, verifyQuestions } from './author.js';
+import { AUDIENCES, MAX_BATCH, SOURCES, type DraftBatch, type DraftQuestion, type GenerateRequest } from '../../shared/packs.js';
+import {
+  DEFAULT_MODEL,
+  MODELS,
+  describeError,
+  generateQuestions,
+  hasCredentials,
+  verifyQuestions,
+  writeFacts,
+} from './author.js';
+import { OPENTDB_CATEGORIES, UNAVAILABLE_REASON, importQuestions } from './trivia-db.js';
 import type { Bank } from './content.js';
 import type { DraftStore } from './drafts.js';
 import { listPacks, packPrompts, publishPack } from './packs.js';
@@ -64,11 +73,19 @@ export async function handleAuthorRoute(
         defaultModel: DEFAULT_MODEL,
         audiences: AUDIENCES,
         maxBatch: MAX_BATCH,
+        sources: SOURCES,
         categories: bank.categories.map((c) => ({
           id: c.id,
           name: c.name,
           blurb: c.blurb,
           count: (bank.byCategory.get(c.id) ?? []).length,
+          // Which sources can fill this category. The screen greys out what it
+          // cannot offer and says why, rather than letting the MC pick a
+          // category that returns nothing after a five-second wait.
+          importable: !!OPENTDB_CATEGORIES[c.id]?.length,
+          importBlockedReason: OPENTDB_CATEGORIES[c.id]?.length
+            ? undefined
+            : UNAVAILABLE_REASON[c.id] ?? 'Open Trivia DB has no counterpart for this category.',
         })),
         packs: listPacks(deps.contentDir),
         batches: deps.drafts.list().map((b) => ({
@@ -90,15 +107,61 @@ export async function handleAuthorRoute(
     if (path === '/api/author/generate' && req.method === 'POST') {
       const body = await readJson<GenerateRequest>(req);
       const bank = deps.bank();
+      const existing = packPrompts(deps.contentDir);
+      const model = body.model ?? DEFAULT_MODEL;
 
-      const generated = await generateQuestions(body, bank, packPrompts(deps.contentDir));
-      let questions = generated.questions;
-      let costCents = generated.costCents;
+      let questions: DraftQuestion[];
+      let rejectedDuplicates: string[];
+      let costCents = 0;
+      const notes: string[] = [];
 
-      if (questions.length) {
-        const verified = await verifyQuestions(questions, generated.model);
-        questions = verified.drafts;
-        costCents += verified.costCents;
+      if (body.source === 'opentdb') {
+        // An import arrives with no reveal line, so the fact-writing pass is
+        // not optional here the way verification is elsewhere: without it the
+        // batch cannot be published at all.
+        const imported = await importQuestions(body, bank, existing);
+        questions = imported.questions;
+        rejectedDuplicates = imported.rejectedDuplicates;
+        if (imported.difficultyCapped) {
+          notes.push(
+            'Open Trivia DB has no difficulty 4. The slots that asked for one hold its hardest instead.',
+          );
+        }
+
+        const prepared = await writeFacts(questions, model);
+        questions = prepared.drafts;
+        costCents += prepared.costCents;
+
+        if (questions.length) {
+          const verified = await verifyQuestions(questions, model);
+          questions = verified.drafts;
+          costCents += verified.costCents;
+        }
+
+        // Applied after verification on purpose. The fact pass is the only
+        // thing that saw the original options against the house rule about
+        // plausible distractors, and a verifier that likes the answer must not
+        // be able to promote a question the fact pass rejected.
+        questions = questions.map((q) => {
+          const flag = prepared.flags.get(q.id);
+          if (!flag) return q;
+          return {
+            ...q,
+            status: 'rejected' as const,
+            verdictNote: [q.verdictNote, flag].map((t) => t.trim()).filter(Boolean).join(' '),
+          };
+        });
+      } else {
+        const generated = await generateQuestions(body, bank, existing);
+        questions = generated.questions;
+        rejectedDuplicates = generated.rejectedDuplicates;
+        costCents += generated.costCents;
+
+        if (questions.length) {
+          const verified = await verifyQuestions(questions, generated.model);
+          questions = verified.drafts;
+          costCents += verified.costCents;
+        }
       }
 
       const batch: DraftBatch = {
@@ -107,10 +170,12 @@ export async function handleAuthorRoute(
         audience: body.audience,
         category: body.category,
         requested: body.count,
-        model: generated.model,
+        model,
         costCents: Math.round(costCents * 100) / 100,
         questions,
-        rejectedDuplicates: generated.rejectedDuplicates,
+        rejectedDuplicates,
+        source: body.source ?? 'claude',
+        notes,
       };
       deps.drafts.save(batch);
       send(res, 200, batch);

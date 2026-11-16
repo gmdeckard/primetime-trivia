@@ -818,6 +818,14 @@ input:focus { border-color: var(--brass); outline: none; }
   border-color: var(--brass-deep);
   color: var(--brass);
 }
+/* A chip the current source cannot fill. Dimmed rather than hidden: the MC
+   needs to see that the category exists and that something else can write for
+   it, and the title attribute carries the reason. */
+.chip:disabled {
+  opacity: .38;
+  border-style: dashed;
+  cursor: not-allowed;
+}
 
 /* A draft's border is its verdict: the reviewer should be able to scan the
    column and see where the model doubted itself without reading a word. */

@@ -34,6 +34,9 @@
     "src/server/packs.ts": [
       "src/server/packs.test.ts"
     ],
+    "src/server/trivia-db.ts": [
+      "src/server/trivia-db.test.ts"
+    ],
     "src/server/content.ts": [
       "src/server/engine.test.ts"
     ],
@@ -57,6 +60,7 @@
       "src/server/integration.test.ts"
     ],
     "shared/packs.ts": [
+      "src/server/trivia-db.test.ts",
       "src/server/packs.test.ts"
     ],
     "content/**": [],

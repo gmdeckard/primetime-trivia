@@ -325,6 +325,121 @@ export async function verifyQuestions(
   };
 }
 
+const FactResult = z.object({
+  index: z.number().int().describe('Index of the question, from the list given.'),
+  fact: z.string().describe('One or two sentences read aloud after the reveal. Empty only if you cannot verify the answer.'),
+  quality: z.enum(['ok', 'weak']).describe(
+    'ok = the question is fit for this quiz as written. ' +
+    'weak = the answer looks wrong, the question is ambiguous, or a distractor ' +
+    'is so implausible that a well-read player eliminates it instantly.',
+  ),
+  note: z.string().describe('One sentence saying what is weak. Empty when quality is ok.'),
+  era: z.string().describe('Decade the answer belongs to, e.g. "1960s". Empty string if not era-specific.'),
+  tags: z.array(z.string()).describe('A few lowercase topic tags.'),
+});
+
+const FactBatch = z.object({
+  results: z.array(FactResult),
+});
+
+const FACT_SYSTEM = `You are preparing imported trivia questions for a live pub-style
+quiz in front of a well-educated audience, many with advanced degrees.
+
+You did NOT write these questions. They came from a free public database and
+were written to no particular standard. Your job is two things:
+
+1. WRITE THE REVEAL LINE. After the host reads the answer, they read one or two
+   sentences that make the question worth having asked: why a wrong answer was
+   tempting, the detail that makes it memorable, or the common misconception.
+   This is required for every question the quiz uses. Write it from what you
+   independently know to be true, not from the question. If you cannot verify
+   the marked answer is correct, return an empty fact and mark the question weak.
+
+2. JUDGE WHETHER IT IS FIT TO ASK. Be strict, and mark weak when:
+   - the marked answer is wrong or arguable;
+   - two options are defensible;
+   - a distractor is implausible enough to be eliminated on sight. A date
+     question whose wrong options are centuries away is the common case. In a
+     room of retired professionals that question is dead air.
+
+Do not rewrite the question, the answer or the options. Judge them and write the
+reveal line. Return one result for every question, using the index given.`;
+
+/**
+ * Write the reveal line for questions this project did not write.
+ *
+ * Needed because no trivia API supplies one and `content.ts` refuses a question
+ * without it, so an import is unpublishable until this runs. It doubles as the
+ * quality gate the source does not have: the flags it returns are applied after
+ * verification, so a question it marked weak cannot be talked back into
+ * 'pending' by a verifier that happened to like the answer.
+ *
+ * Kept separate from `generateQuestions` so the writer behind it can be swapped
+ * for a local model later without touching the import path.
+ */
+export async function writeFacts(
+  drafts: DraftQuestion[],
+  model = DEFAULT_MODEL,
+): Promise<{ drafts: DraftQuestion[]; flags: Map<string, string>; costCents: number }> {
+  const flags = new Map<string, string>();
+  if (!drafts.length) return { drafts, flags, costCents: 0 };
+  const anthropic = client();
+
+  const listing = drafts
+    .map((d, i) =>
+      [
+        `[${i}] ${d.prompt}`,
+        `    options: ${[d.answer, ...d.distractors].join(' | ')}`,
+        `    marked correct: ${d.answer}`,
+      ].join('\n'),
+    )
+    .join('\n\n');
+
+  const response = await anthropic.messages.parse({
+    model,
+    max_tokens: 16000,
+    system: [{ type: 'text', text: FACT_SYSTEM, cache_control: { type: 'ephemeral' } }],
+    messages: [{ role: 'user', content: `Prepare these ${drafts.length} imported questions:\n\n${listing}` }],
+    output_config: {
+      format: zodOutputFormat(FactBatch),
+      effort: 'high',
+    },
+  });
+
+  if (response.stop_reason === 'refusal') {
+    throw new Error('The model declined to prepare this batch.');
+  }
+  const parsed = response.parsed_output;
+  if (!parsed) throw new Error('The fact-writing pass returned an unexpected shape.');
+
+  const byIndex = new Map(parsed.results.map((r) => [r.index, r]));
+  const prepared = drafts.map((draft, i) => {
+    const result = byIndex.get(i);
+    if (!result) {
+      flags.set(draft.id, 'The fact-writing pass returned nothing for this question.');
+      return draft;
+    }
+    const fact = result.fact.trim();
+    // No reveal line means it could not stand behind the answer. That is a
+    // rejection, not a question to hand a reviewer with a blank to fill in.
+    if (!fact || result.quality === 'weak') {
+      flags.set(draft.id, result.note.trim() || 'The fact-writing pass could not verify this answer.');
+    }
+    return {
+      ...draft,
+      fact,
+      era: result.era.trim(),
+      tags: result.tags.map((t) => t.trim().toLowerCase()).filter(Boolean),
+    };
+  });
+
+  return {
+    drafts: prepared,
+    flags,
+    costCents: centsFor(model, response.usage.input_tokens, response.usage.output_tokens),
+  };
+}
+
 export function describeError(err: unknown): string {
   if (err instanceof MissingCredentials) return err.message;
   if (err instanceof Anthropic.AuthenticationError) return 'That API key was rejected. Check ANTHROPIC_API_KEY.';

@@ -124,6 +124,11 @@ export function publishPack(contentDir: string, request: PublishRequest): { file
     fact: q.fact,
     ...(q.era ? { era: q.era } : {}),
     ...(q.tags.length ? { tags: q.tags } : {}),
+    // Attribution travels with the question, not just the pack header. A pack
+    // can mix imported and written questions, and in a year the only way to
+    // tell which is which is the question's own record of where it came from.
+    ...(q.source ? { source: q.source } : {}),
+    ...(q.license ? { license: q.license } : {}),
   }));
 
   const meta: PackMeta = {

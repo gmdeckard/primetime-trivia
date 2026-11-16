@@ -57,6 +57,10 @@ export interface DraftQuestion {
   suggestedAnswer: string;
   /** Set by the reviewer. Only 'approved' drafts can be published. */
   status: 'pending' | 'approved' | 'rejected';
+  /** Where the question text came from. Absent means it was written here. */
+  source?: string;
+  /** Licence of the source text, when the source imposes one. */
+  license?: string;
 }
 
 export interface DraftBatch {
@@ -71,7 +75,39 @@ export interface DraftBatch {
   questions: DraftQuestion[];
   /** Prompts the model produced that duplicated something already in the bank. */
   rejectedDuplicates: string[];
+  /** Which source the questions came from. Absent on batches made before sources existed. */
+  source?: SourceId;
+  /** Things the MC should know about this batch, e.g. a difficulty the source could not supply. */
+  notes?: string[];
 }
+
+/**
+ * Where a batch's questions come from.
+ *
+ * The two sources are not interchangeable in quality, and the screen says so.
+ * Claude writes to this project's rules: plausible distractors, a reveal line
+ * worth reading, difficulty that means something. An internet database is a
+ * pile of someone else's questions - free and instant, but written to no
+ * particular standard, with distractors a well-read player eliminates on
+ * sight. Importing is a way to fill a thin category fast, not a way to skip
+ * the review.
+ */
+export type SourceId = 'claude' | 'opentdb';
+
+export const SOURCES: Array<{ id: SourceId; name: string; blurb: string; cost: string }> = [
+  {
+    id: 'claude',
+    name: 'Written by Claude',
+    blurb: 'Written to this project\'s rules, then fact-checked by a second pass. Best quality.',
+    cost: 'Costs a few cents per batch.',
+  },
+  {
+    id: 'opentdb',
+    name: 'Import from Open Trivia DB',
+    blurb: 'Free public question bank. Expect weak distractors and unreliable difficulty labels; every one still needs your review.',
+    cost: 'Free, apart from writing the reveal lines.',
+  },
+];
 
 export interface GenerateRequest {
   audience: Audience;
@@ -83,6 +119,8 @@ export interface GenerateRequest {
   /** Free-text steer, e.g. "focus on the Apollo programme". Optional. */
   guidance?: string;
   model?: string;
+  /** Which source to pull from. Defaults to 'claude'. */
+  source?: SourceId;
 }
 
 export const MAX_BATCH = 20;
