@@ -203,6 +203,19 @@ PRIMETIME_PUBLIC_URL="trivia.example.com" PRIMETIME_BIND=127.0.0.1 npm start
 `PRIMETIME_PUBLIC_URL` becomes the only address on the big screen, in the QR
 code and in the start-up banner. A bare host is taken as `https`.
 
+**One box can answer on more than one name.** List them comma separated and
+every screen is told the name it was itself opened with, so the QR code on the
+big screen always points back at the address in that screen's own address bar:
+
+```bash
+PRIMETIME_PUBLIC_URL="trivia.example.com, trivia2.example.com" npm start
+```
+
+The first is canonical: it is what the banner leads with and what anything with
+no request to look at gets. A name that was not configured gets the canonical
+one rather than itself, so a forged `Host` header cannot put a stranger's
+domain into a QR code a room is about to scan.
+
 `PRIMETIME_BIND=127.0.0.1` matters as much. Without it the plain-HTTP port
 stays reachable from outside alongside whatever TLS you put in front, and the
 control password crosses the internet in the clear on that path. The server
@@ -317,7 +330,7 @@ Environment variables:
 |---|---|---|
 | `PORT` | `8080` | HTTP port |
 | `PRIMETIME_BIND` | every interface | Address to listen on; set `127.0.0.1` behind a TLS proxy |
-| `PRIMETIME_PUBLIC_URL` | — | Public address to advertise instead of the detected LAN one; a bare host is taken as `https` |
+| `PRIMETIME_PUBLIC_URL` | — | Public address to advertise instead of the detected LAN one; a bare host is taken as `https`. Comma separated for a box answering on several names, first one canonical |
 | `PRIMETIME_VENUE` | `Trivia Night` | Event name on the big screen |
 | `PRIMETIME_SSID` | — | Wifi network name, shown on the join screen; unset shows no wifi step |
 | `PRIMETIME_SSID_ALT` | — | Second SSID of the same router; needs `PRIMETIME_SSID` |

@@ -114,12 +114,28 @@ interface Client {
   watchTeamId?: string;
   /** Last payload this client received, so we can skip sending it again. */
   lastSent?: string;
+  /**
+   * The name this screen was opened with, from its own Host header.
+   *
+   * A box behind a tunnel can answer on more than one hostname, and the join
+   * address this screen is told has to be the one it is already using: the big
+   * screen's QR code is read by a room standing in front of it. Undefined on
+   * anything that arrived without a Host, which falls back to the canonical
+   * name.
+   */
+  host?: string;
 }
 
 const clients = new Set<Client>();
 
-function joinInfo() {
-  const targets = joinTargets({ publicUrl: PUBLIC_URL.url, lan: lanAddresses(), port: PORT });
+function joinInfo(requestHost?: string) {
+  const targets = joinTargets({
+    publicUrl: PUBLIC_URL.url,
+    publicUrls: PUBLIC_URL.urls,
+    requestHost,
+    lan: lanAddresses(),
+    port: PORT,
+  });
   return {
     url: targets.url,
     urls: targets.urls,
@@ -130,11 +146,21 @@ function joinInfo() {
   };
 }
 
-let cachedQr = { url: '', svg: '' };
+/**
+ * One rendered QR per join address.
+ *
+ * It was a single slot, which was right when there was one address. Two names
+ * on one box turned it into a cache that missed every time the other big
+ * screen asked, re-rendering both all night. Keyed by URL and bounded, because
+ * the number of configured names is small and fixed.
+ */
+const cachedQr = new Map<string, string>();
 async function qrForJoinUrl(url: string): Promise<string> {
-  if (cachedQr.url === url) return cachedQr.svg;
+  const hit = cachedQr.get(url);
+  if (hit) return hit;
   const svg = await QRCode.toString(url, { type: 'svg', margin: 4, errorCorrectionLevel: 'Q' });
-  cachedQr = { url, svg };
+  if (cachedQr.size > 8) cachedQr.clear();
+  cachedQr.set(url, svg);
   return svg;
 }
 
@@ -144,7 +170,7 @@ function send(socket: WebSocket, message: ServerMessage) {
 
 async function stateFor(client: Client) {
   if (client.role === 'host') {
-    const info = joinInfo();
+    const info = joinInfo(client.host);
     return hostState(engine, {
       url: info.url,
       ssid: info.ssid,
@@ -255,8 +281,8 @@ const server = createServer(createRequestHandler({
 
 const wss = new WebSocketServer({ server, path: '/ws' });
 
-wss.on('connection', (socket) => {
-  const client: Client = { socket, role: 'player' };
+wss.on('connection', (socket, req) => {
+  const client: Client = { socket, role: 'player', host: req.headers.host };
   clients.add(client);
   let ready = false;
   // Wall-clock is enough here and survives better than a monotonic reading in
@@ -363,7 +389,7 @@ wss.on('connection', (socket) => {
           send(socket, { t: 'error', message: 'Take a seat first — the code follows your team.' });
           return;
         }
-        const url = `${joinInfo().url}/watch?team=${code}`;
+        const url = `${joinInfo(client.host).url}/watch?team=${code}`;
         void QRCode.toString(url, { type: 'svg', margin: 4, errorCorrectionLevel: 'Q' }).then((qrSvg) => {
           send(socket, { t: 'team_qr', url, qrSvg });
         });

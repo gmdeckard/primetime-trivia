@@ -333,6 +333,47 @@ advertises a private address that no phone at the venue can dial.
 Restart and the banner should say `Serving behind https://… Local detection is
 not in use.`
 
+### A box that answers on two names
+
+Two boxes that can each run the night want two names, and either box may end up
+answering on either one — a tunnel hostname is a DNS record, so moving a name
+from one box to the other is an edit in one place and no reinstall anywhere.
+
+List every name a box answers on, comma separated:
+
+```bash
+PRIMETIME_PUBLIC_URL=https://trivia.example.com, https://trivia2.example.com
+```
+
+Then add both to that box's tunnel ingress, pointing at the same service:
+
+```yaml
+ingress:
+  - hostname: trivia.example.com
+    service: http://127.0.0.1:8080
+  - hostname: trivia2.example.com
+    service: http://127.0.0.1:8080
+  - service: http_status:404
+```
+
+Each screen is told the name it was itself opened with. That is the whole point:
+the QR code on the big screen is scanned by a room standing in front of it, so
+it has to send them to the address the operator is already using and not to
+whichever name happens to be first in the config. Open `/host` on either name
+and the code under it agrees with the address bar above it.
+
+The first name is canonical — the start-up banner leads with it, and anything
+with no request to read gets it. A name that is not in the list gets the
+canonical one rather than itself, so a forged `Host` header cannot put somebody
+else's domain into that QR code.
+
+Check both, which is one command each:
+
+```bash
+curl -s http://127.0.0.1:8080/api/info -H 'Host: trivia.example.com'  # want that name back
+curl -s http://127.0.0.1:8080/api/info -H 'Host: trivia2.example.com' # want that one back
+```
+
 ### Check it properly
 
 ```bash

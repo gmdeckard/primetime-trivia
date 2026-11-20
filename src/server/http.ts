@@ -244,7 +244,8 @@ export interface HttpDeps {
   clientDir: string;
   imagesDir: string;
   auth: ControlAuth;
-  joinInfo: () => {
+  /** The join details for one request, by the name that request arrived on. */
+  joinInfo: (requestHost?: string) => {
     url: string;
     urls: string[];
     ssid?: string;
@@ -309,7 +310,7 @@ export function createRequestHandler(deps: HttpDeps) {
     }
 
     if (path === '/api/info') {
-      const info = deps.joinInfo();
+      const info = deps.joinInfo(req.headers.host);
       // Two answers, because this endpoint was two things at once.
       //
       // It was written when the server was a laptop on the room's own wifi,

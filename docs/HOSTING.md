@@ -20,17 +20,34 @@ what you do on the night.
 
 ### The way it runs now: the server is on the internet
 
-The game answers at `trivia.gmdeckard.com` all week. The server is a Jetson
-Orin Nano in a cupboard at home, reached from the internet through a Cloudflare
-Tunnel, so there is no rented cloud box and no monthly bill. The laptop in the
-room is only a browser pointed at it, and the phones reach it over the clubhouse
-wifi. **This needs working internet in the room**, and nothing else: no router
-to carry in, no address to read out, nothing to start.
+The game answers at **`trivia.gmdeckard.com`**, and at
+**`trivia2.gmdeckard.com`** as the second way in. Both are reached from the
+internet through a Cloudflare Tunnel. The laptop in the room is only a browser
+pointed at one of them, and the phones reach it over the clubhouse wifi. **This
+needs working internet in the room**, and nothing else: no router to carry in,
+no address to read out.
 
-**The box stays home.** It is tempting to carry it to the venue since it is
-small, but there is no reason to: the phones reach it through the tunnel whether
-it is in the next room or across town, and leaving it on ethernet at a fixed
-address means nothing to pack, nothing to plug in, and nothing to leave in a car.
+There are two boxes behind those two names, and either can run a night:
+
+- **`trivia.gmdeckard.com`** is a small Ubuntu VM in Azure, sized for this game
+  and nothing else. It is switched off between nights, which is why it costs
+  cents a month rather than dollars.
+- **`trivia2.gmdeckard.com`** is the Jetson Orin Nano at home. No bill at all,
+  and it is the answer when the VM will not start or the Azure bill is not worth
+  it for one night.
+
+**Neither box is on all week, so one thing does have to be started.** That is
+the one real cost of this arrangement and it is covered under *Every night*
+below. Whichever box you start, the address you open is the one to use: the big
+screen works out its own name, so the QR code the room scans always matches the
+screen it is printed on. You never have to remember which box is behind which
+name.
+
+**The box stays home.** It is tempting to carry the Jetson to the venue since it
+is small, but there is no reason to: the phones reach it through the tunnel
+whether it is in the next room or across town, and leaving it on ethernet at a
+fixed address means nothing to pack, nothing to plug in, and nothing to leave in
+a car.
 
 The reason it moved there is worth knowing, because it is the thing that breaks
 a local setup. The rec center's wifi has **client isolation** on, which
@@ -67,11 +84,24 @@ game does not care.
 
 ### On the hosted box
 
-Nothing to start. The server is already running and has been all week, so the
-night begins at step 1 below with `https://trivia.gmdeckard.com`.
+**Start the box, an hour before and not at seven o'clock.** Both boxes are off
+between nights, so this is the step that the night actually depends on.
 
-Worth a glance an hour before, not at seven o'clock: open the big screen
-address and check it loads and shows a room code.
+For the Azure VM: start it from the Azure portal, or
+`az vm start -g <group> -n <vm>`, and give it two or three minutes. For the
+Jetson: switch it on and give it a minute. Either way the service starts itself
+on boot, so there is no command to type on the box.
+
+Then open the big screen address — `https://trivia.gmdeckard.com` for the VM,
+`https://trivia2.gmdeckard.com` for the Jetson — and check it loads and shows a
+room code. That check is the whole point of doing this early.
+
+**A page that says `Error 530` means no box is running behind that name.** It
+comes from Cloudflare, not from the game, and between nights it is the expected
+answer rather than a fault. Start the box and reload. If it persists after a few
+minutes, use the other name.
+
+Then the night begins at step 1 below.
 
 ### On a laptop
 
@@ -109,7 +139,8 @@ written down wherever you set it.
 ## Starting the night
 
 Three steps, the same on either setup. The addresses are the ones in the banner
-above, or `https://trivia.gmdeckard.com` on the hosted box.
+above, or on the hosted box whichever name you started a box behind:
+`https://trivia.gmdeckard.com` or `https://trivia2.gmdeckard.com`.
 
 If you are MCing rather than setting up, [MC-SCRIPT.md](MC-SCRIPT.md) is the
 words to say out loud, in order, written to be read off a phone.
@@ -384,9 +415,13 @@ a weekly game will not recycle material for about two months.
 **Players get "can't reach this page", on the hosted box.** Their phone has no
 working internet, or the box is down. Check your own phone on the same wifi
 first: if that loads the join page, it is their device, and the fix is usually
-to turn wifi off and on. If no phone can load it, the game is not reachable and
-the standings are not coming back by themselves — see
-[DEPLOYMENT.md](DEPLOYMENT.md).
+to turn wifi off and on.
+
+If no phone can load it, try the other name — `trivia2.gmdeckard.com` if you
+were on `trivia`, or the other way round — and start that box if it is off. That
+is what the second name is for. A night already in progress does not survive the
+move: the other box has its own teams and scores, so this is a restart, not a
+failover. Tell the room, and see [DEPLOYMENT.md](DEPLOYMENT.md).
 
 **Players get "can't reach this page", on a laptop.** They are on a different
 wifi network, or the network has client isolation on. Check the first; if the
